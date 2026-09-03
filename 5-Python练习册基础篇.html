@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Python练习册·基础篇</title>
+<style>
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; text-align: justify; }
+h1 { font-size: 18pt; color: #003a8c; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #003a8c; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #003a8c; margin: 10px 0 4px; border-left: 4px solid #003a8c; padding-left: 6px; }
+p { margin: 3px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.kw { color: #003a8c; font-weight: bold; }
+.fn { color: #0a6b1e; }
+.str { color: #a31515; }
+.cm { color: #6a737d; font-style: italic; }
+.num { color: #8a4b08; }
+.param { color: #6b21a8; font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.out { color: #444; }
+.prompt { color: #0a6b1e; }
+.step { color: #003a8c; font-weight: bold; }
+.type-d { color: #0a6b1e; font-weight: bold; }
+.type-g { color: #003a8c; font-weight: bold; }
+.type-z { color: #b45309; font-weight: bold; }
+.type-b { color: #6b21a8; font-weight: bold; }
+.must { color: #c00000; font-weight: bold; }
+.opt-tag { color: #666; }
+.section-head { font-size: 12pt; font-weight: bold; color: #003a8c; background: #e8eef7; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+th { background: #003a8c; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+td:first-child { white-space: nowrap; }
+.box { border: 1.5px solid #003a8c; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #f5f8fd; }
+.box2 { border: 1.5px dashed #b45309; border-radius: 4px; padding: 8px 10px; margin: 8px 0; }
+.warn { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fdf5f5; }
+.warn b { color: #c00000; }
+.ans { border-left: 4px solid #0a6b1e; background: #f5fbf5; padding: 6px 10px; margin: 8px 0; }
+.demo { border: 1px solid #ddd; border-left: 4px solid #0a6b1e; border-radius: 3px; margin: 6px 0; padding: 0; }
+.dtitle { background: #eef7ee; color: #0a6b1e; font-weight: bold; padding: 3px 8px; font-size: 10.5pt; }
+.demo-in { padding: 4px 8px; font-family: Consolas,"Courier New",monospace; font-size: 10.5pt; white-space: pre-wrap; }
+.demo-out { padding: 2px 8px 4px; color: #444; font-family: Consolas,"Courier New",monospace; font-size: 10.5pt; white-space: pre-wrap; background: #fafafa; border-top: 1px dashed #ddd; }
+.demo-ex { padding: 4px 8px; color: #003a8c; font-size: 10.5pt; border-top: 1px dashed #ddd; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+.newpage { page-break-before: always; }
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+.toc-title { background: none; color: #003a8c; border: none; margin: 0 0 6px; font-size: 14pt; }
+.toc a { color: #222; text-decoration: none; }
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+.toc-row .tn { color: #003a8c; font-weight: bold; min-width: 70px; }
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+@media print { .toc a { color: #222; text-decoration: none; } a { color: #222; text-decoration: none; } }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1><img src="data:image/jpeg;base64,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" alt="Python" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Python 练习册 · 基础篇</h1>
+<p class="note">打印设置：A4、边距默认。打印页码：浏览器打印时勾选"页眉和页脚"（或先另存为 PDF 再打印）。</p>
+
+<h2 id="toc-0" class="toc-title">目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">前言</span><span class="tdesc">定位、分级规则、自检规则、答题要求、安全红线</span></div>
+<div class="toc-row"><span class="tn">示范题</span><span class="tdesc">2 道（锁定"四步式答案"质量标准）</span></div>
+<div class="toc-row"><span class="tn">阶段1</span><span class="tdesc">变量与类型（8 题：5 必做 + 3 选做）</span></div>
+<div class="toc-row"><span class="tn">阶段2</span><span class="tdesc">控制流（8 题：5 必做 + 3 选做）</span></div>
+<div class="toc-row"><span class="tn">阶段3</span><span class="tdesc">数据结构（8 题：5 必做 + 3 选做）</span></div>
+<div class="toc-row"><span class="tn">阶段4</span><span class="tdesc">函数与模块（8 题：5 必做 + 3 选做）</span></div>
+<div class="toc-row"><span class="tn">阶段5</span><span class="tdesc">文件与异常（8 题：5 必做 + 3 选做）✅ 检查点②</span></div>
+<div class="toc-row"><span class="tn">阶段6</span><span class="tdesc">模块组合（8 题：5 必做 + 3 选做）</span></div>
+<div class="toc-row"><span class="tn">参考答案</span><span class="tdesc">书末集中，每题四步式</span></div>
+</div>
+
+<div class="newpage"></div>
+<h2 id="toc-1">前言</h2>
+<h3>1. 本书定位</h3>
+<p>学完《Python 入门》教科书后的<b>独立巩固体系</b>。顺序不可跳：教科书 → 本基础篇 → 进阶篇。</p>
+<h3>2. 题目分级（★必做 / ☆选做）</h3>
+<p>48 题全部标注等级，把"必须全做"的压力拆掉：</p>
+<table>
+<tr><th style="width:14%">等级</th><th style="width:46%">范围</th><th>数量</th></tr>
+<tr><td><span class="must">★ 必做</span></td><td>每个概念的变式 1 + 各阶段收尾综合题</td><td>每阶段约 5 题，共 30 题</td></tr>
+<tr><td><span class="opt-tag">☆ 选做</span></td><td>变式 2 中较难的一半 + 加深题</td><td>每阶段约 3 题，共 18 题</td></tr>
+</table>
+<h3>3. 自检规则（决定 ☆ 做不做）</h3>
+<div class="box">
+<p>做完一道 ★ 变式 1 后自检：<b>一次做对、用时少、全程独立没看答案</b>——则该概念的 ☆ 变式 2 可以跳过；<b>卡壳、做错、超时</b>——则该概念的 ☆ 必做，把漏洞补上。</p>
+</div>
+<h3>4. 用时预估</h3>
+<p>基础篇全程 <b>10~14 小时</b>：全做 48 题约 14h；按自检规则跳题约 10h。每阶段约 1.5~2 小时（必做约 1h + 选做约 0.5h）。</p>
+<h3>5. 答题要求（每道题都要遵守）</h3>
+<p>① 先<b>在纸上/脑子里想好思路</b>，再敲代码；② 每道题必须<b>自己跑通看到输出</b>；③ 对答案时<b>先看"先想什么"和"为什么这么写"</b>，最后才看代码；④ 做完的代码和心得记进当天学习日志。</p>
+<h3>6. 题型图例</h3>
+<table>
+<tr><th style="width:14%">题型</th><th style="width:30%">含义</th><th>要求</th></tr>
+<tr><td><span class="type-d">动手</span></td><td>从零写代码跑通</td><td>独立完成</td></tr>
+<tr><td><span class="type-g">观察</span></td><td>改代码看变化</td><td>解释现象</td></tr>
+<tr><td><span class="type-z">组合</span></td><td>串联多个知识点</td><td>综合运用</td></tr>
+<tr><td><span class="type-b">辨析</span></td><td>讲区别、讲为什么</td><td>口头能说清</td></tr>
+</table>
+<p class="note">🌐 = 须电脑环境（Ubuntu）完成；平板 Termux 环境下不确定。Windows 会报错。</p>
+<div class="box2"><b>实验闭环：</b>先记录练习文件原状态；只在 <span class="code">~/lab</span> 操作；运行后核对内容、行数和输出；结束后删除临时文件或恢复现场。异常时保留 traceback。</div>
+<h3>7. 练习环境与安全红线</h3>
+<p>电脑 Ubuntu（Python 3 自带）或平板 Termux 均可。<b>红线</b>：实验文件一律放在 <span class="code">~/lab</span>；涉及<b>覆盖（w 模式）</b>、<b>删除</b>、<b>联网</b>的题，题面已加安全提示，请照提示执行；不访问陌生网站，联网题只用题面指定的公开接口。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-2">示范题（先看这 2 道，锁定答案标准）</h2>
+<p>这两道示范题的"答案四步式"就是全书 48 题答案的标准。做题前先读一遍，了解"对答案时应该看到什么"。<span class="opt">（说明：两道示范题均为独立场景，不与任何正题重叠——它们的用途是展示"四步式答案"的写法标准）</span></p>
+
+<h3>示范题 1（独立示范，不占任何正题）</h3>
+<div class="box">
+<p><b>题目</b>：让用户输入 3 行内容，逐行<b>追加</b>写入 <span class="code">notes.txt</span>（先 <span class="code">cd ~/lab</span> 再运行），最后打印"已写入 3 行"。</p>
+</div>
+<div class="ans">
+<p><span class="step">① 先想什么</span>：三步拼装——<span class="code fn">input</span> 读一行（第 2 章）、<span class="code fn">open</span>("a") 追加写（第 6 章）、<span class="code kw">for</span> 循环 3 次（第 2 章）。写进文件的每一行都要自己补换行符。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code str">"a"</span> 模式 = 追加（只往末尾加，不覆盖原内容——第 6 章对比过 w 和 a）；<span class="code fn">write</span> 不会自动加换行，所以要写 <span class="code str">"\n"</span>；<span class="code fn">range</span>(3) 控制次数。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"notes.txt"</span>, <span class="str">"a"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>):
+        <span class="param">line</span> = <span class="fn">input</span>(<span class="str">"第 "</span> + <span class="fn">str</span>(<span class="param">i</span>+<span class="num">1</span>) + <span class="str">" 行："</span>)
+        <span class="param">f</span>.<span class="fn">write</span>(<span class="param">line</span> + <span class="str">"\n"</span>)
+<span class="fn">print</span>(<span class="str">"已写入 3 行"</span>)</pre>
+<p><span class="step">④ 怎么验证做对了</span>：跑完 <span class="code">cat notes.txt</span> 能看到你输入的 3 行；<b>再跑一轮</b>（再输 3 行），文件变成 6 行——证明 a 是"追加"不是"覆盖"。</p>
+</div>
+
+<h3>示范题 2（独立示范，不占任何正题）</h3>
+<div class="box">
+<p><b>题目</b>：写一个命令行小工具：<span class="code">--times N</span>（次数）参数，把"你好"打印 N 次，并用 <span class="code fn">logging</span> 记一条 INFO 日志。</p>
+</div>
+<div class="ans">
+<p><span class="step">① 先想什么</span>：两个知识点组合——<span class="code fn">argparse</span> 收参数（第 9 章）、<span class="code fn">logging</span> 记日志（第 10 章）。流程：解析参数 → 循环打印 → 记一条日志。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="param">type</span>=<span class="kw">int</span> 把参数自动转成数字（第 9 章）；<span class="code fn">logging.basicConfig</span> 配好文件名、级别和格式（第 10 章）；<span class="code fn">range</span>(<span class="param">args</span>.<span class="param">times</span>) 按次数循环。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">argparse</span>
+<span class="kw">import</span> <span class="fn">logging</span>
+
+<span class="fn">logging.basicConfig</span>(<span class="param">filename</span>=<span class="str">"hello.log"</span>, <span class="param">level</span>=<span class="fn">logging</span>.<span class="param">INFO</span>,
+                    <span class="param">format</span>=<span class="str">"%(asctime)s %(levelname)s %(message)s"</span>)
+
+<span class="param">parser</span> = <span class="fn">argparse</span>.<span class="fn">ArgumentParser</span>()
+<span class="param">parser</span>.<span class="fn">add_argument</span>(<span class="str">"--times"</span>, <span class="param">type</span>=<span class="kw">int</span>, <span class="param">required</span>=<span class="kw">True</span>, <span class="param">help</span>=<span class="str">"打印次数"</span>)
+<span class="param">args</span> = <span class="param">parser</span>.<span class="fn">parse_args</span>()
+
+<span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="param">args</span>.<span class="param">times</span>):
+    <span class="fn">print</span>(<span class="str">"你好"</span>)
+<span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"打印了 %s 次"</span>, <span class="param">args</span>.<span class="param">times</span>)</pre>
+<p><span class="step">④ 怎么验证做对了</span>：<span class="code">python3 hello.py --times 3</span> 打印 3 次"你好"；<span class="code">cat hello.log</span> 有一条 INFO；不传 <span class="code">--times</span> 会报 required 错误；传 <span class="code">--times abc</span> 会报类型错误——四种行为都对，就是真的懂了。</p>
+</div>
+
+<div class="newpage"></div>
+<h2 id="toc-3">阶段 1｜变量与类型（约 1.5h）</h2>
+<p><b>阶段目标</b>：熟练定义变量、操控字符串和数字、会格式化输出。</p>
+<p><b>阶段产出</b>：一个"自我介绍卡"程序（姓名/年龄/城市/进度条，用 f-string 输出）。</p>
+<table>
+<tr><th style="width:12%">编号</th><th style="width:10%">题型</th><th style="width:20%">考点（教科书章）</th><th style="width:50%">题目（只给目标）</th><th style="width:8%">前置</th></tr>
+<tr><td>1-1 <span class="must">★</span></td><td class="type-d">动手</td><td>print 多参数（第1章）</td><td>用一条 <span class="code fn">print</span>()（打印）同时输出你的名字、年龄和所在城市，中间用 <span class="code">-</span> 分隔</td><td>第1章</td></tr>
+<tr><td>1-2 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>print 参数（第1章）</td><td>打印"进度 50%"，要求 <span class="code fn">print</span> 只用一个参数完成（提示：一个字符串里自带空格）</td><td>第1章</td></tr>
+<tr><td>1-3 <span class="must">★</span></td><td class="type-d">动手</td><td>变量与重赋值（第1章）</td><td>定义变量 <span class="param">score</span>（分数）为 60，输出一次；把它改成 90 再输出一次；打印两个结果的类型</td><td>第1章</td></tr>
+<tr><td>1-4 <span class="opt-tag">☆</span></td><td class="type-g">观察</td><td>type（第1章）</td><td>观察 <span class="code fn">type</span>(<span class="num">5</span>)、<span class="code fn">type</span>(<span class="num">5.0</span>)、<span class="code fn">type</span>(<span class="str">"5"</span>) 的差别，用一句话总结</td><td>第1章</td></tr>
+<tr><td>1-5 <span class="must">★</span></td><td class="type-d">动手</td><td>字符串操作（第1章）</td><td>用拼接、重复、<span class="code fn">len</span>()（长度）生成一张"分割线卡片"（如 <span class="code">====欢迎====</span>）</td><td>第1章</td></tr>
+<tr><td>1-6 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>f-string（第1章）</td><td>用 f-string 重做 1-1 题，并额外输出一位小数（如 <span class="num">3.1</span> 而非 <span class="num">3.14159</span>）</td><td>第1章</td></tr>
+<tr><td>1-7 <span class="must">★</span></td><td class="type-d">动手</td><td>数字运算（第1章）</td><td>计算 <span class="code">7/2</span>、<span class="code">7//2</span>、<span class="code">7%2</span>、<span class="code">2**10</span> 并逐行打印，各配一句注释说明结果含义</td><td>第1章</td></tr>
+<tr><td>1-8 <span class="must">★</span></td><td class="type-b">辨析</td><td>变量命名（第1章）</td><td>解释：为什么 <span class="code">1name</span> 和 <span class="code">if</span> 不能作变量名？分别违反了什么规则？</td><td>第1章</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-4">阶段 2｜控制流（约 1.5h）</h2>
+<p><b>阶段目标</b>：能用 if 分支和两种循环写出带判断的程序。</p>
+<p><b>阶段产出</b>：一个完整的"猜数字"游戏（含次数统计与再来一局）。</p>
+<table>
+<tr><th style="width:12%">编号</th><th style="width:10%">题型</th><th style="width:20%">考点（教科书章）</th><th style="width:50%">题目（只给目标）</th><th style="width:8%">前置</th></tr>
+<tr><td>2-1 <span class="must">★</span></td><td class="type-d">动手</td><td>if/else（第2章）</td><td>写程序：输入一个整数，输出它是正数、负数还是零</td><td>第2章</td></tr>
+<tr><td>2-2 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>if/elif（第2章）</td><td>成绩分段：≥90 优秀、≥75 良好、≥60 及格、其余不及格</td><td>第2章</td></tr>
+<tr><td>2-3 <span class="must">★</span></td><td class="type-d">动手</td><td>for + range（第2章）</td><td>打印 1 到 100 中所有 7 的倍数</td><td>第2章</td></tr>
+<tr><td>2-4 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>for + enumerate（第2章）</td><td>给一份名单加编号输出（如 <span class="code">1号：张三</span>），要求序号从 1 开始（提示：<span class="code fn">enumerate</span>()（编号遍历）有第二个参数）</td><td>第2章</td></tr>
+<tr><td>2-5 <span class="must">★</span></td><td class="type-d">动手</td><td>while 计数器（第2章）</td><td>用 <span class="code kw">while</span> 打印 10 到 1 的倒计时，最后输出"发射！"</td><td>第2章</td></tr>
+<tr><td>2-6 <span class="must">★</span></td><td class="type-z">组合</td><td>while + break（第2章）</td><td>猜数字：程序随机想一个 1~100 的数（提示：<span class="code fn">random.randint</span>（随机整数，需先 <span class="kw">import random</span>，第 5 章教 import）），猜对为止，输出猜了几次</td><td>第2、5章</td></tr>
+<tr><td>2-7 <span class="opt-tag">☆</span></td><td class="type-b">辨析</td><td>for vs while（第2章）</td><td>解释：知道循环次数时用哪个？不知道次数（如猜数字）时用哪个？各举一例</td><td>第2章</td></tr>
+<tr><td>2-8 <span class="must">★</span></td><td class="type-z">组合</td><td>嵌套循环（第2章）</td><td>打印九九乘法表，格式对齐</td><td>第2章</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-5">阶段 3｜数据结构（约 2h）</h2>
+<p><b>阶段目标</b>：用 list 与 dict（含 tuple/set）管理一组数据，会增删改查。</p>
+<p><b>阶段产出</b>：一个通讯录小程序（增删查全功能）。</p>
+<table>
+<tr><th style="width:12%">编号</th><th style="width:10%">题型</th><th style="width:20%">考点（教科书章）</th><th style="width:50%">题目（只给目标）</th><th style="width:8%">前置</th></tr>
+<tr><td>3-1 <span class="must">★</span></td><td class="type-d">动手</td><td>list 基本操作（第3章）</td><td>建一个空列表，依次放入 3 个元素，用负数索引取出最后一个</td><td>第3章</td></tr>
+<tr><td>3-2 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>list 切片（第3章）</td><td>对列表 <span class="code">[0,1,2,3,4,5]</span> 分别取：前 3 个、后 2 个、全部（用切片写）</td><td>第3章</td></tr>
+<tr><td>3-3 <span class="must">★</span></td><td class="type-d">动手</td><td>dict 增删改查（第3章）</td><td>建一个"英文→中文"的小词典，完成一次查词、加词、改词、删词</td><td>第3章</td></tr>
+<tr><td>3-4 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>dict get 与遍历（第3章）</td><td>用 <span class="code fn">get</span>()（安全取值）查一个不存在的词并给默认提示"查无此词"；再遍历输出整个词典</td><td>第3章</td></tr>
+<tr><td>3-5 <span class="must">★</span></td><td class="type-d">动手</td><td>tuple/set（第3章）</td><td>用 <span class="code fn">set</span>（集合）给一份有重复的名单去重；解释为什么结果顺序可能变化</td><td>第3章</td></tr>
+<tr><td>3-6 <span class="must">★</span></td><td class="type-z">组合</td><td>list + tuple（第3章）</td><td>存 3 名学生的"姓名+分数"，找出最高分并打印其姓名</td><td>第3章</td></tr>
+<tr><td>3-7 <span class="opt-tag">☆</span></td><td class="type-b">辨析</td><td>list vs tuple（第3章）</td><td>解释：什么时候用 <span class="code fn">tuple</span>（元组）而不是 list？给一个真实场景</td><td>第3章</td></tr>
+<tr><td>3-8 <span class="must">★</span></td><td class="type-z">组合</td><td>通讯录（第3章）</td><td>写一个循环运行的通讯录：输入 1 添加、2 查询、3 退出</td><td>第3章</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-6">阶段 4｜函数与模块（约 1.5h）</h2>
+<p><b>阶段目标</b>：会写函数、传参、拿返回值，会导入模块。</p>
+<p><b>阶段产出</b>：一组自己写的 3 个函数（工具函数库雏形）。</p>
+<table>
+<tr><th style="width:12%">编号</th><th style="width:10%">题型</th><th style="width:20%">考点（教科书章）</th><th style="width:50%">题目（只给目标）</th><th style="width:8%">前置</th></tr>
+<tr><td>4-1 <span class="must">★</span></td><td class="type-d">动手</td><td>def 定义与调用（第4章）</td><td>写一个函数打印"我是新函数"，连续调用 3 次</td><td>第4章</td></tr>
+<tr><td>4-2 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>参数与默认参数（第4章）</td><td>写 <span class="code fn">greet</span>(<span class="param">name</span>, <span class="param">greeting</span>=<span class="str">"你好"</span>)，分别用默认值和自定义值调用</td><td>第4章</td></tr>
+<tr><td>4-3 <span class="must">★</span></td><td class="type-d">动手</td><td>return 与多返回值（第4章）</td><td>写一个函数同时返回两个数中的较大值和较小值</td><td>第4章</td></tr>
+<tr><td>4-4 <span class="opt-tag">☆</span></td><td class="type-g">观察</td><td>作用域（第4章）</td><td>在函数内给一个与外部同名的变量赋值，观察外部变量是否变化，解释原因</td><td>第4章</td></tr>
+<tr><td>4-5 <span class="must">★</span></td><td class="type-d">动手</td><td>import os（第5章）</td><td>用 <span class="code fn">os</span> 模块打印当前目录、列出目录下所有文件</td><td>第5章</td></tr>
+<tr><td>4-6 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>from/import as（第5章）</td><td>分别用 <span class="code kw">from</span> <span class="code fn">os</span> <span class="code kw">import</span> <span class="fn">getcwd</span> 和 <span class="code kw">import</span> <span class="fn">time</span> <span class="kw">as</span> <span class="param">t</span> 两种写法实现同一功能</td><td>第5章</td></tr>
+<tr><td>4-7 <span class="must">★</span></td><td class="type-z">组合</td><td>重构（第4章）</td><td>把阶段 3 通讯录的"添加"功能改造成一个函数，程序主体调用它</td><td>第4章</td></tr>
+<tr><td>4-8 <span class="must">★</span></td><td class="type-b">辨析</td><td>print vs return（第4章）</td><td>写一个"有 return 无 print"的函数和"有 print 无 return"的函数，展示差异并总结</td><td>第4章</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-7">阶段 5｜文件与异常（约 2h）</h2>
+<p><b>阶段目标</b>：会读写文本和 JSON 文件，会给程序加异常处理。✅ 本阶段完成 = 达成检查点②。</p>
+<p><b>阶段产出</b>：一个能读写文件、带异常处理的通讯录工具。</p>
+<p class="note"><b>📌 本阶段统一实验约定</b>：① <b>初始状态</b>：文件题先建练习目录并用答案③给的初始化命令创建初始文件（5-1 造 test.txt；5-3 自建 data.json；5-4 自建 contacts.json）；② <b>是否依赖前题</b>：5-2 承接 5-1 的 test.txt，其余各题自建素材、互不依赖；③ <b>重复运行影响</b>：w 模式会清空重写、a 模式会追加——重复运行前按答案④清理测试文件，否则行数/内容叠加会误判；④ <b>清理恢复</b>：做完本阶段删除 ~/lab 里的测试文件（test.txt、data.json、contacts.json 等），恢复练习前状态。</p>
+<table>
+<tr><th style="width:12%">编号</th><th style="width:10%">题型</th><th style="width:20%">考点（教科书章）</th><th style="width:50%">题目（只给目标）</th><th style="width:8%">前置</th></tr>
+<tr><td>5-1 <span class="must">★</span></td><td class="type-d">动手</td><td>open 读文件（第6章）</td><td>把一个文本文件整段读出，再逐行读出，各打印一次（实验文件自建，放 ~/lab 下）</td><td>第6章</td></tr>
+<tr><td>5-2 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>写入模式（第6章）</td><td>分别用 <span class="str">"w"</span> 和 <span class="str">"a"</span> 模式向同一文件写两次内容，观察并解释最终文件内容（⚠️ w 会清空原内容，只用练习文件做）</td><td>第6章</td></tr>
+<tr><td>5-3 <span class="must">★</span></td><td class="type-d">动手</td><td>json 读写（第6章）</td><td>把一个 dict 存成 JSON 文件，再读回来并打印（⚠️ 写入用 ~/lab 下的练习文件）</td><td>第6章</td></tr>
+<tr><td>5-4 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>json + 通讯录（第6章）</td><td>把阶段 3 通讯录改造成"退出时保存到 JSON、启动时读回"</td><td>第6章</td></tr>
+<tr><td>5-5 <span class="must">★</span></td><td class="type-d">动手</td><td>try/except（第7章）</td><td>读一个不存在的文件，用 <span class="code kw">try</span>/<span class="code kw">except</span> 捕获 <span class="code">FileNotFoundError</span> 并输出友好提示</td><td>第7章</td></tr>
+<tr><td>5-6 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>finally（第7章）</td><td>在 5-5 基础上加 <span class="code kw">finally</span>，无论成功失败都输出"本次读取结束"</td><td>第7章</td></tr>
+<tr><td>5-7 <span class="must">★</span></td><td class="type-z">组合</td><td>读文件统计（第6章）</td><td>统计一个文本文件的行数、总字数，输出一句话报告</td><td>第6章</td></tr>
+<tr><td>5-8 <span class="must">★</span></td><td class="type-b">辨析</td><td>w vs a（第6章）</td><td>解释 <span class="str">"w"</span> 覆盖与 <span class="str">"a"</span> 追加的区别，并说出它们分别对应 Linux 的哪个符号（<span class="code">></span> / <span class="code">>></span>）</td><td>第6章</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-8">阶段 6｜模块组合（约 2h）</h2>
+<p><b>阶段目标</b>：把 requests/argparse/logging/subprocess 组合成命令行工具。</p>
+<p><b>阶段产出</b>：一个带参数、带日志的命令行小工具（本阶段旗舰题 6-8）。<b>外部条件</b>：6-1、6-2 需网络和 requests（断网/未安装时跳过，不影响主线，主线为 6-3~6-8）。</p>
+<table>
+<tr><th style="width:12%">编号</th><th style="width:10%">题型</th><th style="width:20%">考点（教科书章）</th><th style="width:50%">题目（只给目标）</th><th style="width:8%">前置</th></tr>
+<tr><td>6-1 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>requests 基本（第8章）</td><td>请求一个公开 API，打印状态码和返回的 JSON（⚠️ 外部扩展：需网络 + requests，断网/未安装就跳过，不影响主线）</td><td>第8章</td></tr>
+<tr><td>6-2 <span class="opt-tag">☆</span></td><td class="type-d">动手</td><td>requests 异常（第8章）</td><td>请求一个不存在的主机，用 <span class="code kw">try</span>/<span class="code kw">except</span> 接住并输出"网络不通"（提示：<span class="code">requests.exceptions.RequestException</span> = requests 所有网络异常的基类，接住它 = 接住"连不上"）</td><td>第8章</td></tr>
+<tr><td>6-3 <span class="must">★</span></td><td class="type-d">动手</td><td>argparse 参数（第9章）</td><td>写一个脚本，接收 <span class="code">--name</span> 参数并打印"你好，{name}"</td><td>第9章</td></tr>
+<tr><td>6-4 <span class="must">★</span></td><td class="type-d">动手</td><td>argparse 默认值（第9章）</td><td>在 6-3 基础上：不传参数时用默认名字，并让 <span class="code">--help</span> 有中文说明</td><td>第9章</td></tr>
+<tr><td>6-5 <span class="must">★</span></td><td class="type-d">动手</td><td>logging 基本（第10章）</td><td>给一个脚本配日志，INFO 级别记录"开始/结束"，ERROR 记录异常，输出到文件</td><td>第10章</td></tr>
+<tr><td>6-6 <span class="opt-tag">☆</span></td><td class="type-g">观察</td><td>logging 级别（第10章）</td><td>把日志级别改成 WARNING，观察 INFO 日志消失，解释级别过滤机制</td><td>第10章</td></tr>
+<tr><td>6-7 <span class="must">★</span></td><td class="type-d">动手</td><td>subprocess 基本（第11章）</td><td>用 Python 运行 <span class="code">df -h</span>（查磁盘）和 <span class="code">free -h</span>（查内存），捕获并打印输出（🌐本命令为 Linux 命令，需在 Ubuntu/Termux 环境运行，Windows 会报错）</td><td>第11章</td></tr>
+<tr><td>6-8 <span class="must">★</span></td><td class="type-z">组合</td><td>三模块综合（第9/10/11章：argparse+logging+subprocess）</td><td>写一个命令行小工具：<span class="code">--check disk</span> 查磁盘、<span class="code">--check mem</span> 查内存，操作记入日志（🌐同 6-7：df/free 为 Linux 命令，需 Ubuntu/Termux 环境）</td><td>第9/10/11章</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-9">参考答案（书末集中）</h2>
+<p class="note">先自己做，再看答案。对答案时顺序：① 先想什么 → ② 为什么这么写 → ③ 完整代码 → ④ 怎么验证。跳过前两步直接抄代码，等于白做。</p>
+
+<h3>阶段 1</h3>
+<div class="ans">
+<p><b>【1-1】</b></p>
+<p><span class="step">① 先想什么</span>：<span class="code fn">print</span> 可以接多个参数，分隔符由 <span class="param">sep</span> 控制。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="param">sep</span> 默认是空格，题目要 <span class="code">-</span>，就写 <span class="param">sep</span>=<span class="str">"-"</span>；参数按名字、年龄、城市依次排。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="fn">print</span>(<span class="str">"小明"</span>, <span class="num">19</span>, <span class="str">"杭州"</span>, <span class="param">sep</span>=<span class="str">"-"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">小明-19-杭州</span>；如果把 <span class="param">sep</span> 删掉，输出变成 <span class="out">小明 19 杭州</span>（空格）——对照即懂 <span class="param">sep</span> 的作用。</p>
+</div>
+<div class="ans">
+<p><b>【1-2】</b></p>
+<p><span class="step">① 先想什么</span>：只给一个参数 → 就是一个完整的字符串；一个参数根本用不到 <span class="param">sep</span>。</p>
+<p><span class="step">② 为什么这么写</span>：字符串里可以包含空格，直接 <span class="code fn">print</span>(<span class="str">"进度 50%"</span>) 就满足要求。题面的"默认值"提示是干扰项：不写 <span class="param">sep</span> 时用的就是默认值——但一个参数时它没有出场机会。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="fn">print</span>(<span class="str">"进度 50%"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">进度 50%</span>。写成 <span class="code fn">print</span>(<span class="str">"进度"</span>, <span class="str">"50%"</span>) 是两个参数，虽然输出一样，但不满足"一个参数"。</p>
+</div>
+<div class="ans">
+<p><b>【1-3】</b></p>
+<p><span class="step">① 先想什么</span>：变量 = 贴标签的盒子；重新赋值 = 把盒子里的东西换掉；<span class="code fn">type</span> 看类型。</p>
+<p><span class="step">② 为什么这么写</span>：输出一次 → 改值 → 再输出，两次 <span class="code fn">type</span> 都是 <span class="param">int</span>（60 和 90 都是整数）。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">score</span> = <span class="num">60</span>
+<span class="fn">print</span>(<span class="param">score</span>)
+<span class="param">score</span> = <span class="num">90</span>
+<span class="fn">print</span>(<span class="param">score</span>)
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="param">score</span>))</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">60</span>、<span class="out">90</span>、<span class="out">&lt;class 'int'&gt;</span>；若写成 <span class="param">score</span> = <span class="str">"90"</span>，<span class="code fn">type</span> 会变成 <span class="out">&lt;class 'str'&gt;</span>。</p>
+</div>
+<div class="ans">
+<p><b>【1-4】</b></p>
+<p><span class="step">① 先想什么</span>：三个字面量的"长相"决定类型：不带小数点的是 int、带小数点的是 float、带引号的是 str。</p>
+<p><span class="step">② 为什么这么写</span>：Python 靠字面量形式自动判断类型，不需要声明。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="fn">print</span>(<span class="fn">type</span>(<span class="num">5</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="num">5.0</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="str">"5"</span>))</pre>
+<p><span class="step">④ 怎么验证</span>：三行输出分别是 <span class="out">&lt;class 'int'&gt;</span>、<span class="out">&lt;class 'float'&gt;</span>、<span class="out">&lt;class 'str'&gt;</span>。一句话总结：数字的长相决定类型——无小数点是 int，有小数点是 float，有引号是 str。</p>
+</div>
+<div class="ans">
+<p><b>【1-5】</b></p>
+<p><span class="step">① 先想什么</span>：分割线卡片 = 重复的 <span class="code">=</span> 号 + 文字 + 重复的 <span class="code">=</span> 号；长度用 <span class="code fn">len</span>。</p>
+<p><span class="step">② 为什么这么写</span>：字符串重复用 <span class="code">*</span>（<span class="str">"="</span> <span class="code">*</span> <span class="num">4</span> 就是四个等号），拼接用 <span class="code">+</span>。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">line</span> = <span class="str">"="</span> <span class="code">*</span> <span class="num">4</span> + <span class="str">"欢迎"</span> + <span class="str">"="</span> <span class="code">*</span> <span class="num">4</span>
+<span class="fn">print</span>(<span class="param">line</span>)
+<span class="fn">print</span>(<span class="str">"长度:"</span>, <span class="fn">len</span>(<span class="param">line</span>))</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">====欢迎====</span> 和 <span class="out">长度: 10</span>（4+2+4）；<span class="code fn">len</span> 数的是字符个数。</p>
+</div>
+<div class="ans">
+<p><b>【1-6】</b></p>
+<p><span class="step">① 先想什么</span>：f-string 把变量塞进字符串；控制小数位数用 <span class="code">:.1f</span>。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code">f"{变量:.1f}"</span> 保留一位小数；名字年龄城市各自放进 <span class="code">{}</span>。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">name</span> = <span class="str">"小明"</span>
+<span class="param">age</span> = <span class="num">19</span>
+<span class="param">city</span> = <span class="str">"杭州"</span>
+<span class="param">pi</span> = <span class="num">3.14159</span>
+<span class="fn">print</span>(<span class="str">f"{name}-{age}-{city}"</span>)
+<span class="fn">print</span>(<span class="str">f"{pi:.1f}"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">小明-19-杭州</span>、<span class="out">3.1</span>；<span class="code">:.1f</span> 是格式说明（四舍五入到一位）。</p>
+</div>
+<div class="ans">
+<p><b>【1-7】</b></p>
+<p><span class="step">① 先想什么</span>：四个运算符各管一种运算；每行 print 后加注释说明结果含义。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code">/</span> 真除法得 float、<span class="code">//</span> 整除去尾、<span class="code">%</span> 取余、<span class="code">**</span> 乘方。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="fn">print</span>(<span class="num">7</span> / <span class="num">2</span>) <span class="cm"># 真除法：3.5</span>
+<span class="fn">print</span>(<span class="num">7</span> // <span class="num">2</span>) <span class="cm"># 整除：3</span>
+<span class="fn">print</span>(<span class="num">7</span> % <span class="num">2</span>) <span class="cm"># 取余：1</span>
+<span class="fn">print</span>(<span class="num">2</span> ** <span class="num">10</span>) <span class="cm"># 2的10次方：1024</span></pre>
+<p><span class="step">④ 怎么验证</span>：四个输出分别是 <span class="out">3.5</span>、<span class="out">3</span>、<span class="out">1</span>、<span class="out">1024</span>。</p>
+</div>
+<div class="ans">
+<p><b>【1-8】</b></p>
+<p><span class="step">① 先想什么</span>：命名规则两条——不能数字开头；不能是关键字。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code">1name</span> 数字开头，违反规则①；<span class="code">if</span> 是关键字（语法词），被 Python 占用，违反规则②。</p>
+<p><span class="step">③ 完整代码</span>：本题文字作答：<span class="code">1name</span> 以数字 1 开头，Python 变量名不能数字开头；<span class="code">if</span> 是关键字，已经被语言本身占用了。</p>
+<p><span class="step">④ 怎么验证</span>：在交互式里输入 <span class="code">1name = 1</span> 会报 SyntaxError；输入 <span class="code">if = 1</span> 同样报 SyntaxError——用报错验证规则。</p>
+</div>
+
+<h3>阶段 2</h3>
+<div class="ans">
+<p><b>【2-1】</b></p>
+<p><span class="step">① 先想什么</span>：读入 → int 转数字 → if/elif/else 三分支。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">input</span> 返回字符串，比大小前必须 <span class="code fn">int</span>()；三种情况正好 <span class="code kw">elif</span> 链。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">n</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"输入一个整数："</span>))
+<span class="kw">if</span> <span class="param">n</span> &gt; <span class="num">0</span>:
+    <span class="fn">print</span>(<span class="str">"正数"</span>)
+<span class="kw">elif</span> <span class="param">n</span> &lt; <span class="num">0</span>:
+    <span class="fn">print</span>(<span class="str">"负数"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"零"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：分别输入 5、-3、0 测试三条分支；忘 <span class="code fn">int</span>() 输入 5 会报 TypeError（字符串和 0 没法比）。</p>
+</div>
+<div class="ans">
+<p><b>【2-2】</b></p>
+<p><span class="step">① 先想什么</span>：成绩分段 = elif 链，条件从高到低写。</p>
+<p><span class="step">② 为什么这么写</span>：从上往下依次判断，≥90 排第一，落到最后的 else 就是 &lt;60。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">score</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"输入成绩："</span>))
+<span class="kw">if</span> <span class="param">score</span> &gt;= <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"优秀"</span>)
+<span class="kw">elif</span> <span class="param">score</span> &gt;= <span class="num">75</span>:
+    <span class="fn">print</span>(<span class="str">"良好"</span>)
+<span class="kw">elif</span> <span class="param">score</span> &gt;= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"及格"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"不及格"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输入 95/80/65/50 分别得四档；条件顺序反了（先 ≥60）会输出错误结果——这正是"顺序从高到低"的原因。</p>
+</div>
+<div class="ans">
+<p><b>【2-3】</b></p>
+<p><span class="step">① 先想什么</span>：遍历 1~100，筛 7 的倍数；倍数 = 取余等于 0。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">range</span>(<span class="num">1</span>, <span class="num">101</span>) 是 1 到 100（左闭右开）；<span class="param">i</span> % <span class="num">7</span> == <span class="num">0</span> 判断。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
+    <span class="kw">if</span> <span class="param">i</span> % <span class="num">7</span> == <span class="num">0</span>:
+        <span class="fn">print</span>(<span class="param">i</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 7、14、21 ... 98，共 14 个。</p>
+</div>
+<div class="ans">
+<p><b>【2-4】</b></p>
+<p><span class="step">① 先想什么</span>：编号遍历用 <span class="code fn">enumerate</span>；序号从 1 开始用它的第二个参数。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">enumerate</span>(names, <span class="num">1</span>) 让 i 从 1 数而不是 0。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">names</span> = [<span class="str">"张三"</span>, <span class="str">"李四"</span>, <span class="str">"王五"</span>]
+<span class="kw">for</span> <span class="param">i</span>, <span class="param">name</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="param">names</span>, <span class="num">1</span>):
+    <span class="fn">print</span>(<span class="str">f"{i}号：{name}"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">1号：张三</span>、<span class="out">2号：李四</span>、<span class="out">3号：王五</span>；不写 <span class="num">1</span> 就变成 0 号开头。</p>
+</div>
+<div class="ans">
+<p><b>【2-5】</b></p>
+<p><span class="step">① 先想什么</span>：while 循环里手动递减计数器；退出循环后再打印"发射！"。</p>
+<p><span class="step">② 为什么这么写</span>：while 比 for 多一个"自己管计数器"的动作，<span class="param">n</span> -= <span class="num">1</span> 不能忘（忘了就死循环）。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">n</span> = <span class="num">10</span>
+<span class="kw">while</span> <span class="param">n</span> &gt;= <span class="num">1</span>:
+    <span class="fn">print</span>(<span class="param">n</span>)
+    <span class="param">n</span> -= <span class="num">1</span>
+<span class="fn">print</span>(<span class="str">"发射！"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 10 到 1 再"发射！"；把 n -= 1 删掉会死循环（Ctrl+C 急救）。</p>
+</div>
+<div class="ans">
+<p><b>【2-6】</b></p>
+<p><span class="step">① 先想什么</span>：随机数用 <span class="code fn">random.randint</span>(<span class="num">1</span>, <span class="num">100</span>)；猜数循环到猜对为止（不知道几次 → while）；计数变量每次 +1；对了 break。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">random</span> 是标准库要先 import；<span class="code kw">while True</span> + <span class="code kw">break</span> 实现"猜到为止"。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">random</span>
+<span class="param">target</span> = <span class="fn">random.randint</span>(<span class="num">1</span>, <span class="num">100</span>)
+<span class="param">count</span> = <span class="num">0</span>
+<span class="kw">while</span> <span class="kw">True</span>:
+    <span class="param">guess</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"猜一个1~100的数："</span>))
+    <span class="param">count</span> += <span class="num">1</span>
+    <span class="kw">if</span> <span class="param">guess</span> == <span class="param">target</span>:
+        <span class="fn">print</span>(<span class="str">f"猜对了！共猜了{count}次"</span>)
+        <span class="kw">break</span>
+    <span class="kw">elif</span> <span class="param">guess</span> &lt; <span class="param">target</span>:
+        <span class="fn">print</span>(<span class="str">"小了"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">"大了"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：按提示缩小范围，猜中后打印次数；如果你自己改代码时去掉了 <span class="code fn">int</span>()，str 和 int 比大小会报 TypeError——所以 <span class="code fn">int</span>() 不能忘。</p>
+</div>
+<div class="ans">
+<p><b>【2-7】</b></p>
+<p><span class="step">① 先想什么</span>：for = 知道次数（range 给你次数）；while = 不知道次数（靠条件）。</p>
+<p><span class="step">② 为什么这么写</span>：猜数字循环次数未知用 while；打印固定范围用 for。</p>
+<p><span class="step">③ 完整代码</span>：文字作答——知道循环次数用 <span class="code kw">for</span>（例：打印 1~100 的 7 倍数）；不知道次数用 <span class="code kw">while</span>（例：猜数字，猜到为止）。</p>
+<p><span class="step">④ 怎么验证</span>：口头能说清这两条要点即可。</p>
+</div>
+<div class="ans">
+<p><b>【2-8】</b></p>
+<p><span class="step">① 先想什么</span>：外层 for 管行 i（1..9），内层 for 管列 j（1..i），打印 j×i=积，行尾换行。</p>
+<p><span class="step">② 为什么这么写</span>：第 i 行有 i 个式子；<span class="code fn">print</span>(..., <span class="param">end</span>=<span class="str">"\t"</span>) 不换行且制表符对齐；内层循环完 <span class="code fn">print</span>() 换行。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">10</span>):
+    <span class="kw">for</span> <span class="param">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="param">i</span> + <span class="num">1</span>):
+        <span class="fn">print</span>(<span class="str">f"{j}x{i}={i*j}"</span>, <span class="param">end</span>=<span class="str">"\t"</span>)
+    <span class="fn">print</span>()</pre>
+<p><span class="step">④ 怎么验证</span>：输出 9 行三角形乘法表，每行对齐；内层 range(1, i+1) 保证第 i 行有 i 个式子。</p>
+</div>
+
+<h3>阶段 3</h3>
+<div class="ans">
+<p><b>【3-1】</b></p>
+<p><span class="step">① 先想什么</span>：空列表 <span class="code">[]</span>、<span class="code fn">append</span> 加元素、<span class="code">[-1]</span> 取最后一个。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">append</span> 追加到末尾，负数索引从尾部倒数。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">nums</span> = []
+<span class="param">nums</span>.<span class="fn">append</span>(<span class="str">"苹果"</span>)
+<span class="param">nums</span>.<span class="fn">append</span>(<span class="str">"香蕉"</span>)
+<span class="param">nums</span>.<span class="fn">append</span>(<span class="str">"橙子"</span>)
+<span class="fn">print</span>(<span class="param">nums</span>[<span class="num">-1</span>])</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">橙子</span>；<span class="param">nums</span>[<span class="num">0</span>] 是苹果、<span class="param">nums</span>[<span class="num">2</span>] 也是橙子。</p>
+</div>
+<div class="ans">
+<p><b>【3-2】</b></p>
+<p><span class="step">① 先想什么</span>：切片 <span class="code">[a:b]</span> 左闭右开。</p>
+<p><span class="step">② 为什么这么写</span>：前 3 个 = <span class="code">[:3]</span>；后 2 个 = <span class="code">[-2:]</span>（省略结尾 = 到末尾）；全部 = <span class="code">[:]</span>。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">lst</span> = [<span class="num">0</span>, <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+<span class="fn">print</span>(<span class="param">lst</span>[:<span class="num">3</span>])
+<span class="fn">print</span>(<span class="param">lst</span>[<span class="num">-2</span>:])
+<span class="fn">print</span>(<span class="param">lst</span>[:])</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">[0, 1, 2]</span>、<span class="out">[4, 5]</span>、<span class="out">[0, 1, 2, 3, 4, 5]</span>。</p>
+</div>
+<div class="ans">
+<p><b>【3-3】</b></p>
+<p><span class="step">① 先想什么</span>：dict 增删改查 = <span class="code">[]</span> 取值、<span class="code">[]</span> 赋值改、<span class="code kw">del</span> 删、print 看。</p>
+<p><span class="step">② 为什么这么写</span>：dict 用键访问；赋值给已有键 = 改、给新键 = 加；<span class="code kw">del</span> 键 = 删。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">d</span> = {<span class="str">"hello"</span>: <span class="str">"你好"</span>}
+<span class="fn">print</span>(<span class="param">d</span>[<span class="str">"hello"</span>])   <span class="cm"># 查词</span>
+<span class="param">d</span>[<span class="str">"world"</span>] = <span class="str">"世界"</span>  <span class="cm"># 加词</span>
+<span class="param">d</span>[<span class="str">"hello"</span>] = <span class="str">"您好"</span>  <span class="cm"># 改词</span>
+<span class="kw">del</span> <span class="param">d</span>[<span class="str">"world"</span>]         <span class="cm"># 删词</span>
+<span class="fn">print</span>(<span class="param">d</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：依次输出 <span class="out">你好</span>、<span class="out">{'hello': '您好'}</span>；用 [不存在的键] 会报 KeyError。</p>
+</div>
+<div class="ans">
+<p><b>【3-4】</b></p>
+<p><span class="step">① 先想什么</span>：<span class="code fn">get</span>(键, 默认值) 查不存在的键不报错；<span class="code fn">items</span>() 遍历键值对。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">get</span> 比 <span class="code">[]</span> 安全——查不到给默认提示而不是崩溃。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">d</span> = {<span class="str">"hello"</span>: <span class="str">"你好"</span>}
+<span class="fn">print</span>(<span class="param">d</span>.<span class="fn">get</span>(<span class="str">"goodbye"</span>, <span class="str">"查无此词"</span>))
+<span class="kw">for</span> <span class="param">k</span>, <span class="param">v</span> <span class="kw">in</span> <span class="param">d</span>.<span class="fn">items</span>():
+    <span class="fn">print</span>(<span class="param">k</span>, <span class="str">"="</span>, <span class="param">v</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">查无此词</span>、<span class="out">hello = 你好</span>。</p>
+</div>
+<div class="ans">
+<p><b>【3-5】</b></p>
+<p><span class="step">① 先想什么</span>：set 去重 = 把列表塞进 <span class="code fn">set</span>()；顺序会变因为 set 无序。</p>
+<p><span class="step">② 为什么这么写</span>：set 自动去重但元素没有先后。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">names</span> = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小明"</span>, <span class="str">"小刚"</span>]
+<span class="param">s</span> = <span class="fn">set</span>(<span class="param">names</span>)
+<span class="fn">print</span>(<span class="param">s</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出类似 <span class="out">{'小红', '小明', '小刚'}</span>（顺序每次可能不同）；<span class="code fn">len</span>(s) = 3 说明重复的"小明"只留一个。顺序会变的原因：set 内部按哈希存放，不保留插入顺序。</p>
+</div>
+<div class="ans">
+<p><b>【3-6】</b></p>
+<p><span class="step">① 先想什么</span>：存 3 个学生 = 列表装元组(姓名, 分数)；找最高分 = 逐个比，记录更大的。</p>
+<p><span class="step">② 为什么这么写</span>：元组适合"一组固定数据"；遍历时用下标 [1] 取分数比较。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">students</span> = [(<span class="str">"小明"</span>, <span class="num">92</span>), (<span class="str">"小红"</span>, <span class="num">88</span>), (<span class="str">"小刚"</span>, <span class="num">95</span>)]
+<span class="param">best</span> = <span class="param">students</span>[<span class="num">0</span>]
+<span class="kw">for</span> <span class="param">s</span> <span class="kw">in</span> <span class="param">students</span>:
+    <span class="kw">if</span> <span class="param">s</span>[<span class="num">1</span>] &gt; <span class="param">best</span>[<span class="num">1</span>]:
+        <span class="param">best</span> = <span class="param">s</span>
+<span class="fn">print</span>(<span class="str">f"最高分：{best[0]} {best[1]}分"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">最高分：小刚 95分</span>；初始 best 取第一个，后面谁大换谁。</p>
+</div>
+<div class="ans">
+<p><b>【3-7】</b></p>
+<p><span class="step">① 先想什么</span>：tuple 不可变、list 可变；数据固定不动用 tuple。</p>
+<p><span class="step">② 为什么这么写</span>：不可变 = 安全，防止误改。</p>
+<p><span class="step">③ 完整代码</span>：文字作答——固定不变的数据用 tuple（例：一个点的经纬度 (120.2, 30.3)，天生一对固定坐标，不该被修改）；会增删改的数据用 list（例：通讯录名单）。</p>
+<p><span class="step">④ 怎么验证</span>：试试 <span class="code">t = (1, 2)</span> 然后 <span class="code">t[0] = 5</span> 会报 TypeError——用报错验证"不可变"。</p>
+</div>
+<div class="ans">
+<p><b>【3-8】</b></p>
+<p><span class="step">① 先想什么</span>：循环菜单 = <span class="code kw">while True</span> + <span class="code fn">input</span> + <span class="code kw">if</span> 分支；1 添加（dict 赋值）、2 查询（get）、3 退出（break）。</p>
+<p><span class="step">② 为什么这么写</span>：dict 存姓名→电话；<span class="code fn">get</span> 查询给默认提示。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">contacts</span> = {}
+<span class="kw">while</span> <span class="kw">True</span>:
+    <span class="param">cmd</span> = <span class="fn">input</span>(<span class="str">"1添加 2查询 3退出："</span>)
+    <span class="kw">if</span> <span class="param">cmd</span> == <span class="str">"1"</span>:
+        <span class="param">name</span> = <span class="fn">input</span>(<span class="str">"姓名："</span>)
+        <span class="param">phone</span> = <span class="fn">input</span>(<span class="str">"电话："</span>)
+        <span class="param">contacts</span>[<span class="param">name</span>] = <span class="param">phone</span>
+        <span class="fn">print</span>(<span class="str">"已添加"</span>)
+    <span class="kw">elif</span> <span class="param">cmd</span> == <span class="str">"2"</span>:
+        <span class="fn">print</span>(<span class="param">contacts</span>.<span class="fn">get</span>(<span class="fn">input</span>(<span class="str">"查谁："</span>), <span class="str">"查无此人"</span>))
+    <span class="kw">elif</span> <span class="param">cmd</span> == <span class="str">"3"</span>:
+        <span class="fn">print</span>(<span class="str">"再见"</span>)
+        <span class="kw">break</span></pre>
+<p><span class="step">④ 怎么验证</span>：完整走一遍添加→查询→退出；查询不存在的人输出"查无此人"。</p>
+</div>
+
+<h3>阶段 4</h3>
+<div class="ans">
+<p><b>【4-1】</b></p>
+<p><span class="step">① 先想什么</span>：def 定义函数，函数名 + 括号调用；调用 3 次就写 3 行。</p>
+<p><span class="step">② 为什么这么写</span>：def 只是"登记"，调用才执行；连调 3 次 = 复用 3 次。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">def</span> <span class="fn">hello</span>():
+    <span class="fn">print</span>(<span class="str">"我是新函数"</span>)
+<span class="fn">hello</span>()
+<span class="fn">hello</span>()
+<span class="fn">hello</span>()</pre>
+<p><span class="step">④ 怎么验证</span>：输出 3 行"我是新函数"；只 def 不调用则一个字都不输出。</p>
+</div>
+<div class="ans">
+<p><b>【4-2】</b></p>
+<p><span class="step">① 先想什么</span>：默认参数 = 定义时给参数预先赋值；不传参用默认，传参就覆盖。</p>
+<p><span class="step">② 为什么这么写</span>：greeting 带默认值"你好"；调用时省略 = 用默认，写第二个参数 = 自定义。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">def</span> <span class="fn">greet</span>(<span class="param">name</span>, <span class="param">greeting</span>=<span class="str">"你好"</span>):
+    <span class="fn">print</span>(<span class="str">f"{greeting}，{name}"</span>)
+<span class="fn">greet</span>(<span class="str">"小明"</span>)
+<span class="fn">greet</span>(<span class="str">"小明"</span>, <span class="str">"早上好"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">你好，小明</span> 和 <span class="out">早上好，小明</span>。</p>
+</div>
+<div class="ans">
+<p><b>【4-3】</b></p>
+<p><span class="step">① 先想什么</span>：两个数比大小，用 return 把两个结果一起交回（多返回值）。</p>
+<p><span class="step">② 为什么这么写</span>：return 后面逗号分隔多个值，实际返回一个元组；接收时用两个变量拆包。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">def</span> <span class="fn">min_max</span>(<span class="param">a</span>, <span class="param">b</span>):
+    <span class="kw">if</span> <span class="param">a</span> &gt; <span class="param">b</span>:
+        <span class="kw">return</span> <span class="param">b</span>, <span class="param">a</span>
+    <span class="kw">return</span> <span class="param">a</span>, <span class="param">b</span>
+<span class="param">small</span>, <span class="param">big</span> = <span class="fn">min_max</span>(<span class="num">7</span>, <span class="num">3</span>)
+<span class="fn">print</span>(<span class="param">small</span>, <span class="param">big</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">3 7</span>；换 min_max(2, 9) 输出 2 9。</p>
+</div>
+<div class="ans">
+<p><b>【4-4】</b></p>
+<p><span class="step">① 先想什么</span>：函数里给变量赋值，默认新建<b>局部变量</b>，不碰外面的同名变量。</p>
+<p><span class="step">② 为什么这么写</span>：函数有自己的小房间（作用域）；函数里 x = 99 是房间里的新标签，房间外的 x 还是 10。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">x</span> = <span class="num">10</span>
+<span class="kw">def</span> <span class="fn">change</span>():
+    <span class="param">x</span> = <span class="num">99</span>
+    <span class="fn">print</span>(<span class="str">"函数内:"</span>, <span class="param">x</span>)
+<span class="fn">change</span>()
+<span class="fn">print</span>(<span class="str">"函数外:"</span>, <span class="param">x</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">函数内: 99</span>、<span class="out">函数外: 10</span>——外面的 x 没变，证明函数内赋值不会改动外部同名变量。</p>
+</div>
+<div class="ans">
+<p><b>【4-5】</b></p>
+<p><span class="step">① 先想什么</span>：当前目录用 os.getcwd()，列目录用 os.listdir()；用之前先 import os。</p>
+<p><span class="step">② 为什么这么写</span>：os 是标准库自带；getcwd = get current working directory（取当前工作目录），listdir = list directory（列目录）。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">os</span>
+<span class="fn">print</span>(<span class="fn">os.getcwd</span>())
+<span class="fn">print</span>(<span class="fn">os.listdir</span>())</pre>
+<p><span class="step">④ 怎么验证</span>：先输出当前目录路径，再输出该目录下所有文件/文件夹的名字列表。</p>
+</div>
+<div class="ans">
+<p><b>【4-6】</b></p>
+<p><span class="step">① 先想什么</span>：两种导入写法——from ... import 直接拿函数、import ... as 起别名。</p>
+<p><span class="step">② 为什么这么写</span>：from os import getcwd 后直接 getcwd()；import time as t 后 t.time()。别名可以缩短长模块名。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">from</span> <span class="fn">os</span> <span class="kw">import</span> <span class="fn">getcwd</span>
+<span class="kw">import</span> <span class="fn">time</span> <span class="kw">as</span> <span class="param">t</span>
+<span class="fn">print</span>(<span class="fn">getcwd</span>())
+<span class="fn">print</span>(<span class="param">t</span>.<span class="fn">time</span>())</pre>
+<p><span class="step">④ 怎么验证</span>：输出当前目录和一串时间戳（从 1970-01-01 起的秒数）。</p>
+</div>
+<div class="ans">
+<p><b>【4-7】</b></p>
+<p><span class="step">① 先想什么</span>：把"添加联系人"这段代码搬进 def 函数，主体菜单里调它。</p>
+<p><span class="step">② 为什么这么写</span>：重复/独立的一段逻辑收进函数，主体更清楚；以后要改添加逻辑只改一处。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="param">contacts</span> = {}
+<span class="kw">def</span> <span class="fn">add_contact</span>():
+    <span class="param">name</span> = <span class="fn">input</span>(<span class="str">"姓名："</span>)
+    <span class="param">phone</span> = <span class="fn">input</span>(<span class="str">"电话："</span>)
+    <span class="param">contacts</span>[<span class="param">name</span>] = <span class="param">phone</span>
+    <span class="fn">print</span>(<span class="str">"已添加"</span>)
+<span class="cm"># 主体：调用函数</span>
+<span class="fn">add_contact</span>()
+<span class="fn">print</span>(<span class="param">contacts</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：运行后走一遍添加流程，print(contacts) 能看到刚加的人。</p>
+</div>
+<div class="ans">
+<p><b>【4-8】</b></p>
+<p><span class="step">① 先想什么</span>：return 把结果<b>交回来</b>（能存变量）；print 只是<b>显示</b>（返回值是 None）。</p>
+<p><span class="step">② 为什么这么写</span>：两个函数做同一件事但一个 return 一个 print，用变量接收对比结果。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">def</span> <span class="fn">with_return</span>(<span class="param">x</span>):
+    <span class="kw">return</span> <span class="param">x</span> <span class="code">*</span> <span class="num">2</span>
+<span class="kw">def</span> <span class="fn">with_print</span>(<span class="param">x</span>):
+    <span class="fn">print</span>(<span class="param">x</span> <span class="code">*</span> <span class="num">2</span>)
+<span class="param">a</span> = <span class="fn">with_return</span>(<span class="num">3</span>)
+<span class="param">b</span> = <span class="fn">with_print</span>(<span class="num">3</span>)
+<span class="fn">print</span>(<span class="str">"a ="</span>, <span class="param">a</span>)
+<span class="fn">print</span>(<span class="str">"b ="</span>, <span class="param">b</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出顺序是 <span class="out">6</span>（with_print 里打印的）、<span class="out">a = 6</span>、<span class="out">b = None</span>。总结：return 的结果能接着用（a=6）；print 只是给人看的，函数返回值是 None（b=None）。</p>
+</div>
+
+<h3>阶段 5</h3>
+<div class="ans">
+<p><b>【5-1】</b></p>
+<p><span class="step">① 先想什么</span>：整段读用 read()；逐行读用 for 循环遍历文件对象。</p>
+<p><span class="step">② 为什么这么写</span>：with open 自动关文件；for line in f 每次读一行；strip() 去掉行尾换行。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<p class="note">先在<b>终端</b>执行建文件（不是 Python 代码）：<span class="code">mkdir -p ~/lab; echo '第一行' &gt; ~/lab/test.txt; echo '第二行' &gt;&gt; ~/lab/test.txt</span>；再 <span class="code">cd ~/lab</span> 跑下面的 Python（本阶段所有文件都放这里，相对路径才找得到）。</p>
+<pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>())
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="kw">for</span> <span class="param">line</span> <span class="kw">in</span> <span class="param">f</span>:
+        <span class="fn">print</span>(<span class="param">line</span>.<span class="fn">strip</span>())</pre>
+<p><span class="step">④ 怎么验证</span>：整段打印一次、逐行打印一次；不 strip 的话逐行输出间会多空行（行尾换行 + print 自带换行）。</p>
+</div>
+<div class="ans">
+<p><b>【5-2】</b></p>
+<p><span class="step">① 先想什么</span>："w" 打开时清空原文件，"a" 打开时接着末尾写。</p>
+<p><span class="step">② 为什么这么写</span>：先 w 写第一次，再 a 写第二次，最后读出来看——结果只有两行，且第二行是 a 追加的。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"log.txt"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"第一次\n"</span>)
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"log.txt"</span>, <span class="str">"a"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"第二次\n"</span>)
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"log.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>())</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">第一次</span> 和 <span class="out">第二次</span> 两行。如果第二次也用 w，最终只剩"第二次"——这就是覆盖与追加的区别。</p>
+</div>
+<div class="ans">
+<p><b>【5-3】</b></p>
+<p><span class="step">① 先想什么</span>：dict 存成 JSON 用 json.dump；读回用 json.load；先 import json。</p>
+<p><span class="step">② 为什么这么写</span>：json.dump(对象, 文件) 写入；ensure_ascii=False 让中文正常显示不转码；读回后 load 得到原样的 dict。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">json</span>
+<span class="param">d</span> = {<span class="str">"name"</span>: <span class="str">"小明"</span>, <span class="str">"age"</span>: <span class="num">19</span>}
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.json"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="fn">json</span>.<span class="fn">dump</span>(<span class="param">d</span>, <span class="param">f</span>, <span class="param">ensure_ascii</span>=<span class="kw">False</span>)
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"data.json"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">loaded</span> = <span class="fn">json</span>.<span class="fn">load</span>(<span class="param">f</span>)
+<span class="fn">print</span>(<span class="param">loaded</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出 <span class="out">{'name': '小明', 'age': 19}</span>；用 cat 看 data.json 应是一行 JSON 文本。</p>
+</div>
+<div class="ans">
+<p><b>【5-4】</b></p>
+<p><span class="step">① 先想什么</span>：启动时若 JSON 文件存在就读回通讯录——用 <span class="code fn">os</span>.<span class="param">path</span>.<span class="fn">exists</span>（判断文件是否存在，os 模块的常用函数）检查，避免首次运行读不存在的文件报错；退出时把 dict 存进 JSON。</p>
+<p><span class="step">② 为什么这么写</span>：os.path.exists 判断文件在不在，避免首次运行读不存在文件报错；"3"分支里 dump 保存。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">json</span>, <span class="fn">os</span>
+<span class="param">FILE</span> = <span class="str">"contacts.json"</span>
+<span class="param">contacts</span> = {}
+<span class="kw">if</span> <span class="fn">os</span>.<span class="param">path</span>.<span class="fn">exists</span>(<span class="param">FILE</span>):
+    <span class="kw">with</span> <span class="fn">open</span>(<span class="param">FILE</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+        <span class="param">contacts</span> = <span class="fn">json</span>.<span class="fn">load</span>(<span class="param">f</span>)
+<span class="kw">while</span> <span class="kw">True</span>:
+    <span class="param">cmd</span> = <span class="fn">input</span>(<span class="str">"1添加 2查询 3保存退出："</span>)
+    <span class="kw">if</span> <span class="param">cmd</span> == <span class="str">"1"</span>:
+        <span class="param">name</span> = <span class="fn">input</span>(<span class="str">"姓名："</span>)
+        <span class="param">phone</span> = <span class="fn">input</span>(<span class="str">"电话："</span>)
+        <span class="param">contacts</span>[<span class="param">name</span>] = <span class="param">phone</span>
+    <span class="kw">elif</span> <span class="param">cmd</span> == <span class="str">"2"</span>:
+        <span class="fn">print</span>(<span class="param">contacts</span>.<span class="fn">get</span>(<span class="fn">input</span>(<span class="str">"查谁："</span>), <span class="str">"查无此人"</span>))
+    <span class="kw">elif</span> <span class="param">cmd</span> == <span class="str">"3"</span>:
+        <span class="kw">with</span> <span class="fn">open</span>(<span class="param">FILE</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+            <span class="fn">json</span>.<span class="fn">dump</span>(<span class="param">contacts</span>, <span class="param">f</span>, <span class="param">ensure_ascii</span>=<span class="kw">False</span>)
+        <span class="fn">print</span>(<span class="str">"已保存"</span>)
+        <span class="kw">break</span></pre>
+<p><span class="step">④ 怎么验证</span>：添加一个人 → 选 3 退出 → 再运行程序 → 选 2 能查到刚添加的人（数据跨运行存活）。</p>
+</div>
+<div class="ans">
+<p><b>【5-5】</b></p>
+<p><span class="step">① 先想什么</span>：读文件用 <span class="code fn">open</span>()；文件不存在时它会抛出 <span class="code">FileNotFoundError</span>。要接住这个错误，就用 <span class="code kw">try</span>（尝试）包住读文件的代码，用 <span class="code kw">except FileNotFoundError</span>（接住"文件不存在"）处理报错分支。</p>
+<p><span class="step">② 为什么这么写</span>：<span class="code fn">open</span>() 在文件不存在时必然报错，与其让程序崩溃，不如主动接住并给友好提示。指定异常类型 <span class="code">FileNotFoundError</span> 而不是裸 <span class="code kw">except</span>，是为了只处理"文件不存在"这一种情况，其他错误仍应暴露出来。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">try</span>:
+    <span class="kw">with</span> <span class="fn">open</span>(<span class="str">"不存在.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+        <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>())
+<span class="kw">except</span> <span class="code">FileNotFoundError</span>:
+    <span class="fn">print</span>(<span class="str">"这个文件不存在，请检查路径"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：跑一遍应打印友好提示（而不是红色 Traceback）；把文件名改成一个真实存在的文件再跑，正常打印内容——两种路径都对，说明 try/except 正确。</p>
+</div>
+<div class="ans">
+<p><b>【5-6】</b></p>
+<p><span class="step">① 先想什么</span>：在 5-5 基础上加 finally——无论成功失败都执行的收尾代码。</p>
+<p><span class="step">② 为什么这么写</span>：finally 天生是"善后"位置（关文件、发通知），出错不出错都跑。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">try</span>:
+    <span class="kw">with</span> <span class="fn">open</span>(<span class="str">"不存在.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+        <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>())
+<span class="kw">except</span> <span class="param">FileNotFoundError</span>:
+    <span class="fn">print</span>(<span class="str">"这个文件不存在，请检查路径"</span>)
+<span class="kw">finally</span>:
+    <span class="fn">print</span>(<span class="str">"本次读取结束"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：文件不存在时输出两行（提示 + 本次读取结束）；换成存在的文件也输出"本次读取结束"——两种走向 finally 都执行。</p>
+</div>
+<div class="ans">
+<p><b>【5-7】</b></p>
+<p><span class="step">① 先想什么</span>：行数 = 列表长度 len(lines)；字数 = 每行去掉末尾换行后数一数（len(line.strip())）累加。</p>
+<p><span class="step">② 为什么这么写</span>：readlines 得到行列表；len(line.strip()) 数一行的字符；循环累加出总字数。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">lines</span> = <span class="param">f</span>.<span class="fn">readlines</span>()
+<span class="param">total</span> = <span class="num">0</span>
+<span class="kw">for</span> <span class="param">line</span> <span class="kw">in</span> <span class="param">lines</span>:
+    <span class="param">total</span> += <span class="fn">len</span>(<span class="param">line</span>.<span class="fn">strip</span>())
+<span class="fn">print</span>(<span class="str">f"共{len(lines)}行，{total}个字"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：对照文件人工数一遍；报告里的数字与文件一致。</p>
+</div>
+<div class="ans">
+<p><b>【5-8】</b></p>
+<p><span class="step">① 先想什么</span>："w" = 清空重写、"a" = 末尾追加；对应 Linux 的重定向符号。</p>
+<p><span class="step">② 为什么这么写</span>：两个模式分别对应 Linux 的覆盖/追加语义，联想记忆。</p>
+<p><span class="step">③ 完整代码</span>：文字作答——"w"（覆盖）打开时先把文件清空再写，对应 Linux 的 <span class="code">&gt;</span>；"a"（追加）从末尾接着写，对应 Linux 的 <span class="code">&gt;&gt;</span>。</p>
+<p><span class="step">④ 怎么验证</span>：口头说清 + 用 5-2 的实验现象佐证。</p>
+</div>
+
+<h3>阶段 6</h3>
+<div class="ans">
+<p><b>【6-1】</b></p>
+<p><span class="step">① 先想什么</span>：requests.get 请求 URL；r.status_code 看状态码；r.json() 解析 JSON。</p>
+<p><span class="step">② 为什么这么写</span>：Open-Meteo 是免注册的公开天气 API；timeout 防止卡死；json() 把响应文本转成 dict。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">requests</span>
+<span class="param">r</span> = <span class="fn">requests.get</span>(<span class="str">"https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true"</span>, <span class="param">timeout</span>=<span class="num">10</span>)
+<span class="fn">print</span>(<span class="param">r</span>.<span class="param">status_code</span>)
+<span class="fn">print</span>(<span class="param">r</span>.<span class="fn">json</span>())</pre>
+<p><span class="step">④ 怎么验证</span>：输出 200 和一长串 JSON（含 current_weather）；URL 改错会输出 400/404。</p>
+</div>
+<div class="ans">
+<p><b>【6-2】</b></p>
+<p><span class="step">① 先想什么</span>：连不上的错都属于 RequestException 一族，用 try/except 接住它输出友好提示。</p>
+<p><span class="step">② 为什么这么写</span>：RequestException 是 requests 所有网络异常的基类，接住它 = 接住"连不上"；用<b>本机未监听的 127.0.0.1:9</b>——连接必然被拒绝，比域名更确定（域名类失败在代理环境下可能被拦成 200 造成无输出）。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">requests</span>
+<span class="kw">try</span>:
+    <span class="fn">requests.get</span>(<span class="str">"http://127.0.0.1:9"</span>, <span class="param">timeout</span>=<span class="num">3</span>)
+<span class="kw">except</span> <span class="fn">requests</span>.<span class="param">exceptions</span>.<span class="param">RequestException</span>:
+    <span class="fn">print</span>(<span class="str">"网络不通"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：运行输出"网络不通"且不报 Traceback；把 URL 换成真实网站（如 6-1 用过的接口）则正常返回（无输出即成功）。若你的环境有透明代理把 127.0.0.1:9 也拦成响应，说明网络层被改写，属环境差异——此时在题面注明实际结果即可。</p>
+</div>
+<div class="ans">
+<p><b>【6-3】</b></p>
+<p><span class="step">① 先想什么</span>：argparse 三步——建解析器、加参数、解析；用 args.name 取值。</p>
+<p><span class="step">② 为什么这么写</span>：--name 定义命令行参数；required=True 强制必传；args.name 拿值。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">argparse</span>
+<span class="param">p</span> = <span class="fn">argparse</span>.<span class="param">ArgumentParser</span>()
+<span class="param">p</span>.<span class="fn">add_argument</span>(<span class="str">"--name"</span>, <span class="param">required</span>=<span class="kw">True</span>)
+<span class="param">args</span> = <span class="param">p</span>.<span class="fn">parse_args</span>()
+<span class="fn">print</span>(<span class="str">f"你好，{args.name}"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：python3 脚本.py --name 小明 输出"你好，小明"；不带参数运行会被拦截并提示缺少 --name。</p>
+</div>
+<div class="ans">
+<p><b>【6-4】</b></p>
+<p><span class="step">① 先想什么</span>：default 给默认值；help 写中文说明（--help 时显示）。</p>
+<p><span class="step">② 为什么这么写</span>：default="世界" 让参数可选；help 让工具自带说明书。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">argparse</span>
+<span class="param">p</span> = <span class="fn">argparse</span>.<span class="param">ArgumentParser</span>(<span class="param">description</span>=<span class="str">"打招呼小工具"</span>)
+<span class="param">p</span>.<span class="fn">add_argument</span>(<span class="str">"--name"</span>, <span class="param">default</span>=<span class="str">"世界"</span>, <span class="param">help</span>=<span class="str">"你的名字"</span>)
+<span class="param">args</span> = <span class="param">p</span>.<span class="fn">parse_args</span>()
+<span class="fn">print</span>(<span class="str">f"你好，{args.name}"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：不带参数输出"你好，世界"；--name 小明 输出"你好，小明"；--help 显示 description 和"你的名字"。</p>
+</div>
+<div class="ans">
+<p><b>【6-5】</b></p>
+<p><span class="step">① 先想什么</span>：logging.basicConfig 配日志到文件；info 记正常、error 记异常。</p>
+<p><span class="step">② 为什么这么写</span>：basicConfig 一次性配好文件名、级别、格式；故意制造 ZeroDivisionError 让 except 分支记一条 error。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">logging</span>
+<span class="fn">logging.basicConfig</span>(<span class="param">filename</span>=<span class="str">"app.log"</span>, <span class="param">level</span>=<span class="fn">logging</span>.<span class="param">INFO</span>,
+                    <span class="param">format</span>=<span class="str">"%(asctime)s %(levelname)s %(message)s"</span>)
+<span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"开始"</span>)
+<span class="kw">try</span>:
+    <span class="num">1</span> / <span class="num">0</span>
+<span class="kw">except</span> <span class="param">ZeroDivisionError</span> <span class="kw">as</span> <span class="param">e</span>:
+    <span class="fn">logging</span>.<span class="fn">error</span>(<span class="str">"出错了：%s"</span>, <span class="param">e</span>)
+<span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"结束"</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：运行无打印；<b>先 rm -f app.log 再运行</b>（logging 默认追加，旧日志行不会消失——每次验证前清掉或换新文件名）。cat app.log 应看到<b>三条本次新增</b>，且顺序对应代码顺序：① INFO 开始 ② ERROR 出错了：division by zero ③ INFO 结束。level=INFO 时 INFO 和 ERROR 都能进文件，缺哪条查哪步。</p>
+</div>
+<div class="ans">
+<p><b>【6-6】</b></p>
+<p><span class="step">① 先想什么</span>：改 basicConfig 的 level 为 WARNING，再跑 6-5 的脚本观察 INFO 行消失。</p>
+<p><span class="step">② 为什么这么写</span>：级别过滤机制——只记录"级别 ≥ 设定值"的日志；WARNING 比 INFO 高，INFO 被过滤。</p>
+<p><span class="step">③ 完整代码</span>：把 6-5 的 <span class="param">level</span>=<span class="fn">logging</span>.<span class="param">INFO</span> 改成 <span class="param">level</span>=<span class="fn">logging</span>.<span class="param">WARNING</span>，其余不变，重跑。</p>
+<p><span class="step">④ 怎么验证</span>：同样<b>先 rm -f app.log 清旧日志</b>再重跑（否则会混着上次的行）。cat app.log 只剩<b>一条 ERROR</b>：INFO 的"开始/结束"都被过滤了——WARNING 级别高于 INFO，INFO 没资格进文件。级别排序：DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL。</p>
+</div>
+<div class="ans">
+<p><b>【6-7】</b></p>
+<p><span class="step">① 先想什么</span>：subprocess.run 执行系统命令；capture_output 捕获、text 转文本。</p>
+<p><span class="step">② 为什么这么写</span>：命令写成列表 ["df", "-h"]；stdout 里就是命令输出。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">subprocess</span>
+<span class="param">r1</span> = <span class="fn">subprocess.run</span>([<span class="str">"df"</span>, <span class="str">"-h"</span>], <span class="param">capture_output</span>=<span class="kw">True</span>, <span class="param">text</span>=<span class="kw">True</span>)
+<span class="param">r2</span> = <span class="fn">subprocess.run</span>([<span class="str">"free"</span>, <span class="str">"-h"</span>], <span class="param">capture_output</span>=<span class="kw">True</span>, <span class="param">text</span>=<span class="kw">True</span>)
+<span class="fn">print</span>(<span class="param">r1</span>.<span class="param">stdout</span>)
+<span class="fn">print</span>(<span class="param">r2</span>.<span class="param">stdout</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：输出和终端里跑 df -h、free -h 一模一样。</p>
+</div>
+<div class="ans">
+<p><b>【6-8】</b></p>
+<p><span class="step">① 先想什么</span>：三个知识点组合——<span class="code fn">argparse</span> 收参数、<span class="code fn">subprocess</span> 跑命令、<span class="code fn">logging</span> 记日志。流程：解析参数 → 按参数选命令 → 执行并打印 → 记一条日志。</p>
+<p><span class="step">② 为什么这么写</span>：参数用 <span class="param">choices</span> 限定只接受 <span class="str">disk</span>/<span class="str">mem</span>，传错自动报错；<span class="param">capture_output</span>=<span class="kw">True</span> + <span class="param">text</span>=<span class="kw">True</span> 捕获输出；日志用 <span class="code fn">logging.basicConfig</span> 配到文件。</p>
+<p><span class="step">③ 完整代码</span>：</p>
+<pre><span class="kw">import</span> <span class="fn">argparse</span>
+<span class="kw">import</span> <span class="fn">logging</span>
+<span class="kw">import</span> <span class="fn">subprocess</span>
+
+<span class="fn">logging.basicConfig</span>(<span class="param">filename</span>=<span class="str">"check.log"</span>, <span class="param">level</span>=<span class="fn">logging</span>.<span class="param">INFO</span>,
+                    <span class="param">format</span>=<span class="str">"%(asctime)s %(levelname)s %(message)s"</span>)
+
+<span class="param">parser</span> = <span class="fn">argparse</span>.<span class="fn">ArgumentParser</span>()
+<span class="param">parser</span>.<span class="fn">add_argument</span>(<span class="str">"--check"</span>, <span class="param">choices</span>=[<span class="str">"disk"</span>, <span class="str">"mem"</span>], <span class="param">required</span>=<span class="kw">True</span>, <span class="param">help</span>=<span class="str">"查什么：disk 或 mem"</span>)
+<span class="param">args</span> = <span class="param">parser</span>.<span class="fn">parse_args</span>()
+
+<span class="param">cmd</span> = [<span class="str">"df"</span>, <span class="str">"-h"</span>] <span class="kw">if</span> <span class="param">args</span>.<span class="param">check</span> == <span class="str">"disk"</span> <span class="kw">else</span> [<span class="str">"free"</span>, <span class="str">"-h"</span>]
+<span class="param">r</span> = <span class="fn">subprocess</span>.<span class="fn">run</span>(<span class="param">cmd</span>, <span class="param">capture_output</span>=<span class="kw">True</span>, <span class="param">text</span>=<span class="kw">True</span>)
+<span class="fn">print</span>(<span class="param">r</span>.<span class="param">stdout</span>)
+<span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"检查了 %s"</span>, <span class="param">args</span>.<span class="param">check</span>)</pre>
+<p><span class="step">④ 怎么验证</span>：<span class="code">--check disk</span> 显示磁盘情况、<span class="code">--check mem</span> 显示内存情况；<span class="code">--check cpu</span> 报"无效选择"；check.log 里每次运行多一条 INFO。四种行为都对即通过。</p>
+</div>
+
+<div class="newpage"></div>
+<h2 id="toc-10">附录：与学习路线的对应关系</h2>
+<table>
+<tr><th style="width:30%">练习册位置</th><th style="width:40%">路线对应</th><th>达成标志</th></tr>
+<tr><td>阶段 5</td><td>检查点②</td><td>能独立写带 try/except 的脚本 ✅</td></tr>
+<tr><td>阶段 6</td><td>补充模块（requests/argparse/logging/subprocess）</td><td>模块全部落地为可运行代码</td></tr>
+<tr><td>进阶篇场景 1</td><td>脚本 1：批量文件重命名</td><td>产出脚本 +1</td></tr>
+<tr><td>进阶篇场景 2</td><td>脚本 2：天气查询器</td><td>产出脚本 +1</td></tr>
+<tr><td>进阶篇场景 3</td><td>王牌项目 server-health-check 版本 0</td><td>王牌项目正式起步</td></tr>
+<tr><td>进阶篇场景 4</td><td>脚本 3：Nginx 日志分析器</td><td>产出脚本 +1</td></tr>
+<tr><td>进阶篇场景 5</td><td>版本 2 paramiko 远程版（选做）</td><td>远程巡检能力</td></tr>
+</table>
+<p class="footer">Python 练习册 · 基础篇 · 先想后敲，卡壳必做 ☆</p>
+
+</body>
+</html>

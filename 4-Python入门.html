@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Python入门（教科书版）</title>
+<style>
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; text-align: justify; }
+h1 { font-size: 18pt; color: #003a8c; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #003a8c; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #003a8c; margin: 10px 0 4px; border-left: 4px solid #003a8c; padding-left: 6px; }
+p { margin: 3px 0; }
+td, th, pre, h1, h2, h3 { text-align: left; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.kw { color: #003a8c; font-weight: bold; }
+.fn { color: #0a6b1e; }
+.str { color: #a31515; }
+.cm { color: #6a737d; font-style: italic; }
+.num { color: #8a4b08; }
+.param { color: #6b21a8; font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.out { color: #444; }
+.prompt { color: #003a8c; }
+.keyword { color: #003a8c; font-weight: bold; }
+.opt { color: #b45309; }
+.danger { color: #c00000; font-weight: bold; }
+.box { border: 1.5px solid #003a8c; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #f5f8ff; }
+.box2 { border: 1.5px dashed #b45309; border-radius: 4px; padding: 8px 10px; margin: 8px 0; }
+.warn { border: 1.5px solid #c00000; border-radius: 4px; padding: 6px 10px; margin: 8px 0; background: #fff5f5; }
+.quiz { border: 1.5px dashed #6b21a8; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #faf5ff; }
+.demo { border-left: 3px solid #003a8c; padding: 6px 10px; margin: 8px 0; background: #f7f9fc; }
+.dtitle { font-weight: bold; color: #003a8c; margin-bottom: 2px; }
+.demo-in { font-family: Consolas,"Courier New",monospace; font-size: 10.5pt; color: #111; }
+.demo-out { font-family: Consolas,"Courier New",monospace; font-size: 10.5pt; color: #444; }
+.demo-ex { font-size: 11pt; color: #003a8c; }
+.newpage { page-break-before: always; }
+table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+th { background: #003a8c; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.step { color: #003a8c; font-weight: bold; }
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 6px 12px; margin: 6px 0; }
+.toc-title { background: none !important; color: #003a8c; padding: 0 !important; margin: 8px 0 4px !important; border-radius: 0 !important; }
+.toc a { color: #222; text-decoration: none; }
+.toc-row { position: relative; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+.toc-row a { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.toc-row .tn { color: #003a8c; font-weight: bold; display: inline-block; min-width: 68px; }
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+a { color: #003a8c; text-decoration: none; }
+@media print {
+  a { color: #222; text-decoration: none; }
+  .toc-row a { display: none; }
+}
+.practice { background:#e8f5e9; border-left:4px solid #0a6b1e; padding:4px 10px; margin:10px 0 4px; font-size: 10.5pt; font-weight:bold; color:#0a6b1e; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1><img src="data:image/jpeg;base64,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" alt="Python" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Python 入门（教科书版）</h1>
+<p class="note">「Python 三连」主课本 · 与《Linux 入门》同标准 · 学完后接《Python 练习册：基础篇》。<b>速查说明</b>：本书附录 D 提供函数/模块总览；需要展开解释时，再查《Python 内置函数手册》对应小节。打印页码：打印时勾选浏览器"页眉和页脚"，或先另存为 PDF 再打印（步骤同《Linux 入门》：Edge 打开 → Ctrl+P → 另存为 PDF → 勾选"页眉和页脚"）。</p>
+
+<div class="newpage"></div>
+<h2 class="toc-title">📑 目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">使用说明</span><span class="tdesc">配色约定 · 范围说明 · 与 Linux 三连的关系</span><a href="#toc-0"></a></div>
+<div class="toc-row"><span class="tn">第 0 章</span><span class="tdesc">Python 与 AI 运维的关系（约 1h）</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">第 1 章</span><span class="tdesc">起步：print、变量、类型（约 1.5h）</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">第 2 章</span><span class="tdesc">控制流：if、for、while（约 2h）</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">第 3 章</span><span class="tdesc">数据结构：list、dict、tuple、set（约 2.5h）</span><a href="#toc-4"></a></div>
+<div class="toc-row"><span class="tn">第 4 章</span><span class="tdesc">函数：def、参数、返回值（约 2h）</span><a href="#toc-5"></a></div>
+<div class="toc-row"><span class="tn">第 5 章</span><span class="tdesc">模块与导入：import、os、time（约 1.5h）</span><a href="#toc-6"></a></div>
+<div class="toc-row"><span class="tn">第 6 章</span><span class="tdesc">文件操作：open/with、json（约 2h）</span><a href="#toc-7"></a></div>
+<div class="toc-row"><span class="tn">第 7 章</span><span class="tdesc">异常处理：try/except/finally（约 1.5h）</span><a href="#toc-8"></a></div>
+<div class="toc-row"><span class="tn">第 8 章</span><span class="tdesc">网络请求：requests（约 2h）</span><a href="#toc-9"></a></div>
+<div class="toc-row"><span class="tn">第 9 章</span><span class="tdesc">命令行参数：argparse（约 1.5h）</span><a href="#toc-10"></a></div>
+<div class="toc-row"><span class="tn">第 10 章</span><span class="tdesc">日志：logging（约 1h）</span><a href="#toc-11"></a></div>
+<div class="toc-row"><span class="tn">第 11 章</span><span class="tdesc">进程调用：subprocess（约 1.5h）</span><a href="#toc-12"></a></div>
+<div class="toc-row"><span class="tn">附录 A</span><span class="tdesc">章末作业参考答案（含思考过程）</span><a href="#toc-13"></a></div>
+<div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表（中英对照）</span><a href="#toc-14"></a></div>
+<div class="toc-row"><span class="tn">附录 C</span><span class="tdesc">学习路线图（第 0~11 章共 12 章顺序 + 每章耗时）</span><a href="#toc-15"></a></div>
+<div class="toc-row"><span class="tn">附录 D</span><span class="tdesc">函数与模块速查</span><a href="#toc-16"></a></div>
+</div>
+
+<div class="newpage"></div>
+<h2 id="toc-0">使用说明</h2>
+<p class="note">📔 学习日志：每天把敲过的代码、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
+<p><b>本书配色约定</b>（全书一致）：</p>
+<table class="long-table"><thead><tr><th style="width:25%">样式</th><th>含义</th></tr></thead><tbody>
+<tr><td><span class="kw code">深蓝粗体</span></td><td>Python 关键字（def / if / for / import 等，语法骨架）</td></tr>
+<tr><td><span class="fn code">绿色</span></td><td>函数名、模块名（print、len、os 等）</td></tr>
+<tr><td><span class="str code">深红</span></td><td>字符串（引号里的内容）</td></tr>
+<tr><td><span class="cm code">灰色斜体</span></td><td>注释（# 后面的说明）</td></tr>
+<tr><td><span class="out code">灰色</span></td><td>程序的输出（运行结果）</td></tr>
+<tr><td><span class="keyword">蓝色</span></td><td>解读、分析（帮你理解"为什么"）</td></tr>
+<tr><td><span class="param">深紫</span></td><td>参数、变量值（数据，不是语法）</td></tr>
+<tr><td><span class="danger">红色</span></td><td>危险警告、报错</td></tr>
+</tbody></table>
+<div class="box2"><b>实验闭环：</b>涉及文件覆盖、重命名、联网或系统命令的示范与作业，先在练习目录记录文件状态；运行后核对输出、退出码和生成文件；结束后删除临时文件或恢复原文件。遇到异常保留 traceback 和输入条件。</div>
+<p><b>范围说明</b>：本书只教"用 Python 做自动化运维"够用的内容，目标 = 写出脚本 1（批量文件重命名）、脚本 2（天气查询器），并为王牌项目 server-health-check 打基础。面向对象进阶、异步、类型注解等超纲内容一律不进本书。</p>
+<p><b>学习顺序</b>：本书在 Linux 三连之后开始。主线是本书；语法卡壳时可回到对应章节重读。</p>
+<p><b>环境</b>：Ubuntu 自带 python3（终端敲 <span class="code fn">python3 --version</span> 验证，版本 3.8 以上即可），无需额外安装。全书代码都在电脑或平板 Termux 的终端里敲。</p>
+
+<h2 id="toc-1">第 0 章 · Python 与 AI 运维的关系</h2>
+<p><b>本章目标</b>（学完能回答）：① Python 是什么、为什么 AI 运维要用它；② 会装好环境并跑出第一行代码；③ 知道 Python 和 Shell 怎么分工。</p>
+<p><b>本章新知识点</b>：<span class="code fn">print()</span>（打印）、两种运行方式（交互式 / 脚本文件）。</p>
+
+<h3>0.1 Python 是什么</h3>
+<p>Python 是一门<span class="keyword">编程语言</span>——和你学过的 Shell 一样，都是"给电脑下命令"。区别在于：Shell 擅长<b>系统操作</b>（ls、df、装软件），Python 擅长<b>逻辑处理</b>（判断、循环、处理数据）。</p>
+<p><b>比喻</b>：Shell 像你的<b>双手</b>——直接搬文件、开服务；Python 像你的<b>大脑</b>——"如果磁盘满 80% 就发警告、连续三次失败就重试"这类有逻辑的事，交给大脑。AI 部署运维 = 双手 + 大脑配合干活。</p>
+<div class="demo">
+<p class="dtitle">示范 1：验证环境</p>
+<p class="demo-in">$ <span class="fn">python3</span> <span class="opt">--version</span></p>
+<p class="demo-out">Python 3.12.3</p>
+<p class="demo-ex">看到 3.x 就是装好了。Ubuntu 自带，不用装。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：交互式模式跑第一行代码</p>
+<p class="demo-in">$ <span class="fn">python3</span></p>
+<p class="demo-out">&gt;&gt;&gt; <span class="fn">print</span>(<span class="str">"Hello"</span>)
+Hello
+&gt;&gt;&gt; <span class="fn">exit</span>()</p>
+<p class="demo-ex">输入 <span class="code fn">python3</span> 回车后，提示符变成 <span class="out">&gt;&gt;&gt;</span>，这就是<b>交互式模式</b>：敲一行、马上出结果，适合试代码。敲 <span class="code fn">exit</span>() 退出（就像 Linux 敲 exit）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：脚本文件方式（正式工作方式）</p>
+<p class="demo-in">$ <span class="fn">nano</span> hello.py <span class="cm"># 写一行 print("Hello")</span>
+$ <span class="fn">python3</span> hello.py</p>
+<p class="demo-out">Hello</p>
+<p class="demo-ex">把代码存进 <b>.py 文件</b>（脚本）再整体运行，这是正式方式——代码能保存、能复用。交互式适合试，脚本适合写。<b>nano 用法</b>：进入编辑器写代码，写完按 <b>Ctrl+X → Y → 回车</b> 保存退出（nano 比 vim 友好，适合新手）。</p>
+</div>
+
+<h3>0.2 学完本书能做出什么</h3>
+<p>本书学完你将写出两个正式脚本：</p>
+<table>
+<tr><th style="width:30%">产出</th><th>长什么样</th></tr>
+<tr><td>脚本 1：批量文件重命名</td><td>给一个目录里 100 张照片自动加日期前缀——你写过的手动改名操作，变成一条命令</td></tr>
+<tr><td>脚本 2：天气查询器</td><td>敲 <span class="code">python3 weather.py 杭州</span>，程序自动联网拿天气并打印</td></tr>
+</table>
+<p>这两件成品写完后，就打通了通往王牌项目 <b>server-health-check</b>（服务器健康巡检系统）的全部前置知识。</p>
+
+<h3>0.3 Python 与 Shell 的分工</h3>
+<table>
+<tr><th style="width:22%"></th><th>Shell</th><th>Python</th></tr>
+<tr><td>强项</td><td>系统操作：文件、服务、权限</td><td>逻辑处理：判断、循环、算数据</td></tr>
+<tr><td>怎么调用对方</td><td>脚本里直接敲命令</td><td><span class="code fn">subprocess</span>（第 11 章）调系统命令</td></tr>
+<tr><td>举例</td><td><span class="code">df -h</span> 查磁盘</td><td>读 df 的输出，判断"超过 80% 就发警告"</td></tr>
+</table>
+<p><b>一句总结</b>：Shell 管系统层，Python 管逻辑层，第 11 章的 subprocess 让两者合流——这就是 AI 运维工程师每天的活。</p>
+
+<h3>0.4 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① python 和 python3 混用：有的系统 python 指向旧版，<b>一律用 python3</b>；② 在交互式里粘贴多行代码容易缩进错乱——多行代码用脚本文件；③ 忘写 exit() 退出交互式（Ctrl+D 也行）。</p>
+</div>
+
+<h3>0.5 章末作业</h3>
+<div class="box">
+<p><b>作业（无代码，写下来）：</b>"我认为 Python 将帮我完成的三件事。"</p>
+<p class="note">提示方向：自动化重复操作、调 API 拿数据、处理日志文件。写完记进学习日志——一段时间后回看，这就是你的起点。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：暂无（先把 python3 跑通即可）</p>
+<h3>0.6 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出 Python 和 Shell 的分工（系统层 vs 逻辑层）</p>
+<p>☐ 会进交互式模式、会退出、会用脚本文件方式运行</p>
+<p>☐ 能说出学完本书要交出的两个成品脚本</p>
+</div>
+<p class="note">📚 相关手册：内置函数速查 → 见 《Python 内置函数手册》第 1 组（print/input）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-2">第 1 章 · 起步：print、变量、类型</h2>
+<p><b>本章目标</b>（学完能做什么）：能写"自我介绍卡"程序——程序打印出名字、年龄，还会算两位数倒序。这是所有 Python 代码的地基。</p>
+<p><b>本章新知识点</b>：<span class="code fn">print</span>（打印）· <span class="code fn">type</span>（查类型）· <span class="code fn">len</span>（长度）· 变量 · int / float / str 三类型 · f-string · 七种运算。</p>
+
+<h3>1.1 print() 的两个细节：sep 和 end</h3>
+<p><span class="code fn">print</span>() 把内容打印到屏幕。默认多个内容之间用空格隔开（sep），结尾自动换行（end）。</p>
+<div class="demo">
+<p class="dtitle">示范 1：多个内容 + 自定义分隔符</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>)
+<span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>, <span class="param">sep</span>=<span class="str">"-"</span>)</p>
+<p class="demo-out">a b c
+a-b-c</p>
+<p class="demo-ex">第二行指定了 <span class="code">sep</span>（分隔符）为 "-"。<span class="code">sep</span>、<span class="code">end</span> 这种写在括号里的"设置项"叫<b>关键字参数</b>——后面第 4 章会细讲，现在照抄用。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：end 取消换行</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="str">"第一行"</span>, <span class="param">end</span>=<span class="str">""</span>)
+<span class="fn">print</span>(<span class="str">"和第一行连着"</span>)</p>
+<p class="demo-out">第一行和第一行连着</p>
+<p class="demo-ex">默认 print 结束会换行；指定 <span class="code">end</span>=<span class="str">""</span>（空字符串）就是不换行。这招在"循环里一行行拼进度条"时常用。</p>
+</div>
+
+<h3>1.2 变量 = 贴标签的盒子</h3>
+<p>变量是装数据的<b>盒子</b>，标签是盒子名。<span class="code">age = <span class="num">19</span></span> 的意思：造一个盒子，贴标签 "age"，把数字 19 放进去。以后写 age 就等于 19。</p>
+<div class="demo">
+<p class="dtitle">示范 1：赋值与重新赋值</p>
+<p class="demo-in"><span class="param">name</span> = <span class="str">"小明"</span>
+<span class="fn">print</span>(<span class="param">name</span>)
+<span class="param">name</span> = <span class="str">"运维新人"</span>  <span class="cm"># 重新赋值：盒子换新内容</span>
+<span class="fn">print</span>(<span class="param">name</span>)</p>
+<p class="demo-out">小明
+运维新人</p>
+<p class="demo-ex">变量值<b>可以换</b>——这就是"变"量。和 Linux 的变量一样（$HOME 也是盒子），但 Python 里不用加 $ 符号。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：type() 查盒子装的什么货</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="fn">type</span>(<span class="num">5</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="num">5.0</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="str">"5"</span>))</p>
+<p class="demo-out">&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</p>
+<p class="demo-ex"><span class="code fn">type</span>()（查类型）是入门第一神器：不确定一个值是什么类型，就问它。三种基本类型：<b>int</b> 整数、<b>float</b> 小数、<b>str</b> 字符串（引号包着的一切）。<span class="str">"5"</span> 是字符串不是数字——类型不同，能干的活不同（1.5 会讲）。</p>
+</div>
+
+<h3>1.3 字符串的操作：+、*、len、f-string</h3>
+<p>字符串 = 一串文字。两个操作符最常用：<span class="code">+</span> 拼接、<span class="code">*</span> 重复。</p>
+<div class="demo">
+<p class="dtitle">示范 1：拼接与重复</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="str">"你好"</span> + <span class="str">"世界"</span>)
+<span class="fn">print</span>(<span class="str">"哈"</span> * <span class="num">3</span>)
+<span class="fn">print</span>(<span class="fn">len</span>(<span class="str">"hello"</span>))</p>
+<p class="demo-out">你好世界
+哈哈哈
+5</p>
+<p class="demo-ex"><span class="code fn">len</span>()（长度）数字符个数。<span class="code">"哈" * <span class="num">3</span></span> 就是重复三次——和 Linux 的 <span class="code">echo 哈{1..3}</span> 类似的想法，不同写法。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：f-string 格式化（日常最常用）</p>
+<p class="demo-in"><span class="param">name</span> = <span class="str">"小明"</span>
+<span class="param">age</span> = <span class="num">19</span>
+<span class="fn">print</span>(<span class="str">f"我叫<span class="param">{name}</span>，今年<span class="param">{age}</span>岁"</span>)</p>
+<p class="demo-out">我叫小明，今年19岁</p>
+<p class="demo-ex"><b>f-string</b>：字符串前加字母 f，里面用 <span class="code">{变量}</span> 就能把变量的值塞进文字。和 Linux 的 <span class="code">echo "我叫$name"</span> 完全一个思路——只是把 $ 换成了 {}。本章作业全靠它。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：split 切割字符串（处理数据的起手式）</p>
+<p class="demo-in"><span class="param">line</span> = <span class="str">"2026-08-25 14:30:12 INFO 服务启动"</span>
+<span class="param">parts</span> = <span class="param">line</span>.<span class="fn">split</span>(<span class="str">" "</span>)
+<span class="fn">print</span>(<span class="param">parts</span>)
+<span class="fn">print</span>(<span class="param">parts</span>[<span class="num">0</span>])</p>
+<p class="demo-out">['2026-08-25', '14:30:12', 'INFO', '服务启动']
+2026-08-25</p>
+<p class="demo-ex"><span class="code fn">split</span>()（切割）= 按指定符号把字符串切开，返回一个<b>列表</b>（列表第 3 章细讲，现在先记住"切开成一片片"）。这是日后解析日志、处理数据的<b>起手式</b>——一行日志切成了日期、时间、级别、消息四块，要哪块取哪块。</p>
+</div>
+
+<h3>1.4 数字运算：七种运算符</h3>
+<table>
+<tr><th style="width:16%">运算符</th><th>含义</th><th style="width:22%">例子</th><th style="width:16%">结果</th></tr>
+<tr><td><span class="code">+</span></td><td>加</td><td><span class="code">3 + 2</span></td><td>5</td></tr>
+<tr><td><span class="code">-</span></td><td>减</td><td><span class="code">3 - 2</span></td><td>1</td></tr>
+<tr><td><span class="code">*</span></td><td>乘</td><td><span class="code">3 * 2</span></td><td>6</td></tr>
+<tr><td><span class="code">/</span></td><td>真除法（带小数）</td><td><span class="code">7 / 2</span></td><td>3.5</td></tr>
+<tr><td><span class="code">//</span></td><td>整除（砍掉小数）</td><td><span class="code">7 // 2</span></td><td>3</td></tr>
+<tr><td><span class="code">%</span></td><td>取余（剩多少）</td><td><span class="code">7 % 2</span></td><td>1</td></tr>
+<tr><td><span class="code">**</span></td><td>幂（几次方）</td><td><span class="code">2 ** 3</span></td><td>8</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 1：/ 与 // 的区别（新手必看）</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="num">7</span> / <span class="num">2</span>)
+<span class="fn">print</span>(<span class="num">7</span> // <span class="num">2</span>)
+<span class="fn">print</span>(<span class="num">7</span> % <span class="num">2</span>)</p>
+<p class="demo-out">3.5
+3
+1</p>
+<p class="demo-ex"><span class="code">/</span> 是<b>真除法</b>：7 除 2 就是 3.5，老实给小数；<span class="code">//</span> 是<b>整除</b>：只要整数部分 3；<span class="code">%</span> 是<b>取余</b>：7 个苹果分给 2 人，每人 3 个还剩 1 个——所以是 1。% 在运维里极常用（判断奇数偶数、轮询分组）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：类型不同不能乱加</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="str">"我有"</span> + <span class="num">19</span> + <span class="str">"岁"</span>)</p>
+<p class="demo-out">TypeError: can only concatenate str (not "int") to str</p>
+<p class="demo-ex">报错了！<b>字符串和数字不能直接相加</b>——类型不同。怎么改？两种办法：把数字转成字符串 <span class="code fn">str</span>(<span class="num">19</span>)（转字符串），或干脆用 f-string。报错读法见第 7 章，现在记住：类型必须对。</p>
+</div>
+
+<h3>1.5 变量命名规则</h3>
+<div class="box2">
+<p><span class="opt">三个规矩：</span>① 只能由字母、数字、下划线组成，<b>不能数字开头</b>（<span class="code">2name</span> 非法，<span class="code">name2</span> 可以）；② 不能用 Python 关键字（if、for、while、def 等语法词）；③ 大小写敏感（name 和 Name 是两个变量）。<b>补充</b>：print 不是关键字，是内置函数名——语法上允许你拿它当变量名（<span class="code">print = <span class="num">5</span></span> 不报错），但这么干之后 print 就不能用了。所以<b>内置函数名也别占用</b>。</p>
+<p><span class="opt">一个好习惯：</span>名字要"见名知意"：age 年龄、disk_usage 磁盘使用率。多个词用下划线连接（叫蛇形命名）——和你 Linux 脚本里的习惯一致。</p>
+</div>
+
+<h3>1.6 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① <span class="code"><span class="str">"5"</span> + <span class="num">5</span></span> 类型不同报 TypeError；② 变量名 2name 非法；③ 变量名拼错报 NameError（name 'xxx' is not defined）；④ / 与 // 混淆（3.5 vs 3）。</p>
+</div>
+
+<h3>1.7 章末作业</h3>
+<div class="box">
+<p>1. 写一张"自我介绍卡"：用变量存名字、年龄、爱好，再用 f-string 打印成一句话。</p>
+<p>2. 两位数倒序：变量 <span class="code">num = <span class="num">37</span></span>，用 <span class="code">//</span> 和 <span class="code">%</span> 拆出十位和个位，打印成 73。</p>
+<p>3. 验证：<span class="code fn">type</span>(<span class="num">3.14</span>) 是什么？<span class="code fn">len</span>(<span class="str">"linux"</span>) 是几？</p>
+<p>4. 试错：故意写 <span class="code"><span class="fn">print</span>(<span class="str">"5"</span> + <span class="num">5</span>)</span>，把报错抄进学习日志（这是你第一份"报错收藏"）。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 1（题 1-1~1-8）</p>
+<h3>1.8 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能背出 / 和 // 的区别（真除法 vs 整除）</p>
+<p>☐ 会用 f-string 把变量塞进文字</p>
+<p>☐ 知道 <span class="code fn">type</span>() 怎么用、int/float/str 各是什么</p>
+<p>☐ 能说出变量命名的三个规矩</p>
+</div>
+<p class="note">📚 相关手册：print/input/type → 《Python 内置函数手册》第 1-2 组；f-string → 第 2 组尾部。</p>
+<div class="newpage"></div>
+<h2 id="toc-3">第 2 章 · 控制流：if、for、while</h2>
+<p><b>本章目标</b>（学完能做什么）：会写成绩分段程序、九九乘法表、猜数字游戏——程序从此会"自己拿主意"和"重复干活"。</p>
+<p><b>本章新知识点</b>：<span class="code kw">if</span>/<span class="code kw">elif</span>/<span class="code kw">else</span>（如果/否则如果/否则）· 比较运算符 · <span class="code kw">and</span>/<span class="code kw">or</span>/<span class="code kw">not</span> · <span class="code fn">range</span>（范围）· <span class="code kw">for</span> · <span class="code kw">while</span> · <span class="code kw">break</span>/<span class="code kw">continue</span> · <span class="code fn">input</span>（读键盘）。</p>
+
+<h3>2.1 缩进是 Python 的"括号"</h3>
+<p>Python 用<b>缩进</b>（行首空格）表示代码属于哪个块，不像 Shell 用 fi/done 结尾。冒号 : 结尾的行下面，缩进 4 格的就是"块内内容"。</p>
+<div class="demo">
+<p class="dtitle">示范 1：最简单的 if</p>
+<p class="demo-in"><span class="param">score</span> = <span class="num">85</span>
+<span class="kw">if</span> <span class="param">score</span> &gt;= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"及格了"</span>)
+<span class="fn">print</span>(<span class="str">"程序结束"</span>)</p>
+<p class="demo-out">及格了
+程序结束</p>
+<p class="demo-ex"><span class="code kw">if</span>（如果）后面跟条件，冒号结尾。缩进 4 格的 print 属于 if 块；不缩进的 print 不属于 if，无论如何都执行。缩进不一致 = 语法错误（后面 7 章详讲 IndentationError）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：if / elif / else 三段论</p>
+<p class="demo-in"><span class="param">score</span> = <span class="num">73</span>
+<span class="kw">if</span> <span class="param">score</span> &gt;= <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"优秀"</span>)
+<span class="kw">elif</span> <span class="param">score</span> &gt;= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"及格"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"不及格"</span>)</p>
+<p class="demo-out">及格</p>
+<p class="demo-ex"><span class="code kw">elif</span> = 否则如果（再给一次机会），<span class="code kw">else</span> = 否则（兜底）。从上往下<b>依次判断</b>，谁先满足就执行谁，后面都不看。所以 73 落在"大于等于 60"这档。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：比较运算符 + 逻辑连接词</p>
+<p class="demo-in"><span class="param">age</span> = <span class="num">19</span>
+<span class="fn">print</span>(<span class="param">age</span> &gt;= <span class="num">18</span> <span class="kw">and</span> <span class="param">age</span> &lt; <span class="num">60</span>)
+<span class="fn">print</span>(<span class="kw">not</span> (<span class="param">age</span> &lt; <span class="num">18</span>))</p>
+<p class="demo-out">True
+True</p>
+<p class="demo-ex">比较运算符：<span class="code">&gt;</span> <span class="code">&lt;</span> <span class="code">&gt;=</span> <span class="code">&lt;=</span> <span class="code">==</span>（等于，两个等号！）<span class="code">!=</span>（不等于）。<span class="code kw">and</span> = 并且（都真才真）、<span class="code kw">or</span> = 或者（有真就真）、<span class="code kw">not</span> = 取反。结果叫<b>布尔值</b>：True（真）/ False（假）。</p>
+</div>
+
+<h3>2.2 for 循环：把重复的事交给电脑</h3>
+<p><span class="code kw">for</span>（对于）循环：对一串东西，一个一个拿出来处理。<span class="code fn">range</span>（范围）负责生成一串数字。</p>
+<div class="demo">
+<p class="dtitle">示范 1：range 生成数列</p>
+<p class="demo-in"><span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">5</span>)))
+<span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">1</span>, <span class="num">10</span>, <span class="num">2</span>)))</p>
+<p class="demo-out">[0, 1, 2, 3, 4]
+[1, 3, 5, 7, 9]</p>
+<p class="demo-ex"><span class="code fn">range</span>(5) = 0 到 4（共 5 个，从 0 数）；<span class="code fn">range</span>(1, 10, 2) = 从 1 开始、到 10 为止<b>不含 10</b>、步长 2。<span class="code fn">list</span>()（转列表）只是让它显示出来。规律：<b>左闭右开</b>——头有尾没有。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：for 遍历</p>
+<p class="demo-in"><span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">3</span>):
+    <span class="fn">print</span>(<span class="str">"第"</span>, <span class="param">i</span>, <span class="str">"次"</span>)</p>
+<p class="demo-out">第 0 次
+第 1 次
+第 2 次</p>
+<p class="demo-ex"><span class="code kw">for</span> 变量 <span class="code kw">in</span> 一串东西: ——每次从"一串东西"里取一个放进变量 i，缩进块执行一次。i 从 0 开始是 Python 惯例（也是运维的常识：编号从 0 数）。</p>
+</div>
+
+<div class="demo">
+<p class="dtitle">示范 3：嵌套 for（for 里再套一个 for）</p>
+<p class="demo-in"><span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">4</span>):
+    <span class="kw">for</span> <span class="param">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">4</span>):
+        <span class="fn">print</span>(<span class="param">i</span>, <span class="param">j</span>)</p>
+<p class="demo-out">1 1
+1 2
+1 3
+2 1
+2 2
+2 3
+3 1
+3 2
+3 3</p>
+<p class="demo-ex"><b>嵌套 for</b> = 外层每转 1 圈，内层完整转完一轮。外层 i 控制"大步骤"、内层 j 控制"小步骤"——第 2 章作业的九九乘法表就是这个结构：外层 1~9 行，内层每行 1~i 列。</p>
+</div>
+
+<h3>2.3 while 循环：满足条件就一直转</h3>
+<p><span class="code kw">while</span>（当……时）：只要条件为真，就重复执行块。适合"不知道要转几次"的场景（比如猜数字，猜对为止）。</p>
+<div class="demo">
+<p class="dtitle">示范 1：计数器</p>
+<p class="demo-in"><span class="param">count</span> = <span class="num">0</span>
+<span class="kw">while</span> <span class="param">count</span> &lt; <span class="num">3</span>:
+    <span class="fn">print</span>(<span class="param">count</span>)
+    <span class="param">count</span> = <span class="param">count</span> + <span class="num">1</span></p>
+<p class="demo-out">0
+1
+2</p>
+<p class="demo-ex">三个零件：<b>初始值</b>（count=0）、<b>条件</b>（count&lt;3）、<b>递增</b>（count = count + 1）。忘写递增 → 条件永远为真 → <b>死循环</b>（下面警告栏）。</p>
+</div>
+<div class="warn">
+<p><span class="danger">⚠ 危险栏：死循环。</span>忘了写递增，while 会转到天荒地老。症状：终端一直刷字不停。急救：按 <b>Ctrl + C</b> 中断（和 Linux 一样）。写 while 前先在脑子里过一遍"这个循环怎么停下来"。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：break 与 continue</p>
+<p class="demo-in"><span class="kw">for</span> <span class="param">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">10</span>):
+    <span class="kw">if</span> <span class="param">i</span> == <span class="num">7</span>:
+        <span class="kw">break</span>
+    <span class="kw">if</span> <span class="param">i</span> % <span class="num">2</span> == <span class="num">0</span>:
+        <span class="kw">continue</span>
+    <span class="fn">print</span>(<span class="param">i</span>)</p>
+<p class="demo-out">1
+3
+5</p>
+<p class="demo-ex"><span class="code kw">break</span>（跳出）= 整个循环到此为止（到 7 就停，所以 6 之后的都不打印）；<span class="code kw">continue</span>（跳过本轮）= 这次不往下走，直接下一轮（偶数被跳过，所以只打印奇数 1、3、5）。</p>
+</div>
+
+<h3>2.4 input()：让程序问你话</h3>
+<div class="demo">
+<p class="dtitle">示范：读入并转换类型</p>
+<p class="demo-in"><span class="param">age</span> = <span class="fn">input</span>(<span class="str">"你几岁：</span>")
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="param">age</span>))
+<span class="param">age</span> = <span class="fn">int</span>(<span class="param">age</span>)
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="param">age</span>))</p>
+<p class="demo-out">你几岁：19
+&lt;class 'str'&gt;
+&lt;class 'int'&gt;</p>
+<p class="demo-ex"><span class="code fn">input</span>()（读键盘）返回的<b>永远是字符串</b>，哪怕你敲的是 19。要算数必须先 <span class="code fn">int</span>()（转整数）——这是新手第一大坑：input 进来的东西不能直接做加减。<b>交互式示范</b>：运行后程序会停住等你输入，敲 19 回车（上面"你几岁：19"就是输入样例）；不输入直接跑会一直等着，不会报错。</p>
+</div>
+
+<h3>2.5 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① while 忘递增 → 死循环（Ctrl+C 急救）；② input 拿到的没 int() 转，比大小出错；③ 判断相等写成 = 而不是 ==（= 是赋值不是比较）；④ 缩进不一致报 IndentationError。</p>
+</div>
+
+<div class="box">
+<p><b>本章对比：for vs while</b></p>
+<table>
+<tr><th style="width:30%">对象</th><th>特点 / 适用场景</th></tr>
+<tr><td class="code">for i in range(n)</td><td>知道次数（固定遍数）时用；range 负责"数数"</td></tr>
+<tr><td class="code">while 条件</td><td>不知道次数（直到满足条件）时用；要自己管计数器，忘了递增会死循环</td></tr></table>
+</div>
+
+<h3>2.6 章末作业</h3>
+<div class="box">
+<p>1. 成绩分段程序：input 读入分数（记得 int()），按 90/60 分档打印"优秀/及格/不及格"。</p>
+<p>2. 九九乘法表：嵌套 for（for 里再套一个 for），打印 1×1 到 9×9。</p>
+<p>3. 猜数字游戏：预设一个数字，while 循环 + input + if 判断，猜对 break；统计猜了几次。</p>
+<p>4. 打印 1 到 100 里所有能被 7 整除的数（提示：% 取余判断）。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 2（题 2-1~2-8）</p>
+<h3>2.7 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出 if/elif/else 的执行顺序（从上到下，谁先满足执行谁）</p>
+<p>☐ 能说出 for 和 while 的选择：知道次数用 for，不知道次数用 while</p>
+<p>☐ 能说出 break 和 continue 的区别（整锅端走 vs 跳过这一口）</p>
+<p>☐ 知道 input() 返回的一定是字符串</p>
+</div>
+<p class="note">📚 相关手册：range/enumerate → 《Python 内置函数手册》第 4 组；int/str 转换 → 第 2 组。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-4">第 3 章 · 数据结构：list、dict、tuple、set</h2>
+<p><b>本章目标</b>（学完能做什么）：会写通讯录小程序（能存、能查、能删）。数据结构是"数据处理"的核心地基——后面处理日志、JSON、API 全靠它们。</p>
+<p><b>本章新知识点</b>：<span class="code fn">list</span>（列表）· <span class="code fn">dict</span>（字典）· <span class="code fn">tuple</span>（元组）· <span class="code fn">set</span>（集合）· 索引/切片 · <span class="code fn">append</span> · <span class="code fn">get</span> · <span class="code fn">items</span> · <span class="code kw">in</span> 判断。</p>
+
+<h3>3.1 list 列表：一排盒子</h3>
+<p><b>比喻</b>：列表 = 一列火车，每节车厢一个数据，车厢从 0 开始编号。</p>
+<div class="demo">
+<p class="dtitle">示范 1：创建、索引、负数索引</p>
+<p class="demo-in"><span class="param">names</span> = [<span class="str">"nginx"</span>, <span class="str">"docker"</span>, <span class="str">"mysql"</span>]
+<span class="fn">print</span>(<span class="param">names</span>[<span class="num">0</span>])
+<span class="fn">print</span>(<span class="param">names</span>[-1])</p>
+<p class="demo-out">nginx
+mysql</p>
+<p class="demo-ex">方括号 [] 创建列表。索引从 0 数：names[0] 是第一辆车厢。索引填<b>负数</b> = 从尾巴倒数：names[-1] 是最后一个。-1 永远取最后一项，非常常用。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：切片——取一段</p>
+<p class="demo-in"><span class="param">ports</span> = [<span class="num">80</span>, <span class="num">443</span>, <span class="num">22</span>, <span class="num">3306</span>, <span class="num">8080</span>]
+<span class="fn">print</span>(<span class="param">ports</span>[<span class="num">1</span>:<span class="num">3</span>])
+<span class="fn">print</span>(<span class="param">ports</span>[:<span class="num">2</span>])
+<span class="fn">print</span>(<span class="param">ports</span>[<span class="num">2</span>:])</p>
+<p class="demo-out">[443, 22]
+[80, 443]
+[22, 3306, 8080]</p>
+<p class="demo-ex">切片 [a:b] = 从编号 a 到编号 b<b>不含 b</b>（还是"左闭右开"）。省略开头 = 从头开始；省略结尾 = 到末尾。和 Linux 的 <span class="code">head -n</span>（取头）/ <span class="code">tail -n</span>（取尾）一个思路——ports[:2] 就是 head -2。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：append 追加、len、in 判断</p>
+<p class="demo-in"><span class="param">services</span> = [<span class="str">"nginx"</span>]
+<span class="param">services</span>.<span class="fn">append</span>(<span class="str">"docker"</span>)  <span class="cm"># append = 在末尾加一节车厢</span>
+<span class="fn">print</span>(<span class="param">services</span>)
+<span class="fn">print</span>(<span class="fn">len</span>(<span class="param">services</span>))
+<span class="fn">print</span>(<span class="str">"docker"</span> <span class="kw">in</span> <span class="param">services</span>)</p>
+<p class="demo-out">['nginx', 'docker']
+2
+True</p>
+<p class="demo-ex"><span class="code fn">append</span>()（追加）是列表最常用的操作——注意它是"点号调用"（方法，和函数写法不同，详见《Python 内置函数手册》理念篇）。<span class="code kw">in</span> 判断某样东西在不在里面，返回 True/False——运维里"检查服务在不在清单里"天天用。</p>
+</div>
+
+<h3>3.2 dict 字典：键值对</h3>
+<p><b>比喻</b>：字典 = 通讯录。按"名字（键）"找"电话（值）"，而不是按位置找。和 Linux 的配置文件（键=值）完全一个思路。</p>
+<div class="demo">
+<p class="dtitle">示范 1：创建与增删改查</p>
+<p class="demo-in"><span class="param">server</span> = {<span class="str">"ip"</span>: <span class="str">"10.0.0.5"</span>, <span class="str">"port"</span>: <span class="num">22</span>}
+<span class="fn">print</span>(<span class="param">server</span>[<span class="str">"ip"</span>])
+<span class="param">server</span>[<span class="str">"owner"</span>] = <span class="str">"运维组"</span>   <span class="cm"># 加新键值对</span>
+<span class="param">server</span>[<span class="str">"port"</span>] = <span class="num">2222</span>        <span class="cm"># 改</span>
+<span class="fn">print</span>(<span class="param">server</span>)</p>
+<p class="demo-out">10.0.0.5
+{'ip': '10.0.0.5', 'port': 2222, 'owner': '运维组'}</p>
+<p class="demo-ex">花括号 {} 创建。查用 [键]，加新键直接赋值，改也是赋值（键已存在就覆盖）。字典的"键"必须是不变类型（str、int 可以，list 不行——因为键要能唯一锁定位置）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：get 安全取值 + items 遍历</p>
+<p class="demo-in"><span class="param">server</span> = {<span class="str">"ip"</span>: <span class="str">"10.0.0.5"</span>, <span class="str">"port"</span>: <span class="num">22</span>}  <span class="cm"># 独立运行请保留这行（不接上一示范）</span>
+<span class="fn">print</span>(<span class="param">server</span>.<span class="fn">get</span>(<span class="str">"ip"</span>))
+<span class="fn">print</span>(<span class="param">server</span>.<span class="fn">get</span>(<span class="str">"passwd"</span>, <span class="str">"没有这个键"</span>))
+<span class="kw">for</span> <span class="param">k</span>, <span class="param">v</span> <span class="kw">in</span> <span class="param">server</span>.<span class="fn">items</span>():
+    <span class="fn">print</span>(<span class="param">k</span>, <span class="str">"="</span>, <span class="param">v</span>)</p>
+<p class="demo-out">10.0.0.5
+没有这个键
+ip = 10.0.0.5
+port = 22</p>
+<p class="demo-ex"><span class="code fn">get</span>()（安全取值）和 [键] 的区别：键不存在时 [键] 直接报 KeyError，get 返回你指定的默认值（不给默认值就返回 None）。读配置文件的黄金习惯：<b>用 get 不用中括号</b>。items() 遍历时一次拿出"键, 值"两个，配 for 两个变量接。</p>
+</div>
+
+<h3>3.3 tuple 元组与 set 集合</h3>
+<div class="demo">
+<p class="dtitle">示范 1：tuple 不可变</p>
+<p class="demo-in"><span class="param">point</span> = (<span class="num">30</span>, <span class="num">120</span>)  <span class="cm"># 圆括号创建</span>
+<span class="fn">print</span>(<span class="param">point</span>[<span class="num">0</span>])
+<span class="param">point</span>[<span class="num">0</span>] = <span class="num">40</span></p>
+<p class="demo-out">30
+Traceback (most recent call last):
+  File "你的脚本名.py", line 3, in &lt;module&gt;
+    point[0] = 40
+TypeError: 'tuple' object does not support item assignment
+<span class="out">（实际运行时上面是完整多行 Traceback，这里截取关键几行；报错读法见第 7 章）</span></p>
+<p class="demo-ex"><b>tuple</b>（元组）= 创建后<b>不能改</b>的列表。什么时候用：这组数据就是固定的（如坐标、日期），不想被误改。列表 vs 元组的选择：需要增删改 → list；固定不变 → tuple。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：set 去重</p>
+<p class="demo-in"><span class="param">ips</span> = [<span class="str">"10.0.0.1"</span>, <span class="str">"10.0.0.2"</span>, <span class="str">"10.0.0.1"</span>, <span class="str">"10.0.0.1"</span>]
+<span class="fn">print</span>(<span class="fn">set</span>(<span class="param">ips</span>))</p>
+<p class="demo-out">{'10.0.0.1', '10.0.0.2'}  <span class="out">（set 不保顺序：这两项谁先谁后每次运行都可能不同）</span></p>
+<p class="demo-ex"><b>set</b>（集合）= 不存重复项、不保顺序的"去重机"。日志分析里"这堆 IP 里有哪些不同 IP"一句搞定。</p>
+</div>
+
+<h3>3.4 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 索引从 0 数（names[1] 是第二个）；② dict 用 [键] 取不存在的键报 KeyError——用 get；③ 切片 [a:b] 不含 b；④ list 能改、tuple 不能改，用错场合。</p>
+</div>
+
+<div class="box">
+<p><b>本章对比：四种容器</b></p>
+<table>
+<tr><th style="width:30%">对象</th><th>特点 / 适用场景</th></tr>
+<tr><td class="code">list 列表 [ ]</td><td>有序、可改、可重复——增删改查的主力</td></tr>
+<tr><td class="code">dict 字典 {键:值}</td><td>按键查值（像查字典）——一对对的数据</td></tr>
+<tr><td class="code">tuple 元组 ( )</td><td>定死不可改——固定搭配的数据（坐标、日期）</td></tr>
+<tr><td class="code">set 集合 { }</td><td>不重复、没顺序——去重</td></tr></table>
+</div>
+
+<div class="box"><p><b>本章对比：list、dict、tuple、set</b></p><table><tr><th>结构</th><th>核心特征</th><th>适用</th></tr><tr><td class="code">list</td><td>有序、可修改、按索引取</td><td>顺序数据</td></tr><tr><td class="code">dict</td><td>键值对应、按键取</td><td>配置和通讯录</td></tr><tr><td class="code">tuple</td><td>有序、不可修改</td><td>固定数据</td></tr><tr><td class="code">set</td><td>去重、无固定顺序</td><td>去重和成员判断</td></tr></table></div>
+<div class="box"><p><b>本章对比：list、dict、tuple、set</b></p><table><tr><th>结构</th><th>特征</th><th>适用</th></tr><tr><td class="code">list</td><td>有序、可修改、按索引取</td><td>顺序数据</td></tr><tr><td class="code">dict</td><td>键值对应、按键取</td><td>配置和通讯录</td></tr><tr><td class="code">tuple</td><td>有序、不可修改</td><td>固定数据</td></tr><tr><td class="code">set</td><td>去重、无固定顺序</td><td>去重和成员判断</td></tr></table></div>
+<h3>3.5 章末作业</h3>
+<div class="box">
+<p>1. 通讯录小程序：一个 dict 存 3 个联系人（名字→电话）；实现查（get）、加（赋值）、删（后面 3.5 提示）。</p>
+<p>2. 用 set 给名单去重：一个含重复名字的 list，打印去重结果和"名单原本几人、实际几人"。</p>
+<p>3. 用切片从列表 [10, 20, 30, 40, 50, 60, 70] 取出 [30, 40, 50]（提示：中间一段）。</p>
+<p>4. 写一个"服务端口表"：dict 存 nginx→80、ssh→22、mysql→3306，用 for + items() 逐行打印"服务名 监听 端口号"。</p>
+</div>
+<p class="note">提示：删除字典键用 <span class="code kw">del</span> 字典[键]（del = delete 删除）。</p>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 3（题 3-1~3-8）</p>
+<h3>3.6 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出索引从 0 数、负数索引 -1 是什么</p>
+<p>☐ 能说出切片 [a:b] 的"左闭右开"</p>
+<p>☐ 能说出 dict 用 get 不用中括号的理由（不报 KeyError）</p>
+<p>☐ 能说出 list/tuple 的选择标准（改不改）</p>
+</div>
+<p class="note">📚 相关手册：list/dict/set/len → 《Python 内置函数手册》第 2、3 组；切片 → 第 2 组尾部。</p>
+<div class="newpage"></div>
+<h2 id="toc-5">第 4 章 · 函数：def、参数、返回值</h2>
+<p><b>本章目标</b>（学完能做什么）：把第 3 章通讯录改造成函数版，写一个"计算器"函数集合——代码从此可以<b>打包复用</b>。</p>
+<p><b>本章新知识点</b>：<span class="code kw">def</span>（定义函数）· 参数 · <span class="code kw">return</span>（返回）· print vs return 的区别 · 局部变量与作用域。</p>
+
+<h3>4.1 函数 = 把重复操作打包成一条"新命令"</h3>
+<p><b>比喻</b>：函数就像 Linux 里的 alias——把一串长操作打包成一条短命令，以后敲名字就行。区别是函数更强大：能接受不同输入、能返回结果。</p>
+<div class="demo">
+<p class="dtitle">示范 1：def 定义 + 调用</p>
+<p class="demo-in"><span class="kw">def</span> <span class="fn">greet</span>(<span class="param">name</span>):
+    <span class="fn">print</span>(<span class="str">f"你好，<span class="param">{name}</span>！"</span>)
+
+<span class="fn">greet</span>(<span class="str">"小明"</span>)
+<span class="fn">greet</span>(<span class="str">"运维组"</span>)</p>
+<p class="demo-out">你好，小明！
+你好，运维组！</p>
+<p class="demo-ex"><span class="code kw">def</span>（定义）后面跟函数名和括号里的<b>参数</b>（原料入口），冒号结尾，缩进块是函数体。定义时只写一次，调用时传不同参数就出不同结果——同一台机器，换原料。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：return 返回结果</p>
+<p class="demo-in"><span class="kw">def</span> <span class="fn">add</span>(<span class="param">a</span>, <span class="param">b</span>):
+    <span class="kw">return</span> <span class="param">a</span> + <span class="param">b</span>
+
+<span class="param">result</span> = <span class="fn">add</span>(<span class="num">3</span>, <span class="num">5</span>)
+<span class="fn">print</span>(<span class="param">result</span>)
+<span class="fn">print</span>(<span class="fn">add</span>(<span class="num">10</span>, <span class="num">20</span>) * <span class="num">2</span>)</p>
+<p class="demo-out">8
+60</p>
+<p class="demo-ex"><span class="code kw">return</span>（返回）= 把计算结果<b>交出去</b>。交出去之后，调用处可以存变量、可以继续运算（add(10,20)*2 就是先算 30 再乘 2）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：print 与 return 的区别（新手第一迷思）</p>
+<p class="demo-in"><span class="kw">def</span> <span class="fn">f1</span>(<span class="param">x</span>):
+    <span class="fn">print</span>(<span class="param">x</span> * <span class="num">2</span>)   <span class="cm"># 只是打印，没把结果交出去</span>
+
+<span class="kw">def</span> <span class="fn">f2</span>(<span class="param">x</span>):
+    <span class="kw">return</span> <span class="param">x</span> * <span class="num">2</span>   <span class="cm"># 把结果交出去</span>
+
+<span class="param">a</span> = <span class="fn">f1</span>(<span class="num">5</span>)
+<span class="param">b</span> = <span class="fn">f2</span>(<span class="num">5</span>)
+<span class="fn">print</span>(<span class="str">"a ="</span>, <span class="param">a</span>)
+<span class="fn">print</span>(<span class="str">"b ="</span>, <span class="param">b</span>)</p>
+<p class="demo-out">10
+a = None
+b = 10</p>
+<p class="demo-ex">f1 里的 print 把 10 显示在屏幕上，但<b>没把结果交给变量 a</b>，所以 a 是 None（空）。f2 的 return 把 10 交给 b，所以 b = 10。<b>print 是"展示给人看"，return 是"交给程序用"。</b>需要继续算/存，必须 return。</p>
+</div>
+
+<h3>4.2 参数与作用域</h3>
+<div class="demo">
+<p class="dtitle">示范 1：默认参数 + 关键字参数</p>
+<p class="demo-in"><span class="kw">def</span> <span class="fn">check_disk</span>(<span class="param">threshold</span>=<span class="num">80</span>, <span class="param">mount</span>=<span class="str">"/"</span>):
+    <span class="fn">print</span>(<span class="str">f"检查<span class="param">{mount}</span>，阈值<span class="param">{threshold}</span>%"</span>)
+
+<span class="fn">check_disk</span>()
+<span class="fn">check_disk</span>(<span class="param">mount</span>=<span class="str">"/data"</span>, <span class="param">threshold</span>=<span class="num">90</span>)</p>
+<p class="demo-out">检查/，阈值80%
+检查/data，阈值90%</p>
+<p class="demo-ex">参数给默认值后，调用时可以不传。指定参数名传（mount=...）叫<b>关键字参数</b>，顺序随便换——运维脚本里这样写，别人读代码一眼就懂。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：多返回值（其实是元组）</p>
+<p class="demo-in"><span class="kw">def</span> <span class="fn">divmod2</span>(<span class="param">a</span>, <span class="param">b</span>):
+    <span class="kw">return</span> <span class="param">a</span> // <span class="param">b</span>, <span class="param">a</span> % <span class="param">b</span>
+
+<span class="param">shang</span>, <span class="param">yu</span> = <span class="fn">divmod2</span>(<span class="num">17</span>, <span class="num">5</span>)
+<span class="fn">print</span>(<span class="param">shang</span>, <span class="param">yu</span>)</p>
+<p class="demo-out">3 2</p>
+<p class="demo-ex">return 后面逗号隔开多个值 = 一次交回一个元组，用多个变量拆开接。"一次算两样、拆开存"是运维函数里的常见套路。</p>
+</div>
+<div class="box2">
+<p><span class="opt">作用域（一句话版）：</span>函数内部的变量是<b>局部变量</b>，函数外面看不到；函数外面的变量函数里可以读，但不能直接改（要改得用 <span class="code kw">global</span> 声明——日常几乎不用，知道即可）。变量命名的"盒子"只在定义它的区域有效。</p>
+</div>
+
+<h3>4.3 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 忘写 return，函数返回 None；② 定义了函数但没调用（def 只是"登记"，不调用不执行）；③ 想在函数里改外面的变量（作用域限制）；④ 把 print 当 return 用。</p>
+</div>
+
+<h3>4.4 章末作业</h3>
+<div class="box">
+<p>1. 把第 3 章通讯录改造成函数版：至少三个函数 add_contact / find_contact / list_all。</p>
+<p>2. 写一个"计算器"函数集合：加、减、乘、除四个函数（div 函数记得除数为 0 时返回提示）。</p>
+<p>3. 写一个 check_usage(percent) 函数：传入磁盘使用率，&gt;= 90 返回"红色告警"，&gt;= 80 返回"黄色提醒"，否则返回"正常"（提示：return 字符串）。</p>
+<p>4. 验证 print vs return：写一个"有 return"和"只有 print"的函数，各自赋值给变量后 type() 看看是什么。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 4（题 4-1~4-4、4-7、4-8）</p>
+<h3>4.5 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出 def 的完整格式（函数名 + 参数 + 冒号 + 缩进块）</p>
+<p>☐ 能讲清 print 与 return 的区别（展示 vs 交出）</p>
+<p>☐ 会用默认参数和关键字参数</p>
+<p>☐ 能说出什么时候该把代码封装成函数（重复两次以上就封）</p>
+</div>
+<p class="note">📚 相关手册：print/return → 《Python 内置函数手册》第 1 组；自定义函数速查 → 第 6 组。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-6">第 5 章 · 模块与导入：import、os、time</h2>
+<p><b>本章目标</b>（学完能做什么）：写"我的工作目录报告"——列出当前目录所有文件和修改时间。你开始调用 Python 自带的大工具箱（标准库）。</p>
+<p><b>本章新知识点</b>：<span class="code kw">import</span>（导入）· 模块与标准库 · <span class="code fn">os</span> 模块 · <span class="code fn">time</span> 模块 · <span class="code fn">sys</span>.argv 初步。</p>
+
+<h3>5.1 import 三种写法</h3>
+<p><b>比喻</b>：模块 = 工具箱。import 就是"把工具箱搬过来"。标准库 = 装 Python 时免费附赠的一排工具箱，不用安装，直接用。</p>
+<div class="demo">
+<p class="dtitle">示范 1：三种导入写法</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">os</span>            <span class="cm"># 写法1：整个模块搬进来，用 os.xxx 调用</span>
+<span class="fn">print</span>(<span class="fn">os</span>.<span class="fn">getcwd</span>())
+
+<span class="kw">from</span> <span class="fn">os</span> <span class="kw">import</span> <span class="fn">getcwd</span>  <span class="cm"># 写法2：只拿一件工具，直接用名字</span>
+<span class="fn">print</span>(<span class="fn">getcwd</span>())
+
+<span class="kw">import</span> <span class="fn">os</span> <span class="kw">as</span> <span class="fn">o</span>      <span class="cm"># 写法3：起个外号（as = 当作）</span>
+<span class="fn">print</span>(<span class="fn">o</span>.<span class="fn">getcwd</span>())</p>
+<p class="demo-out">/home/你的真实用户名
+/home/你的真实用户名
+/home/你的真实用户名  <span class="out">（示例值：实际以你的当前目录为准，在哪个目录运行就是哪个）</span></p>
+<p class="demo-ex">三种写法结果一样。习惯：<b>写法 1 最推荐</b>（os.getcwd 一眼看出这工具来自哪，代码可读性好）。getcwd()（get current working directory 获取当前工作目录）就是 Linux 的 pwd。</p>
+</div>
+
+<h3>5.2 os 模块：Python 版的 pwd/ls</h3>
+<div class="demo">
+<p class="dtitle">示范 1：listdir 列目录 + path.join 拼路径</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">os</span>
+<span class="param">files</span> = <span class="fn">os</span>.<span class="fn">listdir</span>(<span class="str">"."</span>)
+<span class="fn">print</span>(<span class="param">files</span>)
+<span class="fn">print</span>(<span class="fn">os</span>.<span class="fn">path</span>.<span class="fn">join</span>(<span class="str">"lab"</span>, <span class="str">"notes.md"</span>))</p>
+<p class="demo-out">['hello.py', 'lab', 'notes.md']  <span class="out">（示例值：实际列的是你当前目录里的内容，机器不同结果不同）</span>
+lab/notes.md</p>
+<p class="demo-ex"><span class="code fn">os</span>.<span class="fn">listdir</span>()（列目录）= Linux 的 ls；参数 "." 表示当前目录（和 Linux 一样）。<span class="code fn">path</span>.<span class="fn">join</span>（拼路径）= 把几段用正确的斜杠连起来——永远用它拼，别手写斜杠（Linux 用 /、Windows 用 \，join 自动处理）。示例里 "student" 换成你的真实用户名（<span class="code">whoami</span> 可查）。<span class="code fn">os</span>.<span class="fn">path</span>.<span class="fn">join</span>()（拼接路径）自动处理斜杠——永远用它拼路径，别手写字符串相加。</p>
+</div>
+
+<div class="demo">
+<p class="dtitle">示范 2：读取文件大小和修改时间</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">os</span>, <span class="fn">time</span>
+<span class="cm"># 前置（终端执行）：echo 'hello world!' &gt; hello.txt</span>
+<span class="param">path</span> = <span class="str">"hello.txt"</span>
+<span class="kw">if</span> <span class="fn">os</span>.<span class="fn">path</span>.<span class="fn">isfile</span>(<span class="param">path</span>):
+    <span class="fn">print</span>(<span class="fn">os</span>.<span class="fn">path</span>.<span class="fn">getsize</span>(<span class="param">path</span>))
+    <span class="param">stamp</span> = <span class="fn">os</span>.<span class="fn">path</span>.<span class="fn">getmtime</span>(<span class="param">path</span>)
+    <span class="fn">print</span>(<span class="fn">time</span>.<span class="fn">strftime</span>(<span class="str">"%Y-%m-%d %H:%M:%S"</span>, <span class="fn">time</span>.<span class="fn">localtime</span>(<span class="param">stamp</span>)))
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"文件不存在"</span>)</p>
+<p class="demo-out">12
+2026-08-25 14:30:12 （示例时间；实际值取决于文件）
+<span class="out">（新目录没建文件时，会走 else 分支打印"文件不存在"——两个分支都试一遍）</span></p>
+<p class="demo-ex"><span class="fn">isfile</span> 先确认是普通文件；<span class="fn">getsize</span> 取字节数；<span class="fn">getmtime</span> 取修改时间戳；<span class="fn">localtime</span> 转成本地时间，最后由 <span class="fn">strftime</span> 格式化。</p>
+</div>
+
+<h3>5.3 time 模块：时间戳、暂停、格式化</h3>
+<div class="demo">
+<p class="dtitle">示范 1：time() 与 strftime</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">time</span>
+<span class="fn">print</span>(<span class="fn">time</span>.<span class="fn">time</span>())
+<span class="fn">print</span>(<span class="fn">time</span>.<span class="fn">strftime</span>(<span class="str">"%Y-%m-%d %H:%M:%S"</span>))</p>
+<p class="demo-out">1787612345.678
+2026-08-25 14:30:12  <span class="out">（示例值：时间戳每次运行都不同，日期是运行当天，不要拿它当正确答案）</span></p>
+<p class="demo-ex"><span class="code fn">time</span>.<span class="fn">time</span>()（时间戳）= 从 1970-01-01 起的秒数，给机器算时间差用（两个相减 = 间隔秒数）。strftime()（格式化时间）= 把时间变成人读的格式：%Y 年、%m 月、%d 日、%H 时、%M 分、%S 秒。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：sleep 暂停 + sys.argv 接命令行参数</p>
+<p class="demo-in"><span class="out"># 启动命令（终端执行）：python3 你的脚本名.py 参数1 参数2</span>
+<span class="kw">import</span> <span class="fn">time</span>, <span class="fn">sys</span>
+<span class="fn">print</span>(<span class="str">"开始"</span>)
+<span class="fn">time</span>.<span class="fn">sleep</span>(<span class="num">2</span>)
+<span class="fn">print</span>(<span class="str">"两秒后"</span>)
+<span class="fn">print</span>(<span class="param">sys</span>.<span class="param">argv</span>)</p>
+<p class="demo-out">开始
+两秒后
+['你的脚本名.py', '参数1', '参数2']</p>
+<p class="demo-ex"><span class="code fn">sleep</span>()（暂停）= 程序歇几秒（轮询监控时控制节奏用）。<span class="code fn">sys</span>.argv = 命令行传进来的参数列表：<b>argv[0] 是你实际保存的脚本文件名（不是固定的 app.py，存成什么名就是什么）</b>，argv[1] 起才是真正的参数——第 9 章 argparse 的底层就是它。</p>
+</div>
+
+<h3>5.4 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 忘 import 就调用（NameError: name 'os' is not defined）；② 手拼路径字符串（用 os.path.join）；③ strftime 格式串写错（%H 时 / %M 分搞反）；④ import 写在函数里（习惯统一放文件顶部）。</p>
+</div>
+
+<h3>5.5 章末作业</h3>
+<div class="box">
+<p>1. “我的工作目录报告”：先 <span class="code">import os</span>，用 <span class="code">os.listdir(".")</span> 列出当前目录；对普通文件用 <span class="code">os.path.getsize(路径)</span> 取得字节数并打印文件名和大小。</p>
+<p>2. 对普通文件用 <span class="code">os.path.getmtime(路径)</span> 取得修改时间戳，再用 <span class="code">time.strftime</span> 与 <span class="code">time.localtime</span> 格式化后打印。</p>
+<p>3. 用 <span class="code">import time</span> 和 <span class="code">time.sleep</span> 写一个"倒计时 3 秒"程序（3、2、1、出发）。</p>
+<p>4. 用 <span class="code">import sys</span>，打印 <span class="code">sys.argv</span>：运行 <span class="code">python3 脚本名 a b c</span>，观察 argv 里有什么。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 4（题 4-5、4-6）</p>
+<h3>5.6 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出 import 三种写法，并说清推荐哪种、为什么</p>
+<p>☐ 能用 os 模块做 pwd（getcwd）和 ls（listdir）</p>
+<p>☐ 能说出 strftime 里 %Y %m %d %H %M %S 各是什么</p>
+<p>☐ 知道 sys.argv[0] 和 argv[1] 分别是什么</p>
+</div>
+<p class="note">📚 相关手册：os/time 常用函数 → 《Python 内置函数手册》第 6 组。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-7">第 6 章 · 文件操作：open/with、json</h2>
+<p><b>本章目标</b>（学完能做什么）：把通讯录存成 JSON 文件再读回来——程序从此能<b>记住数据</b>（关掉再开不丢失）。</p>
+<p><b>本章新知识点</b>：<span class="code fn">open</span>（打开文件）· r/w/a 三种模式 · <span class="code kw">with</span>（自动关闭）· 逐行读 · <span class="code fn">json</span> 模块。</p>
+
+<h3>6.1 open 的三种模式：r 读、w 写、a 追加</h3>
+<p><b>呼应 Linux</b>：w 就像 <span class="code">&gt;</span>（覆盖重定向），a 就像 <span class="code">&gt;&gt;</span>（追加重定向），r 就像 cat。你在 Linux 里学过的"覆盖 vs 追加"在这里一模一样。</p>
+<div class="demo">
+<p class="dtitle">示范 1：w 写与 r 读</p>
+<p class="demo-in"><span class="param">f</span> = <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>)
+<span class="param">f</span>.<span class="fn">write</span>(<span class="str">"第一行\n第二行\n"</span>)
+<span class="param">f</span>.<span class="fn">close</span>()
+
+<span class="param">f</span> = <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>)
+<span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>())
+<span class="param">f</span>.<span class="fn">close</span>()</p>
+<p class="demo-out">第一行
+第二行</p>
+<p class="demo-ex"><span class="code fn">open</span>()（打开文件）第一个参数是文件名，第二个是模式。<span class="str">"w"</span> 写、<span class="str">"r"</span> 读、<span class="str">"a"</span> 追加。<span class="param">encoding</span>=<span class="str">"utf-8"</span> 保证中文不乱码（永远带上）。<span class="code fn">close</span>()（关闭）用完必须关——就像 Linux 里用完退出。</p>
+</div>
+<div class="warn">
+<p><span class="danger">⚠ 危险栏：w 模式会清空原文件。</span>对已存在的文件用 "w" 打开，<b>内容立刻被清空</b>，再写新内容。重要文件永远用 "a" 或先备份——和 Linux 里 <span class="code">echo x &gt; file</span> 覆盖文件是一个道理。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：a 追加 + with 自动关闭</p>
+<p class="demo-in"><span class="out"># 前置：承接示范 1（test.txt 已含前两行）；也可以先用 w 模式初始化一遍：with open("test.txt","w") as f: f.write("第一行\n第二行\n")</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"a"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"第三行\n"</span>)
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>())</p>
+<p class="demo-out">第一行
+第二行
+第三行</p>
+<p class="demo-ex">"a" 追加：内容接在尾巴，不丢旧的。<b>重复运行会继续追加</b>（再跑一次就多一行，行数 = 初始两行 + 运行次数），这不是 bug——想要干净输出就先用 w 模式重新初始化。 <span class="code kw">with</span> ... <span class="code kw">as</span>（带上下文打开）= 缩进块结束<b>自动关闭文件</b>，不用手写 close，忘关也不怕。黄金习惯：<b>永远用 with open</b>。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：逐行读文件（处理日志的起手式）</p>
+<p class="demo-in"><span class="out"># 前置（终端执行，可复制）：mkdir -p ~/lab &amp;&amp; cd ~/lab &amp;&amp; echo 第一行 &gt; test.txt &amp;&amp; echo 第二行 &gt;&gt; test.txt &amp;&amp; echo 第三行 &gt;&gt; test.txt</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"test.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="kw">for</span> <span class="param">line</span> <span class="kw">in</span> <span class="param">f</span>:
+        <span class="fn">print</span>(<span class="param">line</span>.<span class="fn">strip</span>())</p>
+<p class="demo-out">第一行
+第二行
+第三行  <span class="out">（行数与你的 test.txt 内容对应）</span></p>
+<p class="demo-ex">文件对象可以直接 for 遍历（一行一行拿）。<span class="code fn">strip</span>()（去空白）去掉每行末尾的换行符，否则会多打空行。这个"逐行读文件"就是日后分析日志的起手式。</p>
+</div>
+
+<h3>6.2 json 模块：数据存成标准格式</h3>
+<p><b>比喻</b>：json = 世界通用的"数据信封"格式。Python 的 dict 和它几乎一样（键值对），所以转换极顺。</p>
+<div class="demo">
+<p class="dtitle">示范 1：dumps/loads 与 dump/load 两对</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">json</span>
+<span class="param">data</span> = {<span class="str">"name"</span>: <span class="str">"小明"</span>, <span class="str">"age"</span>: <span class="num">19</span>}
+
+<span class="param">text</span> = <span class="fn">json</span>.<span class="fn">dumps</span>(<span class="param">data</span>, <span class="param">ensure_ascii</span>=<span class="kw">False</span>)  <span class="cm"># dict → 字符串</span>
+<span class="fn">print</span>(<span class="param">text</span>)
+
+<span class="param">back</span> = <span class="fn">json</span>.<span class="fn">loads</span>(<span class="param">text</span>)  <span class="cm"># 字符串 → dict</span>
+<span class="fn">print</span>(<span class="param">back</span>[<span class="str">"name"</span>])</p>
+<p class="demo-out">{"name": "小明", "age": 19}
+小明</p>
+<p class="demo-ex"><b>带 s 的管字符串</b>：dumps = dict 转字符串，loads = 字符串转 dict。<b>不带 s 的管文件</b>：dump(数据, 文件) 写进文件，load(文件) 从文件读出。口诀：<b>带 s 是字符串（string），不带 s 是文件</b>。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：dump 到文件再 load 回来</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">json</span>
+<span class="param">contacts</span> = {<span class="str">"小明"</span>: <span class="str">"13800000000"</span>, <span class="str">"老王"</span>: <span class="str">"13900000000"</span>}
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"contacts.json"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="fn">json</span>.<span class="fn">dump</span>(<span class="param">contacts</span>, <span class="param">f</span>, <span class="param">ensure_ascii</span>=<span class="kw">False</span>)
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"contacts.json"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">loaded</span> = <span class="fn">json</span>.<span class="fn">load</span>(<span class="param">f</span>)
+
+<span class="fn">print</span>(<span class="param">loaded</span>.<span class="fn">get</span>(<span class="str">"小明"</span>))</p>
+<p class="demo-out">13800000000</p>
+<p class="demo-ex">dict 存成 contacts.json 文件（cat 看看：就是可读的键值对文本），再读回来还是 dict。这就是"程序记住数据"的标准姿势——通讯录、配置、API 返回全是这套。</p>
+</div>
+
+<h3>6.3 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① "w" 打开已有文件 → 内容立刻清空；② 忘 encoding="utf-8" → 中文乱码；③ 忘 close → 用 with open 根治；④ 读的文件路径写错 → FileNotFoundError。</p>
+</div>
+
+<h3>6.4 章末作业</h3>
+<div class="box">
+<p>1. 把第 3 章通讯录用 json.dump 存成 contacts.json，再用 json.load 读回来打印。</p>
+<p>2. 统计一个文本文件的行数和字数（提示：逐行读，行数 += 1，字数 += len(line.strip())）。</p>
+<p>3. 对比实验：对同一个文件分别用 "w" 和 "a" 写入一句话，观察哪种会清空原内容（用临时文件做）。</p>
+<p>4. 写一个"给文件加日期前缀"的小程序：读当前目录某文件，复制成 "2026-08-25_原文件名"（提示：os.path.join + 读内容写内容）。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 5（题 5-1~5-4）</p>
+<h3>6.5 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出 r/w/a 三模式，w 为什么危险</p>
+<p>☐ 永远用 with open，能说出为什么（自动关闭）</p>
+<p>☐ 能背出 json 口诀（带 s 字符串，不带 s 文件）</p>
+<p>☐ 会逐行读文件并 strip 换行符</p>
+</div>
+<p class="note">📚 相关手册：open/read/write → 《Python 内置函数手册》“文件对象三连”；JSON 与字符串方法 → 对应速查小节。</p>
+<div class="newpage"></div>
+<h2 id="toc-8">第 7 章 · 异常处理：try/except/finally</h2>
+<p><b>本章目标</b>（学完能做什么）：给第 6 章的 JSON 程序加上"文件不存在时友好提示"——你的脚本从此<b>不会一碰错误就崩溃</b>。<b>学完本章 = 达成检查点②：能独立写带 try/except 的 Python 脚本。</b></p>
+<p><b>本章新知识点</b>：Traceback 怎么读 · <span class="code kw">try</span>/<span class="code kw">except</span>（尝试/接住）· 捕获指定异常 · <span class="code kw">finally</span>（无论如何都执行）· 常见异常对照表。</p>
+
+<h3>7.1 程序为什么报错 + Traceback 怎么读</h3>
+<p><b>呼应 Linux</b>：报错处理 = Linux 里的"看日志找根因"。你背过的报错英语（《报错英语单词手册》），现在直接上场。</p>
+<div class="demo">
+<p class="dtitle">示范 1：完整 Traceback 逐行拆解</p>
+<p class="demo-in"><span class="fn">open</span>(<span class="str">"不存在的文件.txt"</span>)</p>
+<p class="demo-out">Traceback (most recent call last):
+  File "app.py", line 1, in &lt;module&gt;
+    open("不存在的文件.txt")
+FileNotFoundError: [Errno 2] No such file or directory: '不存在的文件.txt'</p>
+<p class="demo-ex"><b>从下往上看</b>（和读日志一样）：① 最后一行 = 错误本质：FileNotFoundError（文件找不到）＋ 哪个文件；② 往上一段 = 凶手代码 open(...)；③ 再往上 = 案发地点 File "app.py", line 1（第 1 行）。先把最后一行读明白，80% 的报错就解决了。详细读法见 《日志报错解读手册》 B 组。</p>
+</div>
+
+<h3>7.2 try/except：尝试，出错就接住</h3>
+<div class="demo">
+<p class="dtitle">示范 1：捕获指定异常</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">json</span>  <span class="cm"># 每个示范都能独立复制运行</span>
+<span class="kw">try</span>:
+    <span class="kw">with</span> <span class="fn">open</span>(<span class="str">"contacts.json"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+        <span class="param">data</span> = <span class="fn">json</span>.<span class="fn">load</span>(<span class="param">f</span>)
+<span class="kw">except</span> <span class="fn">FileNotFoundError</span>:
+    <span class="fn">print</span>(<span class="str">"通讯录文件还没创建，先用空通讯录。"</span>)
+    <span class="param">data</span> = {}
+<span class="fn">print</span>(<span class="str">"继续干活："</span>, <span class="param">data</span>)</p>
+<p class="demo-out">通讯录文件还没创建，先用空通讯录。
+继续干活： {}</p>
+<p class="demo-ex"><span class="code kw">try</span>（尝试）块里放"可能出错"的代码；<span class="code kw">except</span>（接住）指定异常类型——只有 FileNotFoundError 才被接住，其他错误照常报。接住后程序<b>不会崩溃</b>，继续往下走。指定类型捕获是黄金习惯（见下方橙色提示框，讲为什么）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：finally 无论如何都执行</p>
+<p class="demo-in"><span class="kw">try</span>:
+    <span class="fn">print</span>(<span class="str">"干活中..."</span>)
+    <span class="param">x</span> = <span class="num">1</span> / <span class="num">0</span>
+<span class="kw">except</span> <span class="fn">ZeroDivisionError</span>:
+    <span class="fn">print</span>(<span class="str">"除数为零了！"</span>)
+<span class="kw">finally</span>:
+    <span class="fn">print</span>(<span class="str">"收尾工作：关文件、发通知（这句总会执行）"</span>)</p>
+<p class="demo-out">干活中...
+除数为零了！
+收尾工作：关文件、发通知（这句总会执行）</p>
+<p class="demo-ex"><span class="code kw">finally</span>（最后）块<b>不管出不出错都执行</b>——适合放"必须收尾"的动作（关文件、关连接）。with open 已经自动关了文件，所以日常 finally 用得少，知道它存在即可。</p>
+</div>
+<div class="box2">
+<p><span class="opt">坑：不要无脑 try。</span>有的错误就该让它报出来（比如逻辑写错），接住了反而掩盖问题。<b>原则：只有"预期内可能发生的"错误（文件不存在、网络断开、用户乱输入）才 try</b>；代码 bug 不要 try，让它报错、修掉它。</p>
+</div>
+
+<h3>7.3 常见异常对照表</h3>
+<table>
+<tr><th style="width:28%">异常</th><th>什么时候发生</th></tr>
+<tr><td><span class="code">FileNotFoundError</span></td><td>文件不存在</td></tr>
+<tr><td><span class="code">PermissionError</span></td><td>没权限（对应 Linux Permission denied）</td></tr>
+<tr><td><span class="code">KeyError</span></td><td>字典键不存在（用 [键] 取）</td></tr>
+<tr><td><span class="code">IndexError</span></td><td>列表索引超出范围</td></tr>
+<tr><td><span class="code">ValueError</span></td><td>类型对但值不对（int("abc")）</td></tr>
+<tr><td><span class="code">TypeError</span></td><td>类型不对（"5" + 5）</td></tr>
+<tr><td><span class="code">ZeroDivisionError</span></td><td>除数为零</td></tr>
+<tr><td><span class="code">KeyboardInterrupt</span></td><td>Ctrl+C 打断（一般不接住）</td></tr>
+</table>
+<p class="note">完整版（带逐词拆解和解决办法）→ 见 《日志报错解读手册》 B 组，遇到报错当字典查。</p>
+
+<h3>7.4 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 无脑 try 掩盖代码 bug；② except 后面不写异常类型，什么错都接住，查错困难；③ try 块太大（只包住"可能出错的那一句"）；④ except 里既不打印也不记录，错误被吞掉。</p>
+</div>
+
+<h3>7.5 章末作业</h3>
+<div class="box">
+<p>1. 给第 6 章 JSON 程序加异常处理：文件不存在时打印友好提示并用空 dict 继续。</p>
+<p>2. 写一个"安全除法"函数：除数为 0 时返回提示文字而不是报错。</p>
+<p>3. 故意触发三种不同异常（FileNotFoundError、KeyError、ValueError），抄下三种 Traceback 的最后一行，对照 7.3 表说出各是什么错。</p>
+<p>4. 把 1 的脚本跑两遍：第一次无文件（走 except），第二次有文件（走 try），验证两条分支都正常。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 5（题 5-5~5-8）</p>
+<h3>7.6 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 会从下往上读 Traceback，先说最后一行是什么</p>
+<p>☐ 能说出 try/except 的写法，会捕获指定异常</p>
+<p>☐ 能说出 finally 的作用（无论如何都执行）</p>
+<p>☐ 能说出"不要无脑 try"的原则</p>
+</div>
+<p class="note">📚 相关手册：Traceback 逐行拆解 → 《日志报错解读手册》 B 组开篇；报错英语 → 《报错英语单词手册》。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-9">第 8 章 · 网络请求：requests</h2>
+<p><b>本章目标</b>（学完能做什么）：写"天气查询器"雏形——程序联网拿数据。这是脚本 2 的核心能力，也是调 API 的第一步。</p>
+<p><b>本章新知识点</b>：HTTP 请求/响应 · 状态码 · <span class="code fn">requests</span> 模块 · 响应对象 · 超时与异常。</p>
+<p class="note">📌 外部扩展声明：requests 是<b>第三方库</b>（需先安装），本章所有示范都调<b>外部 API 并需要联网</b>。离线/未安装时：安装方式已标注，无法联网时用离线练习（读一段保存好的 JSON 文本跑 .json()/取值逻辑），主线能力是"拿响应→解析→异常处理"，不在网络本身。练习册基础篇 6-1/6-2 已标外部扩展。</p>
+
+<h3>8.1 什么是 HTTP 请求：Python 版的 curl</h3>
+<p><b>呼应 Linux</b>：requests.get() 就是 curl——向网址发一个"请给我数据"的请求，对方回一个响应。你在第 8 章 Linux 课里用过的 curl，现在换成 Python 写。</p>
+<div class="demo">
+<p class="dtitle">示范 1：发请求 + 看状态码</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">requests</span>  <span class="cm"># 需要先安装：sudo apt install python3-requests</span>
+<span class="param">r</span> = <span class="fn">requests</span>.<span class="fn">get</span>(<span class="str">"https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true"</span>, <span class="param">timeout</span>=<span class="num">10</span>)
+<span class="fn">print</span>(<span class="param">r</span>.<span class="param">status_code</span>)</p>
+<p class="demo-out">200</p>
+<p class="demo-ex"><span class="code fn">requests</span> 是第三方库，Ubuntu 要先装：<span class="code">sudo apt install python3-requests</span>（平板 Termux 用户：<span class="code">pkg install python-requests</span>）。get()（发送 GET 请求）返回<b>响应对象</b> r。status_code（状态码）：<b>200 = 成功</b>、404 = 不存在、500 = 对方服务器出错。<span class="param">timeout</span>（超时）= 等多久没回应就算失败（10 秒），必须写——不然对方没响应你的程序会永远卡住。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：拿数据 .json() 与 .text</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">requests</span>
+<span class="param">r</span> = <span class="fn">requests</span>.<span class="fn">get</span>(<span class="str">"https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true"</span>, <span class="param">timeout</span>=<span class="num">10</span>)
+<span class="param">data</span> = <span class="param">r</span>.<span class="fn">json</span>()
+<span class="fn">print</span>(<span class="param">data</span>[<span class="str">"current_weather"</span>][<span class="str">"temperature"</span>])</p>
+<p class="demo-out">31.2 <span class="out">（示例——实际温度随请求时刻变化）</span></p>
+<p class="demo-ex"><span class="code fn">json</span>()（转字典）= 把响应内容解析成 dict——第 6 章 json.loads 的姊妹，这次直接从网上来。然后就是熟悉的 dict 取值：data["current_weather"]["temperature"] 层层拿。返回的是 dict，你就会处理它（第 3 章学的）。</p>
+</div>
+
+<h3>8.2 网络失败怎么办：try/except 接住</h3>
+<div class="demo">
+<p class="dtitle">示范 1：断网/超时也不崩</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">requests</span>
+<span class="kw">try</span>:
+    <span class="param">r</span> = <span class="fn">requests</span>.<span class="fn">get</span>(<span class="str">"http://127.0.0.1:9"</span>, <span class="param">timeout</span>=<span class="num">3</span>) <span class="cm"># 本机 9 端口没有服务，连接必然被拒绝——受控失败，不依赖外网</span>
+    <span class="fn">print</span>(<span class="param">r</span>.<span class="param">status_code</span>)
+<span class="kw">except</span> <span class="fn">requests</span>.<span class="fn">exceptions</span>.<span class="fn">RequestException</span>:
+    <span class="fn">print</span>(<span class="str">"网络出问题了：断网？超时？服务器没响应？"</span>)</p>
+<p class="demo-out">网络出问题了：断网？超时？服务器没响应？</p>
+<p class="demo-ex">第 7 章的 try/except 直接上场（<span class="code kw">except</span> <span class="param">类型</span> <span class="code kw">as</span> <span class="param">变量</span> 可把错误对象接住，如 <span class="code">except Exception as e: print(e)</span>——第 7 章作业会用到）：RequestException 是 requests 所有网络错误的总称（断网、超时、域名解析失败都归它管）。<b>调 API 的脚本必须套 try/except</b>——网络永远可能出问题，这是运维的常识。<b>想同时验证成功分支</b>：把 127.0.0.1:9 换成 8.1 用过的真实 API 地址再跑，就会走成功分支打印 200——同一段代码两个分支都试一遍。</p>
+</div>
+
+<h3>8.3 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 忘装 requests（ModuleNotFoundError）；② 忘写 timeout（对方无响应程序卡死）；③ URL 拼错（404 或连不上）；④ 不套 try/except，断网就崩。</p>
+</div>
+
+<div class="box">
+<p><b>本章对比：requests vs curl</b></p>
+<table>
+<tr><th style="width:30%">对象</th><th>特点 / 适用场景</th></tr>
+<tr><td class="code">curl（Linux 命令）</td><td>终端里随手测一下接口；快速、无代码</td></tr>
+<tr><td class="code">requests（Python 库）</td><td>脚本里拿数据做后续处理；.json() 直接转 dict，配合 if/try 做逻辑</td></tr></table>
+</div>
+
+<h3>8.4 章末作业</h3>
+<div class="box">
+<p>1. 请求 Open-Meteo 接口，打印当前温度（网址就用示范 1 里的）。</p>
+<p>2. 写天气查询器雏形：把城市经纬度做成两个变量，打印"城市 当前温度 X°C"。</p>
+<p>3. 故意请求一个不存在的地址（如 api.open-meteo.com/v1/forecast?latitude=abc），看状态码或报错是什么。</p>
+<p>4. 给 1 的程序加 try/except 和 timeout，然后断网跑一遍验证提示正常。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-1、6-2）；进阶场景 2（天气查询器）</p>
+<h3>8.5 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能说出 200/404/500 状态码的含义</p>
+<p>☐ 会用 .json() 把响应转成 dict 并取值</p>
+<p>☐ 知道 timeout 必须写，以及为什么</p>
+<p>☐ 会用 try/except 接住网络错误</p>
+</div>
+<p class="note">📚 相关手册：json 处理 → 《Python 内置函数手册》；curl 对照 → 《Linux 入门》第 8 章。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-10">第 9 章 · 命令行参数：argparse</h2>
+<p><b>本章目标</b>（学完能做什么）：脚本支持 <span class="code">python3 weather.py 杭州</span> 这种命令行调用——同一脚本应对不同情况，从"玩具"变"工具"。</p>
+<p><b>本章新知识点</b>：argparse 三步走 · 位置参数 · --可选参数 · 默认值与 help 文本。</p>
+
+<h3>9.1 为什么脚本需要参数</h3>
+<p><b>呼应 Linux</b>：Linux 命令都有参数（ls -l /home）。好脚本也该这样：敲命令时顺手指明"对谁做、怎么做"，而不是改代码。argparse 就是给 Python 脚本装参数的工具。</p>
+<div class="demo">
+<p class="dtitle">示范 1：argparse 三步走（创建 → 添加 → 解析）</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">argparse</span>
+
+<span class="param">parser</span> = <span class="fn">argparse</span>.<span class="fn">ArgumentParser</span>(<span class="param">description</span>=<span class="str">"天气查询器"</span>)  <span class="cm"># 1 创建解析器</span>
+<span class="param">parser</span>.<span class="fn">add_argument</span>(<span class="str">"city"</span>, <span class="param">help</span>=<span class="str">"要查的城市"</span>)           <span class="cm"># 2 添加参数</span>
+<span class="param">args</span> = <span class="param">parser</span>.<span class="fn">parse_args</span>()                                    <span class="cm"># 3 解析</span>
+
+<span class="fn">print</span>(<span class="str">f"正在查<span class="param">{args.city}</span>的天气..."</span>)</p>
+<p class="demo-out">$ python3 weather.py 杭州
+正在查杭州的天气...</p>
+<p class="demo-ex">三步走：<b>① ArgumentParser()</b>（创建解析器）→ <b>② add_argument()</b>（添加参数，"city" 不带 -- 就是位置参数）→ <b>③ parse_args()</b>（解析命令行）。之后 args.city 就是传入的城市。description 会显示在自动生成的 --help 里。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：--可选参数 + 默认值 + 自动 --help</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">argparse</span>
+<span class="param">parser</span> = <span class="fn">argparse</span>.<span class="fn">ArgumentParser</span>(<span class="param">description</span>=<span class="str">"天气查询器"</span>)
+<span class="param">parser</span>.<span class="fn">add_argument</span>(<span class="str">"city"</span>, <span class="param">help</span>=<span class="str">"要查的城市"</span>)
+<span class="param">parser</span>.<span class="fn">add_argument</span>(<span class="str">"--days"</span>, <span class="fn">type</span>=<span class="fn">int</span>, <span class="param">default</span>=<span class="num">1</span>, <span class="param">help</span>=<span class="str">"查未来几天，默认 1"</span>)
+<span class="param">args</span> = <span class="param">parser</span>.<span class="fn">parse_args</span>()
+<span class="fn">print</span>(<span class="param">args</span>.<span class="param">city</span>, <span class="param">args</span>.<span class="param">days</span>)</p>
+<p class="demo-out"><span class="out"># 第一次运行：传两个参数</span>
+$ python3 weather.py 杭州 --days 3
+杭州 3
+
+<span class="out"># 第二次独立运行：看自动生成的帮助</span>
+$ python3 weather.py --help
+usage: weather.py [-h] [--days DAYS] city
+
+天气查询器
+
+positional arguments:
+  city        要查的城市
+
+options:
+  -h, --help  show this help message and exit
+  --days DAYS  查未来几天，默认 1</p>
+<p class="demo-ex">带 <span class="code">--</span> 的是<b>可选参数</b>：不传就用 default（默认值）。<b>--help 是自动生成的</b>——和 Linux 的 --help 同源（一个祖先），你早就熟了。type=int 让 argparse 自动把输入转成整数。</p>
+</div>
+<div class="box2">
+<p><span class="opt">对比：</span>argparse 和 sys.argv（第 5 章）的区别：argv 是毛坯（一列字符串，类型、顺序全要自己处理）；argparse 是精装（自动类型转换、自动 --help、自动报"缺参数"）。<b>正式脚本一律用 argparse</b>。</p>
+</div>
+
+<h3>9.2 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 位置参数顺序写反（args 里按敲的顺序进）；② 忘 type=int（拿到的是字符串，没法比大小）；③ 解析后属性名写错（args.city 写成 args.citys）；④ 位置参数和可选参数混加（先加位置参数，再加 --可选）。</p>
+</div>
+
+<h3>9.3 章末作业</h3>
+<div class="box">
+<p>1. 给第 4 章计算器加参数化：python3 calc.py 3 + 5 打印 8（提示：位置参数三个）。</p>
+<p>2. 给通讯录加子命令：add / find / list 三种用法（提示：用第一个位置参数当"命令名"，if 分支处理）。</p>
+<p>3. 写一个带 --threshold 可选参数的磁盘检查脚本（默认 80，传入则用传入值）。</p>
+<p>4. 敲 python3 脚本名 --help，看 argparse 自动生成的帮助文本长什么样，抄进日志。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-3、6-4）；进阶场景 1（批量重命名工具）</p>
+<h3>9.4 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能背出 argparse 三步走（创建 → 添加 → 解析）</p>
+<p>☐ 能说出位置参数和 --可选参数的区别</p>
+<p>☐ 知道 --help 是自动生成的</p>
+<p>☐ 知道 default 和 type 两个参数的用途</p>
+</div>
+<p class="note">📚 相关手册：--help 对照 → 《Linux 入门》第 0 章。</p>
+<div class="newpage"></div>
+<h2 id="toc-11">第 10 章 · 日志：logging</h2>
+<p><b>本章目标</b>（学完能做什么）：给脚本加日志记录——每次操作留痕，出问题能排查。日志就是运维的第一现场（你读过 Linux 日志，现在自己生产日志）。</p>
+<p><b>本章新知识点</b>：print 调试的不足 · <span class="code fn">logging</span> 模块 · 四个级别 · basicConfig（基本配置）· 日志写文件。</p>
+<p class="note">📌 口径说明：logging 标准是<b>五级</b>（DEBUG/INFO/WARNING/ERROR/CRITICAL）；本章为入门只讲前四级（到 ERROR），属<b>简化范围</b>——真实项目里 CRITICAL 照样常用（定义见《日志报错解读手册》级别表）。</p>
+
+<h3>10.1 print 调试的不足</h3>
+<p>print 能看结果，但有三个毛病：① 没有<b>级别</b>（分不出"正常"和"出错了"）；② 没有<b>时间</b>（不知道何时发生）；③ 用完要删（上线时满屏 print 是灾难）。logging（日志）模块一次解决三样。</p>
+<div class="demo">
+<p class="dtitle">示范 1：四个级别</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">logging</span>
+<span class="fn">logging</span>.<span class="fn">basicConfig</span>(<span class="param">level</span>=<span class="fn">logging</span>.<span class="param">INFO</span>, <span class="param">format</span>=<span class="str">"%(asctime)s %(levelname)s %(message)s"</span>)
+
+<span class="fn">logging</span>.<span class="fn">debug</span>(<span class="str">"调试细节"</span>)
+<span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"服务启动"</span>)
+<span class="fn">logging</span>.<span class="fn">warning</span>(<span class="str">"磁盘快满了"</span>)
+<span class="fn">logging</span>.<span class="fn">error</span>(<span class="str">"连接失败"</span>)</p>
+<p class="demo-out">2026-08-25 14:30:12,345 INFO 服务启动
+2026-08-25 14:30:12,345 WARNING 磁盘快满了
+2026-08-25 14:30:12,346 ERROR 连接失败</p>
+<p class="demo-ex">四个级别从低到高：DEBUG（调试细节）→ INFO（正常消息）→ WARNING（警告）→ ERROR（错误）。basicConfig（基本配置）里 level=INFO 的意思是"只显示 INFO 及以上"——所以 debug 没打印。<b>format 串</b>决定每行长什么样：时间 +级别 +消息，和你读过的 Linux 日志一个结构（时间+谁+说什么）。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：日志写进文件</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">logging</span>
+<span class="fn">logging</span>.<span class="fn">basicConfig</span>(<span class="param">filename</span>=<span class="str">"app.log"</span>, <span class="param">level</span>=<span class="fn">logging</span>.<span class="param">INFO</span>, <span class="param">format</span>=<span class="str">"%(asctime)s %(levelname)s %(message)s"</span>)
+<span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"程序启动"</span>)
+
+<span class="cm"># 之后终端里看：cat app.log</span></p>
+<p class="demo-out">$ cat app.log
+2026-08-25 14:31:00,001 INFO 程序启动</p>
+<p class="demo-ex">加 <span class="param">filename</span>=<span class="str">"app.log"</span>，日志就写进文件而不是屏幕——和 Linux 的"日志落到 /var/log"一个思路：程序跑着，日志记着，出事翻日志。每个脚本都该有自己的日志文件。</p>
+</div>
+
+<h3>10.2 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① level 设成 ERROR，INFO 日志全被过滤看不见；② format 串写错（%(asctime)s 漏写 s）；③ 上线脚本还在用 print 调试；④ filename 用相对路径，日志文件"不知去向"。</p>
+</div>
+
+<h3>10.3 章末作业</h3>
+<div class="box">
+<p>1. 给第 9 章的磁盘检查脚本加日志：每次检查记一条 INFO"检查完成，使用率 X%"，超阈值记 WARNING。</p>
+<p>2. 把日志写到文件，跑完后 cat 看内容。</p>
+<p>3. 实验 level：分别把 level 设为 DEBUG 和 ERROR，观察同一段代码打印出什么差别。</p>
+<p>4. 把错误信息写进日志：try/except 里 except 块加 logging.error(f"失败原因：{e}")。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-5、6-6）</p>
+<h3>10.4 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 能背出四个级别及含义（DEBUG/INFO/WARNING/ERROR）</p>
+<p>☐ 能说出 level=INFO 的作用（屏蔽 DEBUG）</p>
+<p>☐ 会用 filename 把日志写进文件</p>
+<p>☐ 能说出 print 调试的三大不足</p>
+</div>
+<p class="note">📚 相关手册：日志报错解读 → 《日志报错解读手册》；/var/log 对照 → 《Linux 入门》第 10 章。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-12">第 11 章 · 进程调用：subprocess</h2>
+<p><b>本章目标</b>（学完能做什么）：用 Python 调 df -h、free -h 并处理结果——Linux 三连和 Python 三连在这里<b>合流</b>。本章是通往王牌项目 server-health-check 的接口。</p>
+<p><b>本章新知识点</b>：<span class="code fn">subprocess</span>.<span class="fn">run</span>（运行命令）· capture_output · text · 返回码。</p>
+
+<h3>11.1 为什么 Python 要调系统命令</h3>
+<p><b>比喻</b>：Python 是大脑，系统命令是双手。大脑想做"磁盘检查 +超阈值告警"，但查磁盘这种活是 df 的专长——那就让大脑指挥双手：Python 调 df 拿数据，再判断、告警。这就是两条线合流。</p>
+<div class="demo">
+<p class="dtitle">示范 1：run 调 df 并拿输出</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">subprocess</span>
+<span class="param">result</span> = <span class="fn">subprocess</span>.<span class="fn">run</span>(<span class="param">[<span class="str">"df"</span>, <span class="str">"-h"</span>, <span class="str">"/"</span>]</span>, <span class="param">capture_output</span>=<span class="kw">True</span>, <span class="param">text</span>=<span class="kw">True</span>)
+<span class="fn">print</span>(<span class="param">result</span>.<span class="param">stdout</span>)</p>
+<p class="demo-out">Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       916G  146G  724G  17% /  <span class="out">（示例值：你的机器容量不同，数字不同属正常）</span></p>
+<p class="demo-ex"><span class="code fn">run</span>()（运行）第一个参数是<b>命令和参数组成的列表</b>（注意：每段一个元素，不像终端里敲整串）。capture_output=True = 把输出抓回来；text=True = 输出是字符串而不是字节。<span class="param">result</span>.<span class="param">stdout</span> 就是 df 的输出——Linux 里学的 df -h，现在变成了 Python 里的数据。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：判断返回码（成功还是失败）</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">subprocess</span>
+<span class="param">ok</span> = <span class="fn">subprocess</span>.<span class="fn">run</span>(<span class="param">[<span class="str">"ls"</span>, <span class="str">"/home"</span>]</span>, <span class="param">capture_output</span>=<span class="kw">True</span>)
+<span class="fn">print</span>(<span class="param">ok</span>.<span class="param">returncode</span>)
+<span class="param">bad</span> = <span class="fn">subprocess</span>.<span class="fn">run</span>(<span class="param">[<span class="str">"ls"</span>, <span class="str">"/不存在"</span>]</span>, <span class="param">capture_output</span>=<span class="kw">True</span>)
+<span class="fn">print</span>(<span class="param">bad</span>.<span class="param">returncode</span>)</p>
+<p class="demo-out">0
+2</p>
+<p class="demo-ex"><span class="param">returncode</span>（返回码）= 命令的"成绩单"：<b>0 = 成功</b>，非 0 = 失败（数字是失败原因编号，和你 Linux 里 echo $? 看到的是一回事）。脚本里用 returncode 判断"命令成了没"，比看输出文字靠谱得多。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：拿 free -h 的输出做判断（王牌项目雏形）</p>
+<p class="demo-in"><span class="kw">import</span> <span class="fn">subprocess</span>
+<span class="param">r</span> = <span class="fn">subprocess</span>.<span class="fn">run</span>(<span class="param">[<span class="str">"free"</span>, <span class="str">"-h"</span>]</span>, <span class="param">capture_output</span>=<span class="kw">True</span>, <span class="param">text</span>=<span class="kw">True</span>)
+<span class="param">lines</span> = <span class="param">r</span>.<span class="param">stdout</span>.<span class="fn">split</span>(<span class="str">"\n"</span>)
+<span class="fn">print</span>(<span class="param">lines</span>[<span class="num">1</span>])</p>
+<p class="demo-out">Mem:           31G  2.1G   26G  120M  2.3G   28G</p>
+<p class="demo-ex">组合拳：subprocess 拿输出 → <span class="code fn">split</span>()（切割字符串，第 1 章 1.3 学过）按行分成列表 → 取第 2 行（lines[1]，第 1 行是表头）→ 再 split 按空格切 → 拿到数字。这套"调命令 +解析输出"就是 server-health-check 的核心动作。到这一步，Linux 的知识全部变成了 Python 的数据来源。</p>
+</div>
+<div class="warn">
+<p><span class="danger">⚠ 安全提醒：</span>用 subprocess 调命令时，命令列表里的参数<b>不要直接拼用户输入</b>（尤其是 rm、dd 这类危险命令）。永远用列表形式传参，别用字符串拼接——以后做 Web 服务时会懂，先种下这个习惯。</p>
+</div>
+
+<h3>11.2 易错点（这章的坑）</h3>
+<div class="box2">
+<p>① 命令写成字符串而不是列表（["df","-h"] 对，"df -h" 错）；② 忘 capture_output=True，拿不到输出；③ 忘 text=True，输出是字节串 b'...'；④ 忘判断 returncode，命令失败也不知道。</p>
+</div>
+
+<div class="box">
+<p><b>本章对比：subprocess vs 直接在 Shell 敲</b></p>
+<table>
+<tr><th style="width:30%">对象</th><th>特点 / 适用场景</th></tr>
+<tr><td>直接在 Shell 敲命令</td><td>一次性的手工操作；人盯着屏幕</td></tr>
+<tr><td class="code">subprocess.run()</td><td>脚本里自动执行命令、拿输出、做判断——巡检、批处理的骨架</td></tr></table>
+</div>
+
+<h3>11.3 章末作业 🌐</h3>
+<div class="box">
+<p>1. 用 Python 调 df -h，打印结果。</p>
+<p>2. 用 Python 调 free -h，只打印内存那一行。</p>
+<p>3. 用 returncode 判断：ls 一个存在和不存在的目录，分别打印"成功""失败"。</p>
+<p>4. 综合：调 df -h /，把 Use% 那列的数字抓出来（提示：split），超过 80 打印警告（用第 2 章的 if）。</p>
+</div>
+
+<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-7、6-8）；进阶场景 3（巡检雏形·王牌项目版本 0）；进阶场景 5（paramiko 远程版·选做）</p>
+<h3>11.4 这章你会了吗？</h3>
+<div class="quiz">
+<p>☐ 会写 run() 并拿到 stdout</p>
+<p>☐ 知道 capture_output 和 text 各管什么</p>
+<p>☐ 能说出 returncode 为 0 的含义</p>
+<p>☐ 能说出 subprocess 在运维里的地位（两条线合流的接口）</p>
+</div>
+<p class="note">📚 相关手册：df/free → 《Linux 入门》第 7 章；split → 《Python 内置函数手册》字符串十招。学完本书 → 开始《Python 练习册：基础篇》。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-13">附录 A · 章末作业参考答案（含思考过程）</h2>
+<p class="note">先自己做，再看答案。每道题答案分两部分："怎么做"（代码）+ "为什么这么做"（思考过程）。</p>
+
+<h3>第 0 章</h3>
+<p><b>作业（无代码）：</b>参考方向——① 自动化重复操作（批量改名、巡检）；② 调 API 拿数据（天气、监控指标）；③ 处理日志与数据（解析、告警）。写自己的三件事即可，无标准答案。</p>
+
+<h3>第 1 章</h3>
+<p><b>1. 自我介绍卡</b>：<span class="code">name = <span class="str">"小明"</span>; age = <span class="num">19</span>; hobby = <span class="str">"学技术"</span>; <span class="fn">print</span>(<span class="str">f"我叫<span class="param">{name}</span>，<span class="param">{age}</span>岁，喜欢<span class="param">{hobby}</span>"</span>)</span>。<span class="step">为什么</span>：变量让数据有了名字，f-string 负责把变量塞进句子。</p>
+<p><b>2. 两位数倒序</b>：<span class="code">num = <span class="num">37</span>; <span class="param">ge</span> = num % <span class="num">10</span>; <span class="param">shi</span> = num // <span class="num">10</span>; <span class="fn">print</span>(<span class="param">ge</span> * <span class="num">10</span> + <span class="param">shi</span>)</span>。<span class="step">为什么</span>：% 10 取个位（37 除 10 余 7），// 10 取十位（商 3），倒过来拼 = 7×10+3 = 73。</p>
+<p><b>3.</b> type(3.14) → float；len("linux") → 5。</p>
+<p><b>4.</b> 报错应为 TypeError: can only concatenate str (not "int") to str——类型不同不能相加。</p>
+
+<h3>第 2 章</h3>
+<p><b>1. 成绩分段</b>：input 读入 → int() 转整数 → if/elif/else 分档。<span class="step">为什么</span>：input 返回字符串，不转整数没法比大小；从上到下判断的顺序很关键（先 &gt;= 90 再 &gt;= 60，否则 95 会落进"及格"）。</p>
+<p><b>2. 乘法表</b>：外层 for i in range(1,10)，内层 for j in range(1, i+1)，打印 f"{j}×{i}={i*j}"。<span class="step">为什么</span>：内层范围到 i+1 让每行输出到 i 为止（三角形）。</p>
+<p><b>3. 猜数字</b>：secret = 随机或固定数；while True: 猜 = int(input(...)); count += 1; 相等 break。while True + break = "一直转，猜到为止"。<span class="step">为什么</span>：次数未知 → 用 while 不用 for。</p>
+<p><b>4.</b> for i in range(1, 101): if i % 7 == 0: print(i)。<span class="step">为什么</span>：% 取余为 0 = 整除。</p>
+
+<h3>第 3 章</h3>
+<p><b>1. 通讯录</b>：dict 存 名字→电话；查用 .get；加 = 赋值；删用 del 通讯录["名字"]。<span class="step">为什么</span>：按名找人用 dict 天然合适；get 防 KeyError。</p>
+<p><b>2. set 去重</b>：print(len(名单), len(set(名单)))。<span class="step">为什么</span>：len 前后对比直接显示重复人数。</p>
+<p><b>3.</b> lst[2:5] → [30, 40, 50]。<span class="step">为什么</span>：索引从 0 数，30 在位置 2；左闭右开所以结尾写 5。</p>
+<p><b>4.</b> for k, v in ports.items(): print(f"{k} 监听 {v} 端口")。<span class="step">为什么</span>：items() 一次拿出键和值，两个变量接。</p>
+
+<h3>第 4 章</h3>
+<p><b>1. 通讯录函数版</b>：def add_contact(d, name, phone): d[name] = phone。<span class="step">为什么</span>：重复操作打包成函数，主流程只剩调用，可读性大增。</p>
+<p><b>2. 计算器</b>：def div(a, b): if b == 0: return "除数不能为 0"; return a / b。<span class="step">为什么</span>：用 return 把结果交出去；除零要提前挡。</p>
+<p><b>3. check_usage</b>：def check_usage(p): if p &gt;= 90: return "红色告警" ... <span class="step">为什么</span>：返回字符串让调用方能继续处理（打印或写日志）。</p>
+<p><b>4.</b> 有 return 的函数赋值后 type 是计算结果类型；只有 print 的赋值后是 NoneType。<span class="step">为什么</span>：print 只展示不交出。</p>
+
+<h3>第 5 章</h3>
+<p><b>1. 工作目录报告</b>：for f in os.listdir("."): print(f, os.path.getsize <span class="out">（见手册第 6 组）</span>(f))。<span class="step">为什么</span>：listdir 给名字列表，getsize 拿大小，两个 os 工具一拼。</p>
+<p><b>2.</b> t = os.path.getmtime(f); print(f, time.strftime("%Y-%m-%d %H:%M", time.localtime(t)))。<span class="step">为什么</span>：getmtime 给时间戳（机器读），strftime 转成人读格式。</p>
+<p><b>3.</b> for i in [3,2,1]: print(i); time.sleep(1); print("出发")。<span class="step">为什么</span>：sleep 制造节奏。</p>
+<p><b>4.</b> argv[0] = 脚本名，argv[1:] = a b c。<span class="step">为什么</span>：argv 是"命令行切开后的完整列表"。</p>
+
+<h3>第 6 章</h3>
+<p><b>1.</b> json.dump(通讯录, f, ensure_ascii=False) 写；json.load(f) 读。<span class="step">为什么</span>：不带 s 管文件；ensure_ascii=False 防中文变 \uXXXX。</p>
+<p><b>2.</b> lines = 0; chars = 0; for line in f: lines += 1; chars += len(line.strip())。<span class="step">为什么</span>：逐行累计，strip 去掉换行符别算进去。</p>
+<p><b>3.</b> "w" 打开已存在的文件内容变空；"a" 保留原内容。<span class="step">为什么</span>：w = 覆盖（Linux 的 &gt;），a = 追加（&gt;&gt;）。</p>
+<p><b>4.</b> 读原文件内容 → 用 os.path.join 拼"日期_原名" → "w" 写新文件。<span class="step">为什么</span>：join 拼路径最稳，手拼斜杠会出错。</p>
+
+<h3>第 7 章</h3>
+<p><b>1.</b> try: 读 JSON except FileNotFoundError: print(友好提示); data = {}。<span class="step">为什么</span>：指定异常捕获，其他错误照常报。</p>
+<p><b>2.</b> def safe_div(a, b): try: return a / b except ZeroDivisionError: return "除数不能为 0"。<span class="step">为什么</span>：把错误变成返回值，调用方不用 try。</p>
+<p><b>3.</b> 对照 7.3 表：FileNotFoundError / KeyError / ValueError 三种最后一行各不相同。<span class="step">为什么</span>：先看最后一行 = 最快定位。</p>
+<p><b>4.</b> 无文件 → except 分支；有文件 → try 分支。两条路都走通 = 异常处理写对了。</p>
+
+<h3>第 8 章</h3>
+<p><b>1.</b> data = requests.get(url, timeout=10).json(); print(data["current_weather"]["temperature"])。<span class="step">为什么</span>：get → json() → 层层取值。</p>
+<p><b>2.</b> 经纬度变量化 + f-string 打印。<span class="step">为什么</span>：变量化后换城市只改两个数。</p>
+<p><b>3.</b> 参数传 abc 会得到 400 或 JSON 解析错误。<span class="step">为什么</span>：状态码/报错告诉我们"请求本身不合法"。</p>
+<p><b>4.</b> except requests.exceptions.RequestException: print(友好提示)。<span class="step">为什么</span>：网络错误种类多，总称类一把接住。</p>
+
+<h3>第 9 章</h3>
+<p><b>1.</b> add_argument("a")、add_argument("op")、add_argument("b") 三个位置参数，if 判断 op 再运算。<span class="step">为什么</span>：位置参数按敲的顺序进 args。</p>
+<p><b>2.</b> add_argument("cmd")；if args.cmd == "add": ... elif "find": ... <span class="step">为什么</span>：一个位置参数当命令名，if 分支分发——这就是"子命令"的雏形。</p>
+<p><b>3.</b> add_argument("--threshold", type=int, default=80)。<span class="step">为什么</span>：可选参数配默认值 = 不传也能跑。</p>
+<p><b>4.</b> --help 自动列出 usage、参数表。argparse 与 Linux --help 同源。</p>
+
+<h3>第 10 章</h3>
+<p><b>1.</b> logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")；检查完 logging.info(f"使用率 {usage}%")。<span class="step">为什么</span>：basicConfig 全局配置一次，之后随意记。</p>
+<p><b>2.</b> basicConfig 加 filename="app.log"。<span class="step">为什么</span>：日志落文件 = 可回查。</p>
+<p><b>3.</b> level=DEBUG 会多出 debug 行；level=ERROR 只显示 error。<span class="step">为什么</span>：级别是过滤网，拦掉更低级。</p>
+<p><b>4.</b> except Exception as e: logging.error(f"失败：{e}")。<span class="step">为什么</span>：错误信息进日志，以后排查有据。</p>
+
+<h3>第 11 章</h3>
+<p><b>1.</b> r = subprocess.run(["df", "-h"], capture_output=True, text=True); print(r.stdout)。<span class="step">为什么</span>：capture_output 抓输出，text 转字符串。</p>
+<p><b>2.</b> lines = r.stdout.split("\n"); print(lines[1])。<span class="step">为什么</span>：第 1 行是表头，数据从第 2 行起。</p>
+<p><b>3.</b> returncode == 0 → "成功"，否则 "失败"。<span class="step">为什么</span>：0 成功非 0 失败，比读输出文字可靠。</p>
+<p><b>4.</b> 取 lines[1].split()[-2]（倒数第二列是 Use% 值，注意带 % 号要先去掉再比较）。<span class="step">为什么</span>：split（第 1 章学过）后按位置取列；带 % 号不能直接比大小，参考 tr -d 的思路处理。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-14">附录 B · 术语表（中英对照）</h2>
+<table>
+<tr><th style="width:28%">术语</th><th>含义</th></tr>
+<tr><td>交互式模式</td><td>敲一行出一行结果的模式（提示符 &gt;&gt;&gt;）</td></tr>
+<tr><td>脚本（.py 文件）</td><td>存成文件整体运行的代码，可保存可复用</td></tr>
+<tr><td>变量 variable</td><td>贴标签的盒子，装数据</td></tr>
+<tr><td>类型 type</td><td>盒子装的什么货（int/float/str 等）</td></tr>
+<tr><td>字符串 string</td><td>文字，引号包着的一切</td></tr>
+<tr><td>f-string</td><td>带 f 的字符串，{变量} 塞值</td></tr>
+<tr><td>整除 // 与取余 %</td><td>商去小数 / 余数</td></tr>
+<tr><td>布尔值 boolean</td><td>True / False，条件的答案</td></tr>
+<tr><td>缩进 indent</td><td>行首空格，Python 的"括号"</td></tr>
+<tr><td>循环 loop</td><td>for（知道次数）/ while（不知道次数）</td></tr>
+<tr><td>break / continue</td><td>跳出循环 / 跳过本轮</td></tr>
+<tr><td>列表 list</td><td>一排盒子，索引从 0 数，可增删改</td></tr>
+<tr><td>切片 slice</td><td>[a:b] 取一段，左闭右开</td></tr>
+<tr><td>字典 dict</td><td>键值对，按名找值</td></tr>
+<tr><td>元组 tuple</td><td>不可修改的列表</td></tr>
+<tr><td>集合 set</td><td>去重机，不保顺序</td></tr>
+<tr><td>函数 function</td><td>打包好的可复用代码块（def）</td></tr>
+<tr><td>参数 argument</td><td>函数/命令的输入</td></tr>
+<tr><td>return 返回</td><td>把结果交出去（区别于 print 展示）</td></tr>
+<tr><td>作用域 scope</td><td>变量有效的区域</td></tr>
+<tr><td>模块 module / 导入 import</td><td>工具箱 / 搬工具箱</td></tr>
+<tr><td>标准库</td><td>Python 自带的工具箱集合（os、time、json...）</td></tr>
+<tr><td>异常 exception</td><td>程序运行时的错误</td></tr>
+<tr><td>Traceback</td><td>报错时打印的调用链，从下往上读</td></tr>
+<tr><td>try / except</td><td>尝试 / 接住错误</td></tr>
+<tr><td>finally</td><td>无论成败都执行的收尾块</td></tr>
+<tr><td>HTTP 请求/响应</td><td>向网址要数据 / 对方返回数据</td></tr>
+<tr><td>状态码 status code</td><td>200 成功、404 不存在、500 服务器错</td></tr>
+<tr><td>超时 timeout</td><td>等多久无响应算失败</td></tr>
+<tr><td>命令行参数</td><td>敲命令时传入的参数（argparse 管理）</td></tr>
+<tr><td>日志级别</td><td>DEBUG &lt; INFO &lt; WARNING &lt; ERROR</td></tr>
+<tr><td>返回码 returncode</td><td>命令成绩单：0 成功，非 0 失败</td></tr>
+<tr><td>子进程 subprocess</td><td>Python 调系统命令的接口</td></tr>
+<tr><td>stdout</td><td>命令的标准输出（抓回来当数据）</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-15">附录 C · 学习路线图（第 0~11 章共 12 章顺序 + 每章耗时）</h2>
+<table>
+<tr><th style="width:36%">章节</th><th style="width:18%">耗时</th><th>学完的产出 / 里程碑</th></tr>
+<tr><td>第 0 章 Python 与 AI 运维的关系</td><td>1h</td><td>第一行代码</td></tr>
+<tr><td>第 1 章 print、变量、类型</td><td>1.5h</td><td>自我介绍卡、两位数倒序</td></tr>
+<tr><td>第 2 章 if、for、while</td><td>2h</td><td>成绩分段、猜数字</td></tr>
+<tr><td>第 3 章 list、dict、tuple、set</td><td>2.5h</td><td>通讯录小程序</td></tr>
+<tr><td>第 4 章 def、参数、返回值</td><td>2h</td><td>通讯录函数版、计算器</td></tr>
+<tr><td>第 5 章 import、os、time</td><td>1.5h</td><td>工作目录报告</td></tr>
+<tr><td>⭐ 检查点①</td><td>—</td><td>学完第 5 章后，能独立完成第 5 章全部章末作业和自测清单（逐项运行、逐项打勾）；这就是本书的第一个基础检查点。</td></tr>
+<tr><td>第 6 章 open/with、json</td><td>2h</td><td>通讯录存 JSON</td></tr>
+<tr><td>第 7 章 try/except/finally</td><td>1.5h</td><td>⭐ 检查点②：带 try/except 的脚本</td></tr>
+<tr><td>第 8 章 requests</td><td>2h</td><td>天气查询器雏形（脚本 2 核心）</td></tr>
+<tr><td>第 9 章 argparse</td><td>1.5h</td><td>python3 weather.py 杭州</td></tr>
+<tr><td>第 10 章 logging</td><td>1h</td><td>带日志的脚本</td></tr>
+<tr><td>第 11 章 subprocess</td><td>1.5h</td><td>⭐ 通往 server-health-check 的接口</td></tr>
+<tr><td><b>合计</b></td><td><b>20.5h</b></td><td>学完接《Python 练习册：基础篇》</td></tr>
+</table>
+<p class="note">学习顺序：本书在 Linux 三连之后开始。两件成品脚本：① 批量文件重命名（第 5、6 章知识）② 天气查询器（第 8、9 章知识）——练习册进阶篇会把它们作为收尾项目。</p>
+<div class="newpage"></div>
+<h2 id="toc-16">附录 D · 函数与模块速查</h2>
+<table><tr><th>类别</th><th>常用内容</th><th>用途</th></tr><tr><td>输入输出</td><td><span class="code">print / input</span></td><td>显示信息、读取输入</td></tr><tr><td>类型与序列</td><td><span class="code">type / int / str / len / range / enumerate</span></td><td>检查、转换、计数、范围和编号遍历</td></tr><tr><td>数据结构</td><td><span class="code">list / dict / tuple / set</span></td><td>保存和组织数据</td></tr><tr><td>文件与 JSON</td><td><span class="code">open / with / json.load / json.dump</span></td><td>读写文本和结构化数据</td></tr><tr><td>自动化模块</td><td><span class="code">os / time / requests / argparse / logging / subprocess</span></td><td>路径、时间、接口、参数、日志和系统命令</td></tr></table>
+<p class="note">需要按函数查用法时，查《Python 内置函数手册》对应小节。</p>
+</body>
+</html>

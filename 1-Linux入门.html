@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux入门（教科书版）</title>
+<style>
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; text-align: justify; }
+td, th, pre, .toc-row, h1, h2, h3 { text-align: left; }
+h1 { font-size: 18pt; color: #0a6b1e; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #0a6b1e; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #0a6b1e; margin: 10px 0 4px; border-left: 4px solid #0a6b1e; padding-left: 6px; }
+p { margin: 3px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.cmd { color: #0a6b1e; font-weight: bold; }
+.out { color: #444; }
+.opt { color: #b45309; }
+.danger { color: #c00000; font-weight: bold; }
+.keyword { color: #003a8c; font-weight: bold; }
+.prompt { color: #0a6b1e; }
+.section-head { font-size: 12pt; font-weight: bold; color: #0a6b1e; background: #e8f5e9; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+th { background: #0a6b1e; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.box { border: 1.5px solid #0a6b1e; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #f7fdf7; }
+.box2 { border: 1.5px dashed #b45309; border-radius: 4px; padding: 8px 10px; margin: 8px 0; }
+.warn { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fff5f5; }
+.warn .wtitle { color: #c00000; font-weight: bold; }
+.demo { border-left: 4px solid #003a8c; padding: 4px 8px; margin: 6px 0; background: #f7f9ff; }
+.demo .dtitle { font-weight: bold; color: #003a8c; font-size: 10.5pt; }
+.demo-in, .demo-out, .demo-ex { font-size: 9.5pt; margin: 2px 0; }
+.demo-in .prompt { color: #0a6b1e; }
+.demo-out { color: #444; }
+.demo-ex { color: #003a8c; font-size: 9.5pt; }
+.hw { border: 1.5px solid #003a8c; border-radius: 4px; padding: 8px 10px; margin: 8px 0; }
+.hw .htitle { font-weight: bold; color: #003a8c; }
+.quiz { border: 1.5px solid #6b21a8; border-radius: 4px; padding: 8px 10px; margin: 8px 0; }
+.quiz .qtitle { font-weight: bold; color: #6b21a8; }
+.newpage { page-break-before: always; }
+.rule { background:#fffbe6; border-left: 4px solid #b45309; padding: 4px 8px; margin: 5px 0; font-size: 10.5pt; }
+.footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+.step { font-weight: bold; color: #0a6b1e; }
+
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 6px 12px; margin: 6px 0; }
+.toc-title { background: none !important; color: #0a6b1e; padding: 0 !important; margin: 8px 0 4px !important; border-radius: 0 !important; }
+.toc a { color: #222; text-decoration: none; }
+.toc-row { position: relative; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+.toc-row a { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.toc-row .tn { color: #0a6b1e; font-weight: bold; display: inline-block; min-width: 68px; }
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+a { color: #003a8c; text-decoration: none; }
+@media print {
+  a { color: #222; text-decoration: none; }
+  .toc-row a { display: none; }
+  .toc-row { padding: 2.5px 0; }
+}
+
+.param { color: #6b21a8; font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.ptight { line-height: 1.22; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 入门（教科书版）</h1>
+<p class="note">主课本 · 建议按顺序学习 · 与《Linux 指令练习册（基础篇 / 进阶篇）》配套使用</p>
+
+<div class="box">
+<p><b>本书是什么：</b>一本从零开始的 Linux 教科书。每个命令都先讲"是什么、为什么存在"，再给<b>输入 → 输出 → 解读</b>三段式示范，最后布置作业。</p>
+<p><b>配套关系：</b>先学完本书一章，再翻开练习册做对应阶段的题。<b>顺序不能反</b>——练习册是检验，本书是学习。</p>
+</div>
+
+<div class="newpage"></div>
+<h2 class="toc-title">📑 目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">使用说明</span><span class="tdesc">配色约定 · 环境要求 · 安全红线</span><a href="#toc-0"></a></div>
+<div class="toc-row"><span class="tn">学习路线图</span><span class="tdesc">章 → 练习册映射表</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">第 0 章</span><span class="tdesc">开篇：终端与命令（提示符拆解、三件套、--help 自救）</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">第 1 章</span><span class="tdesc">目录树与路径（一切皆文件、绝对/相对路径）</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">第 2 章</span><span class="tdesc">文件与目录操作（touch/mkdir/cp/mv/rm）</span><a href="#toc-4"></a></div>
+<div class="toc-row"><span class="tn">第 3 章</span><span class="tdesc">查看与搜索（cat/less/head/tail、grep/find、diff）</span><a href="#toc-5"></a></div>
+<div class="toc-row"><span class="tn">第 4 章</span><span class="tdesc">管道与重定向（| &gt; &gt;&gt;、sort/uniq、awk 入门）</span><a href="#toc-6"></a></div>
+<div class="toc-row"><span class="tn">第 5 章</span><span class="tdesc">用户与权限（多用户模型、rwx、chmod 数字算法）</span><a href="#toc-7"></a></div>
+<div class="toc-row"><span class="tn">第 6 章</span><span class="tdesc">进程管理（ps aux、信号、优雅 vs 强杀、fuser）</span><a href="#toc-8"></a></div>
+<div class="toc-row"><span class="tn">第 7 章</span><span class="tdesc">磁盘与文件系统（df/du、挂载、fallocate/dd）</span><a href="#toc-9"></a></div>
+<div class="toc-row"><span class="tn">第 8 章</span><span class="tdesc">网络命令（ip/ping/ss/nc/curl、四层排查法）</span><a href="#toc-10"></a></div>
+<div class="toc-row"><span class="tn">第 9 章</span><span class="tdesc">apt 包管理（update/install/search、锁报错）</span><a href="#toc-11"></a></div>
+<div class="toc-row"><span class="tn">第 10 章</span><span class="tdesc">systemctl 与服务（status/start/enable、journalctl）</span><a href="#toc-12"></a></div>
+<div class="toc-row"><span class="tn">第 11 章</span><span class="tdesc">环境变量（PATH、export、alias、source）</span><a href="#toc-13"></a></div>
+<div class="toc-row"><span class="tn">第 12 章</span><span class="tdesc">归档与压缩（tar czvf/xzvf、gzip、zip）</span><a href="#toc-14"></a></div>
+<div class="toc-row"><span class="tn">第 13 章</span><span class="tdesc">Shell 脚本基础（shebang、变量、if/for、crontab）</span><a href="#toc-15"></a></div>
+<div class="toc-row"><span class="tn">附录 A</span><span class="tdesc">章末作业检查点与自测答案（84 题）</span><a href="#toc-16"></a></div>
+<div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表（33 条）</span><a href="#toc-17"></a></div>
+<div class="toc-row"><span class="tn">附录 C</span><span class="tdesc">命令速查总表（按章分组）</span><a href="#toc-18"></a></div>
+<div class="toc-row"><span class="tn">附录 D</span><span class="tdesc">章 ↔ 练习册对应表（新命令对齐）</span><a href="#toc-19"></a></div>
+</div>
+<p class="note">屏幕阅读：点击条目跳转；打印阅读：按章节标题翻页定位。打印页码：打印时勾选浏览器"页眉和页脚"，每页自动显示页码（HTML 无法用 CSS 直接生成打印页码，这是浏览器限制）。建议先"另存为 PDF"再打印。</p>
+
+<h2 id="toc-0">使用说明</h2>
+<p><b>配色约定</b>（全书一致，共 6 色）：</p>
+<table class="long-table"><thead><tr><th style="width:25%">颜色</th><th>含义</th></tr></thead><tbody>
+<tr><td><span class="cmd code">绿色粗体</span></td><td>命令本身（要敲进去的）</td></tr>
+<tr><td><span class="out">灰色</span></td><td>命令的输出（屏幕上会显示的）</td></tr>
+<tr><td><span class="param">深紫</span></td><td>参数、文件名（命令的宾语，不是输出）</td></tr>
+<tr><td><span class="keyword">蓝色</span></td><td>解读、分析（帮你理解"为什么"）</td></tr>
+<tr><td><span class="danger">红色</span></td><td>危险警告（必须看）</td></tr>
+<tr><td><span class="opt">橙色</span></td><td>易错点、坑</td></tr>
+</tbody></table>
+<div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、挂载或日志时，先记录原状态；操作中逐步核对对象；操作后对照输出、数量、状态和退出码验证；结束后恢复配置、停止练习进程、卸载实验挂载并再次检查现场。异常时保留原始报错。</div>
+<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 🌐 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。</p>
+<p class="note">📔 学习日志约定：每天把敲过的命令、报错与心得记进学习日志——这是检查点的依据。</p>
+<p class="note">安全红线：实验目录只用 <span class="code">~/lab</span> 和 <span class="code">/tmp</span>；<span class="code">/tmp</span> 是临时目录，但何时清理由发行版、挂载方式和 systemd-tmpfiles 等系统策略决定，<b>重启后不保证全部清空</b>；<span class="code cmd">rm -rf</span> 永远先 <span class="code cmd">ls</span> 看清楚；涉及 <span class="code cmd">sudo</span> 的命令只在练习机上执行。</p>
+
+<h2 id="toc-1">学习路线图（章 → 练习册）</h2>
+<p class="note">⏱️ 全书 14 章约 22~30 小时（每章约 1.5~2h）。</p>
+<table>
+<tr><th style="width:40%">本书章节</th><th>学完去做</th></tr>
+<tr><td>第 0~2 章（终端、目录树、文件操作）</td><td>基础篇 阶段 1</td></tr>
+<tr><td>第 3~4 章（查看搜索、管道重定向）</td><td>基础篇 阶段 2</td></tr>
+<tr><td>第 5 章（用户与权限）</td><td>基础篇 阶段 3</td></tr>
+<tr><td>第 6~7 章（进程、磁盘）</td><td>基础篇 阶段 4</td></tr>
+<tr><td>第 3~4、12 章（查找、管道、归档）</td><td>基础篇 阶段 5</td></tr>
+<tr><td>第 3、8、10 章（grep、网络、服务）</td><td>进阶篇 场景 1</td></tr>
+<tr><td>第 7、12 章（磁盘、归档）</td><td>进阶篇 场景 2</td></tr>
+<tr><td>第 8 章（网络）</td><td>进阶篇 场景 3</td></tr>
+<tr><td>第 6、10 章（进程、服务）</td><td>进阶篇 场景 4</td></tr>
+<tr><td>第 13 章（Shell 脚本）</td><td>进阶篇 场景 5</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-2">第 0 章 · 开篇：终端与命令</h2>
+<p><b>本章目标</b>（学完能回答）：</p>
+<p>① Linux 是什么、为什么运维要学它；② 能打开终端并看懂提示符；③ 会使用"命令 + 选项 + 参数"三件套；④ 会用 <span class="code cmd">--help</span> 自救。</p>
+<p><b>本章新命令</b>：<span class="code cmd">pwd</span> <span class="code cmd">ls</span> <span class="code cmd">echo</span> <span class="code cmd">man</span> <span class="code cmd">clear</span> <span class="code cmd">history</span> <span class="code cmd">exit</span> <span class="code cmd">whoami</span>（选项 <span class="code opt">--help</span> 见 0.4 节）</p>
+
+<h3>0.1 Linux 是什么</h3>
+<p>Linux 是一个<span class="keyword">操作系统</span>——和你电脑里的 Windows 是同类，负责管理内存、硬盘、CPU 这些硬件，让程序能在上面跑。</p>
+<p>Linux 在服务器和云计算环境中使用广泛。它具有<b>开源、稳定、灵活、便于自动化</b>等特点，所以 Linux 是运维工作中的重要基础。</p>
+<p>你听到的 Ubuntu、CentOS、Debian 叫<span class="keyword">发行版</span>——同一个 Linux 内核，各家包装不同。本书用 <b>Ubuntu</b>（最流行、资料最多）。</p>
+
+<h3>0.2 打开终端</h3>
+<p>终端（Terminal）是你和 Linux 对话的窗口。Ubuntu 里按 <span class="code">Ctrl + Alt + T</span> 打开。你看到的这一行就是<span class="keyword">提示符</span>：</p>
+<pre><span class="prompt">student@ubuntu:~$</span></pre>
+<div class="demo">
+<p class="dtitle">提示符逐段拆解</p>
+<p class="demo-in"><span class="prompt">student</span>@<span class="prompt">ubuntu</span>:<span class="prompt">~</span><span class="prompt">$</span></p>
+<p class="demo-ex"><b>student</b>=当前用户名；<b>@</b>=在；<b>ubuntu</b>=这台机器的主机名；<b>:</b>=分隔符；<b>~</b>=当前在家目录；<b>$</b>=普通用户（如果是 <b>#</b> 说明是管理员 root）。看到这串东西出现，说明终端准备好了，在等你敲命令。</p>
+</div>
+
+<h3>0.3 命令三件套</h3>
+<p>Linux 命令的通用结构，是全书最重要的规律：</p>
+<div class="rule">📌 <b>命令 = 动词 + 选项 + 参数</b>：命令说"做什么"，选项说"怎么做"（改变行为），参数说"对谁做"（目标对象）。</div>
+<pre><span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">-l</span> <span class="param">/home</span>
+<span class="note">ls(动词：列出) -l(选项：以详细格式) /home(参数：列这个目录)</span></pre>
+<p><b>选项的规律：</b>短选项用单横线 <span class="code">-l</span>，长选项用双横线 <span class="code">--all</span>。多个短选项可合并：<span class="code">ls -la</span> = <span class="code">ls -l -a</span>。</p>
+
+<h3>0.4 自救三招</h3>
+<p>任何命令卡住了，按顺序试这三招：</p>
+<table>
+<tr><th style="width:25%">招</th><th>怎么用</th></tr>
+<tr><td><span class="code cmd">命令 --help</span></td><td>最常用。每个命令都自带简短说明，如 <span class="code cmd">ls --help</span></td></tr>
+<tr><td><span class="code cmd">man 命令</span></td><td>完整说明书（manual），按 <span class="code">q</span> 退出，<span class="code">/关键词</span> 搜索</td></tr>
+<tr><td><b>外部扩展</b>：搜索引擎</td><td>断网时除外；联网时可把报错原文复制去搜，前面加 "ubuntu"。主线靠上面两行 + 第 8、9 册的报错手册自查</td></tr>
+</table>
+
+<h3>0.5 键盘生存技巧（第一天就背）</h3>
+<table>
+<tr><th style="width:25%">按键</th><th>作用</th></tr>
+<tr><td><span class="code">Tab</span></td><td>自动补全：敲一半按 Tab，能补命令、补文件名</td></tr>
+<tr><td><span class="code">↑ / ↓</span></td><td>翻历史命令（想不起昨天敲过什么就按 ↑）</td></tr>
+<tr><td><span class="code">Ctrl + C</span></td><td>中断当前程序（卡住了按这个）</td></tr>
+<tr><td><span class="code">Ctrl + L</span></td><td>清屏（同 <span class="code cmd">clear</span>）</td></tr>
+<tr><td><span class="code">Ctrl + A / E</span></td><td>光标跳到行首 / 行尾</td></tr>
+<tr><td><span class="code">Ctrl + R</span></td><td>搜索历史命令</td></tr>
+<tr><td><span class="code">Ctrl + D</span></td><td>退出当前终端（同 <span class="code cmd">exit</span>）</td></tr>
+</table>
+
+<h3>0.6 示范（三段式）</h3>
+<div class="demo">
+<p class="dtitle">示范 1：我在哪、我是谁</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">pwd</span></p>
+<p class="demo-out">/home/&lt;你的真实用户名&gt; <span class="out">（示例输出：实际环境不同，以你机器为准）</span></p>
+<p class="demo-ex"><b>pwd</b> = Print Working Directory（打印工作目录）。任何时候迷路了，先敲它看自己在哪。</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">whoami</span></p>
+<p class="demo-out">student <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex"><b>whoami</b> = 我是谁。和提示符里 @ 前面的名字一致。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：让终端说话</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> "hello linux"</p>
+<p class="demo-out">hello linux</p>
+<p class="demo-ex"><b>echo</b> = 回声，把后面的话原样打印出来。以后写脚本、看变量全靠它。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：自救实战</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">--help</span></p>
+<p class="demo-out">Usage: ls [OPTION]... [FILE]...
+List information about the FILEs...
+  -l  use a long listing format
+  -a  do not ignore entries starting with .</p>
+<p class="demo-ex"><b>读帮助的两条规则</b>：<span class="code">[ ]</span> 括起来的 = <b>可选项</b>（不写也行）；<span class="code">...</span> = <b>可重复多个</b>。这行读作"用法：ls、可选选项、可重复的文件名"。</p>
+<p class="demo-ex">看不懂英文没关系——你现在只需要认出 <b>-l</b> 和 <b>-a</b> 两个选项的名字。配合《英语单词手册》慢慢积累。</p>
+</div>
+
+<h3>0.7 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span>命令拼错会得到 <span class="danger">command not found</span>。别慌，不是电脑坏了，是"系统不认识你敲的这个词"——先检查拼写，再想"这个软件装了吗"（第 9 章）、"命令在不在 PATH 里"（第 11 章）。</p>
+<p><span class="opt">坑 2：</span>Linux 严格区分大小写。<span class="code cmd">LS</span> ≠ <span class="code cmd">ls</span>，前者报错。</p>
+<p><span class="opt">坑 3：</span>提示符被程序"占住"了？看最后一行有没有命令在跑，按 <span class="code">Ctrl + C</span> 或 <span class="code">q</span> 退出来。</p>
+</div>
+
+<div class="hw">
+<p class="htitle">✏️ 章末作业（答案见附录 A）</p>
+<p>1. 打开终端，用 <span class="code cmd">pwd</span> 和 <span class="code cmd">whoami</span> 各敲一遍，把输出抄进学习日志。</p>
+<p>2. 用 <span class="code cmd">ls --help</span> 找出 3 个选项，并说出各自作用。</p>
+<p>3. 敲 <span class="code cmd">history</span>，看你今天敲过的所有命令；用 <span class="code">↑</span> 键调出上一条命令再执行一次。</p>
+<p>4. 故意敲一个拼错的命令（如 <span class="code cmd">pws</span>），把报错原文记下来。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测（答案见附录 A）</p>
+<p>1. 提示符 <span class="code">student@ubuntu:~$</span> 中，<span class="code">$</span> 表示什么？如果换成 <span class="code">#</span> 说明什么？</p>
+<p>2. 判断：<span class="code">ls -l /home</span> 中，<span class="code">ls</span> 是选项，<span class="code">-l</span> 是命令，<span class="code">/home</span> 是参数。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：学完本章先做基础篇「阶段 1」里的 1-1、1-2。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-3">第 1 章 · 目录树与路径</h2>
+<p><b>本章目标：</b>① 理解"一切皆文件"和目录树；② 说出三大重要目录的用途；③ 会区分绝对路径与相对路径；④ 会用 <span class="code cmd">cd</span> 在树里移动。</p>
+<p><b>本章新命令</b>：<span class="code cmd">pwd</span> <span class="code cmd">ls</span> <span class="code cmd">cd</span></p>
+
+<h3>1.1 目录树：一棵倒过来的树</h3>
+<p>Linux 把硬盘上所有东西组织成<span class="keyword">一棵树</span>，树根是一个斜杠 <span class="code">/</span>（读作"根目录"）。文件、文件夹（Linux 里叫"目录"）、甚至鼠标硬盘这些设备，全部挂在这棵树上——这就是著名的<span class="keyword">"一切皆文件"</span>。</p>
+<pre><span class="code">/  ← 树根，一切从这里开始
+├── home/     家目录（每个用户的地盘，你的东西都在这）
+│   └── &lt;你的用户名&gt;/  你的家（提示符里的 ~ 就是指这里）
+├── etc/      配置文件（改设置来这里）
+├── var/log/  日志（排查问题来这里）
+├── tmp/      临时文件；是否在重启后清理由系统配置决定，不能保证全部清空
+├── usr/      已安装的软件
+└── bin/      命令的住处</span></pre>
+<div class="rule">📌 记住三个排障位置：<b>/etc</b> 找配置、<b>/var/log</b> 找日志、<b>/home</b> 找你的东西。</div>
+
+<h3>1.2 两种路径写法</h3>
+<table>
+<tr><th style="width:20%"></th><th style="width:45%">写法</th><th>说明</th></tr>
+<tr><td><b>绝对路径</b></td><td><span class="code">/home/&lt;你的真实用户名&gt;/notes.md</span></td><td>从树根 <span class="code">/</span> 出发写全称，走到哪都不会认错</td></tr>
+<tr><td><b>相对路径</b></td><td><span class="code">notes.md</span> 或 <span class="code">../notes.md</span></td><td>从当前位置出发。到达目标的方式取决于"你现在站在哪"</td></tr>
+<tr><td>特殊符号</td><td><span class="code">~</span>（我的家） <span class="code">.</span>（当前目录） <span class="code">..</span>（上一级）</td><td>三个最常用的"快捷路径"</td></tr>
+</table>
+
+<h3>1.3 示范（三段式）</h3>
+<div class="demo">
+<p class="dtitle">示范 1：列出家里有什么</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">-l</span> <span class="param">~</span></p>
+<p class="demo-out">total 12
+drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
+-rw-r--r-- 1 &lt;用户名&gt; &lt;用户名&gt;  123 Aug 15 09:00 hello.py <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex">每一行是一个条目。<b>第 1 列</b>第一个字符：<b>d</b>=目录，<b>-</b>=普通文件（后面的 rwx 权限位第 5 章细讲）。<b>属主 属组</b>。<b>4096/123</b>=大小（字节）。最后是<b>修改时间</b>和<b>名字</b>。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：在树里移动</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">/etc</span> <span class="note"># 去 /etc（绝对路径）</span>
+<span class="prompt">$</span> <span class="cmd">pwd</span>
+<span class="demo-out">/etc</span>
+<span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">..</span> <span class="note"># 回上一级（相对路径）</span>
+<span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">~</span> <span class="note"># 回家（等价 cd /home/&lt;你的真实用户名&gt;，以 whoami 为准）</span>
+<span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">-</span> <span class="note"># 回到刚才的目录（来回切换神器）</span></p>
+<p class="demo-ex"><b>cd</b> = change directory（切换目录）。记住四个快捷：<b>cd ~</b> 回家、<b>cd ..</b> 上一级、<b>cd -</b> 回上一个、<b>cd</b>（裸敲）也是回家。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 3：看到隐藏文件</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">-a</span> <span class="param">~</span></p>
+<p class="demo-out">.  ..  .bashrc  .profile  notes  hello.py</p>
+<p class="demo-ex">以 <b>.</b> 开头的名字是<b>隐藏文件</b>（如 .bashrc 配置文件，第 11 章会用到）。<span class="code">ls</span> 默认不显示它们，加 <span class="opt">-a</span> 才显示。<b>.</b> 和 <b>..</b> 就是"当前目录"和"上一级"本身。</p>
+</div>
+
+<h3>1.4 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span><span class="code cmd">cd</span> 后面必须接目录。敲 <span class="code">cd hello.py</span> 会报 <span class="danger">Not a directory</span>。</p>
+<p><span class="opt">坑 2：</span>Linux 大小写敏感：<span class="code">Notes</span> 和 <span class="code">notes</span> 是两个不同的东西。</p>
+<p><span class="opt">坑 3：</span>文件名里有空格，要用引号包住：<span class="code">cd "my notes"</span>。新手建议文件名永远别用空格，用下划线。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 用 <span class="code cmd">cd</span> 走到 <span class="code">/etc</span> 看一眼，再 <span class="code cmd">cd</span> <span class="code">~</span> 回家——两步各用一次 <span class="code cmd">pwd</span>，把输出记下来。</p>
+<p>2. 从 <span class="code">/tmp</span> 出发，分别用绝对路径和相对路径进入 <span class="code">~/lab/ch1</span>。</p>
+<p>3. 用 <span class="code">ls -a ~</span> 找出 3 个隐藏文件，把名字记下来。</p>
+<p>4. 用 <span class="code">cd /</span> 到树根，用 <span class="code">ls</span> 看根下有哪些目录，找找 /home、/etc、/var 在哪。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 绝对路径和相对路径的核心区别是什么？</p>
+<p>2. 判断：<span class="code">cd ..</span> 永远回到"上一个待过的目录"。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 1-1、1-2、1-3。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-4">第 2 章 · 文件与目录操作</h2>
+<p><b>本章目标：</b>① 会建文件和目录；② 会复制、移动、改名；③ 理解删除的不可逆；④ 会用 <span class="code cmd">mkdir -p</span> 连级创建。</p>
+<p><b>本章新命令</b>：<span class="code cmd">touch</span> <span class="code cmd">mkdir</span> <span class="code cmd">cp</span> <span class="code cmd">mv</span> <span class="code cmd">rm</span> <span class="code cmd">rmdir</span></p>
+
+<h3>2.1 创建：touch 和 mkdir</h3>
+<p><span class="code cmd">touch</span> 造<b>文件</b>；<span class="code cmd">mkdir</span> 造<b>目录</b>（make directory）。touch 本义是"碰一下"（更新文件时间戳），文件不存在时顺手就造一个——这个双关用法要记住。</p>
+<p><span class="opt">-p</span> 是 mkdir 最常用选项：<b>p</b>arents（父级），允许连级创建不存在的中间目录。</p>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 1：连级建目录</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab/ch2/a/b/c</span>
+<span class="prompt">$</span> <span class="cmd">ls</span> <span class="param">~/lab/ch2</span>
+<span class="demo-out">a</span>
+<span class="prompt">$</span> <span class="cmd">touch</span> <span class="param">~/lab/ch2/note1.txt ~/lab/ch2/note2.txt</span>
+<span class="prompt">$</span> <span class="cmd">ls</span> <span class="param">~/lab/ch2</span>
+<span class="demo-out">a  note1.txt  note2.txt</span></p>
+<p class="demo-ex">不带 <span class="opt">-p</span> 时，如果中间的 a、b 不存在，mkdir 会报错；带 <span class="opt">-p</span> 则一次把整条链建好。touch 可以一次造多个文件（空格隔开）。</p>
+</div>
+
+<h3>2.2 复制与移动：cp 和 mv</h3>
+<table>
+<tr><th style="width:18%">命令</th><th>作用</th><th>关键点</th></tr>
+<tr><td><span class="code cmd">cp 源 目标</span></td><td>复制（copy）</td><td>复制<b>目录</b>必须加 <span class="opt">-r</span>（递归）</td></tr>
+<tr><td><span class="code cmd">mv 源 目标</span></td><td>移动 / 改名（move）</td><td>目标路径和源在同一目录 = 改名；跨目录 = 搬家</td></tr>
+</table>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 2：复制目录</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab/ch2/sub</span> <span class="out"># 先自造一个目录（空目录也能跑完整示范）</span>
+<span class="prompt">$</span> <span class="cmd">cp</span> <span class="param">~/lab/ch2</span> <span class="param">~/lab/ch2-copy</span>
+<span class="demo-out">cp: -r not specified; omitting directory '/home/你的真实用户名/lab/ch2'（shell 已把 ~ 展开成绝对路径）</span>
+</p><p class="demo-ex"><b>报错了。</b>cp 默认只复制文件；复制目录必须带 <span class="opt">-r</span>。这就是"先看报错再改正"的标准学习流程。（报错里显示的是你机器上的真实绝对路径，不是波浪号。）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">cp</span> <span class="opt">-r</span> <span class="param">~/lab/ch2 ~/lab/ch2-copy</span>
+<span class="prompt">$</span> <span class="cmd">ls</span> <span class="param">~/lab</span>
+<span class="demo-out">ch2  ch2-copy</span></p>
+<p class="demo-ex"><b>-r</b> = recursive（递归），意思是"把这个目录连同里面所有东西一起复制"。</p>
+</div>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 3：改名 = 同目录内移动</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">mv</span> <span class="param">~/lab/ch2/note1.txt ~/lab/ch2/first-note.txt</span>
+<span class="prompt">$</span> <span class="cmd">ls</span> <span class="param">~/lab/ch2</span>
+<span class="demo-out">a  first-note.txt  note2.txt</span></p>
+<p class="demo-ex">mv 没有独立的"rename 命令"——<b>改名就是移动到新名字</b>。想清楚这一点，你就理解 Linux 设计哲学了：一件事用一种工具完成。</p>
+</div>
+
+<h3>2.3 删除：rm 和 rmdir</h3>
+<div class="warn">
+<p class="wtitle">⚠️ 危险警告：删除不可恢复</p>
+<p>Linux 没有回收站。<span class="code cmd">rm</span> 删掉的文件<b>找不回来</b>。还有两个与 Windows 最大的习惯差异：<b>命令行没有"复制 → 粘贴"两步</b>——<span class="code cmd">cp</span> 一步到位；<b><span class="code cmd">mv</span> 搬完原位置就消失</b>——它同时承担"移动"和"改名"。铁律：<b>先 <span class="code cmd">ls</span> 看清楚，再 <span class="code cmd">rm</span></b>；实验只在 <span class="code">~/lab</span> 里做；<span class="code cmd">rm -rf</span> 敲之前默念一遍完整路径。</p>
+</div>
+<table>
+<tr><th style="width:30%">命令</th><th>作用</th></tr>
+<tr><td><span class="code cmd">rm 文件</span></td><td>删文件</td></tr>
+<tr><td><span class="code cmd">rm -r 目录</span></td><td>删目录及里面一切（-r 递归）</td></tr>
+<tr><td><span class="code cmd">rm -f 文件</span></td><td>强制删，不询问</td></tr>
+<tr><td><span class="code cmd">rmdir 目录</span></td><td>只删<b>空</b>目录（有内容就报错，相当于安全版）</td></tr>
+</table>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 4：安全地删除</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ls</span> <span class="param">~/lab/ch2/a</span> <span class="note"># 先看清里面有什么</span>
+<span class="demo-out">b</span>
+</p><p class="prompt">$ <span class="cmd">rm</span> <span class="opt">-r</span> <span class="param">~/lab/ch2/a</span> <span class="note"># 确认无误再删</span></p>
+<p class="demo-ex">"先 ls 后 rm"是运维的第一肌肉记忆。rmdir 删不掉非空目录时，正是它在保护你。</p>
+</div>
+
+<h3>2.4 易错点</h3>
+<div class="box2 tight2">
+<p><span class="opt">坑 1：</span>cp 不写目标会报错；cp 目标已存在会<b>直接覆盖</b>，不提示。</p>
+<p><span class="opt">坑 2：</span>mv 目标已存在同样直接覆盖。</p>
+<p><span class="opt">坑 3：</span>mv 是"移动或改名"，cp 是"复制一份"。mv 快（同一磁盘只改记录），cp 慢（真复制数据）。</p>
+</div>
+<div class="hw tight2">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 用一条命令建出 <span class="code">~/lab/ch2/x/y/z</span> 三层目录。</p>
+<p>2. 复制整个 <span class="code">~/lab/ch2</span> 到 <span class="code">~/lab/ch2-backup</span>，验证里面文件都在。</p>
+<p>3. 把 <span class="code">note2.txt</span> 改名为 <span class="code">second-note.txt</span>。</p>
+<p>4. 尝试用 <span class="code cmd">rmdir</span> 删一个非空目录，观察报错；再用 <span class="code cmd">rm -r</span> 删掉它。</p>
+</div>
+<div class="quiz tight2">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 为什么说"改名就是移动"？</p>
+<p>2. 判断：<span class="code">rm -rf</span> 删错文件后可以用恢复软件找回。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 1-4、1-5、1-6、1-7、1-8。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-5">第 3 章 · 查看与搜索</h2>
+<p class="note">💡 本册日志示范统一用自建文件 <span class="code">~/lab/app.log</span>：先执行 <span class="code">echo '2026-08-01 09:00:01 ERROR disk fail' &gt;&gt; ~/lab/app.log</span>（多敲几行不同内容）。系统日志路径取决于发行版、日志服务和配置；不要假定 <span class="code">/var/log/syslog</span> 一定存在。先确认实际文件，或对 systemd 服务使用 <span class="code">journalctl</span>。</p>
+<p><b>本章目标：</b>① 会用四种"看"命令按需查看文件；② 会用 <span class="code cmd">grep</span> 按内容搜、<span class="code cmd">find</span> 按名字找；③ 会 <span class="code cmd">wc</span> 计数、<span class="code cmd">diff</span> 对比；④ 理解 <span class="code cmd">tail -f</span> 的实时跟踪。</p>
+<p><b>本章新命令</b>：<span class="code cmd">cat</span> <span class="code cmd">less</span> <span class="code cmd">head</span> <span class="code cmd">tail</span> <span class="code cmd">wc</span> <span class="code cmd">file</span> <span class="code cmd">grep</span> <span class="code cmd">find</span> <span class="code cmd">diff</span></p>
+
+<h3>3.1 四种"看"</h3>
+<table>
+<tr><th style="width:20%">命令</th><th>行为</th><th>适合</th></tr>
+<tr><td><span class="code cmd">cat</span></td><td>一口气把整个文件全打印</td><td>小文件（几行到几十行）</td></tr>
+<tr><td><span class="code cmd">less</span></td><td>翻页查看（空格下翻 / b 上翻 / q 退出 / /词 搜索）</td><td>大文件——less 一次只加载一屏，大文件不卡</td></tr>
+<tr><td><span class="code cmd">head</span></td><td>看前 10 行（-n 指定行数）</td><td>只看开头</td></tr>
+<tr><td><span class="code cmd">tail</span></td><td>看后 10 行；<b>-f</b> 实时跟踪新增</td><td>看结尾；排错神器</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 1：tail -f 实时跟踪日志</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">tail</span> <span class="opt">-f</span> <span class="param">~/lab/app.log</span>
+</p><p class="demo-out">2026-08-01 09:00:01 ERROR disk fail
+2026-08-01 09:00:02 WARN retrying in 3s
+2026-08-01 09:00:03 INFO service recovered</p>
+<p class="demo-ex"><b>-f</b> = follow（跟随）：文件一有新增，立刻显示。排错标准动作：<b>开一个终端 tail -f 日志，另一个终端去复现问题</b>，报错会实时跳出来。按 Ctrl+C 退出。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：取文件中间某一段</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">head</span> <span class="opt">-n 120</span> <span class="param">~/lab/app.log</span> | <span class="cmd">tail</span> <span class="opt">-n 21</span>
+</p><p class="demo-out">（第 100~120 行的内容）</p>
+<p class="demo-ex">head 先取前 120 行，交给 tail 取最后 21 行——合起来就是第 100~120 行。中间的竖线 <b>|</b> 叫"管道"（第 4 章主角），现在先感受一下。</p>
+</div>
+
+<h3>3.2 按内容搜：grep</h3>
+<p><span class="code cmd">grep</span> 的职责：<b>从文件里捞出含有某个词的行</b>。全称 Global Regular Expression Print（全局正则打印）。</p>
+<table>
+<tr><th style="width:32%">写法</th><th>作用</th></tr>
+<tr><td><span class="code">grep "error" 文件</span></td><td>找含 error 的行</td></tr>
+<tr><td><span class="code">grep -i error 文件</span></td><td>忽略大小写（Error、ERROR 都算）</td></tr>
+<tr><td><span class="code">grep -r "关键词" 目录</span></td><td>递归搜索整个目录</td></tr>
+<tr><td><span class="code">grep -n error 文件</span></td><td>显示行号</td></tr>
+<tr><td><span class="code">grep -v "^#" 文件</span></td><td>排除 <b># 开头</b>的注释行（-v 反选，^ 表示行首）</td></tr>
+<tr><td><span class="code">grep -c error 文件</span></td><td>只数有多少行匹配</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 3：grep 实战</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">grep</span> <span class="opt">-i</span> <span class="param">"error" ~/lab/app.log</span>
+</p><p class="demo-out">2026-08-01 09:00:01 ERROR disk fail</p>
+<p class="demo-ex">日志几万行，直接 cat 会刷屏刷到天荒地老。<b>grep 先过滤，再看细节</b>——这是读日志的标准姿势。</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'Port 22'</span> &gt; <span class="param">~/lab/my.conf</span>
+<span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'#PermitRootLogin no'</span> &gt;&gt; <span class="param">~/lab/my.conf</span>
+<span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'MaxSessions 10'</span> &gt;&gt; <span class="param">~/lab/my.conf</span>
+<span class="prompt">$</span> <span class="cmd">grep</span> <span class="opt">-v</span> <span class="param">"^#" ~/lab/my.conf</span>
+</p><p class="demo-out">Port 22
+MaxSessions 10</p>
+<p class="demo-ex"><span class="opt">-v</span> = 反选（排除匹配行）。配置文件里通常有很多 # 注释行，用 <span class="code">grep -v "^#"</span> 只看"真正生效的配置"。注意 <b>^#</b> 的 ^ 表示"行首"——只排除 # 开头的行，正文里带 # 的不误伤。</p>
+</div>
+
+<h3>3.3 按名字找：find</h3>
+<p>grep 搜<b>内容</b>，find 搜<b>文件本身</b>（名字、大小、时间）。</p>
+<div class="demo">
+<p class="dtitle">示范 4：find 实战</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">find</span> <span class="param">~</span> <span class="opt">-name</span> <span class="param">"*.log"</span>
+</p><p class="demo-out">~/lab/app.log
+~/lab/error.log</p>
+<p class="demo-ex">find 对 ~/lab 查找。find 的格式：<b>find 在哪找 + 按什么条件</b>。<span class="code">"*.log"</span> 中的 * 是通配模式。模式放在引号里时，shell 不会先展开它；<b>find 自己接收原样模式并递归匹配文件名</b>。去掉引号后，shell 可能先展开当前目录中的匹配项；当前目录没有匹配项时，行为还可能因 shell 选项而不同。因此 find 的通配模式通常要加引号。</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">find</span> <span class="param">~</span> <span class="opt">-size</span> <span class="param">+100M</span>
+</p><p class="demo-out">~/videos/big-file.mp4</p>
+<p class="demo-ex">按大小找：+100M = 大于 100 兆。磁盘满的时候（第 7 章），用 find 揪出大文件。</p>
+</div>
+
+<h3>3.4 计数与对比：wc、file、diff</h3>
+<table>
+<tr><th style="width:22%">命令</th><th>作用</th></tr>
+<tr><td><span class="code">wc -l 文件</span></td><td>数行数（-w 词数，-c 字节数）</td></tr>
+<tr><td><span class="code">file 文件</span></td><td>看文件真实类型（不看名字，看内容）</td></tr>
+<tr><td><span class="code">diff 文件1 文件2</span></td><td>对比两个文件的差异（验证操作正确性的利器）</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 5：用 diff 验证复制无误</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">diff</span> <span class="opt">-r</span> <span class="param">~/lab/ch2 ~/lab/ch2-backup</span>
+</p><p class="demo-out">（没有任何输出）</p>
+<p class="demo-ex"><b>diff 没输出 = 两个目录完全一致</b>。以后做完复制、备份、解压，都可以用 diff -r 验证"一个不多一个不少"。</p>
+</div>
+
+<h3>3.5 易错点</h3>
+<div class="box2 tight2">
+<p><span class="opt">坑 1：</span>cat 大文件会刷屏，机器卡住几秒都正常——大文件用 less。</p>
+<p><span class="opt">坑 2：</span>grep 的搜索词建议加引号：<span class="code">grep "my log"</span>，否则空格和特殊符号会捣乱。</p>
+<p><span class="opt">坑 3：</span>grep 搜内容 vs find 找文件，面试常考，别混。</p>
+</div>
+<div class="hw tight2">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 用 less 打开 ~/lab/app.log，练习 空格 / b / q / 搜索。</p>
+<p>2. 用 grep -i 在 ~/lab/app.log 里找 "error"，用 grep -c 数一共几行。</p>
+<p>3. 用 find 找出家目录下所有 .txt 文件。</p>
+<p>4. 复制一个目录后用 diff -r 验证两边一致，再改动一个文件后看 diff 输出长什么样。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 想看一个 5 万行日志的最新报错，应该用哪条命令？（A. cat B. less C. tail -f）</p>
+<p>2. 判断：grep 是按文件名找文件，find 是按内容找文件。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 2-3、2-4、2-5、2-6、2-7；阶段 5 的 5-1、5-2、5-3；进阶篇场景 1。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-6">第 4 章 · 管道与重定向</h2>
+<p><b>本章目标：</b>① 理解管道 <span class="code">|</span> 的流水线思想；② 区分 <span class="code">&gt;</span>（覆盖）与 <span class="code">&gt;&gt;</span>（追加）；③ 会 sort / uniq 配合管道；④ awk 入门：按列取数据。</p>
+<p><b>本章新命令</b>：<span class="code cmd">sort</span> <span class="code cmd">uniq</span> <span class="code cmd">awk</span>（符号：<span class="code">|</span> <span class="code">&gt;</span> <span class="code">&gt;&gt;</span> <span class="code">2&gt;&amp;1</span>）</p>
+
+<h3>4.1 管道：把命令串成流水线</h3>
+<p>每个 Linux 命令都像一道<span class="keyword">工序</span>：吃进数据，吐出结果。<b>管道 |</b> 就是把前一道工序的"吐出"，直接喂给下一道工序的"吃进"。</p>
+<div class="rule">📌 管道的哲学：<b>每个命令只做一件小事，用管道把小工具组合成大功能</b>。这就是 Linux 力量的来源。</div>
+<div class="demo">
+<p class="dtitle">示范 1：三道工序接力</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">grep</span> <span class="opt">-i</span> <span class="param">"error" ~/lab/app.log</span> | <span class="cmd">wc</span> <span class="opt">-l</span>
+</p><p class="demo-out">3 <span class="note">（你自建了几行就是几）</span></p>
+<p class="demo-ex">grep 捞出行 → 交给 wc -l 数行数。<b>不落地、不存中间文件</b>，这就是管道的好处。</p>
+</div>
+
+<h3>4.2 重定向：改变输出的流向</h3>
+<table>
+<tr><th style="width:20%">符号</th><th>作用</th></tr>
+<tr><td><span class="code">&gt;</span></td><td>把输出<b>覆盖写入</b>文件（文件原有内容会<b>清空</b>）</td></tr>
+<tr><td><span class="code">&gt;&gt;</span></td><td>把输出<b>追加</b>到文件末尾</td></tr>
+<tr><td><span class="code">2&gt;&amp;1</span></td><td>把"错误输出"合并到"正常输出"一起去同一个地方</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 2：&gt; 和 &gt;&gt; 的差别（亲手验证）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> "第一行" &gt; <span class="param">~/lab/test.txt</span>
+<span class="prompt">$</span> <span class="cmd">echo</span> "第二行" &gt; <span class="param">~/lab/test.txt</span>
+<span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/lab/test.txt</span>
+</p><p class="demo-out">第二行</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> "第三行" &gt;&gt; <span class="param">~/lab/test.txt</span>
+<span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/lab/test.txt</span>
+</p><p class="demo-out">第二行
+第三行</p>
+<p class="demo-ex">两次 &gt; 之后文件里只剩"第二行"——<b>&gt; 每次都会清空重写</b>。&gt;&gt; 则乖乖排在后面。这个实验一定要亲手敲一遍，比看十遍都记得牢。</p>
+</div>
+<div class="box2">
+<p><span class="opt">易错点：</span>往重要文件写内容时，<b>先备份再 &gt;</b>。一条 <span class="code">echo x &gt; 配置.conf</span> 会把原配置清得干干净净。</p>
+</div>
+
+<h3>4.3 sort 和 uniq</h3>
+<p><span class="code cmd">sort</span> 排序；<span class="code cmd">uniq</span> 去重（<b>只对相邻重复行生效</b>，所以标准用法是先 sort 再 uniq）；<span class="opt">-c</span> 顺便计数。</p>
+<div class="demo">
+<p class="dtitle">示范 3：sort + uniq -c</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'bob'</span> &gt; <span class="param">~/lab/names.txt</span>; <span class="cmd">echo</span> <span class="str">'alice'</span> &gt;&gt; <span class="param">~/lab/names.txt</span>; <span class="cmd">echo</span> <span class="str">'alice'</span> &gt;&gt; <span class="param">~/lab/names.txt</span>; <span class="cmd">echo</span> <span class="str">'carol'</span> &gt;&gt; <span class="param">~/lab/names.txt</span>; <span class="cmd">echo</span> <span class="str">'carol'</span> &gt;&gt; <span class="param">~/lab/names.txt</span>; <span class="cmd">echo</span> <span class="str">'carol'</span> &gt;&gt; <span class="param">~/lab/names.txt</span> <span class="out"># 先自造名单文件（alice×2、bob×1、carol×3）</span>
+</p><p class="demo-in"><span class="prompt">$</span> <span class="cmd">sort</span> <span class="param">~/lab/names.txt</span> | <span class="cmd">uniq</span> <span class="opt">-c</span>
+</p><p class="demo-out">      2 alice
+      1 bob
+      3 carol</p>
+<p class="demo-ex">sort 把相同的挤到一起，uniq -c 才能正确统计。名字后的数字是出现次数。这是"分组计数"的标准套路。</p>
+</div>
+
+<h3>4.4 awk 入门：按列取数据</h3>
+<p><span class="code cmd">awk</span> 是文本处理利器，入门只需要记住一件事：<b>按空格把一行切成几列，$1 是第一列，$2 是第二列……</b>。</p>
+<div class="demo">
+<p class="dtitle">示范 4：取日志的第一列</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> "Aug 16 09:30 ubuntu kernel: boot ok" | <span class="cmd">awk</span> '<span class="param">{print $1}</span>'
+</p><p class="demo-out">Aug</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'Aug 09:30:01 kernel: boot ok'</span> &gt; <span class="param">~/lab/log.txt</span>; <span class="cmd">echo</span> <span class="str">'Sep 14:02:55 kernel: shutdown ok'</span> &gt;&gt; <span class="param">~/lab/log.txt</span> <span class="out"># 先自造两行日志</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">awk</span> '<span class="param">{print $1, $3}</span>' <span class="param">~/lab/log.txt</span>
+</p><p class="demo-out">Aug 09:30
+Sep 14:02</p>
+<p class="demo-ex">awk 的固定格式：<span class="code">awk '{print 你想取的列}'</span>。单引号里的内容是一小段"取列指令"。$0 表示整行。</p>
+</div>
+
+<h3>4.5 日志分析标准套路（本章精华）</h3>
+<div class="rule">📌 <b>提取 → 排序 → 去重计数 → 倒序 → 取前 N</b>。五步连环，日志统计题一招通吃。</div>
+<div class="demo">
+<p class="dtitle">示范 5：统计访问日志里出现最多的 IP 前 5 名</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">printf</span> <span class="str">'192.168.1.10 abc\n203.0.113.9 xyz\n'</span> &gt;&gt; <span class="param">~/lab/access.log</span> <span class="out"># 先自造日志，多敲几行不同 IP 的</span>
+<span class="prompt">$</span> <span class="cmd">awk</span> '<span class="param">{print $1}</span>' <span class="param">~/lab/access.log</span> | <span class="cmd">sort</span> | <span class="cmd">uniq</span> <span class="opt">-c</span> | <span class="cmd">sort</span> <span class="opt">-rn</span> | <span class="cmd">head</span> <span class="opt">-5</span></p>
+<p class="demo-out">     2 192.168.1.10
+     1 203.0.113.9 <span class="note">（示例——你的数字按实际写入为准）</span></p>
+<p class="demo-ex">逐环解释：awk 取 IP 列 → sort 排序（相同的挨一起）→ uniq -c 计数 → sort -rn（r=倒序，n=按数字）→ head -5 取前五。<b>把这个管道背下来，它就是你的第一个"组合拳"。</b></p>
+</div>
+
+<h3>4.6 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span>&gt; 会清空文件。先想清楚"我要覆盖还是追加"。</p>
+<p><span class="opt">坑 2：</span>管道只传递"正常输出"，错误信息不走管道（所以 grep 没结果时不报错，就是没匹配）。</p>
+<p><span class="opt">坑 3：</span>awk 的单引号不能换成双引号。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 把 echo 输出分别用 &gt; 和 &gt;&gt; 写 3 次，cat 验证差别（照示范 2 做）。</p>
+<p>2. 造一个多行文本，用 sort | uniq -c 统计每个词出现次数。</p>
+<p>3. 用 awk 取出 /etc/passwd 的第一列（用户名）。</p>
+<p>4. 把示范 5 的管道改造成：统计自己日志里出现最多的 3 个词。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 管道 | 和重定向 &gt; 的本质区别是什么？</p>
+<p>2. 判断：uniq 可以直接对乱序文件正确去重。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 2-4、2-8；阶段 5 的 5-4、5-5。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-7">第 5 章 · 用户与权限</h2>
+<p><b>本章目标：</b>① 理解多用户模型和"组"；② 会创建用户、改密码、加 sudo；③ 读懂 rwx 权限位；④ 会用 chmod（含数字算法）、chown。</p>
+<p><b>本章新命令</b>：<span class="code cmd">whoami</span> <span class="code cmd">id</span> <span class="code cmd">su</span> <span class="code cmd">sudo</span> <span class="code cmd">useradd</span> <span class="code cmd">passwd</span> <span class="code cmd">usermod</span> <span class="code cmd">groupadd</span> <span class="code cmd">groups</span> <span class="code cmd">userdel</span> <span class="code cmd">last</span> <span class="code cmd">chmod</span> <span class="code cmd">chown</span> <span class="code cmd">chgrp</span></p>
+
+<h3>5.1 用户模型：住户、室友与房东</h3>
+<p>Linux 是多用户系统：很多人可以同时用一台机器，各干各的、互不干扰。</p>
+<table>
+<tr><th style="width:25%">角色</th><th>比喻</th><th>说明</th></tr>
+<tr><td>普通用户</td><td>住户</td><td>只能动自己的房间（家目录）</td></tr>
+<tr><td>组（group）</td><td>合租的室友们</td><td>共享某些空间；一个用户可属多个组</td></tr>
+<tr><td>root</td><td>房东</td><td>万能权限，能做任何事（提示符里显示 #）</td></tr>
+<tr><td>sudo</td><td>借房东钥匙</td><td>临时以 root 身份执行一条命令</td></tr>
+</table>
+<div class="box2">
+<p><span class="opt">易错：</span><span class="code cmd">sudo</span> 是"借权限执行<b>一条</b>命令"（superuser do）；<span class="code cmd">su</span> 是"切换<b>成为</b>另一个用户"（switch user）。<span class="code">sudo -i</span> 才会变成 root 的提示符。日常操作永远 sudo，别长期待在 root。</p>
+</div>
+
+<h3>5.2 创建用户</h3>
+<div class="demo">
+<p class="dtitle">示范 1：建一个完整用户并加入 sudo 组 🌐</p>
+<p class="note">⚠️ 动系统用户属于系统级操作：只在专用实验机（虚拟机）里做；练习完按 5.4 收尾要求清理并自查。</p>
+<p class="demo-in"><span class="prompt">$</span> getent passwd alice || echo "alice 不存在，可以创建"   <span class="out"># 冲突检查：若已存在（上次实验残留），先 sudo userdel -r alice 清干净再继续</span>
+<span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">useradd</span> <span class="opt">-m -s /bin/bash</span> <span class="param">alice</span>
+<span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">passwd</span> <span class="param">alice</span>
+</p><p class="demo-out">New password: （输入两次，屏幕不显示）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">usermod</span> <span class="opt">-aG sudo</span> <span class="param">alice</span>
+<span class="prompt">$</span> <span class="cmd">groups</span> <span class="param">alice</span>
+</p><p class="demo-out">alice : alice sudo</p>
+<p class="demo-ex">三步：<b>useradd -m</b>（-m=顺带建家目录）、<b>passwd</b> 设密码、<b>usermod -aG sudo</b>（-a=追加、-G=组，把 alice 塞进 sudo 组=获得借钥匙资格）。groups 验证她在哪些组。</p>
+</div>
+
+<h3>5.3 权限位：rwx 三组九位</h3>
+<p>用 <span class="code cmd">ls -l</span> 看权限，这 10 个字符是 Linux 权限的核心：</p>
+<pre><span class="code">- rwx r-x r--
+│ └┬┘ └┬┘ └┬┘
+│  │    │    └── 其他人权限 r--（只读）
+│  │    └─────── 属组权限 r-x（读+执行）
+│  └──────────── 属主权限 rwx（读+写+执行）
+└─────────────── 类型：-文件 d目录 l链接</span></pre>
+<p><b>r</b>=read 读，<b>w</b>=write 写，<b>x</b>=execute 执行。三组依次对应：<b>属主 / 属组 / 其他人</b>。</p>
+
+<h3>5.4 chmod：改权限（含数字算法原理）</h3>
+<p>两种写法：</p>
+<table>
+<tr><th style="width:35%">写法</th><th>示例</th><th>说明</th></tr>
+<tr><td>符号法</td><td><span class="code">chmod u+x 文件</span></td><td>u=属主、g=组、o=其他人、a=全部；+=加、-=减。只动你指定位</td></tr>
+<tr><td>数字法</td><td><span class="code">chmod 755 文件</span></td><td>一次覆盖全部九位</td></tr>
+</table>
+<div class="rule">📌 <b>数字算法原理</b>（为什么 r=4、w=2、x=1）：权限位本质是三个开关，开=1 关=0。<b>r=4(100)、w=2(010)、x=1(001)</b>，相加即组合：rwx=7、rw-=6、r-x=5、r--=4。755 = 属主 rwx(7) + 属组 r-x(5) + 其他人 r-x(5)。<b>644</b>（文件最常见）= rw-r--r--。</div>
+<div class="demo">
+<p class="dtitle">示范 2：chmod 实战</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">touch</span> <span class="param">~/lab/script.sh</span> <span class="out"># 先自造目标文件（示范自足，跳章也能跑）</span>
+<span class="prompt">$</span> <span class="cmd">chmod</span> <span class="param">u+x</span> <span class="param">~/lab/script.sh</span>
+<span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">-l</span> <span class="param">~/lab/script.sh</span>
+</p><p class="demo-out">-rwxr--r-- 1 &lt;用户名&gt; &lt;用户名&gt; 0 Aug 16 10:00 script.sh <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex">u+x 只给属主加执行位：rw- 变 rwx，其余不变。<b>符号法动一位，数字法全覆盖</b>——两种方法目标一致时结果相同（如 chmod u+x 与 chmod 744 都得到 744）。</p>
+</div>
+
+<h3>5.5 chown / chgrp：换主人</h3>
+<div class="demo">
+<p class="dtitle">示范 3：换属主属组</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">touch</span> <span class="param">~/lab/shared.txt</span> <span class="out"># 先自造一个测试文件</span>
+</p><p class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">chown</span> <span class="param">alice:alice ~/lab/shared.txt</span>
+</p><p class="demo-ex"><b>chown</b> = change owner。格式"用户:组"。chgrp 只换组不换人。注意：换了主人后，原来的用户就按"其他人"或"属组"的权限位来判了（前提：他不在这文件的属组里）。</p>
+</div>
+<h3>5.6 其他用户管理命令</h3>
+<table>
+<tr><th style="width:28%">命令</th><th>作用</th></tr>
+<tr><td><span class="code">id 用户名</span></td><td>看用户的 UID、GID 和所属组（比 whoami 详细）</td></tr>
+<tr><td><span class="code">userdel -r 用户名</span></td><td>删除用户（-r 连家目录一起删）</td></tr>
+<tr><td><span class="code">groupadd 组名</span></td><td>创建组（做共享目录的第一步）</td></tr>
+<tr><td><span class="code">last</span></td><td>看最近谁登录过这台机器</td></tr>
+</table>
+<div class="warn">
+<p class="wtitle">⚠️ 危险警告：chmod 777</p>
+<p><span class="code cmd">chmod 777 文件</span> = 属主、属组、其他人都能读写执行——相当于把家门钥匙插在锁上。遇到"权限问题先 777 再说"的坏习惯，面试和实战都会翻车。正确姿势：<b>搞清楚谁需要什么权限，给最小权限</b>。</p>
+</div>
+
+<h3>5.7 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span>新建用户不加 <span class="opt">-m</span>，没有家目录，登录会各种奇怪。</p>
+<p><span class="opt">坑 2：</span>删除是看<b>目录</b>写权限，不是文件本身权限（练习册 1-7、3-8 会验证这个反直觉结论）。</p>
+<p><span class="opt">坑 3：</span><span class="code cmd">chmod -R</span> 递归改整个目录很危险，先想清楚再敲。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业 🌐</p>
+<p>1. 创建 alice、bob 两个用户并设密码，用 groups 验证各自所在组。</p>
+<p>2. 把 alice 加入 sudo 组（usermod -aG），验证她能 sudo 了。</p>
+<p>3. 建一个文件，分别用符号法和数字法把它改成 755，两次都 ls -l 验证。</p>
+<p>4. 用 chown 把文件换给 bob，再用 alice 身份试试能不能读它。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 权限串 -rwxr-xr-- 中，"其他人"的权限是什么？数字法是几？</p>
+<p>2. 判断：sudo 是切换成 root 用户，su 是借 root 权限执行一条命令。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 3-1 ~ 3-8。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-8">第 6 章 · 进程管理</h2>
+<p><b>本章目标：</b>① 看懂 ps aux 各列；② 会找进程（pgrep / ps+grep）；③ 理解"优雅杀 vs 强杀"；④ 会前后台切换与 nohup；⑤ 会用 fuser 定位占端口的进程。</p>
+<p><b>本章新命令</b>：<span class="code cmd">ps</span> <span class="code cmd">top</span> <span class="code cmd">htop</span> <span class="code cmd">pgrep</span> <span class="code cmd">kill</span> <span class="code cmd">killall</span> <span class="code cmd">jobs</span> <span class="code cmd">bg</span> <span class="code cmd">fg</span> <span class="code cmd">nohup</span> <span class="code cmd">fuser</span></p>
+
+<h3>6.1 进程是什么</h3>
+<p><b>进程 = 正在运行的程序</b>。同一个程序可以开多个进程（开两个终端就是两个进程）。每个进程有一个编号 <b>PID</b>（工号），管理进程全靠它。</p>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 1：ps aux 各列解读</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ps</span> <span class="param">aux</span></p>
+<p class="demo-out">USER   PID  %CPU %MEM  VSZ    RSS  TTY  STAT  START  TIME  COMMAND
+root     1   0.0  0.1 163904  12340  ?    Ss    08:00  0:01  /sbin/init
+&lt;用户名&gt;    1234   0.5  2.3 456704 234560 pts/0 S+   09:10  0:02  python3 app.py <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex">重点看四列：<b>USER</b>=谁启动的、<b>PID</b>=工号、<b>%CPU/%MEM</b>=吃多少资源（机器卡了先看这两列谁最高）、<b>COMMAND</b>=是什么程序。<b>aux</b> 三个字母是组合选项（a=所有用户、u=带用户信息、x=含无终端的）。</p>
+</div>
+<p><span class="code cmd">top</span> 是实时版的 ps（每 3 秒刷新，按 q 退出）；<span class="code cmd">htop</span> 是彩色增强版（可能要先 <span class="code cmd">sudo apt install htop</span>，第 9 章会教）。</p>
+
+<h3>6.2 找进程</h3>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 2：三种找法</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ps</span> <span class="param">aux</span> | <span class="cmd">grep</span> <span class="param">nginx</span> <span class="note"># 通用法：ps 全量 + grep 过滤</span>
+<span class="prompt">$</span> <span class="cmd">pgrep</span> <span class="param">nginx</span> <span class="note"># 快捷法：直接输出 PID</span>
+</p><p class="demo-out">1234
+5678 <span class="out">（示例 PID：实际是你的进程号）</span></p>
+<p class="demo-ex">pgrep = process grep，一步到位拿 PID。ps aux | grep 是面试必考的组合拳，两者都要会。</p>
+</div>
+
+<h3>6.3 结束进程：优雅 vs 强杀</h3>
+<p><b>kill 不是"杀死"，是"发信号"</b>。默认发的是 SIGTERM（15）："请你退出"。程序收到后可以打扫房间——写日志、存数据——然后体面离开。加 <span class="opt">-9</span> 是 SIGKILL："当场击毙"，由内核直接处决，程序<b>没有任何清理机会</b>。</p>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 3：亲眼看见"优雅退出"（先建一个会写日志的小程序）</p>
+<p class="note">本示范用到了 <span class="code">cat &gt; 文件 &lt;&lt; 'EOF'</span> 这个写法：把下面整段内容直接"喂"进文件（直到出现 EOF 为止），不用一行行 echo——这是快速造多行文件的标准姿势（heredoc，读作"此文档"）；EOF 是约定的结束标记，前后各放一个。</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">&gt; ~/lab/run.sh &lt;&lt; 'EOF'</span>
+<span class="param">#!/bin/bash
+trap 'echo "$(date +%T) 收到退出信号，清理中..." &gt;&gt; ~/lab/run.log; exit 0' TERM
+while true; do sleep 1; done
+EOF</span>
+<span class="prompt">$</span> <span class="cmd">chmod</span> <span class="param">+x ~/lab/run.sh</span>
+<span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">~/lab &amp;&amp;</span> <span class="cmd">./run.sh</span> <span class="param">&amp;</span>
+<span class="param">MY_PID=$!</span> <span class="out"># $! = 刚启动的后台任务真实 PID（不靠猜）</span>
+<span class="prompt">$</span> <span class="cmd">ps</span> <span class="param">-p $MY_PID</span> <span class="out"># 先核对：确实是我们启动的 ./run.sh</span>
+</p><p class="demo-out">PID TTY TIME CMD
+4242 pts/0 00:00:00 /bin/bash ./run.sh <span class="out">（示例 PID，以你 ps 实际看到的为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">kill</span> <span class="param">$MY_PID</span>
+<span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/lab/run.log</span>
+</p><p class="demo-out">09:30:15 收到退出信号，清理中...</p>
+<p class="demo-ex">trap 那行 = 程序安装了"信号处理器"：收到 TERM 就写一行日志再退出。<b>kill（优雅）→ 日志里留下了告别记录</b>。现在再用 kill -9 试一次：日志里<b>不会有</b>新记录——程序连写日志的机会都没有。（PID 和日志时间是动态的：$! 拿到的是你的实际 PID；pgrep 可能匹配多个同名进程，所以用 $! 保存、用 ps -p 核对，只动自己的实验进程。run.log 写进了 ~/lab/，从任何目录启动都不乱跑。）</p>
+</div>
+<p><span class="code cmd">killall</span> = 按<b>名字</b>杀进程（不用查 PID）：<span class="code">killall nginx</span>。名字匹配到多个进程会全部杀掉，先 <span class="code cmd">pgrep</span> 确认再动手。</p>
+<div class="warn">
+<p class="wtitle">⚠️ 危险警告：kill -9 滥用</p>
+<p>对数据库、推理服务直接 <span class="code cmd">kill -9</span> 可能造成数据损坏。<b>-9 永远是最后手段</b>：先试普通 kill → 没反应再观察 → 仍无效才 -9。养成习惯，面试和实战都加分。</p>
+</div>
+
+<h3>6.4 前后台与 nohup</h3>
+<table>
+<tr><th style="width:30%">命令</th><th>作用</th></tr>
+<tr><td><span class="code">命令 &amp;</span></td><td>末尾加 &amp; = 放后台运行，终端继续给你用</td></tr>
+<tr><td><span class="code">Ctrl + Z</span></td><td>把前台程序"挂起"（暂停）</td></tr>
+<tr><td><span class="code">jobs</span></td><td>看后台任务清单</td></tr>
+<tr><td><span class="code">fg %1 / bg %1</span></td><td>把 1 号任务拉回前台 / 放后台继续跑</td></tr>
+<tr><td><span class="code">nohup 命令 &amp;</span></td><td>后台运行 + <b>关掉终端也不死</b>（no hang up）</td></tr>
+</table>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 4：nohup 挂后台长任务</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'import time; time.sleep(3600)'</span> &gt; <span class="param">~/lab/train.py</span> <span class="out"># 先自造一个"跑一小时"的模拟训练脚本</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">nohup</span> <span class="param">python3 ~/lab/train.py</span> <span class="opt">&gt;</span> <span class="param">~/lab/train.log 2&gt;&amp;1 &amp;</span>
+<span class="param">TRAIN_PID=$!</span> <span class="out"># 记下 PID，练完 kill $TRAIN_PID 清理，别留长任务占机器</span>
+</p><p class="demo-ex">拆开看：nohup（关终端不死）+ &gt; ~/lab/train.log（输出进文件，和脚本同目录、路径一致）+ 2&gt;&amp;1（错误也进同文件）+ &amp;（后台）。长任务标准姿势。SSH 断开后任务照样跑。练完 <span class="code">kill $TRAIN_PID</span> 清理。</p>
+</div>
+
+<h3>6.5 fuser：谁占着这个端口/文件</h3>
+<p><span class="code cmd">fuser</span> 回答一个高频问题："<b>谁在用这个东西</b>"。端口报"Address already in use"时就用它揪人。</p>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 5：fuser -v</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">python3</span> <span class="opt">-m</span> <span class="param">http.server 8080 &amp;</span> <span class="out"># 先造一个可控监听（&amp; = 放后台）</span>
+<span class="param">SRV_PID=$!</span> <span class="out"># 记下它的 PID，验证完要清理</span>
+<span class="prompt">$</span> <span class="cmd">fuser</span> <span class="opt">-v</span> <span class="param">8080/tcp</span>
+</p><p class="demo-out">USER   PID ACCESS COMMAND
+8080/tcp:        &lt;用户名&gt;    &lt;实际 PID&gt; F.... python3 <span class="out">（示例 PID，以你实际输出为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">kill</span> <span class="param">$SRV_PID</span> <span class="out"># 验证完清理，别留后台服务</span>
+<span class="prompt">$</span> <span class="cmd">fuser</span> <span class="opt">-v</span> <span class="param">8080/tcp</span> <span class="out"># 没输出 = 端口已释放</span></p>
+<p class="demo-ex"><b>-v</b> = 详细。输出告诉你：8080 端口被 <b>&lt;实际 PID&gt;</b> 的 python3 占着（PID 是动态的，以本机实际输出为准）。<b>fuser 属于 psmisc 软件包</b>，没装就先 <span class="code">sudo apt install psmisc</span>。也可以查文件：<span class="code">fuser -v 某个文件</span>。</p>
+</div>
+
+<h3>6.6 易错点</h3>
+<div class="box2 tight2">
+<p><span class="opt">坑 1：</span>ps 不带 aux 只显示自己的进程——"找不到进程"先检查是不是忘了 aux。</p>
+<p><span class="opt">坑 2：</span>kill 之后用 ps 再确认一次，有些进程要几秒才消失。</p>
+<p><span class="opt">坑 3：</span>&amp; 忘打，程序霸占终端——Ctrl+C 或 Ctrl+Z 先救场。</p>
+</div>
+<div class="hw tight2">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 用 ps aux | grep 找到你的终端进程，读出它的 PID 和 %CPU。</p>
+<p>2. 后台跑一个 sleep 300，用 jobs 看它，再用 kill 优雅结束它。</p>
+<p>3. 重做示范 3 的完整实验：kill 和 kill -9 各来一次，对比 run.log。</p>
+<p>4. 用 nohup 挂一个后台任务，关掉终端重新打开，验证它还在跑。</p>
+</div>
+<div class="quiz tight2">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. kill 和 kill -9 的区别是什么？为什么 -9 是最后手段？</p>
+<p>2. 判断：nohup 的作用是"忽略错误输出"。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 4-1 ~ 4-5；进阶篇场景 1、4（fuser 用于定位占端口进程）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-9">第 7 章 · 磁盘与文件系统</h2>
+<p><b>本章目标：</b>① 会用 df 看整体、du 看明细；② 理解"挂载"；③ 会造测试大文件（fallocate / dd）；④ 看懂磁盘满的排查套路。</p>
+<p><b>本章新命令</b>：<span class="code cmd">df</span> <span class="code cmd">du</span> <span class="code cmd">lsblk</span> <span class="code cmd">mount</span> <span class="code cmd">fallocate</span> <span class="code cmd">dd</span> <span class="code cmd">mkfs</span><span class="opt">（mount/mkfs 的完整动手流程见《Linux 练习册·进阶篇》场景 2 搭建手册；这里先记住：mount=把设备接到目录树上，mkfs=格式化——绝不对真磁盘乱用）</span></p>
+
+<h3>7.1 磁盘、分区与挂载</h3>
+<p>比喻：<b>硬盘=仓库，分区=仓库隔间，挂载=把隔间接进目录树</b>。Linux 没有 Windows 的 C 盘 D 盘——新硬盘必须"挂"到某个目录（如 /mnt/data），这个目录就成了它的入口。</p>
+<div class="demo">
+<p class="dtitle">示范 1：df -h 看整体</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">df</span> <span class="opt">-h</span></p>
+<p class="demo-out">Filesystem  Size  Used Avail Use% Mounted on
+/dev/sda1     500G  120G  355G  26%  / <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex"><b>-h</b> = human（人类可读，自动换算 G/M）。<b>Use%</b> 是核心：超过 80% 要警惕，100% 服务会挂。Mounted on 列就是"挂载点"。</p>
+</div>
+<div class="demo">
+<p class="dtitle">示范 2：du -sh 看谁占了空间</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">du</span> <span class="opt">-sh</span> <span class="param">~/*</span>   <span class="out"># 明确指定家目录；* 不展开隐藏文件（.开头），想看全部先 ls -a ~</span></p>
+<p class="demo-out">4.0K lab
+2.3G videos
+1.1G Downloads <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex">df 告诉你"仓库满没满"，du 告诉你"哪个箱子最占地方"。磁盘满的排查套路：<b>df -h 定位满的分区 → du 逐层下钻 → find -size +100M 揪出大文件</b>（第 3 章）→ 确认无用后删除或归档。</p>
+</div>
+<div class="box2">
+<p><span class="opt">易错：</span>df 和 du 的数字对不上是经典现象——常见原因是"文件被删了但还有进程占着"（练习册进阶场景 2 会完整演练）。</p>
+</div>
+
+<h3>7.2 造测试文件：fallocate 和 dd</h3>
+<table>
+<tr><th style="width:40%">命令</th><th>说明</th></tr>
+<tr><td><span class="code">fallocate -l 100M 文件</span></td><td>瞬间造一个 100M 大文件（秒完成，练习用首选）</td></tr>
+<tr><td><span class="code">dd if=/dev/zero of=文件 bs=1M count=100</span></td><td>造 100M 文件（真写入，可造镜像文件）</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 3：fallocate 快速造大文件</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">df</span> <span class="opt">-h</span> <span class="param">~</span> <span class="out"># 先确认磁盘空间够（本章作业 3 也造 100M，口径一致）</span>
+<span class="prompt">$</span> <span class="cmd">fallocate</span> <span class="opt">-l 100M</span> <span class="param">~/lab/big.img</span>
+<span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">-lh</span> <span class="param">~/lab/big.img</span>
+</p><p class="demo-out">-rw-r--r-- 1 &lt;用户名&gt; &lt;用户名&gt; 100M Aug 16 11:00 big.img <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex">一秒造出 100M 文件，练习"磁盘占用"场景的原料。<b>容量按你的磁盘空间调整（50M / 100M 都行），先 df -h 确认够再动手</b>。dd 的 <b>if</b>=输入文件（/dev/zero 是无限零的设备）、<b>of</b>=输出文件、<b>bs</b>=块大小、<b>count</b>=块数。</p>
+</div>
+<div class="warn">
+<p class="wtitle">⚠️ 危险警告：dd 的 of= 写错 = 灾难</p>
+<p><span class="code">dd if=/dev/zero of=/dev/sda</span> 会直接覆盖整块硬盘。<b>用 dd 前必须先 lsblk 确认设备名</b>；of= 永远不要指向真实硬盘/分区。练习只用普通文件名。</p>
+</div>
+
+<h3>7.3 内存与负载：free 和 uptime</h3>
+<p>磁盘用 df/du 看，<b>内存用 free</b>、<b>负载用 uptime</b>——资源占用三兄弟齐了。</p>
+<div class="demo">
+<p class="dtitle">示范 4：free 与 uptime</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">free</span> <span class="opt">-h</span></p>
+<p class="demo-out">              total  used  free  shared  buff/cache  available
+Mem:           31G  2.1G   26G   120M       2.3G        28G
+Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex"><b>free -h</b> 看内存：total=总内存、used=已用、available=真正可用（含缓存可释放部分）。Linux 的"内存看着满"常常是缓存，先看 available 再下结论。</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">uptime</span></p>
+<p class="demo-out">11:30:15 up 2 days,  3:14,  2 users,  load average: 0.15, 0.10, 0.08 <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex"><b>uptime</b> 看两件事：开机多久 + 三个负载值（最近 1/5/15 分钟平均）。负载是"排队等 CPU 的任务数"，持续超过 CPU 核数说明机器忙。</p>
+</div>
+<h3>7.4 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span>mkfs 是"格式化"（清空建文件系统），练习机上永远别碰真实分区。</p>
+<p><span class="opt">坑 2：</span>du 不带 -sh 会列出每个子目录，输出刷屏；先加 -s（汇总）。</p>
+<p><span class="opt">坑 3：</span>df 忘记 -h，数字长得没法读。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. df -h 找出根分区使用率，记下来。</p>
+<p>2. 先 <span class="code">ls -a ~</span> 确认家目录里有哪些项（含隐藏），再用 <span class="code">du -sh ~/*</span> 找出最占空间的 3 个东西。</p>
+<p>3. fallocate 造一个 100M 文件，ls -lh 验证大小。</p>
+<p>4. lsblk 看你机器有几块硬盘、几个分区，对照 df 的输出找对应关系。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. df 和 du 的区别是什么？排查磁盘满时先用哪个？</p>
+<p>2. 判断：Linux 的新硬盘会自动出现 D 盘、E 盘。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 4-5；进阶篇场景 2（磁盘满应急）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-10">第 8 章 · 网络命令</h2>
+<p><b>本章目标：</b>① 会查 IP、网关（ip / ip route）；② 会用 ping、ss、nc、curl 做基础排查；③ 会 ssh / scp 远程操作；④ 掌握"主机→端口→进程→日志"四层排查法。</p>
+<p><b>本章新命令</b>：<span class="code cmd">ip</span> <span class="code cmd">ip route</span> <span class="code cmd">ping</span> <span class="code cmd">ss</span> <span class="code cmd">curl</span> <span class="code cmd">wget</span> <span class="code cmd">nc</span> <span class="code cmd">traceroute</span> <span class="code cmd">nslookup</span> <span class="code cmd">ssh</span> <span class="code cmd">scp</span></p>
+
+<p class="note">📌 外部条件说明：<span class="code cmd">nc / traceroute / nslookup</span> 通常需 apt 安装（netcat-openbsd、traceroute、dnsutils）；<span class="code cmd">ssh / scp</span> 需要远程主机。主线（ip / ping / ss / curl / wget）本地可完成；扩展命令只演示用法，装不上不影响主线。</p>
+
+<h3>8.1 地址与端口</h3>
+<p><b>IP = 门牌号</b>（机器在网络里的地址），<b>端口 = 门上的窗口号</b>（一台机器上不同服务各开一个窗口：网页 80、SSH 22、HTTPS 443）。"连不上服务"= 要么门牌找不到，要么窗口没开。</p>
+<div class="demo">
+<p class="dtitle">示范 1：查本机 IP 和网关</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ip</span> <span class="param">addr</span></p>
+<p class="demo-out">2: ens33: inet 192.168.1.10/24 ... <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex">在 inet 后面找本机 IP（192.168.1.10）。/24 表示子网掩码，暂时不用深究。</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ip</span> <span class="param">route</span></p>
+<p class="demo-out">default via 192.168.1.1 dev ens33 <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-ex"><b>ip route（查看路由表）</b>：default via 后面就是你的<b>默认网关</b>（一般就是路由器地址）。排查"上不了网"从这里开始。</p>
+</div>
+
+<h3>8.2 排查三件套：ping、ss、nc</h3>
+<table>
+<tr><th style="width:32%">命令</th><th>作用</th></tr>
+<tr><td><span class="code">ping -c 4 目标</span></td><td>测通不通（-c 限定发 4 个包就停）</td></tr>
+<tr><td><span class="code">ss -tlnp</span></td><td>看本机哪些端口在<b>监听</b>（t=TCP、l=监听、n=数字、p=程序名）</td></tr>
+<tr><td><span class="code">nc -zv 主机 端口</span></td><td>探测对方端口开没开（-z=只探测不传数据、-v=详细）</td></tr>
+</table>
+<div class="demo">
+<p class="dtitle">示范 2：ss 和 nc 实战</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ss</span> <span class="opt">-tlnp</span></p>
+<p class="demo-out">LISTEN 0  128  0.0.0.0:22  users:(("sshd",pid=&lt;实际 PID&gt;,fd=3)) <span class="out">（示例输出：端口、进程名、PID 均以本机为准）</span></p>
+<p class="demo-ex">22 端口（SSH 服务）在监听，程序是 sshd。谁在哪个端口一目了然。<span class="opt">注：-p 显示的进程名需要权限——普通用户看不到别人的进程名属正常，用 sudo ss -tlnp 可看全部。</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">nc</span> <span class="opt">-zv</span> <span class="param">localhost 22</span></p>
+<p class="demo-out">Connection to localhost 22 port [tcp/ssh] succeeded!</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">nc</span> <span class="opt">-zv</span> <span class="param">localhost 9999</span></p>
+<p class="demo-out">nc: connect to localhost port 9999 (tcp) failed: Connection refused</p>
+<p class="demo-ex">"在听"和"能连上"是两回事：ss 看<b>本机</b>谁在听；nc 从<b>访问者角度</b>测能不能连。第一次用 nc 若提示找不到命令：<span class="code cmd">sudo apt install netcat-openbsd</span>（第 9 章会教你 apt）。</p>
+</div>
+
+<h3>8.3 取数据：curl 和 wget（本地可复现版）</h3>
+<p class="note">📌 本节全部用本地服务演示，不需要外网；文末附一个"联网扩展"例子（无网络直接跳过，不影响主线验收）。</p>
+<div class="demo">
+<p class="dtitle">示范 3：先用 python3 -m http.server 起一个本地网页服务</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab</span> &amp;&amp; <span class="cmd">cd</span> <span class="param">~/lab</span> &amp;&amp; <span class="cmd">python3</span> <span class="opt">-m</span> <span class="param">http.server</span> <span class="param">8000</span> <span class="opt">&amp;</span></p>
+<p class="demo-out">Serving HTTP on 0.0.0.0 port 8000 ... <span class="out">（以你机器实际输出为准）</span></p>
+<p class="demo-ex">python3 -m http.server = 把当前目录变成一个网页服务，8000 是端口；结尾 &amp; 让它后台跑不占终端。<b>用完收尾：jobs 找到它，kill 掉（或 kill %1）。</b></p>
+<p class="dtitle">示范 4：curl 成功请求 + 404 失败（本地稳定可复现）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">curl</span> <span class="opt">-I</span> <span class="param">http://localhost:8000/</span></p>
+<p class="demo-out">HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.x.x <span class="out">（以你机器实际输出为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">curl</span> <span class="opt">-I</span> <span class="param">http://localhost:8000/不存在.html</span></p>
+<p class="demo-out">HTTP/1.0 404 File not found <span class="out">（以你机器实际输出为准）</span></p>
+<p class="demo-ex">curl = 发 HTTP 请求拿数据（调 API、测网站、看返回）。<b>200 = 成功；404 = 服务器上没这个文件</b>。常用选项：<span class="opt">-I</span> 只看响应头、<span class="opt">-o 文件</span> 存到文件。</p>
+<p class="dtitle">示范 5：wget 本地演示（下载成功 + 404 失败）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="param">test</span> &gt; <span class="param">hello.txt</span>
+<span class="prompt">$</span> <span class="cmd">wget</span> <span class="opt">-O</span> <span class="param">downloaded-hello.txt</span> <span class="param">http://localhost:8000/hello.txt</span></p>
+<p class="demo-out">... 'downloaded-hello.txt' saved [5/5] <span class="out">（成功：以实际输出为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">wget</span> <span class="param">http://localhost:8000/不存在.html</span></p>
+<p class="demo-out">HTTP request sent, awaiting response... 404 File not found
+ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实际输出为准）</span></p>
+<p class="demo-ex">wget = 下载文件。<span class="opt">-O</span> 指定"保存成什么名字"——这里源文件 hello.txt 和下载目标在同一目录，<b>不指定 -O 的话 wget 会改名存成 hello.txt.1</b>（避免覆盖已存在的同名文件）。404 时 wget 会打印 ERROR 404 提示——<b>注意：Ubuntu 22.04 实测 wget 对 404 的退出码仍是 0</b>，所以脚本里判断下载成败别只依赖 wget 退出码，看输出提示、或用 <span class="code">curl --fail</span>（失败时退出码非 0）更可靠。演示完收尾：<span class="code">kill %1</span> 停掉本地服务、<span class="code">rm hello.txt downloaded-hello.txt</span> 清理。</p>
+</div>
+<div class="box2">
+<p><span class="opt">易错：</span>curl 测"服务通不通"，wget 下"文件"。URL 里的 &amp; 会被 shell 当后台符号处理，带 &amp; 的长 URL 必须加引号。</p>
+</div>
+<div class="box2">
+<p><b>🌐 联网扩展（可跳过，不影响主线）：</b>带参数的公开 API 示例——<span class="code">curl 'https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true'</span>（天气 API，免注册）。返回 JSON，值随时变化；<b>需要网络，连不上就跳过</b>——本节所有验收只要求本地部分。</p>
+</div>
+
+<h3>8.4 远程操作：ssh 和 scp</h3>
+<div class="demo">
+<p class="dtitle">示范 4：ssh 登录 + scp 传文件 🌐</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">ssh</span> <span class="param">用户名@192.168.1.10</span> <span class="note"># 远程登录（-p 可指定端口）</span>
+<span class="prompt">$</span> <span class="cmd">scp</span> <span class="param">~/lab/file.txt 用户名@192.168.1.10:/tmp/</span> <span class="note"># 把文件拷到远程机器</span></p>
+<p class="demo-ex">ssh = secure shell，远程登录后就像坐在那台机器前一样敲命令。<b>scp</b> = 通过 SSH 跨机器拷贝文件。练习条件：被连的机器要先装 openssh-server（Ubuntu：<span class="code cmd">sudo apt install openssh-server</span>）。</p>
+</div>
+
+<div class="box2">
+<p><span class="opt">补充两个命令：</span><span class="code cmd">traceroute 目标</span> = 显示数据包沿途经过的每一跳（定位"堵在哪一段"）；<span class="code cmd">nslookup 域名</span> = 域名查 IP（DNS 解析排查，如 <span class="code">nslookup deepseek.com</span>）。</p>
+</div>
+<h3>8.5 四层排查法（本章精华）</h3>
+<div class="rule">📌 服务连不上时，按证据分层排查，不能由一次 ping 直接下结论：<br>① <b>回环层</b>：<span class="code">ping -c 4 127.0.0.1</span>，只验证本机回环和网络栈；<br>② <b>本机/网关层</b>：<span class="code">ip addr</span> 看地址，<span class="code">ip route</span> 找默认网关，再测试网关；<br>③ <b>目标主机层</b>：ping 目标 IP；ICMP 可能被防火墙禁用，ping 不通不等于机器关机；<br>④ <b>端口/进程/应用层</b>：用 <span class="code">nc -zv</span> 或 <span class="code">curl</span> 测端口和应用，再用 <span class="code">ss</span>、<span class="code">ps</span>、日志定位服务。</div>
+<p class="note">这条路线和练习册进阶篇场景 3 的题目一一对应，做完题回来再读一遍，体会更深。</p>
+
+<h3>8.6 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span>ping 不通 ≠ 对方没开机——对方可能禁 ping（防火墙），但网页服务正常。继续用 nc 测端口。</p>
+<p><span class="opt">坑 2：</span>ss 是新一代 netstat，旧教程里的 netstat 用 ss 替代。</p>
+<p><span class="opt">坑 3：</span>curl 的 URL 带 &amp; 参数时，URL 要加引号。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 用 ip addr 找出本机 IP，用 ip route 找出网关地址。</p>
+<p>2. 用 ss -tlnp 列出本机所有监听端口，说出每个端口是干什么的（22 号至少认识）。</p>
+<p>3. 用 nc -zv 测 localhost 的 22 端口和一个不存在的端口，对比输出。</p>
+<p>4. 用 curl 请求一个公开网址（如 example.com），用 -I 只看响应头。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 默写四层排查法（主机→端口→进程→日志）每一步用什么命令。</p>
+<p>2. 判断：ping 不通说明对方机器一定关机了。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：进阶篇场景 3（全部题目）；场景 1 的 ss 部分。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-11">第 9 章 · apt 包管理</h2>
+<p><b>本章目标：</b>① 理解包管理器为什么存在；② 会用 apt 装/卸/搜软件；③ 看懂常见的锁文件报错。</p>
+<p><b>本章新命令</b>：<span class="code cmd">apt update</span> <span class="code cmd">apt install</span> <span class="code cmd">apt remove</span> <span class="code cmd">apt search</span> <span class="code cmd">apt upgrade</span> <span class="code cmd">apt list</span> <span class="code cmd">dpkg</span></p>
+
+<h3>9.1 包管理器：应用商店 + 自动管家</h3>
+<p>软件之间互相依赖（A 需要 B，B 需要 C）。手动装软件要自己解决依赖地狱；<b>apt = 应用商店 + 自动管家</b>：你只说"我要装 htop"，它自动把依赖全拉齐、装好、登记在册。</p>
+<table>
+<tr><th style="width:40%">命令</th><th>作用</th></tr>
+<tr><td><span class="code">sudo apt update</span></td><td><b>刷新货架</b>（更新软件列表，本身不装任何东西）</td></tr>
+<tr><td><span class="code">sudo apt install 软件</span></td><td>安装</td></tr>
+<tr><td><span class="code">sudo apt search 关键词</span></td><td>搜货架</td></tr>
+<tr><td><span class="code">sudo apt remove 软件</span></td><td>卸载</td></tr>
+<tr><td><span class="code">sudo apt upgrade</span></td><td>把已装的都升级到最新</td></tr>
+<tr><td><span class="code">apt list --installed</span></td><td>看已装清单（常配 grep 过滤）</td></tr>
+</table>
+<p class="note">📌 外部条件与四种状态：apt 需要<b>网络 + 软件源 + sudo 权限 + dpkg 状态正常</b>。①<u>已安装</u>：apt 提示"已是最新版本"；②<u>未安装</u>：先 <span class="code">sudo apt update</span> 刷新再装；③<u>无网络</u>：update 会超时/失败，主线概念不受影响，安装题记为环境扩展；④<u>被锁定</u>：报 Could not get lock，等另一个 apt 结束（见 9.3）。<b>安装后的软件不能当默认已有</b>——每台新机器都要先装。</p>
+<div class="demo">
+<p class="dtitle">示范 1：完整装一个软件 🌐</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">update</span>
+</p><p class="demo-out">Get:1 http://archive.ubuntu.com ... [1,234 kB] <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">apt</span> <span class="param">search</span> <span class="param">htop</span>
+</p><p class="demo-out">htop/&lt;发行版代号&gt; 3.3.0-4 amd64
+  interactive processes viewer <span class="out">（示例输出：Ubuntu 版本不同会显示不同代号（22.04=jammy、24.04=noble），以本机实际显示为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">install</span> <span class="param">htop</span>
+</p><p class="demo-in"><span class="prompt">$</span> <span class="cmd">htop</span></p>
+<p class="demo-ex">四步标准流程：<b>update 刷新 → search 确认名字 → install 安装 → 直接运行验证</b>。以后想装任何软件，照这个流程走。</p>
+</div>
+
+<h3>9.2 经典报错解读</h3>
+<div class="demo">
+<p class="dtitle">示范 2：锁文件报错</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">install</span> <span class="param">htop</span>
+</p><p class="demo-out">E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)</p>
+<p class="demo-ex">原因：<b>另一个 apt 正在跑</b>（比如系统自动更新），或者上次 apt 被 Ctrl+C 打断没清理。<b>锁</b>=防止两个 apt 同时改系统。解决：等它跑完；确认没有别的 apt 后重启一次系统锁会自动释放。</p>
+</div>
+<p class="note">底层补充：<span class="code cmd">dpkg</span> 是 apt 底层的"装机工"，apt 最终通过它干活。日常用 apt 就够，知道 dpkg 的存在即可——报错里见到 dpkg 字样不用慌。</p>
+<div class="box2">
+<p><span class="opt">易错点：</span>update 和 upgrade 天天被搞混——<b>update 刷新列表（几乎每次装东西前都做），upgrade 真正升级软件</b>。装新软件只需要 update + install。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业 🌐</p>
+<p>1. 用 apt search 找一个你感兴趣的小软件（如 cowsay、neofetch），装它并运行。</p>
+<p>2. apt list --installed 配合 grep，确认 htop 是否已安装。</p>
+<p>3. 用 apt remove 卸掉刚装的小软件，再 search 确认它没了。</p>
+<p>4. 🌐 复现锁报错：终端 1 运行 <span class="code">sudo apt install linux-firmware</span>（体积较大、下载需片刻，够时间复现），趁它下载时在终端 2 运行 <span class="code">sudo apt install htop</span>——观察终端 2 的锁报错。实验完终端 1 按 Ctrl+C 中断，并清理残留：<span class="code">sudo dpkg --configure -a</span>。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. apt update 和 apt upgrade 的区别？</p>
+<p>2. 判断：apt 报"Could not get lock"说明磁盘满了。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 4-7（htop 安装）；进阶篇各场景的 nc、htop 安装。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-12">第 10 章 · systemctl 与服务</h2>
+<p><b>本章目标：</b>① 理解 systemd 和"服务"；② 会用 systemctl 管理服务全流程；③ 会用 journalctl 看服务日志。</p>
+<p><b>本章新命令</b>：<span class="code cmd">systemctl</span> <span class="code cmd">journalctl</span></p>
+
+<h3>10.1 systemd：开机大管家</h3>
+<p><b>服务 = 常驻后台的程序</b>（nginx 网页服务、sshd 远程登录服务、docker 容器引擎……）。它们没人盯着也要 7×24 运行。<b>systemd 就是大管家</b>：开机时按顺序拉起所有服务，运行时盯着它们，崩了拉起来。</p>
+<p><span class="code cmd">systemctl</span> 是你和管家对话的命令。它管理的每个服务都有一份"档案"（unit 文件），记录启动命令、依赖、重启策略。</p>
+<div class="demo">
+<p class="dtitle">示范 1：服务管理全流程 🌐</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">systemctl</span> <span class="param">status</span> <span class="param">ssh</span>
+</p><p class="demo-out">● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/usr/lib/systemd/system/ssh.service; enabled)
+     Active: active (running) since Fri 2026-08-15 08:00:01 CST; 1 day ago
+   Main PID: 890 (sshd) <span class="out">（示例时间和 PID，以你机器实际输出为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">systemctl</span> <span class="param">restart</span> <span class="param">ssh</span>
+<span class="prompt">$</span> <span class="cmd">systemctl</span> <span class="param">status</span> <span class="param">ssh</span></p>
+<p class="demo-ex">status 输出三行是核心：<b>Loaded</b>=档案在哪（enabled=开机自启）；<b>Active</b>=现在是活是死（running=活着，failed=挂了，这里是排查第一眼）；<b>Main PID</b>=主进程工号。</p>
+</div>
+<table>
+<tr><th style="width:40%">命令</th><th>作用</th></tr>
+<tr><td><span class="code">systemctl start / stop 服务</span></td><td>启动 / 停止（只对这一次生效）</td></tr>
+<tr><td><span class="code">systemctl restart / reload 服务</span></td><td>重启 / 不中断重读配置</td></tr>
+<tr><td><span class="code">systemctl status 服务</span></td><td>看状态</td></tr>
+<tr><td><span class="code">systemctl enable / disable 服务</span></td><td>设/取消<b>开机自启</b></td></tr>
+</table>
+<div class="box2">
+<p><span class="opt">易错点：</span><b>start ≠ enable</b>。start 是"现在启动"；enable 是"开机时自动启动"。装了服务忘记 enable，重启机器后服务不回来——经典坑。改完配置文件后要 <b>restart</b>（或 reload）才生效。</p>
+</div>
+
+<h3>10.2 journalctl：服务的日记本</h3>
+<div class="demo">
+<p class="dtitle">示范 2：journalctl 实战</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">journalctl</span> <span class="opt">-u</span> <span class="param">ssh</span> <span class="note"># 只看 ssh 服务的日志</span>
+</p><p class="demo-in"><span class="prompt">$</span> <span class="cmd">journalctl</span> <span class="opt">-u ssh -f</span> <span class="note"># 实时跟踪</span>
+</p><p class="demo-in"><span class="prompt">$</span> <span class="cmd">journalctl</span> <span class="opt">-p err</span> <span class="note"># 只看错误级别以上的</span></p>
+<p class="demo-ex">服务挂了的三板斧：<b>systemctl status 看死活 → journalctl -u 服务名 看日志 → journalctl -p err 只看报错</b>。和《日志报错解读手册》配合使用。</p>
+</div>
+<p class="note">📌 外部条件：本章用 ssh 服务做演示对象——Ubuntu 桌面版可能没装 openssh-server（先 <span class="code">sudo apt install openssh-server</span>，或用系统已有的任意服务代替，如 cron、systemd-resolved）。<b>停止正在用的 SSH 服务会断掉你的远程会话</b>：实验请在本地终端做，远程时改用"重启"而非"停止"，并留好本地终端恢复方式。WSL / 容器环境 systemd 可能受限，不能做时记为环境限制，不影响主线概念。</p>
+<div class="hw">
+<p class="htitle">✏️ 章末作业 🌐</p>
+<p>1. systemctl status ssh，逐行解释 Loaded、Active、Main PID 的含义。</p>
+<p>2. 对 ssh 服务完整走一遍 start/stop/restart，每次都用 status 验证。</p>
+<p>3. journalctl -u ssh 看它的日志，再 -p err 过滤只看错误。</p>
+<p>4. 查一下 ssh 是否 enabled（开机自启），说出判断依据。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. start 和 enable 的区别？装了个服务想"重启机器后自动运行"该敲哪个？</p>
+<p>2. 服务挂了，排查的第一步该做什么？（A. 先 systemctl status 看死活，再 journalctl 看日志 B. 先 journalctl 看日志，再 status C. 只看 status 就够 D. 只看日志就够）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 4-6；进阶篇场景 4（开机自启）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-13">第 11 章 · 环境变量</h2>
+<p><b>本章目标：</b>① 理解环境变量是"全局公告栏"；② 明白 PATH 决定"命令找不找得到"；③ 会 export、改 rc 文件、source；④ 会 alias 起外号。</p>
+<p><b>本章新命令</b>：<span class="code cmd">env</span> <span class="code cmd">echo</span> <span class="code cmd">export</span> <span class="code cmd">source</span> <span class="code cmd">alias</span>（文件：<span class="code">~/.bashrc</span>）</p>
+
+<h3>11.1 环境变量：贴在墙上的公告</h3>
+<p>每个终端都有一面"公告栏"，上面贴着各种公告：<b>HOME</b>=你家在哪、<b>PATH</b>=去哪找命令、<b>USER</b>=你是谁。程序跑起来之前会先看公告栏。<span class="code cmd">env</span> 能看全部公告，<span class="code cmd">echo</span> 加 <span class="code">$</span> 能看某一条：</p>
+<div class="demo">
+<p class="dtitle">示范 1：读公告</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="param">$HOME</span>
+</p><p class="demo-out">/home/&lt;你的真实用户名&gt; <span class="out">（示例输出，以你机器为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="param">$PATH</span>
+</p><p class="demo-out">/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin</p>
+<p class="demo-ex">$ 的作用是"取公告内容"。PATH 是一串<b>用冒号分隔的目录</b>——你敲 <span class="code">ls</span> 时，系统按这个顺序逐目录找叫 ls 的程序，找到就执行。</p>
+</div>
+<div class="rule">📌 第 0 章的 "command not found" 谜底就在这：<b>你要的程序不在 PATH 的任何一个目录里</b>。装的东西找不到了？三种可能：没装、装了但 PATH 没有它的目录、名字记错了。</div>
+
+<h3>11.2 export：贴新公告</h3>
+<div class="demo">
+<p class="dtitle">示范 2：把自定义目录加进 PATH</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="param">~/mybin</span>
+<span class="prompt">$</span> <span class="cmd">export</span> <span class="param">PATH="$HOME/mybin:$PATH"</span>
+<span class="prompt">$</span> <span class="cmd">echo</span> <span class="param">$PATH</span>
+</p><p class="demo-out">/home/&lt;你的真实用户名&gt;/mybin:/usr/local/bin:/usr/bin:...</p>
+<p class="demo-ex">注意写法：<b>新目录在前，$PATH 原样带上</b>——如果把 $PATH 丢了，等于把原公告全部覆盖，系统命令全都找不到（坑！）。</p>
+</div>
+<div class="box2">
+<p><span class="opt">易错点：</span>export 只对<b>当前终端</b>生效。关掉重开，公告没了。想让公告<b>永久</b>有效，把这行写进 <span class="code">~/.bashrc</span>（每次开终端自动执行的配置文件）。</p>
+</div>
+
+<h3>11.3 alias 与 source</h3>
+<div class="demo">
+<p class="dtitle">示范 3：起外号 + 立即生效</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">alias</span> <span class="param">lh='ls -lh'</span>
+<span class="prompt">$</span> <span class="cmd">lh</span>
+</p><p class="demo-out">total 12
+-rw-r--r-- 1 student student 100M Aug 16 11:00 big.img <span class="out">（示例输出，实际以本机为准）</span></p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> "alias lh='ls -lh'" &gt;&gt; <span class="param">~/.bashrc</span>
+<span class="prompt">$</span> <span class="cmd">source</span> <span class="param">~/.bashrc</span></p>
+<p class="demo-ex"><b>alias</b> = 给长命令起外号。写进 .bashrc = 永久保存；<b>source</b> = 让当前终端立刻重读配置文件（不用重开终端）。注意：ll、la 这些名字 Ubuntu 已经预定义了别名，自定义外号避开它们。</p>
+<p class="note">✅ 安全闭环：①改前备份 <span class="code">cp ~/.bashrc ~/.bashrc.backup</span>；②自己加的行用唯一注释标记（如 <span class="code"># my-alias</span>），重复执行不会重复追加；③不想要了：删掉那两行再 source；④改乱想回退：<span class="code">cp ~/.bashrc.backup ~/.bashrc</span> 再 source。验证恢复成功：<span class="code">alias</span> 里 lh 消失。</p>
+</div>
+<div class="box">
+<p><b>本章对比：export 临时 vs 写进 ~/.bashrc 永久</b></p>
+<table>
+<tr><th style="width:34%">做法</th><th>特点</th></tr>
+<tr><td class="code">export 变量=值</td><td>只对当前终端生效，关了就没——试东西用</td></tr>
+<tr><td>写进 <span class="code">~/.bashrc</span> 再 source</td><td>永久生效，每次开终端自动加载——定下来后用</td></tr>
+</table>
+</div>
+
+<div class="hw">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. env 看全部环境变量，找出 HOME、USER、SHELL 三条的值。</p>
+<p>2. 建 ~/mybin，把它的路径加进 PATH（别丢 $PATH），验证。</p>
+<p>3. 自定义一个不撞名的别名（如 lh），写进 .bashrc，source 后验证。</p>
+<p>4. 重开一个终端，确认别名还在（写进 .bashrc 的才能"永久"）。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 敲命令报 command not found，有哪三种可能原因？</p>
+<p>2. 判断：export 设置的环境变量在下次开机后仍然有效。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：进阶篇场景 1（labservice.conf 的 LOGDIR 就是环境变量的"文件版"用法）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-14">第 12 章 · 归档与压缩</h2>
+<p><b>本章目标：</b>① 理解"归档"和"压缩"是两件事；② 会用 tar 打包（含 tar.gz）；③ 会 gzip / zip；④ 会用 diff 验证解包无误。</p>
+<p><b>本章新命令</b>：<span class="code cmd">tar</span> <span class="code cmd">gzip</span> <span class="code cmd">gunzip</span> <span class="code cmd">zip</span> <span class="code cmd">unzip</span></p>
+
+<h3>12.1 两个概念先分开</h3>
+<table>
+<tr><th style="width:25%">概念</th><th>比喻</th><th>效果</th></tr>
+<tr><td>归档</td><td>把一堆文件<b>装箱</b></td><td>多个 → 一个（大小几乎不变）</td></tr>
+<tr><td>压缩</td><td>把箱子<b>抽真空</b></td><td>体积变小</td></tr>
+</table>
+<p>tar 负责装箱，gzip 负责抽真空。<b>tar.gz = 先装箱再抽真空</b>（两步合成一条命令）。</p>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 1：打包 + 压缩（背口诀）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab/ch2 &amp;&amp;</span> <span class="cmd">echo</span> <span class="param">x &gt; ~/lab/ch2/note.txt</span> <span class="out"># 材料自足：没有就现造（跳章也能跑）</span>
+<span class="prompt">$</span> <span class="cmd">tar</span> <span class="opt">-czvf</span> <span class="param">~/lab/bak.tar.gz ~/lab/ch2</span></p>
+<p class="demo-out">/home/&lt;你的真实用户名&gt;/lab/ch2/
+/home/&lt;你的真实用户名&gt;/lab/ch2/note.txt
+<span class="note">（tar 打印的是真实绝对路径，以你机器为准）</span></p>
+<p class="demo-ex"><b>c</b>=create 建包、<b>z</b>=gzip 压缩、<b>v</b>=verbose 显示过程、<b>f</b>=file 后面接文件名。口诀：<b>打包 czvf，解包 xzvf</b>（解包把 c 换成 x）。f 永远放最后，紧接文件名。</p>
+</div>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 2：解包 + 验证</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">rm</span> <span class="opt">-rf</span> <span class="param">~/lab/restore</span> <span class="out"># 重复运行前先清旧解包目录（只清练习目录，确认无其他东西）</span>
+<span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab/restore</span>
+<span class="prompt">$</span> <span class="cmd">tar</span> <span class="opt">-xzvf</span> <span class="param">~/lab/bak.tar.gz</span> <span class="opt">-C</span> <span class="param">~/lab/restore</span>
+<span class="prompt">$</span> <span class="param">RESTORED_DIR="$(find ~/lab/restore -type d -path '*/lab/ch2' -print -quit)"</span> <span class="out"># 只取第一个匹配（-quit），不依赖通配展开，不误匹配多个用户目录</span>
+<span class="prompt">$</span> <span class="param">[ -n "$RESTORED_DIR" ] &amp;&amp; diff -r ~/lab/ch2 "$RESTORED_DIR" &amp;&amp; echo 还原一致</span>
+<span class="prompt">$</span> <span class="out"># 若没输出“还原一致”，先 echo "$RESTORED_DIR" 看取到的路径对不对</span></p>
+<p class="demo-out">还原一致</p>
+<p class="demo-ex">解包后<b>用 diff -r 对比原目录</b>——无输出 = 一个不多一个不少。备份的意义在于"能原样还原"，验证这一步不能省（练习册 5-7 就是这道题）。</p>
+</div>
+<div class="demo" style="line-height:1.3">
+<p class="dtitle">示范 3：gzip 单文件 / zip 跨平台</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'这是一段用于压缩练习的文本，可以多写几行'</span> &gt; <span class="param">~/lab/big.txt</span> <span class="out"># 先自造要压缩的文件</span>
+<span class="prompt">$</span> <span class="cmd">gzip</span> <span class="param">~/lab/big.txt</span> <span class="note"># → big.txt.gz</span>
+<span class="prompt">$</span> <span class="cmd">gunzip</span> <span class="param">~/lab/big.txt.gz</span> <span class="note"># 解回来</span>
+<span class="prompt">$</span> <span class="cmd">zip</span> <span class="opt">-r</span> <span class="param">~/lab/for-windows.zip ~/lab/ch2</span>
+<span class="prompt">$</span> <span class="cmd">unzip</span> <span class="param">~/lab/for-windows.zip</span></p>
+<p class="demo-ex">gzip 只压单个文件（压完原文件消失，变成 .gz）；zip 是 Windows 也认的格式，跨系统交换文件用 zip。</p>
+</div>
+<div class="box2 tight2">
+<p><span class="opt">易错点：</span>c 和 x 写反 = 灾难（覆盖）；-f 必须最后；tar 本身只打包不压缩（tar.gz 里的 z 才负责压缩）。</p>
+</div>
+<div class="hw tight2">
+<p class="htitle">✏️ 章末作业</p>
+<p>1. 把 ~/lab/ch2 打包成 tar.gz，观察大小，再解包到新目录。</p>
+<p>2. 用 diff -r 验证解包目录和原目录一致。</p>
+<p>3. 用 gzip 压一个文件，ls 看后缀变化，再用 gunzip 解回来。</p>
+<p>4. 用 zip 打包发给"Windows 朋友"（虚拟），unzip 解包验证。</p>
+</div>
+<div class="quiz tight2">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 默写口诀：打包用什么，解包用什么？z 和 f 分别是什么？</p>
+<p>2. 判断：tar 命令会自动压缩文件。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：基础篇 5-6、5-7；进阶篇场景 2（归档大文件）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-15">第 13 章 · Shell 脚本基础</h2>
+<p><b>本章目标：</b>① 理解"脚本 = 把敲过的命令装进文件"；② 会写带变量、if、for 的脚本；③ 会用 crontab 定时执行；④ 知道脚本的标准写法。</p>
+<p><b>本章新命令</b>：<span class="code cmd">crontab</span>（脚本语法：shebang、变量、if、for、函数、exit）</p>
+
+<h3>13.1 脚本是什么</h3>
+<p>你在终端一条条敲命令很累，而且容易敲错。把要敲的命令按顺序写进一个文件，以后执行这个文件就行——<b>这个文件就是 Shell 脚本</b>。它是运维自动化的起点：巡检、备份、告警，全是脚本。</p>
+<div class="demo">
+<p class="dtitle">示范 1：第一个完整脚本（资源巡检）</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">&gt; ~/lab/check.sh &lt;&lt; 'EOF'</span></p>
+<p class="demo-out">#!/bin/bash
+# 资源巡检脚本：磁盘、内存、负载
+echo "===== 巡检开始 $(date) ====="
+echo "--- 磁盘 ---"
+df -h | grep -v "^tmpfs"
+echo "--- 内存 ---"
+free -h
+echo "--- 负载 ---"
+uptime</p>
+<p class="demo-in">EOF
+<span class="prompt">$</span> <span class="cmd">chmod</span> <span class="param">+x ~/lab/check.sh</span>
+<span class="prompt">$</span> <span class="cmd">bash</span> <span class="param">~/lab/check.sh</span></p>
+<p class="demo-ex">逐行解读：<b>#!/bin/bash</b>（shebang，告诉系统用 bash 解释这个文件，永远第一行）；# 开头=注释；echo 打印提示；df/free/uptime 是你学过的命令（见第 7 章）原样放进来。<b>chmod +x</b> 给执行权限后才能 ./ 运行。</p>
+</div>
+
+<h3>13.2 变量、if、for</h3>
+<div class="demo">
+<p class="dtitle">示范 2：变量 + 判断 + 循环</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">&gt; ~/lab/check_disk.sh &lt;&lt; 'EOF'</span></p>
+<p class="demo-out">#!/bin/bash
+# 磁盘告警：使用率超 80% 打印警告
+THRESHOLD=80
+USAGE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')
+if [ "$USAGE" -gt "$THRESHOLD" ]; then
+  echo "警告：根分区已用 $USAGE%，超过 $THRESHOLD%！"
+else
+  echo "正常：根分区已用 $USAGE%"
+fi
+for user in alice bob; do
+  echo "检查用户：$user"
+done</p>
+<p class="demo-in">EOF
+<span class="prompt">$</span> <span class="cmd">chmod</span> <span class="param">+x ~/lab/check_disk.sh &amp;&amp;</span> <span class="cmd">./check_disk.sh</span></p>
+<p class="demo-out">正常：根分区已用 26%
+检查用户：alice
+检查用户：bob</p>
+<p class="demo-ex">三个语法点：<b>变量</b>（THRESHOLD=80，<span class="danger">等号两边绝不能有空格</span>；用的时候加 $）；<b>$()</b> = 把命令的输出装进变量；<b>tr -d '%'</b> = tr 字符转换、-d 删除，把 % 号删掉（df 输出是 "26%" 带百分号，删掉才是纯数字，才能和 80 比大小）；<b>if/then/else/fi</b> 判断（注意 [ ] 里和条件之间有空格）；<b>for 变量 in 列表; do...done</b> 循环。</p>
+</div>
+
+<div class="box2">
+<p><span class="opt">补两个脚本零件：</span></p>
+<p>① <span class="code cmd">exit</span> = 结束脚本，并带一个"退出码"：<span class="code">exit 0</span>（正常）、<span class="code">exit 1</span>（出错）。别的程序（或你自己）可以读这个码判断脚本成没成功。</p>
+<p>② <b>函数</b> = 把一段脚本起个名字，需要时叫它：<span class="code">check_disk() { df -h; }</span>（定义），<span class="code">check_disk</span>（调用）。函数让长脚本分块、可复用——进阶篇的巡检脚本就是"三个函数 + 主流程"的搭法。</p>
+</div>
+
+<div class="box2"><b>函数与退出码：</b>Shell 函数用“函数名(){ 命令; }”把命令封装起来；<span class="code">exit 0</span> 表示正常结束，非 0 通常表示失败；<span class="code">$?</span> 可查看上一个命令的退出码。</div>
+<h3>13.3 crontab：定时闹钟</h3>
+<p><span class="code cmd">crontab</span> 让脚本定时自动跑。<span class="code">crontab -e</span> 编辑（首次会问选编辑器）、<span class="code">crontab -l</span> 查看。</p>
+<div class="demo">
+<p class="dtitle">示范 3：每天凌晨 2 点自动跑脚本 🌐</p>
+<p class="demo-in"><span class="prompt">$</span> <span class="cmd">crontab</span> <span class="opt">-e</span></p>
+<p class="demo-out">0 2 * * * /home/&lt;你的真实用户名&gt;/lab/check.sh &gt;&gt; /home/&lt;你的真实用户名&gt;/lab/check.log 2&gt;&amp;1</p>
+<p class="demo-ex">格式：<b>分 时 日 月 周 + 命令</b>（五个时间位，* = 任意）。这行=每天 2 点 0 分执行。<b>check.sh 就是本章 13.1 写好的巡检脚本</b>——cron 只管按时叫你，跑什么还是你自己的脚本。</p>
+<p class="note">✅ 安全闭环（照做）：①改前先备份 <span class="code">crontab -l &gt; ~/lab/cron.backup</span>；②实验行加唯一标记（如把 check.sh 改成每分钟跑一次：<span class="code">* * * * * /home/学生/lab/check.sh &gt;&gt; ...</span>）；③等 1~2 分钟验证日志新增后，立即删掉该实验行；④核对只剩原有任务：<span class="code">crontab -l</span>；⑤若改乱，恢复：<span class="code">crontab ~/lab/cron.backup</span>。cron 无“运行错误提示”，验证只能看脚本自己写的日志或邮件。</p>
+</div>
+<div class="box2">
+<p><span class="opt">易错（重要）：</span>cron 的环境和你的终端<b>不是同一个</b>——它对 <span class="code">~</span> 的展开不可靠。定时任务里的路径<b>一律写绝对路径</b>（/home/&lt;你的真实用户名&gt;/...，不写 ~/...）。这是练习册进阶篇 5-4 的考点，也是实战第一大坑。</p>
+</div>
+
+<div class="box">
+<p><b>本章对比：脚本 vs 手动敲</b></p>
+<table>
+<tr><th style="width:30%">对象</th><th>特点 / 适用场景</th></tr>
+<tr><td>手动一条条敲</td><td>一次性操作；边看边敲边改</td></tr>
+<tr><td>写成脚本（.sh + chmod +x）</td><td>可重复、可定时（crontab）、可交给别人跑——一切自动化从写脚本开始</td></tr></table>
+</div>
+
+<h3>13.4 易错点</h3>
+<div class="box2">
+<p><span class="opt">坑 1：</span>变量赋值 <span class="code">NAME=student</span> 等号两边有空格 → 报错 command not found。</p>
+<p><span class="opt">坑 2：</span>写好的脚本忘 <span class="code">chmod +x</span> → Permission denied。</p>
+<p><span class="opt">坑 3：</span>脚本第一行 <span class="code">#!/bin/bash</span> 忘了写，在部分环境会出怪问题。</p>
+</div>
+<div class="hw">
+<p class="htitle">✏️ 章末作业 🌐</p>
+<p>1. 写一个脚本：打印"今天日期 + 磁盘使用率 + 内存剩余"，跑通。</p>
+<p>2. 给脚本加变量和 if：内存可用低于 20% 时打印警告。</p>
+<p>3. 用 for 循环遍历 3 个文件，对每个打印"文件 X 的大小是..."。</p>
+<p>4. 🌐 crontab -e 加一条每分钟执行的测试任务（用绝对路径！），观察日志后删掉它。</p>
+</div>
+<div class="quiz">
+<p class="qtitle">🎯 章末自测</p>
+<p>1. 脚本第一行 #!/bin/bash 是什么？crontab 里为什么必须用绝对路径？</p>
+<p>2. 判断：脚本写好后不需要执行权限也能 ./ 运行。（对/错）</p>
+</div>
+<p class="note">✏️ 对应练习册：进阶篇场景 5（两个脚本 + cron 收尾，直通"5 个 Shell 脚本"任务）。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-16">附录 A · 章末作业与自测答案</h2>
+<p class="note">先自己做，再对答案。自测题给答案；动手作业给“检查点”（做到什么程度算对）。</p>
+
+<h3>第 0 章</h3>
+<p><b>自测 1：</b>$ 表示当前是普通用户；# 表示当前是 root（管理员）身份。</p>
+<p><b>自测 2：</b>错。ls 是命令（动词），-l 是选项（怎么做），/home 是参数（对谁做）。</p>
+<p class="note">✅ 作业检查点：① pwd 输出 = /home/&lt;你的真实用户名&gt;，whoami = 你的真实用户名（两者对应）；② 能说出 3 个选项及作用；③ history 能看到今天敲过的命令，↑ 能调出上一条并再次执行；④ 报错原文以 command not found 结尾。</p>
+<h3>第 1 章</h3>
+<p><b>自测 1：</b>绝对路径从树根 / 出发写全称，走到哪都不变；相对路径从当前目录出发，站在不同位置同一个写法指向不同地方。</p>
+<p><b>自测 2：</b>错。cd .. 是去"上一级目录"；cd - 才是回"上一个待过的目录"。</p>
+<p class="note">✅ 作业检查点：① cd /etc 后 pwd 输出 /etc，cd ~ 后 pwd 输出 /home/&lt;你的真实用户名&gt;；② 两种路径进入同一目录后 pwd 输出相同；③ 找出 3 个 . 开头文件（.bashrc、.profile 等）；④ / 下能看到 home、etc、var、usr、bin 等目录。</p>
+<h3>第 2 章</h3>
+<p><b>自测 1：</b>文件系统里"改名"就是把它在目录树里的记录从旧名字移到新名字——和 mv 的实现完全一致，所以 Linux 不需要单独 rename 命令。</p>
+<p><b>自测 2：</b>错。rm 删除不可恢复，没有回收站；恢复软件成功率极低。</p>
+<p class="note">✅ 作业检查点：① 一条命令建成 x/y/z（mkdir -p）；② 用 ls 对比两目录清单一致（diff -r 留到学完第 3 章 3.4 后补做）；③ ls 里 second-note.txt 存在、note2.txt 消失；④ rmdir 报“Directory not empty”，rm -r 后目录消失。</p>
+<h3>第 3 章</h3>
+<p><b>自测 1：</b>C（tail -f 实时跟踪）。cat 会刷屏，less 要手动翻，tail -f 直接等新报错。</p>
+<p><b>自测 2：</b>错。说反了：grep 按<b>内容</b>搜，find 按<b>文件名/属性</b>找。</p>
+<p class="note">✅ 作业检查点：① less 里空格/b/q/搜索都能操作；② grep -ci error 和 grep -i 数出的行数一致；③ find ~ -name "*.txt" 列出家目录所有 txt；④ 改动前 diff 无输出，改动后 diff 显示差异行。</p>
+<h3>第 4 章</h3>
+<p><b>自测 1：</b>管道 | 连接<b>命令与命令</b>（数据不落地）；重定向 &gt; 连接<b>命令与文件</b>（数据写进文件）。</p>
+<p><b>自测 2：</b>错。uniq 只对相邻重复行生效，乱序文件必须先 sort。</p>
+<p class="note">✅ 作业检查点：① cat 验证 &gt; 覆盖、&gt;&gt; 追加（和示范 2 现象一致）；② uniq -c 每行 = 数字 + 词；③ awk '{print $1}' 输出全是第一列；④ 管道链改造后输出 3 个词，用 head -3 收尾。</p>
+<h3>第 5 章</h3>
+<p><b>自测 1：</b>其他人权限是 r--（只读）；数字法是 4，整串是 754。</p>
+<p><b>自测 2：</b>错。说反了：sudo 是借 root 权限执行一条命令，su 是切换成另一个用户。</p>
+<p class="note">✅ 作业检查点：① groups alice 和 groups bob 各有输出；② groups alice 结果里含 sudo；③ ls -l 两次都显示 -rwxr-xr-x（755）；④ alice 读 bob 的文件被拒绝或按权限位受限（前提：alice 不在该文件属组内）。</p>
+<h3>第 6 章</h3>
+<p><b>自测 1：</b>kill 发 SIGTERM（程序可清理后优雅退出）；kill -9 发 SIGKILL（内核直接处决，无清理机会）。对数据库等直接 -9 可能损坏数据，所以 -9 是最后手段。</p>
+<p><b>自测 2：</b>错。nohup 是"挂断不死"（关终端进程继续跑）；忽略错误输出是 2&gt;&amp;1 和 &gt; 的事。</p>
+<p class="note">✅ 作业检查点：① 找到 bash 进程并读出 PID、%CPU；② sleep 300 已被 kill（ps 再查已消失）；③ run.log 有清理记录，kill -9 那次无新增记录；④ 重开终端 ps 还能看到 nohup 任务。</p>
+<h3>第 7 章</h3>
+<p><b>自测 1：</b>df 看整个分区（整体），du 看具体目录（明细）。排查先 df 定位满的分区，再 du 逐层下钻。</p>
+<p><b>自测 2：</b>错。Linux 没有盘符，新硬盘要挂载（mount）到某个目录。</p>
+<p class="note">✅ 作业检查点：① df -h 里根分区 Use% 有数字；② 先 ls -a ~ 再 du -sh ~/* 排出前 3 名（注意 .开头的隐藏项也要看）；③ ls -lh 显示 big.img 为 100M；④ lsblk 的 sda1 与 df 的 /dev/sda1 对应得上。</p>
+<h3>第 8 章</h3>
+<p><b>自测 1：</b>① ping 目标 IP；② nc -zv 目标 端口 / ss -tlnp；③ ps aux | grep / fuser -v 端口；④ tail -f 对应日志。</p>
+<p><b>自测 2：</b>错。对方可能禁 ping（防火墙丢 ICMP），服务却正常；应继续用 nc 测端口。</p>
+<p class="note">✅ 作业检查点：① ip addr 里 inet 后是本机 IP，ip route 里 default via 后是网关；② ss -tlnp 里认出 22 端口 sshd；③ nc -zv 22 端口 succeeded、9999 端口 refused；④ curl -I 能看到 HTTP/1.1 200 等状态行。</p>
+<h3>第 9 章</h3>
+<p><b>自测 1：</b>update 刷新软件列表（不装不升级）；upgrade 把已装软件升级到新版本。</p>
+<p><b>自测 2：</b>错。锁报错=另一个 apt 在跑或上次异常中断；磁盘满会报 No space left on device。</p>
+<p class="note">✅ 作业检查点：① 装的软件能直接运行；② apt list --installed | grep htop 有结果；③ remove 后 list 里无 htop；④ 终端 2 出现 Could not get lock 报错。</p>
+<h3>第 10 章</h3>
+<p><b>自测 1：</b>start=现在启动一次；enable=设开机自启。想重启机器后自动运行：systemctl enable 服务。</p>
+<p><b>自测 2：</b>A。先 status 一眼定位死活，再 journalctl 找原因；C、D 都信息不全。</p>
+<p class="note">✅ 作业检查点：① Loaded/Active/Main PID 三行能逐行解释；② 每次操作后 status 的 Active 字段与动作对应（stop 后 inactive，start 后 active）；③ -p err 只显示 error 级别；④ status 输出里含 enabled 字样 = 开机自启。</p>
+<h3>第 11 章</h3>
+<p><b>自测 1：</b>① 没装这个软件；② 装了但它的目录不在 PATH 里；③ 命令名拼错了。</p>
+<p><b>自测 2：</b>错。export 只对当前终端生效；想永久生效要写进 ~/.bashrc。</p>
+<p class="note">✅ 作业检查点：① env 里找到 HOME/USER/SHELL 三条；② echo $PATH 以 /home/&lt;你的真实用户名&gt;/mybin 开头，且原目录都在（没丢 $PATH）；③ lh 能列出详细文件；④ 新开终端 lh 依然可用。</p>
+<h3>第 12 章</h3>
+<p><b>自测 1：</b>打包 czvf、解包 xzvf；z=用 gzip 压缩，f=指定文件名（放最后）。</p>
+<p><b>自测 2：</b>错。tar 只归档不压缩；tar.gz 里的 z 才压缩。</p>
+<p class="note">✅ 作业检查点：① ls 里出现 bak.tar.gz；② diff -r 无输出（一个不多一个不少）；③ 文件后缀变 .gz，gunzip 后还原；④ unzip 能解出全部文件。</p>
+<h3>第 13 章</h3>
+<p><b>自测 1：</b>#!/bin/bash 是 shebang，告诉系统用 bash 解释脚本。cron 环境对 ~ 展开不可靠，路径必须写绝对路径才能保证找得到。</p>
+<p><b>自测 2：</b>错。必须有执行权限（chmod +x）才能 ./ 运行；或改用 bash 脚本名 方式运行。</p>
+<p class="note">✅ 作业检查点：① 脚本输出含日期、磁盘、内存三项；② 临时把阈值改大（如 90）能触发警告分支，再改回 20；③ 三个文件各行打印出“文件 X 的大小是...”；④ crontab -l 能看到任务，日志每分钟新增，删除后 crontab -l 无该项。</p>
+
+<div class="newpage"></div>
+<h2 id="toc-17">附录 B · 术语表</h2>
+<table>
+<tr><th style="width:22%">术语</th><th>解释</th></tr>
+<tr><td>终端 Terminal</td><td>和 Linux 对话的窗口</td></tr>
+<tr><td>提示符</td><td>student@ubuntu:~$ 这串符号，出现=等你敲命令</td></tr>
+<tr><td>命令/选项/参数</td><td>做什么 / 怎么做 / 对谁做</td></tr>
+<tr><td>发行版</td><td>Ubuntu、CentOS 等（同内核，不同包装）</td></tr>
+<tr><td>目录树</td><td>一切文件的组织结构，根是 /</td></tr>
+<tr><td>一切皆文件</td><td>连设备、磁盘都是文件，统一操作</td></tr>
+<tr><td>绝对/相对路径</td><td>从 / 出发 / 从当前位置出发</td></tr>
+<tr><td>家目录 ~</td><td>你的地盘 /home/&lt;你的真实用户名&gt;</td></tr>
+<tr><td>通配符</td><td>*任意一串、? 任意一个</td></tr>
+<tr><td>管道 |</td><td>把前一个命令的输出喂给后一个</td></tr>
+<tr><td>重定向 &gt; / &gt;&gt;</td><td>输出到文件（覆盖 / 追加）</td></tr>
+<tr><td>权限位 rwx</td><td>读 / 写 / 执行；分属主、属组、其他人三组</td></tr>
+<tr><td>root / sudo</td><td>管理员 / 借管理员权限执行一条命令</td></tr>
+<tr><td>进程 / PID</td><td>运行中的程序 / 它的工号</td></tr>
+<tr><td>SIGTERM / SIGKILL</td><td>请退出（可清理）/ 当场击毙（无机会）</td></tr>
+<tr><td>前台 / 后台</td><td>占着终端 / 不占终端（&amp;）</td></tr>
+<tr><td>nohup</td><td>关终端也不死的后台运行</td></tr>
+<tr><td>挂载 mount</td><td>把磁盘/分区接到目录树上</td></tr>
+<tr><td>IP / 端口</td><td>门牌号 / 窗口号</td></tr>
+<tr><td>监听 LISTEN</td><td>服务开着窗口等人连</td></tr>
+<tr><td>包管理器 apt</td><td>应用商店+自动处理依赖</td></tr>
+<tr><td>systemd</td><td>开机大管家，管所有服务</td></tr>
+<tr><td>服务 unit</td><td>常驻后台的程序 / 它的档案文件</td></tr>
+<tr><td>开机自启 enable</td><td>重启机器后自动拉起</td></tr>
+<tr><td>环境变量</td><td>全局公告栏（HOME、PATH）</td></tr>
+<tr><td>PATH</td><td>找命令的目录清单，冒号分隔</td></tr>
+<tr><td>.bashrc</td><td>每次开终端自动执行的配置</td></tr>
+<tr><td>alias</td><td>命令外号</td></tr>
+<tr><td>归档 / 压缩</td><td>装箱 / 抽真空</td></tr>
+<tr><td>shebang</td><td>脚本第一行 #!/bin/bash</td></tr>
+<tr><td>cron</td><td>定时闹钟（分时日月周）</td></tr>
+<tr><td>JSON</td><td>数据交换格式，{键:值}（API 返回常用）</td></tr>
+<tr><td>四层排查法</td><td>主机→端口→进程→日志</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-18">附录 C · 命令速查总表（按章）</h2>
+<table>
+<tr><th style="width:30%">章节</th><th>命令</th></tr>
+<tr><td>第 0 章</td><td>pwd ls echo --help man clear history exit whoami</td></tr>
+<tr><td>第 1 章</td><td>pwd ls cd（~ .. -）</td></tr>
+<tr><td>第 2 章</td><td>touch mkdir(-p) cp(-r) mv rm(-r -f) rmdir</td></tr>
+<tr><td>第 3 章</td><td>cat less head tail(-f) wc file grep(-i -r -n -v -c) find(-name -size) diff(-r)</td></tr>
+<tr><td>第 4 章</td><td>| &gt; &gt;&gt; 2&gt;&amp;1 sort uniq(-c) awk('{print $1}')</td></tr>
+<tr><td>第 5 章</td><td>whoami id su sudo useradd passwd usermod(-aG) groupadd groups userdel last chmod(符号/数字) chown chgrp</td></tr>
+<tr><td>第 6 章</td><td>ps aux top htop pgrep kill killall jobs bg fg nohup fuser(-v)</td></tr>
+<tr><td>第 7 章</td><td>df(-h) du(-sh) lsblk mount fallocate dd mkfs</td></tr>
+<tr><td>第 8 章</td><td>ip addr ip route ping(-c) ss(-tlnp) curl(-I -o) wget nc(-zv) traceroute nslookup ssh scp</td></tr>
+<tr><td>第 9 章</td><td>apt update/install/remove/search/upgrade/list dpkg</td></tr>
+<tr><td>第 10 章</td><td>systemctl(status start stop restart reload enable disable) journalctl(-u -f -p)</td></tr>
+<tr><td>第 11 章</td><td>env echo($变量) export source alias（~/.bashrc）</td></tr>
+<tr><td>第 12 章</td><td>tar(-czvf -xzvf) gzip gunzip zip unzip</td></tr>
+<tr><td>第 13 章</td><td>crontab(-e -l) chmod +x（脚本：#!/bin/bash 变量 if for $()）</td></tr>
+</table>
+
+<div class="newpage"></div>
+<h2 id="toc-19">附录 D · 章 ↔ 练习册对应表（含新命令对齐）</h2>
+<table>
+<tr><th style="width:30%">本书章节</th><th>练习册</th><th>对齐的新命令</th></tr>
+<tr><td>第 0~2 章</td><td>基础篇 阶段 1（1-1~1-8）</td><td>—</td></tr>
+<tr><td>第 3~4 章</td><td>基础篇 阶段 2（2-1~2-8）</td><td>grep、wc、管道、重定向</td></tr>
+<tr><td>第 5 章</td><td>基础篇 阶段 3（3-1~3-8）</td><td>chmod 数字算法、chown、usermod</td></tr>
+<tr><td>第 6~7 章</td><td>基础篇 阶段 4（4-1~4-8）</td><td>fuser、htop、df/du</td></tr>
+<tr><td>第 3~4、12 章</td><td>基础篇 阶段 5（5-1~5-8）</td><td>awk、find、sort、uniq、tar</td></tr>
+<tr><td>第 3、8、10 章</td><td>进阶篇 场景 1</td><td>grep、ss、journalctl</td></tr>
+<tr><td>第 7、12 章</td><td>进阶篇 场景 2</td><td>fallocate、dd、tar、df/du</td></tr>
+<tr><td>第 8 章</td><td>进阶篇 场景 3</td><td>ip route、nc、ss、ping</td></tr>
+<tr><td>第 6、10 章</td><td>进阶篇 场景 4</td><td>fuser、nohup、systemctl</td></tr>
+<tr><td>第 13 章</td><td>进阶篇 场景 5</td><td>crontab（绝对路径）、脚本语法</td></tr>
+</table>
+<p class="footer">《Linux 入门》教科书版 · 与《Linux 指令练习册》基础篇 / 进阶篇、《英语单词手册》《日志报错解读手册》《Python 内置函数手册》配套使用</p>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>报错英语单词手册</title>
+<style>
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #003a8c; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #003a8c; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #003a8c; margin: 10px 0 4px; border-left: 4px solid #003a8c; padding-left: 6px; }
+p { margin: 3px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.word { color: #003a8c; font-weight: bold; }
+.err { color: #c00000; font-weight: bold; }
+.ok { color: #0a6b1e; }
+.section-head { font-size: 12pt; font-weight: bold; color: #003a8c; background: #e8f0fb; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+th { background: #003a8c; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #003a8c; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #f7faff; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; }
+.footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1>📘 报错英语单词手册</h1>
+<p class="note">打印设置：A4、边距默认。用法：第1天只读第1页理念篇，之后每天过1组（约20词，混个脸熟），配合平板早上复习。<b>📔 学习日志</b>：每天把敲过的命令、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
+
+<h2>第 1 页 · 理念篇：报错英语的构造规律</h2>
+
+<h3>1. 报错就是"简单句"，倒着读就懂</h3>
+<p>计算机的报错<b>大多是</b>"简单句"：<b>什么东西 + 怎么了 + 对象</b>。中文习惯"找不到文件"，英文是"文件没被找到"。<b>把英文倒过来装回中文语序，意思立刻出来</b>——这是<b>辅助记忆规律，不是唯一结论</b>：最终判断还要结合完整报错、退出码和命令行为。</p>
+<table>
+<tr><th>报错原文</th><th>逐词</th><th>中文顺序</th></tr>
+<tr><td class="code err">File not found</td><td>File(文件) + not(不) + found(被找到)</td><td>找不到文件</td></tr>
+<tr><td class="code err">Permission denied</td><td>Permission(权限) + denied(被拒绝)</td><td>权限被拒绝 = 没权限</td></tr>
+<tr><td class="code err">Connection refused</td><td>Connection(连接) + refused(被拒绝)</td><td>连接被拒绝 = 对方没开门</td></tr>
+<tr><td class="code err">No space left on device</td><td>No(没有) space(空间) left(剩下) on(在) device(设备)</td><td>设备上没剩空间 = 磁盘满了</td></tr>
+</table>
+
+<h3>2. 规律一：-ed 结尾 = "被…了"（报错的灵魂）</h3>
+<p>很多常见报错中的过去分词或形容词形式以 -ed 结尾，但不是全部；不要把这个规律当成绝对语法：</p>
+<table>
+<tr><th style="width:25%">单词</th><th style="width:35%">意思</th><th>出现在</th></tr>
+<tr><td class="word">denied</td><td>被拒绝（deny 拒绝）</td><td>Permission denied 没权限</td></tr>
+<tr><td class="word">refused</td><td>被拒绝（refuse 拒绝）</td><td>Connection refused 连不上</td></tr>
+<tr><td class="word">failed</td><td>失败了（fail 失败）</td><td>Installation failed 安装失败</td></tr>
+<tr><td class="word">terminated</td><td>被终止（terminate 终止）</td><td>Process terminated 进程被结束</td></tr>
+<tr><td class="word">killed</td><td>被杀掉</td><td>Killed by OOM 被内存不足杀死</td></tr>
+<tr><td class="word">closed</td><td>被关闭</td><td>Connection closed 连接被关闭</td></tr>
+<tr><td class="word">ignored</td><td>被忽略</td><td>Warning ignored 警告被忽略</td></tr>
+<tr><td class="word">skipped</td><td>被跳过</td><td>Package skipped 软件包被跳过</td></tr>
+</table>
+
+<h3>3. 规律二：前缀是"方向盘"，词根是"发动机"</h3>
+<p>英语单词 = 前缀 + 词根 + 后缀。认识前缀和后缀，不认识的长单词也能猜个七八成：</p>
+<table>
+<tr><th style="width:18%">前缀/后缀</th><th style="width:20%">意思</th><th>举例</th></tr>
+<tr><td><b>un- / in- / im- / dis- / non-</b></td><td>不、否定</td><td class="word">unknown 未知 · invalid 无效 · disabled 被禁用</td></tr>
+<tr><td><b>re-</b></td><td>重新、再次</td><td class="word">restart 重启 · retry 重试 · reconnect 重连</td></tr>
+<tr><td><b>pre-</b></td><td>预先</td><td class="word">preinstall 预装</td></tr>
+<tr><td><b>mis-</b></td><td>错误的</td><td class="word">mistake 错误 · misconfigured 配置错了</td></tr>
+<tr><td><b>-er / -or</b></td><td>做…的（人/工具）</td><td class="word">server = serve(服务)+er → 提供服务的机器</td></tr>
+<tr><td><b>-ion / -tion</b></td><td>名词化</td><td class="word">connection = connect(连接)+ion</td></tr>
+<tr><td><b>-able / -ible</b></td><td>可以…的</td><td class="word">available 可用的 · executable 可执行的</td></tr>
+<tr><td><b>-ory / -ary</b></td><td>场所、地点</td><td class="word">directory = direct(指引)+ory → 指引放东西的地方=目录</td></tr>
+</table>
+
+<div class="box">
+<p><b>背单词联想技巧</b>（把长单词拆成认识的小块，联想记忆，不必较真词源）：</p>
+<p>• <span class="word">denied</span> → deny(拒绝) + ed(被…) = 被拒绝</p>
+<p>• <span class="word">unreachable</span> → un(不) + reach(到达) + able(能) = 不能到达 = 不可达</p>
+<p>• <span class="word">available</span> → avail(有用) + able(能) = 有用的 = 可用的</p>
+<p>• <span class="word">connection</span> → connect(连接) + ion(名词化) = "连接"这件事</p>
+<p>规律：<b>大部分技术单词都是"词根+前后缀"拼出来的，先拆块、再拼意思，比死记快 3 倍。</b></p>
+</div>
+
+<h3>4. 读报错四步口诀</h3>
+<div class="box">
+<p>① 先找否定词：<b>not / no / denied / failed / refused / error</b>（红色的就是）</p>
+<p>② 再找主语：谁出事了？file？connection？permission？</p>
+<p>③ 按"主语 + 怎么了 + 对象"翻译出来</p>
+<p>④ 看不懂就先翻本手册 A 组查对应条目，还不行再<b>联网搜索</b>（外部扩展：把整句报错复制去搜；断网时先记录原文，回网再查）</p>
+</div>
+
+<div class="newpage"></div>
+<div class="section-head">A 组 · 否定与判断核心词（第 1 优先背）</div>
+<table>
+<tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
+<tr><td class="word">not / no / none</td><td>不 / 没有</td><td class="code err">command not found 命令没找到</td></tr>
+<tr><td class="word">denied</td><td>被拒绝</td><td class="code err">Permission denied 没有权限</td></tr>
+<tr><td class="word">refused</td><td>被拒绝</td><td class="code err">Connection refused 连接被拒绝</td></tr>
+<tr><td class="word">failed / failure</td><td>失败 / 失败(名词)</td><td class="code err">Failed to start service 服务启动失败</td></tr>
+<tr><td class="word">error</td><td>错误</td><td class="code err">SyntaxError 语法错误</td></tr>
+<tr><td class="word">invalid</td><td>无效的</td><td class="code err">invalid syntax 无效的语法</td></tr>
+<tr><td class="word">missing</td><td>缺失、不见了</td><td class="code err">Missing required argument 缺少必需的参数</td></tr>
+<tr><td class="word">unexpected</td><td>意料之外的</td><td class="code err">unexpected indent 意外的缩进</td></tr>
+<tr><td class="word">unknown</td><td>未知的</td><td class="code err">unknown host 未知的主机</td></tr>
+<tr><td class="word">forbidden</td><td>被禁止</td><td class="code err">403 Forbidden 服务器拒绝访问</td></tr>
+<tr><td class="word">unavailable</td><td>不可用</td><td class="code err">service unavailable 服务不可用</td></tr>
+<tr><td class="word">warning</td><td>警告（还不到错误）</td><td class="code">W: warning 黄字提示</td></tr>
+</table>
+
+<div class="section-head">B 组 · 文件世界（第 2 优先背）</div>
+<table>
+<tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
+<tr><td class="word">file</td><td>文件</td><td class="code err">No such file 没有这样的文件</td></tr>
+<tr><td class="word">directory (dir)</td><td>目录、文件夹</td><td class="code err">No such file or directory</td></tr>
+<tr><td class="word">path</td><td>路径</td><td>path = 文件的家在哪条路上</td></tr>
+<tr><td class="word">root</td><td>根 / 管理员</td><td>/ 根目录；root 用户 = 管理员</td></tr>
+<tr><td class="word">permission</td><td>权限</td><td class="code err">Permission denied 没权限</td></tr>
+<tr><td class="word">access</td><td>访问、进入</td><td class="code err">access denied 访问被拒</td></tr>
+<tr><td class="word">owner / group</td><td>属主 / 属组</td><td>文件的主人 / 文件属于哪个组</td></tr>
+<tr><td class="word">read / write / execute</td><td>读 / 写 / 执行</td><td>r w x = 权限三兄弟</td></tr>
+<tr><td class="word">read-only</td><td>只读（read 读 + only 只有）</td><td class="code err">read-only file system 只读文件系统，写不进去</td></tr>
+<tr><td class="word">empty</td><td>空的</td><td class="code">empty file 空文件</td></tr>
+<tr><td class="word">exist / found</td><td>存在 / 被找到</td><td class="code err">File exists 文件已存在</td></tr>
+<tr><td class="word">create / remove</td><td>创建 / 移除</td><td>create file 建文件；remove 删除</td></tr>
+<tr><td class="word">rename / copy / move</td><td>改名 / 复制 / 移动</td><td>mv = move；cp = copy</td></tr>
+<tr><td class="word">recursive</td><td>递归的（一层层往下全含）</td><td>rm -r 的 r 就是这个：连子目录一起处理</td></tr>
+<tr><td class="word">hidden</td><td>隐藏的</td><td>ls -a 能看到点开头的隐藏文件</td></tr>
+</table>
+
+<div class="section-head">C 组 · 动作动词（命令里的动词就是它们）</div>
+<table>
+<tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
+<tr><td class="word">install</td><td>安装</td><td>apt install nginx 安装nginx</td></tr>
+<tr><td class="word">update / upgrade</td><td>更新 / 升级</td><td>apt update 更新软件源列表</td></tr>
+<tr><td class="word">start / stop / restart</td><td>启动 / 停止 / 重启</td><td>systemctl start nginx</td></tr>
+<tr><td class="word">enable / disable</td><td>启用 / 禁用</td><td>systemctl enable 开机自启</td></tr>
+<tr><td class="word">run</td><td>运行</td><td>run this command 运行这条命令</td></tr>
+<tr><td class="word">execute</td><td>执行</td><td>execute permission 执行权限</td></tr>
+<tr><td class="word">listen</td><td>监听</td><td>listening on port 80 在80端口监听</td></tr>
+<tr><td class="word">bind</td><td>绑定</td><td>bind to 0.0.0.0 绑定所有网卡</td></tr>
+<tr><td class="word">open / close</td><td>打开 / 关闭</td><td>open file 打开文件</td></tr>
+<tr><td class="word">save / load</td><td>保存 / 加载</td><td>save config 保存配置</td></tr>
+<tr><td class="word">connect / disconnect</td><td>连接 / 断开</td><td>connect to server 连服务器</td></tr>
+<tr><td class="word">terminate</td><td>终止</td><td>terminate the process 结束进程</td></tr>
+<tr><td class="word">abort</td><td>中止</td><td>installation aborted 安装中止</td></tr>
+<tr><td class="word">retry</td><td>重试</td><td>Retry? (y/n) 重试吗？</td></tr>
+<tr><td class="word">mount / unmount</td><td>挂载 / 卸载</td><td>mount disk 挂载磁盘（⚠ 词汇演示：真实操作、风险与恢复见《Linux 入门》第 7 章）</td></tr>
+</table>
+<p class="note">📌 本表 mount、apt、systemctl 等词条只是<b>报错词汇</b>教学，不是操作手册；照做前以《Linux 入门》《日志报错解读手册》对应章节的风险与恢复说明为准。</p>
+
+<div class="section-head">D 组 · 状态与结果</div>
+<table>
+<tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
+<tr><td class="word">success / successful</td><td>成功 / 成功的</td><td class="ok">Successfully installed 安装成功（绿色）</td></tr>
+<tr><td class="word">info / notice</td><td>信息 / 提示</td><td>日志级别：INFO = 正常说话</td></tr>
+<tr><td class="word">debug</td><td>调试</td><td>日志级别：DEBUG = 最啰嗦的细节</td></tr>
+<tr><td class="word">timeout / timed out</td><td>超时</td><td class="code err">Connection timed out 连接超时（等了太久没人应答）</td></tr>
+<tr><td class="word">busy</td><td>忙、被占用</td><td class="code err">Device busy 设备正忙</td></tr>
+<tr><td class="word">full</td><td>满的</td><td class="code err">disk full 磁盘满了</td></tr>
+<tr><td class="word">valid / legal</td><td>有效的 / 合法的</td><td>invalid 的相反词</td></tr>
+<tr><td class="word">complete / completed</td><td>完成</td><td>download completed 下载完成</td></tr>
+<tr><td class="word">interrupted</td><td>被打断</td><td>process interrupted 进程被打断（Ctrl+C）</td></tr>
+<tr><td class="word">in use</td><td>使用中</td><td class="code err">Address already in use 地址已被占用</td></tr>
+<tr><td class="word">available</td><td>可用的</td><td>available space 可用空间</td></tr>
+<tr><td class="word">expired</td><td>过期了</td><td>license expired 许可证过期</td></tr>
+</table>
+
+<div class="newpage"></div>
+<div class="section-head">E 组 · 网络</div>
+<table>
+<tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
+<tr><td class="word">connection</td><td>连接（connect 的名词）</td><td class="code err">Connection refused 连接被拒绝</td></tr>
+<tr><td class="word">request</td><td>请求（你向服务器要东西）</td><td>send a request 发一个请求</td></tr>
+<tr><td class="word">response</td><td>响应（服务器回你话）</td><td>server response 服务器的回应</td></tr>
+<tr><td class="word">server / client</td><td>服务器 / 客户端</td><td>server = 提供服务者；client = 来要服务的</td></tr>
+<tr><td class="word">host</td><td>主机、服务器</td><td>unknown host 未知的主机</td></tr>
+<tr><td class="word">port</td><td>端口（服务的门牌号）</td><td>port 80 = 网站的门；port 22 = SSH 的门</td></tr>
+<tr><td class="word">address</td><td>地址</td><td>IP address IP 地址</td></tr>
+<tr><td class="word">network</td><td>网络</td><td>network error 网络错误</td></tr>
+<tr><td class="word">packet</td><td>数据包</td><td>packet loss 丢包</td></tr>
+<tr><td class="word">unreachable</td><td>不可达（un 不 + reach 到达 + able 能）</td><td class="code err">Network is unreachable 网络不可达</td></tr>
+<tr><td class="word">resolve / resolved</td><td>解析（域名转成IP）</td><td class="code err">Name or service not known 域名解析失败</td></tr>
+<tr><td class="word">local / remote</td><td>本地的 / 远程的</td><td>localhost 本机；remote server 远程服务器</td></tr>
+<tr><td class="word">secure</td><td>安全的</td><td>HTTPS 的 S = secure；security 安全</td></tr>
+<tr><td class="word">certificate</td><td>证书</td><td>SSL certificate SSL 证书</td></tr>
+<tr><td class="word">proxy</td><td>代理</td><td>proxy server 代理服务器</td></tr>
+</table>
+
+<div class="section-head">F 组 · Python 世界（学 Python 前先背这组）</div>
+<table class="long-table"><thead><tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>含义 / 例子</th></tr></thead><tbody>
+<tr><td class="word">string (str)</td><td>字符串</td><td>一串文字："hello"（像一串珠子，string=绳子）</td></tr>
+<tr><td class="word">integer (int)</td><td>整数</td><td>5、-3、100</td></tr>
+<tr><td class="word">float</td><td>小数（浮点数）</td><td>3.14、0.5（float=带小数点的会"浮动"）</td></tr>
+<tr><td class="word">list</td><td>列表</td><td>[1, 2, 3]（有顺序，能增删改）</td></tr>
+<tr><td class="word">dictionary (dict)</td><td>字典</td><td>{"name": "小明"}（键:值 一对对查，像查字典）</td></tr>
+<tr><td class="word">tuple</td><td>元组</td><td>(1, 2, 3)（定死的列表，不能改）</td></tr>
+<tr><td class="word">set</td><td>集合</td><td>{1, 2, 3}（不重复、没顺序）</td></tr>
+<tr><td class="word">boolean (bool)</td><td>布尔值</td><td>只有两个：True 真 / False 假</td></tr>
+<tr><td class="word">None</td><td>空、无</td><td>表示"什么都没有"</td></tr>
+<tr><td class="word">loop</td><td>循环</td><td>for 循环 = 一圈圈重复干</td></tr>
+<tr><td class="word">range</td><td>范围、数列</td><td>range(5) = 0到4的数</td></tr>
+<tr><td class="word">function</td><td>函数</td><td>def 定义的那块代码</td></tr>
+<tr><td class="word">argument / parameter</td><td>参数（实参/形参）</td><td>函数括号里喂进去的东西</td></tr>
+<tr><td class="word">return</td><td>返回</td><td>函数吐出来的结果</td></tr>
+<tr><td class="word">import</td><td>导入</td><td>import requests 把工具库搬进来</td></tr>
+<tr><td class="word">module / package</td><td>模块 / 包</td><td>一个 .py 文件 = 模块；一堆模块 = 包</td></tr>
+<tr><td class="word">exception</td><td>异常</td><td>程序出错"炸"出来的那个东西</td></tr>
+<tr><td class="word">traceback</td><td>错误追踪信息</td><td>报错时打印的那一大堆（trace 追踪 + back 回溯）</td></tr>
+<tr><td class="word">syntax</td><td>语法</td><td>SyntaxError = 你写的"话"不合 Python 语法</td></tr>
+<tr><td class="word">indent / indentation</td><td>缩进（行首空格）</td><td>Python 靠缩进分块，缩进错了就报错</td></tr>
+<tr><td class="word">index</td><td>索引、下标</td><td>列表里第几个，从 0 数起</td></tr>
+<tr><td class="word">slice</td><td>切片</td><td>list[0:3] 切出前三个</td></tr>
+<tr><td class="word">key / value</td><td>键 / 值</td><td>字典里的"名字"和"内容"</td></tr>
+<tr><td class="word">item</td><td>项、条目</td><td>列表里的每一个元素</td></tr>
+<tr><td class="word">iterable</td><td>可迭代的（能一个个取的）</td><td>for 循环能遍历的都是 iterable</td></tr>
+<tr><td class="word">method</td><td>方法（挂在对象后面的函数）</td><td>"abc".split() 点号后面的就是 method</td></tr>
+<tr><td class="word">attribute</td><td>属性</td><td>对象身上带的东西</td></tr>
+<tr><td class="word">object / class</td><td>对象 / 类</td><td>Python 一切皆对象；类=造对象的模具</td></tr>
+<tr><td class="word">variable</td><td>变量</td><td>装数据的盒子（变+量=会变的量）</td></tr>
+<tr><td class="word">assignment</td><td>赋值</td><td>x = 5 就是把 5 装进 x</td></tr>
+<tr><td class="word">expression</td><td>表达式</td><td>能被算出值的一串代码，如 1+2</td></tr>
+<tr><td class="word">statement</td><td>语句</td><td>一行完整指令</td></tr>
+<tr><td class="word">comment</td><td>注释</td><td># 后面的文字，给人类看的，机器忽略</td></tr>
+<tr><td class="word">escape</td><td>转义</td><td>\n = 换行，反斜杠改变后面字符的意思</td></tr>
+</tbody></table>
+
+<div class="newpage"></div>
+<h2>一词多义提醒（技术场景里的第二张脸）</h2>
+<p>这些单词你在生活里认识一个意思，但报错/文档里常是另一个意思——看错一个词，整个报错就理解反了。</p>
+<table>
+<tr><th style="width:18%">单词</th><th style="width:30%">生活里的意思</th><th style="width:30%">技术里的意思</th><th>例子</th></tr>
+<tr><td class="code">address</td><td>地址</td><td>处理、解决（动词）</td><td class="code">address the issue 解决问题</td></tr>
+<tr><td class="code">run</td><td>跑</td><td>运行；一次运行</td><td class="code">run the script 跑脚本</td></tr>
+<tr><td class="code">key</td><td>钥匙</td><td>键、键名；密钥</td><td class="code">KeyError 键错误</td></tr>
+<tr><td class="code">root</td><td>根</td><td>管理员账号；根目录</td><td class="code">Permission denied (root only) 只有管理员能干</td></tr>
+<tr><td class="code">mount</td><td>骑马</td><td>挂载（把磁盘接到目录）</td><td class="code">mount /dev/sdb1 /data</td></tr>
+<tr><td class="code">host</td><td>主人</td><td>主机、服务器</td><td class="code">remote host 远程主机</td></tr>
+<tr><td class="code">file</td><td>文件</td><td>提交、登记（动词）</td><td class="code">file a bug 提交/登记/报告一个 bug</td></tr>
+<tr><td class="code">watch</td><td>手表</td><td>监视、盯着看</td><td class="code">watch 命令 = 定时刷新</td></tr>
+<tr><td class="code">load</td><td>装载</td><td>负载；加载</td><td class="code">load average 系统负载</td></tr>
+<tr><td class="code">pack</td><td>打包</td><td>打包（动作）</td><td class="code">pack up 收拾打包</td></tr>
+<tr><td class="code">package</td><td>包裹</td><td>软件包</td><td class="code">apt install package 装软件包</td></tr>
+<tr><td class="code">packet</td><td>（无生活义）</td><td>数据包（网络传输单位）</td><td class="code">packet loss 丢包</td></tr>
+</table>
+
+<h2>尾页 · 十条黄金报错（每天读一遍，读到条件反射）</h2>
+<table>
+<tr><th style="width:38%">报错</th><th>中文</th><th>一句话原因</th></tr>
+<tr><td class="code err">Permission denied</td><td>没有权限</td><td>身份不够，sudo 或 chmod</td></tr>
+<tr><td class="code err">No such file or directory</td><td>没有这个文件或目录</td><td>路径写错了，ls 看清楚</td></tr>
+<tr><td class="code err">command not found</td><td>命令找不到</td><td>没装这个软件，或名字拼错</td></tr>
+<tr><td class="code err">Connection refused</td><td>连接被拒绝</td><td>对方服务没启动，或端口不对</td></tr>
+<tr><td class="code err">Connection timed out</td><td>连接超时</td><td>网络不通或防火墙挡路</td></tr>
+<tr><td class="code err">No space left on device</td><td>磁盘满了</td><td>df -h 看看，清理大文件</td></tr>
+<tr><td class="code err">Address already in use</td><td>端口被占用</td><td>有程序占了端口，ss 查一下</td></tr>
+<tr><td class="code err">Name or service not known</td><td>域名解析失败</td><td>DNS 问题，检查网络</td></tr>
+<tr><td class="code err">SyntaxError: invalid syntax</td><td>语法错误</td><td>代码写错，看行尾少没少冒号括号</td></tr>
+<tr><td class="code err">NameError: name 'x' is not defined</td><td>名字没定义</td><td>变量没赋值就用了</td></tr>
+</table>
+<p class="footer">报错英语单词手册 · 每天过 1 组（混个脸熟）+ 朗读一遍十条黄金报错</p>
+
+<div class="newpage"></div>
+<h2>综合练习 · 看报错猜意思（6 题，先猜再看答案）</h2>
+
+<div class="box2">
+<p><b>1.</b> <span class="code err">No such file or directory</span>（提示：such）<br>
+<b>2.</b> <span class="code err">Permission denied</span>（提示：-ed）<br>
+<b>3.</b> <span class="code err">NameError: name 'data' is not defined</span>（提示：defined）<br>
+<b>4.</b> <span class="code err">IndexError: list index out of range</span>（提示：index / range）<br>
+<b>5.</b> <span class="code err">ModuleNotFoundError: No module named 'requests'</span>（提示：module）<br>
+<b>6.</b> <span class="code err">Connection timed out</span>（提示：time / out）</p>
+
+</div>
+
+<p class="note">自检规则：6 题全对 → 你已经掌握报错英语的骨架，进入"遇到就翻"阶段；错 1-2 题 → 回去重读理念篇规律一、二；错 3 题以上 → 从 A 组开始重新背。</p>
+
+<div class="newpage"></div>
+<h2>综合练习答案（先做再看，与题目分页隔离）</h2>
+<p><b>第 1 题</b>：没有这样的文件或目录（such=这样的）</p>
+<p><b>第 2 题</b>：权限被拒绝（denied=被拒绝）</p>
+<p><b>第 3 题</b>：变量 data 没定义就用了</p>
+<p><b>第 4 题</b>：索引超出范围（index=索引、range=范围）：访问列表/字符串时下标超过了它的长度。题面只给了报错原文，具体是"取到第几个"要看当时的代码和列表长度——单凭这一行报错猜不出具体数值。</p>
+<p><b>第 5 题</b>：没安装 requests 这个模块</p>
+<p><b>第 6 题</b>：连接超时（等了太久没回应）</p>
+
+</body>
+</html>

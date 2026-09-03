@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>日志报错解读手册</title>
+<style>
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 3px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1>📕 日志报错解读手册</h1>
+<div class="box2"><b>排错闭环：</b>先记录时间窗口、服务状态和原始日志；按上下文与退出码定位；修复后重新验证；完成后恢复临时配置并保留处理记录。</div>
+<p class="note">打印设置：A4、边距默认。用法：这是"查字典"式的手册——遇到报错翻到对应条目；A组前10条建议熟读到条件反射。</p>
+
+<h2>第 1 页 · 理念篇：日志的构造与读法</h2>
+
+<h3>1. 日志是什么？</h3>
+<p>程序运行时会给自己写"工作日记"，这就是日志（log）。<b>程序死前留下的遗言，就是报错信息</b>——它其实是程序在告诉你："我为什么干不下去了，你去看看什么原因。"报错不是敌人，是线索。</p>
+
+<h3>2. 一条日志的通用结构</h3>
+<pre><span class="code">Aug 16 08:30:01 ubuntu systemd[1]: Starting Daily apt upgrade and clean activities...</span>
+<span class="note">   时间戳         主机名   程序名[进程号]   消息内容</span></pre>
+<p>规律：<b>时间 + 谁写的 + 说什么</b>。排错时按时间顺序看，就能还原"事发经过"。</p>
+
+<h3>2.1 日志都藏在哪？（去哪找线索）</h3>
+<table>
+<tr><th style="width:34%">位置</th><th>里面是什么</th></tr>
+<tr><td class="code">/var/log/syslog</td><td>常见系统日志文件，但是否存在取决于发行版与日志服务配置</td></tr>
+<tr><td class="code">/var/log/auth.log</td><td>常见登录/认证日志文件，路径与名称可能变化</td></tr>
+<tr><td class="code">/var/log/nginx/access.log</td><td>Nginx 直接安装时的常见访问日志；容器化时可能在容器标准输出</td></tr>
+<tr><td class="code">/var/log/nginx/error.log</td><td>Nginx 直接安装时的常见错误日志，以实际配置为准</td></tr>
+<tr><td class="code">journalctl 命令</td><td>查询 journald 日志；systemd 服务优先用 <span class="code">journalctl -u 服务名</span> 确认来源</td></tr>
+</table>
+<p>查找原则：先确认程序、服务和部署方式，再确定日志来源；文件不存在不一定是故障，日志也可能只进入 journald、容器标准输出或自定义路径。</p>
+
+<h3>3. 日志级别体系（颜色代表严重程度）</h3>
+<table>
+<tr><th style="width:16%">级别</th><th style="width:22%">英文</th><th style="width:22%">颜色</th><th>含义</th></tr>
+<tr><td>调试</td><td class="word">DEBUG</td><td>灰</td><td>最啰嗦的细节，排错时看</td></tr>
+<tr><td>信息</td><td class="word">INFO</td><td>白</td><td>记录动作或状态；通常不代表错误，也不能仅凭 INFO 判断一切正常，要结合时间线和上下文</td></tr>
+<tr><td>警告</td><td class="warn">WARNING</td><td>黄</td><td>"有点不对劲，但还能干活"</td></tr>
+<tr><td>错误</td><td class="err">ERROR</td><td>红</td><td>"出事了，这件事没干成"</td></tr>
+<tr><td>严重</td><td class="err">CRITICAL</td><td>红加粗</td><td>"大事故，我可能要挂了"</td></tr>
+<tr><td colspan="4" class="note">注：CRITICAL 是 Linux/通用日志级别；Python logging 标准是<b>五级</b>（DEBUG/INFO/WARNING/ERROR/CRITICAL）——《Python 入门》第 10 章为入门只讲四级（到 ERROR），属简化范围，实际项目里 CRITICAL 照样常用。</td></tr>
+</table>
+
+<h3>4. 读日志四步法（核心心法）</h3>
+<div class="box">
+<p>① 按时间确定故障窗口，先保存原始日志和服务状态</p>
+<p>② 在窗口内同时查 ERROR、WARNING、INFO、退出码和服务状态，不把某个级别当唯一入口</p>
+<p>③ 从可疑行向上看前因、向下看后续，并结合配置与上下文验证</p>
+<p>④ 修复后复现或重跑验证；仍不明白时保留完整原文再查询资料</p>
+</div>
+
+<h3>5. 报错的三种常见句式</h3>
+<div class="rule">📌 句式①：<b>X + 被动词</b>（被动式）—— <span class="code err">Permission denied</span>（权限被拒绝）</div>
+<div class="rule">📌 句式②：<b>cannot / can't + 动词 + 对象</b>—— <span class="code err">cannot connect to host</span>（连不上主机）</div>
+<div class="rule">📌 句式③：<b>No + 名词</b>（缺东西）—— <span class="code err">No such file</span>（没这个文件）</div>
+
+<div class="newpage"></div>
+<h2>A 组 · Linux 报错（前 10 条必须熟读）</h2>
+
+<div class="errblock">
+<p class="code err">① Permission denied</p>
+<p class="line">逐词：<span class="word">Permission</span>（权限）→ <span class="word">denied</span>（被拒绝，deny 的被动式）</p>
+<p class="line">整句：<b class="trans">权限被拒绝 = 你没资格动它</b></p>
+<p class="line">为什么：你要读/写/执行一个文件，但你的身份权限不够</p>
+<p class="line">怎么办：<span class="ok">sudo</span> 借管理员身份；<span class="ok">chmod</span> 改权限；<span class="ok">chown</span> 换主人</p>
+</div>
+
+<div class="errblock">
+<p class="code err">② No such file or directory</p>
+<p class="line">逐词：<span class="word">No</span>（没有）→ <span class="word">such</span>（这样的）→ <span class="word">file</span>（文件）→ <span class="word">or</span>（或者）→ <span class="word">directory</span>（目录）</p>
+<p class="line">整句：<b class="trans">没有这样的文件或目录 = 你指的路不存在</b></p>
+<p class="line">为什么：路径拼错了、文件名打错了、或你记错了位置</p>
+<p class="line">怎么办：<span class="ok">ls</span> 看看目录里到底有什么；<span class="ok">pwd</span> 确认自己在哪；Tab 自动补全防拼错</p>
+</div>
+
+<div class="errblock">
+<p class="code err">③ command not found</p>
+<p class="line">逐词：<span class="word">command</span>（命令）→ <span class="word">not</span>（不）→ <span class="word">found</span>（被找到）</p>
+<p class="line">整句：<b class="trans">命令没找到 = 系统不认识你敲的东西</b></p>
+<p class="line">为什么：① 软件没装 ② 命令名拼错了 ③ 程序装了，但它不在 PATH（系统的"命令搜索路径"）里，系统不知道去哪找它</p>
+<p class="line">怎么办：先 <span class="ok">which 命令名</span>（查命令路径）看装没装；没装就 <span class="ok">sudo apt install 软件名</span>；装了还找不到 → 重开一个终端（或 <span class="ok">hash -r</span> 刷新命令缓存——bash 内置命令，先了解即可）；用 <span class="ok">echo $PATH</span> 看搜索路径；实在不行就用绝对路径运行，如 <span class="ok">/usr/local/bin/nginx</span></p>
+</div>
+
+<div class="errblock">
+<p class="code err">④ No space left on device</p>
+<p class="line">逐词：<span class="word">No</span>（没有）→ <span class="word">space</span>（空间）→ <span class="word">left</span>（剩下）→ <span class="word">on device</span>（在设备上）</p>
+<p class="line">整句：<b class="trans">设备上没有剩余空间 = 磁盘满了</b></p>
+<p class="line">为什么：磁盘被写满了，日志/文件/程序都写不进去了</p>
+<p class="line">怎么办：<span class="ok">df -h</span> 看哪块盘满；<span class="ok">du -sh ~/lab/*</span> 找谁占的空间（<b>把 ~/lab 换成你要查的目标目录，如 ~、/var/log；注意：* 不展开隐藏文件，根目录/家目录建议先 <span class="ok">ls -a</span> 确认目标，或用 <span class="ok">du -sh ~/lab/.[^.]* ~/lab/*</span> 补上隐藏文件，权限不足会报错</b>）；确认文件用途、备份和所属服务后，再清理明确无用的大文件或旧日志。不要把清空 <span class="ok">/tmp</span> 当成通用答案，临时目录中的文件也可能正被程序使用</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑤ Connection refused</p>
+<p class="line">逐词：<span class="word">Connection</span>（连接）→ <span class="word">refused</span>（被拒绝）</p>
+<p class="line">整句：<b class="trans">连接被拒绝 = 门是关着的（对方明确拒绝你）</b></p>
+<p class="line">为什么：对方的服务根本没启动；或服务没监听你连的那个端口；或防火墙直接拒绝（reject）</p>
+<p class="line">怎么办：确认服务启动没（<span class="ok">systemctl status 服务名</span>）；用 <span class="ok">ss -tlnp</span> 看端口有没有人听；查防火墙 <span class="ok">ufw status</span>（ufw = 防火墙管理命令，属于进阶，先了解即可）</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑥ Connection timed out</p>
+<p class="line">逐词：<span class="word">Connection</span>（连接）→ <span class="word">timed out</span>（超时了：time 时间 + out 用尽）</p>
+<p class="line">整句：<b class="trans">连接超时 = 敲了门，等了很久没人应答</b></p>
+<p class="line">为什么：网络不通；中间有防火墙悄悄丢包；目标机器宕机；路由不通</p>
+<p class="line">怎么办：<span class="ok">ping</span> 目标看通不通；<span class="ok">traceroute</span> 看断在哪一跳；检查防火墙和安全组</p>
+<p class="note">💡 和 refused 的区别：refused = 对方明确说"不"；timed out = 对方连"不"都没说，石沉大海。</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑦ Name or service not known</p>
+<p class="line">逐词：<span class="word">Name</span>（名字，指域名）→ <span class="word">service</span>（服务）→ <span class="word">not known</span>（不被知道）</p>
+<p class="line">整句：<b class="trans">域名解析不了 = 把网址翻译成 IP 的那一步失败了</b></p>
+<p class="line">为什么：DNS 服务器连不上；域名拼错；本机 DNS 配置有问题</p>
+<p class="line">怎么办：分层排查，不要一步跳到"断网"：① <span class="ok">ip addr</span> 确认本机地址和网卡状态 → ② <span class="ok">ip route</span> 确认默认路由 → ③ <span class="ok">cat /etc/resolv.conf</span> 确认 DNS 配置 → ④ <span class="ok">nslookup 域名</span> 测试解析。ping 外网 IP（如 8.8.8.8）只是<b>可选辅助</b>——它依赖外网、且 ICMP 可能被防火墙禁止，ping 不通 ≠ 断网；能 ping 通 IP 但域名解析失败，才是 DNS 问题的特征。</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑧ Address already in use</p>
+<p class="line">逐词：<span class="word">Address</span>（地址，指端口）→ <span class="word">already</span>（已经）→ <span class="word">in use</span>（在使用中）</p>
+<p class="line">整句：<b class="trans">端口已被占用 = 这个门牌号已经有人住了</b></p>
+<p class="line">为什么：你要启动的程序想监听 80 端口，但另一个程序已经占着 80 了</p>
+<p class="line">怎么办：<span class="ok">ss -tlnp | grep 端口号</span> 找到占用的进程；kill 掉它或换一个端口启动</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑨ read-only file system</p>
+<p class="line">逐词：<span class="word">read-only</span>（只读：read 读 + only 只有）→ <span class="word">file system</span>（文件系统）</p>
+<p class="line">整句：<b class="trans">文件系统是只读的 = 只能看不能写</b></p>
+<p class="line">为什么：磁盘硬件出问题系统会自动转只读保护；或人为挂载成只读；U盘写保护</p>
+<p class="line">怎么办：先停止可能继续写入的程序，不要直接 remount。先收集 <span class="ok">dmesg</span>、相关日志、<span class="ok">df -h</span> 和磁盘状态，判断是否是硬件或文件系统保护。必要时进入维护/恢复环境检查并先保证备份；只有确认原因、目标文件系统和恢复条件后，才考虑高级 remount 分支，不能把它当通用修复。</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑩ Unable to lock the administration directory (/var/lib/dpkg/)</p>
+<p class="line">逐词：<span class="word">Unable to</span>（无法）→ <span class="word">lock</span>（上锁）→ <span class="word">administration directory</span>（管理目录）</p>
+<p class="line">整句：<b class="trans">无法锁定管理目录 = 有另一个 apt 正在安装软件</b></p>
+<p class="line">为什么：两个安装命令同时跑，或上次安装中断没清理锁</p>
+<p class="line">怎么办（<b>新手不手动删锁文件</b>）：锁的作用是防止两个 apt 同时写坏软件数据库。正确顺序：① <span class="ok">ps aux | grep apt</span> 确认没有 apt 在跑（有就等它结束）；② <span class="ok">sudo dpkg --configure -a</span> 清理上次中断的残留；③ 重启后仍报锁，查日志找是谁在写。只有在能确认"没有任何 apt 进程、且已用 dpkg --configure -a 恢复过数据库"时，才可考虑删除锁文件并立即重建——这是高级操作，新手一律不做。</p>
+</div>
+
+<div class="newpage"></div>
+<div class="section-head">A 组续 · 其他常见 Linux 报错</div>
+
+<div class="errblock">
+<p class="code err">⑪ Failed to fetch ... 404 Not Found</p>
+<p class="line">逐词：<span class="word">Failed to fetch</span>（抓取失败：fetch = 拿取）→ <span class="word">404</span>（HTTP 状态码）→ <span class="word">Not Found</span>（没找到）</p>
+<p class="line">整句：<b class="trans">下载软件包失败，404 = 服务器上没这个文件</b></p>
+<p class="line">为什么：软件源（apt 的仓库）失效、网络中断、或源地址配错了</p>
+<p class="line">怎么办：<span class="ok">sudo apt update</span> 刷新源；换软件源（清华/阿里镜像）；检查网络</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑫ E: Sub-process /usr/bin/dpkg returned an error code (1)</p>
+<p class="line">逐词：<span class="word">Sub-process</span>（子进程）→ <span class="word">returned</span>（返回了）→ <span class="word">error code</span>（错误码）</p>
+<p class="line">整句：<b class="trans">安装过程中底层工具 dpkg 报错了，返回错误码 1</b></p>
+<p class="line">为什么：软件包冲突、依赖坏了、或上次安装中断留下烂摊子</p>
+<p class="line">怎么办：<span class="ok">sudo dpkg --configure -a</span> 修复未完成的配置；再 <span class="ok">sudo apt -f install</span> 修复依赖</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑬ Host key verification failed</p>
+<p class="line">逐词：<span class="word">Host</span>（主机）→ <span class="word">key</span>（钥匙/指纹）→ <span class="word">verification</span>（验证）→ <span class="word">failed</span>（失败）</p>
+<p class="line">整句：<b class="trans">SSH 连接时主机指纹验证失败</b></p>
+<p class="line">为什么：第一次连某台机器时记住了它的"指纹"，之后指纹变了（重装系统/换机器），SSH 怀疑你连的不是同一台，怕被钓鱼</p>
+<p class="line">怎么办：确认目标是安全的，删掉旧指纹 <span class="ok">ssh-keygen -R 主机名/IP</span> 后重连</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑭ Permission denied (publickey)</p>
+<p class="line">逐词：<span class="word">Permission denied</span>（权限被拒绝）→ <span class="word">publickey</span>（公钥）</p>
+<p class="line">整句：<b class="trans">SSH 免密登录失败：服务器不认你的钥匙</b></p>
+<p class="line">为什么：你的公钥没加到服务器的 authorized_keys 里；或钥匙权限太宽松（必须是 600）</p>
+<p class="line">怎么办（<b>先保住现有会话，别把自己锁在门外</b>）：① 保留当前能连的会话不关；② 把公钥重新拷到服务器 <span class="ok">ssh-copy-id user@host</span>，或手动追加到 <span class="ok">~/.ssh/authorized_keys</span>；③ 检查权限：<span class="ok">chmod 700 ~/.ssh</span>、<span class="ok">chmod 600 ~/.ssh/authorized_keys</span>；④ 改过 sshd 配置先 <span class="ok">sudo sshd -t</span> 校验语法；⑤ <b>新开一个会话验证能登录后，再关掉旧会话</b>——顺序反了可能再也进不去。</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑮ Cannot connect to the Docker daemon. Is the docker daemon running?</p>
+<p class="line">逐词：<span class="word">Cannot connect</span>（连不上）→ <span class="word">daemon</span>（守护进程：后台服务）→ <span class="word">running</span>（运行中）</p>
+<p class="line">整句：<b class="trans">连不上 Docker 后台服务：它没在运行</b></p>
+<p class="line">为什么：Docker 服务没启动；或当前用户没权限（没加入 docker 组）</p>
+<p class="line">怎么办：<span class="ok">sudo systemctl start docker</span> 启动；<span class="ok">sudo usermod -aG docker 用户名</span> 加组后重新登录（<b>外部扩展：Docker 的安装、镜像、端口、卷、停止与清理都不在九册前置内，无 Docker 时本条跳过，不影响主线</b>）</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑯ port is already allocated</p>
+<p class="line">逐词：<span class="word">port</span>（端口）→ <span class="word">already</span>（已经）→ <span class="word">allocated</span>（被分配）</p>
+<p class="line">整句：<b class="trans">Docker 端口已被占用</b>（和 ⑧ 同一个病）</p>
+<p class="line">怎么办：<span class="ok">docker ps</span> 看哪个容器占着；改端口映射 -p 8081:80；或 <span class="ok">ss -tlnp</span> 找到进程 kill 掉</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑰ Too many open files</p>
+<p class="line">逐词：<span class="word">Too many</span>（太多）→ <span class="word">open</span>（打开着的）→ <span class="word">files</span>（文件）</p>
+<p class="line">整句：<b class="trans">打开的文件数超过上限</b></p>
+<p class="line">为什么：Linux 每个进程能同时打开的文件数有限（默认 1024），程序忘了关文件或开了太多连接就会触发</p>
+<p class="line">怎么办：先看<b>软硬限制</b>：<span class="ok">ulimit -Sn</span>（soft 软限制，可临时调高）、<span class="ok">ulimit -Hn</span>（hard 硬限制，普通用户只能降不能升）。临时调高只对<b>当前 Shell 及其子进程</b>生效：<span class="ok">ulimit -n 65535</span>（不能超过 hard）；重开终端就失效。长期改 /etc/security/limits.conf 需重新登录生效；程序侧要记得 close。</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑱ Segmentation fault (core dumped)</p>
+<p class="line">逐词：<span class="word">Segmentation</span>（内存段）→ <span class="word">fault</span>（故障）→ <span class="word">core dumped</span>（核心转储：把现场拍下来存了文件）</p>
+<p class="line">整句：<b class="trans">程序访问了不该访问的内存，当场崩溃</b></p>
+<p class="line">为什么：C/C++ 程序的野指针、越界访问等底层 bug；内存条硬件故障也会</p>
+<p class="line">怎么办：升级程序版本；多次出现就查硬件（memtest 测内存）</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑲ Killed (Out of memory)</p>
+<p class="line">逐词：<span class="word">Killed</span>（被杀死）→ <span class="word">Out of memory</span>（内存耗尽）</p>
+<p class="line">整句：<b class="trans">系统内存不足，内核的 OOM Killer 挑了个"最该杀的"进程杀掉</b></p>
+<p class="line">为什么：可能是宿主机内存/交换空间不足，也可能是容器或 cgroup 达到了自己的内存限额；容器被杀时宿主机仍可能有可用内存。</p>
+<p class="line">怎么办：宿主机先看 <span class="ok">free -h</span>、<span class="ok">top</span> 和内核日志；容器再看 <span class="ok">docker stats</span>、<span class="ok">docker inspect</span> 中的内存限制以及容器状态/事件。宿主机视角的 free/top 不能单独排除容器限额，容器内看到的数值也要结合 cgroup 配置解释；若同时出现 Docker 容器退出，结合本手册 Docker daemon 条目和容器状态一起查。</p>
+</div>
+
+<div class="newpage"></div>
+<h2>B 组 · Python 报错（学 Python 后每天读几条）</h2>
+
+<p class="note">💡 Python traceback 的最后一行通常先给出<b>异常类型和直接原因</b>，是重要入口，但不是全部证据；具体行号在上方的 <span class="code">File "xxx.py", line 7</span> 中，调用链和前后文也要一起看。常用读法：先看末行知道“错是什么”，再从下往上沿调用链定位“错从哪里传来”。</p>
+
+<div class="section-head">B 组开篇 · 完整 traceback 逐行拆解（Python 报错的"全景图"）</div>
+<div class="box">
+<p>Python 出错时打印的那一大段叫 <b>traceback</b>（追踪回溯）。看这个两层调用的完整例子：</p>
+<pre>Traceback (most recent call last):
+  File "app.py", line 10, in &lt;module&gt;
+    main()
+  File "app.py", line 7, in main
+    helper()
+  File "app.py", line 3, in helper
+    return 10 / 0
+ZeroDivisionError: division by zero</pre>
+<p>逐行拆解（每行在说什么）：</p>
+<table>
+<tr><th style="width:45%">原文</th><th>意思</th></tr>
+<tr><td class="code">Traceback (most recent call last):</td><td>trace(追踪)+back(回溯)=调用记录。整句："下面是事故的完整调用链，<b>最近的调用排在最后</b>"——越往下越接近案发现场</td></tr>
+<tr><td class="code">File "app.py", line 10, in &lt;module&gt;</td><td>File(文件)+line(行)+in(在)+&lt;module&gt;(模块顶层)。意思：案发文件 app.py，第 10 行，位置在顶层代码</td></tr>
+<tr><td class="code">&nbsp;&nbsp;main()</td><td>第 10 行的那句代码——它调用了函数 main（这是案发的第一层）</td></tr>
+<tr><td class="code">File "app.py", line 7, in main</td><td>进入 main 函数内部，追踪到第 7 行</td></tr>
+<tr><td class="code">&nbsp;&nbsp;helper()</td><td>main 里第 7 行调用了 helper（第二层）</td></tr>
+<tr><td class="code">File "app.py", line 3, in helper</td><td>进入 helper 函数内部，追踪到第 3 行</td></tr>
+<tr><td class="code">&nbsp;&nbsp;return 10 / 0</td><td><b>真正的凶手</b>——这句代码除以了零</td></tr>
+<tr><td class="code err">ZeroDivisionError: division by zero</td><td>报错类型+信息 = 除以零（最后一行 = 错误本质）</td></tr>
+</table>
+<p><b>读法口诀（从下往上读）：</b>① 最后一行 = 什么错 → ② 往上第一段代码 = 凶手是谁 → ③ 再往上 = 谁叫了它（调用链，帮你理清来龙去脉）。</p>
+</div>
+
+<div class="errblock">
+<p class="code err">① SyntaxError: invalid syntax</p>
+<p class="line">逐词：<span class="word">Syntax</span>（语法）→ <span class="word">Error</span>（错误）→ <span class="word">invalid</span>（无效的）→ <span class="word">syntax</span>（语法）</p>
+<p class="line">整句：<b class="trans">语法错误 = 你写的东西 Python 读不懂</b></p>
+<p class="line">常见原因：冒号忘了、括号没配对、if/for 行尾没加 : 、用了中文标点</p>
+<p class="line">怎么办：看箭头 ^ 指的位置，检查它前面一行；最常漏的是冒号和右括号</p>
+</div>
+
+<div class="errblock">
+<p class="code err">② IndentationError: unexpected indent / expected an indented block</p>
+<p class="line">逐词：<span class="word">Indentation</span>（缩进）→ <span class="word">Error</span>（错误）→ <span class="word">unexpected</span>（意外的）→ <span class="word">indent</span>（缩进）；另一变体 <span class="word">expected</span>（期望的）→ <span class="word">block</span>（代码块）</p>
+<p class="line">整句：<b class="trans">缩进错了：Python 靠行首空格区分代码块</b>（冒号后面的下一行必须缩进，同一块的缩进必须对齐）</p>
+<p class="line">怎么办：冒号下一行加 4 个空格；同一层代码缩进对齐；别把空格和 Tab 混用</p>
+</div>
+
+<div class="errblock">
+<p class="code err">③ NameError: name 'x' is not defined</p>
+<p class="line">逐词：<span class="word">Name</span>（名字）→ <span class="word">Error</span>（错误）→ <span class="word">is not defined</span>（没有被定义）</p>
+<p class="line">整句：<b class="trans">名字 x 不存在 = 这个变量你还没创建就用它</b></p>
+<p class="line">常见原因：变量名拼错了；变量没赋值就用；变量定义在函数里却想在函数外用</p>
+<p class="line">怎么办：检查拼写；确认赋值语句在用它之前执行了</p>
+</div>
+
+<div class="errblock">
+<p class="code err">④ TypeError: can only concatenate str (not "int") to str</p>
+<p class="line">逐词：<span class="word">Type</span>（类型）→ <span class="word">Error</span>（错误）→ <span class="word">concatenate</span>（拼接）→ <span class="word">str</span>（字符串）→ <span class="word">int</span>（整数）</p>
+<p class="line">整句：<b class="trans">类型错误：字符串只能拼字符串，你拿字符串去拼整数了</b></p>
+<p class="line">例：<span class="code">"年龄：" + 19</span> 就报这个错；正确是 <span class="code">"年龄：" + str(19)</span></p>
+<p class="line">怎么办：用 str()/int()/float() 转换类型再运算；print 里改用逗号或 f-string</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑤ ValueError: invalid literal for int() with base 10: 'abc'</p>
+<p class="line">逐词：<span class="word">Value</span>（值）→ <span class="word">Error</span>（错误）→ <span class="word">invalid literal</span>（无效的字面量）→ <span class="word">base 10</span>（十进制）</p>
+<p class="line">整句：<b class="trans">值错误：'abc' 不是数字，int() 没法把它转成整数</b></p>
+<p class="line">怎么办：转换前先确认内容是数字；用 try/except 包住转换</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑥ KeyError: 'age'</p>
+<p class="line">逐词：<span class="word">Key</span>（键）→ <span class="word">Error</span>（错误）</p>
+<p class="line">整句：<b class="trans">字典里没有 'age' 这个键，你查了个不存在的名字</b></p>
+<p class="line">怎么办：用 <span class="code">d.get("age")</span> 代替 <span class="code">d["age"]</span>（get 查不到返回 None 不报错）</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑦ IndexError: list index out of range</p>
+<p class="line">逐词：<span class="word">Index</span>（索引）→ <span class="word">Error</span>（错误）→ <span class="word">out of range</span>（超出范围）</p>
+<p class="line">整句：<b class="trans">列表索引越界 = 你要第 10 个，但列表只有 5 个</b></p>
+<p class="line">为什么：列表索引从 0 开始数！长度 5 的列表，最后一个的索引是 4，访问 [5] 就炸</p>
+<p class="line">怎么办：用 len() 先量长度；循环里用 for x in list 而不是手数索引</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑧ AttributeError: 'list' object has no attribute 'keys'</p>
+<p class="line">逐词：<span class="word">Attribute</span>（属性）→ <span class="word">object</span>（对象）→ <span class="word">has no attribute</span>（没有这个属性）</p>
+<p class="line">整句：<b class="trans">属性错误：列表没有 keys 这个方法（你把它当字典用了）</b></p>
+<p class="line">为什么：对象类型搞错了——keys() 是字典的方法，列表没有</p>
+<p class="line">怎么办：用 <span class="code">type(变量)</span> 确认类型；别把 list 和 dict 混着用</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑨ ModuleNotFoundError: No module named 'requests'</p>
+<p class="line">逐词：<span class="word">Module</span>（模块）→ <span class="word">Not Found</span>（没找到）→ <span class="word">named</span>（名字叫）</p>
+<p class="line">整句：<b class="trans">找不到 requests 这个模块 = 这个库你没安装</b></p>
+<p class="line">怎么办：<span class="ok">pip install requests</span>；装完还是报错就检查是不是装到了别的 Python 版本里</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑩ ImportError: cannot import name 'xxx' from 'yyy'</p>
+<p class="line">逐词：<span class="word">Import</span>（导入）→ <span class="word">cannot import</span>（无法导入）→ <span class="word">from</span>（从…）</p>
+<p class="line">整句：<b class="trans">导入错误：yyy 模块里没有 xxx 这个东西</b></p>
+<p class="line">常见原因：名字拼错；模块版本太旧没有这个函数；循环导入（两个文件互相 import）</p>
+<p class="line">怎么办：<span class="code">dir(yyy)</span> 看看模块里到底有什么；升级模块版本</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑪ FileNotFoundError: [Errno 2] No such file or directory: 'data.json'</p>
+<p class="line">逐词：<span class="word">File</span>（文件）→ <span class="word">Not Found</span>（没找到）→ <span class="word">Errno 2</span>（系统错误编号 2）</p>
+<p class="line">整句：<b class="trans">Python 找不到 data.json 这个文件</b></p>
+<p class="line">为什么：文件不在当前目录；路径写错；文件名拼错</p>
+<p class="line">怎么办：<span class="code">pwd</span> 和 <span class="code">ls</span> 确认文件在不在脚本所在目录；用绝对路径最稳妥</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑫ PermissionError: [Errno 13] Permission denied: 'file.txt'</p>
+<p class="line">逐词：<span class="word">Permission</span>（权限）→ <span class="word">Error</span>（错误）→ <span class="word">denied</span>（被拒绝）</p>
+<p class="line">整句：<b class="trans">Python 打开文件时被系统拒绝（没权限）</b>——和 Linux 的 Permission denied 是同一个病</p>
+<p class="line">怎么办：chmod 改权限；sudo 运行；别去碰系统目录里的文件（/etc、/root）</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑬ ZeroDivisionError: division by zero</p>
+<p class="line">逐词：<span class="word">Zero</span>（零）→ <span class="word">Division</span>（除法）→ <span class="word">by</span>（被）→ <span class="word">zero</span>（零）</p>
+<p class="line">整句：<b class="trans">除以零了 = 数学上不允许的操作</b></p>
+<p class="line">怎么办：除法前判断分母是不是 0：<span class="code">if b != 0: a / b</span></p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑭ EOFError: EOF when reading a line</p>
+<p class="line">逐词：<span class="word">EOF</span>（End Of File：文件结束）→ <span class="word">Error</span>（错误）→ <span class="word">when reading</span>（在读取时）</p>
+<p class="line">整句：<b class="trans">还没读完就结束了 = input() 等输入，但输入流没了</b></p>
+<p class="line">为什么：input() 在没人输入的环境里（比如在线判题平台）就会遇到</p>
+<p class="line">怎么办：给 input 提供数据；或不用 input 改用参数传入</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑮ UnboundLocalError: local variable 'x' referenced before assignment</p>
+<p class="line">逐词：<span class="word">local variable</span>（局部变量）→ <span class="word">referenced</span>（被引用）→ <span class="word">before assignment</span>（在赋值之前）</p>
+<p class="line">整句：<b class="trans">函数里用了还没赋值的局部变量</b>（赋值前就读取了）</p>
+<p class="line">为什么：函数内给 x 赋值 → Python 把 x 当局部变量 → 但赋值语句在读取语句后面</p>
+<p class="line">怎么办：把赋值挪到读取前面；要改全局变量就在函数里加 <span class="code">global x</span></p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑯ RecursionError: maximum recursion depth exceeded</p>
+<p class="line">逐词：<span class="word">Recursion</span>（递归）→ <span class="word">maximum</span>（最大的）→ <span class="word">depth</span>（深度）→ <span class="word">exceeded</span>（被超过）</p>
+<p class="line">整句：<b class="trans">递归太深 = 函数自己叫自己叫个没完（约1000层后 Python 强制叫停）</b></p>
+<p class="line">为什么：递归函数忘了写"停下来的条件"（基准条件）</p>
+<p class="line">怎么办：检查递归的出口条件写没写、写得对不对</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑰ JSONDecodeError: Expecting value: line 1 column 1 (char 0)</p>
+<p class="line">逐词：<span class="word">Expecting value</span>（期待一个值）→ <span class="word">line 1 column 1</span>（第 1 行第 1 列）</p>
+<p class="line">整句：<b class="trans">JSON 解析失败：想解析的内容根本不是 JSON（第1个字符就不是）</b></p>
+<p class="line">为什么：API 返回了 HTML 报错页/空内容，你却当 JSON 解析</p>
+<p class="line">怎么办：先把返回内容 <span class="code">print</span> 出来看看是什么；确认接口地址和返回格式</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑱ OSError: [Errno 98] Address already in use</p>
+<p class="line">逐词：<span class="word">Address</span>（地址）→ <span class="word">already</span>（已经）→ <span class="word">in use</span>（在使用中）</p>
+<p class="line">整句：<b class="trans">端口被占用</b>——Python 起服务（如 Flask）时和 Linux 报错 ⑧ 同一个病</p>
+<p class="line">怎么办：换端口；<span class="ok">ss -tlnp | grep 端口</span> 找到占用者 kill 掉</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑲ MemoryError</p>
+<p class="line">逐词：<span class="word">Memory</span>（内存）→ <span class="word">Error</span>（错误）</p>
+<p class="line">整句：<b class="trans">内存不足 = Python 程序吃光内存</b></p>
+<p class="line">为什么：一次读入超大文件；死循环里不停 append 列表；数据处理量爆炸；也可能是<b>系统本身内存不足</b>（容器/虚拟机限制更常见）</p>
+<p class="line">怎么办：先分清是哪一层——<span class="ok">free -h</span> 看系统内存是否本来就不够；再查代码：大文件改流式（一行行读，别 read() 一把读）；检查死循环里不停 append；精简数据结构。若系统内存不足，是资源问题不是代码问题</p>
+</div>
+
+<div class="errblock">
+<p class="code err">⑳ KeyboardInterrupt</p>
+<p class="line">逐词：<span class="word">Keyboard</span>（键盘）→ <span class="word">Interrupt</span>（打断）</p>
+<p class="line">整句：<b class="trans">你按了 Ctrl+C 把程序打断了（这不是 bug，是你干的）</b></p>
+<p class="line">怎么办：不用管，程序是正常的，你想重启就再运行一次</p>
+</div>
+
+<div class="newpage"></div>
+<h2>报错分级速查表（什么颜色代表多严重）</h2>
+<table>
+<tr><th style="width:14%">级别</th><th style="width:22%">英文关键词</th><th>含义</th><th style="width:30%">例子</th><th>处理</th></tr>
+<tr><td>DEBUG</td><td class="code">debug</td><td>调试细节，最唠叨</td><td class="code">进入函数 x()</td><td>通常用于定位时查看</td></tr>
+<tr><td>INFO</td><td class="code">info / notice</td><td>过程信息；不等于一定正常</td><td class="code">服务启动成功</td><td>结合时间线和上下文判断</td></tr>
+<tr><td>WARNING</td><td class="code">warning / warn</td><td>警告，还能用但要注意</td><td class="code">磁盘使用率 85%</td><td>留个心眼，提前准备</td></tr>
+<tr><td>ERROR</td><td class="code err">error</td><td>出错了，这个功能废了</td><td class="code err">连接数据库失败</td><td>要处理</td></tr>
+<tr><td>CRITICAL</td><td class="code err">critical / fatal</td><td>严重，系统级故障</td><td class="code err">磁盘写满了</td><td>立刻处理</td></tr>
+</table>
+<p class="rule">📌 处理原则：先按时间线确定故障窗口，再结合 ERROR/WARNING/INFO、上下文、退出码、服务状态和配置定位。ERROR 是重要线索，不是唯一入口；INFO 也可能记录安全、权限或业务异常，不能一律当作“没事”。</p>
+
+<h2>实战定位练习（3 个故障现场，先自己想再看答案）</h2>
+
+<div class="box2">
+<p><b>场景 1：SSH 连不上</b></p>
+<pre>Aug 25 09:30:12 server1 sshd[1024]: Connection closed by 192.168.1.50 port 55900 [preauth]
+Aug 25 09:31:05 server1 sshd[1026]: Failed password for invalid user student from 192.168.1.50 port 55920 ssh2</pre>
+<p>问题：① 这两行大概是什么级别的事件？② 发生了什么？③ 第一行的 [preauth] 和 invalid user 说明什么？</p>
+
+</div>
+
+<div class="box2">
+<p><b>场景 2：Python 程序崩溃</b></p>
+<pre>Traceback (most recent call last):
+  File "app.py", line 12, in &lt;module&gt;
+    load_config()
+  File "app.py", line 8, in load_config
+    with open(path, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'config.ini'</pre>
+<p>问题：① 真正的错误是哪一行？② 谁调用了谁（调用链）？③ 怎么修？</p>
+
+</div>
+
+<div class="box2">
+<p><b>场景 3：磁盘满了</b> <span class="opt">（以下为模拟日志：主机名、用户名、路径、时间、PID 均为示例，不是真实机器输出）</span></p>
+<pre>Aug 25 10:00:01 server1 CRON[2001]: (&lt;某用户&gt;) CMD (/home/&lt;某用户&gt;/backup.sh)
+Aug 25 10:00:03 server1 backup.sh[2002]: /home/&lt;某用户&gt;/backup.sh: line 3: /backup/data.tar: No space left on device</pre>
+<p>问题：① 谁是肇事者？② 报错关键词是哪个？③ 处理步骤？</p>
+
+</div>
+
+<h2>章末作业（3 题，实践题）</h2>
+<p class="note"><b>📌 实验约定</b>：① <b>初始状态</b>：作业 1/3 不产生文件；作业 2 只读不改，无初始文件要求；② <b>是否依赖前题</b>：三题互相独立；③ <b>重复运行影响</b>：作业 1 每跑一次产生新 traceback（无残留）；作业 2/3 可无限重复；④ <b>清理恢复</b>：如为作业 1 创建了临时 .py 文件，完成后删除即可。</p>
+<p>1. 自建一个故障现场：跑一段必然会报错的 Python 代码，把完整 traceback 抄下来，用 B 组开篇的拆解方法逐行标注意思。<br>
+2. 读自己机器上一个真实存在的日志来源（如 <span class="code">journalctl -n 20</span>，或系统中确实存在的 <span class="code">/var/log/dpkg.log</span>）最后 20 行，按时间、程序、消息拆解至少 3 条；日志不一定含 INFO/WARNING 字样，不要为了凑级别编造结果。<br>
+3. 把 A 组前 10 条的"怎么办"一栏遮住，只看报错原文默写解决办法，然后核对。</p>
+
+
+<h2>尾页 · 排错心法（遇到没见过的报错怎么办）</h2>
+<div class="box">
+<p>① <b>别慌，报错是线索不是判决</b>——程序在告诉你它为什么死，不是骂你</p>
+<p>② <b>先读末行，再看调用链</b>——Python traceback 末行通常给异常类型和直接原因；上方的 File/line 与调用链告诉你它在哪里发生、是谁调用过来的，两部分要一起看</p>
+<p>③ <b>先翻本手册 A/B 组</b>找对应条目；没有就<b>联网搜索</b>（外部扩展：把报错原文复制去搜，前面加 python / ubuntu；断网时先把原文和上下文完整记录，回网再查——不要离线死猜）</p>
+<p>④ <b>一次只改一个变量</b>——排错时改一处试一次，别一次性改五处（改五处，好了你也不知道是哪处起作用）</p>
+<p>⑤ <b>解决后记笔记</b>——"什么报错 + 什么原因 + 怎么解决"写进学习日志，这以后就是你的《运维踩坑宝典》</p>
+</div>
+<p class="footer">日志报错解读手册 · 这不是用来背的，是用来"查"的——遇到就翻，翻多了自然记住</p>
+
+<div class="newpage"></div>
+<h2>实战练习答案（先做再看）</h2>
+<p class="note">三个故障现场的答案集中在这里。先自己定位，再对答案；定位错了就把那一段日志重新拆一遍。</p>
+<div class="box2"><p><b>场景 1</b>：答案：① 登录失败类事件（比 INFO 严重，算安全告警）。② 有台机器（192.168.1.50）在尝试用 student 这个用户名登录，密码错误。③ [preauth]=还没通过认证就断开了；invalid user=系统里根本没有 student 这个用户——大概率是扫描脚本在批量试弱密码。<b>边界提醒：第一行 "Connection closed [preauth]" 只能说明"认证前连接被关闭"，单独看它不能推出密码错误</b>；本例的结论是靠第二行 "Failed password" 推出的。两行结合才构成完整证据。处理：关闭密码登录改用密钥、限制来源 IP。</p></div>
+<div class="box2"><p><b>场景 2</b>：答案：① 最后一行——文件 config.ini 不存在。② 调用链：顶层（第 12 行）→ load_config()（第 8 行）→ open 打开文件时报错。③ 检查路径写没写对，或先创建 config.ini（读法口诀：从下往上读）。</p></div>
+<div class="box2"><p><b>场景 3</b>：答案：① backup.sh（被 cron 定时任务在 10:00 触发）。② <b>No space left on device</b>（磁盘满了）。③ 处理步骤：<span class="ok">df -h</span> 确认哪个分区满 → <span class="ok">du -sh 指定目录/</span>（先 ls 确认目标目录，<b>不要在不明确目录直接 du -sh *</b>：* 不展开隐藏文件，且范围过宽；家目录/根目录要先 ls -a 看隐藏项，或用 du -sh 路径/.[^.]* 路径/* 补齐）→ 确认文件用途、备份和所属服务后，清理明确无用的大文件或旧日志 → 重新跑任务。</p></div>
+<div class="box2"><p><b>章末作业要点提示</b>：作业 1 核对标准=每行都标出“这行是什么”（参考 B 组开篇范例）；作业 2 用理念篇“一条日志的通用结构”来拆（时间+主机+程序+消息），同时记录实际日志来源；作业 3 错一条就回看 A 组对应条目并重新解释原因。</p></div>
+
+</body>
+</html>

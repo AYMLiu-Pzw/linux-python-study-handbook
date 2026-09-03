@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Python 内置函数手册</title>
+<style>
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; text-align: justify; }
+h1 { font-size: 18pt; color: #6b21a8; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #6b21a8; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #6b21a8; margin: 10px 0 4px; border-left: 4px solid #6b21a8; padding-left: 6px; }
+p { margin: 3px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.kw { color: #003a8c; font-weight: bold; }
+.fn { color: #0a6b1e; }
+.str { color: #a31515; }
+.cm { color: #6a737d; font-style: italic; }
+.num { color: #8a4b08; }
+.out { color: #444; }
+.param { color: #6b21a8; }
+.danger { color: #c00000; font-weight: bold; }
+.section-head { font-size: 12pt; font-weight: bold; color: #6b21a8; background: #f3e8ff; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+th { background: #6b21a8; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+.box { border: 1.5px solid #6b21a8; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #faf7ff; }
+.box2 { border: 1.5px dashed #b45309; border-radius: 4px; padding: 8px 10px; margin: 8px 0; }
+.quiz { border: 1.5px solid #0a6b1e; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #f7fdf7; }
+.warn { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fef6f6; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.rule { background: #fffbe6; border-left: 4px solid #b45309; padding: 4px 8px; margin: 5px 0; font-size: 10.5pt; }
+.footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+.answer { color: #0a6b1e; }
+a { color: #003a8c; text-decoration: none; }
+@media print { a { color: #222; } }
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+.toc-row .tn { color: #6b21a8; font-weight: bold; min-width: 90px; }
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+</style>
+
+
+
+</head>
+<body>
+
+<h1>📙 Python 内置函数手册（教科书配套版）</h1>
+<p class="note">定位：参考手册（工具书），配合《Python 入门》教科书使用。查得快、记得牢，不用背。组号与教科书每章末尾"📚 相关手册"的跳转一一对应。打印：A4、边距默认。<b>📔 学习日志</b>：每天把敲过的代码、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
+
+<div class="toc">
+<h3 style="border:none;margin:2px 0 6px;">📑 目录</h3>
+<div class="toc-row"><span class="tn">理念篇</span><span class="tdesc">先搞懂函数是什么，再记函数（第一页必读）</span></div>
+<div class="toc-row"><span class="tn">第 1 组</span><span class="tdesc">输入输出：print / input</span></div>
+<div class="toc-row"><span class="tn">第 2 组</span><span class="tdesc">类型工厂：str/int/float/bool/list/tuple/dict/set/type + 切片速查</span></div>
+<div class="toc-row"><span class="tn">第 3 组</span><span class="tdesc">长度与统计：len/sum/min/max/abs/round</span></div>
+<div class="toc-row"><span class="tn">第 4 组</span><span class="tdesc">序列工具：range/enumerate/zip/sorted/reversed</span></div>
+<div class="toc-row"><span class="tn">第 5 组</span><span class="tdesc">检查工具：isinstance/dir/help</span></div>
+<div class="toc-row"><span class="tn">第 6 组</span><span class="tdesc">工具集：pow/divmod/chr/ord/format/all/any/repr + os/time 常用函数 + 自定义函数速查</span></div>
+<div class="toc-row"><span class="tn">文件与 JSON</span><span class="tdesc">JSON 四件套、文件对象三连（运维天天用）</span></div>
+<div class="toc-row"><span class="tn">字符串十招</span><span class="tdesc">split/join/strip/replace/upper/lower/find/startswith/endswith/count</span></div>
+<div class="toc-row"><span class="tn">组合练习</span><span class="tdesc">5 道函数组合套路题（含答案）</span></div>
+<div class="toc-row"><span class="tn">替代写法对比</span><span class="tdesc">f-string vs %；subprocess vs os.system；logging vs print</span></div>
+<div class="toc-row"><span class="tn">章末作业</span><span class="tdesc">8 题（答案紧随题目，先做再看）</span></div>
+</div>
+
+<div class="newpage"></div>
+<h2>理念篇：先搞懂函数是什么，再记函数</h2>
+
+<h3>1. 函数 = 一台加工机器</h3>
+<p>进去的是<b>原料</b>（参数），出来的是<b>产品</b>（返回值）：</p>
+<pre><span class="fn">len</span>(<span class="str">"hello"</span>) <span class="cm"># 原料 "hello" → 机器 len → 产品 5</span></pre>
+
+<h3>2. 三条黄金规律</h3>
+<div class="rule">📌 规律①：<b>名字即用途</b>。print打印、input输入、len长度(length)、sum求和、sorted排序——英文单词看懂，函数就懂一半。</div>
+<div class="rule">📌 规律②：<b>括号是开关</b>。函数名后面跟 <span class="code">()</span>才开工；不写括号只是把机器指给你看。</div>
+<div class="rule">📌 规律③：<b>函数 vs 方法</b>。函数是 <span class="code fn">len(x)</span>（手拿工具加工）；方法是 <span class="code">x.<span class="fn">split</span>()</span>（工具长在对象身上，点号调用）。</div>
+
+<h3>3. 最重要的两个函数（第一天就认识）</h3>
+<table>
+<tr><th style="width:18%">函数</th><th>作用</th><th style="width:38%">示例</th></tr>
+<tr><td class="code fn">print()</td><td>打印到屏幕</td><td class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">"-"</span>, <span class="param">end</span>=<span class="str">"!"</span>) <span class="out">→ a-b!</span></td></tr>
+<tr><td class="code fn">input()</td><td>读键盘输入</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>)</td></tr>
+</table>
+<p class="danger">⚠️ input() 拿到的永远是字符串！要算数先 <span class="code">int()</span>。</p>
+
+<h3>4. 类型转换家族 = "工厂函数"</h3>
+<p><span class="code fn">str() int() float() bool() list() tuple() dict() set()</span> —— 都是把一种类型"加工"成另一种类型的工厂。见第 2 组。</p>
+
+<h3>5. 变量 = 贴了标签的盒子</h3>
+<pre><span class="param">age</span> = <span class="num">19</span> <span class="cm"># 造一个盒子，贴上"age"标签，把 19 放进去。以后写 age 就等于是 19。</span></pre>
+<p>命名规律：见名知意（age、name、disk_usage）；英文小写，多词用下划线连接。</p>
+
+<div class="newpage"></div>
+<h2>第 1 组 · 输入输出（print / input）</h2>
+
+<table>
+<tr><th style="width:16%">函数</th><th>作用</th><th style="width:42%">示例</th><th>注意点</th></tr>
+<tr><td class="code fn">print()</td><td>打印；多参数默认空格分隔</td><td class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>) <span class="out">→ a b</span><br><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">"-"</span>) <span class="out">→ a-b</span><br><span class="fn">print</span>(<span class="str">"hi"</span>, <span class="param">end</span>=<span class="str">""</span>) <span class="out">→ hi（不换行）</span></td><td>sep=分隔符<br>end=结尾（默认换行）</td></tr>
+<tr><td class="code fn">input()</td><td>读键盘，返回字符串</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>)</td><td>返回<b>永远是 str</b>！</td></tr>
+</table>
+
+<div class="quiz">
+<p><b>🎯 识别题（先猜，再看答案）</b></p>
+<p>1. <span class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">""</span>)</span> 输出？<br>
+2. 用户输入 <span class="code">42</span>，<span class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"?"</span>)</span> 后，<span class="code">name</span> 的类型？</p>
+
+</div>
+
+<h2>第 2 组 · 类型工厂（含 type 与切片速查）</h2>
+
+<table>
+<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><td class="code fn">str()</td><td>转字符串</td><td class="code"><span class="fn">str</span>(<span class="num">42</span>) <span class="out">→ "42"</span></td><td>拼接字符串前常用</td></tr>
+<tr><td class="code fn">int()</td><td>转整数</td><td class="code"><span class="fn">int</span>(<span class="str">"42"</span>) <span class="out">→ 42</span>　<span class="fn">int</span>(<span class="str">"3.14"</span>) <span class="out">→ 报错</span></td><td>转不了会报 ValueError</td></tr>
+<tr><td class="code fn">float()</td><td>转小数</td><td class="code"><span class="fn">float</span>(<span class="str">"3.14"</span>) <span class="out">→ 3.14</span></td><td></td></tr>
+<tr><td class="code fn">bool()</td><td>转真假</td><td class="code"><span class="fn">bool</span>(<span class="num">0</span>) <span class="out">→ False</span>　<span class="fn">bool</span>(<span class="str">"x"</span>) <span class="out">→ True</span></td><td>空的东西多为 False</td></tr>
+<tr><td class="code fn">list()</td><td>转列表</td><td class="code"><span class="fn">list</span>(<span class="str">"abc"</span>) <span class="out">→ ['a', 'b', 'c']</span></td><td></td></tr>
+<tr><td class="code fn">tuple()</td><td>转元组（不可变）</td><td class="code"><span class="fn">tuple</span>([<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ (1, 2)</span></td><td></td></tr>
+<tr><td class="code fn">dict()</td><td>造字典</td><td class="code"><span class="fn">dict</span>(<span class="param">a</span>=<span class="num">1</span>) <span class="out">→ {'a': 1}</span></td><td></td></tr>
+<tr><td class="code fn">set()</td><td>造集合（自动去重）</td><td class="code"><span class="fn">set</span>([<span class="num">1</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ {1, 2}</span></td><td>无序</td></tr>
+<tr><td class="code fn">type()</td><td>查类型</td><td class="code"><span class="fn">type</span>(<span class="num">5</span>) <span class="out">→ &lt;class 'int'&gt;</span>　<span class="fn">type</span>(<span class="str">"5"</span>) <span class="out">→ &lt;class 'str'&gt;</span></td><td>排查"类型不对"第一招；显示为 &lt;class 'xxx'&gt; 形式</td></tr>
+</table>
+
+<div class="rule">📌 <b>切片速查</b>（字符串/列表通用）：<span class="code">x[起点:终点:步长]</span>，终点<b>不含</b>。<span class="code">"python"[0:2]→"py"</span>、<span class="code">[-1]</span>最后一个、<span class="code">[::-1]</span>反转。</div>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. <span class="code"><span class="fn">int</span>(<span class="str">"42"</span>) + <span class="num">8</span></span> = ?<br>
+2. <span class="code"><span class="fn">list</span>(<span class="str">"abc"</span>)</span> = ?<br>
+3. <span class="code"><span class="str">"python"</span>[<span class="num">1</span>:<span class="num">4</span>]</span> = ?</p>
+
+</div>
+
+<h2>第 3 组 · 长度与统计（len/sum/min/max/abs/round）</h2>
+
+<table>
+<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><td class="code fn">len()</td><td>长度</td><td class="code"><span class="fn">len</span>(<span class="str">"hello"</span>) <span class="out">→ 5</span>　<span class="fn">len</span>([<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ 2</span></td><td>字符串/列表/字典通用</td></tr>
+<tr><td class="code fn">sum()</td><td>求和</td><td class="code"><span class="fn">sum</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]) <span class="out">→ 6</span></td><td></td></tr>
+<tr><td class="code fn">min() / max()</td><td>最小/最大</td><td class="code"><span class="fn">min</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ 1</span>　<span class="fn">max</span>(<span class="str">"abc"</span>) <span class="out">→ 'c'</span></td><td></td></tr>
+<tr><td class="code fn">abs()</td><td>绝对值</td><td class="code"><span class="fn">abs</span>(-<span class="num">5</span>) <span class="out">→ 5</span></td><td></td></tr>
+<tr><td class="code fn">round()</td><td>保留小数位</td><td class="code"><span class="fn">round</span>(<span class="num">3.14159</span>, <span class="num">2</span>) <span class="out">→ 3.14</span></td><td>⚠️ 银行家舍入：<span class="code">round(2.5)→2</span>、<span class="code">round(3.5)→4</span>（四舍六入五成双）</td></tr>
+</table>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. <span class="code"><span class="fn">round</span>(<span class="num">2.5</span>)</span> = ?<br>
+2. <span class="code"><span class="fn">len</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])</span> = ?</p>
+
+</div>
+
+<h2>第 4 组 · 序列工具（range/enumerate/zip/sorted/reversed）</h2>
+
+<table>
+<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><td class="code fn">range()</td><td>生成数列</td><td class="code"><span class="fn">list</span>(<span class="fn">range</span>(<span class="num">5</span>)) <span class="out">→ [0, 1, 2, 3, 4]</span><br><span class="fn">list</span>(<span class="fn">range</span>(<span class="num">1</span>,<span class="num">10</span>,<span class="num">2</span>)) <span class="out">→ [1, 3, 5, 7, 9]</span><br><span class="fn">range</span>(<span class="num">5</span>) <span class="out">→ range(0, 5)</span></td><td>终点不含；直接敲 range(5) 显示的是对象本身 range(0, 5)，要看数字得套 list()</td></tr>
+<tr><td class="code fn">enumerate()</td><td>编号遍历</td><td class="code"><span class="kw">for</span> <span class="param">i</span>, <span class="param">x</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="param">xs</span>, <span class="num">1</span>):</td><td>第二个参数=起始编号</td></tr>
+<tr><td class="code fn">zip()</td><td>拉链配对</td><td class="code"><span class="fn">list</span>(<span class="fn">zip</span>([<span class="num">1</span>,<span class="num">2</span>], [<span class="str">"a"</span>,<span class="str">"b"</span>])) <span class="out">→ [(1, 'a'), (2, 'b')]</span></td><td>zip() 本身返回迭代器，要列表得套 list()</td></tr>
+<tr><td class="code fn">sorted()</td><td>排序（返回新列表）</td><td class="code"><span class="fn">sorted</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ [1, 2, 3]</span><br><span class="param">reverse</span>=<span class="kw">True</span> 倒序</td><td>原列表不变</td></tr>
+<tr><td class="code fn">list.sort()</td><td>原地排序（改原列表，返回 None）</td><td class="code"><span class="param">a</span> = [<span class="num">3</span>,<span class="num">1</span>]; <span class="param">a</span>.<span class="fn">sort</span>(); <span class="fn">print</span>(<span class="param">a</span>) → [<span class="num">1</span>,<span class="num">3</span>]<br>与 sorted() 的区别：sort() 改原列表不返回新列表；sorted() 返回新列表不动原列表（进阶篇已统一用 sorted()）</td></tr>
+<tr><td class="code fn">reversed()</td><td>反向</td><td class="code"><span class="fn">list</span>(<span class="fn">reversed</span>([<span class="num">1</span>,<span class="num">2</span>])) <span class="out">→ [2, 1]</span></td><td>要 list() 包一层</td></tr>
+</table>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. <span class="code"><span class="fn">list</span>(<span class="fn">range</span>(<span class="num">1</span>, <span class="num">10</span>, <span class="num">2</span>))</span> = ?<br>
+2. <span class="code"><span class="fn">sorted</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>], <span class="param">reverse</span>=<span class="kw">True</span>)</span> = ?</p>
+
+</div>
+
+<div class="newpage"></div>
+<h2>第 5 组 · 检查工具（isinstance/dir/help）</h2>
+
+<table>
+<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><td class="code fn">isinstance()</td><td>判断是不是某类型</td><td class="code"><span class="fn">isinstance</span>(<span class="num">5</span>, <span class="kw">int</span>) <span class="out">→ True</span><br><span class="fn">isinstance</span>(<span class="str">"5"</span>, <span class="kw">int</span>) <span class="out">→ False</span></td><td>比 type 更推荐（有继承概念时更稳）</td></tr>
+<tr><td class="code fn">dir()</td><td>列出对象所有方法</td><td class="code"><span class="fn">dir</span>(<span class="str">"abc"</span>) <span class="out">→ ['__add__', 'split', 'strip', 'upper', ...]</span></td><td>真实输出很长（含双下划线开头的方法），此处为示意省略，以你机器实际输出为准；想不起字符串能干什么时用</td></tr>
+<tr><td class="code fn">help()</td><td>看说明书</td><td class="code"><span class="fn">help</span>(<span class="fn">len</span>) <span class="out">→ 交互式英文文档（内容以实际输出为准，按 q 退出）</span></td><td>等于 Linux 的 man</td></tr>
+</table>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. <span class="code"><span class="fn">isinstance</span>(<span class="str">"5"</span>, <span class="kw">int</span>)</span> = ?<br>
+2. <span class="code"><span class="fn">dir</span>(<span class="str">"abc"</span>)</span> 返回什么？</p>
+
+</div>
+
+<h2>第 6 组 · 工具集（数学杂项 + all/any/repr + os/time 常用 + 自定义函数速查）</h2>
+
+<h3>6.1 数学与杂项</h3>
+<table>
+<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><td class="code fn">pow()</td><td>幂</td><td class="code"><span class="fn">pow</span>(<span class="num">2</span>, <span class="num">3</span>) <span class="out">→ 8</span></td><td>= 2**3</td></tr>
+<tr><td class="code fn">divmod()</td><td>商和余数</td><td class="code"><span class="fn">divmod</span>(<span class="num">10</span>, <span class="num">3</span>) <span class="out">→ (3, 1)</span></td><td>一次拿两个</td></tr>
+<tr><td class="code fn">chr() / ord()</td><td>字符↔编码</td><td class="code"><span class="fn">ord</span>(<span class="str">"A"</span>) <span class="out">→ 65</span>　<span class="fn">chr</span>(<span class="num">65</span>) <span class="out">→ 'A'</span></td><td></td></tr>
+<tr><td class="code fn">format()</td><td>格式化数字</td><td class="code"><span class="fn">format</span>(<span class="num">3.14159</span>, <span class="str">".2f"</span>) <span class="out">→ '3.14'</span></td><td>f-string 更方便</td></tr>
+<tr><td class="code fn">all() / any()</td><td>全真 / 有真</td><td class="code"><span class="fn">all</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">0</span>]) <span class="out">→ False</span>　<span class="fn">any</span>([<span class="num">0</span>,<span class="num">0</span>,<span class="num">1</span>]) <span class="out">→ True</span></td><td>0、""、None 算"假"</td></tr>
+<tr><td class="code fn">repr()</td><td>看值的"原始表示"</td><td class="code"><span class="fn">repr</span>(<span class="str">"hi"</span>) <span class="out">→ "'hi'"</span>（带引号）</td><td>调试时区分类型用</td></tr>
+</table>
+<p class="danger">⚠️ <b>eval() / exec() 是危险函数</b>：能把字符串当代码执行。网上很多新手教程用它，但生产环境禁用——永远别用它们处理用户输入。</p>
+
+<h3>6.2 os / time 常用函数速查（运维最常用）</h3>
+<table>
+<tr><th style="width:30%">函数</th><th>作用</th><th style="width:44%">示例</th></tr>
+<tr><td class="code">os.getcwd()</td><td>当前目录</td><td class="code"><span class="kw">import</span> os; os.getcwd()</td></tr>
+<tr><td class="code">os.listdir(路径)</td><td>列目录内容</td><td class="code">os.listdir(<span class="str">"."</span>) <span class="out">→ 当前目录的文件名列表（内容以你机器实际为准）</span></td></tr>
+<tr><td class="code">os.path.join(a, b)</td><td>拼路径（自动用对分隔符）</td><td class="code">os.path.join(<span class="str">"home"</span>, <span class="str">"student"</span>) <span class="out">→ "home/student"</span></td></tr>
+<tr><td class="code">os.rename(旧, 新)</td><td>重命名/移动文件</td><td class="code">os.rename(<span class="str">"a.txt"</span>, <span class="str">"b.txt"</span>)</td></tr>
+<tr><td class="code">os.path.exists(路径)</td><td>判断文件是否存在</td><td class="code">os.path.exists(<span class="str">"a.txt"</span>) <span class="out">→ True/False</span></td></tr>
+<tr><td class="code">os.path.getsize(路径)</td><td>文件大小（字节）</td><td class="code">os.path.getsize(<span class="str">"a.txt"</span>) <span class="out">→ 数字（大小以你机器的文件为准）</span></td></tr>
+<tr><td class="code">os.path.getmtime(路径)</td><td>最后修改时间（时间戳）</td><td class="code">os.path.getmtime(<span class="str">"a.txt"</span>) <span class="out">→ 数字（时间戳，值以你机器为准）</span></td></tr>
+<tr><td class="code">time.localtime(秒)</td><td>时间戳 → 可读时间</td><td class="code">time.strftime(<span class="str">"%F"</span>, time.localtime(时间戳))</td></tr>
+<tr><td class="code">time.time()</td><td>时间戳（1970 起的秒数）</td><td class="code"><span class="kw">import</span> time; time.time()</td></tr>
+<tr><td class="code">time.sleep(秒)</td><td>暂停</td><td class="code">time.sleep(<span class="num">1</span>) <span class="cm"># 脚本里"等一会"用</span></td></tr>
+<tr><td class="code">time.strftime(格式)</td><td>格式化当前时间</td><td class="code">time.strftime(<span class="str">"%Y-%m-%d %H:%M:%S"</span>)</td></tr>
+</table>
+<p class="note">补一个字节串方法：<span class="code">"你好".encode("utf-8")</span> 得到字节串（<span class="code">b'...'</span> 形式，这是合法写法——bytes 字面量只能直接写 ASCII，中文要先 encode）；subprocess 不设 text=True 时输出就是字节串，用 <span class="code">.decode("utf-8")</span> 转回字符串（进阶篇场景 5 用到）。</p>
+
+<h3>6.3 自定义函数结构速查</h3>
+<pre><span class="cm"># 下面是结构示意（伪代码，不可直接运行）；每个中文占位换成真实名字</span>
+<span class="kw">def</span> <span class="fn">函数名</span>(<span class="param">参数</span>):
+    <span class="cm"># 注释：这函数干什么</span>
+    <span class="param">结果</span> = <span class="param">参数</span> <span class="param">加工过程</span>
+    <span class="kw">return</span> <span class="param">结果</span>          <span class="cm"># 把结果交回来；忘写 return → 返回 None</span>
+
+<span class="param">返回值</span> = <span class="fn">函数名</span>(<span class="param">实参</span>)   <span class="cm"># 调用：函数名 + 括号才开工</span></pre>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. <span class="code"><span class="fn">divmod</span>(<span class="num">10</span>, <span class="num">3</span>)</span> = ?<br>
+2. <span class="code"><span class="fn">all</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">0</span>])</span> = ?<br>
+3. Linux 上 <span class="code">os.path.join(<span class="str">"a"</span>, <span class="str">"b"</span>)</span> = ?</p>
+
+</div>
+
+<div class="newpage"></div>
+<h2>文件与 JSON：速查</h2>
+<div class="box2">
+<p><span class="opt">json 四件套（配置文件 / API 数据专用，教科书第 6 章）：</span></p>
+<table>
+<tr><th style="width:34%">写法</th><th>作用</th></tr>
+<tr><td class="code">json.load(f)</td><td>从文件对象读 JSON → dict</td></tr>
+<tr><td class="code">json.dump(d, f, ensure_ascii=False)</td><td>把 dict 写进文件（ensure_ascii=False 让中文不乱码）</td></tr>
+<tr><td class="code">json.loads(字符串)</td><td>从字符串解析 → dict</td></tr>
+<tr><td class="code">json.dumps(d)</td><td>把 dict 变成 JSON 字符串</td></tr>
+</table>
+</div>
+
+<h2>文件对象三连（open / read / write / with）</h2>
+
+<div class="box2">
+<p><b>📦 准备材料（先照抄跑一次）：</b>下面所有示例都读写同一个 <span class="code">a.txt</span>，先创建它并写入两行：</p>
+<pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"第一行\n第二行\n"</span>)   <span class="cm"># w 模式：不存在就创建（存在会清空，正好保证每次起点一致）</span></pre>
+<p class="note">从空工作目录开始照抄：先跑这个准备框，再依次跑后面的 r / readlines / w / a 示例，任何一步都不会因文件不存在而中断。</p>
+</div>
+
+<pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:   <span class="cm"># with = 自动关门，推荐写法</span>
+    <span class="param">内容</span> = <span class="param">f</span>.<span class="fn">read</span>()                <span class="cm"># 全读成一整个字符串</span>
+    <span class="cm"># ⚠ 同一文件对象读完一次就到末尾：read 之后再 readlines 通常得到空列表；</span>
+    <span class="cm">#   要么二选一，要么重新 open，或 f.seek(0) 回到开头再读。</span>
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">行列表</span> = <span class="param">f</span>.<span class="fn">readlines</span>()          <span class="cm"># 按行读成列表</span>
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"内容\n"</span>)             <span class="cm"># 写；\n = 换行</span>
+
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"a"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"追加一行\n"</span>)         <span class="cm"># 追加：不清空原文</span></pre>
+
+<table>
+<tr><th style="width:16%">模式</th><th>含义</th><th>对照 Linux</th></tr>
+<tr><td class="code">"r"</td><td>读</td><td>cat</td></tr>
+<tr><td class="code">"w"</td><td>写（⚠️ 打开即清空原文件）</td><td>&gt;（覆盖）</td></tr>
+<tr><td class="code">"a"</td><td>追加（不清空）</td><td>&gt;&gt;</td></tr>
+</table>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. 已有内容的文件用 <span class="code">"w"</span> 打开会怎样？<br>
+2. <span class="code">with open</span> 比手动 open+close 好在哪？</p>
+
+</div>
+
+<h2>字符串十招（10 个必会方法）</h2>
+
+<table>
+<tr><th style="width:24%">方法</th><th>作用</th><th style="width:40%">示例</th></tr>
+<tr><td class="code">s.split(符号)</td><td>切开成列表</td><td class="code"><span class="str">"a,b,c"</span>.<span class="fn">split</span>(<span class="str">","</span>) <span class="out">→ ['a', 'b', 'c']</span></td></tr>
+<tr><td class="code">"符号".join(列表)</td><td>列表拼成字符串</td><td class="code"><span class="str">"-"</span>.<span class="fn">join</span>([<span class="str">"a"</span>,<span class="str">"b"</span>]) <span class="out">→ 'a-b'</span></td></tr>
+<tr><td class="code">s.strip()</td><td>去首尾空白（读文件必用）</td><td class="code"><span class="str">" hi "</span>.<span class="fn">strip</span>() <span class="out">→ 'hi'</span></td></tr>
+<tr><td class="code">s.replace(a, b)</td><td>替换</td><td class="code"><span class="str">"a-b"</span>.<span class="fn">replace</span>(<span class="str">"-"</span>, <span class="str">"_"</span>) <span class="out">→ 'a_b'</span></td></tr>
+<tr><td class="code">s.upper() / lower()</td><td>大小写</td><td class="code"><span class="str">"ab"</span>.<span class="fn">upper</span>() <span class="out">→ 'AB'</span></td></tr>
+<tr><td class="code">s.find(x)</td><td>找位置，找不到返回 -1</td><td class="code"><span class="str">"abc"</span>.<span class="fn">find</span>(<span class="str">"b"</span>) <span class="out">→ 1</span></td></tr>
+<tr><td class="code">s.startswith(x) / endswith(x)</td><td>判断开头/结尾</td><td class="code"><span class="str">"a.log"</span>.<span class="fn">endswith</span>(<span class="str">".log"</span>) <span class="out">→ True</span></td></tr>
+<tr><td class="code">s.count(x)</td><td>数出现次数</td><td class="code"><span class="str">"abab"</span>.<span class="fn">count</span>(<span class="str">"a"</span>) <span class="out">→ 2</span></td></tr>
+<tr><td class="code">s.rsplit(符号, 次数)</td><td>从右边切（取扩展名/最后一段）</td><td class="code"><span class="str">"a.b.c"</span>.<span class="fn">rsplit</span>(<span class="str">"."</span>, <span class="num">1</span>)[-<span class="num">1</span>] <span class="out">→ 'c'</span></td></tr>
+<tr><td class="code">s.splitlines()</td><td>按行切成列表（读命令输出必用）</td><td class="code"><span class="str">"a\nb"</span>.<span class="fn">splitlines</span>() <span class="out">→ ['a', 'b']</span></td></tr>
+</table>
+
+<div class="quiz">
+<p><b>🎯 识别题</b></p>
+<p>1. <span class="code"><span class="str">"a,b,c"</span>.<span class="fn">split</span>(<span class="str">","</span>)</span> = ?<br>
+2. <span class="code"><span class="str">" hello "</span>.<span class="fn">strip</span>()</span> = ?</p>
+
+</div>
+
+<div class="newpage"></div>
+<h2>组合练习（5 道套路题，答案附后）</h2>
+
+<p>学函数不是背单个，而是会<b>组合</b>。这 5 道是运维脚本里出现频率最高的组合套路。</p>
+
+<p><b>1.</b> 统计一个日志文件里 "error" 出现几次（open + read + count）<br>
+<b>2.</b> 求 [85, 92, 78, 90] 的平均分（sum + len）<br>
+<b>3.</b> 把用户输入的一串数字（空格分隔）从小到大排序打印（input + split + int + sorted，用循环转换）<br>
+<b>4.</b> 从一行日志 "2026-08-25 14:30:12 INFO 服务启动" 里只取出日期部分（split 或切片）<br>
+<b>5.</b> 算 1 加到 100 的和（range + sum）</p>
+
+
+
+<h2>替代写法对比（三组，各有推荐）</h2>
+
+<table>
+<tr><th style="width:34%">写法 A（老）</th><th style="width:34%">写法 B（新，推荐）</th><th>为什么推荐 B</th></tr>
+<tr><td class="code"><span class="str">"我叫%s，%d岁"</span> % (<span class="param">name</span>, <span class="param">age</span>)</td><td class="code"><span class="param">f</span><span class="str">"我叫{name}，{age}岁"</span></td><td>f-string 直观、不易错位</td></tr>
+<tr><td class="code">os.system(<span class="str">"ls"</span>)</td><td class="code">subprocess.run([<span class="str">"ls"</span>], <span class="param">capture_output</span>=<span class="kw">True</span>, <span class="param">text</span>=<span class="kw">True</span>)</td><td>能拿输出、能判返回值、无命令注入风险</td></tr>
+<tr><td class="code"><span class="fn">print</span>(<span class="str">"调试信息"</span>)</td><td class="code">logging.info(<span class="str">"调试信息"</span>)</td><td>日志带时间/级别、能写文件、可开关</td></tr>
+</table>
+
+<h2>章末作业（8 题，先做再看答案）</h2>
+
+<p>1. 把 <span class="code">"apple,banana,cherry"</span> 切成列表，打印第 2 个元素<br>
+2. 输入年龄，判断是否成年（≥18 输出"成年"）<br>
+3. 把 [1, 2, 3] 反转并求和<br>
+4. 用 enumerate 给自己的 3 条待办事项加编号打印（从 1 开始）<br>
+5. 用字典存 "hello:你好"，用 get 查 "goodbye"（给默认提示）<br>
+6. 用 os.path.join 拼出 "logs/2026/08" 这样的路径<br>
+7. 实测 round(2.5) 和 round(3.5)，记录结果并解释<br>
+8. 用 format 和 f-string 各输出一次 π 保留两位小数</p>
+
+<div class="answer">
+<p><b>作业答案</b>：</p>
+<pre><span class="cm"># 1</span>
+<span class="param">fruits</span> = <span class="str">"apple,banana,cherry"</span>.<span class="fn">split</span>(<span class="str">","</span>)
+<span class="fn">print</span>(<span class="param">fruits</span>[<span class="num">1</span>])                 <span class="out"># banana</span>
+
+<span class="cm"># 2</span>
+<span class="param">age</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄："</span>))
+<span class="fn">print</span>(<span class="str">"成年"</span> <span class="kw">if</span> <span class="param">age</span> &gt;= <span class="num">18</span> <span class="kw">else</span> <span class="str">"未成年"</span>)
+
+<span class="cm"># 3</span>
+<span class="param">xs</span> = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+<span class="fn">print</span>(<span class="fn">sum</span>(<span class="fn">reversed</span>(<span class="param">xs</span>)))        <span class="out"># 6（反转后还是 1+2+3，但机制要会）</span>
+
+<span class="cm"># 4</span>
+<span class="param">todos</span> = [<span class="str">"学 Linux"</span>, <span class="str">"学 Python"</span>, <span class="str">"写日志"</span>]
+<span class="kw">for</span> <span class="param">i</span>, <span class="param">t</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="param">todos</span>, <span class="num">1</span>):
+    <span class="fn">print</span>(<span class="param">f</span><span class="str">"{i}. {t}"</span>)
+
+<span class="cm"># 5</span>
+<span class="param">d</span> = {<span class="str">"hello"</span>: <span class="str">"你好"</span>}
+<span class="fn">print</span>(<span class="param">d</span>.<span class="fn">get</span>(<span class="str">"goodbye"</span>, <span class="str">"查无此词"</span>))
+
+<span class="cm"># 6</span>
+<span class="kw">import</span> os
+<span class="param">path</span> = os.path.join(<span class="str">"logs"</span>, <span class="str">"2026"</span>, <span class="str">"08"</span>)
+<span class="fn">print</span>(<span class="param">path</span>)                  <span class="out"># logs/2026/08（Linux）</span>
+
+<span class="cm"># 7</span>
+<span class="fn">print</span>(<span class="fn">round</span>(<span class="num">2.5</span>), <span class="fn">round</span>(<span class="num">3.5</span>))   <span class="out"># 2 4 —— 银行家舍入：5前面是偶数→舍，奇数→进</span>
+
+<span class="cm"># 8</span>
+<span class="param">pi</span> = <span class="num">3.14159</span>
+<span class="fn">print</span>(<span class="fn">format</span>(<span class="param">pi</span>, <span class="str">".2f"</span>))      <span class="out"># 3.14</span>
+<span class="fn">print</span>(<span class="param">f</span><span class="str">"{pi:.2f}"</span>)            <span class="out"># 3.14</span></pre>
+</div>
+
+<div class="newpage"></div>
+<h2>练习答案汇总（先做再看）</h2>
+<p class="note">识别题与组合练习的答案全部集中在这里。对完答案请回看题目，把做错的重新想一遍。</p>
+<h3>识别题答案（按组）</h3>
+<p><b>第1处</b>：答案：1. ab（分隔符是空串）　2. str（字符串，永远不是数字——要算数先 int()）</p>
+<p><b>第2处</b>：答案：1. 50（先转整数再相加）　2. ['a','b','c']　3. "yth"（1、2、3 位，不含 4）</p>
+<p><b>第3处</b>：答案：1. <b>2</b>（不是 3！银行家舍入：5 前面是偶数 2 → 舍）　2. 3</p>
+<p><b>第4处</b>：答案：1. [1,3,5,7,9]　2. [3,2,1]</p>
+<p><b>第5处</b>：答案：1. False（"5" 是 str）　2. 字符串能用的所有方法名列表（split、strip……）</p>
+<p><b>第6处</b>：答案：1. (3, 1)　2. False（0 算假）　3. "a/b"（Windows 上是 "a\b"——这就是用 join 别手拼的理由）</p>
+<p><b>第7处</b>：答案：1. 立刻清空（重要文件先备份或用 "a"）　2. 自动关闭文件，不会忘写 close</p>
+<p><b>第8处</b>：答案：1. ['a','b','c']　2. "hello"（读文件后每行都该 strip 一下，去掉末尾换行）</p>
+<h3>组合练习参考答案</h3>
+
+<p><b>参考答案</b>（运行前先准备：题 1 先 <span class="code">echo 'error' &gt; log.txt</span> 建文件；题 2 自行输入三个数字；题 3 交互式输入数字串；其余按题意准备）</p>
+<pre><span class="cm"># 1</span>
+<span class="kw">with</span> <span class="fn">open</span>(<span class="str">"log.txt"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
+    <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>().<span class="fn">count</span>(<span class="str">"error"</span>))
+
+<span class="cm"># 2</span>
+<span class="param">scores</span> = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">90</span>]
+<span class="fn">print</span>(<span class="fn">sum</span>(<span class="param">scores</span>) / <span class="fn">len</span>(<span class="param">scores</span>))   <span class="out"># 86.25</span>
+
+<span class="cm"># 3</span>
+<span class="param">parts</span> = <span class="fn">input</span>(<span class="str">"输入数字（空格分隔）："</span>).<span class="fn">split</span>()
+<span class="param">nums</span> = []
+<span class="kw">for</span> <span class="param">p</span> <span class="kw">in</span> <span class="param">parts</span>:
+    <span class="param">nums</span>.<span class="fn">append</span>(<span class="fn">int</span>(<span class="param">p</span>))
+<span class="fn">print</span>(<span class="fn">sorted</span>(<span class="param">nums</span>))
+
+<span class="cm"># 4</span>
+<span class="param">line</span> = <span class="str">"2026-08-25 14:30:12 INFO 服务启动"</span>
+<span class="fn">print</span>(<span class="param">line</span>.<span class="fn">split</span>()[<span class="num">0</span>])      <span class="out"># 2026-08-25（split后取第0块）</span>
+<span class="fn">print</span>(<span class="param">line</span>[:<span class="num">10</span>])           <span class="out"># 2026-08-25（切片前10个字符）</span>
+
+<span class="cm"># 5</span>
+<span class="fn">print</span>(<span class="fn">sum</span>(<span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>)))     <span class="out"># 5050</span></pre>
+
+<h2>尾页 · 记忆索引（分组速查用）</h2>
+
+<div class="box">
+<p>① <b>看名字</b>：print打印、input输入、len长度、sum求和、sorted排序</p>
+<p>② <b>变类型</b>：str/int/float/bool/list/tuple/dict/set——工厂函数全家桶</p>
+<p>③ <b>量一量</b>：len长度、sum求和、min小、max大、abs绝对值、round注意银行家舍入</p>
+<p>④ <b>排一排</b>：range数列、enumerate编号、zip配对、sorted排序、reversed反转</p>
+<p>⑤ <b>查一查</b>：type/isinstance看类型、dir看方法、help看说明书</p>
+<p>⑥ <b>文件三连</b>：open开门、read读、write写，with自动关门</p>
+<p>⑦ <b>字符串十招</b>：split切、join拼、strip洗、replace换、upper/lower大小写、find找、startswith/endswith看头尾、count数</p>
+</div>
+
+<div class="box2">
+<p><b>📝 本册待改进清单</b>（学习中发现手册不好用的地方，攒 5 条再统一改版）：</p>
+<p class="note">（留白：学习中发现手册哪里不好用就记在这里，攒满 5 条再统一改版）</p>
+</div>
+
+<p class="footer">Python 内置函数手册· 配合《Python 入门》教科书使用 · 查得快、记得牢，不用背</p>
+
+</body>
+</html>
