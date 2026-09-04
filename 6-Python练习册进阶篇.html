@@ -191,7 +191,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <p><b>📋 背景工单</b>：线上 Nginx 日志突然增长，领导要一份报告：谁在猛刷我们的网站、哪些页面 404 最多。<b>主线（必做）就用附录 B 的样例日志练</b>——它已包含全部解析要素。<b>Docker/Nginx 真实日志版是外部扩展</b>：九册不含 Docker 安装、镜像、日志挂载、端口与清理的前置，需要时自备环境，无 Docker、无网络不影响主线完成。</p>
 </div>
 <p><b>日志格式说明（题面给出）</b>：Nginx 访问日志每行形如：</p>
-<pre><span class="code">66.249.66.1 - - [18/Aug/2026:10:11:12 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0"</span></pre>
+<pre style="font-size:8.5pt; line-height:1.4;"><span class="code">66.249.66.1 - - [18/Aug/2026:10:11:12 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0"</span></pre>
 <p>拆解：开头第一个字段是<b>访客 IP</b>；中间一对引号里是<b>请求行</b>（GET 方法 + URL + 协议）；请求行后面第一个数字是<b>状态码</b>（200 正常、404 找不到）。</p>
 <p><b>🎯 只给目标</b>（最终交付一个 <span class="code">log_analyzer.py</span>）：</p>
 <table>
@@ -244,7 +244,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <div class="newpage"></div>
 <h2>附录 B｜场景 4 样例日志（access.log）</h2>
 <p>把下面 10 行复制保存成 <span class="code">access.log</span>（注意每行不能折行）：</p>
-<pre><span class="code">66.249.66.1 - - [18/Aug/2026:10:11:12 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0"
+<pre style="font-size:8.5pt; line-height:1.4;"><span class="code">66.249.66.1 - - [18/Aug/2026:10:11:12 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0"
 203.0.113.9 - - [18/Aug/2026:10:11:15 +0000] "GET /style.css HTTP/1.1" 200 1024 "-" "Mozilla/5.0"
 66.249.66.1 - - [18/Aug/2026:10:12:01 +0000] "GET /old-page HTTP/1.1" 404 180 "-" "Mozilla/5.0"
 198.51.100.7 - - [18/Aug/2026:10:12:30 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "curl/8.0"
@@ -264,7 +264,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <div class="ans ans-split">
 <p><span class="step">1. 先想什么</span>：先收集普通文件，并在比较扩展名时统一转小写；再生成完整计划。正式执行前一次性检查源文件、目标名重复和目标占用，任何冲突都整体拒绝；执行中异常时回滚已完成项目。</p>
 <p><span class="step">2. 为什么这么写</span>：<span class="code fn">lower</span>() 使 <span class="code">.jpg</span> 与 <span class="code">.JPG</span> 一致；<span class="code fn">os.path.isfile</span>() 排除目录；先验证完整计划再执行，避免改到一半才发现冲突。正式操作不使用会覆盖目标的 <span class="code">os.replace</span>。</p>
-<p><span class="step">3. 完整代码</span>（rename_tool.py）：</p>
+<p><span class="step">3. 完整代码</span>（rename_tool.py）： style="break-after: avoid; page-break-after: avoid;"</p>
 <pre class="pre-split">import argparse
 import os
 
@@ -361,7 +361,7 @@ if __name__ == "__main__":
 </div>
 
 <h3 class="pb">场景 2｜天气查询器</h3>
-<div class="ans ans-split"><p><span class="step">1. 先想什么</span>：城市 → 经纬度 → URL → 请求 → 状态码 → JSON → 字段校验 → 输出；网络层、HTTP 层和数据格式层分别处理。</p><p><span class="step">2. 为什么这么写</span>：HTTP 200 不代表 JSON 或字段结构正确，因此处理网络失败、非 200、JSON 解析失败、缺字段和字段类型错误。</p><p><span class="step">3. 完整代码</span>（weather.py）：</p><pre class="pre-split">import argparse
+<div class="ans ans-split"><p><span class="step">1. 先想什么</span>：城市 → 经纬度 → URL → 请求 → 状态码 → JSON → 字段校验 → 输出；网络层、HTTP 层和数据格式层分别处理。</p><p><span class="step">2. 为什么这么写</span>：HTTP 200 不代表 JSON 或字段结构正确，因此处理网络失败、非 200、JSON 解析失败、缺字段和字段类型错误。</p><p><span class="step">3. 完整代码</span>（weather.py）： style="break-after: avoid; page-break-after: avoid;"</p><pre class="pre-split">import argparse
 import requests
 
 CITIES = {
@@ -455,7 +455,7 @@ main()</pre><p><span class="step">4. 怎么验证</span>：正常接口、未知
 <div class="ans ans-split">
 <p><span class="step">1. 先想什么</span>：三个检查函数 + 报告 + 日志。三个检查函数的完整代码见下方③；它们都按 subprocess 调用模板分别解析输出，但 <span class="code">free -m</span> 输出单位是 MB（纯数字），第二行（索引 1）是 Mem 内存行；check_cpu 只取 <span class="code">uptime</span> 末尾的 load average（负载平均值）。报告 = 三行结果拼起来写入文件；日志 = INFO 记开始/完成。</p>
 <p><span class="step">2. 为什么这么写</span>：内存百分比用 <span class="code">used * 100 // total</span>（整数除法，教科书第 1 章）；负载没有"百分比"，直接报告数值（负载数字在输出末尾 <span class="code">load average:</span> 之后，用 <span class="fn">rsplit</span>（从右边切，切到第一次出现的分隔符为止）取最后一段再 <span class="fn">strip</span>（去空白）；配合 Linux 第 7 章学过：负载超 CPU 核数才算忙，这里只报数据）；文件名日期用 <span class="code fn">time</span>.<span class="fn">strftime</span>(<span class="str">"%Y-%m-%d"</span>)（第 5 章学过）；日志用 <span class="code fn">logging</span>.<span class="fn">basicConfig</span> 写文件。<b>范围说明：本版只处理 Ubuntu 正常命令输出（命令存在、返回码 0、输出结构正常）；命令不存在、输出异常等环境问题不在本版范围内，需要时用第 7 章 try/except 自行加强。</b></p>
-<p><span class="step">3. 完整代码</span>（health_check.py；先 cd ~/lab 再运行，报告和日志都写进练习目录）：</p>
+<p><span class="step">3. 完整代码</span>（health_check.py；先 cd ~/lab 再运行，报告和日志都写进练习目录）： style="break-after: avoid; page-break-after: avoid;"</p>
 <pre class="pre-split"><span class="kw">import</span> <span class="fn">logging</span>
 <span class="kw">import</span> <span class="fn">subprocess</span>
 <span class="kw">import</span> <span class="fn">time</span>
@@ -505,7 +505,7 @@ main()</pre><p><span class="step">4. 怎么验证</span>：正常接口、未知
 <div class="ans ans-split">
 <p><span class="step">1. 先想什么</span>：逐行读取 → 分层校验 IP、引号片段、请求字段和状态码 → 正常行计数 → 坏行记录行号和原因并继续 → 输出报告。</p>
 <p><span class="step">2. 为什么这么写</span>：日志可能有空行、缺引号、短请求行或非数字状态码。解析函数不能只保护引号片段，还要保护请求字段和状态码；坏行跳过并计数，避免一条坏日志拖垮整批分析。</p>
-<p><span class="step">3. 完整代码</span>（log_analyzer.py）：</p>
+<p><span class="step">3. 完整代码</span>（log_analyzer.py）： style="break-after: avoid; page-break-after: avoid;"</p>
 <pre class="pre-split">import argparse
 
 
@@ -586,7 +586,7 @@ if __name__ == "__main__":
 <div class="ans ans-split">
 <p><span class="step">1. 先想什么</span>：连接、认证、执行命令和释放连接是四个边界。任何一步失败都要给出可定位信息；每条远程命令都同时读取 stdout、stderr，并检查返回码。</p>
 <p><span class="step">2. 为什么这么写</span>：<span class="code fn">getpass.getpass</span> 输入密码时不回显；<span class="code">timeout</span> 防止连接无限等待；<span class="code">try/finally</span> 保证连接关闭；<span class="code">recv_exit_status()</span> 区分“有输出但失败”和真正成功。<span class="code">AutoAddPolicy</span> 仅限自己的练习虚拟机，生产环境必须核验主机密钥。</p>
-<p><span class="step">3. 完整代码</span>（remote_check.py）：</p>
+<p><span class="step">3. 完整代码</span>（remote_check.py）： style="break-after: avoid; page-break-after: avoid;"</p>
 <p class="note">安装依赖：Ubuntu 执行 <span class="code">sudo apt install python3-paramiko</span>；未安装时会报 <span class="code danger">ModuleNotFoundError: No module named 'paramiko'</span>。只连自己的练习虚拟机。</p>
 <pre class="pre-split">import getpass
 import paramiko
