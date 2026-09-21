@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Linux指令练习册·进阶篇</title>
+<title>Linux指令练习册·进阶篇 · v2.4</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,17 +92,22 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 <div class="box">
 <p><b>📌 本册路线（5 场景）</b></p>
-<pre>场景1 本地推理服务起不来（日志排查）      约 3h   ★ 必做
-场景2 磁盘满应急（模型文件占满磁盘）🌐   约 3h   ☆ 选做
-场景3 服务连不上（网络链路排查）          约 3h   ☆ 选做
-场景4 服务与进程运维（含 GPU 进程定位）   约 3h   ☆ 选做
-场景5 脚本收尾（衔接 5 个 Shell 脚本）   约 3h   ★ 必做</pre>
+<pre><a href="#toc-1" style="color:inherit;text-decoration:none;">场景1 本地推理服务起不来（日志排查）</a>      约 3h   ★ 必做
+<a href="#toc-2" style="color:inherit;text-decoration:none;">场景2 磁盘满应急（模型文件占满磁盘）🌐</a>   约 3h   ☆ 选做
+<a href="#toc-3" style="color:inherit;text-decoration:none;">场景3 服务连不上（网络链路排查）</a>          约 3h   ☆ 选做
+<a href="#toc-4" style="color:inherit;text-decoration:none;">场景4 服务与进程运维（含 GPU 进程定位）</a>   约 3h   ☆ 选做
+<a href="#toc-5" style="color:inherit;text-decoration:none;">场景5 脚本收尾（衔接 5 个 Shell 脚本）</a>   约 3h   ★ 必做
+<a href="#toc-6" style="color:inherit;text-decoration:none;">参考答案（书末集中，先做再看）</a>            做完题对答案
+<a href="#toc-7" style="color:inherit;text-decoration:none;">附录 A · 练习用脚本（labservice.sh）</a>      复刻现场用
+<a href="#toc-8" style="color:inherit;text-decoration:none;">附录 B · 本册命令速查</a>              查询用
+<a href="#toc-9" style="color:inherit;text-decoration:none;">附录 C · 术语表补充</a>                查询用
+<a href="#toc-10" style="color:inherit;text-decoration:none;">附录 D · 其余 3 个脚本</a>             查询用</pre>
 </div>
 
 <div class="newpage"></div>
 <h2>进阶篇 · 场景与题目（只给目标）</h2>
 
-<h3>场景 1｜本地推理服务起不来（日志排查）</h3>
+<h3 id="toc-1">场景 1｜本地推理服务起不来（日志排查）</h3>
 <div class="ticket">
 <p><b>📋 背景工单</b>：你是某公司 AI 组的新运维。同事说他昨天在服务器上装了一个推理服务，今天早上启动失败，让你去处理。<b>机器上有个服务脚本 labservice.sh（见附录 A），它在某个目录下写日志。</b></p>
 </div>
@@ -112,7 +117,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <span class="out"># 只检查并停止本场景记录的 PID；不要按模糊命令名误杀其他服务</span>
 <span class="prompt">$</span> if [ -f ~/lab/labservice.pid ]; then old_pid=$(cat ~/lab/labservice.pid); ps -p "$old_pid" -o pid=,args=; fi
 <span class="prompt">$</span> ./labservice.sh stop 2&gt;/dev/null || true
-<span class="prompt">$</span> nano labservice.sh     <span class="out"># 把附录 A1 的脚本内容全部粘贴进来，保存退出（Ctrl+X → Y → 回车）</span>
+<span class="prompt">$</span> nano labservice.sh     <span class="out"># 把附录 A1 的脚本内容全部粘贴进来，保存退出（Ctrl+X → Y → 回车）——nano 是终端里的文本编辑器，比 vim 友好，新手先用它</span>
 <span class="prompt">$</span> nano labservice.conf   <span class="out"># 把附录 A2 的配置内容粘贴进来，LOGDIR 填你的真实路径（用 A2 里的生成命令产生）</span>
 <span class="prompt">$</span> chmod +x labservice.sh
 <span class="prompt">$</span> ./labservice.sh start &amp;       <span class="out"># 后台启动（末尾加 &amp;，不占终端），先确认它本来是好的</span>
@@ -130,9 +135,9 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td>进1-3</td><td>修复问题，重新启动服务，让服务成功跑起来</td></tr>
 <tr><td>进1-4</td><td>验证服务可用（端口通了、日志显示正常），写一份 3 行的处理记录（做了什么、为什么）</td></tr>
 </table>
-<p><b>最终产出</b>：一份故障处理记录 + 复述"处理流程四步（确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测）"。</p>
+<p><b>最终产出</b>：一份故障处理记录 + 复述"处理流程四步"（即 9 册《日志报错解读手册》的"读日志四步法"：确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测）。</p>
 
-<h3>场景 2｜磁盘满应急（模型文件占满磁盘）🌐</h3>
+<h3 id="toc-2">场景 2｜磁盘满应急（模型文件占满磁盘）🌐</h3>
 <div class="ticket">
 <p><b>📋 背景工单</b>：你负责的 GPU 服务器磁盘使用率报警到 92%，同事说服务开始写日志报"空间不足"。<b>你的任务：定位是什么占满了磁盘、安全清理、恢复服务、给出预防措施。</b></p>
 </div>
@@ -162,7 +167,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </div>
 <p><b>题目</b>：进2-1 确认是哪个挂载点满了，占用多少。进2-2 进入该分区，逐层定位最大的目录、最大的文件。进2-3 判断哪些可安全删除、哪些不能动（说清依据），完成清理。进2-4 验证恢复，写出 2 条预防措施。</p>
 
-<h3>场景 3｜服务连不上（网络链路排查）</h3>
+<h3 id="toc-3">场景 3｜服务连不上（网络链路排查）</h3>
 <div class="ticket">
 <p><b>📋 背景工单</b>：同事反馈"我们部署在本地 8080 端口的服务突然连不上了"，让你按链路排查：<b>主机通不通 → 端口通不通 → 服务进程在不在 → 日志怎么说。</b></p>
 </div>
@@ -191,14 +196,16 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </table>
 <p><b>最终产出</b>：一份网络故障排查记录 + 画一张排查顺序流程图。</p>
 
-<h3>场景 4｜服务与进程运维（含 GPU 进程定位）</h3>
+<h3 id="toc-4">场景 4｜服务与进程运维（含 GPU 进程定位）</h3>
 <div class="ticket">
 <p><b>📋 背景工单</b>：你在管一台"推理服务机器"，今天要完成：部署一个服务并让它开机自启、监控它、处理一个"卡死进程"，最后查清楚"显卡/文件被哪个进程占着"。</p>
 </div>
-<p class="note">📌 环境边界（实测结论）：① <b>GPU 题（进 4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进 4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 22.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
+<p class="note">📌 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 22.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
 <div class="build">
 <p><b>🔧 场景搭建手册</b>：</p>
 <pre><span class="prompt">$</span> cd ~/lab
+<span class="prompt">$</span> nano loop.sh                        <span class="out"># 粘贴附录 A3 的完整内容（死循环进程），保存退出（Ctrl+X → Y → 回车）</span>
+<span class="prompt">$</span> chmod +x loop.sh                    <span class="out"># 给执行权限；⚠️ loop.sh 跑起来会占满一个 CPU 核，用完必须 kill 并收尾</span>
 <span class="prompt">$</span> ./labservice.sh start &amp;                 <span class="out"># 只启动本场景服务</span>
 <span class="prompt">$</span> nohup ./loop.sh &gt; loop.log 2&gt;&amp;1 &amp; echo $! &gt; loop.pid <span class="out"># 保存 loop.sh 的 PID</span>
 <span class="prompt">$</span> top                                      <span class="out"># 现场就位</span></pre>
@@ -213,7 +220,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </table>
 <p><b>最终产出</b>：一台"服务能自启、能监控、出问题会处理"的练习机状态 + 处理记录。</p>
 
-<h3>场景 5｜脚本收尾（衔接 Shell 脚本任务）</h3>
+<h3 id="toc-5">场景 5｜脚本收尾（衔接 Shell 脚本任务）</h3>
 <div class="ticket">
 <p><b>📋 背景工单</b>：前四个场景你都是手动敲命令处理的。现在公司要求把巡检"脚本化"：以后一键就能看到机器状态。<b>这就是通往"5 个 Shell 脚本"任务的桥。</b></p>
 </div>
@@ -227,30 +234,30 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <p><b>最终产出</b>：2 个可用的 Shell 脚本，直接衔接"5 个 Shell 脚本"任务——5 件套总览（本场景产出前 2 个，后 3 个按表补齐）：</p>
 <table>
 <tr><th style="width:22%">脚本</th><th style="width:40%">功能</th><th style="width:26%">知识来源</th><th>优先级</th></tr>
-<tr><td><span class="code">check_res.sh</span></td><td>资源巡检（磁盘/内存/负载 + 日期）</td><td>本场景进 5-1</td><td>★ 必做</td></tr>
-<tr><td><span class="code">health_check.sh</span></td><td>服务健康检查（进程/端口/日志时间）</td><td>本场景进 5-2</td><td>★ 必做</td></tr>
+<tr><td><span class="code">check_res.sh</span></td><td>资源巡检（磁盘/内存/负载 + 日期）</td><td>本场景进5-1</td><td>★ 必做</td></tr>
+<tr><td><span class="code">health_check.sh</span></td><td>服务健康检查（进程/端口/日志时间）</td><td>本场景进5-2</td><td>★ 必做</td></tr>
 <tr><td><span class="code">backup.sh</span></td><td>自动备份 + 日期后缀（tar + date）</td><td>基础篇 5-6 + 教科书第 12 章</td><td>★ 必做</td></tr>
-<tr><td><span class="code">disk_alert.sh</span></td><td>磁盘超 80% 告警（df 解析 + if 判断）</td><td>进 5-1 思路 + 教科书第 13 章</td><td>☆ 选做</td></tr>
+<tr><td><span class="code">disk_alert.sh</span></td><td>磁盘超 80% 告警（df 解析 + if 判断）</td><td>进5-1 思路 + 教科书第 13 章</td><td>☆ 选做</td></tr>
 <tr><td><span class="code">service_guard.sh</span></td><td>服务挂了自动拉起（systemctl is-active 检查 || start）</td><td>教科书第 6、10 章</td><td>☆ 选做</td></tr>
 </table>
-<p class="note">另有"批量建用户""清理过期日志"两项能力已在基础篇阶段 3、阶段 5 覆盖，不再单独成脚本。全部脚本配 README，保存到脚本目录。</p>
+<p class="note">另有"批量建用户""清理过期日志"两项能力已在基础篇阶段 3、阶段 5 覆盖，不再单独成脚本。全部脚本配 README，保存到 shell-scripts 仓库。</p>
 
 <div class="newpage"></div>
-<h2>参考答案（书末集中）</h2>
+<h2 id="toc-6">参考答案（书末集中）</h2>
 
 <h3>场景 1 答案</h3>
-<div class="ans"><p><b>【进 1-1】确认服务状态</b></p>
+<div class="ans"><p><b>【进1-1】确认服务状态</b></p>
 <p><span class="step">① 先想什么</span>："服务起没起"要回答两个问题：进程活着吗？端口在听吗？</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">ps aux | grep labservice</span> 看进程；<span class="code">ss -tlnp</span> 看所有监听端口（-t TCP、-l 监听、-n 数字显示、-p 显示进程名）。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ps aux | grep -v grep | grep labservice   <span class="out"># 无输出 = 进程没活</span>
 <span class="prompt">$</span> ss -tlnp | grep 8080                    <span class="out"># 无输出 = 没人监听 8080</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：两个命令都无输出，确认"进程没起、端口没听"——故障实锤，不是"起了但连不上"。</p></div>
 
-<div class="ans"><p><b>【进 1-2】定位根因行</b></p>
+<div class="ans"><p><b>【进1-2】定位根因行</b></p>
 <p><span class="step">① 先想什么</span>：日志在哪？哪一行是根因、哪些是干扰？——看脚本配置找日志位置，再按"级别"过滤。</p>
 <p><span class="step">② 为什么用这个命令</span>：日志位置在 labservice.conf 的 LOGDIR 里（或脚本中写死）。用 <span class="code">tail -n 20</span> 看最后几行（启动失败的信息都在末尾），重点看 [ERROR] / [FATAL] 行，忽略 [INFO] 心跳行。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> cat labservice.conf             <span class="out"># 找到 LOGDIR= 那一行，记下它的值（应是你的真实路径）</span>
 <span class="prompt">$</span> tail -n 20 ~/lab/logs/labservice.log
 <span class="out">... [INFO] 服务启动中，配置端口=abc
@@ -258,29 +265,30 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <span class="prompt">$</span> grep -e ERROR -e FATAL ~/lab/logs/labservice.log   <span class="out"># 一步过滤出根因（-e = 每个 -e 后跟一个匹配模式，可一次搜多个词）</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：你能说出"为什么排除其他行"——[INFO] 心跳行是每 3 秒一条的噪音，[ERROR] 只在出问题时出现。处理流程四步：<b>确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测</b>。</p></div>
 
-<div class="ans"><p><b>【进 1-3】修复并重启</b></p>
+<div class="ans"><p><b>【进1-3】修复并重启</b></p>
 <p><span class="step">① 先想什么</span>：根因是"端口配置非法"，修复 = 把配置改回合法值。</p>
 <p><span class="step">② 为什么用这个命令</span>：改配置用 nano 编辑 labservice.conf（nano 按键：改完 Ctrl+X → Y → 回车），把 PORT=abc 改回 PORT=8080，再重新启动。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nano labservice.conf   <span class="out"># 改完 Ctrl+X → Y → 回车</span>        <span class="out">把 PORT=abc 改回 PORT=8080，保存退出</span>
 <span class="prompt">$</span> ./labservice.sh start
 <span class="prompt">$</span> ps aux | grep -v grep | grep labservice   <span class="out"># 进程活了</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：进程存在，且日志末尾出现 <span class="code out">[INFO] 服务启动成功</span>。修复不是"猜"，是"改掉日志指出的那一处"。</p></div>
 
-<div class="ans"><p><b>【进 1-4】验证 + 处理记录</b></p>
+<div class="ans"><p><b>【进1-4】验证 + 处理记录</b></p>
 <p><span class="step">① 先想什么</span>：验证要"从外到内"——端口通不通（外部视角）、日志正不正常（内部视角）。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">curl localhost:8080</span> 或 <span class="code">nc -zv localhost 8080</span> 测端口；<span class="code">tail -f</span> 看心跳在跳。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nc -zv localhost 8080              <span class="out"># Connection to localhost 8080 port [tcp/*] succeeded!</span>
 <span class="prompt">$</span> tail -f ~/lab/logs/labservice.log  <span class="out"># 每 3 秒一条心跳，Ctrl+C 退出</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：端口连通 + 心跳正常，服务恢复。处理记录示例（3 行）：<br>1. 现象：服务启动失败。<br>2. 定位：日志 [ERROR] 端口配置非法（PORT=abc）。<br>3. 处理：改回 PORT=8080 重启，端口 8080 连通、心跳正常。已提醒同事：改配置后保存前核对格式。</p></div>
 
 <h3>场景 2 答案</h3>
 <div class="ans">
+<p class="note">说明：本场景按整体给出四步式（4 步覆盖 4 个小题），小题编号见代码注释中的"进2-x"。</p>
 
 <p><span class="step">① 先想什么</span>：磁盘满分两层看——"全局"（哪个分区满）用 <span class="code cmd">df -h</span>，"局部"（谁占的）用 <span class="code cmd">du</span> 一层层下钻，最后用 <span class="code cmd">ls -lhS</span> 按大小排序找元凶。清理前必须判断文件性质：model_v1.bin 是被 v2 替代的旧模型（可删），old_service.log 是旧日志（可删），tmp_cache.bin 是缓存（可删）；但如果服务正在写某个日志，那个就不能删。<b>注意：这些文件是搭建手册用 sudo fallocate 创建的（root 属主、目录 root 可写），普通用户直接 rm 会 Permission denied——删除也要 sudo。</b></p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">df -h</span> 看分区级占用；<span class="code cmd">du -h --max-depth=1</span> 只下钻一层、不淹没在细节里；<span class="code cmd">ls -lhS</span> 用 S 参数按大小排序，一眼看到最大的文件；<span class="code cmd">rm</span> 删除。不用 <span class="code">find -size</span> 是因为目录不大，逐层看更直观、更能练"下钻"的思路。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> df -h /mnt/lab                                   <span class="out"># 进2-1：使用率 90%+</span>
 <span class="prompt">$</span> cd /mnt/lab
 <span class="prompt">$</span> du -h --max-depth=1 .                            <span class="out"># 进2-2：models/ 最大</span>
@@ -296,64 +304,65 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 
 <h3>场景 3 答案</h3>
-<div class="ans"><p><b>【进 3-1】主机可达性</b></p>
+<div class="ans"><p><b>【进3-1】主机可达性</b></p>
 <p><span class="step">① 先想什么</span>：连不上先从最底层查起——机器本身通不通。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">ping localhost</span> 只测回环和本机网络栈，不能证明网卡、网关或外网正常；<span class="code">ping 网关IP</span> 才是局域网层测试，但 ICMP 可能被防火墙禁用。网关地址用 <span class="code">ip route</span> 查。再逐步测试目标 IP、端口和应用，不能只凭一次 ping 下结论。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ping -c 4 localhost      <span class="out"># 4 个包，全通</span>
 <span class="prompt">$</span> ip route                <span class="out"># 找到默认网关地址</span>
 <span class="prompt">$</span> ping -c 4 网关IP        <span class="out"># 局域网通</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：输出显示 0% packet loss。本场景是"本地 8080 服务"，ping 通说明问题在更高层（端口/进程/配置），继续下一题。</p></div>
 
-<div class="ans"><p><b>【进 3-2】端口监听检查</b></p>
+<div class="ans"><p><b>【进3-2】端口监听检查</b></p>
 <p><span class="step">① 先想什么</span>：8080 有没有人在听？被谁听？</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">ss -tlnp</span> 列出所有 TCP 监听端口及进程。故障 A（没起）→ 无 8080；故障 B（被占）→ 8080 有监听但进程是 http.server 不是 labservice。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ss -tlnp | grep 8080
 <span class="out"># 故障A：无输出 → 服务没起</span>
 <span class="out"># 故障B：LISTEN 0 5 0.0.0.0:8080 ... users:(("python3",...)) → 被 python3 占着</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：能根据 ss 输出判断出"没起"还是"被占"，并说出占用进程是谁——这一步直接决定下一步动作（启动 vs 杀占用者）。</p></div>
 
-<div class="ans"><p><b>【进 3-3】实测连通</b></p>
+<div class="ans"><p><b>【进3-3】实测连通</b></p>
 <p><span class="step">① 先想什么</span>："进程在听"不等于"真的能连上"——防火墙、监听地址都可能让"听着却连不上"。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">nc -zv 主机 端口</span> 直接发起一次连接尝试（z=只测不传数据，v=显示过程）；<span class="code">curl</span> 还能顺带看服务是否正常应答。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nc -zv localhost 8080
 <span class="out"># 能连：Connection to localhost 8080 port succeeded!
 # 不能连：Connection refused（没人听）或 timeout（有防火墙丢包）</span>
 <span class="prompt">$</span> curl -I localhost:8080    <span class="out"># 看 HTTP 响应头，确认服务正常应答</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：能区分三种结论——refused（没进程听）、timeout（防火墙/地址错）、succeeded（连通）。故障 C（监听地址错）的表现正是"localhost 能连、真实 IP 连不上"。</p></div>
 
-<div class="ans"><p><b>【进 3-4】定位 + 修复 + 复述顺序</b></p>
+<div class="ans"><p><b>【进3-4】定位 + 修复 + 复述顺序</b></p>
 <p><span class="step">① 先想什么</span>：把前三题的结论拼起来，按"主机→端口→进程→日志"给故障点定位。</p>
 <p><span class="step">② 为什么用这个命令</span>：A 类修复=启动服务；B 类修复=找到占用者（ss 输出里有 PID）评估后 kill 掉、再启动服务；C 类修复=改回正确的监听地址。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="out"># 故障B 修复示例：</span>
 <span class="prompt">$</span> ss -tlnp | grep ':8080'          <span class="out"># 先看原始输出，PID 在 users:(("python3",pid=1234,...)) 里</span>
 <span class="prompt">$</span> PIDS=$(ss -tlnp | grep ':8080' | sed -n 's/.*pid=\([0-9][0-9]*\).*/\1/p')   <span class="out"># 提取全部 PID</span>
-<span class="prompt">$</span> N=$(echo "$PIDS" | sed '/^$/d' | wc -l)   <span class="out"># 统计个数</span>
+<span class="prompt">$</span> N=$(echo "$PIDS" | sed '/^$/d' | wc -l)   <span class="out"># 统计个数（sed /^$/d：/^$/=空行，d=删除——整句=删掉空行再数）</span>
 <span class="prompt">$</span> if [ "$N" -ne 1 ]; then echo "检测到 $N 个进程占用 8080：$PIDS ——先列出来人工判断，停止处理"; exit 1; fi   <span class="out"># 不是唯一 PID 就停，绝不自动取第一个</span>
 <span class="prompt">$</span> OCC_PID="$PIDS"
 <span class="prompt">$</span> ps -p "$OCC_PID" -o pid=,args= | grep -q "python3 -m http.server 8080" || { echo "PID $OCC_PID 的命令行不是本场景的 http.server，停止处理"; exit 1; }   <span class="out"># 核对命令行确实是本场景进程才动手</span>
 <span class="prompt">$</span> kill "$OCC_PID"                    <span class="out"># 先优雅终止</span>
 <span class="prompt">$</span> ./labservice.sh start         <span class="out"># 重启服务</span>
 <span class="prompt">$</span> nc -zv localhost 8080         <span class="out"># 验证连通</span></pre>
+<p class="note">📎 <b>sed 拆解</b>（本册第一次出现，正文未教，这里一次讲清）：<code>-n</code>=只打印被处理的行；<code>s/旧/新/p</code>=替换并打印；<code>\(...\)</code>=圈住要保留的部分；<code>\1</code>=用圈住的内容替换整行——整句 = 把含 <code>pid=</code> 的行替换成 <code>pid=</code> 后面的数字。</p>
 <p><span class="step">④ 怎么验证做对了</span>：服务连通。四步顺序脱口而出：<b>先记录各层证据，再按“确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测”处理</b>，不能只凭单次 ping 或单条命令下结论。</p></div>
 
 <h3>场景 4 答案</h3>
-<div class="ans"><p><b>【进 4-1】部署 + 确认</b></p>
+<div class="ans"><p><b>【进4-1】部署 + 确认</b></p>
 <p><span class="step">① 先想什么</span>：部署 = 后台跑起来 + 退出终端也不死。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">nohup 命令 &amp;</span> 让进程忽略挂断信号（终端关了它也不死）；确认用 ps + ss 双保险。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nohup ./labservice.sh start &amp;
 <span class="prompt">$</span> ps aux | grep -v grep | grep labservice   <span class="out"># 在</span>
 <span class="prompt">$</span> ss -tlnp | grep 8080                    <span class="out"># 在听</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：进程和端口双重确认。完成后用本场景 PID 停止服务，再检查 PID 文件、端口和进程均已消失；日志本体在 LOGDIR 里。</p></div>
 
-<div class="ans"><p><b>【进 4-2】揪出死循环进程</b></p>
+<div class="ans"><p><b>【进4-2】揪出死循环进程</b></p>
 <p><span class="step">① 先想什么</span>：死循环通常会持续占用 CPU；先用资源观察确认，再只操作本场景保存的 PID。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">top</span> 按 P 观察高 CPU 进程；<span class="code">loop.pid</span> 是搭建时记录的本场景 PID。先发 TERM 给程序清理机会；实验脚本会用 trap 忽略 TERM，所以确认仍在后才使用 KILL。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> loop_pid=$(cat loop.pid)
 <span class="prompt">$</span> ps -p "$loop_pid" -o pid=,args= <span class="out"># 必须确认命令行属于 loop.sh</span>
 <span class="prompt">$</span> kill "$loop_pid"
@@ -363,27 +372,28 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <span class="prompt">$</span> top <span class="out"># CPU 应降回正常水平</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：确认 loop.sh 的 PID 已不再存在、CPU 占用下降、<span class="code">loop.pid</span> 已删除。不能根据 PID 文件直接杀进程，必须先用 <span class="code">ps</span> 核对命令归属，防止 PID 复用误杀其他进程。</p></div>
 
-<div class="ans"><p><b>【进 4-3】GPU / 文件占用定位</b></p>
+<div class="ans"><p><b>【进4-3】GPU / 文件占用定位</b></p>
 <p><span class="step">① 先想什么</span>：GPU 显存被谁占着？——技能本质是"资源 → 占用它的进程"。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">nvidia-smi</span> 看显存使用和占用进程 PID；<span class="code">fuser -v /dev/nvidia*</span> 反查"谁占着 GPU 设备"。无 GPU 的等价题：<span class="code">fuser -v 某个文件</span> 反查"谁占着这个文件"——命令和思路完全一样。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nvidia-smi                    <span class="out"># GPU 题：看 Processes 区块里的 PID</span>
 <span class="prompt">$</span> fuser -v /dev/nvidia*         <span class="out"># 哪个进程占着 GPU</span>
 <span class="prompt">$</span> fuser -v ~/lab/logs/labservice.log <span class="out"># 无 GPU 替代：哪个进程占着这个文件（选正被进程打开的文件——labservice.log 被 python3 持续打开着）</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：fuser 输出"文件: 进程名(PID)"格式，与 ps 结果互证。fuser 只显示"打开着该文件"的进程——所以要做实验，得选一个正被进程持续打开的文件（如服务的日志），而不是写完就关的 pid 文件。核心能力不是记命令，是"从资源反查进程"这个思路——磁盘满（du 找文件）、端口被占（ss 找进程）、GPU 被占（fuser），同一种思维。</p></div>
 
-<div class="ans"><p><b>【进 4-4 🌐】开机自启</b></p>
+<div class="ans"><p><b>【进4-4 🌐】开机自启</b></p>
 <p><span class="step">① 先想什么</span>：让 systemd 这个大管家替你"开机自动拉起服务"。</p>
 <p><span class="step">② 为什么用这个命令</span>：写一个 unit 文件描述服务，<span class="code">systemctl enable</span> 注册开机自启，<span class="code">systemctl start</span> 立即生效。无 systemd 的环境说明 rc.local 或 crontab @reboot 方案即可。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> EXEC_PATH="$(readlink -f ~/lab/labservice.sh)"   <span class="out"># 先拿真实绝对路径（readlink -f 把 ~ 展开成完整路径）</span>
 <span class="prompt">$</span> echo "$EXEC_PATH"                              <span class="out"># 只看一眼，确认输出是完整真实路径（这一步就是用它替换下面 %s 的值）</span>
 <span class="prompt">$</span> printf '[Unit]\nDescription=Lab fake service\n[Service]\nExecStart=%s start\nRestart=on-failure\nRestartSec=2\n[Install]\nWantedBy=multi-user.target\n' "$EXEC_PATH" | sudo tee /etc/systemd/system/labservice.service &gt;/dev/null   <span class="out"># 动态生成 unit，不手写占位路径</span>
 <span class="prompt">$</span> sudo systemctl daemon-reload
 <span class="prompt">$</span> sudo systemctl enable --now labservice
-<span class="prompt">$</span> sudo reboot          <span class="out"># 重启验证（会断开当前所有连接：先在本地终端做，或改用 sudo systemctl restart labservice 代替，效果等价）</span>
+<span class="prompt">$</span> sudo reboot          <span class="out"># 重启验证</span>
 <span class="prompt">$</span> systemctl status labservice   <span class="out"># active (running) = 自启成功</span>
 <span class="prompt">$</span> sudo systemctl disable --now labservice &amp;&amp; sudo rm /etc/systemd/system/labservice.service &amp;&amp; sudo systemctl daemon-reload   <span class="out"># 练习完恢复原状：先 disable 停止、再删 unit、最后 daemon-reload 让 systemd 重新读配置</span></pre>
+<div class="warn">⚠️ <b>reboot 会断开当前所有连接</b>：请在本地终端做，或改用 <code>sudo systemctl restart labservice</code> 代替（效果等价）。</div>
 <p><span class="step">④ 怎么验证做对了</span>：重启后服务自动在跑。养成习惯：改完 unit 文件必须 <span class="code">daemon-reload</span>，这是新手最容易漏的一步。</p>
 <div class="box2"><p><span class="opt">Restart=on-failure 验证（Ubuntu 22.04 + systemd 实测通过，实测现象附在各步骤后）：</span></p>
 <pre><span class="prompt">$</span> sudo systemctl start labservice
@@ -395,13 +405,13 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <span class="prompt">$</span> for i in $(seq 1 30); do systemctl is-active --quiet labservice &amp;&amp; ss -tlnp | grep -q :8080 &amp;&amp; break; sleep 1; done   <span class="out"># 轮询最多 30 秒：等 unit 恢复 active 且端口恢复（实测恢复约需 4~5 秒，固定 sleep 2 会看到“还没恢复”的假象）</span>
 <span class="prompt">$</span> systemctl status labservice   <span class="out"># 预期：状态仍为 active (running)，Main PID 变了</span>
 <span class="prompt">$</span> journalctl -u labservice -n 10          <span class="out"># 预期：看到“已重启”相关日志，NRestarts ≥ 1</span></pre>
-<p>实测（Ubuntu 22.04）：kill -9 后约 4~5 秒 unit 自动重启、MainPID 由旧值变为新值（<b>PID 每次随机分配，以你机器上 ss 和 systemctl status 的实际显示为准，不要对照固定数字</b>）、NRestarts=1；systemctl stop 后 unit inactive 且不自动重启。若你的环境现象不符 → 记录实际环境与现象，如实记为“环境限制”。<b>正常停止对照</b>：<span class="code">sudo systemctl stop labservice</span> 后 <span class="code">systemctl status labservice</span> 应为 inactive（dead）且 <b>不自动重启</b>（父进程 trap 收尾返回 0，不会触发 on-failure）；<span class="code">sudo systemctl start labservice</span> 再恢复。两项都通过才算本题闭环：异常→自动重启，正常→安静退出。</p></div></div>
+<p>实测（Ubuntu 22.04）：kill -9 后约 4~5 秒 unit 自动重启、MainPID 由旧值变为新值。<b>注意：PID 每次随机分配——以你机器上 ss 和 systemctl status 的实际显示为准，不要对照固定数字。</b>、NRestarts=1；systemctl stop 后 unit inactive 且不自动重启。若你的环境现象不符 → 记录实际环境与现象，如实记为“环境限制”。<b>正常停止对照</b>：<span class="code">sudo systemctl stop labservice</span> 后 <span class="code">systemctl status labservice</span> 应为 inactive（dead）且 <b>不自动重启</b>（父进程 trap 收尾返回 0，不会触发 on-failure）；<span class="code">sudo systemctl start labservice</span> 再恢复。两项都通过才算本题闭环：异常→自动重启，正常→安静退出。</p></div></div>
 
 <h3>场景 5 答案</h3>
-<div class="ans"><p><b>【进 5-1】资源巡检脚本</b></p>
+<div class="ans"><p><b>【进5-1】资源巡检脚本</b></p>
 <p><span class="step">① 先想什么</span>：把三个手动命令装进一个文件，开头声明解释器。</p>
 <p><span class="step">② 为什么用这个命令</span>：df（磁盘）、free（内存）、uptime（负载）都是"看一眼"类命令，脚本就是它们的组合 + 中文注释。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nano check_res.sh <span class="out"># 写完 Ctrl+X → Y → 回车保存退出</span>
 <span class="out">#!/bin/bash
 echo "===== 磁盘 ====="; df -h /
@@ -410,10 +420,10 @@ echo "===== 负载 ====="; uptime</span>
 <span class="prompt">$</span> chmod +x check_res.sh &amp;&amp; ./check_res.sh</pre>
 <p><span class="step">④ 怎么验证做对了</span>：一条命令输出三段摘要，和手动敲三条完全一致。这一步完成了"手动 → 脚本"的第一次跨越。</p></div>
 
-<div class="ans"><p><b>【进 5-2】服务健康检查脚本</b></p>
+<div class="ans"><p><b>【进5-2】服务健康检查脚本</b></p><p class="note">达标版：用 pgrep 或 ps -p 判断进程在不在即可达标；下面的"四要素认领"是强化版（防 PID 复用误判），先看达标版思路，学有余力再上强化。</p>
 <p><span class="step">① 先想什么</span>："健康"要查三层：进程在不在、端口通不通、日志新不新。</p>
 <p><span class="step">② 为什么用这个命令</span>：读 <span class="code">labservice.pid</span> + <span class="code">ps</span> 核对命令行查进程（不用 pgrep -f，避免误匹配同名脚本）；<span class="code">nc -z</span> 查端口；<span class="code">stat -c %Y 日志文件</span> 拿日志最后修改时间，和当前时间比较判断"最近有没有更新"。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre class="pre-split"><span class="prompt">$</span> nano health_check.sh <span class="out"># 写完 Ctrl+X → Y → 回车保存退出</span>
 <span class="out">#!/bin/bash
 LOG=~/lab/logs/labservice.log
@@ -442,16 +452,16 @@ fi</span>
 <span class="prompt">$</span> chmod +x health_check.sh &amp;&amp; ./health_check.sh</pre>
 <p><span class="step">④ 怎么验证做对了</span>：三条中文结论准确反映当前状态。故意杀掉服务再跑一次，结论应变为"挂了/不通/没动静"；把 LOG 改成不存在的路径再跑，应打印"日志：文件不存在"而不是报错——五种情况（不存在/空/坏行/正常/权限不足）都要有明确输出。</p></div>
 
-<div class="ans ans-split"><p><b>【进 5-3】变量、判断与注释</b></p>
+<div class="ans ans-split"><p><b>【进5-3】变量、判断与注释</b></p>
 <p><span class="step">① 先想什么</span>：脚本是写给人看的——变量消除"魔法数字"，判断增加分支，注释讲清意图。</p>
 <p><span class="step">② 为什么用这个命令</span>：把重复出现的路径/端口提成变量（以后改一处即可）；用 if 结构替代一长串 &amp;&amp;||（可读性更好）；每段逻辑前加 # 注释。<b>进程检查不用 pgrep -f</b>（按整条命令行模糊匹配会误判同名脚本）：读本场景 PID 文件（父进程 PID）+ <span class="code">ps</span> 核对命令行是本脚本，缺失/过期/复用一律明确报错并返回非 0。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre class="pre-split"><span class="out">#!/bin/bash
 # 健康检查脚本 v2：检查 labservice 的进程、端口、日志
 PORT=8080                       # 服务端口
 LOG=~/lab/logs/labservice.log   # 日志路径
 echo "== 检查结果 =="
-PID_FILE=~/lab/labservice.pid    # 本场景服务的 PID 文件
+PID_FILE="${PID_FILE:-$HOME/lab/labservice.pid}"    # 本场景服务的 PID 文件；${变量:-默认值}=环境里没传就取默认（测试时可用假 PID 文件覆盖，不动真实文件）
 if [ ! -f "$PID_FILE" ]; then
   echo "进程：PID 文件不存在，服务没在运行"
   exit 1
@@ -491,7 +501,7 @@ fi</span></pre>
 <p><b>check_res.sh 完整 v2</b>（照此模式改，题 5-1 的完整版即本模式）：</p>
 <pre class="pre-split"><span class="out">#!/bin/bash</span>
 <span class="out"># check_res.sh v2 —— 资源巡检 + 告警（变量、判断、注释版）</span>
-THRESHOLD=80
+THRESHOLD=80   # 变式：改成 90 试试，再仿照根分区加一行 df /home 的检查
 <span class="out"># 磁盘</span>
 USE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')  <span class="out"># 取根分区使用率（去掉 %）</span>
 if [ "$USE" -gt "$THRESHOLD" ]; then
@@ -516,12 +526,12 @@ else
 fi
 <span class="out"># 负载</span>
 uptime</pre>
-<p><span class="step">④ 怎么验证做对了</span>：三种分支都要跑——① 服务在跑（先 <span class="code">./labservice.sh start</span>）：应打印"进程：正常"且退出码 0；② 删 PID 文件（<span class="code">rm ~/lab/labservice.pid</span>）再跑：应打印"PID 文件不存在"且退出码非 0；③ 写假 PID（<span class="code">echo 99999 &gt; ~/lab/labservice.pid</span>）再跑：应打印"PID 文件失效"且退出码非 0。测完用 <span class="code">./labservice.sh start</span> 恢复现场。可读性：让没学过脚本的人读一遍能说出"它在查什么"。</p></div>
+<p><span class="step">④ 怎么验证做对了</span>：三种分支都要跑，<b>全程不碰真实的 labservice.pid</b>（真实服务保持运行、端口不被误停）：① 服务在跑（先 <span class="code">./labservice.sh start</span>）：应打印"进程：正常"且退出码 0；② 不存在的假路径：<span class="code">PID_FILE="$HOME/lab/not-exist.pid" ./health_check.sh</span> → 打印"PID 文件不存在"且退出码非 0；③ 写假 PID：<span class="code">printf '99999\n/fake/path\n/fake/dir\n' &gt; "$HOME/lab/fake.pid"</span>，再 <span class="code">PID_FILE="$HOME/lab/fake.pid" ./health_check.sh</span> → 打印"实例不符或已过期"且退出码非 0。测完 <span class="code">rm -f "$HOME/lab/fake.pid"</span> 清理，并确认 <span class="code">cat ~/lab/labservice.pid</span> 内容未变、<span class="code">./labservice.sh status</span> 仍显示运行中。可读性：让没学过脚本的人读一遍能说出"它在查什么"。</p></div>
 
-<div class="ans"><p><b>【进 5-4 🌐】验证 + 定时巡检</b></p>
+<div class="ans"><p><b>【进5-4 🌐】验证 + 定时巡检</b></p>
 <p><span class="step">① 先想什么</span>：脚本要定期自动跑，用 crontab 定计划。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">crontab -e</span> 编辑定时表，格式"分 时 日 月 周 命令"；<span class="code">0 9 * * *</span> 表示每天 9:00。</p>
-<p><span class="step">③ 完整步骤</span>： style="break-after: avoid; page-break-after: avoid;"</p>
+<p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ./check_res.sh &gt; ~/lab/巡检报告_$(date +%F).txt   <span class="out"># 先手动验证输出正确</span>
 <span class="prompt">$</span> CRON_HOME="$HOME"   <span class="out"># 真实家目录绝对路径（cron 不认 ~）</span>
 <span class="prompt">$</span> (crontab -l 2&gt;/dev/null; printf '0 9 * * * %s/lab/check_res.sh &gt;&gt; %s/lab/巡检记录.log 2&gt;&amp;1\n' "$CRON_HOME" "$CRON_HOME") | crontab -   <span class="out"># 动态生成真实绝对路径，不用手写占位</span>
@@ -530,7 +540,7 @@ uptime</pre>
 <p><span class="step">④ 怎么验证做对了</span>：<span class="code">crontab -l</span> 能看到计划；把时间改成"两分钟后"测试一次，日志文件按时新增内容，再改回 9 点。注意：cron 环境对 ~ 的展开不可靠，定时任务里的路径一律写绝对路径。这两个脚本（check_res.sh、health_check.sh）可直接放进脚本目录。</p></div>
 
 <div class="newpage"></div>
-<h2>附录 A · 练习用脚本（复制保存即可）</h2>
+<h2 id="toc-7">附录 A · 练习用脚本（复制保存即可）</h2>
 
 <h3>A1. labservice.sh（假推理服务，支持 start / stop / status）</h3>
 <div class="warn">⚠️ <b>附录脚本总警告</b>：脚本内含自动删除命令（rm -f 清 PID 文件、stop 时结束子进程）——全部只作用于练习目录内自己的产物，不会碰其它路径；但仍需遵守：① 只在专用 Ubuntu 虚拟机或可丢弃实验环境运行；② 不把脚本复制到真实服务器使用；③ 每次实验前先 <span class="code">cd ~/lab</span> 并确认 labservice.conf 的 LOGDIR 指向 ~/lab/logs；④ 练完用 <span class="code">./labservice.sh stop</span> 收尾并复查现场（PID 文件已删、端口已释放）。</div>
@@ -649,6 +659,7 @@ start_service() {
     return 1
   fi
   echo "[$(date '+%F %T')] [INFO] 服务启动成功，父进程 PID=$$ 子进程 PID=$SRV，端口=$PORT" &gt;&gt; "$LOG"
+  echo "服务已在前台运行（父进程 PID=$$）；如需后台运行，请在启动时用 ./labservice.sh start &amp;"
   while true; do
     echo "[$(date '+%F %T')] [INFO] 服务心跳正常" &gt;&gt; "$LOG"
     # 子服务退出检测：kill -0 对 zombie 仍为真，所以再查进程状态 Z
@@ -702,13 +713,13 @@ PORT=8080</pre>
 <h3>A3. loop.sh（死循环进程，用于场景 4）</h3>
 <pre>#!/bin/bash
 # loop.sh - 练习用"卡死进程"（会吃满一个 CPU 核，用完记得 kill）
-# 这行把 TERM 信号拦下（演示用），让 kill 对它无效——正是进 4-2 要观察的现象
+# 这行把 TERM 信号拦下（演示用），让 kill 对它无效——正是进4-2 要观察的现象
 trap 'echo "忽略 TERM（演示用）"' TERM
 while :; do :; done</pre>
 
 <div class="warn">⚠️ loop.sh 跑起来会占满一个 CPU 核——用完必须 <span class="code cmd">kill</span> 掉，练习结束别忘清理。</div>
 
-<h2>附录 B · 本册命令速查</h2>
+<h2 id="toc-8">附录 B · 本册命令速查</h2>
 <table>
 <tr><th style="width:20%">场景</th><th>命令一览</th></tr>
 <tr><td>场景 1</td><td class="code">ps aux · grep · ss -tlnp · tail(-n/-f) · cat · nano（vim 亦可） · curl -I · 处理流程四步</td></tr>
@@ -718,7 +729,7 @@ while :; do :; done</pre>
 <tr><td>场景 5</td><td class="code">#!/bin/bash · 变量 · if · 注释 · chmod +x · nc -z · stat -c %Y · date +%s · crontab(-e/-l) · &gt;&gt; · 2&gt;&amp;1</td></tr>
 </table>
 
-<h2>附录 C · 术语表补充</h2>
+<h2 id="toc-9">附录 C · 术语表补充</h2>
 <table>
 <tr><th style="width:20%">术语</th><th>解释</th></tr>
 <tr><td>沙盒式故障注入</td><td>在镜像文件/练习进程等"隔离环境"里复刻故障，不碰真实系统</td></tr>
@@ -733,7 +744,7 @@ while :; do :; done</pre>
 
 
 <div class="newpage"></div>
-<h2>附录 D · 5 件套其余 3 个脚本（backup / disk_alert / service_guard）</h2>
+<h2 id="toc-10">附录 D · 5 件套其余 3 个脚本（backup / disk_alert / service_guard）</h2>
 <p class="note">场景 5 的"5 件套总览"里，check_res.sh 与 health_check.sh 在场景 5 题目中完成；本附录给出其余 3 个的完整实现与验证方式——每条命令的出处都标注了教科书章节，全部在教材体系内。</p>
 
 <h3>D1. backup.sh（自动备份 + 日期后缀）</h3>
@@ -760,7 +771,7 @@ else
 fi</pre>
 <p><b>逐行要点</b>：<span class="code">[ "$1" = "" ]</span> 判断没传参数（= 在 [ ] 里是字符串比较，第 13 章）；<span class="code">[ ! -d ]</span> 源目录不存在、<span class="code">[ ! -r ]</span> 不可读，任一成立就退出——<b>源目录不存在绝不能打印"成功"</b>；<span class="code">date +%F-%H%M%S</span> 输出"年-月-日-时分秒"（%F、%H、%M、%S 是固定格式符），<b>同一天重复跑也不会覆盖</b>；<span class="code">tar -czf</span> 打包+压缩（c=建包 z=gzip f=文件名，第 12 章）；<b>if 直接判断 tar 命令</b>（命令返回 0=成功，非 0=失败，第 13 章），失败不打印成功、返回 1；<span class="code">mkdir -p</span> 保证备份目录存在（第 2 章）；<span class="code">exit 1</span> 异常退出（0 正常、非 0 异常，第 13 章）。<b>验证（五种情况）</b>：①正常备份 → 打印成功、文件存在；②不传参数 → 只打印用法、退出码 1；③源目录不存在 → 打印"不存在或不可读"、退出码 1；④权限不足 → 同上；⑤连续跑两次 → 两个不同名字的备份都在，不覆盖。退出码用 <span class="code">echo $?</span> 查看。</p>
 
-<h3>D2. disk_alert.sh（磁盘超 80% 告警）</h3>
+<h3 style="page-break-before: always;">D2. disk_alert.sh（磁盘超 80% 告警）</h3>
 <pre class="pre-split">#!/bin/bash
 # disk_alert.sh —— 磁盘使用率超过 80% 就告警
 # 用法：./disk_alert.sh（可放进 crontab 定时跑）
@@ -785,7 +796,7 @@ else
 fi</pre>
 <p><b>逐行要点</b>：取数 → 判断 → 行动的巡检三步曲；<span class="code">df /</span> 看根分区（第 7 章）、<span class="code">tail -1</span> 取最后一行（第 3 章）、<span class="code">awk '{print $5}'</span> 取第 5 列即使用率（第 4 章）、<span class="code">tr -d '%'</span> 删掉百分号只剩数字（tr=字符转换、-d=删除，第 13 章 13.2）、<span class="code">$(...)</span> 把命令输出装进变量（第 13 章）、<span class="code">-gt</span> 在 [ ] 里表示"大于"（第 13 章）。<b>三层防护</b>：① df 本身失败先退出（路径不存在/环境异常）；② 解析结果为空先退出；③ <span class="code">[ "$USE" -eq "$USE" ]</span> 是"数值自比较"技巧——USE 不是纯数字时 test 会失败（非 0），! 翻转后进分支退出，防止把垃圾当数字比大小。阈值放变量，以后想改只改一行。<b>验证</b>：正常时打印"磁盘正常：X%"；把 THRESHOLD 改成 0 再跑，应打印"磁盘告警"；把 df / 换成 df /nonexist 再跑，应打印"df 执行失败"且退出码 1——三种分支都出现即正确；建议配 crontab 每天跑一次（第 13 章）。</p>
 
-<h3>D3. service_guard.sh（服务挂了自动拉起）</h3>
+<h3 style="page-break-before: always;">D3. service_guard.sh（服务挂了自动拉起）</h3>
 <pre class="pre-split">#!/bin/bash
 # service_guard.sh —— 服务挂了自动拉起（失败必须返回非 0，不伪装成功）
 # 用法：./service_guard.sh 服务名（如 ssh、nginx）
@@ -809,8 +820,8 @@ else
   echo "$1 拉起后仍不在运行（active/failed/offline 状态不同，逐一核实），看日志：journalctl -u $1"
   exit 1
 fi</pre>
-<p><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：<span class="code">./service_guard.sh ssh</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop ssh</span> 再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（🌐 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
+<p style="line-height:1.35;"><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：<span class="code">./service_guard.sh ssh</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop ssh</span> 再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（🌐 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
 
-<p class="footer">Linux 指令练习册 · 进阶篇 · 先自己想，再看答案</p>
+<p class="footer">Linux 指令练习册 · 进阶篇 · 先自己想，再看答案 · v2.4（2026-09）</p>
 </body>
 </html>

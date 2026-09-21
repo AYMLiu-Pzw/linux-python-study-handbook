@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Linux指令练习册·基础篇</title>
+<title>Linux指令练习册·基础篇 · v2.4</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,6 +71,29 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 @media print {
   pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
 }
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #0a6b1e; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #0a6b1e; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
 </style>
 
 
@@ -81,7 +104,19 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 指令练习册 · 基础篇</h1>
 <p class="note">系列顺序：《Linux 入门》（主课本）→ 本册 →《进阶篇》。本册约 12~16 小时。</p>
 
-<h2>前言：这本练习册怎么用</h2>
+<h2 class="toc-title">目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">前言</span><span class="tdesc">这本练习册怎么用</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">阶段 1</span><span class="tdesc">文件系统操作：导航、创建、复制、移动、删除</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">阶段 2</span><span class="tdesc">查看与管道：cat/less/head/tail/grep/重定向</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">阶段 3</span><span class="tdesc">权限与用户：chmod/chown/sudo/用户管理</span><a href="#toc-4"></a></div>
+<div class="toc-row"><span class="tn">阶段 4</span><span class="tdesc">进程与系统：ps/top/kill/服务/磁盘/包管理</span><a href="#toc-5"></a></div>
+<div class="toc-row"><span class="tn">阶段 5</span><span class="tdesc">查找与归档：find/grep -r/sort/uniq/tar</span><a href="#toc-6"></a></div>
+<div class="toc-row"><span class="tn">参考答案</span><span class="tdesc">书末集中，每题四步式</span><a href="#toc-7"></a></div>
+<div class="toc-row"><span class="tn">附录 A</span><span class="tdesc">本册命令速查</span><a href="#toc-8"></a></div>
+<div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表</span><a href="#toc-9"></a></div>
+</div>
+<h2 id="toc-1">前言：这本练习册怎么用</h2>
 
 <p><b>定位</b>：真正<b>学懂</b> Linux 指令，而不是背指令。每道题背后都有一个"要弄懂的原理"。答案不直接给命令，而是先给思路——所以请先自己想，再看书末答案。</p>
 
@@ -117,7 +152,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <p><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ls -l notes <span class="out"># 若没有 notes 这个文件，先 touch notes 再敲</span>
 drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
-<p>逐字段解读：</p>
+<p style="page-break-after: avoid;">逐字段解读：</p>
 <table>
 <tr><th style="width:20%">字段</th><th style="width:30%">内容</th><th>含义</th></tr>
 <tr><td>第 1 段</td><td class="code">drwxr-xr-x</td><td>d 开头 = <b>目录</b>（- 开头是文件）；后面 9 位 = 属主 rwx、属组 r-x、其他人 r-x</td></tr>
@@ -146,8 +181,8 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <div class="newpage"></div>
 <h2>基础篇 · 题目（只给目标）</h2>
 
-<h3>阶段 1｜文件系统操作：导航、创建、复制、移动、删除</h3>
-<p><b>阶段目标</b>：理解"目录树"这个核心概念，熟练增删改查，弄懂 <span class="code cmd">cp</span> 与 <span class="code cmd">mv</span> 的本质区别、删除权限的真正来源。</p>
+<h3 id="toc-2">阶段 1｜文件系统操作：导航、创建、复制、移动、删除</h3>
+<p><b>阶段目标</b>：理解"目录树"这个核心概念（<span class="opt">1-7 涉及第 5 章权限知识，可留到学完第 5 章再回头做</span>），熟练增删改查，弄懂 <span class="code cmd">cp</span> 与 <span class="code cmd">mv</span> 的本质区别、删除权限的真正来源。</p>
 <p><b>对应教科书章节</b>：第 1、2 章。&nbsp;&nbsp;<b>最终产出</b>：独立搭建一棵自己的目录树 + 完成一次完整的"文件搬家"，并用文字总结 <span class="code cmd">cp</span>/<span class="code cmd">mv</span>/<span class="code cmd">rm</span> 三条命令各自的边界。</p>
 <p class="note">说明：★ = 必做，☆ = 选做（变式 2）。</p>
 <table>
@@ -162,7 +197,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <tr><td>1-8 ☆</td><td class="type-d">动手</td><td>安全删除</td><td>建一棵 3 层目录树，用 <span class="code cmd">rm -r</span>（递归删除）一次删掉；再用 <span class="code cmd">rm -i</span>（删除前确认）体验交互模式，养成危险操作确认习惯</td><td>第 2 章</td></tr>
 </table>
 
-<h3>阶段 2｜查看与管道：cat/less/head/tail/grep/重定向</h3>
+<h3 id="toc-3">阶段 2｜查看与管道：cat/less/head/tail/grep/重定向</h3>
 <p><b>阶段目标</b>：弄懂"查看文件"的多种姿势和"管道/重定向"这两个 Linux 最核心的抽象。</p>
 <p><b>对应教科书章节</b>：第 3、4 章。&nbsp;&nbsp;<b>最终产出</b>：从一份真实日志中捞出指定信息并存入文件（附操作截图/记录），并用一句话向新手讲清"管道和重定向有什么不同"。</p>
 <p class="note"><b>📌 本阶段统一实验约定</b>：① <b>初始状态</b>：日志题先在 ~/lab 自建 app.log（echo 三行即可，答案③ 给了命令）；② <b>是否依赖前题</b>：2-4 承接 2-3 的日志文件，其余可独立；③ <b>重复运行影响</b>：&gt; 会清空重写、&gt;&gt; 会追加，重复运行前先重建日志，否则行数与预期对不上；④ <b>清理恢复</b>：做完本阶段删除 ~/lab/app.log 等测试文件。</p>
@@ -171,14 +206,14 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <tr><td>2-1 ★</td><td class="type-d">动手</td><td>创建与重定向</td><td>用 <span class="code cmd">cat</span>（打印文件）配合 <span class="code">&gt;</span> 自己创建一个小文件；再分别用 <span class="code">&gt;</span> 和 <span class="code">&gt;&gt;</span> 往里写内容两次，对比文件内容变化</td><td>第 3、4 章</td></tr>
 <tr><td>2-2 ☆</td><td class="type-o">观察</td><td>覆盖 vs 追加</td><td>说明 <span class="code">&gt;</span> 与 <span class="code">&gt;&gt;</span> 的区别，并设计一个小实验验证"覆盖"会先清空再写</td><td>第 4 章</td></tr>
 <tr><td>2-3 ★</td><td class="type-d">动手</td><td>头尾查看</td><td>用 <span class="code cmd">head</span>/<span class="code cmd">tail</span> 看系统日志文件（如 ~/lab/app.log）的头尾各 10 行；再用 <span class="code cmd">tail -f</span> 跟踪一个持续写入的文件，观察动态刷新</td><td>第 3 章</td></tr>
-<tr><td>2-4 ☆</td><td class="type-d">动手</td><td>指定行数</td><td>从同一份日志中取出第 100 行到第 120 行的内容（head 与 tail 组合）</td><td>第 3、4 章</td></tr>
+<tr><td>2-4 ☆</td><td class="type-d">动手</td><td>指定行数</td><td>从同一份日志中取出第 100 行到第 120 行的内容（head 与 tail 组合）。<b>变式（拉开梯度）：做完再用 <span class="code">tail -n +50 | head -n 21</span> 取第 50~70 行（另一种组合顺序，体会 +50 的"从第 50 行起"）</b></td><td>第 3、4 章</td></tr>
 <tr><td>2-5 ★</td><td class="type-d">动手</td><td>grep 过滤</td><td>用 <span class="code cmd">grep</span>（按内容搜索）从日志中找出含 error 的行；再用 <span class="code cmd">-i</span>/<span class="code cmd">-v</span>/<span class="code cmd">-c</span> 各做一遍，说明每个选项的意义</td><td>第 3 章</td></tr>
 <tr><td>2-6 ★</td><td class="type-z">组合</td><td>递归搜索</td><td>用 <span class="code cmd">grep -r</span> 在整棵目录树里搜索一个关键词，并让它显示行号</td><td>第 3 章</td></tr>
 <tr><td>2-7 ★</td><td class="type-z">组合</td><td>管道实战</td><td>把"查看 → 过滤 → 统计"串成一条管道：从日志里捞出含 error 的行，数出一共有多少条</td><td>第 3、4 章</td></tr>
 <tr><td>2-8 ☆</td><td class="type-b">辨析</td><td>管道 vs 重定向</td><td>解释 <span class="code">|</span> 和 <span class="code">&gt;</span> 的本质区别（数据流向命令 vs 流向文件），各举一个例子</td><td>第 4 章</td></tr>
 </table>
 
-<h3>阶段 3｜权限与用户：chmod/chown/sudo/用户管理</h3>
+<h3 id="toc-4">阶段 3｜权限与用户：chmod/chown/sudo/用户管理</h3>
 <p><b>阶段目标</b>：真正搞懂 Linux 权限模型（属主/属组/其他人 × 读写执行），会建用户、建组、配置互不越权。</p>
 <p><b>对应教科书章节</b>：第 5 章。&nbsp;&nbsp;<b>最终产出</b>：alice + bob + 一个共享组的完整体系：各自的私有目录互不越权、共享目录两人可写，并画一张权限判断流程图。</p>
 <p class="note">本阶段大部分题涉及 sudo 和多用户实验，建议整阶段在电脑 Ubuntu 上完成（🌐）；平板用户做 3-1、3-2、3-7 即可。<b>⚠️ 安全要求：实验账户 alice/bob 与共享组 shared 只允许在专用实验机（虚拟机）里创建；每条创建命令前先做冲突检查（getent passwd/group 已存在 → 先清理上次残留或拒绝继续）；做题结束必须恢复原状（见 3-3/3-6 答案的收尾）并自查：ls /home 无残留、getent group shared 为空或已删。</b></p>
@@ -194,7 +229,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <tr><td>3-8 ☆ 🌐</td><td class="type-b">辨析</td><td>删除权限回顾</td><td>结合 1-7：为什么在"目录可写但文件属主是别人"的情况下，你依然能删掉那个文件？用权限位推演一遍</td><td>第 5 章</td></tr>
 </table>
 
-<h3>阶段 4｜进程与系统：ps/top/kill/服务/磁盘/包管理</h3>
+<h3 id="toc-5">阶段 4｜进程与系统：ps/top/kill/服务/磁盘/包管理</h3>
 <p class="note">本阶段建议环境：4-6、4-7 需电脑 Ubuntu（🌐，Termux 无 systemd/apt）；平板用户做 4-1/4-2/4-3/4-5/4-8 即可。外部条件：4-6（SSH 服务）需先 <span class="code">sudo apt install openssh-server</span> 或改用已有服务；4-7（apt）需网络，无网络/被锁时记为环境限制，不影响其他题。</p>
 <p><b>阶段目标</b>：理解"进程"概念和前后台机制，会定位和终止进程、管理服务、查磁盘、装软件。</p>
 <p><b>对应教科书章节</b>：第 6、7、9、10 章。&nbsp;&nbsp;<b>最终产出</b>：完整走一遍"起进程 → 定位 → 优雅终止"流程 + 一次磁盘占用调查记录 + 独立完成一次软件安装。</p>
@@ -210,13 +245,13 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <tr><td>4-8 ☆</td><td class="type-b">辨析</td><td>前后台机制</td><td>体验 Ctrl+Z 挂起、Ctrl+C 中断、<span class="code cmd">jobs</span>/<span class="code cmd">fg</span>/<span class="code cmd">bg</span>（前后台切换），说清三种"停下来"方式的区别</td><td>第 6 章</td></tr>
 </table>
 
-<h3>阶段 5｜查找与归档：find/grep -r/sort/uniq/tar</h3>
+<h3 id="toc-6">阶段 5｜查找与归档：find/grep -r/sort/uniq/tar</h3>
 <p><b>阶段目标</b>：掌握 <span class="code cmd">find</span> 的查找语法、日志分析的"提取→排序→去重→统计"套路、<span class="code cmd">tar</span> 打包还原。</p>
 <p><b>对应教科书章节</b>：第 3、4、12 章。&nbsp;&nbsp;<b>最终产出</b>：一次完整的"全盘查找大文件 → 统计日志高频词 → 打包备份 → 还原验证"全流程记录。</p>
 <table>
 <tr><th style="width:8%">编号</th><th style="width:8%">题型</th><th style="width:16%">考点</th><th>题目指令（只给目标）</th><th style="width:14%">前置知识</th></tr>
 <tr><td>5-1 ★</td><td class="type-d">动手</td><td>按名查找</td><td>用 <span class="code cmd">find</span>（按条件查找文件）在整个家目录里找出所有 .log 结尾的文件</td><td>第 3 章</td></tr>
-<tr><td>5-2 ☆</td><td class="type-d">动手</td><td>按属性查找</td><td>用 <span class="code cmd">find</span> 找出大于 100MB 的文件；再找出最近 1 天内修改过的文件</td><td>第 3 章</td></tr>
+<tr><td>5-2 ☆</td><td class="type-d">动手</td><td>按属性查找</td><td>用 <span class="code cmd">find</span> 找出大于 100MB 的文件；再找出最近 1 天内修改过的文件。<b>变式（学完 5-3 的 -exec 后回头做）：<span class="code">find . -type f -size +100M -exec file {} \;</span> 对找到的文件批量判断类型</b></td><td>第 3 章</td></tr>
 <tr><td>5-3 ★</td><td class="type-z">组合</td><td>查找+执行</td><td>用 <span class="code cmd">find</span> 对找到的文件批量执行操作（-exec 或 -delete），并说明为什么要小心使用</td><td>第 3 章</td></tr>
 <tr><td>5-4 ★</td><td class="type-d">动手</td><td>排序去重</td><td>对一份有重复行的名单文件做 <span class="code cmd">sort</span>（排序）+ <span class="code cmd">uniq</span>（去重）+ <span class="code cmd">uniq -c</span>（计数）三步操作</td><td>第 4 章</td></tr>
 <tr><td>5-5 ☆</td><td class="type-z">组合</td><td>日志统计套路</td><td>用一条管道完成"从日志提取关键词 → 排序 → 去重计数 → 按次数倒序取前 5"，这是日志分析的标准套路（本册新命令：awk——按列处理文本）</td><td>第 3、4 章</td></tr>
@@ -226,7 +261,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 </table>
 
 <div class="newpage"></div>
-<h2>参考答案（书末集中，先自己想再看）</h2>
+<h2 id="toc-7">参考答案（书末集中，先自己想再看）</h2>
 <p class="note">每题四步式：① 先想什么 ② 为什么用这个命令 ③ 完整步骤 ④ 怎么验证做对了。</p>
 
 <h3>阶段 1 答案</h3>
@@ -288,7 +323,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <span class="prompt">$</span> printf '第一行\n第二行\n这一行里有关键词\n' &gt; file1.txt   <span class="out"># 先写入三行内容（第三行含"关键词"，供 2-6 递归搜索用）</span>
 <span class="prompt">$</span> mv file1.txt ~/lab1/a/renamed.txt   <span class="out"># 搬家 + 改名，一步</span>
 <span class="prompt">$</span> ls . ~/lab1/a/        <span class="out"># 原位置消失，新位置出现 renamed.txt</span></pre>
-<p><span class="step">④ 怎么验证做对了</span>：对比 <span class="code">cp file1.txt ~/lab1/a/renamed.txt</span> 再做一次——cp 后原文件还在，mv 后原位置空了。这就是本质区别：<b>cp 是"复印"，mv 是"搬走"。</b></p></div>
+<p><span class="step">④ 怎么验证做对了</span>：先 <span class="code">touch file1.txt</span> 重建一个（它已被 mv 搬走），再对比 <span class="code">cp file1.txt file1-copy-demo.txt</span> 做一次——cp 后原文件还在，mv 后原位置空了。（用新名字对比，避免覆盖 2-6 要用的 renamed.txt）这就是本质区别：<b>cp 是"复印"，mv 是"搬走"。</b></p></div>
 
 <div class="ans"><p><b>【基础 1-7 ★】删除权限原理</b></p>
 <p><span class="step">① 先想什么</span>：直觉以为"删除文件 = 改文件"，但删除时系统改的其实是<b>文件所在目录</b>。</p>
@@ -355,7 +390,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <pre><span class="prompt">$</span> seq 1 120 &gt; ~/lab/lines.log   <span class="out"># 先造材料：seq 生成 1~120 共 120 行（本册第一次出现：seq = 生成数字序列，作用就是快速造出带行号的材料）。用独立的 lines.log，不动 app.log——2-5、2-7 还要用 app.log 里的 error 行</span>
 <span class="prompt">$</span> head -n 120 ~/lab/lines.log | tail -n +100   <span class="out"># 第100~120行，共21行</span>
 <span class="out"># 等价写法：head -n 120 ~/lab/lines.log | tail -n 21</span></pre>
-<p><span class="step">④ 怎么验证做对了</span>：数一下输出行数应是 21 行（<span class="code">... | wc -l</span> 验证），且第一行内容与 <span class="code">head -n 100 ~/lab/lines.log | tail -n 1</span> 一致（head|tail 第 3 章学过；sed 属进阶，学到这里不必会）。这种"两头裁剪取中间"的组合，以后你会反复用到。做完顺手 <span class="code">rm ~/lab/lines.log</span> 清理。</p></div>
+<p><span class="step">④ 怎么验证做对了</span>：数一下输出行数应是 21 行（<span class="code">... | wc -l</span> 验证），且第一行内容与 <span class="code">head -n 100 ~/lab/lines.log | tail -n 1</span> 一致（head|tail 第 3 章学过）。这种"两头裁剪取中间"的组合，以后你会反复用到。做完顺手 <span class="code">rm ~/lab/lines.log</span> 清理。</p></div>
 
 <div class="ans"><p><b>【基础 2-5 ★】grep 过滤</b></p>
 <p><span class="step">① 先想什么</span>：日志几千行，只关心含 error 的——这是"过滤"。</p>
@@ -371,7 +406,8 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">① 先想什么</span>：知道内容、不知道在哪个文件里，要整棵树搜。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">grep -r</span>（recursive）对目录递归搜索；<span class="code cmd">-n</span> 显示"文件名:行号"，找到后能直接定位。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
-<pre><span class="prompt">$</span> grep -rn "关键词" ~/lab1/
+<pre><span class="prompt">$</span> mkdir -p ~/lab1/a &amp;&amp; printf '第一行\n第二行\n这一行里有关键词\n' &gt; ~/lab1/a/renamed.txt   <span class="out"># 若跳过了阶段 1，先自建材料（含"关键词"的第三行）</span>
+<span class="prompt">$</span> grep -rn "关键词" ~/lab1/
 <span class="out">/home/你的真实用户名/lab1/a/renamed.txt:3:这一行里有关键词（输出里的路径以你机器上的实际绝对路径为准）</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：输出的每一行格式是"文件:行号:内容"，照着路径和行号打开文件能对上。参数顺序自由，<span class="code">-rn</span> 与 <span class="code">-nr</span> 等价。</p></div>
 
@@ -416,9 +452,9 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">useradd -m</span> 建用户并生成家目录（-m = make home）；<span class="code cmd">passwd</span> 设密码。都要 sudo。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> getent passwd alice bob   <span class="out"># 冲突检查：无输出=可以创建；有输出=上次残留，先清理（sudo userdel -r 对应账号）再继续，或停止本阶段实验</span>
-<span class="prompt">$</span> sudo useradd -m alice
+<span class="prompt">$</span> sudo useradd -m -s /bin/bash alice   <span class="out"># -m 建家目录；-s 指定登录 shell（与教科书 5.2 一致）</span>
 <span class="prompt">$</span> sudo passwd alice        <span class="out"># 按提示输两遍密码</span>
-<span class="prompt">$</span> sudo useradd -m bob
+<span class="prompt">$</span> sudo useradd -m -s /bin/bash bob
 <span class="prompt">$</span> sudo passwd bob
 <span class="prompt">$</span> ls /home                <span class="out"># alice、bob 的家目录都出现了</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：<span class="code">ls /home</span> 出现两个新目录；<span class="code">id alice</span> 能看到她的 uid/gid。用完可以清理：<span class="code">sudo userdel -r alice</span>（-r 连家目录一起删）。</p></div>
@@ -436,6 +472,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 
 <div class="ans"><p><b>【基础 3-5 ★】chown 影响</b></p>
 <p class="note">前提：本答案假设 alice 不在该文件的属组内（此时她按"其他人"权限位判断）；若 alice 与文件同属一组，则应按属组权限位判断，结论相应改变。</p>
+<p class="note">⚠️ 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
 <p><span class="step">① 先想什么</span>：文件换了主人后，原主人变成了"其他人"还是"同组"，权限就跟着变。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">chown bob file</span> 把属主换成 bob。若文件 644（rw-r--r--），alice 不再是属主，只能以"其他人"身份读（r），不能写也不能执行。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
@@ -449,6 +486,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">④ 怎么验证做对了</span>：读成功、写失败，与你按权限位推演的结果一致。关键理解：<b>判断权限不是看"我是谁"，而是看"对这个人而言我是属主、属组还是其他人"</b>——文件换主后，原主人的身份也跟着变了。</p></div>
 
 <div class="ans"><p><b>【基础 3-6 ☆】组共享</b></p>
+<p class="note">⚠️ 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
 <p><span class="step">① 先想什么</span>：两个人要能写同一个目录，但又不给"所有人"写——用"属组"这个中间层。</p>
 <p><span class="step">② 为什么用这个命令</span>：建组 <span class="code cmd">groupadd</span>，把人加进组 <span class="code cmd">usermod -aG</span>，目录属组设成该组 <span class="code cmd">chgrp</span>，组权限给 rwx。这样"组内能写、组外不能"。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
@@ -542,7 +580,7 @@ EOF
 <pre><span class="prompt">$</span> top          <span class="out"># 按 q 退出；观察前几行</span>
 <span class="prompt">$</span> sudo apt update <span class="out"># 新系统先刷新软件列表（4-7 会细讲；若报 Unable to locate，多半是没 update）</span>
 <span class="prompt">$</span> sudo apt install htop &amp;&amp; htop</pre>
-<p><span class="step">④ 怎么验证做对了</span>：能指出当前 %CPU 最高的进程是谁、load average（1/5/15 分钟平均负载）三个数字在什么位置。造一个吃 CPU 的进程验证：<span class="code">yes &gt; /dev/null &amp;</span> 跑起来后 top 里它应该冲到榜首——看完记得 kill 掉。</p></div>
+<p><span class="step">④ 怎么验证做对了</span>：能指出当前 %CPU 最高的进程是谁、load average（1/5/15 分钟平均负载）三个数字在什么位置。造一个吃 CPU 的进程验证：<span class="code">yes &gt; /dev/null &amp;</span> 跑起来后 top 里它应该冲到榜首——看完记得结束它：<span class="code">kill %1</span>（%1 = 最近一个后台任务；或 <span class="code">pkill yes</span>）。</p></div>
 
 <div class="ans"><p><b>【基础 4-5 ★】磁盘视角</b></p>
 <p><span class="step">① 先想什么</span>：df 和 du 都跟"空间"有关，但一个看分区、一个看目录。</p>
@@ -679,17 +717,17 @@ EOF
 <p><span class="step">④ 怎么验证做对了</span>：同一个命令，目录里有没有 .log 文件时行为不同——这就是"shell 抢先展开"的证据。结论：<b>find 的通配符永远加引号</b>，把解释权留给 find。</p></div>
 
 <div class="newpage"></div>
-<h2>附录 A · 本册命令速查</h2>
+<h2 id="toc-8">附录 A · 本册命令速查</h2>
 <table>
 <tr><th style="width:22%">阶段</th><th>命令一览</th></tr>
 <tr><td>阶段 1</td><td class="code">pwd · ls · cd · mkdir(-p) · touch · cp(-r) · mv · rm(-r/-i) · rmdir · echo · 花括号展开 {1..5}</td></tr>
-<tr><td>阶段 2</td><td class="code">cat · less · head(-n) · tail(-n/-f) · grep(-i/-v/-c/-r/-n) · wc(-l) · 管道 | · 重定向 &gt; &gt;&gt; 2&gt;/dev/null</td></tr>
-<tr><td>阶段 3</td><td class="code">ls -l(-ld) · chmod(符号法/数字法/2770) · chown · chgrp · sudo · useradd(-m) · passwd · usermod(-aG) · groupadd · su · id · userdel(-r)</td></tr>
+<tr><td>阶段 2</td><td class="code">cat · less · head(-n) · tail(-n/-f) · grep(-i/-v/-c/-r/-n) · wc(-l) · 管道 | · 重定向 &gt; &gt;&gt; 2&gt;/dev/null · seq（造材料）</td></tr>
+<tr><td>阶段 3</td><td class="code">ls -l(-ld) · chmod(符号法/数字法/2770) · chown · chgrp · stat(-c %a) · sudo · useradd(-m) · passwd · usermod(-aG) · groupadd · su · id · userdel(-r)</td></tr>
 <tr><td>阶段 4</td><td class="code">ps(-ef/aux) · pgrep(-l) · top · htop · kill · kill -9 · jobs · fg · bg · Ctrl+Z / Ctrl+C · df(-h) · du(-sh/--max-depth) · systemctl(status/start/stop/restart/enable) · apt(search/update/install/list/remove)</td></tr>
-<tr><td>阶段 5</td><td class="code">find(-name/-iname/-size/-mtime/-delete/-exec) · sort(-r/-n) · uniq(-c) · awk '{print $1}' · tar(-cf/-czf/-xzf/-C) · gzip · diff(-r) · head -n 5</td></tr>
+<tr><td>阶段 5</td><td class="code">find(-name/-iname/-size/-mtime/-delete/-exec) · file（判断类型） · sort(-r/-n) · uniq(-c) · awk '{print $1}' · tar(-cf/-czf/-xzf/-C) · gzip · diff(-r) · head -n 5</td></tr>
 </table>
 
-<h2>附录 B · 术语表</h2>
+<h2 id="toc-9">附录 B · 术语表</h2>
 <table class="long-table"><thead><tr><th style="width:20%">术语</th><th>解释</th></tr></thead><tbody>
 <tr><td>目录树</td><td>Linux 的所有文件和目录组成一棵以 / 为根的树</td></tr>
 <tr><td>绝对路径 / 相对路径</td><td>从 / 出发 vs 从当前目录出发描述位置</td></tr>
@@ -709,6 +747,6 @@ EOF
 <tr><td>粘滞位（t）</td><td>目录权限上的特殊位：只有文件属主或 root 能删除（如 /tmp）</td></tr>
 </tbody></table>
 
-<p class="footer">Linux 指令练习册 · 基础篇 · 先自己想，再看答案</p>
+<p class="footer">Linux 指令练习册 · 基础篇 · 先自己想，再看答案 · v2.4（2026-09）</p>
 </body>
 </html>

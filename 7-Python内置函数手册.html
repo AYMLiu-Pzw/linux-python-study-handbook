@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Python 内置函数手册</title>
+<title>Python 内置函数手册 · v2.4</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +33,7 @@ td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 1
 pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
 .rule { background: #fffbe6; border-left: 4px solid #b45309; padding: 4px 8px; margin: 5px 0; font-size: 10.5pt; }
 .footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
-.answer { color: #0a6b1e; }
+.answer { color: #0a6b1e; break-inside: avoid; page-break-inside: avoid; }
 a { color: #003a8c; text-decoration: none; }
 @media print { a { color: #222; } }
 .toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
@@ -85,22 +85,26 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 <div class="toc">
 <h3 style="border:none;margin:2px 0 6px;">📑 目录</h3>
-<div class="toc-row"><span class="tn">理念篇</span><span class="tdesc">先搞懂函数是什么，再记函数（第一页必读） · 第1页</span></div>
-<div class="toc-row"><span class="tn">第 1 组</span><span class="tdesc">输入输出：print / input</span></div>
-<div class="toc-row"><span class="tn">第 2 组</span><span class="tdesc">类型工厂：str/int/float/bool/list/tuple/dict/set/type + 切片速查</span></div>
-<div class="toc-row"><span class="tn">第 3 组</span><span class="tdesc">长度与统计：len/sum/min/max/abs/round</span></div>
-<div class="toc-row"><span class="tn">第 4 组</span><span class="tdesc">序列工具：range/enumerate/zip/sorted/reversed</span></div>
-<div class="toc-row"><span class="tn">第 5 组</span><span class="tdesc">检查工具：isinstance/dir/help</span></div>
-<div class="toc-row"><span class="tn">第 6 组</span><span class="tdesc">工具集：pow/divmod/chr/ord/format/all/any/repr + os/time 常用函数 + 自定义函数速查</span></div>
-<div class="toc-row"><span class="tn">文件与 JSON</span><span class="tdesc">JSON 四件套、文件对象三连（运维天天用）</span></div>
-<div class="toc-row"><span class="tn">字符串十招</span><span class="tdesc">split/join/strip/replace/upper/lower/find/startswith/endswith/count · 第1页</span></div>
-<div class="toc-row"><span class="tn">组合练习</span><span class="tdesc">5 道函数组合套路题（含答案） · 第1页</span></div>
-<div class="toc-row"><span class="tn">替代写法对比</span><span class="tdesc">f-string vs %；subprocess vs os.system；logging vs print · 第1页</span></div>
-<div class="toc-row"><span class="tn">章末作业</span><span class="tdesc">8 题（答案紧随题目，先做再看） · 第1页</span></div>
+<div class="toc-row"><span class="tn">理念篇</span><span class="tdesc">先搞懂函数是什么，再记函数（第一页必读）</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">第 1 组</span><span class="tdesc">输入输出：print / input</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">第 2 组</span><span class="tdesc">类型工厂：str/int/float/bool/list/tuple/dict/set/type + 切片速查</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">第 3 组</span><span class="tdesc">长度与统计：len/sum/min/max/abs/round</span><a href="#toc-4"></a></div>
+<div class="toc-row"><span class="tn">第 4 组</span><span class="tdesc">序列工具：range/enumerate/zip/sorted/reversed</span><a href="#toc-5"></a></div>
+<div class="toc-row"><span class="tn">第 5 组</span><span class="tdesc">检查工具：isinstance/dir/help</span><a href="#toc-6"></a></div>
+<div class="toc-row"><span class="tn">第 6 组</span><span class="tdesc">工具集：pow/divmod/chr/ord/format/all/any/repr + os/time 常用函数 + 自定义函数速查</span><a href="#toc-7"></a></div>
+<div class="toc-row"><span class="tn">文件与 JSON</span><span class="tdesc">JSON 四件套、文件对象三连（运维天天用）</span><a href="#toc-8"></a></div>
+<div class="toc-row"><span class="tn">文件对象三连</span><span class="tdesc">open / read / with（三种文件操作速查）</span><a href="#toc-9"></a></div>
+<div class="toc-row"><span class="tn">字符串方法速查</span><span class="tdesc">11 条必会：split/join/strip(带参)/replace/大小写/find/头尾判断/count/rsplit/splitlines/isdigit</span><a href="#toc-10"></a></div>
+<div class="toc-row"><span class="tn">组合练习</span><span class="tdesc">5 道函数组合套路题（含答案）</span><a href="#toc-11"></a></div>
+<div class="toc-row"><span class="tn">替代写法对比</span><span class="tdesc">f-string vs %；subprocess vs os.system；logging vs print</span><a href="#toc-12"></a></div>
+<div class="toc-row"><span class="tn">章末作业</span><span class="tdesc">8 题（答案紧随题目，先做再看）</span><a href="#toc-13"></a></div>
+<div class="toc-row"><span class="tn">练习答案</span><span class="tdesc">先做再看（按组汇总）</span><a href="#toc-14"></a></div>
+<div class="toc-row"><span class="tn">识别题答案</span><span class="tdesc">按组速览</span><a href="#toc-16"></a></div>
+<div class="toc-row"><span class="tn">尾页 · 记忆索引</span><span class="tdesc">分组速查用</span><a href="#toc-15"></a></div>
 </div>
 
 <div class="newpage"></div>
-<h2>理念篇：先搞懂函数是什么，再记函数</h2>
+<h2 id="toc-1">理念篇：先搞懂函数是什么，再记函数</h2>
 
 <h3>1. 函数 = 一台加工机器</h3>
 <p>进去的是<b>原料</b>（参数），出来的是<b>产品</b>（返回值）：</p>
@@ -113,9 +117,9 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 <h3>3. 最重要的两个函数（第一天就认识）</h3>
 <table>
-<tr><th style="width:18%">函数</th><th>作用</th><th style="width:38%">示例</th></tr>
+<tr><th style="width:16%">函数</th><th style="width:14%">作用</th><th style="width:40%">示例</th></tr>
 <tr><td class="code fn">print()</td><td>打印到屏幕</td><td class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">"-"</span>, <span class="param">end</span>=<span class="str">"!"</span>) <span class="out">→ a-b!</span></td></tr>
-<tr><td class="code fn">input()</td><td>读键盘输入</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>)</td></tr>
+<tr><td class="code fn">input()</td><td>读键盘输入</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>) <span class="out">→ 停下等你输入；回车后 name = 你输入的文字</span></td></tr>
 </table>
 <p class="danger">⚠️ input() 拿到的永远是字符串！要算数先 <span class="code">int()</span>。</p>
 
@@ -127,12 +131,12 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <p>命名规律：见名知意（age、name、disk_usage）；英文小写，多词用下划线连接。</p>
 
 <div class="newpage"></div>
-<h2>第 1 组 · 输入输出（print / input）</h2>
+<h2 id="toc-2">第 1 组 · 输入输出（print / input）</h2>
 
 <table>
 <tr><th style="width:16%">函数</th><th>作用</th><th style="width:42%">示例</th><th>注意点</th></tr>
 <tr><td class="code fn">print()</td><td>打印；多参数默认空格分隔</td><td class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>) <span class="out">→ a b</span><br><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">"-"</span>) <span class="out">→ a-b</span><br><span class="fn">print</span>(<span class="str">"hi"</span>, <span class="param">end</span>=<span class="str">""</span>) <span class="out">→ hi（不换行）</span></td><td>sep=分隔符<br>end=结尾（默认换行）</td></tr>
-<tr><td class="code fn">input()</td><td>读键盘，返回字符串</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>)</td><td>返回<b>永远是 str</b>！</td></tr>
+<tr><td class="code fn">input()</td><td>读键盘，返回字符串</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>) <span class="out">→ 停下等你输入；回车后 name = 你输入的文字</span></td><td>返回<b>永远是 str</b>！</td></tr>
 </table>
 
 <div class="quiz">
@@ -142,10 +146,10 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 </div>
 
-<h2>第 2 组 · 类型工厂（含 type 与切片速查）</h2>
+<h2 id="toc-3">第 2 组 · 类型工厂（含 type 与切片速查）</h2>
 
 <table>
-<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><th style="width:14%">函数</th><th style="width:13%">作用</th><th style="width:43%">示例</th><th>注意点</th></tr>
 <tr><td class="code fn">str()</td><td>转字符串</td><td class="code"><span class="fn">str</span>(<span class="num">42</span>) <span class="out">→ "42"</span></td><td>拼接字符串前常用</td></tr>
 <tr><td class="code fn">int()</td><td>转整数</td><td class="code"><span class="fn">int</span>(<span class="str">"42"</span>) <span class="out">→ 42</span>　<span class="fn">int</span>(<span class="str">"3.14"</span>) <span class="out">→ 报错</span></td><td>转不了会报 ValueError</td></tr>
 <tr><td class="code fn">float()</td><td>转小数</td><td class="code"><span class="fn">float</span>(<span class="str">"3.14"</span>) <span class="out">→ 3.14</span></td><td></td></tr>
@@ -167,10 +171,10 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 </div>
 
-<h2>第 3 组 · 长度与统计（len/sum/min/max/abs/round）</h2>
+<h2 id="toc-4">第 3 组 · 长度与统计（len/sum/min/max/abs/round）</h2>
 
 <table>
-<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><th style="width:14%">函数</th><th style="width:13%">作用</th><th style="width:43%">示例</th><th>注意点</th></tr>
 <tr><td class="code fn">len()</td><td>长度</td><td class="code"><span class="fn">len</span>(<span class="str">"hello"</span>) <span class="out">→ 5</span>　<span class="fn">len</span>([<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ 2</span></td><td>字符串/列表/字典通用</td></tr>
 <tr><td class="code fn">sum()</td><td>求和</td><td class="code"><span class="fn">sum</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]) <span class="out">→ 6</span></td><td></td></tr>
 <tr><td class="code fn">min() / max()</td><td>最小/最大</td><td class="code"><span class="fn">min</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ 1</span>　<span class="fn">max</span>(<span class="str">"abc"</span>) <span class="out">→ 'c'</span></td><td></td></tr>
@@ -185,12 +189,12 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 </div>
 
-<h2>第 4 组 · 序列工具（range/enumerate/zip/sorted/reversed）</h2>
+<h2 id="toc-5">第 4 组 · 序列工具（range/enumerate/zip/sorted/reversed）</h2>
 
 <table>
-<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><th style="width:14%">函数</th><th style="width:13%">作用</th><th style="width:43%">示例</th><th>注意点</th></tr>
 <tr><td class="code fn">range()</td><td>生成数列</td><td class="code"><span class="fn">list</span>(<span class="fn">range</span>(<span class="num">5</span>)) <span class="out">→ [0, 1, 2, 3, 4]</span><br><span class="fn">list</span>(<span class="fn">range</span>(<span class="num">1</span>,<span class="num">10</span>,<span class="num">2</span>)) <span class="out">→ [1, 3, 5, 7, 9]</span><br><span class="fn">range</span>(<span class="num">5</span>) <span class="out">→ range(0, 5)</span></td><td>终点不含；直接敲 range(5) 显示的是对象本身 range(0, 5)，要看数字得套 list()</td></tr>
-<tr><td class="code fn">enumerate()</td><td>编号遍历</td><td class="code"><span class="kw">for</span> <span class="param">i</span>, <span class="param">x</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="param">xs</span>, <span class="num">1</span>):</td><td>第二个参数=起始编号</td></tr>
+<tr><td class="code fn">enumerate()</td><td>编号遍历</td><td class="code"><span class="kw">for</span> <span class="param">i</span>, <span class="param">x</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="param">xs</span>, <span class="num">1</span>): <span class="out">→ i 从 1 开始编号（不写第二个参数则从 0）</span></td><td>第二个参数=起始编号</td></tr>
 <tr><td class="code fn">zip()</td><td>拉链配对</td><td class="code"><span class="fn">list</span>(<span class="fn">zip</span>([<span class="num">1</span>,<span class="num">2</span>], [<span class="str">"a"</span>,<span class="str">"b"</span>])) <span class="out">→ [(1, 'a'), (2, 'b')]</span></td><td>zip() 本身返回迭代器，要列表得套 list()</td></tr>
 <tr><td class="code fn">sorted()</td><td>排序（返回新列表）</td><td class="code"><span class="fn">sorted</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ [1, 2, 3]</span><br><span class="param">reverse</span>=<span class="kw">True</span> 倒序</td><td>原列表不变</td></tr>
 <tr><td class="code fn">list.sort()</td><td>原地排序（改原列表，返回 None）</td><td class="code"><span class="param">a</span> = [<span class="num">3</span>,<span class="num">1</span>]; <span class="param">a</span>.<span class="fn">sort</span>(); <span class="fn">print</span>(<span class="param">a</span>) → [<span class="num">1</span>,<span class="num">3</span>]<br>与 sorted() 的区别：sort() 改原列表不返回新列表；sorted() 返回新列表不动原列表（进阶篇已统一用 sorted()）</td></tr>
@@ -205,10 +209,10 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </div>
 
 <div class="newpage"></div>
-<h2>第 5 组 · 检查工具（isinstance/dir/help）</h2>
+<h2 id="toc-6">第 5 组 · 检查工具（isinstance/dir/help）</h2>
 
 <table>
-<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><th style="width:14%">函数</th><th style="width:13%">作用</th><th style="width:43%">示例</th><th>注意点</th></tr>
 <tr><td class="code fn">isinstance()</td><td>判断是不是某类型</td><td class="code"><span class="fn">isinstance</span>(<span class="num">5</span>, <span class="kw">int</span>) <span class="out">→ True</span><br><span class="fn">isinstance</span>(<span class="str">"5"</span>, <span class="kw">int</span>) <span class="out">→ False</span></td><td>比 type 更推荐（有继承概念时更稳）</td></tr>
 <tr><td class="code fn">dir()</td><td>列出对象所有方法</td><td class="code"><span class="fn">dir</span>(<span class="str">"abc"</span>) <span class="out">→ ['__add__', 'split', 'strip', 'upper', ...]</span></td><td>真实输出很长（含双下划线开头的方法），此处为示意省略，以你机器实际输出为准；想不起字符串能干什么时用</td></tr>
 <tr><td class="code fn">help()</td><td>看说明书</td><td class="code"><span class="fn">help</span>(<span class="fn">len</span>) <span class="out">→ 交互式英文文档（内容以实际输出为准，按 q 退出）</span></td><td>等于 Linux 的 man</td></tr>
@@ -221,11 +225,11 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 </div>
 
-<h2>第 6 组 · 工具集（数学杂项 + all/any/repr + os/time 常用 + 自定义函数速查）</h2>
+<h2 id="toc-7">第 6 组 · 工具集（数学杂项 + all/any/repr + os/time 常用 + 自定义函数速查）</h2>
 
 <h3>6.1 数学与杂项</h3>
 <table>
-<tr><th style="width:16%">函数</th><th>作用</th><th style="width:44%">示例</th><th>注意点</th></tr>
+<tr><th style="width:14%">函数</th><th style="width:13%">作用</th><th style="width:43%">示例</th><th>注意点</th></tr>
 <tr><td class="code fn">pow()</td><td>幂</td><td class="code"><span class="fn">pow</span>(<span class="num">2</span>, <span class="num">3</span>) <span class="out">→ 8</span></td><td>= 2**3</td></tr>
 <tr><td class="code fn">divmod()</td><td>商和余数</td><td class="code"><span class="fn">divmod</span>(<span class="num">10</span>, <span class="num">3</span>) <span class="out">→ (3, 1)</span></td><td>一次拿两个</td></tr>
 <tr><td class="code fn">chr() / ord()</td><td>字符↔编码</td><td class="code"><span class="fn">ord</span>(<span class="str">"A"</span>) <span class="out">→ 65</span>　<span class="fn">chr</span>(<span class="num">65</span>) <span class="out">→ 'A'</span></td><td></td></tr>
@@ -238,17 +242,18 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <h3>6.2 os / time 常用函数速查（运维最常用）</h3>
 <table>
 <tr><th style="width:30%">函数</th><th>作用</th><th style="width:44%">示例</th></tr>
-<tr><td class="code">os.getcwd()</td><td>当前目录</td><td class="code"><span class="kw">import</span> os; os.getcwd()</td></tr>
+<tr><td class="code">os.getcwd()</td><td>当前目录</td><td class="code"><span class="kw">import</span> os; os.getcwd() <span class="out">→ '/home/你的用户名'</span></td></tr>
 <tr><td class="code">os.listdir(路径)</td><td>列目录内容</td><td class="code">os.listdir(<span class="str">"."</span>) <span class="out">→ 当前目录的文件名列表（内容以你机器实际为准）</span></td></tr>
 <tr><td class="code">os.path.join(a, b)</td><td>拼路径（自动用对分隔符）</td><td class="code">os.path.join(<span class="str">"home"</span>, <span class="str">"student"</span>) <span class="out">→ "home/student"</span></td></tr>
-<tr><td class="code">os.rename(旧, 新)</td><td>重命名/移动文件</td><td class="code">os.rename(<span class="str">"a.txt"</span>, <span class="str">"b.txt"</span>)</td></tr>
+<tr><td class="code">os.rename(旧, 新)</td><td>重命名/移动文件</td><td class="code">os.rename(<span class="str">"a.txt"</span>, <span class="str">"b.txt"</span>) <span class="out">→ 不报错就是成功（旧名消失、新名出现）</span></td></tr>
 <tr><td class="code">os.path.exists(路径)</td><td>判断文件是否存在</td><td class="code">os.path.exists(<span class="str">"a.txt"</span>) <span class="out">→ True/False</span></td></tr>
 <tr><td class="code">os.path.getsize(路径)</td><td>文件大小（字节）</td><td class="code">os.path.getsize(<span class="str">"a.txt"</span>) <span class="out">→ 数字（大小以你机器的文件为准）</span></td></tr>
 <tr><td class="code">os.path.getmtime(路径)</td><td>最后修改时间（时间戳）</td><td class="code">os.path.getmtime(<span class="str">"a.txt"</span>) <span class="out">→ 数字（时间戳，值以你机器为准）</span></td></tr>
-<tr><td class="code">time.localtime(秒)</td><td>时间戳 → 可读时间</td><td class="code">time.strftime(<span class="str">"%F"</span>, time.localtime(时间戳))</td></tr>
-<tr><td class="code">time.time()</td><td>时间戳（1970 起的秒数）</td><td class="code"><span class="kw">import</span> time; time.time()</td></tr>
-<tr><td class="code">time.sleep(秒)</td><td>暂停</td><td class="code">time.sleep(<span class="num">1</span>) <span class="cm"># 脚本里"等一会"用</span></td></tr>
-<tr><td class="code">time.strftime(格式)</td><td>格式化当前时间</td><td class="code">time.strftime(<span class="str">"%Y-%m-%d %H:%M:%S"</span>)</td></tr>
+<tr><td class="code">time.localtime(秒)</td><td>时间戳 → 可读时间</td><td class="code">time.strftime(<span class="str">"%F"</span>, time.localtime(时间戳)) <span class="out">→ '2026-08-25'（示例）</span></td></tr>
+<tr><td class="code">time.time()</td><td>时间戳（1970 起的秒数）</td><td class="code"><span class="kw">import</span> time; time.time() <span class="out">→ 1758400000.0（示例值，每次运行都在涨）</span></td></tr>
+<tr><td class="code">time.sleep(秒)</td><td>暂停</td><td class="code">time.sleep(<span class="num">1</span>) <span class="out">→ 暂停 1 秒后继续</span> <span class="cm"># 脚本里"等一会"用</span></td></tr>
+<tr><td class="code">time.strftime(格式)</td><td>格式化当前时间</td><td class="code">time.strftime(<span class="str">"%Y-%m-%d %H:%M:%S"</span>) <span class="out">→ '2026-09-21 14:30:00'（示例）</span></td></tr>
+<tr><td class="code">random.randint(a, b)</td><td>随机整数（a~b，两头都包含）</td><td class="code"><span class="kw">import</span> random; random.randint(<span class="num">1</span>, <span class="num">6</span>) <span class="out">→ 1~6 的随机数</span></td></tr>
 </table>
 <p class="note">补一个字节串方法：<span class="code">"你好".encode("utf-8")</span> 得到字节串（<span class="code">b'...'</span> 形式，这是合法写法——bytes 字面量只能直接写 ASCII，中文要先 encode）；subprocess 不设 text=True 时输出就是字节串，用 <span class="code">.decode("utf-8")</span> 转回字符串（进阶篇场景 5 用到）。</p>
 
@@ -270,19 +275,19 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </div>
 
 <div class="newpage"></div>
-<h2>文件与 JSON：速查</h2>
+<h2 id="toc-8">文件与 JSON：速查</h2>
 <div class="box2">
 <p><span class="opt">json 四件套（配置文件 / API 数据专用，教科书第 6 章）：</span></p>
 <table>
 <tr><th style="width:34%">写法</th><th>作用</th></tr>
 <tr><td class="code">json.load(f)</td><td>从文件对象读 JSON → dict</td></tr>
-<tr><td class="code">json.dump(d, f, ensure_ascii=False)</td><td>把 dict 写进文件（ensure_ascii=False 让中文不乱码）</td></tr>
+<tr><td class="code">json.dump(d, f, ensure_ascii=False)</td><td>把 dict 写进文件（ensure_ascii=False 让中文不乱码）</td><td class="code">先 <span class="fn">open</span> 文件再调用 <span class="out">→ 写入成功、不返回内容</span></td></tr>
 <tr><td class="code">json.loads(字符串)</td><td>从字符串解析 → dict</td></tr>
-<tr><td class="code">json.dumps(d)</td><td>把 dict 变成 JSON 字符串</td></tr>
+<tr><td class="code">json.dumps(d)</td><td>把 dict 变成 JSON 字符串</td><td class="code">json.dumps({<span class="str">"a"</span>: <span class="num">1</span>}) <span class="out">→ '{"a": 1}'</span></td></tr>
 </table>
 </div>
 
-<h2>文件对象三连（open / read / write / with）</h2>
+<h2 id="toc-9">文件对象三连（open / read / write / with）</h2>
 
 <div class="box2">
 <p><b>📦 准备材料（先照抄跑一次）：</b>下面所有示例都读写同一个 <span class="code">a.txt</span>，先创建它并写入两行：</p>
@@ -319,19 +324,20 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 </div>
 
-<h2>字符串十招（10 个必会方法）</h2>
+<h2 id="toc-10">字符串方法速查（11 个必会方法）</h2>
 
 <table>
 <tr><th style="width:24%">方法</th><th>作用</th><th style="width:40%">示例</th></tr>
 <tr><td class="code">s.split(符号)</td><td>切开成列表</td><td class="code"><span class="str">"a,b,c"</span>.<span class="fn">split</span>(<span class="str">","</span>) <span class="out">→ ['a', 'b', 'c']</span></td></tr>
 <tr><td class="code">"符号".join(列表)</td><td>列表拼成字符串</td><td class="code"><span class="str">"-"</span>.<span class="fn">join</span>([<span class="str">"a"</span>,<span class="str">"b"</span>]) <span class="out">→ 'a-b'</span></td></tr>
-<tr><td class="code">s.strip()</td><td>去首尾空白（读文件必用）</td><td class="code"><span class="str">" hi "</span>.<span class="fn">strip</span>() <span class="out">→ 'hi'</span></td></tr>
+<tr><td class="code">s.strip() / strip("字符") / lstrip() / rstrip()</td><td>去首尾空白；带参数=去首尾指定的字符</td><td class="code"><span class="str">" hi "</span>.<span class="fn">strip</span>() <span class="out">→ 'hi'</span><br><span class="str">"%80%"</span>.<span class="fn">strip</span>(<span class="str">"%"</span>) <span class="out">→ '80'</span>　<span class="str">".jpg"</span>.<span class="fn">lstrip</span>(<span class="str">"."</span>) <span class="out">→ 'jpg'</span></td></tr>
 <tr><td class="code">s.replace(a, b)</td><td>替换</td><td class="code"><span class="str">"a-b"</span>.<span class="fn">replace</span>(<span class="str">"-"</span>, <span class="str">"_"</span>) <span class="out">→ 'a_b'</span></td></tr>
 <tr><td class="code">s.upper() / lower()</td><td>大小写</td><td class="code"><span class="str">"ab"</span>.<span class="fn">upper</span>() <span class="out">→ 'AB'</span></td></tr>
 <tr><td class="code">s.find(x)</td><td>找位置，找不到返回 -1</td><td class="code"><span class="str">"abc"</span>.<span class="fn">find</span>(<span class="str">"b"</span>) <span class="out">→ 1</span></td></tr>
 <tr><td class="code">s.startswith(x) / endswith(x)</td><td>判断开头/结尾</td><td class="code"><span class="str">"a.log"</span>.<span class="fn">endswith</span>(<span class="str">".log"</span>) <span class="out">→ True</span></td></tr>
 <tr><td class="code">s.count(x)</td><td>数出现次数</td><td class="code"><span class="str">"abab"</span>.<span class="fn">count</span>(<span class="str">"a"</span>) <span class="out">→ 2</span></td></tr>
 <tr><td class="code">s.rsplit(符号, 次数)</td><td>从右边切（取扩展名/最后一段）</td><td class="code"><span class="str">"a.b.c"</span>.<span class="fn">rsplit</span>(<span class="str">"."</span>, <span class="num">1</span>)[-<span class="num">1</span>] <span class="out">→ 'c'</span></td></tr>
+<tr><td class="code">s.isdigit()</td><td>判断是不是纯数字</td><td class="code"><span class="str">"123"</span>.<span class="fn">isdigit</span>() <span class="out">→ True</span>　<span class="str">"12a"</span>.<span class="fn">isdigit</span>() <span class="out">→ False</span></td></tr>
 <tr><td class="code">s.splitlines()</td><td>按行切成列表（读命令输出必用）</td><td class="code"><span class="str">"a\nb"</span>.<span class="fn">splitlines</span>() <span class="out">→ ['a', 'b']</span></td></tr>
 </table>
 
@@ -343,7 +349,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </div>
 
 <div class="newpage"></div>
-<h2>组合练习（5 道套路题，答案附后）</h2>
+<h2 id="toc-11">组合练习（5 道套路题，答案附后）</h2>
 
 <p>学函数不是背单个，而是会<b>组合</b>。这 5 道是运维脚本里出现频率最高的组合套路。</p>
 
@@ -355,7 +361,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 
 
 
-<h2>替代写法对比（三组，各有推荐）</h2>
+<h2 id="toc-12">替代写法对比（三组，各有推荐）</h2>
 
 <table>
 <tr><th style="width:34%">写法 A（老）</th><th style="width:34%">写法 B（新，推荐）</th><th>为什么推荐 B</th></tr>
@@ -364,7 +370,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td class="code"><span class="fn">print</span>(<span class="str">"调试信息"</span>)</td><td class="code">logging.info(<span class="str">"调试信息"</span>)</td><td>日志带时间/级别、能写文件、可开关</td></tr>
 </table>
 
-<h2>章末作业（8 题，先做再看答案）</h2>
+<h2 id="toc-13">章末作业（8 题，先做再看答案）</h2>
 
 <p>1. 把 <span class="code">"apple,banana,cherry"</span> 切成列表，打印第 2 个元素<br>
 2. 输入年龄，判断是否成年（≥18 输出"成年"）<br>
@@ -376,7 +382,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 8. 用 format 和 f-string 各输出一次 π 保留两位小数</p>
 
 <div class="answer">
-<p><b>作业答案</b>：</p>
+<p style="page-break-after: avoid;"><b>作业答案</b>：</p>
 <pre><span class="cm"># 1</span>
 <span class="param">fruits</span> = <span class="str">"apple,banana,cherry"</span>.<span class="fn">split</span>(<span class="str">","</span>)
 <span class="fn">print</span>(<span class="param">fruits</span>[<span class="num">1</span>])                 <span class="out"># banana</span>
@@ -413,9 +419,9 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </div>
 
 <div class="newpage"></div>
-<h2>练习答案汇总（先做再看）</h2>
+<h2 id="toc-14">练习答案汇总（先做再看）</h2>
 <p class="note">识别题与组合练习的答案全部集中在这里。对完答案请回看题目，把做错的重新想一遍。</p>
-<h3>识别题答案（按组）</h3>
+<h3 id="toc-16">识别题答案（按组）</h3>
 <p><b>第1处</b>：答案：1. ab（分隔符是空串）　2. str（字符串，永远不是数字——要算数先 int()）</p>
 <p><b>第2处</b>：答案：1. 50（先转整数再相加）　2. ['a','b','c']　3. "yth"（1、2、3 位，不含 4）</p>
 <p><b>第3处</b>：答案：1. <b>2</b>（不是 3！银行家舍入：5 前面是偶数 2 → 舍）　2. 3</p>
@@ -450,7 +456,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <span class="cm"># 5</span>
 <span class="fn">print</span>(<span class="fn">sum</span>(<span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>)))     <span class="out"># 5050</span></pre>
 
-<h2>尾页 · 记忆索引（分组速查用）</h2>
+<h2 id="toc-15">尾页 · 记忆索引（分组速查用）</h2>
 
 <div class="box">
 <p>① <b>看名字</b>：print打印、input输入、len长度、sum求和、sorted排序</p>
@@ -459,7 +465,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <p>④ <b>排一排</b>：range数列、enumerate编号、zip配对、sorted排序、reversed反转</p>
 <p>⑤ <b>查一查</b>：type/isinstance看类型、dir看方法、help看说明书</p>
 <p>⑥ <b>文件三连</b>：open开门、read读、write写，with自动关门</p>
-<p>⑦ <b>字符串十招</b>：split切、join拼、strip洗、replace换、upper/lower大小写、find找、startswith/endswith看头尾、count数</p>
+<p>⑦ <b>字符串方法（11 个）</b>：split切、join拼、strip洗（可带参数）、replace换、upper/lower大小写、find找、startswith/endswith看头尾、count数、rsplit右切、splitlines按行切、isdigit验数字</p>
 </div>
 
 <div class="box2">
@@ -467,7 +473,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <p class="note">（留白：学习中发现手册哪里不好用就记在这里，攒满 5 条再统一改版）</p>
 </div>
 
-<p class="footer">Python 内置函数手册· 配合《Python 入门》教科书使用 · 查得快、记得牢，不用背</p>
+<p class="footer">Python 内置函数手册· 配合《Python 入门》教科书使用 · 查得快、记得牢，不用背 · v2.4（2026-09）</p>
 
 </body>
 </html>

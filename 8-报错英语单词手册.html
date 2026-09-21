@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>报错英语单词手册</title>
+<title>报错英语单词手册 · v2.4</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,7 +15,7 @@ p { margin: 3px 0; }
 .code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
 .word { color: #003a8c; font-weight: bold; }
 .err { color: #c00000; font-weight: bold; }
-.ok { color: #0a6b1e; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
 .section-head { font-size: 12pt; font-weight: bold; color: #003a8c; background: #e8f0fb; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
 table { width: 100%; border-collapse: collapse; margin: 4px 0; }
 th { background: #003a8c; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
@@ -59,6 +59,29 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 @media print {
   pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
 }
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #b45309; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #b45309; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
 </style>
 
 
@@ -69,7 +92,17 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <h1>📘 报错英语单词手册</h1>
 <p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
 
-<h2>第 1 页 · 理念篇：报错英语的构造规律</h2>
+<h2 class="toc-title">目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">理念篇</span><span class="tdesc">报错英语的构造规律（先读这一页）</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">A 组</span><span class="tdesc">否定与判断核心词（第 1 优先背）</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">B 组</span><span class="tdesc">文件世界（第 2 优先背）</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">C 组</span><span class="tdesc">动作动词（第 3 优先背）</span><a href="#toc-4"></a></div>
+<div class="toc-row"><span class="tn">D 组</span><span class="tdesc">状态与结果</span><a href="#toc-5"></a></div>
+<div class="toc-row"><span class="tn">E 组</span><span class="tdesc">网络世界</span><a href="#toc-6"></a></div>
+<div class="toc-row"><span class="tn">F 组</span><span class="tdesc">Python 世界（学 Python 前先背这组）</span><a href="#toc-7"></a></div>
+</div>
+<h2 id="toc-1">第 1 页 · 理念篇：报错英语的构造规律</h2>
 
 <h3>1. 报错就是"简单句"，倒着读就懂</h3>
 <p>计算机的报错<b>大多是</b>"简单句"：<b>什么东西 + 怎么了 + 对象</b>。中文习惯"找不到文件"，英文是"文件没被找到"。<b>把英文倒过来装回中文语序，意思立刻出来</b>——这是<b>辅助记忆规律，不是唯一结论</b>：最终判断还要结合完整报错、退出码和命令行为。</p>
@@ -82,7 +115,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </table>
 
 <h3>2. 规律一：-ed 结尾 = "被…了"（报错的灵魂）</h3>
-<p>很多常见报错中的过去分词或形容词形式以 -ed 结尾，但不是全部；不要把这个规律当成绝对语法：</p>
+<p style="page-break-after: avoid;">很多常见报错中的过去分词或形容词形式以 -ed 结尾，但不是全部；不要把这个规律当成绝对语法：</p>
 <table>
 <tr><th style="width:25%">单词</th><th style="width:35%">意思</th><th>出现在</th></tr>
 <tr><td class="word">denied</td><td>被拒绝（deny 拒绝）</td><td>Permission denied 没权限</td></tr>
@@ -96,7 +129,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </table>
 
 <h3>3. 规律二：前缀是"方向盘"，词根是"发动机"</h3>
-<p>英语单词 = 前缀 + 词根 + 后缀。认识前缀和后缀，不认识的长单词也能猜个七八成：</p>
+<p style="page-break-after: avoid;">英语单词 = 前缀 + 词根 + 后缀。认识前缀和后缀，不认识的长单词也能猜个七八成：</p>
 <table>
 <tr><th style="width:18%">前缀/后缀</th><th style="width:20%">意思</th><th>举例</th></tr>
 <tr><td><b>un- / in- / im- / dis- / non-</b></td><td>不、否定</td><td class="word">unknown 未知 · invalid 无效 · disabled 被禁用</td></tr>
@@ -127,7 +160,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </div>
 
 <div class="newpage"></div>
-<div class="section-head">A 组 · 否定与判断核心词（第 1 优先背）</div>
+<div class="section-head" id="toc-2">A 组 · 否定与判断核心词（第 1 优先背）</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">not / no / none</td><td>不 / 没有</td><td class="code err">command not found 命令没找到</td></tr>
@@ -144,7 +177,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td class="word">warning</td><td>警告（还不到错误）</td><td class="code">W: warning 黄字提示</td></tr>
 </table>
 
-<div class="section-head">B 组 · 文件世界（第 2 优先背）</div>
+<div class="section-head" id="toc-3">B 组 · 文件世界（第 2 优先背）</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">file</td><td>文件</td><td class="code err">No such file 没有这样的文件</td></tr>
@@ -164,7 +197,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td class="word">hidden</td><td>隐藏的</td><td>ls -a 能看到点开头的隐藏文件</td></tr>
 </table>
 
-<div class="section-head">C 组 · 动作动词（命令里的动词就是它们）</div>
+<div class="section-head" id="toc-4">C 组 · 动作动词（命令里的动词就是它们）</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">install</td><td>安装</td><td>apt install nginx 安装nginx</td></tr>
@@ -185,7 +218,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </table>
 <p class="note">📌 本表 mount、apt、systemctl 等词条只是<b>报错词汇</b>教学，不是操作手册；照做前以《Linux 入门》《日志报错解读手册》对应章节的风险与恢复说明为准。</p>
 
-<div class="section-head">D 组 · 状态与结果</div>
+<div class="section-head" id="toc-5">D 组 · 状态与结果</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">success / successful</td><td>成功 / 成功的</td><td class="ok">Successfully installed 安装成功（绿色）</td></tr>
@@ -203,7 +236,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 </table>
 
 <div class="newpage"></div>
-<div class="section-head">E 组 · 网络</div>
+<div class="section-head" id="toc-6">E 组 · 网络</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">connection</td><td>连接（connect 的名词）</td><td class="code err">Connection refused 连接被拒绝</td></tr>
@@ -223,7 +256,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td class="word">proxy</td><td>代理</td><td>proxy server 代理服务器</td></tr>
 </table>
 
-<div class="section-head">F 组 · Python 世界（学 Python 前先背这组）</div>
+<div class="section-head" id="toc-7">F 组 · Python 世界（学 Python 前先背这组）</div>
 <table class="long-table"><thead><tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>含义 / 例子</th></tr></thead><tbody>
 <tr><td class="word">string (str)</td><td>字符串</td><td>一串文字："hello"（像一串珠子，string=绳子）</td></tr>
 <tr><td class="word">integer (int)</td><td>整数</td><td>5、-3、100</td></tr>
@@ -280,7 +313,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td class="code">packet</td><td>（无生活义）</td><td>数据包（网络传输单位）</td><td class="code">packet loss 丢包</td></tr>
 </table>
 
-<h2>尾页 · 十条黄金报错（每天读一遍，读到条件反射）</h2>
+<h2>尾页 · 十条黄金报错（每天读一遍，读到条件反射；逐条详解见《日志报错解读手册》A 组）</h2>
 <table>
 <tr><th style="width:38%">报错</th><th>中文</th><th>一句话原因</th></tr>
 <tr><td class="code err">Permission denied</td><td>没有权限</td><td>身份不够，sudo 或 chmod</td></tr>
@@ -294,7 +327,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 <tr><td class="code err">SyntaxError: invalid syntax</td><td>语法错误</td><td>代码写错，看行尾少没少冒号括号</td></tr>
 <tr><td class="code err">NameError: name 'x' is not defined</td><td>名字没定义</td><td>变量没赋值就用了</td></tr>
 </table>
-<p class="footer">报错英语单词手册 · 每天过 1 组（混个脸熟）+ 朗读一遍十条黄金报错</p>
+<p class="footer">报错英语单词手册 · 每天过 1 组（混个脸熟）+ 朗读一遍十条黄金报错 · v2.4（2026-09）</p>
 
 <div class="newpage"></div>
 <h2>综合练习 · 看报错猜意思（6 题，先猜再看答案）</h2>
