@@ -98,12 +98,84 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 /* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
 </style>
 
 
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-gl" viewBox="0 0 72 72"><g id="gl_color">
+    <circle cx="36" cy="36" r="28" fill="#92D3F5" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="gl_hair"/>
+  <g id="gl_skin"/>
+  <g id="gl_skin-shadow"/>
+  <g id="gl_line">
+    <circle cx="36" cy="36" r="28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M36,8v56c-8.5604,0-15.5-12.536-15.5-28S27.4396,8,36,8c8.5604,0,15.5,12.536,15.5,28S44.5604,64,36,64"/>
+    <line x1="64" x2="8" y1="36" y2="36" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="22" y2="22" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="50" y2="50" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-nb" viewBox="0 0 72 72"><g id="nb_color">
+    <rect x="17.5625" y="12" width="42.4375" height="47.5" fill="#fcea2b"/>
+    <rect x="12" y="12" width="5.9479" height="47.5" fill="#f1b31c"/>
+    <rect x="17.5729" y="23.8761" width="42.4167" height="13.8125" fill="#fff"/>
+  </g>
+  <g id="nb_line">
+    <line x1="17" x2="17" y1="13" y2="59" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M62.9087,54.8149A1.986,1.986,0,0,0,64,53.0467V9.0833A2.0833,2.0833,0,0,0,61.9167,7H16.4591a4.7714,4.7714,0,0,0-3.9733,2.13h0a1.889,1.889,0,0,0,1.573,2.9349h3.8086l2.1331-.0177H59.9167v48H14.0583a1.8905,1.8905,0,0,1-1.8916-1.85V10.575"/>
+    <g>
+      <g>
+        <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="47.734 27.438 43.908 27.438 43.908 34.133 47.734 34.133"/>
+        <line x1="43.9084" x2="46.7775" y1="30.7855" y2="30.7855" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="22.57 34.133 22.57 27.438 27.352 34.133 27.352 27.438"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M32.6123,34.1328h0a2.391,2.391,0,0,1-2.3909-2.391V29.8291a2.391,2.391,0,0,1,2.3909-2.391h0a2.391,2.391,0,0,1,2.391,2.391v1.9127A2.391,2.391,0,0,1,32.6123,34.1328Z"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M54.4694,28.7683A2.0432,2.0432,0,0,0,52.41,27.4319h0a1.9249,1.9249,0,0,0-2.102,1.6737,1.9249,1.9249,0,0,0,2.102,1.6736l-.0427.0063a1.9249,1.9249,0,0,1,2.102,1.6736,1.9249,1.9249,0,0,1-2.102,1.6737h0a2.0431,2.0431,0,0,1-2.0593-1.3364"/>
+      <g>
+        <line x1="37.2348" x2="41.0603" y1="27.4381" y2="27.4381" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <line x1="39.1475" x2="39.1475" y1="27.4381" y2="34.1328" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g></symbol><symbol id="ic-lb" viewBox="0 0 72 72"><g id="lb_color">
+    <path fill="#d0cfce" d="m35.71,64.65c4.779,0,7.509-2.244,8.156-5.151h-16.31c.647,2.907,3.376,5.151,8.155,5.151h-.001Z"/>
+    <path fill="#fcea2b" d="m45.2028,10.655s-12.23-3.457-18.2,1.269c-5.969,4.726-6.401,15.6-6.401,15.6.5848,2.213,4.226,8.493,4.226,8.493.54.9111,2.253,7.481,3.249,11.36h15.92c.8662-2.845,4.35-13.15,4.805-14.21.584-1.363,1.58-4.016,2.083-5.017,1.21-2.409,1.1663-4.533.5378-7.027-1.3571-5.385-2.4738-6.7228-6.221-10.47l.0012.002Z"/>
+    <path fill="#fff" d="m35.71,7.202c-8.532,0-16.5,6.752-16.5,15.28,0,1.079-.2641,4.491,1.217,4.491,0,0,2.393-7.825,8.362-12.55,5.969-4.725,15.52-3.725,15.52-3.725-.6645-2.045-5.55-3.499-8.596-3.499l-.003.003Z"/>
+  </g>
+  <g id="lb_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m52.55,23.75c0,3.985-1.785,5.908-3.754,10.5-.5028,1.172-4.211,13.38-4.211,13.38h-17.17s-2.981-11.67-3.546-12.62c-2.37-3.998-4.419-6.91-4.419-11.26,0-9.141,7.41-16.55,16.55-16.55s16.55,7.41,16.55,16.55Z"/>
+    <line x1="36" x2="36" y1="47.22" y2="35.28" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="41.97" x2="30.03" y1="35.28" y2="35.28" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.696" d="m44.16,58.79c0,3.24-3.651,5.867-8.155,5.867s-8.155-2.627-8.155-5.867h16.31Z"/>
+    <line x1="27.99" x2="44.01" y1="54.98" y2="51.51" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.965"/>
+    <line x1="38.2" x2="43.98" y1="56.07" y2="54.89" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="28.02" x2="33.8" y1="51.6" y2="50.42" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g></symbol><symbol id="ic-pn" viewBox="0 0 72 72"><g id="pn_color">
+    <path fill="#ea5a47" d="m46.288,34.3932c-.8205-1.4005-3.5756-2.5592-3.5756-2.5592l-1.0343-4.1975-2.2282-13.0482-9.1051-.6051-2.184,16.6293c-.0635.3545-1.4459,1.7772-1.7857,1.8963-2.8213.9893-3.0856,3.5212-3.57,4.5505l24.1657.0322c-.0304-.143.0226-1.494-.6828-2.6983Z"/>
+    <polygon fill="#ea5a47" points="31.0083 8.5994 29.5845 14.5883 40.2816 14.1282 39.8274 8.7892 31.0083 8.5994"/>
+    <polygon fill="#d22f27" points="39.8274 8.7892 36.848 8.7892 37.1401 14.5883 40.8274 14.5883 39.8274 8.7892"/>
+    <path fill="#d0cfce" d="m33.051,40.2346s-.0242,2.6808-.0242,3.2335l.3163,12.4946,2.5241,5.8434,1.67-4.2589.7783-17.2953-5.2645-.0173Z"/>
+    <polygon fill="#9b9b9a" points="35.8645 61.5263 37.9727 55.7491 38.3093 41.6967 38.32 40.2367 35.6609 40.2456 35.8645 61.5263"/>
+    <path fill="#d22f27" d="m38.0116,31.834s1.4394,1.1587,2.2599,2.5592c.7054,1.2043,1.238,2.5553,1.2684,2.6983l5.2498-.6511c-.4834-1.0264-.2141-2.6709-3.0383-3.6611-.3398-.1191-.6609-.5908-.7244-.9453,0,0-2.712-14.0382-2.5498-13.5879l-.6956-4.1179-2.6415.4601.8499,15.3903.0216,1.8554Z"/>
+  </g>
+  <g id="pn_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="33.069 41.2315 33.0753 56.0146 35.9361 63.8727 38.2539 55.9913 38.2479 41.2352"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m30.3187,18.576l-2.3773,13.26c-5.2242,1.8318-5.4803,5.4953-5.4803,5.4953h25.4502s-.2561-3.6635-5.4803-5.4953l-2.3773-13.26"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.8274 14.5883 29.5845 14.5883 30.5845 8.7892 39.8274 8.7892 40.8274 14.5883"/>
+  </g></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 指令练习册 · 基础篇</h1>
 <p class="note">系列顺序：《Linux 入门》（主课本）→ 本册 →《进阶篇》。本册约 12~16 小时。</p>
@@ -129,14 +201,14 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 ② <span class="keyword">边学边做（可选）</span>：每学完教科书一章，立刻做本册对应阶段，用于复习与查漏。</p>
 <p><b>★/☆ 分级</b>：★ = 必做（每个概念的变式 1），☆ = 选做（每个概念的变式 2，加难版）。<b>自检规则（决定 ☆ 做不做）</b>：做完一道 ★ 变式 1 后自检——一次做对、用时少、全程独立没看答案，则该概念的 ☆ 变式 2 可以跳过；卡壳、做错、超时，则该概念的 ☆ 必做，把漏洞补上。</p>
 <div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、配置或日志的题，先记录原状态；每一步核对路径、对象、PID 和权限；操作后对照输出与数量验证；完成后删除临时对象、恢复权限并复查现场。异常时保留报错原文。</div>
-<p><b>环境要求</b>：题目标注 🌐 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定（不保证可做）；其余题目平板一般能做。</p>
-<p class="note">📔 学习日志：每天把敲过的命令、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
-<p class="note">💡 题面括号里有时会给出"脚手架提示"（如 bash 的 {1..5} 花括号展开）——卡住再看；先自己思考，提示只是安全绳。</p>
+<p><b>环境要求</b>：题目标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定（不保证可做）；其余题目平板一般能做。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志：每天把敲过的命令、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-lb"/></svg> 题面括号里有时会给出"脚手架提示"（如 bash 的 {1..5} 花括号展开）——卡住再看；先自己思考，提示只是安全绳。</p>
 <p class="note">前置列直接标注《Linux 入门》教科书章号（如"第 3、4 章"），不再使用旧的"命令组"编号。</p>
 
 
 <div class="box">
-<p><b>📌 本册学习路线（5 阶段）</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本册学习路线（5 阶段）</b></p>
 <pre>阶段1 文件系统操作（导航/创建/复制/移动/删除）    约 3h
 阶段2 查看与管道（cat/less/head/tail/grep/重定向）约 3h
 阶段3 权限与用户（chmod/chown/sudo/用户管理）     约 3h
@@ -204,7 +276,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <h3 id="toc-3">阶段 2｜查看与管道：cat/less/head/tail/grep/重定向</h3>
 <p><b>阶段目标</b>：弄懂"查看文件"的多种姿势和"管道/重定向"这两个 Linux 最核心的抽象。</p>
 <p><b>对应教科书章节</b>：第 3、4 章。&nbsp;&nbsp;<b>最终产出</b>：从一份真实日志中捞出指定信息并存入文件（附操作截图/记录），并用一句话向新手讲清"管道和重定向有什么不同"。</p>
-<p class="note"><b>📌 本阶段统一实验约定</b>：① <b>初始状态</b>：日志题先在 ~/lab 自建 app.log（echo 三行即可，答案③ 给了命令）；② <b>是否依赖前题</b>：2-4 承接 2-3 的日志文件，其余可独立；③ <b>重复运行影响</b>：&gt; 会清空重写、&gt;&gt; 会追加，重复运行前先重建日志，否则行数与预期对不上；④ <b>清理恢复</b>：做完本阶段删除 ~/lab/app.log 等测试文件。</p>
+<p class="note"><b><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本阶段统一实验约定</b>：① <b>初始状态</b>：日志题先在 ~/lab 自建 app.log（echo 三行即可，答案③ 给了命令）；② <b>是否依赖前题</b>：2-4 承接 2-3 的日志文件，其余可独立；③ <b>重复运行影响</b>：&gt; 会清空重写、&gt;&gt; 会追加，重复运行前先重建日志，否则行数与预期对不上；④ <b>清理恢复</b>：做完本阶段删除 ~/lab/app.log 等测试文件。</p>
 <table>
 <tr><th style="width:8%">编号</th><th style="width:8%">题型</th><th style="width:16%">考点</th><th>题目指令（只给目标）</th><th style="width:14%">前置知识</th></tr>
 <tr><td>2-1 ★</td><td class="type-d">动手</td><td>创建与重定向</td><td>用 <span class="code cmd">cat</span>（打印文件）配合 <span class="code">&gt;</span> 自己创建一个小文件；再分别用 <span class="code">&gt;</span> 和 <span class="code">&gt;&gt;</span> 往里写内容两次，对比文件内容变化</td><td>第 3、4 章</td></tr>
@@ -220,21 +292,21 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <h3 id="toc-4">阶段 3｜权限与用户：chmod/chown/sudo/用户管理</h3>
 <p><b>阶段目标</b>：真正搞懂 Linux 权限模型（属主/属组/其他人 × 读写执行），会建用户、建组、配置互不越权。</p>
 <p><b>对应教科书章节</b>：第 5 章。&nbsp;&nbsp;<b>最终产出</b>：alice + bob + 一个共享组的完整体系：各自的私有目录互不越权、共享目录两人可写，并画一张权限判断流程图。</p>
-<p class="note">本阶段大部分题涉及 sudo 和多用户实验，建议整阶段在电脑 Ubuntu 上完成（🌐）；平板用户做 3-1、3-2、3-7 即可。<b>⚠️ 安全要求：实验账户 alice/bob 与共享组 shared 只允许在专用实验机（虚拟机）里创建；每条创建命令前先做冲突检查（getent passwd/group 已存在 → 先清理上次残留或拒绝继续）；做题结束必须恢复原状（见 3-3/3-6 答案的收尾）并自查：ls /home 无残留、getent group shared 为空或已删。</b></p>
+<p class="note">本阶段大部分题涉及 sudo 和多用户实验，建议整阶段在电脑 Ubuntu 上完成（<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>）；平板用户做 3-1、3-2、3-7 即可。<b><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全要求：实验账户 alice/bob 与共享组 shared 只允许在专用实验机（虚拟机）里创建；每条创建命令前先做冲突检查（getent passwd/group 已存在 → 先清理上次残留或拒绝继续）；做题结束必须恢复原状（见 3-3/3-6 答案的收尾）并自查：ls /home 无残留、getent group shared 为空或已删。</b></p>
 <table>
 <tr><th style="width:8%">编号</th><th style="width:8%">题型</th><th style="width:16%">考点</th><th>题目指令（只给目标）</th><th style="width:14%">前置知识</th></tr>
 <tr><td>3-1 ★</td><td class="type-d">动手</td><td>权限位解读</td><td>用 <span class="code cmd">ls -l</span> 解读一个文件的权限串（如 -rw-r--r--），说出每位含义；用数字法算出 755、644 各代表什么权限</td><td>第 5 章</td></tr>
 <tr><td>3-2 ☆</td><td class="type-d">动手</td><td>两种改法</td><td>对一个 644 的文件，先用符号法（<span class="code cmd">chmod u+x</span>）再用数字法（<span class="code cmd">chmod 744</span>）改成同一目标权限，验证两种方法结果一致，并说清"只动一位"和"整体覆盖"的区别</td><td>第 5 章</td></tr>
-<tr><td>3-3 ★ 🌐</td><td class="type-d">动手</td><td>建用户</td><td>用 <span class="code cmd">sudo</span>（借管理员权限）创建两个新用户 alice 和 bob，并设置密码</td><td>第 5 章</td></tr>
-<tr><td>3-4 ★ 🌐</td><td class="type-z">组合</td><td>越权验证</td><td>分别以 alice、bob 身份访问对方家目录，记录被拒绝的现象，并解释是哪一位权限拦住了</td><td>第 5 章</td></tr>
-<tr><td>3-5 ★ 🌐</td><td class="type-b">辨析</td><td>chown 影响</td><td>把 alice 的一个文件 <span class="code cmd">chown</span>（换属主）给 bob 后，alice 还能不能读/改它？动手验证并解释</td><td>第 5 章</td></tr>
-<tr><td>3-6 ☆ 🌐</td><td class="type-d">动手</td><td>组共享</td><td>建一个共享组，把 alice、bob 都加进去，做一个"两人都能写"的共享目录，验证组权限的写法</td><td>第 5 章</td></tr>
+<tr><td>3-3 ★ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-d">动手</td><td>建用户</td><td>用 <span class="code cmd">sudo</span>（借管理员权限）创建两个新用户 alice 和 bob，并设置密码</td><td>第 5 章</td></tr>
+<tr><td>3-4 ★ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-z">组合</td><td>越权验证</td><td>分别以 alice、bob 身份访问对方家目录，记录被拒绝的现象，并解释是哪一位权限拦住了</td><td>第 5 章</td></tr>
+<tr><td>3-5 ★ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-b">辨析</td><td>chown 影响</td><td>把 alice 的一个文件 <span class="code cmd">chown</span>（换属主）给 bob 后，alice 还能不能读/改它？动手验证并解释</td><td>第 5 章</td></tr>
+<tr><td>3-6 ☆ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-d">动手</td><td>组共享</td><td>建一个共享组，把 alice、bob 都加进去，做一个"两人都能写"的共享目录，验证组权限的写法</td><td>第 5 章</td></tr>
 <tr><td>3-7 ★</td><td class="type-o">观察</td><td>账号文件</td><td>查看 /etc/passwd 和 /etc/group，找到自己的账号行，解释每个冒号分隔字段的含义</td><td>第 5 章</td></tr>
-<tr><td>3-8 ☆ 🌐</td><td class="type-b">辨析</td><td>删除权限回顾</td><td>结合 1-7：为什么在"目录可写但文件属主是别人"的情况下，你依然能删掉那个文件？用权限位推演一遍</td><td>第 5 章</td></tr>
+<tr><td>3-8 ☆ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-b">辨析</td><td>删除权限回顾</td><td>结合 1-7：为什么在"目录可写但文件属主是别人"的情况下，你依然能删掉那个文件？用权限位推演一遍</td><td>第 5 章</td></tr>
 </table>
 
 <h3 id="toc-5">阶段 4｜进程与系统：ps/top/kill/服务/磁盘/包管理</h3>
-<p class="note">本阶段建议环境：4-6、4-7 需电脑 Ubuntu（🌐，Termux 无 systemd/apt）；平板用户做 4-1/4-2/4-3/4-5/4-8 即可。外部条件：4-6（SSH 服务）需先 <span class="code">sudo apt install openssh-server</span> 或改用已有服务；4-7（apt）需网络，无网络/被锁时记为环境限制，不影响其他题。</p>
+<p class="note">本阶段建议环境：4-6、4-7 需电脑 Ubuntu（<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>，Termux 无 systemd/apt）；平板用户做 4-1/4-2/4-3/4-5/4-8 即可。外部条件：4-6（SSH 服务）需先 <span class="code">sudo apt install openssh-server</span> 或改用已有服务；4-7（apt）需网络，无网络/被锁时记为环境限制，不影响其他题。</p>
 <p><b>阶段目标</b>：理解"进程"概念和前后台机制，会定位和终止进程、管理服务、查磁盘、装软件。</p>
 <p><b>对应教科书章节</b>：第 6、7、9、10 章。&nbsp;&nbsp;<b>最终产出</b>：完整走一遍"起进程 → 定位 → 优雅终止"流程 + 一次磁盘占用调查记录 + 独立完成一次软件安装。</p>
 <table>
@@ -244,8 +316,8 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <tr><td>4-3 ★</td><td class="type-d">动手</td><td>优雅 vs 强杀</td><td>对"一个会写日志的进程"分别用 <span class="code cmd">kill</span> 和 <span class="code cmd">kill -9</span> 终止，对比日志里的差异，解释为什么优先用 kill</td><td>第 6 章</td></tr>
 <tr><td>4-4 ☆</td><td class="type-d">动手</td><td>资源观察</td><td>用 <span class="code cmd">top</span>/<span class="code cmd">htop</span>（实时监控）找出当前最吃 CPU 和内存的进程，说出各列含义</td><td>第 6 章</td></tr>
 <tr><td>4-5 ★</td><td class="type-d">动手</td><td>磁盘视角</td><td>用 <span class="code cmd">df -h</span>（整体磁盘占用）看各分区占用、<span class="code cmd">du -sh</span>（目录占用）看某目录大小，说清两者视角的区别</td><td>第 7 章</td></tr>
-<tr><td>4-6 ★ 🌐</td><td class="type-d">动手</td><td>服务管理</td><td>用 <span class="code cmd">systemctl</span>（管理系统服务）对一个服务完成 status/start/stop/restart 全流程</td><td>第 10 章</td></tr>
-<tr><td>4-7 ★ 🌐</td><td class="type-d">动手</td><td>包管理</td><td>用 <span class="code cmd">apt</span>（软件包管理）搜索并安装一个工具（如 htop、curl），再用 <span class="code cmd">apt list</span> 确认装上了</td><td>第 9 章</td></tr>
+<tr><td>4-6 ★ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-d">动手</td><td>服务管理</td><td>用 <span class="code cmd">systemctl</span>（管理系统服务）对一个服务完成 status/start/stop/restart 全流程</td><td>第 10 章</td></tr>
+<tr><td>4-7 ★ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="type-d">动手</td><td>包管理</td><td>用 <span class="code cmd">apt</span>（软件包管理）搜索并安装一个工具（如 htop、curl），再用 <span class="code cmd">apt list</span> 确认装上了</td><td>第 9 章</td></tr>
 <tr><td>4-8 ☆</td><td class="type-b">辨析</td><td>前后台机制</td><td>体验 Ctrl+Z 挂起、Ctrl+C 中断、<span class="code cmd">jobs</span>/<span class="code cmd">fg</span>/<span class="code cmd">bg</span>（前后台切换），说清三种"停下来"方式的区别</td><td>第 6 章</td></tr>
 </table>
 
@@ -476,7 +548,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 
 <div class="ans"><p><b>【基础 3-5 ★】chown 影响</b></p>
 <p class="note">前提：本答案假设 alice 不在该文件的属组内（此时她按"其他人"权限位判断）；若 alice 与文件同属一组，则应按属组权限位判断，结论相应改变。</p>
-<p class="note">⚠️ 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
 <p><span class="step">① 先想什么</span>：文件换了主人后，原主人变成了"其他人"还是"同组"，权限就跟着变。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">chown bob file</span> 把属主换成 bob。若文件 644（rw-r--r--），alice 不再是属主，只能以"其他人"身份读（r），不能写也不能执行。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
@@ -490,7 +562,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">④ 怎么验证做对了</span>：读成功、写失败，与你按权限位推演的结果一致。关键理解：<b>判断权限不是看"我是谁"，而是看"对这个人而言我是属主、属组还是其他人"</b>——文件换主后，原主人的身份也跟着变了。</p></div>
 
 <div class="ans"><p><b>【基础 3-6 ☆】组共享</b></p>
-<p class="note">⚠️ 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
 <p><span class="step">① 先想什么</span>：两个人要能写同一个目录，但又不给"所有人"写——用"属组"这个中间层。</p>
 <p><span class="step">② 为什么用这个命令</span>：建组 <span class="code cmd">groupadd</span>，把人加进组 <span class="code cmd">usermod -aG</span>，目录属组设成该组 <span class="code cmd">chgrp</span>，组权限给 rwx。这样"组内能写、组外不能"。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
@@ -517,7 +589,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">① 先想什么</span>：结合 1-7 的结论推演：删除看目录的写权限，那"目录可写"时无论文件是谁的，都能删。</p>
 <p><span class="step">② 为什么用这个命令</span>：删除 = 从目录里划掉登记项，需要目录 w 权限，跟文件的属主无关。所以"目录可写 + 文件属主是别人"→ 能删。唯一例外是 sticky bit（粘滞位，/tmp 就有，权限位显示 t）：此时只有文件属主或 root 能删。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
-<div class="warn">⚠️ <b>危险操作提醒（先读再做）</b>：本组涉及 <span class="code cmd">chmod 777</span>（所有人可写）和 <span class="code cmd">sudo rm -rf</span>（递归强删）。只在<b>专用 Ubuntu 虚拟机</b>里做，不碰真实系统；动手前先 <span class="code">pwd</span> 和 <span class="code">ls</span> 核对目标；实验中建的 /tmp/openbox、/tmp/stickybox 只允许删这两个目录，<b>绝不能把 rm -rf 指向 /tmp 本身或其它路径</b>；做完按④的收尾恢复现场。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>危险操作提醒（先读再做）</b>：本组涉及 <span class="code cmd">chmod 777</span>（所有人可写）和 <span class="code cmd">sudo rm -rf</span>（递归强删）。只在<b>专用 Ubuntu 虚拟机</b>里做，不碰真实系统；动手前先 <span class="code">pwd</span> 和 <span class="code">ls</span> 核对目标；实验中建的 /tmp/openbox、/tmp/stickybox 只允许删这两个目录，<b>绝不能把 rm -rf 指向 /tmp 本身或其它路径</b>；做完按④的收尾恢复现场。</div>
 <pre><span class="prompt">$</span> sudo mkdir /tmp/openbox; sudo chmod 777 /tmp/openbox
 <span class="prompt">$</span> sudo touch /tmp/openbox/rootfile      <span class="out"># root 的文件</span>
 <span class="prompt">$</span> sudo -u alice sh -c 'whoami; rm /tmp/openbox/rootfile' <span class="out"># 显示 alice，并删除 root 的文件</span>
@@ -595,17 +667,17 @@ EOF
 <span class="prompt">$</span> du -h --max-depth=1 ~   <span class="out"># 只看一层，不淹没在细节里</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：能一句话说清区别——<b>df 是"从天上看的全局视角"，du 是"钻进去找元凶的局部视角"</b>。注意 df 显示的"已用"包含系统保留空间，和 du 加起来的数对不上是正常的，不用慌。</p></div>
 
-<div class="ans"><p><b>【基础 4-6 ★ 🌐】服务管理</b></p>
+<div class="ans"><p><b>【基础 4-6 ★ <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>】服务管理</b></p>
 <p><span class="step">① 先想什么</span>：服务的本质是"常驻后台的进程"，systemd 是负责看管它们的大管家。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">systemctl</span> 是管家的总开关：status（看状态）、start（启动）、stop（停止）、restart（重启）、enable（开机自启）、disable（取消自启）。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
-<div class="warn">⚠️ <b>停 SSH 前必看</b>：<span class="code cmd">systemctl stop ssh</span> 会把远程登录服务关掉——<b>如果你正用 SSH 远程连到这台机器，执行后你会立刻被踢下线、再也连不回来！</b>只用本地终端（或虚拟机的直接窗口）做本题，别在 SSH 会话里做；做完必须 <span class="code">sudo systemctl start ssh</span> 恢复。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>停 SSH 前必看</b>：<span class="code cmd">systemctl stop ssh</span> 会把远程登录服务关掉——<b>如果你正用 SSH 远程连到这台机器，执行后你会立刻被踢下线、再也连不回来！</b>只用本地终端（或虚拟机的直接窗口）做本题，别在 SSH 会话里做；做完必须 <span class="code">sudo systemctl start ssh</span> 恢复。</div>
 <pre><span class="prompt">$</span> systemctl status ssh        <span class="out"># 看 SSH 服务：active (running) 就是活着</span>
 <span class="prompt">$</span> sudo systemctl restart ssh  <span class="out"># 重启它</span>
 <span class="prompt">$</span> sudo systemctl stop ssh
 <span class="prompt">$</span> systemctl status ssh        <span class="out"># inactive (dead)</span>
 <span class="prompt">$</span> sudo systemctl start ssh     <span class="out"># 恢复！别把练习机搞到连不上</span></pre>
-<p><span class="step">④ 怎么验证做对了</span>：每个动作后 status 的状态都会变（running ↔ dead），最后 start 回 running。记住四连：<b>改配置 → restart；查问题 → status；开机自启 → enable</b>。平板 Termux 没有 systemd，这题标 🌐 只能在电脑做。</p></div>
+<p><span class="step">④ 怎么验证做对了</span>：每个动作后 status 的状态都会变（running ↔ dead），最后 start 回 running。记住四连：<b>改配置 → restart；查问题 → status；开机自启 → enable</b>。平板 Termux 没有 systemd，这题标 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 只能在电脑做。</p></div>
 
 <div class="ans"><p><b>【基础 4-7 ★】包管理</b></p>
 <p><span class="step">① 先想什么</span>：装软件不用去官网下载，系统有"软件仓库 + 安装工具"。</p>

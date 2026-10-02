@@ -70,12 +70,128 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 /* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
 </style>
 
 
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-nb" viewBox="0 0 72 72"><g id="nb_color">
+    <rect x="17.5625" y="12" width="42.4375" height="47.5" fill="#fcea2b"/>
+    <rect x="12" y="12" width="5.9479" height="47.5" fill="#f1b31c"/>
+    <rect x="17.5729" y="23.8761" width="42.4167" height="13.8125" fill="#fff"/>
+  </g>
+  <g id="nb_line">
+    <line x1="17" x2="17" y1="13" y2="59" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M62.9087,54.8149A1.986,1.986,0,0,0,64,53.0467V9.0833A2.0833,2.0833,0,0,0,61.9167,7H16.4591a4.7714,4.7714,0,0,0-3.9733,2.13h0a1.889,1.889,0,0,0,1.573,2.9349h3.8086l2.1331-.0177H59.9167v48H14.0583a1.8905,1.8905,0,0,1-1.8916-1.85V10.575"/>
+    <g>
+      <g>
+        <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="47.734 27.438 43.908 27.438 43.908 34.133 47.734 34.133"/>
+        <line x1="43.9084" x2="46.7775" y1="30.7855" y2="30.7855" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="22.57 34.133 22.57 27.438 27.352 34.133 27.352 27.438"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M32.6123,34.1328h0a2.391,2.391,0,0,1-2.3909-2.391V29.8291a2.391,2.391,0,0,1,2.3909-2.391h0a2.391,2.391,0,0,1,2.391,2.391v1.9127A2.391,2.391,0,0,1,32.6123,34.1328Z"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M54.4694,28.7683A2.0432,2.0432,0,0,0,52.41,27.4319h0a1.9249,1.9249,0,0,0-2.102,1.6737,1.9249,1.9249,0,0,0,2.102,1.6736l-.0427.0063a1.9249,1.9249,0,0,1,2.102,1.6736,1.9249,1.9249,0,0,1-2.102,1.6737h0a2.0431,2.0431,0,0,1-2.0593-1.3364"/>
+      <g>
+        <line x1="37.2348" x2="41.0603" y1="27.4381" y2="27.4381" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <line x1="39.1475" x2="39.1475" y1="27.4381" y2="34.1328" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g></symbol><symbol id="ic-gl" viewBox="0 0 72 72"><g id="gl_color">
+    <circle cx="36" cy="36" r="28" fill="#92D3F5" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="gl_hair"/>
+  <g id="gl_skin"/>
+  <g id="gl_skin-shadow"/>
+  <g id="gl_line">
+    <circle cx="36" cy="36" r="28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M36,8v56c-8.5604,0-15.5-12.536-15.5-28S27.4396,8,36,8c8.5604,0,15.5,12.536,15.5,28S44.5604,64,36,64"/>
+    <line x1="64" x2="8" y1="36" y2="36" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="22" y2="22" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="50" y2="50" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-pn" viewBox="0 0 72 72"><g id="pn_color">
+    <path fill="#ea5a47" d="m46.288,34.3932c-.8205-1.4005-3.5756-2.5592-3.5756-2.5592l-1.0343-4.1975-2.2282-13.0482-9.1051-.6051-2.184,16.6293c-.0635.3545-1.4459,1.7772-1.7857,1.8963-2.8213.9893-3.0856,3.5212-3.57,4.5505l24.1657.0322c-.0304-.143.0226-1.494-.6828-2.6983Z"/>
+    <polygon fill="#ea5a47" points="31.0083 8.5994 29.5845 14.5883 40.2816 14.1282 39.8274 8.7892 31.0083 8.5994"/>
+    <polygon fill="#d22f27" points="39.8274 8.7892 36.848 8.7892 37.1401 14.5883 40.8274 14.5883 39.8274 8.7892"/>
+    <path fill="#d0cfce" d="m33.051,40.2346s-.0242,2.6808-.0242,3.2335l.3163,12.4946,2.5241,5.8434,1.67-4.2589.7783-17.2953-5.2645-.0173Z"/>
+    <polygon fill="#9b9b9a" points="35.8645 61.5263 37.9727 55.7491 38.3093 41.6967 38.32 40.2367 35.6609 40.2456 35.8645 61.5263"/>
+    <path fill="#d22f27" d="m38.0116,31.834s1.4394,1.1587,2.2599,2.5592c.7054,1.2043,1.238,2.5553,1.2684,2.6983l5.2498-.6511c-.4834-1.0264-.2141-2.6709-3.0383-3.6611-.3398-.1191-.6609-.5908-.7244-.9453,0,0-2.712-14.0382-2.5498-13.5879l-.6956-4.1179-2.6415.4601.8499,15.3903.0216,1.8554Z"/>
+  </g>
+  <g id="pn_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="33.069 41.2315 33.0753 56.0146 35.9361 63.8727 38.2539 55.9913 38.2479 41.2352"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m30.3187,18.576l-2.3773,13.26c-5.2242,1.8318-5.4803,5.4953-5.4803,5.4953h25.4502s-.2561-3.6635-5.4803-5.4953l-2.3773-13.26"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.8274 14.5883 29.5845 14.5883 30.5845 8.7892 39.8274 8.7892 40.8274 14.5883"/>
+  </g></symbol><symbol id="ic-cl" viewBox="0 0 72 72"><g id="cl_color">
+    <path fill="#a57939" d="m19.4835,11.9519c-1.6223.0879-2.6548,1.3894-2.6446,3.0141l.3073,49.0067c0,1.1025,1.5713,3.0003,2.6738,3.0003h28.4129c3.5401,0,6.4365-2.8964,6.4365-6.4365V14.8499c0-1.6248-1.2817-2.8115-2.9042-2.898-.7359-.0392-31.6955-.0318-32.2816,0Z"/>
+    <path fill="#d0cfce" d="m32.9574,11.2092l-4.0841.1491c-1.6251,0-3.3121,2.401-3.7826,3.8716l21.4716.3382c-.4705-1.4707-1.8325-4.3589-3.4576-4.3589l-3.8013-.3336c-.3697,0-.1859-3.8359-3.3445-3.6872s-2.6318,4.0208-3.0015,4.0208Z"/>
+    <path fill="#fff" d="m51.7802,54.9399v-.1743c-.0021.0239-.0102.0456-.014.0689.0046.0353.0131.0696.014.1054Z"/>
+    <path fill="#fff" d="m47.1379,14.8526c.008.1192-2.3273.5918-2.88.5918,0,0-20.1393-.4492-20.1313-.5685h-3.0741s.0002.0001.0004.0001c.236.0377-.1528,46.5465-.1528,46.5465h22.5355s7.3614-6.4365,7.3614-6.4623l-.1522-2.8562.1522-36.2586c0-.0543-.0221-.9928-.0221-.9928,0,0-3.637,0-3.637,0Z"/>
+    <path fill="#fff" d="m42.7393,57.1041c.0184.0177.0435.0265.0633.0427-.0199-.0159-.0447-.0253-.0633-.0427Z"/>
+    <path fill="#fff" d="m43.0405,57.301c.1157.0482.2423.076.3765.076-.1336,0-.2601-.0286-.3765-.076Z"/>
+    <polygon fill="#d0cfce" points="50.5145 55.2072 45.8303 54.8528 43.6878 54.7656 42.4317 56.4499 42.4317 60.4229 43.4356 61.4225 50.5145 55.2072"/>
+    <polyline fill="none" stroke="#6a462f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="50.6448 55.9269 43.2287 62.4038 20.9144 62.4038"/>
+  </g>
+  <g id="cl_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m49.6856,11.9519h4.9838v52.0211c0,1.6568-1.3431,3-3,3h-31.8494c-1.6569,0-3-1.3432-3-3V11.9519h4.6155"/>
+    <line x1="50.797" x2="50.797" y1="15.8454" y2="54.9602" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="43.4175 56.3765 43.4175 54.9641 50.7959 54.9602 43.4356 61.4225 20.9001 61.4225 20.9001 15.8454"/>
+    <line x1="24.5808" x2="37.3475" y1="22.6148" y2="22.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="41.5632" y1="26.6148" y2="26.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="44.781" y1="30.6148" y2="30.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="38.1335" y1="34.6148" y2="34.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="40.9916" y1="38.6148" y2="38.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="31.7029" y1="42.6148" y2="42.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m42.2763,10.9439h-3.7961c.1302-.3182.2034-.666.2034-1.0311,0-1.5047-1.2199-2.7244-2.7247-2.7244s-2.7244,1.2197-2.7244,2.7244c0,.3651.0729.7129.2033,1.0311h-4.0611c-2.367,0-4.286,1.9189-4.286,4.286h21.4716c0-2.3671-1.919-4.286-4.286-4.286Z"/>
+  </g></symbol><symbol id="ic-wr" viewBox="0 0 72 72"><g id="wr_color">
+    <path fill="#D0CFCE" stroke="none" d="M41,64.9049V36.4955l1.3665-0.5232c4.0791-1.5617,7.0017-5.2461,7.6335-9.623v0 c0.601-4.2688-0.4505-7.5594-3-10.1462c0,0-1.3928-1.4132-3.5973-2.4706C42.75,13.4194,42,13.9291,42,14.6615l0,7.6293l-2,3.0439 h-3h-1h-3l-2-3.0439l0-7.6293c0-0.7324-0.75-1.2421-1.4026-0.929C27.3928,14.7899,26,16.2031,26,16.2031 c-2.5495,2.5868-3.601,5.8774-3,10.1462c0.005,0.0356,0.0102,0.0712,0.0154,0.1068c0.6494,4.3916,3.72,8.0239,7.815,9.5916 L32,36.4955v28.4094"/>
+  </g>
+  <g id="wr_hair"/>
+  <g id="wr_skin"/>
+  <g id="wr_skin-shadow"/>
+  <g id="wr_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M41,63.9064v-28l1.3665-0.5157c4.0791-1.5392,7.0017-5.1705,7.6335-9.4843v0c0.601-4.2073-0.4505-7.4505-3-10 c0,0-1.3928-1.3928-3.5973-2.435C42.75,13.1629,42,13.6653,42,14.3871l0,7.5193l-2,3h-3h-1h-3l-2-3l0-7.5193 c0-0.7219-0.75-1.2242-1.4026-0.9157C27.3928,14.5136,26,15.9064,26,15.9064c-2.5495,2.5495-3.601,5.7927-3,10 c0.005,0.0351,0.0102,0.0702,0.0154,0.1052c0.6494,4.3283,3.72,7.9082,7.815,9.4534L32,35.9064v28"/>
+  </g></symbol><symbol id="ic-pp" viewBox="0 0 72 72"><g id="pp_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m27.1001,30.3606s11.8183,12.2773,16.0293,16.0846c2.0768,1.8777,3.811,1.4778,4.7703.4926,1.1251-1.1555,1.5673-2.9854.1144-4.4427-5.8084-5.8261-23.0688-23.0704-23.0688-23.0704-2.3431-2.3432-6.8921-2.0932-9.2353.25s-2.3431,6.1421,0,8.4852l25.1983,25.3054c3.9053,3.9052,10.2369,3.9052,14.1422,0,3.9053-3.9052,3.9052-10.2369,0-14.1421l-12.5032-12.5032"/>
+  </g>
+  <g id="pp_color"/></symbol><symbol id="ic-pz" viewBox="0 0 72 72"><g id="pz_color">
+    <path fill="#92d3f5" d="M39.7792,57.8819H52.77V44.851c5.2976,0,11.6314,1.4,11.6314-6.1934,0-6.7613-6.3338-5.8535-11.6314-5.8535V19.5133H39.7792c1.8239-5.8157,1.8239-11.6314-4.9774-11.6314s-6.73,6.3338-6.73,11.6314H14.4016V33.5239c4.2433-1.5715,11.6314-4.4184,11.6314,5.1737s-8.48,6.5814-11.6314,5.1737V57.8819H26.3729c0-5.2976,0-12.383,7.213-12.3112C40.3686,45.6382,39.7792,52.5843,39.7792,57.8819Z"/>
+    <path fill="#61b2e4" d="M39.0542,51.0992c1.7359,1.7359,1.11,4.1339,1.11,6.7827H52.77V43.8713c5.8157,1.0357,10.9968,3.6045,10.9968-5.2137,0-5.2976-4.9743-6.1934-10.2719-6.1934V19.8154H49.3788"/>
+  </g>
+  <g id="pz_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="14.402 33.524 14.402 19.513 29.628 19.513"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="28 57.882 14.402 57.882 14.402 43.871"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="52.77 43.871 52.77 57.882 38.348 57.882"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="39.976 19.513 52.77 19.513 52.77 33.524"/>
+    <g>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.4016,33.5239c2.6813-2.3413,11.6314-3.2873,11.6314,5.1737"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.4016,43.8713c2.6813,2.3413,11.6314,3.2873,11.6314-5.1737"/>
+    </g>
+    <g>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28.0005,57.8819c-2.3414-2.6814-3.2873-11.6314,5.1737-11.6314"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M38.3479,57.8819c2.3413-2.6814,3.2873-11.6314-5.1737-11.6314"/>
+    </g>
+    <g>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M29.6281,19.5133c-2.3414-2.6814-3.2873-11.6314,5.1737-11.6314"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M39.9755,19.5133c2.3413-2.6814,3.2873-11.6314-5.1737-11.6314"/>
+    </g>
+    <g>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M52.77,43.8713c2.6813,2.3413,11.6314,3.2873,11.6314-5.1737"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M52.77,33.5239c2.6813-2.3413,11.6314-3.2873,11.6314,5.1737"/>
+    </g>
+  </g></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 指令练习册 · 进阶篇</h1>
 <p class="note">系列顺序： 《Linux 入门》→《基础篇》→ 本册。本册约 10~15 小时（场景 2~4 按需选做，全做约 15h），建议先做基础篇。</p>
@@ -85,9 +201,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b>定位</b>：基础篇练"单个技能"，本册练"组合技能"——每道题模拟真实运维工单：<b>有背景、有故障、只给目标、不给过程</b>。你扮演值班运维，从一堆现象里自己定位问题、修复、写记录。</p>
 
 <p><b>两种用法</b>：① 学完基础篇后集中做；② 边学边做，按需选用。场景 1 和场景 5 与后续的日志排查、Shell 脚本任务衔接最紧密，建议优先完成；场景 2~4 按需选做。</p>
-<p class="note">📔 学习日志：每天把敲过的命令、报错与心得记进学习日志。&nbsp;&nbsp;🌐 说明：🌐 = 须电脑环境（Ubuntu）完成；平板 Termux 环境下不确定（不保证可做）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志：每天把敲过的命令、报错与心得记进学习日志。&nbsp;&nbsp;<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 说明：<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> = 须电脑环境（Ubuntu）完成；平板 Termux 环境下不确定（不保证可做）。</p>
 
-<div class="warn"><b>⚠️ 安全红线（本册最重要的一节）</b>：进阶篇所有故障都用<b>沙盒式故障注入</b>复刻——故障只发生在练习目录、镜像文件、练习进程里，<b>不会伤到真实系统</b>。规则：① 场景 2 结束后必须执行 <span class="code cmd">sudo umount /mnt/lab</span>（卸载实验分区）；② 实验目录只用 ~/lab 和 /tmp；③ 每场景做完都要"恢复现场"（杀掉练习进程、删除实验文件）。</div>
+<div class="warn"><b><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全红线（本册最重要的一节）</b>：进阶篇所有故障都用<b>沙盒式故障注入</b>复刻——故障只发生在练习目录、镜像文件、练习进程里，<b>不会伤到真实系统</b>。规则：① 场景 2 结束后必须执行 <span class="code cmd">sudo umount /mnt/lab</span>（卸载实验分区）；② 实验目录只用 ~/lab 和 /tmp；③ 每场景做完都要"恢复现场"（杀掉练习进程、删除实验文件）。</div>
 
 
 
@@ -95,9 +211,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b>零基础前置约束</b>：本册只用《基础篇》练过的命令；出现新命令（如 <span class="code cmd">nc</span>、<span class="code cmd">fuser</span>、<span class="code cmd">nvidia-smi</span>）时，题目或搭建手册中会先介绍它是什么再使用。答案/附录里首次出现的新命令或选项（如 grep -e、stat、systemctl is-active）同样自带行内解释；其中 <span class="code">-e</span> 表示“每个 -e 后跟一个匹配模式”，遇到不认识的先读注释。</p>
 
 <div class="box">
-<p><b>📌 本册路线（5 场景）</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本册路线（5 场景）</b></p>
 <pre><a href="#toc-1" style="color:inherit;text-decoration:none;">场景1 本地推理服务起不来（日志排查）</a>      约 3h   ★ 必做
-<a href="#toc-2" style="color:inherit;text-decoration:none;">场景2 磁盘满应急（模型文件占满磁盘）🌐</a>   约 3h   ☆ 选做
+<a href="#toc-2" style="color:inherit;text-decoration:none;">场景2 磁盘满应急（模型文件占满磁盘）<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></a>   约 3h   ☆ 选做
 <a href="#toc-3" style="color:inherit;text-decoration:none;">场景3 服务连不上（网络链路排查）</a>          约 3h   ☆ 选做
 <a href="#toc-4" style="color:inherit;text-decoration:none;">场景4 服务与进程运维（含 GPU 进程定位）</a>   约 3h   ☆ 选做
 <a href="#toc-5" style="color:inherit;text-decoration:none;">场景5 脚本收尾（衔接 5 个 Shell 脚本）</a>   约 3h   ★ 必做
@@ -113,10 +229,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <h3 id="toc-1">场景 1｜本地推理服务起不来（日志排查）</h3>
 <div class="ticket">
-<p><b>📋 背景工单</b>：你是某公司 AI 组的新运维。同事说他昨天在服务器上装了一个推理服务，今天早上启动失败，让你去处理。<b>机器上有个服务脚本 labservice.sh（见附录 A），它在某个目录下写日志。</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你是某公司 AI 组的新运维。同事说他昨天在服务器上装了一个推理服务，今天早上启动失败，让你去处理。<b>机器上有个服务脚本 labservice.sh（见附录 A），它在某个目录下写日志。</b></p>
 </div>
 <div class="build">
-<p><b>🔧 场景搭建手册（做题前执行）</b>：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 场景搭建手册（做题前执行）</b>：</p>
 <pre><span class="prompt">$</span> mkdir -p ~/lab && cd ~/lab
 <span class="out"># 只检查并停止本场景记录的 PID；不要按模糊命令名误杀其他服务</span>
 <span class="prompt">$</span> if [ -f ~/lab/labservice.pid ]; then old_pid=$(cat ~/lab/labservice.pid); ps -p "$old_pid" -o pid=,args=; fi
@@ -141,14 +257,14 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </table>
 <p><b>最终产出</b>：一份故障处理记录 + 复述"处理流程四步"（即 9 册《日志报错解读手册》的"读日志四步法"：确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测）。</p>
 
-<h3 id="toc-2">场景 2｜磁盘满应急（模型文件占满磁盘）🌐</h3>
+<h3 id="toc-2">场景 2｜磁盘满应急（模型文件占满磁盘）<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></h3>
 <div class="ticket">
-<p><b>📋 背景工单</b>：你负责的 GPU 服务器磁盘使用率报警到 92%，同事说服务开始写日志报"空间不足"。<b>你的任务：定位是什么占满了磁盘、安全清理、恢复服务、给出预防措施。</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你负责的 GPU 服务器磁盘使用率报警到 92%，同事说服务开始写日志报"空间不足"。<b>你的任务：定位是什么占满了磁盘、安全清理、恢复服务、给出预防措施。</b></p>
 </div>
 <div class="build">
-<p><b>🔧 搭建手册（做题前执行，需电脑 Ubuntu 🌐）</b>：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 搭建手册（做题前执行，需电脑 Ubuntu <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>）</b>：</p>
 <pre><span class="out"># ① 先确认磁盘空间（df -h ~），再创建一个 500MB 空白镜像。</span>
-<span class="opt">⚠️ 空间紧张的替代参数（二选一，直接照抄整组；均为 Ubuntu 22.04 / ext4 / mount -o loop 实测值）：</span>
+<span class="opt"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 空间紧张的替代参数（二选一，直接照抄整组；均为 Ubuntu 22.04 / ext4 / mount -o loop 实测值）：</span>
 <span class="out">#   替代1：count=250（250MB 镜像）+ 塞入量合计 180MB，六个塞入行示例：30M、30M、30M、30M、30M、30M。实测 df 约 219M/181M/21M、Use% 90%，以你机器 df 实测为准。</span>
 <span class="out">#   替代2：count=150（150MB 镜像）+ 塞入量合计 100MB，六个塞入行示例：20M、20M、20M、10M、10M、20M。实测 df 约 125M/101M/14M、Use% 88%，以你机器 df 实测为准。</span>
 <span class="prompt">$</span> df -h ~
@@ -167,16 +283,16 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> sudo fallocate -l 70M /mnt/lab/logs/old_service2.log
 <span class="prompt">$</span> sudo fallocate -l 70M /mnt/lab/cache/tmp2.bin <span class="out"># 合计 400M；500M 镜像实测（Ubuntu）格式化后约 Size 452M、写满后 Used 约 401M、Avail 约 17M、Use% 约 96%。预期 Use% 约 95%~97%，以你机器的 df 实测为准——最后一条 fallocate 成功即搭建成功（Avail 剩十几 M 属正常：这正好复现“磁盘即将写满”）</span>
 <span class="prompt">$</span> df -h /mnt/lab        <span class="out"># 确认接近写满：预期 Use% 约 95%~97%，以你机器的 df 实测为准（&gt;85% 即搭建成功），现场搭建完成</span></pre>
-<div class="warn">⚠️ 安全提示：故障全部发生在 /mnt/lab 这个镜像分区里。做完题执行 <span class="code cmd">sudo umount /mnt/lab</span> 卸载后，一切恢复原样，真系统没有任何变化。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提示：故障全部发生在 /mnt/lab 这个镜像分区里。做完题执行 <span class="code cmd">sudo umount /mnt/lab</span> 卸载后，一切恢复原样，真系统没有任何变化。</div>
 </div>
 <p><b>题目</b>：进2-1 确认是哪个挂载点满了，占用多少。进2-2 进入该分区，逐层定位最大的目录、最大的文件。进2-3 判断哪些可安全删除、哪些不能动（说清依据），完成清理。进2-4 验证恢复，写出 2 条预防措施。</p>
 
 <h3 id="toc-3">场景 3｜服务连不上（网络链路排查）</h3>
 <div class="ticket">
-<p><b>📋 背景工单</b>：同事反馈"我们部署在本地 8080 端口的服务突然连不上了"，让你按链路排查：<b>主机通不通 → 端口通不通 → 服务进程在不在 → 日志怎么说。</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：同事反馈"我们部署在本地 8080 端口的服务突然连不上了"，让你按链路排查：<b>主机通不通 → 端口通不通 → 服务进程在不在 → 日志怎么说。</b></p>
 </div>
 <div class="build">
-<p><b>🔧 场景搭建手册</b>：在本机用 labservice.sh 起一个服务，然后从三种故障里<b>任选一种注入</b>（做两遍可以换着来）：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 场景搭建手册</b>：在本机用 labservice.sh 起一个服务，然后从三种故障里<b>任选一种注入</b>（做两遍可以换着来）：</p>
 <pre><span class="prompt">$</span> cd ~/lab
 <span class="out"># 故障 A：服务压根没起（什么都不做，直接进入题目）</span>
 <span class="out"># 故障 B：服务起了，但端口被别的进程占了：</span>
@@ -202,14 +318,14 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <h3 id="toc-4">场景 4｜服务与进程运维（含 GPU 进程定位）</h3>
 <div class="ticket">
-<p><b>📋 背景工单</b>：你在管一台"推理服务机器"，今天要完成：部署一个服务并让它开机自启、监控它、处理一个"卡死进程"，最后查清楚"显卡/文件被哪个进程占着"。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你在管一台"推理服务机器"，今天要完成：部署一个服务并让它开机自启、监控它、处理一个"卡死进程"，最后查清楚"显卡/文件被哪个进程占着"。</p>
 </div>
-<p class="note">📌 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 22.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 22.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
 <div class="build">
-<p><b>🔧 场景搭建手册</b>：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 场景搭建手册</b>：</p>
 <pre><span class="prompt">$</span> cd ~/lab
 <span class="prompt">$</span> nano loop.sh                        <span class="out"># 粘贴附录 A3 的完整内容（死循环进程），保存退出（Ctrl+X → Y → 回车）</span>
-<span class="prompt">$</span> chmod +x loop.sh                    <span class="out"># 给执行权限；⚠️ loop.sh 跑起来会占满一个 CPU 核，用完必须 kill 并收尾</span>
+<span class="prompt">$</span> chmod +x loop.sh                    <span class="out"># 给执行权限；<svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> loop.sh 跑起来会占满一个 CPU 核，用完必须 kill 并收尾</span>
 <span class="prompt">$</span> ./labservice.sh start &amp;                 <span class="out"># 只启动本场景服务</span>
 <span class="prompt">$</span> nohup ./loop.sh &gt; loop.log 2&gt;&amp;1 &amp; echo $! &gt; loop.pid <span class="out"># 保存 loop.sh 的 PID</span>
 <span class="prompt">$</span> top                                      <span class="out"># 现场就位</span></pre>
@@ -220,20 +336,20 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>进4-1</td><td>部署服务：后台运行 + 确认进程和端口都正常</td></tr>
 <tr><td>进4-2</td><td>用 top/ps 找出那个死循环进程，优雅终止它（并说明为什么不直接 -9）</td></tr>
 <tr><td>进4-3</td><td>GPU 题：用 <span class="code cmd">nvidia-smi</span> 查看显卡状态，用 <span class="code cmd">fuser -v</span> 定位占用显卡的进程并处理。/ 无 GPU 替代题：定位"占用某个文件"的进程并处理（技能完全等价）</td></tr>
-<tr><td>进4-4 🌐</td><td>设置服务开机自启（systemd 写 unit 文件 / 或 rc.local / 或说明其他方式），重启验证自启生效</td></tr>
+<tr><td>进4-4 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td>设置服务开机自启（systemd 写 unit 文件 / 或 rc.local / 或说明其他方式），重启验证自启生效</td></tr>
 </table>
 <p><b>最终产出</b>：一台"服务能自启、能监控、出问题会处理"的练习机状态 + 处理记录。</p>
 
 <h3 id="toc-5">场景 5｜脚本收尾（衔接 Shell 脚本任务）</h3>
 <div class="ticket">
-<p><b>📋 背景工单</b>：前四个场景你都是手动敲命令处理的。现在公司要求把巡检"脚本化"：以后一键就能看到机器状态。<b>这就是通往"5 个 Shell 脚本"任务的桥。</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：前四个场景你都是手动敲命令处理的。现在公司要求把巡检"脚本化"：以后一键就能看到机器状态。<b>这就是通往"5 个 Shell 脚本"任务的桥。</b></p>
 </div>
 <table>
 <tr><th style="width:10%">编号</th><th>目标（只给这些）</th></tr>
 <tr><td>进5-1</td><td>写一个"资源巡检"脚本：一键输出磁盘占用（df）、内存（free）、CPU 负载（uptime）摘要</td></tr>
 <tr><td>进5-2</td><td>写一个"服务健康检查"脚本：检查进程在不在 + 端口通不通 + 日志最近有没有更新，结果用中文提示输出</td></tr>
 <tr><td>进5-3</td><td>给两个脚本加上变量、判断和注释，让一个完全没写过脚本的人能看懂</td></tr>
-<tr><td>进5-4 🌐</td><td>运行验证两个脚本的输出正确，并（可选）用 <span class="code cmd">cron</span>（定时任务）设置每天自动巡检一次</td></tr>
+<tr><td>进5-4 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td>运行验证两个脚本的输出正确，并（可选）用 <span class="code cmd">cron</span>（定时任务）设置每天自动巡检一次</td></tr>
 </table>
 <p><b>最终产出</b>：2 个可用的 Shell 脚本，直接衔接"5 个 Shell 脚本"任务——5 件套总览（本场景产出前 2 个，后 3 个按表补齐）：</p>
 <table>
@@ -350,7 +466,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> kill "$OCC_PID"                    <span class="out"># 先优雅终止</span>
 <span class="prompt">$</span> ./labservice.sh start         <span class="out"># 重启服务</span>
 <span class="prompt">$</span> nc -zv localhost 8080         <span class="out"># 验证连通</span></pre>
-<p class="note">📎 <b>sed 拆解</b>（本册第一次出现，正文未教，这里一次讲清）：<code>-n</code>=只打印被处理的行；<code>s/旧/新/p</code>=替换并打印；<code>\(...\)</code>=圈住要保留的部分；<code>\1</code>=用圈住的内容替换整行——整句 = 把含 <code>pid=</code> 的行替换成 <code>pid=</code> 后面的数字。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pp"/></svg> <b>sed 拆解</b>（本册第一次出现，正文未教，这里一次讲清）：<code>-n</code>=只打印被处理的行；<code>s/旧/新/p</code>=替换并打印；<code>\(...\)</code>=圈住要保留的部分；<code>\1</code>=用圈住的内容替换整行——整句 = 把含 <code>pid=</code> 的行替换成 <code>pid=</code> 后面的数字。</p>
 <p><span class="step">④ 怎么验证做对了</span>：服务连通。四步顺序脱口而出：<b>先记录各层证据，再按“确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测”处理</b>，不能只凭单次 ping 或单条命令下结论。</p></div>
 
 <h3>场景 4 答案</h3>
@@ -385,7 +501,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> fuser -v ~/lab/logs/labservice.log <span class="out"># 无 GPU 替代：哪个进程占着这个文件（选正被进程打开的文件——labservice.log 被 python3 持续打开着）</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：fuser 输出"文件: 进程名(PID)"格式，与 ps 结果互证。fuser 只显示"打开着该文件"的进程——所以要做实验，得选一个正被进程持续打开的文件（如服务的日志），而不是写完就关的 pid 文件。核心能力不是记命令，是"从资源反查进程"这个思路——磁盘满（du 找文件）、端口被占（ss 找进程）、GPU 被占（fuser），同一种思维。</p></div>
 
-<div class="ans"><p><b>【进4-4 🌐】开机自启</b></p>
+<div class="ans"><p><b>【进4-4 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>】开机自启</b></p>
 <p><span class="step">① 先想什么</span>：让 systemd 这个大管家替你"开机自动拉起服务"。</p>
 <p><span class="step">② 为什么用这个命令</span>：写一个 unit 文件描述服务，<span class="code">systemctl enable</span> 注册开机自启，<span class="code">systemctl start</span> 立即生效。无 systemd 的环境说明 rc.local 或 crontab @reboot 方案即可。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
@@ -397,12 +513,12 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> sudo reboot          <span class="out"># 重启验证</span>
 <span class="prompt">$</span> systemctl status labservice   <span class="out"># active (running) = 自启成功</span>
 <span class="prompt">$</span> sudo systemctl disable --now labservice &amp;&amp; sudo rm /etc/systemd/system/labservice.service &amp;&amp; sudo systemctl daemon-reload   <span class="out"># 练习完恢复原状：先 disable 停止、再删 unit、最后 daemon-reload 让 systemd 重新读配置</span></pre>
-<div class="warn">⚠️ <b>reboot 会断开当前所有连接</b>：请在本地终端做，或改用 <code>sudo systemctl restart labservice</code> 代替（效果等价）。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>reboot 会断开当前所有连接</b>：请在本地终端做，或改用 <code>sudo systemctl restart labservice</code> 代替（效果等价）。</div>
 <p><span class="step">④ 怎么验证做对了</span>：重启后服务自动在跑。养成习惯：改完 unit 文件必须 <span class="code">daemon-reload</span>，这是新手最容易漏的一步。</p>
 <div class="box2"><p><span class="opt">Restart=on-failure 验证（Ubuntu 22.04 + systemd 实测通过，实测现象附在各步骤后）：</span></p>
 <pre><span class="prompt">$</span> sudo systemctl start labservice
 <span class="prompt">$</span> ss -tlnp | grep :8080   <span class="out"># 输出如 users:(("python3",pid=1234,...))——记下这个唯一 PID</span>
-<span class="opt">⚠️ 安全警告：不要用 pkill -f 'http.server 8080'——它按整条命令行模糊匹配，会误杀别的同名 http.server。</span>
+<span class="opt"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全警告：不要用 pkill -f 'http.server 8080'——它按整条命令行模糊匹配，会误杀别的同名 http.server。</span>
 <span class="prompt">$</span> PID=1234   <span class="out"># 换成上一步 ss 显示的唯一 PID（如 ss 显示多个 pid，先逐个 ps 核对，只处理本场景那个）</span>
 <span class="prompt">$</span> ps -p "$PID" -o pid=,args=   <span class="out"># 人工核对命令行确实是本场景子服务（含 http.server 8080），不是别的进程</span>
 <span class="prompt">$</span> sudo kill -9 "$PID"   <span class="out"># 只杀这一个 PID；父服务随后以非 0 退出，触发 Restart=on-failure</span>
@@ -532,7 +648,7 @@ fi
 uptime</pre>
 <p><span class="step">④ 怎么验证做对了</span>：三种分支都要跑，<b>全程不碰真实的 labservice.pid</b>（真实服务保持运行、端口不被误停）：① 服务在跑（先 <span class="code">./labservice.sh start</span>）：应打印"进程：正常"且退出码 0；② 不存在的假路径：<span class="code">PID_FILE="$HOME/lab/not-exist.pid" ./health_check.sh</span> → 打印"PID 文件不存在"且退出码非 0；③ 写假 PID：<span class="code">printf '99999\n/fake/path\n/fake/dir\n' &gt; "$HOME/lab/fake.pid"</span>，再 <span class="code">PID_FILE="$HOME/lab/fake.pid" ./health_check.sh</span> → 打印"实例不符或已过期"且退出码非 0。测完 <span class="code">rm -f "$HOME/lab/fake.pid"</span> 清理，并确认 <span class="code">cat ~/lab/labservice.pid</span> 内容未变、<span class="code">./labservice.sh status</span> 仍显示运行中。可读性：让没学过脚本的人读一遍能说出"它在查什么"。</p></div>
 
-<div class="ans"><p><b>【进5-4 🌐】验证 + 定时巡检</b></p>
+<div class="ans"><p><b>【进5-4 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>】验证 + 定时巡检</b></p>
 <p><span class="step">① 先想什么</span>：脚本要定期自动跑，用 crontab 定计划。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">crontab -e</span> 编辑定时表，格式"分 时 日 月 周 命令"；<span class="code">0 9 * * *</span> 表示每天 9:00。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
@@ -547,7 +663,7 @@ uptime</pre>
 <h2 id="toc-7">附录 A · 练习用脚本（复制保存即可）</h2>
 
 <h3>A1. labservice.sh（假推理服务，支持 start / stop / status）</h3>
-<div class="warn">⚠️ <b>附录脚本总警告</b>：脚本内含自动删除命令（rm -f 清 PID 文件、stop 时结束子进程）——全部只作用于练习目录内自己的产物，不会碰其它路径；但仍需遵守：① 只在专用 Ubuntu 虚拟机或可丢弃实验环境运行；② 不把脚本复制到真实服务器使用；③ 每次实验前先 <span class="code">cd ~/lab</span> 并确认 labservice.conf 的 LOGDIR 指向 ~/lab/logs；④ 练完用 <span class="code">./labservice.sh stop</span> 收尾并复查现场（PID 文件已删、端口已释放）。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>附录脚本总警告</b>：脚本内含自动删除命令（rm -f 清 PID 文件、stop 时结束子进程）——全部只作用于练习目录内自己的产物，不会碰其它路径；但仍需遵守：① 只在专用 Ubuntu 虚拟机或可丢弃实验环境运行；② 不把脚本复制到真实服务器使用；③ 每次实验前先 <span class="code">cd ~/lab</span> 并确认 labservice.conf 的 LOGDIR 指向 ~/lab/logs；④ 练完用 <span class="code">./labservice.sh stop</span> 收尾并复查现场（PID 文件已删、端口已释放）。</div>
 
 <pre class="pre-split">#!/bin/bash
 # labservice.sh - 练习用假服务，仅在练习目录使用
@@ -691,7 +807,7 @@ esac</pre>
 <p class="note">PID 文件三行 = 实例唯一标识：父进程 PID / 脚本绝对路径 / 启动工作目录。<span class="code">stop</span>/<span class="code">status</span> 按"路径一致 + 命令行是本脚本 + 工作目录一致"三要素认领——两个目录各跑同名脚本也不会误认。子服务退出检测：<span class="code">kill -0</span> + 进程状态 <span class="code">Z</span>（zombie）双查——被外部 kill -9 后即使成为 zombie 也能在下一轮心跳检出 → 父进程 <span class="code">exit 1</span>（供 Restart=on-failure）；正常 stop/systemd TERM → trap 收尾 <span class="code">exit 0</span>。请分别复核：正常 start/status/stop、Ctrl+C、重复 start、异常退出和过期 PID 文件；收尾时确认 PID 文件已删、端口不再监听、练习进程不再存在。</p>
 
 <div class="box2">
-<p><b>🧩 高级 Shell 构件速查（附录脚本用到的语法，正文未逐一展开——允许照抄运行、边用边懂；排错时翻回这张表）</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-pz"/></svg> 高级 Shell 构件速查（附录脚本用到的语法，正文未逐一展开——允许照抄运行、边用边懂；排错时翻回这张表）</b></p>
 <table>
 <tr><th style="width:16%">构件</th><th style="width:38%">用途</th><th>本脚本哪里用到</th></tr>
 <tr><td class="code">set -u</td><td>用了没定义的变量就报错退出（防拼写错误悄悄放行）</td><td>脚本开头：全文安全网</td></tr>
@@ -721,13 +837,13 @@ PORT=8080</pre>
 trap 'echo "忽略 TERM（演示用）"' TERM
 while :; do :; done</pre>
 
-<div class="warn">⚠️ loop.sh 跑起来会占满一个 CPU 核——用完必须 <span class="code cmd">kill</span> 掉，练习结束别忘清理。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> loop.sh 跑起来会占满一个 CPU 核——用完必须 <span class="code cmd">kill</span> 掉，练习结束别忘清理。</div>
 
 <h2 id="toc-8">附录 B · 本册命令速查</h2>
 <table>
 <tr><th style="width:20%">场景</th><th>命令一览</th></tr>
 <tr><td>场景 1</td><td class="code">ps aux · grep · ss -tlnp · tail(-n/-f) · cat · nano（vim 亦可） · curl -I · 处理流程四步</td></tr>
-<tr><td>场景 2 🌐</td><td class="code">dd · mkfs.ext4 · mount(-o loop) · umount · df -h · du -h --max-depth=1 · ls -lhS · rm · fallocate</td></tr>
+<tr><td>场景 2 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></td><td class="code">dd · mkfs.ext4 · mount(-o loop) · umount · df -h · du -h --max-depth=1 · ls -lhS · rm · fallocate</td></tr>
 <tr><td>场景 3</td><td class="code">ping(-c) · ip route · ss -tlnp · nc(-zv) · curl · kill · 四步排查顺序</td></tr>
 <tr><td>场景 4</td><td class="code">nohup · pgrep · top · kill/kill -9 · fuser -v · nvidia-smi · systemctl(daemon-reload/enable/--now) · unit 文件</td></tr>
 <tr><td>场景 5</td><td class="code">#!/bin/bash · 变量 · if · 注释 · chmod +x · nc -z · stat -c %Y · date +%s · crontab(-e/-l) · &gt;&gt; · 2&gt;&amp;1</td></tr>
@@ -824,7 +940,7 @@ else
   echo "$1 拉起后仍不在运行（active/failed/offline 状态不同，逐一核实），看日志：journalctl -u $1"
   exit 1
 fi</pre>
-<p style="line-height:1.35;"><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：<span class="code">./service_guard.sh ssh</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop ssh</span> 再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（🌐 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
+<p style="line-height:1.35;"><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：<span class="code">./service_guard.sh ssh</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop ssh</span> 再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
 
 <p class="footer">Linux 指令练习册 · 进阶篇 · 先自己想，再看答案 · v2.4（2026-09）</p>
 </body>

@@ -100,12 +100,150 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 /* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
 </style>
 
 
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-pe" viewBox="0 0 72 72"><g id="pe_color">
+    <polygon fill="#3F3F3F" stroke="none" points="14.5943,53.154 18.2544,56.814 12.6242,59.0928"/>
+    <polyline fill="#f4aa41" stroke="none" points="18.0381,41.8761 36.8684,23.0457 48.1813,34.3586 29.5108,53.0291"/>
+    <polyline fill="#a57939" stroke="none" points="14.4132,52.5663 17.9281,43.3946 27.8278,53.2939 18.6558,56.809"/>
+    <polyline fill="#EA5A47" stroke="none" points="42.9209,16.9933 50.4228,9.4913 61.7357,20.8042 54.2975,28.2424"/>
+    <polyline fill="#9b9b9a" stroke="none" points="35.6498,24.2643 43.3318,16.5823 54.6447,27.8952 47.0278,35.512"/>
+  </g>
+  <g id="pe_hair"/>
+  <g id="pe_skin"/>
+  <g id="pe_skin-shadow"/>
+  <g id="pe_line">
+    <polygon fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="18.6304,56.8203 27.8278,53.2939 53.8207,27.301 43.9212,17.4015 17.9281,43.3946 14.3904,52.6032"/>
+    <polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="47.3354,13.9873 50.8388,10.4839 60.7383,20.3834 57.2645,23.8572"/>
+    <line x1="18.5562" x2="28.4557" y1="42.7665" y2="52.6659" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="14.3979,52.5817 11.9073,59.3148 18.6558,56.809"/>
+    <line x1="36.9099" x2="46.4225" y1="25.0073" y2="34.5199" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-bm" viewBox="0 0 72 72"><g id="bm_color">
+    <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="2" d="m14.85 64.04 0.05537-5.257-5.343-0.03324v-50.79h28.89l5.287 5.291h11.3v50.79z"/>
+    <polyline transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#d0cfce" stroke-width="0.9454" points="54.92 23 44 11.65 44 23"/>
+    <polygon transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#92d3f5" stroke-width="0.9454" points="59.55 29.04 67 29.04 67 34 59.55 34 57.71 31.52"/>
+    <polygon transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#ea5a47" stroke-width="0.9454" points="54.55 48 62 48 62 52.96 54.55 52.96 52.71 50.48"/>
+  </g>
+  <g id="bm_line">
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="60 28.75 60 17 49.32 17"/>
+    <line x1="55.06" x2="55.06" y1="45.53" y2="31.68" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="22 63.09 22 65 60 65 60 53.33"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="55 48 55 22.68 44.32 12 17 12 17 60 55 60 55 53"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="55 23 44.3 23 44.32 12"/>
+    <polygon transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="59.55 34 57.71 31.52 59.55 29.04 67 29.04 67 34"/>
+    <polygon transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="54.55 52.96 52.71 50.48 54.55 48 62 48 62 52.96"/>
+    <line x1="15.89" x2="30.71" y1="17.48" y2="17.48" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="25.94" y2="25.94" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="33.35" y2="33.35" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="41.82" y2="41.82" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="50.29" y2="50.29" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g></symbol><symbol id="ic-gl" viewBox="0 0 72 72"><g id="gl_color">
+    <circle cx="36" cy="36" r="28" fill="#92D3F5" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="gl_hair"/>
+  <g id="gl_skin"/>
+  <g id="gl_skin-shadow"/>
+  <g id="gl_line">
+    <circle cx="36" cy="36" r="28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M36,8v56c-8.5604,0-15.5-12.536-15.5-28S27.4396,8,36,8c8.5604,0,15.5,12.536,15.5,28S44.5604,64,36,64"/>
+    <line x1="64" x2="8" y1="36" y2="36" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="22" y2="22" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="50" y2="50" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-nb" viewBox="0 0 72 72"><g id="nb_color">
+    <rect x="17.5625" y="12" width="42.4375" height="47.5" fill="#fcea2b"/>
+    <rect x="12" y="12" width="5.9479" height="47.5" fill="#f1b31c"/>
+    <rect x="17.5729" y="23.8761" width="42.4167" height="13.8125" fill="#fff"/>
+  </g>
+  <g id="nb_line">
+    <line x1="17" x2="17" y1="13" y2="59" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M62.9087,54.8149A1.986,1.986,0,0,0,64,53.0467V9.0833A2.0833,2.0833,0,0,0,61.9167,7H16.4591a4.7714,4.7714,0,0,0-3.9733,2.13h0a1.889,1.889,0,0,0,1.573,2.9349h3.8086l2.1331-.0177H59.9167v48H14.0583a1.8905,1.8905,0,0,1-1.8916-1.85V10.575"/>
+    <g>
+      <g>
+        <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="47.734 27.438 43.908 27.438 43.908 34.133 47.734 34.133"/>
+        <line x1="43.9084" x2="46.7775" y1="30.7855" y2="30.7855" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="22.57 34.133 22.57 27.438 27.352 34.133 27.352 27.438"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M32.6123,34.1328h0a2.391,2.391,0,0,1-2.3909-2.391V29.8291a2.391,2.391,0,0,1,2.3909-2.391h0a2.391,2.391,0,0,1,2.391,2.391v1.9127A2.391,2.391,0,0,1,32.6123,34.1328Z"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M54.4694,28.7683A2.0432,2.0432,0,0,0,52.41,27.4319h0a1.9249,1.9249,0,0,0-2.102,1.6737,1.9249,1.9249,0,0,0,2.102,1.6736l-.0427.0063a1.9249,1.9249,0,0,1,2.102,1.6736,1.9249,1.9249,0,0,1-2.102,1.6737h0a2.0431,2.0431,0,0,1-2.0593-1.3364"/>
+      <g>
+        <line x1="37.2348" x2="41.0603" y1="27.4381" y2="27.4381" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <line x1="39.1475" x2="39.1475" y1="27.4381" y2="34.1328" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g></symbol><symbol id="ic-pn" viewBox="0 0 72 72"><g id="pn_color">
+    <path fill="#ea5a47" d="m46.288,34.3932c-.8205-1.4005-3.5756-2.5592-3.5756-2.5592l-1.0343-4.1975-2.2282-13.0482-9.1051-.6051-2.184,16.6293c-.0635.3545-1.4459,1.7772-1.7857,1.8963-2.8213.9893-3.0856,3.5212-3.57,4.5505l24.1657.0322c-.0304-.143.0226-1.494-.6828-2.6983Z"/>
+    <polygon fill="#ea5a47" points="31.0083 8.5994 29.5845 14.5883 40.2816 14.1282 39.8274 8.7892 31.0083 8.5994"/>
+    <polygon fill="#d22f27" points="39.8274 8.7892 36.848 8.7892 37.1401 14.5883 40.8274 14.5883 39.8274 8.7892"/>
+    <path fill="#d0cfce" d="m33.051,40.2346s-.0242,2.6808-.0242,3.2335l.3163,12.4946,2.5241,5.8434,1.67-4.2589.7783-17.2953-5.2645-.0173Z"/>
+    <polygon fill="#9b9b9a" points="35.8645 61.5263 37.9727 55.7491 38.3093 41.6967 38.32 40.2367 35.6609 40.2456 35.8645 61.5263"/>
+    <path fill="#d22f27" d="m38.0116,31.834s1.4394,1.1587,2.2599,2.5592c.7054,1.2043,1.238,2.5553,1.2684,2.6983l5.2498-.6511c-.4834-1.0264-.2141-2.6709-3.0383-3.6611-.3398-.1191-.6609-.5908-.7244-.9453,0,0-2.712-14.0382-2.5498-13.5879l-.6956-4.1179-2.6415.4601.8499,15.3903.0216,1.8554Z"/>
+  </g>
+  <g id="pn_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="33.069 41.2315 33.0753 56.0146 35.9361 63.8727 38.2539 55.9913 38.2479 41.2352"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m30.3187,18.576l-2.3773,13.26c-5.2242,1.8318-5.4803,5.4953-5.4803,5.4953h25.4502s-.2561-3.6635-5.4803-5.4953l-2.3773-13.26"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.8274 14.5883 29.5845 14.5883 30.5845 8.7892 39.8274 8.7892 40.8274 14.5883"/>
+  </g></symbol><symbol id="ic-tg" viewBox="0 0 72 72"><g id="tg_color">
+    <circle cx="39.4882" cy="39.4552" r="29.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="23.85" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="15.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="10.9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="5.9" fill="#EA5A47" stroke="none"/>
+  </g>
+  <g id="tg_hair"/>
+  <g id="tg_skin"/>
+  <g id="tg_skin-shadow"/>
+  <g id="tg_line">
+    <line x1="11.4659" x2="2.5131" y1="11.4989" y2="11.4989" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="11.4662" x2="11.4663" y1="11.4989" y2="2.546" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5067" x2="6.5538" y1="15.5473" y2="15.5473" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5086" x2="15.5086" y1="15.5454" y2="6.5925" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="39.4865" x2="7.4778" y1="39.4644" y2="7.5188" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M21.9689,16.3467c4.8593-3.674,10.9579-5.8915,17.5193-5.8915c16.0163,0,29,12.9837,29,29s-12.9837,29-29,29s-29-12.9837-29-29 c0-6.5467,2.1693-12.5867,5.8283-17.4404"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M26.2567,20.6399c3.7421-2.6364,8.306-4.1847,13.2315-4.1847c12.7025,0,23,10.2975,23,23s-10.2975,23-23,23s-23-10.2975-23-23 c0-4.8704,1.5138-9.3872,4.0966-13.1056"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.04,26.4321c2.1945-1.2578,4.7374-1.9769,7.4482-1.9769c8.2843,0,15,6.7157,15,15s-6.7157,15-15,15s-15-6.7157-15-15 c0-2.6162,0.7305-5.1268,1.9079-7.268"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M40.0779,34.4744c2.4674,0.3067,4.3769,2.4111,4.3769,4.9616c0,2.7614-2.2386,5-5,5c-2.4824,0-4.5422-1.809-4.9332-4.1806"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M35.7775,30.1663c1.1474-0.4587,2.3996-0.7111,3.7107-0.7111c5.5228,0,10,4.4772,10,10s-4.4772,10-10,10s-10-4.4771-10-10 c0-1.2548,0.252-2.4731,0.6858-3.5895"/>
+  </g></symbol><symbol id="ic-lb" viewBox="0 0 72 72"><g id="lb_color">
+    <path fill="#d0cfce" d="m35.71,64.65c4.779,0,7.509-2.244,8.156-5.151h-16.31c.647,2.907,3.376,5.151,8.155,5.151h-.001Z"/>
+    <path fill="#fcea2b" d="m45.2028,10.655s-12.23-3.457-18.2,1.269c-5.969,4.726-6.401,15.6-6.401,15.6.5848,2.213,4.226,8.493,4.226,8.493.54.9111,2.253,7.481,3.249,11.36h15.92c.8662-2.845,4.35-13.15,4.805-14.21.584-1.363,1.58-4.016,2.083-5.017,1.21-2.409,1.1663-4.533.5378-7.027-1.3571-5.385-2.4738-6.7228-6.221-10.47l.0012.002Z"/>
+    <path fill="#fff" d="m35.71,7.202c-8.532,0-16.5,6.752-16.5,15.28,0,1.079-.2641,4.491,1.217,4.491,0,0,2.393-7.825,8.362-12.55,5.969-4.725,15.52-3.725,15.52-3.725-.6645-2.045-5.55-3.499-8.596-3.499l-.003.003Z"/>
+  </g>
+  <g id="lb_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m52.55,23.75c0,3.985-1.785,5.908-3.754,10.5-.5028,1.172-4.211,13.38-4.211,13.38h-17.17s-2.981-11.67-3.546-12.62c-2.37-3.998-4.419-6.91-4.419-11.26,0-9.141,7.41-16.55,16.55-16.55s16.55,7.41,16.55,16.55Z"/>
+    <line x1="36" x2="36" y1="47.22" y2="35.28" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="41.97" x2="30.03" y1="35.28" y2="35.28" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.696" d="m44.16,58.79c0,3.24-3.651,5.867-8.155,5.867s-8.155-2.627-8.155-5.867h16.31Z"/>
+    <line x1="27.99" x2="44.01" y1="54.98" y2="51.51" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.965"/>
+    <line x1="38.2" x2="43.98" y1="56.07" y2="54.89" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="28.02" x2="33.8" y1="51.6" y2="50.42" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g></symbol><symbol id="ic-ok" viewBox="0 0 72 72"><g id="ok_color">
+    <path fill="#B1CC33" stroke="none" d="M53.1887,52.843H20.5794c-0.3752,0-0.6794-0.2955-0.6794-0.66v-31.68c0-0.3645,0.3042-0.66,0.6794-0.66 h21.5062h1.2918h2.0097h6.6745h1.1271c0.3752,0,0.6794,0.2955,0.6794,0.66v31.68C53.8681,52.5475,53.5639,52.843,53.1887,52.843z"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M30.66,30.538c-1.85-2.61-6.18-0.11-4.32,2.52c3.19,4.51,5.87,9.25,7.91,14.38c0.84,2.09,4.23,2.65,4.83,0 c2.83-12.6,8.21-27.17,20.68-33c2.91-1.36,0.38-5.67-2.52-4.32c-11.43,5.35-17.68,17.36-21.23,29.25 C34.45,36.318,32.68,33.378,30.66,30.538z"/>
+  </g>
+  <g id="ok_hair"/>
+  <g id="ok_skin"/>
+  <g id="ok_skin-shadow"/>
+  <g id="ok_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M53,22.642v30.476c0,0.3645-0.2955,0.66-0.66,0.66H20.66c-0.3645,0-0.66-0.2955-0.66-0.66v-31.68c0-0.3645,0.2955-0.66,0.66-0.66 h20.0814h0.5672"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M30.66,30.538c-1.85-2.61-6.18-0.11-4.32,2.52c3.19,4.51,5.87,9.25,7.91,14.38c0.84,2.09,4.23,2.65,4.83,0 c2.83-12.6,8.21-27.17,20.68-33c2.91-1.36,0.38-5.67-2.52-4.32c-11.43,5.35-17.68,17.36-21.23,29.25 C34.45,36.318,32.68,33.378,30.66,30.538z"/>
+  </g></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 入门（教科书版）</h1>
 <p class="note">主课本 · 建议按顺序学习 · 与《Linux 指令练习册（基础篇 / 进阶篇）》配套使用</p>
@@ -116,7 +254,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 
 <div class="newpage"></div>
-<h2 class="toc-title">📑 目录</h2>
+<h2 class="toc-title"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">使用说明</span><span class="tdesc">配色约定 · 环境要求 · 安全红线</span><a href="#toc-0"></a></div>
 <div class="toc-row"><span class="tn">学习路线图</span><span class="tdesc">章 → 练习册映射表</span><a href="#toc-1"></a></div>
@@ -152,8 +290,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td><span class="opt">橙色</span></td><td>易错点、坑</td></tr>
 </tbody></table>
 <div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、挂载或日志时，先记录原状态；操作中逐步核对对象；操作后对照输出、数量、状态和退出码验证；结束后恢复配置、停止练习进程、卸载实验挂载并再次检查现场。异常时保留原始报错。</div>
-<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 🌐 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。</p>
-<p class="note">📔 学习日志约定：每天把敲过的命令、报错与心得记进学习日志——这是检查点的依据。</p>
+<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志约定：每天把敲过的命令、报错与心得记进学习日志——这是检查点的依据。</p>
 <p class="note">安全红线：实验目录只用 <span class="code">~/lab</span> 和 <span class="code">/tmp</span>；<span class="code">/tmp</span> 是临时目录，但何时清理由发行版、挂载方式和 systemd-tmpfiles 等系统策略决定，<b>重启后不保证全部清空</b>；<span class="code cmd">rm -rf</span> 永远先 <span class="code cmd">ls</span> 看清楚；涉及 <span class="code cmd">sudo</span> 的命令只在练习机上执行。</p>
 
 <h2 id="toc-1">学习路线图（章 → 练习册）</h2>
@@ -195,7 +333,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <h3>0.3 命令三件套</h3>
 <p>Linux 命令的通用结构，是全书最重要的规律：</p>
-<div class="rule">📌 <b>命令 = 动词 + 选项 + 参数</b>：命令说"做什么"，选项说"怎么做"（改变行为），参数说"对谁做"（目标对象）。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> <b>命令 = 动词 + 选项 + 参数</b>：命令说"做什么"，选项说"怎么做"（改变行为），参数说"对谁做"（目标对象）。</div>
 <pre><span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">-l</span> <span class="param">/home</span>
 <span class="note">ls(动词：列出) -l(选项：以详细格式) /home(参数：列这个目录)</span></pre>
 <p><b>选项的规律：</b>短选项用单横线 <span class="code">-l</span>，长选项用双横线 <span class="code">--all</span>。多个短选项可合并：<span class="code">ls -la</span> = <span class="code">ls -l -a</span>。</p>
@@ -256,18 +394,18 @@ List information about the FILEs...
 </div>
 
 <div class="hw">
-<p class="htitle">✏️ 章末作业（答案见附录 A）</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业（答案见附录 A）</p>
 <p>1. 打开终端，用 <span class="code cmd">pwd</span> 和 <span class="code cmd">whoami</span> 各敲一遍，把输出抄进学习日志。</p>
 <p>2. 用 <span class="code cmd">ls --help</span> 找出 3 个选项，并说出各自作用。</p>
 <p>3. 敲 <span class="code cmd">history</span>，看你今天敲过的所有命令；用 <span class="code">↑</span> 键调出上一条命令再执行一次。</p>
 <p>4. 故意敲一个拼错的命令（如 <span class="code cmd">pws</span>），把报错原文记下来。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测（答案见附录 A）</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测（答案见附录 A）</p>
 <p>1. 提示符 <span class="code">student@ubuntu:~$</span> 中，<span class="code">$</span> 表示什么？如果换成 <span class="code">#</span> 说明什么？</p>
 <p>2. 判断：<span class="code">ls -l /home</span> 中，<span class="code">ls</span> 是选项，<span class="code">-l</span> 是命令，<span class="code">/home</span> 是参数。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：学完本章先做基础篇「阶段 1」里的 1-1、1-2。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：学完本章先做基础篇「阶段 1」里的 1-1、1-2。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-3">第 1 章 · 目录树与路径</h2>
@@ -284,7 +422,7 @@ List information about the FILEs...
 ├── tmp/      临时文件；是否在重启后清理由系统配置决定，不能保证全部清空
 ├── usr/      已安装的软件
 └── bin/      命令的住处</span></pre>
-<div class="rule">📌 记住三个排障位置：<b>/etc</b> 找配置、<b>/var/log</b> 找日志、<b>/home</b> 找你的东西。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 记住三个排障位置：<b>/etc</b> 找配置、<b>/var/log</b> 找日志、<b>/home</b> 找你的东西。</div>
 
 <h3>1.2 两种路径写法</h3>
 <table>
@@ -327,18 +465,18 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 <p><span class="opt">坑 3：</span>文件名里有空格，要用引号包住：<span class="code">cd "my notes"</span>。新手建议文件名永远别用空格，用下划线。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用 <span class="code cmd">cd</span> 走到 <span class="code">/etc</span> 看一眼，再 <span class="code cmd">cd</span> <span class="code">~</span> 回家——两步各用一次 <span class="code cmd">pwd</span>，把输出记下来。</p>
 <p>2. 从 <span class="code">/tmp</span> 出发，分别用绝对路径和相对路径进入 <span class="code">~/lab/ch1</span>。</p>
 <p>3. 用 <span class="code">ls -a ~</span> 找出 3 个隐藏文件，把名字记下来。</p>
 <p>4. 用 <span class="code">cd /</span> 到树根，用 <span class="code">ls</span> 看根下有哪些目录，找找 /home、/etc、/var 在哪。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 绝对路径和相对路径的核心区别是什么？</p>
 <p>2. 判断：<span class="code">cd ..</span> 永远回到"上一个待过的目录"。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 1-1、1-2、1-3。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 1-1、1-2、1-3。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-4">第 2 章 · 文件与目录操作</h2>
@@ -386,7 +524,7 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 
 <h3>2.3 删除：rm 和 rmdir</h3>
 <div class="warn">
-<p class="wtitle">⚠️ 危险警告：删除不可恢复</p>
+<p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：删除不可恢复</p>
 <p>Linux 没有回收站。<span class="code cmd">rm</span> 删掉的文件<b>找不回来</b>。还有两个与 Windows 最大的习惯差异：<b>命令行没有"复制 → 粘贴"两步</b>——<span class="code cmd">cp</span> 一步到位；<b><span class="code cmd">mv</span> 搬完原位置就消失</b>——它同时承担"移动"和"改名"。铁律：<b>先 <span class="code cmd">ls</span> 看清楚，再 <span class="code cmd">rm</span></b>；实验只在 <span class="code">~/lab</span> 里做；<span class="code cmd">rm -rf</span> 敲之前默念一遍完整路径。</p>
 </div>
 <table>
@@ -411,22 +549,22 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 <p><span class="opt">坑 3：</span>mv 是"移动或改名"，cp 是"复制一份"。mv 快（同一磁盘只改记录），cp 慢（真复制数据）。</p>
 </div>
 <div class="hw tight2">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用一条命令建出 <span class="code">~/lab/ch2/x/y/z</span> 三层目录。</p>
 <p>2. 复制整个 <span class="code">~/lab/ch2</span> 到 <span class="code">~/lab/ch2-backup</span>，验证里面文件都在。</p>
 <p>3. 把 <span class="code">note2.txt</span> 改名为 <span class="code">second-note.txt</span>。</p>
 <p>4. 尝试用 <span class="code cmd">rmdir</span> 删一个非空目录，观察报错；再用 <span class="code cmd">rm -r</span> 删掉它。</p>
 </div>
 <div class="quiz tight2">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 为什么说"改名就是移动"？</p>
 <p>2. 判断：<span class="code">rm -rf</span> 删错文件后可以用恢复软件找回。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 1-4、1-5、1-6、1-7、1-8。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 1-4、1-5、1-6、1-7、1-8。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-5">第 3 章 · 查看与搜索</h2>
-<p class="note">💡 本册日志示范统一用自建文件 <span class="code">~/lab/app.log</span>：先执行 <span class="code">echo '2026-08-01 09:00:01 ERROR disk fail' &gt;&gt; ~/lab/app.log</span>（多敲几行不同内容）。系统日志路径取决于发行版、日志服务和配置；不要假定 <span class="code">/var/log/syslog</span> 一定存在。先确认实际文件，或对 systemd 服务使用 <span class="code">journalctl</span>。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-lb"/></svg> 本册日志示范统一用自建文件 <span class="code">~/lab/app.log</span>：先执行 <span class="code">echo '2026-08-01 09:00:01 ERROR disk fail' &gt;&gt; ~/lab/app.log</span>（多敲几行不同内容）。系统日志路径取决于发行版、日志服务和配置；不要假定 <span class="code">/var/log/syslog</span> 一定存在。先确认实际文件，或对 systemd 服务使用 <span class="code">journalctl</span>。</p>
 <p><b>本章目标：</b>① 会用四种"看"命令按需查看文件；② 会用 <span class="code cmd">grep</span> 按内容搜、<span class="code cmd">find</span> 按名字找；③ 会 <span class="code cmd">wc</span> 计数、<span class="code cmd">diff</span> 对比；④ 理解 <span class="code cmd">tail -f</span> 的实时跟踪。</p>
 <p><b>本章新命令</b>：<span class="code cmd">cat</span> <span class="code cmd">less</span> <span class="code cmd">head</span> <span class="code cmd">tail</span> <span class="code cmd">wc</span> <span class="code cmd">file</span> <span class="code cmd">grep</span> <span class="code cmd">find</span> <span class="code cmd">diff</span></p>
 
@@ -512,18 +650,18 @@ MaxSessions 10</pre>
 <p><span class="opt">坑 3：</span>grep 搜内容 vs find 找文件，面试常考，别混。</p>
 </div>
 <div class="hw tight2">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用 less 打开 ~/lab/app.log，练习 空格 / b / q / 搜索。</p>
 <p>2. 用 grep -i 在 ~/lab/app.log 里找 "error"，用 grep -c 数一共几行。</p>
 <p>3. 用 find 找出家目录下所有 .txt 文件。</p>
 <p>4. 复制一个目录后用 diff -r 验证两边一致，再改动一个文件后看 diff 输出长什么样。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 想看一个 5 万行日志的最新报错，应该用哪条命令？（A. cat B. less C. tail -f）</p>
 <p>2. 判断：grep 是按文件名找文件，find 是按内容找文件。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 2-3、2-4、2-5、2-6、2-7；阶段 5 的 5-1、5-2、5-3；进阶篇场景 1。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 2-3、2-4、2-5、2-6、2-7；阶段 5 的 5-1、5-2、5-3；进阶篇场景 1。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-6">第 4 章 · 管道与重定向</h2>
@@ -532,7 +670,7 @@ MaxSessions 10</pre>
 
 <h3>4.1 管道：把命令串成流水线</h3>
 <p>每个 Linux 命令都像一道<span class="keyword">工序</span>：吃进数据，吐出结果。<b>管道 |</b> 就是把前一道工序的"吐出"，直接喂给下一道工序的"吃进"。</p>
-<div class="rule">📌 管道的哲学：<b>每个命令只做一件小事，用管道把小工具组合成大功能</b>。这就是 Linux 力量的来源。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 管道的哲学：<b>每个命令只做一件小事，用管道把小工具组合成大功能</b>。这就是 Linux 力量的来源。</div>
 <div class="demo">
 <p class="dtitle">示范 1：三道工序接力</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">grep</span> <span class="opt">-i</span> <span class="param">"error" ~/lab/app.log</span> | <span class="cmd">wc</span> <span class="opt">-l</span>
@@ -589,7 +727,7 @@ Sep 14:02</pre>
 </div>
 
 <h3>4.5 日志分析标准套路（本章精华）</h3>
-<div class="rule">📌 <b>提取 → 排序 → 去重计数 → 倒序 → 取前 N</b>。五步连环，日志统计题一招通吃。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> <b>提取 → 排序 → 去重计数 → 倒序 → 取前 N</b>。五步连环，日志统计题一招通吃。</div>
 <div class="demo">
 <p class="dtitle">示范 5：统计访问日志里出现最多的 IP 前 5 名</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">printf</span> <span class="str">'192.168.1.10 abc\n203.0.113.9 xyz\n'</span> &gt;&gt; <span class="param">~/lab/access.log</span> <span class="out"># 先自造日志，多敲几行不同 IP 的（printf = 增强版 echo，首次出现：它认 \n 等转义字符，\n 表示换行）</span>
@@ -606,18 +744,18 @@ Sep 14:02</pre>
 <p><span class="opt">坑 3：</span>awk 的单引号不能换成双引号。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 把 echo 输出分别用 &gt; 和 &gt;&gt; 写 3 次，cat 验证差别（照示范 2 做）。</p>
 <p>2. 造一个多行文本，用 sort | uniq -c 统计每个词出现次数。</p>
 <p>3. 用 awk 取出 /etc/passwd 的第一列（用户名）。</p>
 <p>4. 把示范 5 的管道改造成：统计自己日志里出现最多的 3 个词。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 管道 | 和重定向 &gt; 的本质区别是什么？</p>
 <p>2. 判断：uniq 可以直接对乱序文件正确去重。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 2-4、2-8；阶段 5 的 5-4、5-5。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 2-4、2-8；阶段 5 的 5-4、5-5。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-7">第 5 章 · 用户与权限</h2>
@@ -639,8 +777,8 @@ Sep 14:02</pre>
 
 <h3>5.2 创建用户</h3>
 <div class="demo">
-<p class="dtitle">示范 1：建一个完整用户并加入 sudo 组 🌐</p>
-<p class="note">⚠️ 动系统用户属于系统级操作：只在专用实验机（虚拟机）里做；练习完按 5.4 收尾要求清理并自查。</p>
+<p class="dtitle">示范 1：建一个完整用户并加入 sudo 组 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 动系统用户属于系统级操作：只在专用实验机（虚拟机）里做；练习完按 5.4 收尾要求清理并自查。</p>
 <pre class="demo-in"><span class="prompt">$</span> getent passwd alice || echo "alice 不存在，可以创建"   <span class="out"># 冲突检查：若已存在（上次实验残留），先 sudo userdel -r alice 清干净再继续</span>
 <span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">useradd</span> <span class="opt">-m -s /bin/bash</span> <span class="param">alice</span>
 <span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">passwd</span> <span class="param">alice</span>
@@ -668,7 +806,7 @@ Sep 14:02</pre>
 <tr><td>符号法</td><td><span class="code">chmod u+x 文件</span></td><td>u=属主、g=组、o=其他人、a=全部；+=加、-=减。只动你指定位</td></tr>
 <tr><td>数字法</td><td><span class="code">chmod 755 文件</span></td><td>一次覆盖全部九位</td></tr>
 </table>
-<div class="rule">📌 <b>数字算法原理</b>（为什么 r=4、w=2、x=1）：权限位本质是三个开关，开=1 关=0。<b>r=4(100)、w=2(010)、x=1(001)</b>，相加即组合：rwx=7、rw-=6、r-x=5、r--=4。755 = 属主 rwx(7) + 属组 r-x(5) + 其他人 r-x(5)。<b>644</b>（文件最常见）= rw-r--r--。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> <b>数字算法原理</b>（为什么 r=4、w=2、x=1）：权限位本质是三个开关，开=1 关=0。<b>r=4(100)、w=2(010)、x=1(001)</b>，相加即组合：rwx=7、rw-=6、r-x=5、r--=4。755 = 属主 rwx(7) + 属组 r-x(5) + 其他人 r-x(5)。<b>644</b>（文件最常见）= rw-r--r--。</div>
 <div class="demo">
 <p class="dtitle">示范 2：chmod 实战</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">touch</span> <span class="param">~/lab/script.sh</span> <span class="out"># 先自造目标文件（示范自足，跳章也能跑）</span>
@@ -694,7 +832,7 @@ Sep 14:02</pre>
 <tr><td><span class="code">last</span></td><td>看最近谁登录过这台机器</td></tr>
 </table>
 <div class="warn">
-<p class="wtitle">⚠️ 危险警告：chmod 777</p>
+<p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：chmod 777</p>
 <p><span class="code cmd">chmod 777 文件</span> = 属主、属组、其他人都能读写执行——相当于把家门钥匙插在锁上。遇到"权限问题先 777 再说"的坏习惯，面试和实战都会翻车。正确姿势：<b>搞清楚谁需要什么权限，给最小权限</b>。</p>
 </div>
 
@@ -705,18 +843,18 @@ Sep 14:02</pre>
 <p><span class="opt">坑 3：</span><span class="code cmd">chmod -R</span> 递归改整个目录很危险，先想清楚再敲。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业 🌐</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. 创建 alice、bob 两个用户并设密码，用 groups 验证各自所在组。</p>
 <p>2. 把 alice 加入 sudo 组（usermod -aG），验证她能 sudo 了。</p>
 <p>3. 建一个文件，分别用符号法和数字法把它改成 755，两次都 ls -l 验证。</p>
 <p>4. 用 chown 把文件换给 bob，再用 alice 身份试试能不能读它。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 权限串 -rwxr-xr-- 中，"其他人"的权限是什么？数字法是几？</p>
 <p>2. 判断：sudo 是切换成 root 用户，su 是借 root 权限执行一条命令。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 3-1 ~ 3-8。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 3-1 ~ 3-8。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-8">第 6 章 · 进程管理</h2>
@@ -765,11 +903,11 @@ EOF</span>
 <span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/lab/run.log</span>
 </pre><pre class="demo-out">09:30:15 收到退出信号，清理中...</pre>
 <p class="demo-ex">trap 那行 = 程序安装了"信号处理器"：收到 TERM 就写一行日志再退出。<b>kill（优雅）→ 日志里留下了告别记录</b>。现在再用 kill -9 试一次：日志里<b>不会有</b>新记录——程序连写日志的机会都没有。。</p>
-<p class="note">📌 细节提示：PID 和日志时间是动态的——<code>$!</code> 拿到的是你的实际 PID；pgrep 可能匹配多个同名进程，所以用 <code>$!</code> 保存、用 <code>ps -p</code> 核对，<b>只动自己的实验进程</b>。run.log 写进 ~/lab/，从任何目录启动都不乱跑。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 细节提示：PID 和日志时间是动态的——<code>$!</code> 拿到的是你的实际 PID；pgrep 可能匹配多个同名进程，所以用 <code>$!</code> 保存、用 <code>ps -p</code> 核对，<b>只动自己的实验进程</b>。run.log 写进 ~/lab/，从任何目录启动都不乱跑。</p>
 </div>
 <p><span class="code cmd">killall</span> = 按<b>名字</b>杀进程（不用查 PID）：<span class="code">killall nginx</span>。名字匹配到多个进程会全部杀掉，先 <span class="code cmd">pgrep</span> 确认再动手。</p>
 <div class="warn">
-<p class="wtitle">⚠️ 危险警告：kill -9 滥用</p>
+<p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：kill -9 滥用</p>
 <p>对数据库、推理服务直接 <span class="code cmd">kill -9</span> 可能造成数据损坏。<b>-9 永远是最后手段</b>：先试普通 kill → 没反应再观察 → 仍无效才 -9。养成习惯，面试和实战都加分。</p>
 </div>
 
@@ -811,24 +949,24 @@ EOF</span>
 <p><span class="opt">坑 3：</span>&amp; 忘打，程序霸占终端——Ctrl+C 或 Ctrl+Z 先救场。</p>
 </div>
 <div class="hw tight2">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用 ps aux | grep 找到你的终端进程，读出它的 PID 和 %CPU。</p>
 <p>2. 后台跑一个 sleep 300，用 jobs 看它，再用 kill 优雅结束它。</p>
 <p>3. 重做示范 3 的完整实验：kill 和 kill -9 各来一次，对比 run.log。</p>
 <p>4. 用 nohup 挂一个后台任务，关掉终端重新打开，验证它还在跑。</p>
 </div>
 <div class="quiz tight2">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. kill 和 kill -9 的区别是什么？为什么 -9 是最后手段？</p>
 <p>2. 判断：nohup 的作用是"忽略错误输出"。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 4-1 ~ 4-5；进阶篇场景 1、4（fuser 用于定位占端口进程）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 4-1 ~ 4-5；进阶篇场景 1、4（fuser 用于定位占端口进程）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-9">第 7 章 · 磁盘与文件系统</h2>
 <p><b>本章目标：</b>① 会用 df 看整体、du 看明细；② 理解"挂载"；③ 会造测试大文件（fallocate / dd）；④ 看懂磁盘满的排查套路。</p>
 <p><b>本章新命令</b>：<span class="code cmd">df</span> <span class="code cmd">du</span> <span class="code cmd">lsblk</span> <span class="code cmd">mount</span> <span class="code cmd">fallocate</span> <span class="code cmd">dd</span> <span class="code cmd">mkfs</span></p>
-<div class="warn">⚠️ <b>mount / mkfs 是危险操作，别急着动手</b>：完整演练流程见《Linux 练习册·进阶篇》场景 2 搭建手册（在镜像文件里练，安全）。先记住两个词义：<b>mount</b> = 把设备接到目录树上；<b>mkfs</b> = 格式化——<b>绝不对真磁盘乱用</b>。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>mount / mkfs 是危险操作，别急着动手</b>：完整演练流程见《Linux 练习册·进阶篇》场景 2 搭建手册（在镜像文件里练，安全）。先记住两个词义：<b>mount</b> = 把设备接到目录树上；<b>mkfs</b> = 格式化——<b>绝不对真磁盘乱用</b>。</div>
 
 <h3>7.1 磁盘、分区与挂载</h3>
 <p>比喻：<b>硬盘=仓库，分区=仓库隔间，挂载=把隔间接进目录树</b>。Linux 没有 Windows 的 C 盘 D 盘——新硬盘必须"挂"到某个目录（如 /mnt/data），这个目录就成了它的入口。</p>
@@ -870,7 +1008,7 @@ EOF</span>
 <p class="demo-ex">一秒造出 100M 文件，练习"磁盘占用"场景的原料。<b>容量按你的磁盘空间调整（50M / 100M 都行），先 df -h 确认够再动手</b>。dd 的 <b>if</b>=输入文件（/dev/zero 是无限零的设备）、<b>of</b>=输出文件、<b>bs</b>=块大小、<b>count</b>=块数。</p>
 </div>
 <div class="warn">
-<p class="wtitle">⚠️ 危险警告：dd 的 of= 写错 = 灾难</p>
+<p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：dd 的 of= 写错 = 灾难</p>
 <p><span class="code">dd if=/dev/zero of=/dev/sda</span> 会直接覆盖整块硬盘。<b>用 dd 前必须先 lsblk 确认设备名</b>；of= 永远不要指向真实硬盘/分区。练习只用普通文件名。</p>
 </div>
 
@@ -894,25 +1032,25 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 <p><span class="opt">坑 3：</span>df 忘记 -h，数字长得没法读。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. df -h 找出根分区使用率，记下来。</p>
 <p>2. 先 <span class="code">ls -a ~</span> 确认家目录里有哪些项（含隐藏），再用 <span class="code">du -sh ~/*</span> 找出最占空间的 3 个东西。</p>
 <p>3. fallocate 造一个 100M 文件，ls -lh 验证大小。</p>
 <p>4. lsblk 看你机器有几块硬盘、几个分区，对照 df 的输出找对应关系。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. df 和 du 的区别是什么？排查磁盘满时先用哪个？</p>
 <p>2. 判断：Linux 的新硬盘会自动出现 D 盘、E 盘。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 4-5；进阶篇场景 2（磁盘满应急）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 4-5；进阶篇场景 2（磁盘满应急）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-10">第 8 章 · 网络命令</h2>
 <p><b>本章目标：</b>① 会查 IP、网关（ip / ip route）；② 会用 ping、ss、nc、curl 做基础排查；③ 会 ssh / scp 远程操作；④ 掌握"主机→端口→进程→日志"四层排查法。</p>
 <p><b>本章新命令</b>：<span class="code cmd">ip</span> <span class="code cmd">ip route</span> <span class="code cmd">ping</span> <span class="code cmd">ss</span> <span class="code cmd">curl</span> <span class="code cmd">wget</span> <span class="code cmd">nc</span> <span class="code cmd">traceroute</span> <span class="code cmd">nslookup</span> <span class="code cmd">ssh</span> <span class="code cmd">scp</span></p>
 
-<p class="note">📌 外部条件说明：<span class="code cmd">nc / traceroute / nslookup</span> 通常需 apt 安装（netcat-openbsd、traceroute、dnsutils）；<span class="code cmd">ssh / scp</span> 需要远程主机。主线（ip / ping / ss / curl / wget）本地可完成；扩展命令只演示用法，装不上不影响主线。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件说明：<span class="code cmd">nc / traceroute / nslookup</span> 通常需 apt 安装（netcat-openbsd、traceroute、dnsutils）；<span class="code cmd">ssh / scp</span> 需要远程主机。主线（ip / ping / ss / curl / wget）本地可完成；扩展命令只演示用法，装不上不影响主线。</p>
 
 <h3>8.1 地址与端口</h3>
 <p><b>IP = 门牌号</b>（机器在网络里的地址），<b>端口 = 门上的窗口号</b>（一台机器上不同服务各开一个窗口：网页 80、SSH 22、HTTPS 443）。"连不上服务"= 要么门牌找不到，要么窗口没开。</p>
@@ -946,7 +1084,7 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 </div>
 
 <h3>8.3 取数据：curl 和 wget（本地可复现版）</h3>
-<p class="note">📌 本节全部用本地服务演示，不需要外网；文末附一个"联网扩展"例子（无网络直接跳过，不影响主线验收）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本节全部用本地服务演示，不需要外网；文末附一个"联网扩展"例子（无网络直接跳过，不影响主线验收）。</p>
 <div class="demo">
 <p class="dtitle">示范 3：先用 python3 -m http.server 起一个本地网页服务</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab</span> &amp;&amp; <span class="cmd">cd</span> <span class="param">~/lab</span> &amp;&amp; <span class="cmd">python3</span> <span class="opt">-m</span> <span class="param">http.server</span> <span class="param">8000</span> <span class="opt">&amp;</span></pre>
@@ -972,12 +1110,12 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">易错：</span>curl 测"服务通不通"，wget 下"文件"。URL 里的 &amp; 会被 shell 当后台符号处理，带 &amp; 的长 URL 必须加引号。</p>
 </div>
 <div class="box2">
-<p><b>🌐 联网扩展（可跳过，不影响主线）：</b>带参数的公开 API 示例——<span class="code">curl 'https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true'</span>（天气 API，免注册）。返回 JSON，值随时变化；<b>需要网络，连不上就跳过</b>——本节所有验收只要求本地部分。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 联网扩展（可跳过，不影响主线）：</b>带参数的公开 API 示例——<span class="code">curl 'https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true'</span>（天气 API，免注册）。返回 JSON，值随时变化；<b>需要网络，连不上就跳过</b>——本节所有验收只要求本地部分。</p>
 </div>
 
 <h3>8.4 远程操作：ssh 和 scp</h3>
 <div class="demo">
-<p class="dtitle">示范 6：ssh 登录 + scp 传文件 🌐</p>
+<p class="dtitle">示范 6：ssh 登录 + scp 传文件 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">ssh</span> <span class="param">用户名@192.168.1.10</span> <span class="note"># 远程登录（-p 可指定端口）</span>
 <span class="prompt">$</span> <span class="cmd">scp</span> <span class="param">~/lab/file.txt 用户名@192.168.1.10:/tmp/</span> <span class="note"># 把文件拷到远程机器</span></pre>
 <p class="demo-ex">ssh = secure shell，远程登录后就像坐在那台机器前一样敲命令。<b>scp</b> = 通过 SSH 跨机器拷贝文件。练习条件：被连的机器要先装 openssh-server（Ubuntu：<span class="code cmd">sudo apt install openssh-server</span>）。</p>
@@ -987,7 +1125,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">补充两个命令：</span><span class="code cmd">traceroute 目标</span> = 显示数据包沿途经过的每一跳（定位"堵在哪一段"）；<span class="code cmd">nslookup 域名</span> = 域名查 IP（DNS 解析排查，如 <span class="code">nslookup deepseek.com</span>）。</p>
 </div>
 <h3>8.5 四层排查法（本章精华）</h3>
-<div class="rule">📌 服务连不上时，按证据分层排查，不能由一次 ping 直接下结论：<br>① <b>回环层</b>：<span class="code">ping -c 4 127.0.0.1</span>，只验证本机回环和网络栈；<br>② <b>本机/网关层</b>：<span class="code">ip addr</span> 看地址，<span class="code">ip route</span> 找默认网关，再测试网关；<br>③ <b>目标主机层</b>：ping 目标 IP；ICMP 可能被防火墙禁用，ping 不通不等于机器关机；<br>④ <b>端口/进程/应用层</b>：用 <span class="code">nc -zv</span> 或 <span class="code">curl</span> 测端口和应用，再用 <span class="code">ss</span>、<span class="code">ps</span>、日志定位服务。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 服务连不上时，按证据分层排查，不能由一次 ping 直接下结论：<br>① <b>回环层</b>：<span class="code">ping -c 4 127.0.0.1</span>，只验证本机回环和网络栈；<br>② <b>本机/网关层</b>：<span class="code">ip addr</span> 看地址，<span class="code">ip route</span> 找默认网关，再测试网关；<br>③ <b>目标主机层</b>：ping 目标 IP；ICMP 可能被防火墙禁用，ping 不通不等于机器关机；<br>④ <b>端口/进程/应用层</b>：用 <span class="code">nc -zv</span> 或 <span class="code">curl</span> 测端口和应用，再用 <span class="code">ss</span>、<span class="code">ps</span>、日志定位服务。</div>
 <p class="note">这条路线和练习册进阶篇场景 3 的题目一一对应，做完题回来再读一遍，体会更深。</p>
 
 <h3>8.6 易错点</h3>
@@ -997,18 +1135,18 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">坑 3：</span>curl 的 URL 带 &amp; 参数时，URL 要加引号。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用 ip addr 找出本机 IP，用 ip route 找出网关地址。</p>
 <p>2. 用 ss -tlnp 列出本机所有监听端口，说出每个端口是干什么的（22 号至少认识）。</p>
 <p>3. 用 nc -zv 测 localhost 的 22 端口和一个不存在的端口，对比输出。</p>
 <p>4. 用 curl 请求一个公开网址（如 example.com），用 -I 只看响应头。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 默写四层排查法（主机→端口→进程→日志）每一步用什么命令。</p>
 <p>2. 判断：ping 不通说明对方机器一定关机了。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：进阶篇场景 3（全部题目）；场景 1 的 ss 部分。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：进阶篇场景 3（全部题目）；场景 1 的 ss 部分。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-11">第 9 章 · apt 包管理</h2>
@@ -1026,9 +1164,9 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <tr><td><span class="code">sudo apt upgrade</span></td><td>把已装的都升级到最新</td></tr>
 <tr><td><span class="code">apt list --installed</span></td><td>看已装清单（常配 grep 过滤）</td></tr>
 </table>
-<p class="note">📌 外部条件与四种状态：apt 需要<b>网络 + 软件源 + sudo 权限 + dpkg 状态正常</b>。①<u>已安装</u>：apt 提示"已是最新版本"；②<u>未安装</u>：先 <span class="code">sudo apt update</span> 刷新再装；③<u>无网络</u>：update 会超时/失败，主线概念不受影响，安装题记为环境扩展；④<u>被锁定</u>：报 Could not get lock，等另一个 apt 结束（见 9.3）。<b>安装后的软件不能当默认已有</b>——每台新机器都要先装。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件与四种状态：apt 需要<b>网络 + 软件源 + sudo 权限 + dpkg 状态正常</b>。①<u>已安装</u>：apt 提示"已是最新版本"；②<u>未安装</u>：先 <span class="code">sudo apt update</span> 刷新再装；③<u>无网络</u>：update 会超时/失败，主线概念不受影响，安装题记为环境扩展；④<u>被锁定</u>：报 Could not get lock，等另一个 apt 结束（见 9.3）。<b>安装后的软件不能当默认已有</b>——每台新机器都要先装。</p>
 <div class="demo">
-<p class="dtitle">示范 1：完整装一个软件 🌐</p>
+<p class="dtitle">示范 1：完整装一个软件 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">update</span>
 </pre><pre class="demo-out">Get:1 http://archive.ubuntu.com ... [1,234 kB] <span class="out">（示例输出，实际以本机为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">apt</span> <span class="param">search</span> <span class="param">htop</span>
@@ -1051,18 +1189,18 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">易错点：</span>update 和 upgrade 天天被搞混——<b>update 刷新列表（几乎每次装东西前都做），upgrade 真正升级软件</b>。装新软件只需要 update + install。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业 🌐</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. 用 apt search 找一个你感兴趣的小软件（如 cowsay、neofetch），装它并运行。</p>
 <p>2. apt list --installed 配合 grep，确认 htop 是否已安装。</p>
 <p>3. 用 apt remove 卸掉刚装的小软件，再 search 确认它没了。</p>
-<p>4. 🌐 复现锁报错：终端 1 运行 <span class="code">sudo apt install linux-firmware</span>（体积较大、下载需片刻，够时间复现），趁它下载时在终端 2 运行 <span class="code">sudo apt install htop</span>——观察终端 2 的锁报错。实验完终端 1 按 Ctrl+C 中断，并清理残留：<span class="code">sudo dpkg --configure -a</span>。</p>
+<p>4. <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 复现锁报错：终端 1 运行 <span class="code">sudo apt install linux-firmware</span>（体积较大、下载需片刻，够时间复现），趁它下载时在终端 2 运行 <span class="code">sudo apt install htop</span>——观察终端 2 的锁报错。实验完终端 1 按 Ctrl+C 中断，并清理残留：<span class="code">sudo dpkg --configure -a</span>。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. apt update 和 apt upgrade 的区别？</p>
 <p>2. 判断：apt 报"Could not get lock"说明磁盘满了。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 4-7（htop 安装）；进阶篇各场景的 nc、htop 安装。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 4-7（htop 安装）；进阶篇各场景的 nc、htop 安装。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-12">第 10 章 · systemctl 与服务</h2>
@@ -1073,7 +1211,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><b>服务 = 常驻后台的程序</b>（nginx 网页服务、sshd 远程登录服务、docker 容器引擎……）。它们没人盯着也要 7×24 运行。<b>systemd 就是大管家</b>：开机时按顺序拉起所有服务，运行时盯着它们，崩了拉起来。</p>
 <p><span class="code cmd">systemctl</span> 是你和管家对话的命令。它管理的每个服务都有一份"档案"（unit 文件），记录启动命令、依赖、重启策略。</p>
 <div class="demo">
-<p class="dtitle">示范 1：服务管理全流程 🌐</p>
+<p class="dtitle">示范 1：服务管理全流程 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">systemctl</span> <span class="param">status</span> <span class="param">ssh</span>
 </pre><pre class="demo-out">● ssh.service - OpenBSD Secure Shell server
      Loaded: loaded (/usr/lib/systemd/system/ssh.service; enabled)
@@ -1102,20 +1240,20 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 </pre><pre class="demo-in"><span class="prompt">$</span> <span class="cmd">journalctl</span> <span class="opt">-p err</span> <span class="note"># 只看错误级别以上的</span></pre>
 <p class="demo-ex">服务挂了的三板斧：<b>systemctl status 看死活 → journalctl -u 服务名 看日志 → journalctl -p err 只看报错</b>。和《日志报错解读手册》配合使用。</p>
 </div>
-<p class="note">📌 外部条件：本章用 ssh 服务做演示对象——Ubuntu 桌面版可能没装 openssh-server（先 <span class="code">sudo apt install openssh-server</span>，或用系统已有的任意服务代替，如 cron、systemd-resolved）。<b>停止正在用的 SSH 服务会断掉你的远程会话</b>：实验请在本地终端做，远程时改用"重启"而非"停止"，并留好本地终端恢复方式。WSL / 容器环境 systemd 可能受限，不能做时记为环境限制，不影响主线概念。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件：本章用 ssh 服务做演示对象——Ubuntu 桌面版可能没装 openssh-server（先 <span class="code">sudo apt install openssh-server</span>，或用系统已有的任意服务代替，如 cron、systemd-resolved）。<b>停止正在用的 SSH 服务会断掉你的远程会话</b>：实验请在本地终端做，远程时改用"重启"而非"停止"，并留好本地终端恢复方式。WSL / 容器环境 systemd 可能受限，不能做时记为环境限制，不影响主线概念。</p>
 <div class="hw">
-<p class="htitle">✏️ 章末作业 🌐</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. systemctl status ssh，逐行解释 Loaded、Active、Main PID 的含义。</p>
 <p>2. 对 ssh 服务完整走一遍 start/stop/restart，每次都用 status 验证。</p>
 <p>3. journalctl -u ssh 看它的日志，再 -p err 过滤只看错误。</p>
 <p>4. 查一下 ssh 是否 enabled（开机自启），说出判断依据。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. start 和 enable 的区别？装了个服务想"重启机器后自动运行"该敲哪个？</p>
 <p>2. 服务挂了，排查的第一步该做什么？（A. 先 systemctl status 看死活，再 journalctl 看日志 B. 先 journalctl 看日志，再 status C. 只看 status 就够 D. 只看日志就够）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 4-6；进阶篇场景 4（开机自启）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 4-6；进阶篇场景 4（开机自启）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-13">第 11 章 · 环境变量</h2>
@@ -1132,7 +1270,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 </pre><pre class="demo-out">/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin</pre>
 <p class="demo-ex">$ 的作用是"取公告内容"。PATH 是一串<b>用冒号分隔的目录</b>——你敲 <span class="code">ls</span> 时，系统按这个顺序逐目录找叫 ls 的程序，找到就执行。</p>
 </div>
-<div class="rule">📌 第 0 章的 "command not found" 谜底就在这：<b>你要的程序不在 PATH 的任何一个目录里</b>。装的东西找不到了？三种可能：没装、装了但 PATH 没有它的目录、名字记错了。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 第 0 章的 "command not found" 谜底就在这：<b>你要的程序不在 PATH 的任何一个目录里</b>。装的东西找不到了？三种可能：没装、装了但 PATH 没有它的目录、名字记错了。</div>
 
 <h3>11.2 export：贴新公告</h3>
 <div class="demo">
@@ -1157,7 +1295,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> "alias lh='ls -lh'" &gt;&gt; <span class="param">~/.bashrc</span>
 <span class="prompt">$</span> <span class="cmd">source</span> <span class="param">~/.bashrc</span></pre>
 <p class="demo-ex"><b>alias</b> = 给长命令起外号。写进 .bashrc = 永久保存；<b>source</b> = 让当前终端立刻重读配置文件（不用重开终端）。注意：ll、la 这些名字 Ubuntu 已经预定义了别名，自定义外号避开它们。</p>
-<p class="note">✅ 安全闭环：①改前备份 <span class="code">cp ~/.bashrc ~/.bashrc.backup</span>；②自己加的行用唯一注释标记（如 <span class="code"># my-alias</span>），重复执行不会重复追加；③不想要了：删掉那两行再 source；④改乱想回退：<span class="code">cp ~/.bashrc.backup ~/.bashrc</span> 再 source。验证恢复成功：<span class="code">alias</span> 里 lh 消失。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 安全闭环：①改前备份 <span class="code">cp ~/.bashrc ~/.bashrc.backup</span>；②自己加的行用唯一注释标记（如 <span class="code"># my-alias</span>），重复执行不会重复追加；③不想要了：删掉那两行再 source；④改乱想回退：<span class="code">cp ~/.bashrc.backup ~/.bashrc</span> 再 source。验证恢复成功：<span class="code">alias</span> 里 lh 消失。</p>
 </div>
 <div class="box">
 <p><b>本章对比：export 临时 vs 写进 ~/.bashrc 永久</b></p>
@@ -1169,18 +1307,18 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 </div>
 
 <div class="hw">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. env 看全部环境变量，找出 HOME、USER、SHELL 三条的值。</p>
 <p>2. 建 ~/mybin，把它的路径加进 PATH（别丢 $PATH），验证。</p>
 <p>3. 自定义一个不撞名的别名（如 lh），写进 .bashrc，source 后验证。</p>
 <p>4. 重开一个终端，确认别名还在（写进 .bashrc 的才能"永久"）。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 敲命令报 command not found，有哪三种可能原因？</p>
 <p>2. 判断：export 设置的环境变量在下次开机后仍然有效。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：进阶篇场景 1（labservice.conf 的 LOGDIR 就是环境变量的"文件版"用法）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：进阶篇场景 1（labservice.conf 的 LOGDIR 就是环境变量的"文件版"用法）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-14">第 12 章 · 归档与压缩</h2>
@@ -1227,18 +1365,18 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">易错点：</span>c 和 x 写反 = 灾难（覆盖）；-f 必须最后；tar 本身只打包不压缩（tar.gz 里的 z 才负责压缩）。</p>
 </div>
 <div class="hw tight2">
-<p class="htitle">✏️ 章末作业</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 把 ~/lab/ch2 打包成 tar.gz，观察大小，再解包到新目录。</p>
 <p>2. 用 diff -r 验证解包目录和原目录一致。</p>
 <p>3. 用 gzip 压一个文件，ls 看后缀变化，再用 gunzip 解回来。</p>
 <p>4. 用 zip 打包发给"Windows 朋友"（虚拟），unzip 解包验证。</p>
 </div>
 <div class="quiz tight2">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 默写口诀：打包用什么，解包用什么？z 和 f 分别是什么？</p>
 <p>2. 判断：tar 命令会自动压缩文件。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：基础篇 5-6、5-7；进阶篇场景 2（归档大文件）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 5-6、5-7；进阶篇场景 2（归档大文件）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-15">第 13 章 · Shell 脚本基础</h2>
@@ -1299,11 +1437,11 @@ done</pre>
 <h3>13.3 crontab：定时闹钟</h3>
 <p><span class="code cmd">crontab</span> 让脚本定时自动跑。<span class="code">crontab -e</span> 编辑（首次会问选编辑器）、<span class="code">crontab -l</span> 查看。</p>
 <div class="demo">
-<p class="dtitle">示范 3：每天凌晨 2 点自动跑脚本 🌐</p>
+<p class="dtitle">示范 3：每天凌晨 2 点自动跑脚本 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">crontab</span> <span class="opt">-e</span></pre>
 <pre class="demo-out">0 2 * * * /home/&lt;你的真实用户名&gt;/lab/check.sh &gt;&gt; /home/&lt;你的真实用户名&gt;/lab/check.log 2&gt;&amp;1</pre>
 <p class="demo-ex">格式：<b>分 时 日 月 周 + 命令</b>（五个时间位，* = 任意）。这行=每天 2 点 0 分执行。<b>check.sh 就是本章 13.1 写好的巡检脚本</b>——cron 只管按时叫你，跑什么还是你自己的脚本。</p>
-<p class="note">✅ 安全闭环（照做）：①改前先备份 <span class="code">crontab -l &gt; ~/lab/cron.backup</span>；②实验行加唯一标记（如把 check.sh 改成每分钟跑一次：<span class="code">* * * * * /home/学生/lab/check.sh &gt;&gt; ...</span>）；③等 1~2 分钟验证日志新增后，立即删掉该实验行；④核对只剩原有任务：<span class="code">crontab -l</span>；⑤若改乱，恢复：<span class="code">crontab ~/lab/cron.backup</span>。cron 无“运行错误提示”，验证只能看脚本自己写的日志或邮件。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 安全闭环（照做）：①改前先备份 <span class="code">crontab -l &gt; ~/lab/cron.backup</span>；②实验行加唯一标记（如把 check.sh 改成每分钟跑一次：<span class="code">* * * * * /home/学生/lab/check.sh &gt;&gt; ...</span>）；③等 1~2 分钟验证日志新增后，立即删掉该实验行；④核对只剩原有任务：<span class="code">crontab -l</span>；⑤若改乱，恢复：<span class="code">crontab ~/lab/cron.backup</span>。cron 无“运行错误提示”，验证只能看脚本自己写的日志或邮件。</p>
 </div>
 <div class="box2">
 <p><span class="opt">易错（重要）：</span>cron 的环境和你的终端<b>不是同一个</b>——它对 <span class="code">~</span> 的展开不可靠。定时任务里的路径<b>一律写绝对路径</b>（/home/&lt;你的真实用户名&gt;/...，不写 ~/...）。这是练习册进阶篇 5-4 的考点，也是实战第一大坑。</p>
@@ -1324,18 +1462,18 @@ done</pre>
 <p><span class="opt">坑 3：</span>脚本第一行 <span class="code">#!/bin/bash</span> 忘了写，在部分环境会出怪问题。</p>
 </div>
 <div class="hw">
-<p class="htitle">✏️ 章末作业 🌐</p>
+<p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. 写一个脚本：打印"今天日期 + 磁盘使用率 + 内存剩余"，跑通。</p>
 <p>2. 给脚本加变量和 if：内存可用低于 20% 时打印警告。</p>
 <p>3. 用 for 循环遍历 3 个文件，对每个打印"文件 X 的大小是..."。</p>
-<p>4. 🌐 crontab -e 加一条每分钟执行的测试任务（用绝对路径！），观察日志后删掉它。</p>
+<p>4. <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> crontab -e 加一条每分钟执行的测试任务（用绝对路径！），观察日志后删掉它。</p>
 </div>
 <div class="quiz">
-<p class="qtitle">🎯 章末自测</p>
+<p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
 <p>1. 脚本第一行 #!/bin/bash 是什么？crontab 里为什么必须用绝对路径？</p>
 <p>2. 判断：脚本写好后不需要执行权限也能 ./ 运行。（对/错）</p>
 </div>
-<p class="note">✏️ 对应练习册：进阶篇场景 5（两个脚本 + cron 收尾，直通"5 个 Shell 脚本"任务）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：进阶篇场景 5（两个脚本 + cron 收尾，直通"5 个 Shell 脚本"任务）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-16">附录 A · 章末作业与自测答案</h2>
@@ -1344,59 +1482,59 @@ done</pre>
 <h3>第 0 章</h3>
 <p><b>自测 1：</b>$ 表示当前是普通用户；# 表示当前是 root（管理员）身份。</p>
 <p><b>自测 2：</b>错。ls 是命令（动词），-l 是选项（怎么做），/home 是参数（对谁做）。</p>
-<p class="note">✅ 作业检查点：① pwd 输出 = /home/&lt;你的真实用户名&gt;，whoami = 你的真实用户名（两者对应）；② 能说出 3 个选项及作用；③ history 能看到今天敲过的命令，↑ 能调出上一条并再次执行；④ 报错原文以 command not found 结尾。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① pwd 输出 = /home/&lt;你的真实用户名&gt;，whoami = 你的真实用户名（两者对应）；② 能说出 3 个选项及作用；③ history 能看到今天敲过的命令，↑ 能调出上一条并再次执行；④ 报错原文以 command not found 结尾。</p>
 <h3>第 1 章</h3>
 <p><b>自测 1：</b>绝对路径从树根 / 出发写全称，走到哪都不变；相对路径从当前目录出发，站在不同位置同一个写法指向不同地方。</p>
 <p><b>自测 2：</b>错。cd .. 是去"上一级目录"；cd - 才是回"上一个待过的目录"。</p>
-<p class="note">✅ 作业检查点：① cd /etc 后 pwd 输出 /etc，cd ~ 后 pwd 输出 /home/&lt;你的真实用户名&gt;；② 两种路径进入同一目录后 pwd 输出相同；③ 找出 3 个 . 开头文件（.bashrc、.profile 等）；④ / 下能看到 home、etc、var、usr、bin 等目录。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① cd /etc 后 pwd 输出 /etc，cd ~ 后 pwd 输出 /home/&lt;你的真实用户名&gt;；② 两种路径进入同一目录后 pwd 输出相同；③ 找出 3 个 . 开头文件（.bashrc、.profile 等）；④ / 下能看到 home、etc、var、usr、bin 等目录。</p>
 <h3>第 2 章</h3>
 <p><b>自测 1：</b>文件系统里"改名"就是把它在目录树里的记录从旧名字移到新名字——和 mv 的实现完全一致，所以 Linux 不需要单独 rename 命令。</p>
 <p><b>自测 2：</b>错。rm 删除不可恢复，没有回收站；恢复软件成功率极低。</p>
-<p class="note">✅ 作业检查点：① 一条命令建成 x/y/z（mkdir -p）；② 用 ls 对比两目录清单一致（diff -r 留到学完第 3 章 3.4 后补做）；③ ls 里 second-note.txt 存在、note2.txt 消失；④ rmdir 报“Directory not empty”，rm -r 后目录消失。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① 一条命令建成 x/y/z（mkdir -p）；② 用 ls 对比两目录清单一致（diff -r 留到学完第 3 章 3.4 后补做）；③ ls 里 second-note.txt 存在、note2.txt 消失；④ rmdir 报“Directory not empty”，rm -r 后目录消失。</p>
 <h3>第 3 章</h3>
 <p><b>自测 1：</b>C（tail -f 实时跟踪）。cat 会刷屏，less 要手动翻，tail -f 直接等新报错。</p>
 <p><b>自测 2：</b>错。说反了：grep 按<b>内容</b>搜，find 按<b>文件名/属性</b>找。</p>
-<p class="note">✅ 作业检查点：① less 里空格/b/q/搜索都能操作；② grep -ci error 和 grep -i 数出的行数一致；③ find ~ -name "*.txt" 列出家目录所有 txt；④ 改动前 diff 无输出，改动后 diff 显示差异行。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① less 里空格/b/q/搜索都能操作；② grep -ci error 和 grep -i 数出的行数一致；③ find ~ -name "*.txt" 列出家目录所有 txt；④ 改动前 diff 无输出，改动后 diff 显示差异行。</p>
 <h3>第 4 章</h3>
 <p><b>自测 1：</b>管道 | 连接<b>命令与命令</b>（数据不落地）；重定向 &gt; 连接<b>命令与文件</b>（数据写进文件）。</p>
 <p><b>自测 2：</b>错。uniq 只对相邻重复行生效，乱序文件必须先 sort。</p>
-<p class="note">✅ 作业检查点：① cat 验证 &gt; 覆盖、&gt;&gt; 追加（和示范 2 现象一致）；② uniq -c 每行 = 数字 + 词；③ awk '{print $1}' 输出全是第一列；④ 管道链改造后输出 3 个词，用 head -3 收尾。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① cat 验证 &gt; 覆盖、&gt;&gt; 追加（和示范 2 现象一致）；② uniq -c 每行 = 数字 + 词；③ awk '{print $1}' 输出全是第一列；④ 管道链改造后输出 3 个词，用 head -3 收尾。</p>
 <h3>第 5 章</h3>
 <p><b>自测 1：</b>其他人权限是 r--（只读）；数字法是 4，整串是 754。</p>
 <p><b>自测 2：</b>错。说反了：sudo 是借 root 权限执行一条命令，su 是切换成另一个用户。</p>
-<p class="note">✅ 作业检查点：① groups alice 和 groups bob 各有输出；② groups alice 结果里含 sudo；③ ls -l 两次都显示 -rwxr-xr-x（755）；④ alice 读 bob 的文件被拒绝或按权限位受限（前提：alice 不在该文件属组内）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① groups alice 和 groups bob 各有输出；② groups alice 结果里含 sudo；③ ls -l 两次都显示 -rwxr-xr-x（755）；④ alice 读 bob 的文件被拒绝或按权限位受限（前提：alice 不在该文件属组内）。</p>
 <h3>第 6 章</h3>
 <p><b>自测 1：</b>kill 发 SIGTERM（程序可清理后优雅退出）；kill -9 发 SIGKILL（内核直接处决，无清理机会）。对数据库等直接 -9 可能损坏数据，所以 -9 是最后手段。</p>
 <p><b>自测 2：</b>错。nohup 是"挂断不死"（关终端进程继续跑）；忽略错误输出是 2&gt;&amp;1 和 &gt; 的事。</p>
-<p class="note">✅ 作业检查点：① 找到 bash 进程并读出 PID、%CPU；② sleep 300 已被 kill（ps 再查已消失）；③ run.log 有清理记录，kill -9 那次无新增记录；④ 重开终端 ps 还能看到 nohup 任务。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① 找到 bash 进程并读出 PID、%CPU；② sleep 300 已被 kill（ps 再查已消失）；③ run.log 有清理记录，kill -9 那次无新增记录；④ 重开终端 ps 还能看到 nohup 任务。</p>
 <h3>第 7 章</h3>
 <p><b>自测 1：</b>df 看整个分区（整体），du 看具体目录（明细）。排查先 df 定位满的分区，再 du 逐层下钻。</p>
 <p><b>自测 2：</b>错。Linux 没有盘符，新硬盘要挂载（mount）到某个目录。</p>
-<p class="note">✅ 作业检查点：① df -h 里根分区 Use% 有数字；② 先 ls -a ~ 再 du -sh ~/* 排出前 3 名（注意 .开头的隐藏项也要看）；③ ls -lh 显示 big.img 为 100M；④ lsblk 的 sda1 与 df 的 /dev/sda1 对应得上。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① df -h 里根分区 Use% 有数字；② 先 ls -a ~ 再 du -sh ~/* 排出前 3 名（注意 .开头的隐藏项也要看）；③ ls -lh 显示 big.img 为 100M；④ lsblk 的 sda1 与 df 的 /dev/sda1 对应得上。</p>
 <h3>第 8 章</h3>
 <p><b>自测 1：</b>① ping 目标 IP；② nc -zv 目标 端口 / ss -tlnp；③ ps aux | grep / fuser -v 端口；④ tail -f 对应日志。</p>
 <p><b>自测 2：</b>错。对方可能禁 ping（防火墙丢 ICMP），服务却正常；应继续用 nc 测端口。</p>
-<p class="note">✅ 作业检查点：① ip addr 里 inet 后是本机 IP，ip route 里 default via 后是网关；② ss -tlnp 里认出 22 端口 sshd；③ nc -zv 22 端口 succeeded、9999 端口 refused；④ curl -I 能看到 HTTP/1.1 200 等状态行。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① ip addr 里 inet 后是本机 IP，ip route 里 default via 后是网关；② ss -tlnp 里认出 22 端口 sshd；③ nc -zv 22 端口 succeeded、9999 端口 refused；④ curl -I 能看到 HTTP/1.1 200 等状态行。</p>
 <h3>第 9 章</h3>
 <p><b>自测 1：</b>update 刷新软件列表（不装不升级）；upgrade 把已装软件升级到新版本。</p>
 <p><b>自测 2：</b>错。锁报错=另一个 apt 在跑或上次异常中断；磁盘满会报 No space left on device。</p>
-<p class="note">✅ 作业检查点：① 装的软件能直接运行；② apt list --installed | grep htop 有结果；③ remove 后 list 里无 htop；④ 终端 2 出现 Could not get lock 报错。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① 装的软件能直接运行；② apt list --installed | grep htop 有结果；③ remove 后 list 里无 htop；④ 终端 2 出现 Could not get lock 报错。</p>
 <h3>第 10 章</h3>
 <p><b>自测 1：</b>start=现在启动一次；enable=设开机自启。想重启机器后自动运行：systemctl enable 服务。</p>
 <p><b>自测 2：</b>A。先 status 一眼定位死活，再 journalctl 找原因；C、D 都信息不全。</p>
-<p class="note">✅ 作业检查点：① Loaded/Active/Main PID 三行能逐行解释；② 每次操作后 status 的 Active 字段与动作对应（stop 后 inactive，start 后 active）；③ -p err 只显示 error 级别；④ status 输出里含 enabled 字样 = 开机自启。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① Loaded/Active/Main PID 三行能逐行解释；② 每次操作后 status 的 Active 字段与动作对应（stop 后 inactive，start 后 active）；③ -p err 只显示 error 级别；④ status 输出里含 enabled 字样 = 开机自启。</p>
 <h3>第 11 章</h3>
 <p><b>自测 1：</b>① 没装这个软件；② 装了但它的目录不在 PATH 里；③ 命令名拼错了。</p>
 <p><b>自测 2：</b>错。export 只对当前终端生效；想永久生效要写进 ~/.bashrc。</p>
-<p class="note">✅ 作业检查点：① env 里找到 HOME/USER/SHELL 三条；② echo $PATH 以 /home/&lt;你的真实用户名&gt;/mybin 开头，且原目录都在（没丢 $PATH）；③ lh 能列出详细文件；④ 新开终端 lh 依然可用。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① env 里找到 HOME/USER/SHELL 三条；② echo $PATH 以 /home/&lt;你的真实用户名&gt;/mybin 开头，且原目录都在（没丢 $PATH）；③ lh 能列出详细文件；④ 新开终端 lh 依然可用。</p>
 <h3>第 12 章</h3>
 <p><b>自测 1：</b>打包 czvf、解包 xzvf；z=用 gzip 压缩，f=指定文件名（放最后）。</p>
 <p><b>自测 2：</b>错。tar 只归档不压缩；tar.gz 里的 z 才压缩。</p>
-<p class="note">✅ 作业检查点：① ls 里出现 bak.tar.gz；② diff -r 无输出（一个不多一个不少）；③ 文件后缀变 .gz，gunzip 后还原；④ unzip 能解出全部文件。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① ls 里出现 bak.tar.gz；② diff -r 无输出（一个不多一个不少）；③ 文件后缀变 .gz，gunzip 后还原；④ unzip 能解出全部文件。</p>
 <h3>第 13 章</h3>
 <p><b>自测 1：</b>#!/bin/bash 是 shebang，告诉系统用 bash 解释脚本。cron 环境对 ~ 展开不可靠，路径必须写绝对路径才能保证找得到。</p>
 <p><b>自测 2：</b>错。必须有执行权限（chmod +x）才能 ./ 运行；或改用 bash 脚本名 方式运行。</p>
-<p class="note">✅ 作业检查点：① 脚本输出含日期、磁盘、内存三项；② 临时把阈值改大（如 90）能触发警告分支，再改回 20；③ 三个文件各行打印出“文件 X 的大小是...”；④ crontab -l 能看到任务，日志每分钟新增，删除后 crontab -l 无该项。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① 脚本输出含日期、磁盘、内存三项；② 临时把阈值改大（如 90）能触发警告分支，再改回 20；③ 三个文件各行打印出“文件 X 的大小是...”；④ crontab -l 能看到任务，日志每分钟新增，删除后 crontab -l 无该项。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-17">附录 B · 术语表</h2>

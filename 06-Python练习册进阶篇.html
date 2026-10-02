@@ -76,12 +76,83 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 /* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
 </style>
 
 
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-gl" viewBox="0 0 72 72"><g id="gl_color">
+    <circle cx="36" cy="36" r="28" fill="#92D3F5" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="gl_hair"/>
+  <g id="gl_skin"/>
+  <g id="gl_skin-shadow"/>
+  <g id="gl_line">
+    <circle cx="36" cy="36" r="28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M36,8v56c-8.5604,0-15.5-12.536-15.5-28S27.4396,8,36,8c8.5604,0,15.5,12.536,15.5,28S44.5604,64,36,64"/>
+    <line x1="64" x2="8" y1="36" y2="36" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="22" y2="22" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="50" y2="50" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-cl" viewBox="0 0 72 72"><g id="cl_color">
+    <path fill="#a57939" d="m19.4835,11.9519c-1.6223.0879-2.6548,1.3894-2.6446,3.0141l.3073,49.0067c0,1.1025,1.5713,3.0003,2.6738,3.0003h28.4129c3.5401,0,6.4365-2.8964,6.4365-6.4365V14.8499c0-1.6248-1.2817-2.8115-2.9042-2.898-.7359-.0392-31.6955-.0318-32.2816,0Z"/>
+    <path fill="#d0cfce" d="m32.9574,11.2092l-4.0841.1491c-1.6251,0-3.3121,2.401-3.7826,3.8716l21.4716.3382c-.4705-1.4707-1.8325-4.3589-3.4576-4.3589l-3.8013-.3336c-.3697,0-.1859-3.8359-3.3445-3.6872s-2.6318,4.0208-3.0015,4.0208Z"/>
+    <path fill="#fff" d="m51.7802,54.9399v-.1743c-.0021.0239-.0102.0456-.014.0689.0046.0353.0131.0696.014.1054Z"/>
+    <path fill="#fff" d="m47.1379,14.8526c.008.1192-2.3273.5918-2.88.5918,0,0-20.1393-.4492-20.1313-.5685h-3.0741s.0002.0001.0004.0001c.236.0377-.1528,46.5465-.1528,46.5465h22.5355s7.3614-6.4365,7.3614-6.4623l-.1522-2.8562.1522-36.2586c0-.0543-.0221-.9928-.0221-.9928,0,0-3.637,0-3.637,0Z"/>
+    <path fill="#fff" d="m42.7393,57.1041c.0184.0177.0435.0265.0633.0427-.0199-.0159-.0447-.0253-.0633-.0427Z"/>
+    <path fill="#fff" d="m43.0405,57.301c.1157.0482.2423.076.3765.076-.1336,0-.2601-.0286-.3765-.076Z"/>
+    <polygon fill="#d0cfce" points="50.5145 55.2072 45.8303 54.8528 43.6878 54.7656 42.4317 56.4499 42.4317 60.4229 43.4356 61.4225 50.5145 55.2072"/>
+    <polyline fill="none" stroke="#6a462f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="50.6448 55.9269 43.2287 62.4038 20.9144 62.4038"/>
+  </g>
+  <g id="cl_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m49.6856,11.9519h4.9838v52.0211c0,1.6568-1.3431,3-3,3h-31.8494c-1.6569,0-3-1.3432-3-3V11.9519h4.6155"/>
+    <line x1="50.797" x2="50.797" y1="15.8454" y2="54.9602" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="43.4175 56.3765 43.4175 54.9641 50.7959 54.9602 43.4356 61.4225 20.9001 61.4225 20.9001 15.8454"/>
+    <line x1="24.5808" x2="37.3475" y1="22.6148" y2="22.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="41.5632" y1="26.6148" y2="26.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="44.781" y1="30.6148" y2="30.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="38.1335" y1="34.6148" y2="34.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="40.9916" y1="38.6148" y2="38.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="24.5808" x2="31.7029" y1="42.6148" y2="42.6148" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m42.2763,10.9439h-3.7961c.1302-.3182.2034-.666.2034-1.0311,0-1.5047-1.2199-2.7244-2.7247-2.7244s-2.7244,1.2197-2.7244,2.7244c0,.3651.0729.7129.2033,1.0311h-4.0611c-2.367,0-4.286,1.9189-4.286,4.286h21.4716c0-2.3671-1.919-4.286-4.286-4.286Z"/>
+  </g></symbol><symbol id="ic-tg" viewBox="0 0 72 72"><g id="tg_color">
+    <circle cx="39.4882" cy="39.4552" r="29.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="23.85" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="15.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="10.9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="5.9" fill="#EA5A47" stroke="none"/>
+  </g>
+  <g id="tg_hair"/>
+  <g id="tg_skin"/>
+  <g id="tg_skin-shadow"/>
+  <g id="tg_line">
+    <line x1="11.4659" x2="2.5131" y1="11.4989" y2="11.4989" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="11.4662" x2="11.4663" y1="11.4989" y2="2.546" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5067" x2="6.5538" y1="15.5473" y2="15.5473" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5086" x2="15.5086" y1="15.5454" y2="6.5925" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="39.4865" x2="7.4778" y1="39.4644" y2="7.5188" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M21.9689,16.3467c4.8593-3.674,10.9579-5.8915,17.5193-5.8915c16.0163,0,29,12.9837,29,29s-12.9837,29-29,29s-29-12.9837-29-29 c0-6.5467,2.1693-12.5867,5.8283-17.4404"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M26.2567,20.6399c3.7421-2.6364,8.306-4.1847,13.2315-4.1847c12.7025,0,23,10.2975,23,23s-10.2975,23-23,23s-23-10.2975-23-23 c0-4.8704,1.5138-9.3872,4.0966-13.1056"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.04,26.4321c2.1945-1.2578,4.7374-1.9769,7.4482-1.9769c8.2843,0,15,6.7157,15,15s-6.7157,15-15,15s-15-6.7157-15-15 c0-2.6162,0.7305-5.1268,1.9079-7.268"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M40.0779,34.4744c2.4674,0.3067,4.3769,2.4111,4.3769,4.9616c0,2.7614-2.2386,5-5,5c-2.4824,0-4.5422-1.809-4.9332-4.1806"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M35.7775,30.1663c1.1474-0.4587,2.3996-0.7111,3.7107-0.7111c5.5228,0,10,4.4772,10,10s-4.4772,10-10,10s-10-4.4771-10-10 c0-1.2548,0.252-2.4731,0.6858-3.5895"/>
+  </g></symbol><symbol id="ic-pp" viewBox="0 0 72 72"><g id="pp_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m27.1001,30.3606s11.8183,12.2773,16.0293,16.0846c2.0768,1.8777,3.811,1.4778,4.7703.4926,1.1251-1.1555,1.5673-2.9854.1144-4.4427-5.8084-5.8261-23.0688-23.0704-23.0688-23.0704-2.3431-2.3432-6.8921-2.0932-9.2353.25s-2.3431,6.1421,0,8.4852l25.1983,25.3054c3.9053,3.9052,10.2369,3.9052,14.1422,0,3.9053-3.9052,3.9052-10.2369,0-14.1421l-12.5032-12.5032"/>
+  </g>
+  <g id="pp_color"/></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Python" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Python 练习册 · 进阶篇</h1>
 <p class="note">学完《Python 入门》教科书与基础篇后开练。五个场景 = 五份工单，答案全部集中在书末。</p>
@@ -112,7 +183,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h2 id="toc-1">示范题（先读这一题，锁定质量标准）</h2>
 <p class="note">体会四步式答案的写法，后面的题都按这个标准做。<span class="opt">（说明：本示范题为独立场景，不与任何正题重叠——展示"四步式答案"的写法标准）</span></p>
 <h3>示范题（独立示范，不占任何正题）</h3>
-<p class="note">本示范用 <span class="code">whoami</span>（Windows/Ubuntu/Termux 都有，无需 🌐），只演示 <span class="code fn">subprocess</span> 的<b>最小完整模板</b>。它不提供其他场景的设计思路或答案；后续任务需要根据各自的题目目标独立完成。</p>
+<p class="note">本示范用 <span class="code">whoami</span>（Windows/Ubuntu/Termux 都有，无需 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>），只演示 <span class="code fn">subprocess</span> 的<b>最小完整模板</b>。它不提供其他场景的设计思路或答案；后续任务需要根据各自的题目目标独立完成。</p>
 <p><b>题目</b>：用 <span class="code fn">subprocess</span> 执行 <span class="code">whoami</span>，把输出拿到 Python 里打印成 <span class="code str">"当前用户是：xxx"</span>。</p>
 <div class="ans">
 <p><span class="step">1. 先想什么</span>：任务三步——执行命令（<span class="code fn">subprocess.run</span> 传命令列表）、拿输出（返回对象里的 <span class="code">.stdout</span>）、处理输出（<span class="fn">strip</span> 去掉末尾换行）。</p>
@@ -128,9 +199,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="newpage"></div>
 <h2 id="toc-2">场景 1｜批量文件重命名工具</h2>
 <div class="box">
-<p><b>📋 背景工单</b>：你在运维组实习，同事甩来一个文件夹，里面 100 个文件命名混乱（<span class="code">照片(1).jpg</span>、<span class="code">IMG_2024...</span> 各种格式）。领导要一份工具：以后任何乱命名文件夹都能一键规范化。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你在运维组实习，同事甩来一个文件夹，里面 100 个文件命名混乱（<span class="code">照片(1).jpg</span>、<span class="code">IMG_2024...</span> 各种格式）。领导要一份工具：以后任何乱命名文件夹都能一键规范化。</p>
 </div>
-<p><b>🎯 只给目标</b>（最终交付一个 <span class="code">rename_tool.py</span>）：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 只给目标</b>（最终交付一个 <span class="code">rename_tool.py</span>）：</p>
 <table>
 <tr><th style="width:8%">目标</th><th>要求</th></tr>
 <tr><td>A</td><td>列出目录所有文件，只处理指定扩展名的文件（扩展名可用 <span class="code fn">endswith</span>（判断以…结尾））</td></tr>
@@ -140,14 +211,14 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>E</td><td>程序通过 <span class="code fn">argparse</span> 接收目录路径参数</td></tr>
 </table>
 <div class="warn">
-<p>⚠️ 安全提示：重命名不可逆。① 只在专门测试目录里练（先建 <span class="code">~/lab/renametest</span> 放一堆"假文件"）；② 正式执行前必须先 <span class="code">--dry-run</span> 看清单；③ 测试目录建议先手动备份一份。</p>
+<p><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提示：重命名不可逆。① 只在专门测试目录里练（先建 <span class="code">~/lab/renametest</span> 放一堆"假文件"）；② 正式执行前必须先 <span class="code">--dry-run</span> 看清单；③ 测试目录建议先手动备份一份。</p>
 </div>
-<p class="note">📎 测试文件生成命令见附录 A（10 个乱命名文件，一行一个）。产出：脚本 1，保存为脚本文件。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pp"/></svg> 测试文件生成命令见附录 A（10 个乱命名文件，一行一个）。产出：脚本 1，保存为脚本文件。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-3">场景 2｜天气查询器</h2>
 <div class="box">
-<p><b>📋 背景工单</b>：办公室要做个命令行小工具，输入城市名就能看当前天气，给巡检同事出门用。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：办公室要做个命令行小工具，输入城市名就能看当前天气，给巡检同事出门用。</p>
 </div>
 <p><b>接口信息（题面给出，标注含义）</b>：</p>
 <table>
@@ -159,7 +230,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>weathercode 对照</td><td>0=晴、1~2=多云、3=阴、45=雾、51~67 与 80~82=有雨、71~77=有雪、≥95=雷暴</td></tr>
 <tr><td>城市经纬度表</td><td>北京(39.90,116.40)、上海(31.23,121.47)、杭州(30.25,120.17)、广州(23.13,113.26)、成都(30.57,104.06)</td></tr>
 </table>
-<p><b>🎯 只给目标</b>（最终交付一个 <span class="code">weather.py</span>）：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 只给目标</b>（最终交付一个 <span class="code">weather.py</span>）：</p>
 <table>
 <tr><th style="width:8%">目标</th><th>要求</th></tr>
 <tr><td>A</td><td>用 <span class="code fn">requests</span> 调用上面的天气接口（城市经纬度从上表查）</td></tr>
@@ -168,16 +239,16 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>D</td><td>异常处理全覆盖：网络不通、接口返回错误都要有对应提示，不能裸奔报错</td></tr>
 </table>
 <div class="warn">
-<p>⚠️ 安全提示：本题联网。① 请求要设 <span class="code">timeout</span>（超时上限，如 10 秒），防止对方无响应时程序卡死；② 支持的城市以外输入，要给出友好提示。</p>
+<p><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提示：本题联网。① 请求要设 <span class="code">timeout</span>（超时上限，如 10 秒），防止对方无响应时程序卡死；② 支持的城市以外输入，要给出友好提示。</p>
 </div>
 <p class="note">产出：脚本 2，保存为脚本文件。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-4">场景 3｜本机巡检工具雏形 ★（王牌项目版本 0 · 教学简化版）</h2>
 <div class="box">
-<p><b>📋 背景工单</b>：领导要求每天对服务器做一次健康巡检并留档。你被指定做第一版：本机版巡检工具。<b>⚠️ 教学简化版说明：本场景的脚本只按 Ubuntu 的 df/free/uptime 预期输出做解析与验收；其他发行版（CentOS/Arch 等）的命令输出列数、字段名可能不同，跑出差异属于环境差异，不算你做错——验收只比较"解析思路与字段逻辑"，不比较固定数值。</b>这是你整条学习路线的王牌项目 server-health-check 的起点。（subprocess 调用模板已在示范题演示，按同样思路完成三个检查函数。）</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：领导要求每天对服务器做一次健康巡检并留档。你被指定做第一版：本机版巡检工具。<b><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 教学简化版说明：本场景的脚本只按 Ubuntu 的 df/free/uptime 预期输出做解析与验收；其他发行版（CentOS/Arch 等）的命令输出列数、字段名可能不同，跑出差异属于环境差异，不算你做错——验收只比较"解析思路与字段逻辑"，不比较固定数值。</b>这是你整条学习路线的王牌项目 server-health-check 的起点。（subprocess 调用模板已在示范题演示，按同样思路完成三个检查函数。）</p>
 </div>
-<p><b>🎯 只给目标</b>（最终交付一个 <span class="code">health_check.py</span>）：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 只给目标</b>（最终交付一个 <span class="code">health_check.py</span>）：</p>
 <table>
 <tr><th style="width:8%">目标</th><th>要求</th></tr>
 <tr><td>A</td><td>用 <span class="code fn">subprocess</span> 调用系统命令，实现三个检查函数：<span class="code fn">check_disk</span>()（磁盘，调 <span class="code">df -h</span>）、<span class="code fn">check_memory</span>()（内存，调 <span class="code">free -m</span>）、<span class="code fn">check_cpu</span>()（负载，调 <span class="code">uptime</span>）</td></tr>
@@ -187,19 +258,19 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>E</td><td>程序运行全过程用 <span class="code fn">logging</span> 记日志（INFO 记开始/完成，写到文件）</td></tr>
 </table>
 <div class="warn">
-<p>⚠️ 安全提示：<span class="code">df</span>、<span class="code">free</span>、<span class="code">uptime</span> 是 Linux 命令（本场景标 🌐：须电脑环境完成；Windows 会报错）。只读命令，无破坏风险。</p>
+<p><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提示：<span class="code">df</span>、<span class="code">free</span>、<span class="code">uptime</span> 是 Linux 命令（本场景标 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>：须电脑环境完成；Windows 会报错）。只读命令，无破坏风险。</p>
 </div>
 <p class="note">产出：server-health-check 版本 0，保存为脚本文件。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-5">场景 4｜Nginx 日志分析器</h2>
 <div class="box">
-<p><b>📋 背景工单</b>：线上 Nginx 日志突然增长，领导要一份报告：谁在猛刷我们的网站、哪些页面 404 最多。<b>主线（必做）就用附录 B 的样例日志练</b>——它已包含全部解析要素。<b>Docker/Nginx 真实日志版是外部扩展</b>：九册不含 Docker 安装、镜像、日志挂载、端口与清理的前置，需要时自备环境，无 Docker、无网络不影响主线完成。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：线上 Nginx 日志突然增长，领导要一份报告：谁在猛刷我们的网站、哪些页面 404 最多。<b>主线（必做）就用附录 B 的样例日志练</b>——它已包含全部解析要素。<b>Docker/Nginx 真实日志版是外部扩展</b>：九册不含 Docker 安装、镜像、日志挂载、端口与清理的前置，需要时自备环境，无 Docker、无网络不影响主线完成。</p>
 </div>
 <p><b>日志格式说明（题面给出）</b>：Nginx 访问日志每行形如：</p>
 <pre style="font-size:8.5pt; line-height:1.4;"><span class="code">66.249.66.1 - - [18/Aug/2026:10:11:12 +0000] "GET /index.html HTTP/1.1" 200 612 "-" "Mozilla/5.0"</span></pre>
 <p>拆解：开头第一个字段是<b>访客 IP</b>；中间一对引号里是<b>请求行</b>（GET 方法 + URL + 协议）；请求行后面第一个数字是<b>状态码</b>（200 正常、404 找不到）。</p>
-<p><b>🎯 只给目标</b>（最终交付一个 <span class="code">log_analyzer.py</span>）：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 只给目标</b>（最终交付一个 <span class="code">log_analyzer.py</span>）：</p>
 <table>
 <tr><th style="width:8%">目标</th><th>要求</th></tr>
 <tr><td>A</td><td>逐行读取日志文件（文件路径用 <span class="code fn">argparse</span> 传入）</td></tr>
@@ -209,15 +280,15 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>E</td><td>结果写入报告文件 <span class="code">report.txt</span></td></tr>
 </table>
 <div class="warn">
-<p>⚠️ 安全提示：只读日志文件、只写 report.txt，无破坏操作。空行要 <span class="code fn">strip</span> 后跳过，防止解析报错。</p>
+<p><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提示：只读日志文件、只写 report.txt，无破坏操作。空行要 <span class="code fn">strip</span> 后跳过，防止解析报错。</p>
 </div>
-<p class="note">📎 样例日志在附录 B（10 行，含重复 IP 和 404，直接复制保存成 access.log）。产出：脚本 3，保存为脚本文件。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pp"/></svg> 样例日志在附录 B（10 行，含重复 IP 和 404，直接复制保存成 access.log）。产出：脚本 3，保存为脚本文件。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-6">场景 5 ☆｜paramiko 远程巡检雏形（选做 · 可跳过）</h2>
 <div class="box">
-<p><b>📋 背景工单</b>：本机巡检跑通了，但真实服务器在远程。领导要求升级：从你的 Windows 电脑 SSH 到 Ubuntu 执行巡检。</p>
-<p class="note"><b>⚠️ 选做与跳过条件</b>：本场景为 ☆ 选做。需要你自己有一台可 SSH 的 Ubuntu（虚拟机即可）和一个可用账号；未安装 Paramiko、没有目标主机、或不具备 SSH 条件时，<b>直接跳过本场景，不影响主线学习</b>——它只是把场景 3 的本机巡检换成远程执行。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：本机巡检跑通了，但真实服务器在远程。领导要求升级：从你的 Windows 电脑 SSH 到 Ubuntu 执行巡检。</p>
+<p class="note"><b><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 选做与跳过条件</b>：本场景为 ☆ 选做。需要你自己有一台可 SSH 的 Ubuntu（虚拟机即可）和一个可用账号；未安装 Paramiko、没有目标主机、或不具备 SSH 条件时，<b>直接跳过本场景，不影响主线学习</b>——它只是把场景 3 的本机巡检换成远程执行。</p>
 </div>
 <p><b>安装与连接说明（题面给出）</b>：</p>
 <table>
@@ -228,7 +299,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>paramiko 三步</td><td>建客户端 <span class="code fn">paramiko</span>.<span class="fn">SSHClient</span>()（创建 SSH 客户端）→ <span class="code fn">connect</span>(host, username, password)（建立连接）→ <span class="code fn">exec_command</span>（远程执行命令，返回三个流）</td></tr>
 <tr><td>首次连接</td><td>练习环境可跳过主机密钥验证（答案里有写法）；<b>生产环境必须验证</b></td></tr>
 </table>
-<p><b>🎯 只给目标</b>：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 只给目标</b>：</p>
 <table>
 <tr><th style="width:8%">目标</th><th>要求</th></tr>
 <tr><td>A</td><td>用 <span class="code fn">paramiko</span> 建立 SSH 连接：主机、用户名用 <span class="code fn">input</span> 读入，密码用 <span class="code fn">getpass.getpass</span> 隐藏输入；设置连接、认证和 banner 超时</td></tr>
@@ -236,7 +307,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>C</td><td>输出汇总报告（每条命令前打印分隔标题）；认证失败、SSH 服务未启动、错误端口和远程命令失败都要友好结束，并用 <span class="code">finally</span> 关闭连接</td></tr>
 </table>
 <div class="warn">
-<p>⚠️ 安全提示：只连自己的虚拟机，<b>绝不连接生产服务器</b>；密码使用 <span class="code fn">getpass.getpass</span> 读取且不回显；只连接自己的练习虚拟机，绝不使用真实生产密码。</p>
+<p><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提示：只连自己的虚拟机，<b>绝不连接生产服务器</b>；密码使用 <span class="code fn">getpass.getpass</span> 读取且不回显；只连接自己的练习虚拟机，绝不使用真实生产密码。</p>
 </div>
 <p class="note">产出：server-health-check 版本 2 雏形（选做：时间够就做）。</p>
 
@@ -504,7 +575,7 @@ main()</pre><p><span class="step">4. 怎么验证</span>：正常接口、未知
     <span class="fn">logging</span>.<span class="fn">info</span>(<span class="str">"巡检完成，报告写入 %s"</span>, <span class="param">filename</span>)
 
 <span class="fn">main</span>()</pre>
-<p><span class="step">4. 怎么验证</span>：先 <span class="code">cd ~/lab</span>，记录 <span class="code">health_check.log</span> 当前行数或尾部时间戳；运行后应打印三行检查结果并生成 <span class="code">health_report_今天日期.txt</span>，报告内也是同样三行。只核对<b>本次新增</b>的一条“开始巡检”和一条“巡检完成”，不要固定断言日志总行数；重复运行前重新记录起点。自测阈值：把 <span class="code">percent &gt; 80</span> 临时改成 <span class="code">percent &gt; 0</span>，应输出“告警”，验证后立即改回。最后删除临时报告；若不保留练习日志，可在确认本次记录后删除 <span class="code">health_check.log</span>。Windows 跑 df/free/uptime 会报 <span class="code danger">FileNotFoundError</span>——正常，本题标了 🌐。</p>
+<p><span class="step">4. 怎么验证</span>：先 <span class="code">cd ~/lab</span>，记录 <span class="code">health_check.log</span> 当前行数或尾部时间戳；运行后应打印三行检查结果并生成 <span class="code">health_report_今天日期.txt</span>，报告内也是同样三行。只核对<b>本次新增</b>的一条“开始巡检”和一条“巡检完成”，不要固定断言日志总行数；重复运行前重新记录起点。自测阈值：把 <span class="code">percent &gt; 80</span> 临时改成 <span class="code">percent &gt; 0</span>，应输出“告警”，验证后立即改回。最后删除临时报告；若不保留练习日志，可在确认本次记录后删除 <span class="code">health_check.log</span>。Windows 跑 df/free/uptime 会报 <span class="code danger">FileNotFoundError</span>——正常，本题标了 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>。</p>
 </div>
 
 <h3 class="pb">场景 4｜Nginx 日志分析器</h3>

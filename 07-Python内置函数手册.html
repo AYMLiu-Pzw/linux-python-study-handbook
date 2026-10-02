@@ -77,18 +77,140 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 /* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
 </style>
 
 
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-ob" viewBox="0 0 72 72"><g id="ob_color">
+    <rect x="18" y="12" width="42" height="47.5" fill="#f4aa41"/>
+    <path fill="#e27022" d="m14.6366,12h2.4693c1.0419,0,1.8866.8447,1.8866,1.8866l-1,43.7268c0,1.0419.1553,1.8866-.8866,1.8866h-2.4693c-1.0419,0-1.8866-.8447-1.8866-1.8866V13.8866c0-1.0419.8447-1.8866,1.8866-1.8866Z"/>
+  </g>
+  <g id="ob_line">
+    <line x1="18" x2="18" y1="13" y2="59" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m62.9087,54.8149c.6677-.3369,1.0895-1.0203,1.0913-1.7682V9.0833c0-1.1506-.9327-2.0833-2.0833-2.0833H16.4591c-1.5975,0-3.0889.7996-3.9733,2.13h0c-.5776.8688-.3416,2.0413.5271,2.6189.3099.206.6737.316,1.0459.316h3.8086l2.1331-.0177h39.9162v48H14.0583c-1.0289.0008-1.8696-.8213-1.8916-1.85V10.575"/>
+    <g>
+      <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="39.533 27.219 39.533 34.219 42.533 34.219"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m33.7078,34.2187h0c-1.3807,0-2.5-1.1193-2.5-2.5v-2c0-1.3807,1.1193-2.5,2.5-2.5h0c1.3807,0,2.5,1.1193,2.5,2.5v2c0,1.3807-1.1193,2.5-2.5,2.5Z"/>
+      <g>
+        <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="50.164 27.219 49.563 31.099 53.658 31.099"/>
+        <line x1="52.9834" x2="52.9834" y1="27.2187" y2="34.2187" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <circle cx="45.5328" cy="34.2187" r="1"/>
+      <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="28.416 27.29 26.898 34.29 26.208 34.29 25.537 34.29 24 27.29"/>
+    </g>
+  </g></symbol><symbol id="ic-bm" viewBox="0 0 72 72"><g id="bm_color">
+    <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="2" d="m14.85 64.04 0.05537-5.257-5.343-0.03324v-50.79h28.89l5.287 5.291h11.3v50.79z"/>
+    <polyline transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#d0cfce" stroke-width="0.9454" points="54.92 23 44 11.65 44 23"/>
+    <polygon transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#92d3f5" stroke-width="0.9454" points="59.55 29.04 67 29.04 67 34 59.55 34 57.71 31.52"/>
+    <polygon transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#ea5a47" stroke-width="0.9454" points="54.55 48 62 48 62 52.96 54.55 52.96 52.71 50.48"/>
+  </g>
+  <g id="bm_line">
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="60 28.75 60 17 49.32 17"/>
+    <line x1="55.06" x2="55.06" y1="45.53" y2="31.68" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="22 63.09 22 65 60 65 60 53.33"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="55 48 55 22.68 44.32 12 17 12 17 60 55 60 55 53"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="55 23 44.3 23 44.32 12"/>
+    <polygon transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="59.55 34 57.71 31.52 59.55 29.04 67 29.04 67 34"/>
+    <polygon transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="54.55 52.96 52.71 50.48 54.55 48 62 48 62 52.96"/>
+    <line x1="15.89" x2="30.71" y1="17.48" y2="17.48" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="25.94" y2="25.94" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="33.35" y2="33.35" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="41.82" y2="41.82" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="50.29" y2="50.29" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g></symbol><symbol id="ic-pn" viewBox="0 0 72 72"><g id="pn_color">
+    <path fill="#ea5a47" d="m46.288,34.3932c-.8205-1.4005-3.5756-2.5592-3.5756-2.5592l-1.0343-4.1975-2.2282-13.0482-9.1051-.6051-2.184,16.6293c-.0635.3545-1.4459,1.7772-1.7857,1.8963-2.8213.9893-3.0856,3.5212-3.57,4.5505l24.1657.0322c-.0304-.143.0226-1.494-.6828-2.6983Z"/>
+    <polygon fill="#ea5a47" points="31.0083 8.5994 29.5845 14.5883 40.2816 14.1282 39.8274 8.7892 31.0083 8.5994"/>
+    <polygon fill="#d22f27" points="39.8274 8.7892 36.848 8.7892 37.1401 14.5883 40.8274 14.5883 39.8274 8.7892"/>
+    <path fill="#d0cfce" d="m33.051,40.2346s-.0242,2.6808-.0242,3.2335l.3163,12.4946,2.5241,5.8434,1.67-4.2589.7783-17.2953-5.2645-.0173Z"/>
+    <polygon fill="#9b9b9a" points="35.8645 61.5263 37.9727 55.7491 38.3093 41.6967 38.32 40.2367 35.6609 40.2456 35.8645 61.5263"/>
+    <path fill="#d22f27" d="m38.0116,31.834s1.4394,1.1587,2.2599,2.5592c.7054,1.2043,1.238,2.5553,1.2684,2.6983l5.2498-.6511c-.4834-1.0264-.2141-2.6709-3.0383-3.6611-.3398-.1191-.6609-.5908-.7244-.9453,0,0-2.712-14.0382-2.5498-13.5879l-.6956-4.1179-2.6415.4601.8499,15.3903.0216,1.8554Z"/>
+  </g>
+  <g id="pn_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="33.069 41.2315 33.0753 56.0146 35.9361 63.8727 38.2539 55.9913 38.2479 41.2352"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m30.3187,18.576l-2.3773,13.26c-5.2242,1.8318-5.4803,5.4953-5.4803,5.4953h25.4502s-.2561-3.6635-5.4803-5.4953l-2.3773-13.26"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.8274 14.5883 29.5845 14.5883 30.5845 8.7892 39.8274 8.7892 40.8274 14.5883"/>
+  </g></symbol><symbol id="ic-tg" viewBox="0 0 72 72"><g id="tg_color">
+    <circle cx="39.4882" cy="39.4552" r="29.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="23.85" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="15.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="10.9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="5.9" fill="#EA5A47" stroke="none"/>
+  </g>
+  <g id="tg_hair"/>
+  <g id="tg_skin"/>
+  <g id="tg_skin-shadow"/>
+  <g id="tg_line">
+    <line x1="11.4659" x2="2.5131" y1="11.4989" y2="11.4989" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="11.4662" x2="11.4663" y1="11.4989" y2="2.546" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5067" x2="6.5538" y1="15.5473" y2="15.5473" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5086" x2="15.5086" y1="15.5454" y2="6.5925" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="39.4865" x2="7.4778" y1="39.4644" y2="7.5188" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M21.9689,16.3467c4.8593-3.674,10.9579-5.8915,17.5193-5.8915c16.0163,0,29,12.9837,29,29s-12.9837,29-29,29s-29-12.9837-29-29 c0-6.5467,2.1693-12.5867,5.8283-17.4404"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M26.2567,20.6399c3.7421-2.6364,8.306-4.1847,13.2315-4.1847c12.7025,0,23,10.2975,23,23s-10.2975,23-23,23s-23-10.2975-23-23 c0-4.8704,1.5138-9.3872,4.0966-13.1056"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.04,26.4321c2.1945-1.2578,4.7374-1.9769,7.4482-1.9769c8.2843,0,15,6.7157,15,15s-6.7157,15-15,15s-15-6.7157-15-15 c0-2.6162,0.7305-5.1268,1.9079-7.268"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M40.0779,34.4744c2.4674,0.3067,4.3769,2.4111,4.3769,4.9616c0,2.7614-2.2386,5-5,5c-2.4824,0-4.5422-1.809-4.9332-4.1806"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M35.7775,30.1663c1.1474-0.4587,2.3996-0.7111,3.7107-0.7111c5.5228,0,10,4.4772,10,10s-4.4772,10-10,10s-10-4.4771-10-10 c0-1.2548,0.252-2.4731,0.6858-3.5895"/>
+  </g></symbol><symbol id="ic-px" viewBox="0 0 72 72"><g id="px_color">
+    <path fill="#f4aa41" d="m34.3223,64.1641c-.1755,0-.3479-.0462-.5-.1338l-22.6894-13.3321c-.3095-.1787-.5001-.5089-.5-.8662l-.251-27.414c0-.3573.1905-.6875.5-.8662l24.1904-14.3318c.3096-.1777.6904-.1777,1,0l22.6905,13.0818c.4784.2759.6426.8874.3666,1.3659-.0875.1517-.2133.2777-.3647.3655l-23.1923,14.0001-.2501,27.1327c-.0015.5514-.4486.9977-1,.9981Z"/>
+    <polygon fill="#f4aa41" points="36 64.5715 60.7589 50.4641 60.413 21.988 35.5724 36.0333 36 64.5715"/>
+    <path fill="#d0cfce" d="m44.4415,37.9783c-.7769-.442-1.2545-1.2692-1.249-2.163v-4.1719l-22.8806-15.5295c.692-.4567,6.2179-3.6331,6.5605-3.7231l26.1492,13.0017c.3095.1787.5001.5089.5.8662v6.0244c-.0018,1.1714-.6264,2.2536-1.64,2.8409l-4.9444,2.8544c-.771.4505-1.7251.4505-2.4961,0h.0004Z"/>
+    <path fill="#d0cfce" d="m44.8377,59.475v-3.336c.0017-1.0607.5674-2.0405,1.4853-2.5722l6.0733-3.5068c.8836-.5099,2.0133-.207,2.5232.6766.162.2808.2473.5992.2473.9234,0,0-.0232,1.6053-.3301,1.8473-2.0407,1.6093-9.9991,6.2783-9.999,5.9677Z"/>
+    <path fill="#3f3f3f" d="m44.4274,45.9464v.8683c0,.8266.67,1.4967,1.4967,1.4967.2628,0,.5209-.0692.7485-.2006l6.8048-3.76c.7054-.4073,1.14-1.1599,1.14-1.9745v-1.1184c0-.7976-.6466-1.4442-1.4442-1.4442-.2535,0-.5025.0667-.7221.1935l-6.7455,3.7252c-.7909.4567-1.2781,1.3006-1.2781,2.2139Z"/>
+    <polygon fill="#fff" points="31.083 38.917 22.785 34.264 22.785 41.706 31.083 46.359 31.083 38.917"/>
+  </g>
+  <g id="px_line">
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="61.262 21.168 35.572 6.336 9.882 21.168 9.882 50.832 35.572 65.664 61.262 50.832 61.262 21.168"/>
+    <line x1="35.5724" x2="35.5724" y1="36.0333" y2="65.6642" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="35.6301" x2="9.9401" y1="36.0333" y2="21.2012" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="52.5169" x2="61.2624" y1="26.2504" y2="21.2012" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="35.5724" x2="44.1879" y1="36.0333" y2="31.0591" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m26.884,11.4565l25.6375,14.8018v6.0248c0,.8146-.4346,1.5672-1.14,1.9745l-4.9439,2.8543c-.7158.4133-1.6312.1681-2.0446-.5477-.1314-.2276-.2006-.4857-.2006-.7485v-4.7486l-25.5689-14.8183"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="31.083 38.917 22.785 34.264 22.785 41.706 31.083 46.359 31.083 38.917"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m54.1667,54.6663v-3.0063c0-.4679-.3793-.8472-.8472-.8472-.1487,0-.2948.0391-.4236.1135l-6.073,3.5062c-.6098.3519-.9854,1.0025-.9853,1.7065v3.3361"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m44.4274,45.9464v.8683c0,.8266.67,1.4967,1.4967,1.4967.2628,0,.5209-.0692.7485-.2006l6.8048-3.76c.7054-.4073,1.14-1.1599,1.14-1.9745v-1.1184c0-.7976-.6466-1.4442-1.4442-1.4442-.2535,0-.5025.0667-.7221.1935l-6.7455,3.7252c-.7909.4567-1.2781,1.3006-1.2781,2.2139Z"/>
+  </g></symbol><symbol id="ic-nt" viewBox="0 0 72 72"><g id="nt_color">
+    <rect x="16.4055" y="11.3783" width="39.5645" height="49.0659" fill="#fff"/>
+    <polyline fill="#f4aa41" points="39.9312 40.2224 51.2252 28.9284 56.8562 36.3591 46.3562 46.8706"/>
+    <polyline fill="#a57939" points="37.9415 46.8185 39.902 41.17 46.3562 47.624 40.7075 49.5846"/>
+    <polyline fill="#ea5a47" points="55.3215 25.5799 59.3001 21.6013 66.0352 28.1847 62.0904 32.1296"/>
+    <polyline fill="#d0cfce" points="50.4943 29.6593 55.1018 25.0519 61.7836 31.7907 57.2152 36.3591"/>
+  </g>
+  <g id="nt_line">
+    <polygon points="38.0702 47.191 40.4564 49.5772 36.9921 50.8566 38.0702 47.191"/>
+    <line x1="22.3215" x2="49.3215" y1="19.875" y2="19.875" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="22.3215" x2="47.9215" y1="27.875" y2="27.875" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="22.3215" x2="39.4312" y1="35.875" y2="35.875" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="22.3215" x2="34.5284" y1="43.875" y2="43.875" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="22.3215" x2="32.4675" y1="51.875" y2="51.875" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polygon points="38.0702 47.191 40.4564 49.5772 36.9921 50.8566 38.0702 47.191"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.6919 49.591 46.3562 47.624 61.9461 32.034 55.492 25.5799 39.902 41.17 37.9282 46.841 40.6919 49.591"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="58.0856 22.9863 59.6411 21.4309 66.0952 27.885 64.4634 29.5168"/>
+    <line x1="40.2788" x2="46.7329" y1="40.7932" y2="47.2473" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="37.9323 46.8277 36.5493 50.9768 40.7075 49.5846"/>
+    <line x1="51.3023" x2="57.1946" y1="30.1572" y2="36.0495" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.0206" points="55.3215 44.228 55.3215 59.875 16.3215 59.875 16.3215 11.875 55.3215 11.875 55.3215 20.3309"/>
+  </g></symbol></defs></svg>
 
-<h1>📙 Python 内置函数手册（教科书配套版）</h1>
+<h1><svg class="em" width="15" height="15"><use href="#ic-ob"/></svg> Python 内置函数手册（教科书配套版）</h1>
 <p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
 
 <div class="toc">
-<h3 style="border:none;margin:2px 0 6px;">📑 目录</h3>
+<h3 style="border:none;margin:2px 0 6px;"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h3>
 <div class="toc-row"><span class="tn">理念篇</span><span class="tdesc">先搞懂函数是什么，再记函数（第一页必读）</span><a href="#toc-1"></a></div>
 <div class="toc-row"><span class="tn">第 1 组</span><span class="tdesc">输入输出：print / input</span><a href="#toc-2"></a></div>
 <div class="toc-row"><span class="tn">第 2 组</span><span class="tdesc">类型工厂：str/int/float/bool/list/tuple/dict/set/type + 切片速查</span><a href="#toc-3"></a></div>
@@ -115,9 +237,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <pre><span class="fn">len</span>(<span class="str">"hello"</span>) <span class="cm"># 原料 "hello" → 机器 len → 产品 5</span></pre>
 
 <h3>2. 三条黄金规律</h3>
-<div class="rule">📌 规律①：<b>名字即用途</b>。print打印、input输入、len长度(length)、sum求和、sorted排序——英文单词看懂，函数就懂一半。</div>
-<div class="rule">📌 规律②：<b>括号是开关</b>。函数名后面跟 <span class="code">()</span>才开工；不写括号只是把机器指给你看。</div>
-<div class="rule">📌 规律③：<b>函数 vs 方法</b>。函数是 <span class="code fn">len(x)</span>（手拿工具加工）；方法是 <span class="code">x.<span class="fn">split</span>()</span>（工具长在对象身上，点号调用）。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 规律①：<b>名字即用途</b>。print打印、input输入、len长度(length)、sum求和、sorted排序——英文单词看懂，函数就懂一半。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 规律②：<b>括号是开关</b>。函数名后面跟 <span class="code">()</span>才开工；不写括号只是把机器指给你看。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 规律③：<b>函数 vs 方法</b>。函数是 <span class="code fn">len(x)</span>（手拿工具加工）；方法是 <span class="code">x.<span class="fn">split</span>()</span>（工具长在对象身上，点号调用）。</div>
 
 <h3>3. 最重要的两个函数（第一天就认识）</h3>
 <table>
@@ -125,7 +247,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="code fn">print()</td><td>打印到屏幕</td><td class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">"-"</span>, <span class="param">end</span>=<span class="str">"!"</span>) <span class="out">→ a-b!</span></td></tr>
 <tr><td class="code fn">input()</td><td>读键盘输入</td><td class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"你叫什么："</span>) <span class="out">→ 停下等你输入；回车后 name = 你输入的文字</span></td></tr>
 </table>
-<p class="danger">⚠️ input() 拿到的永远是字符串！要算数先 <span class="code">int()</span>。</p>
+<p class="danger"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> input() 拿到的永远是字符串！要算数先 <span class="code">int()</span>。</p>
 
 <h3>4. 类型转换家族 = "工厂函数"</h3>
 <p><span class="code fn">str() int() float() bool() list() tuple() dict() set()</span> —— 都是把一种类型"加工"成另一种类型的工厂。见第 2 组。</p>
@@ -144,7 +266,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </table>
 
 <div class="quiz">
-<p><b>🎯 识别题（先猜，再看答案）</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题（先猜，再看答案）</b></p>
 <p>1. <span class="code"><span class="fn">print</span>(<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="param">sep</span>=<span class="str">""</span>)</span> 输出？<br>
 2. 用户输入 <span class="code">42</span>，<span class="code"><span class="param">name</span> = <span class="fn">input</span>(<span class="str">"?"</span>)</span> 后，<span class="code">name</span> 的类型？</p>
 
@@ -165,10 +287,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="code fn">type()</td><td>查类型</td><td class="code"><span class="fn">type</span>(<span class="num">5</span>) <span class="out">→ &lt;class 'int'&gt;</span>　<span class="fn">type</span>(<span class="str">"5"</span>) <span class="out">→ &lt;class 'str'&gt;</span></td><td>排查"类型不对"第一招；显示为 &lt;class 'xxx'&gt; 形式</td></tr>
 </table>
 
-<div class="rule">📌 <b>切片速查</b>（字符串/列表通用）：<span class="code">x[起点:终点:步长]</span>，终点<b>不含</b>。<span class="code">"python"[0:2]→"py"</span>、<span class="code">[-1]</span>最后一个、<span class="code">[::-1]</span>反转。</div>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> <b>切片速查</b>（字符串/列表通用）：<span class="code">x[起点:终点:步长]</span>，终点<b>不含</b>。<span class="code">"python"[0:2]→"py"</span>、<span class="code">[-1]</span>最后一个、<span class="code">[::-1]</span>反转。</div>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. <span class="code"><span class="fn">int</span>(<span class="str">"42"</span>) + <span class="num">8</span></span> = ?<br>
 2. <span class="code"><span class="fn">list</span>(<span class="str">"abc"</span>)</span> = ?<br>
 3. <span class="code"><span class="str">"python"</span>[<span class="num">1</span>:<span class="num">4</span>]</span> = ?</p>
@@ -183,11 +305,11 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="code fn">sum()</td><td>求和</td><td class="code"><span class="fn">sum</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]) <span class="out">→ 6</span></td><td></td></tr>
 <tr><td class="code fn">min() / max()</td><td>最小/最大</td><td class="code"><span class="fn">min</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ 1</span>　<span class="fn">max</span>(<span class="str">"abc"</span>) <span class="out">→ 'c'</span></td><td></td></tr>
 <tr><td class="code fn">abs()</td><td>绝对值</td><td class="code"><span class="fn">abs</span>(-<span class="num">5</span>) <span class="out">→ 5</span></td><td></td></tr>
-<tr><td class="code fn">round()</td><td>保留小数位</td><td class="code"><span class="fn">round</span>(<span class="num">3.14159</span>, <span class="num">2</span>) <span class="out">→ 3.14</span></td><td>⚠️ 银行家舍入：<span class="code">round(2.5)→2</span>、<span class="code">round(3.5)→4</span>（四舍六入五成双）</td></tr>
+<tr><td class="code fn">round()</td><td>保留小数位</td><td class="code"><span class="fn">round</span>(<span class="num">3.14159</span>, <span class="num">2</span>) <span class="out">→ 3.14</span></td><td><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 银行家舍入：<span class="code">round(2.5)→2</span>、<span class="code">round(3.5)→4</span>（四舍六入五成双）</td></tr>
 </table>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. <span class="code"><span class="fn">round</span>(<span class="num">2.5</span>)</span> = ?<br>
 2. <span class="code"><span class="fn">len</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])</span> = ?</p>
 
@@ -206,7 +328,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </table>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. <span class="code"><span class="fn">list</span>(<span class="fn">range</span>(<span class="num">1</span>, <span class="num">10</span>, <span class="num">2</span>))</span> = ?<br>
 2. <span class="code"><span class="fn">sorted</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>], <span class="param">reverse</span>=<span class="kw">True</span>)</span> = ?</p>
 
@@ -223,7 +345,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </table>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. <span class="code"><span class="fn">isinstance</span>(<span class="str">"5"</span>, <span class="kw">int</span>)</span> = ?<br>
 2. <span class="code"><span class="fn">dir</span>(<span class="str">"abc"</span>)</span> 返回什么？</p>
 
@@ -241,7 +363,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="code fn">all() / any()</td><td>全真 / 有真</td><td class="code"><span class="fn">all</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">0</span>]) <span class="out">→ False</span>　<span class="fn">any</span>([<span class="num">0</span>,<span class="num">0</span>,<span class="num">1</span>]) <span class="out">→ True</span></td><td>0、""、None 算"假"</td></tr>
 <tr><td class="code fn">repr()</td><td>看值的"原始表示"</td><td class="code"><span class="fn">repr</span>(<span class="str">"hi"</span>) <span class="out">→ "'hi'"</span>（带引号）</td><td>调试时区分类型用</td></tr>
 </table>
-<p class="danger">⚠️ <b>eval() / exec() 是危险函数</b>：能把字符串当代码执行。网上很多新手教程用它，但生产环境禁用——永远别用它们处理用户输入。</p>
+<p class="danger"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>eval() / exec() 是危险函数</b>：能把字符串当代码执行。网上很多新手教程用它，但生产环境禁用——永远别用它们处理用户输入。</p>
 
 <h3>6.2 os / time 常用函数速查（运维最常用）</h3>
 <table>
@@ -271,7 +393,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="param">返回值</span> = <span class="fn">函数名</span>(<span class="param">实参</span>)   <span class="cm"># 调用：函数名 + 括号才开工</span></pre>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. <span class="code"><span class="fn">divmod</span>(<span class="num">10</span>, <span class="num">3</span>)</span> = ?<br>
 2. <span class="code"><span class="fn">all</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">0</span>])</span> = ?<br>
 3. Linux 上 <span class="code">os.path.join(<span class="str">"a"</span>, <span class="str">"b"</span>)</span> = ?</p>
@@ -294,7 +416,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h2 id="toc-9">文件对象三连（open / read / write / with）</h2>
 
 <div class="box2">
-<p><b>📦 准备材料（先照抄跑一次）：</b>下面所有示例都读写同一个 <span class="code">a.txt</span>，先创建它并写入两行：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-px"/></svg> 准备材料（先照抄跑一次）：</b>下面所有示例都读写同一个 <span class="code">a.txt</span>，先创建它并写入两行：</p>
 <pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"w"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
     <span class="param">f</span>.<span class="fn">write</span>(<span class="str">"第一行\n第二行\n"</span>)   <span class="cm"># w 模式：不存在就创建（存在会清空，正好保证每次起点一致）</span></pre>
 <p class="note">从空工作目录开始照抄：先跑这个准备框，再依次跑后面的 r / readlines / w / a 示例，任何一步都不会因文件不存在而中断。</p>
@@ -302,7 +424,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <pre><span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:   <span class="cm"># with = 自动关门，推荐写法</span>
     <span class="param">内容</span> = <span class="param">f</span>.<span class="fn">read</span>()                <span class="cm"># 全读成一整个字符串</span>
-    <span class="cm"># ⚠ 同一文件对象读完一次就到末尾：read 之后再 readlines 通常得到空列表；</span>
+    <span class="cm"># <svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 同一文件对象读完一次就到末尾：read 之后再 readlines 通常得到空列表；</span>
     <span class="cm">#   要么二选一，要么重新 open，或 f.seek(0) 回到开头再读。</span>
 
 <span class="kw">with</span> <span class="fn">open</span>(<span class="str">"a.txt"</span>, <span class="str">"r"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
@@ -317,12 +439,12 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <table>
 <tr><th style="width:16%">模式</th><th>含义</th><th>对照 Linux</th></tr>
 <tr><td class="code">"r"</td><td>读</td><td>cat</td></tr>
-<tr><td class="code">"w"</td><td>写（⚠️ 打开即清空原文件）</td><td>&gt;（覆盖）</td></tr>
+<tr><td class="code">"w"</td><td>写（<svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 打开即清空原文件）</td><td>&gt;（覆盖）</td></tr>
 <tr><td class="code">"a"</td><td>追加（不清空）</td><td>&gt;&gt;</td></tr>
 </table>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. 已有内容的文件用 <span class="code">"w"</span> 打开会怎样？<br>
 2. <span class="code">with open</span> 比手动 open+close 好在哪？</p>
 
@@ -346,7 +468,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </table>
 
 <div class="quiz">
-<p><b>🎯 识别题</b></p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 识别题</b></p>
 <p>1. <span class="code"><span class="str">"a,b,c"</span>.<span class="fn">split</span>(<span class="str">","</span>)</span> = ?<br>
 2. <span class="code"><span class="str">" hello "</span>.<span class="fn">strip</span>()</span> = ?</p>
 
@@ -473,7 +595,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 
 <div class="box2">
-<p><b>📝 本册待改进清单</b>（学习中发现手册不好用的地方，攒 5 条再统一改版）：</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-nt"/></svg> 本册待改进清单</b>（学习中发现手册不好用的地方，攒 5 条再统一改版）：</p>
 <p class="note">（留白：学习中发现手册哪里不好用就记在这里，攒满 5 条再统一改版）</p>
 </div>
 

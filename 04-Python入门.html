@@ -92,18 +92,133 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 /* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
 </style>
 
 
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-pe" viewBox="0 0 72 72"><g id="pe_color">
+    <polygon fill="#3F3F3F" stroke="none" points="14.5943,53.154 18.2544,56.814 12.6242,59.0928"/>
+    <polyline fill="#f4aa41" stroke="none" points="18.0381,41.8761 36.8684,23.0457 48.1813,34.3586 29.5108,53.0291"/>
+    <polyline fill="#a57939" stroke="none" points="14.4132,52.5663 17.9281,43.3946 27.8278,53.2939 18.6558,56.809"/>
+    <polyline fill="#EA5A47" stroke="none" points="42.9209,16.9933 50.4228,9.4913 61.7357,20.8042 54.2975,28.2424"/>
+    <polyline fill="#9b9b9a" stroke="none" points="35.6498,24.2643 43.3318,16.5823 54.6447,27.8952 47.0278,35.512"/>
+  </g>
+  <g id="pe_hair"/>
+  <g id="pe_skin"/>
+  <g id="pe_skin-shadow"/>
+  <g id="pe_line">
+    <polygon fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="18.6304,56.8203 27.8278,53.2939 53.8207,27.301 43.9212,17.4015 17.9281,43.3946 14.3904,52.6032"/>
+    <polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="47.3354,13.9873 50.8388,10.4839 60.7383,20.3834 57.2645,23.8572"/>
+    <line x1="18.5562" x2="28.4557" y1="42.7665" y2="52.6659" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="14.3979,52.5817 11.9073,59.3148 18.6558,56.809"/>
+    <line x1="36.9099" x2="46.4225" y1="25.0073" y2="34.5199" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-bm" viewBox="0 0 72 72"><g id="bm_color">
+    <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="2" d="m14.85 64.04 0.05537-5.257-5.343-0.03324v-50.79h28.89l5.287 5.291h11.3v50.79z"/>
+    <polyline transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#d0cfce" stroke-width="0.9454" points="54.92 23 44 11.65 44 23"/>
+    <polygon transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#92d3f5" stroke-width="0.9454" points="59.55 29.04 67 29.04 67 34 59.55 34 57.71 31.52"/>
+    <polygon transform="matrix(1.057 0 0 1.058 -8.414 -4.737)" fill="#ea5a47" stroke-width="0.9454" points="54.55 48 62 48 62 52.96 54.55 52.96 52.71 50.48"/>
+  </g>
+  <g id="bm_line">
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="60 28.75 60 17 49.32 17"/>
+    <line x1="55.06" x2="55.06" y1="45.53" y2="31.68" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="22 63.09 22 65 60 65 60 53.33"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="55 48 55 22.68 44.32 12 17 12 17 60 55 60 55 53"/>
+    <polyline transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="55 23 44.3 23 44.32 12"/>
+    <polygon transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="59.55 34 57.71 31.52 59.55 29.04 67 29.04 67 34"/>
+    <polygon transform="matrix(1.059 0 0 1.058 -8.462 -4.752)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.889" points="54.55 52.96 52.71 50.48 54.55 48 62 48 62 52.96"/>
+    <line x1="15.89" x2="30.71" y1="17.48" y2="17.48" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="25.94" y2="25.94" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="33.35" y2="33.35" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="41.82" y2="41.82" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="15.89" x2="43.41" y1="50.29" y2="50.29" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g></symbol><symbol id="ic-nb" viewBox="0 0 72 72"><g id="nb_color">
+    <rect x="17.5625" y="12" width="42.4375" height="47.5" fill="#fcea2b"/>
+    <rect x="12" y="12" width="5.9479" height="47.5" fill="#f1b31c"/>
+    <rect x="17.5729" y="23.8761" width="42.4167" height="13.8125" fill="#fff"/>
+  </g>
+  <g id="nb_line">
+    <line x1="17" x2="17" y1="13" y2="59" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M62.9087,54.8149A1.986,1.986,0,0,0,64,53.0467V9.0833A2.0833,2.0833,0,0,0,61.9167,7H16.4591a4.7714,4.7714,0,0,0-3.9733,2.13h0a1.889,1.889,0,0,0,1.573,2.9349h3.8086l2.1331-.0177H59.9167v48H14.0583a1.8905,1.8905,0,0,1-1.8916-1.85V10.575"/>
+    <g>
+      <g>
+        <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="47.734 27.438 43.908 27.438 43.908 34.133 47.734 34.133"/>
+        <line x1="43.9084" x2="46.7775" y1="30.7855" y2="30.7855" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="22.57 34.133 22.57 27.438 27.352 34.133 27.352 27.438"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M32.6123,34.1328h0a2.391,2.391,0,0,1-2.3909-2.391V29.8291a2.391,2.391,0,0,1,2.3909-2.391h0a2.391,2.391,0,0,1,2.391,2.391v1.9127A2.391,2.391,0,0,1,32.6123,34.1328Z"/>
+      <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M54.4694,28.7683A2.0432,2.0432,0,0,0,52.41,27.4319h0a1.9249,1.9249,0,0,0-2.102,1.6737,1.9249,1.9249,0,0,0,2.102,1.6736l-.0427.0063a1.9249,1.9249,0,0,1,2.102,1.6736,1.9249,1.9249,0,0,1-2.102,1.6737h0a2.0431,2.0431,0,0,1-2.0593-1.3364"/>
+      <g>
+        <line x1="37.2348" x2="41.0603" y1="27.4381" y2="27.4381" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <line x1="39.1475" x2="39.1475" y1="27.4381" y2="34.1328" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g></symbol><symbol id="ic-bk" viewBox="0 0 72 72"><g id="bk_color">
+    <path fill="#fff" d="M61.2167,21.6411,37.911,15.0386a1.0068,1.0068,0,0,0-.5537.0019l-22.5947,6.627a.9484.9484,0,0,0-.1365.0719,5.3829,5.3829,0,0,0-1.8343,9.5426,5.3642,5.3642,0,0,0,.0663,8.6968,5.3776,5.3776,0,0,0,1.4856,9.5022l23.0146,6.7128a1.0034,1.0034,0,0,0,.5547.002l23.3057-6.6514a1.0008,1.0008,0,0,0,.7255-.9619V22.603A1,1,0,0,0,61.2167,21.6411Z"/>
+    <polygon fill="#92d3f5" points="37.638 15.976 60.944 22.579 37.638 29.231 15.044 22.603 37.638 15.976"/>
+    <path fill="#61b2e4" d="M15.0823,24.7275,37.0756,31.174a2,2,0,0,0,1.1113.0039l23.2947-6.7653a.613.613,0,0,0,.442-.5794l.0189-1.2508L37.6381,29.2547,15.08,22.6425a4.4,4.4,0,0,0-.4554,8.4813l23.014,6.713,24.2115-6.91.04-1.2423a.6255.6255,0,0,0-.7968-.6215L37.6442,35.7552l-22.4226-6.54a2.4,2.4,0,0,1-.1393-4.4873"/>
+    <path fill="#d22f27" d="M15.0823,33.4092l21.9933,6.4465a1.9988,1.9988,0,0,0,1.1113.004l23.2947-6.7653a.6131.6131,0,0,0,.442-.5794l.0189-1.2508L37.6381,37.9365,15.08,31.3243a4.4,4.4,0,0,0-.4554,8.4813l23.014,6.713,24.2115-6.91.04-1.2424a.6254.6254,0,0,0-.7968-.6214L37.6442,44.437l-22.4226-6.54a2.4,2.4,0,0,1-.1393-4.4873"/>
+    <path fill="#5c9e31" d="M15.0823,42.1549l21.9933,6.4465a2,2,0,0,0,1.1113.0039L61.4816,41.84a.613.613,0,0,0,.442-.5794l.0189-1.2507L37.6381,46.6821,15.08,40.07a4.4,4.4,0,0,0-.4554,8.4813l23.014,6.713,24.2115-6.91.04-1.2424a.6254.6254,0,0,0-.7968-.6214L37.6442,53.1827l-22.4226-6.54a2.4,2.4,0,0,1-.1393-4.4873"/>
+    <polygon fill="#61b2e4" points="44.32 17.794 38.594 16.172 16 22.799 21.81 24.504 44.32 17.794"/>
+  </g>
+  <g id="bk_line">
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="37.638 16 60.944 22.603 37.638 29.255 15.044 22.627 37.638 16"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.08,22.6425a4.4,4.4,0,0,0-.4554,8.4813l23.0141,6.713,23.3057-6.6516"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.08,31.2942a4.4,4.4,0,0,0-.4554,8.4813l23.0141,6.713,23.3057-6.6516"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.08,40.04a4.4,4.4,0,0,0-.4554,8.4813l23.0141,6.713,23.3057-6.6516"/>
+  </g></symbol><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-pn" viewBox="0 0 72 72"><g id="pn_color">
+    <path fill="#ea5a47" d="m46.288,34.3932c-.8205-1.4005-3.5756-2.5592-3.5756-2.5592l-1.0343-4.1975-2.2282-13.0482-9.1051-.6051-2.184,16.6293c-.0635.3545-1.4459,1.7772-1.7857,1.8963-2.8213.9893-3.0856,3.5212-3.57,4.5505l24.1657.0322c-.0304-.143.0226-1.494-.6828-2.6983Z"/>
+    <polygon fill="#ea5a47" points="31.0083 8.5994 29.5845 14.5883 40.2816 14.1282 39.8274 8.7892 31.0083 8.5994"/>
+    <polygon fill="#d22f27" points="39.8274 8.7892 36.848 8.7892 37.1401 14.5883 40.8274 14.5883 39.8274 8.7892"/>
+    <path fill="#d0cfce" d="m33.051,40.2346s-.0242,2.6808-.0242,3.2335l.3163,12.4946,2.5241,5.8434,1.67-4.2589.7783-17.2953-5.2645-.0173Z"/>
+    <polygon fill="#9b9b9a" points="35.8645 61.5263 37.9727 55.7491 38.3093 41.6967 38.32 40.2367 35.6609 40.2456 35.8645 61.5263"/>
+    <path fill="#d22f27" d="m38.0116,31.834s1.4394,1.1587,2.2599,2.5592c.7054,1.2043,1.238,2.5553,1.2684,2.6983l5.2498-.6511c-.4834-1.0264-.2141-2.6709-3.0383-3.6611-.3398-.1191-.6609-.5908-.7244-.9453,0,0-2.712-14.0382-2.5498-13.5879l-.6956-4.1179-2.6415.4601.8499,15.3903.0216,1.8554Z"/>
+  </g>
+  <g id="pn_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="33.069 41.2315 33.0753 56.0146 35.9361 63.8727 38.2539 55.9913 38.2479 41.2352"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m30.3187,18.576l-2.3773,13.26c-5.2242,1.8318-5.4803,5.4953-5.4803,5.4953h25.4502s-.2561-3.6635-5.4803-5.4953l-2.3773-13.26"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.8274 14.5883 29.5845 14.5883 30.5845 8.7892 39.8274 8.7892 40.8274 14.5883"/>
+  </g></symbol><symbol id="ic-gl" viewBox="0 0 72 72"><g id="gl_color">
+    <circle cx="36" cy="36" r="28" fill="#92D3F5" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="gl_hair"/>
+  <g id="gl_skin"/>
+  <g id="gl_skin-shadow"/>
+  <g id="gl_line">
+    <circle cx="36" cy="36" r="28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M36,8v56c-8.5604,0-15.5-12.536-15.5-28S27.4396,8,36,8c8.5604,0,15.5,12.536,15.5,28S44.5604,64,36,64"/>
+    <line x1="64" x2="8" y1="36" y2="36" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="22" y2="22" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="50" y2="50" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-st" viewBox="0 0 72 72"><g id="st_color">
+    <polygon fill="#FCEA2B" stroke="none" points="35.9928,10.7363 27.7913,27.3699 9.4394,30.0436 22.7245,42.9838 19.5962,61.2637 36.0084,52.6276 52.427,61.2515 49.2851,42.9739 62.5606,30.0239 44.2067,27.3638"/>
+  </g>
+  <g id="st_hair"/>
+  <g id="st_skin"/>
+  <g id="st_skin-shadow"/>
+  <g id="st_line">
+    <polygon fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="35.9928,10.7363 27.7913,27.3699 9.4394,30.0436 22.7245,42.9838 19.5962,61.2637 36.0084,52.6276 52.427,61.2515 49.2851,42.9739 62.5606,30.0239 44.2067,27.3638"/>
+  </g></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Python" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Python 入门（教科书版）</h1>
 <p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
 
 <div class="newpage"></div>
-<h2 class="toc-title">📑 目录</h2>
+<h2 class="toc-title"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">使用说明</span><span class="tdesc">配色约定 · 范围说明 · 与 Linux 三连的关系</span><a href="#toc-0"></a></div>
 <div class="toc-row"><span class="tn">第 0 章</span><span class="tdesc">Python 与 AI 运维的关系（约 1h）</span><a href="#toc-1"></a></div>
@@ -126,7 +241,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <div class="newpage"></div>
 <h2 id="toc-0">使用说明</h2>
-<p class="note">📔 学习日志：每天把敲过的代码、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志：每天把敲过的代码、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
 <p><b>本书配色约定</b>（全书一致）：</p>
 <table class="long-table"><thead><tr><th style="width:25%">样式</th><th>含义</th></tr></thead><tbody>
 <tr><td><span class="kw code">深蓝粗体</span></td><td>Python 关键字（def / if / for / import 等，语法骨架）</td></tr>
@@ -201,14 +316,14 @@ $ <span class="fn">python3</span> hello.py</pre>
 <p class="note">提示方向：自动化重复操作、调 API 拿数据、处理日志文件。写完记进学习日志——一段时间后回看，这就是你的起点。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：暂无（先把 python3 跑通即可）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：暂无（先把 python3 跑通即可）</p>
 <h3>0.6 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能说出 Python 和 Shell 的分工（系统层 vs 逻辑层）</p>
 <p>☐ 会进交互式模式、会退出、会用脚本文件方式运行</p>
 <p>☐ 能说出学完本书要交出的两个成品脚本</p>
 </div>
-<p class="note">📚 相关手册：内置函数速查 → 见 《Python 内置函数手册》第 1 组（print/input）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：内置函数速查 → 见 《Python 内置函数手册》第 1 组（print/input）。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-2">第 1 章 · 起步：print、变量、类型</h2>
@@ -337,7 +452,7 @@ a-b-c</pre>
 <p>4. 试错：故意写 <span class="code"><span class="fn">print</span>(<span class="str">"5"</span> + <span class="num">5</span>)</span>，把报错抄进学习日志（这是你第一份"报错收藏"）。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 1（题 1-1~1-8）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 1（题 1-1~1-8）</p>
 <h3>1.8 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能背出 / 和 // 的区别（真除法 vs 整除）</p>
@@ -345,7 +460,7 @@ a-b-c</pre>
 <p>☐ 知道 <span class="code fn">type</span>() 怎么用、int/float/str 各是什么</p>
 <p>☐ 能说出变量命名的三个规矩</p>
 </div>
-<p class="note">📚 相关手册：print/input/type → 《Python 内置函数手册》第 1-2 组；f-string → 第 2 组尾部。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：print/input/type → 《Python 内置函数手册》第 1-2 组；f-string → 第 2 组尾部。</p>
 <div class="newpage"></div>
 <h2 id="toc-3">第 2 章 · 控制流：if、for、while</h2>
 <p><b>本章目标</b>（学完能做什么）：会写成绩分段程序、九九乘法表、猜数字游戏——程序从此会"自己拿主意"和"重复干活"。</p>
@@ -436,7 +551,7 @@ True</pre>
 <p class="demo-ex">三个零件：<b>初始值</b>（count=0）、<b>条件</b>（count&lt;3）、<b>递增</b>（count = count + 1）。忘写递增 → 条件永远为真 → <b>死循环</b>（下面警告栏）。</p>
 </div>
 <div class="warn">
-<p><span class="danger">⚠ 危险栏：死循环。</span>忘了写递增，while 会转到天荒地老。症状：终端一直刷字不停。急救：按 <b>Ctrl + C</b> 中断（和 Linux 一样）。写 while 前先在脑子里过一遍"这个循环怎么停下来"。</p>
+<p><span class="danger"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险栏：死循环。</span>忘了写递增，while 会转到天荒地老。症状：终端一直刷字不停。急救：按 <b>Ctrl + C</b> 中断（和 Linux 一样）。写 while 前先在脑子里过一遍"这个循环怎么停下来"。</p>
 </div>
 <div class="demo">
 <p class="dtitle">示范 2：break 与 continue</p>
@@ -486,7 +601,7 @@ True</pre>
 <p>4. 打印 1 到 100 里所有能被 7 整除的数（提示：% 取余判断）。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 2（题 2-1~2-8）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 2（题 2-1~2-8）</p>
 <h3>2.7 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能说出 if/elif/else 的执行顺序（从上到下，谁先满足执行谁）</p>
@@ -494,7 +609,7 @@ True</pre>
 <p>☐ 能说出 break 和 continue 的区别（整锅端走 vs 跳过这一口）</p>
 <p>☐ 知道 input() 返回的一定是字符串</p>
 </div>
-<p class="note">📚 相关手册：range/enumerate → 《Python 内置函数手册》第 4 组；int/str 转换 → 第 2 组。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：range/enumerate → 《Python 内置函数手册》第 4 组；int/str 转换 → 第 2 组。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-4">第 3 章 · 数据结构：list、dict、tuple、set</h2>
@@ -611,7 +726,7 @@ TypeError: 'tuple' object does not support item assignment
 </div>
 <p class="note">提示：删除字典键用 <span class="code kw">del</span> 字典[键]（del = delete 删除）。</p>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 3（题 3-1~3-8）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 3（题 3-1~3-8）</p>
 <h3>3.6 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能说出索引从 0 数、负数索引 -1 是什么</p>
@@ -619,7 +734,7 @@ TypeError: 'tuple' object does not support item assignment
 <p>☐ 能说出 dict 用 get 不用中括号的理由（不报 KeyError）</p>
 <p>☐ 能说出 list/tuple 的选择标准（改不改）</p>
 </div>
-<p class="note">📚 相关手册：list/dict/set/len → 《Python 内置函数手册》第 2、3 组；切片 → 第 2 组尾部。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：list/dict/set/len → 《Python 内置函数手册》第 2、3 组；切片 → 第 2 组尾部。</p>
 <div class="newpage"></div>
 <h2 id="toc-5">第 4 章 · 函数：def、参数、返回值</h2>
 <p><b>本章目标</b>（学完能做什么）：写自己的函数（问候、计算、判断）+ 一个"计算器"函数集合——代码从此可以<b>打包复用</b>。</p>
@@ -707,7 +822,7 @@ b = 10</pre>
 <p>4. 验证 print vs return：写一个"有 return"和"只有 print"的函数，各自赋值给变量后 type() 看看是什么。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 4（题 4-1~4-4、4-7、4-8）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 4（题 4-1~4-4、4-7、4-8）</p>
 <h3>4.5 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能说出 def 的完整格式（函数名 + 参数 + 冒号 + 缩进块）</p>
@@ -715,7 +830,7 @@ b = 10</pre>
 <p>☐ 会用默认参数和关键字参数</p>
 <p>☐ 能说出什么时候该把代码封装成函数（重复两次以上就封）</p>
 </div>
-<p class="note">📚 相关手册：print/return → 《Python 内置函数手册》第 1 组；自定义函数速查 → 第 6 组。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：print/return → 《Python 内置函数手册》第 1 组；自定义函数速查 → 第 6 组。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-6">第 5 章 · 模块与导入：import、os、time</h2>
@@ -826,7 +941,7 @@ lab/notes.md</pre>
 <p>4. 用 <span class="code">import sys</span>，打印 <span class="code">sys.argv</span>：运行 <span class="code">python3 脚本名 a b c</span>，观察 argv 里有什么。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 4（题 4-5、4-6）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 4（题 4-5、4-6）</p>
 <h3>5.7 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能说出 import 三种写法，并说清推荐哪种、为什么</p>
@@ -834,7 +949,7 @@ lab/notes.md</pre>
 <p>☐ 能说出 strftime 里 %Y %m %d %H %M %S 各是什么</p>
 <p>☐ 知道 sys.argv[0] 和 argv[1] 分别是什么</p>
 </div>
-<p class="note">📚 相关手册：os/time 常用函数 → 《Python 内置函数手册》第 6 组。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：os/time 常用函数 → 《Python 内置函数手册》第 6 组。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-7">第 6 章 · 文件操作：open/with、json</h2>
@@ -857,7 +972,7 @@ lab/notes.md</pre>
 <p class="demo-ex"><span class="code fn">open</span>()（打开文件）第一个参数是文件名，第二个是模式。<span class="str">"w"</span> 写、<span class="str">"r"</span> 读、<span class="str">"a"</span> 追加。<span class="param">encoding</span>=<span class="str">"utf-8"</span> 保证中文不乱码（永远带上）。<span class="code fn">close</span>()（关闭）用完必须关——就像 Linux 里用完退出。</p>
 </div>
 <div class="warn">
-<p><span class="danger">⚠ 危险栏：w 模式会清空原文件。</span>对已存在的文件用 "w" 打开，<b>内容立刻被清空</b>，再写新内容。重要文件永远用 "a" 或先备份——和 Linux 里 <span class="code">echo x &gt; file</span> 覆盖文件是一个道理。</p>
+<p><span class="danger"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险栏：w 模式会清空原文件。</span>对已存在的文件用 "w" 打开，<b>内容立刻被清空</b>，再写新内容。重要文件永远用 "a" 或先备份——和 Linux 里 <span class="code">echo x &gt; file</span> 覆盖文件是一个道理。</p>
 </div>
 <div class="demo">
 <p class="dtitle">示范 2：a 追加 + with 自动关闭</p>
@@ -929,7 +1044,7 @@ lab/notes.md</pre>
 <p>4. 写一个"给文件加日期前缀"的小程序：读当前目录某文件，复制成 "2026-08-25_原文件名"（提示：os.path.join + 读内容写内容）。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 5（题 5-1~5-4）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 5（题 5-1~5-4）</p>
 <h3>6.5 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能说出 r/w/a 三模式，w 为什么危险</p>
@@ -937,7 +1052,7 @@ lab/notes.md</pre>
 <p>☐ 能背出 json 口诀（带 s 字符串，不带 s 文件）</p>
 <p>☐ 会逐行读文件并 strip 换行符</p>
 </div>
-<p class="note">📚 相关手册：open/read/write → 《Python 内置函数手册》“文件对象三连”；JSON 与字符串方法 → 对应速查小节。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：open/read/write → 《Python 内置函数手册》“文件对象三连”；JSON 与字符串方法 → 对应速查小节。</p>
 <div class="newpage"></div>
 <h2 id="toc-8">第 7 章 · 异常处理：try/except/finally</h2>
 <p><b>本章目标</b>（学完能做什么）：给第 6 章的 JSON 程序加上"文件不存在时友好提示"——你的脚本从此<b>不会一碰错误就崩溃</b>。<b>学完本章 = 达成检查点②：能独立写带 try/except 的 Python 脚本。</b></p>
@@ -1015,7 +1130,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '不存在的文件.txt'
 <p>4. 把 1 的脚本跑两遍：第一次无文件（走 except），第二次有文件（走 try），验证两条分支都正常。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 5（题 5-5~5-8）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 5（题 5-5~5-8）</p>
 <h3>7.6 这章你会了吗？</h3>
 <div class="quiz" style="line-height:1.35;">
 <p>☐ 会从下往上读 Traceback，先说最后一行是什么</p>
@@ -1023,13 +1138,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '不存在的文件.txt'
 <p>☐ 能说出 finally 的作用（无论如何都执行）</p>
 <p>☐ 能说出"不要无脑 try"的原则</p>
 </div>
-<p class="note">📚 相关手册：Traceback 逐行拆解 → 《日志报错解读手册》 B 组开篇；报错英语 → 《报错英语单词手册》。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：Traceback 逐行拆解 → 《日志报错解读手册》 B 组开篇；报错英语 → 《报错英语单词手册》。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-9">第 8 章 · 网络请求：requests</h2>
 <p><b>本章目标</b>（学完能做什么）：写"天气查询器"雏形——程序联网拿数据。这是脚本 2 的核心能力，也是调 API 的第一步。</p>
 <p><b>本章新知识点</b>：HTTP 请求/响应 · 状态码 · <span class="code fn">requests</span> 模块 · 响应对象 · 超时与异常。</p>
-<p class="note">📌 外部扩展声明：requests 是<b>第三方库</b>（需先安装），本章所有示范都调<b>外部 API 并需要联网</b>。离线/未安装时：安装方式已标注，无法联网时用离线练习（读一段保存好的 JSON 文本跑 .json()/取值逻辑），主线能力是"拿响应→解析→异常处理"，不在网络本身。练习册基础篇 6-1/6-2 已标外部扩展。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部扩展声明：requests 是<b>第三方库</b>（需先安装），本章所有示范都调<b>外部 API 并需要联网</b>。离线/未安装时：安装方式已标注，无法联网时用离线练习（读一段保存好的 JSON 文本跑 .json()/取值逻辑），主线能力是"拿响应→解析→异常处理"，不在网络本身。练习册基础篇 6-1/6-2 已标外部扩展。</p>
 
 <h3>8.1 什么是 HTTP 请求：Python 版的 curl</h3>
 <p><b>呼应 Linux</b>：requests.get() 就是 curl——向网址发一个"请给我数据"的请求，对方回一个响应。你在第 8 章 Linux 课里用过的 curl，现在换成 Python 写。</p>
@@ -1086,7 +1201,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '不存在的文件.txt'
 <p>4. 给 1 的程序加 try/except 和 timeout，然后断网跑一遍验证提示正常。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-1、6-2）；进阶场景 2（天气查询器）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 6（题 6-1、6-2）；进阶场景 2（天气查询器）</p>
 <h3>8.5 这章你会了吗？</h3>
 <div class="quiz" style="line-height:1.35;">
 <p>☐ 能说出 200/404/500 状态码的含义</p>
@@ -1094,7 +1209,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '不存在的文件.txt'
 <p>☐ 知道 timeout 必须写，以及为什么</p>
 <p>☐ 会用 try/except 接住网络错误</p>
 </div>
-<p class="note">📚 相关手册：json 处理 → 《Python 内置函数手册》；curl 对照 → 《Linux 入门》第 8 章。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：json 处理 → 《Python 内置函数手册》；curl 对照 → 《Linux 入门》第 8 章。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-10">第 9 章 · 命令行参数：argparse</h2>
@@ -1176,7 +1291,7 @@ True</pre>
 <p>4. 敲 python3 脚本名 --help，看 argparse 自动生成的帮助文本长什么样，抄进日志。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-3、6-4）；进阶场景 1（批量重命名工具）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 6（题 6-3、6-4）；进阶场景 1（批量重命名工具）</p>
 <h3>9.4 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能背出 argparse 三步走（创建 → 添加 → 解析）</p>
@@ -1184,12 +1299,12 @@ True</pre>
 <p>☐ 知道 --help 是自动生成的</p>
 <p>☐ 知道 default 和 type 两个参数的用途</p>
 </div>
-<p class="note">📚 相关手册：--help 对照 → 《Linux 入门》第 0 章。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：--help 对照 → 《Linux 入门》第 0 章。</p>
 <div class="newpage"></div>
 <h2 id="toc-11">第 10 章 · 日志：logging</h2>
 <p><b>本章目标</b>（学完能做什么）：给脚本加日志记录——每次操作留痕，出问题能排查。日志就是运维的第一现场（你读过 Linux 日志，现在自己生产日志）。</p>
 <p><b>本章新知识点</b>：print 调试的不足 · <span class="code fn">logging</span> 模块 · 四个级别 · basicConfig（基本配置）· 日志写文件。</p>
-<p class="note">📌 口径说明：logging 标准是<b>五级</b>（DEBUG/INFO/WARNING/ERROR/CRITICAL）；本章为入门只讲前四级（到 ERROR），属<b>简化范围</b>——真实项目里 CRITICAL 照样常用（定义见《日志报错解读手册》级别表）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 口径说明：logging 标准是<b>五级</b>（DEBUG/INFO/WARNING/ERROR/CRITICAL）；本章为入门只讲前四级（到 ERROR），属<b>简化范围</b>——真实项目里 CRITICAL 照样常用（定义见《日志报错解读手册》级别表）。</p>
 
 <h3>10.1 print 调试的不足</h3>
 <p>print 能看结果，但有三个毛病：① 没有<b>级别</b>（分不出"正常"和"出错了"）；② 没有<b>时间</b>（不知道何时发生）；③ 用完要删（上线时满屏 print 是灾难）。logging（日志）模块一次解决三样。</p>
@@ -1232,7 +1347,7 @@ True</pre>
 <p>4. 把错误信息写进日志：try/except 里 except 块加 logging.error(f"失败原因：{e}")。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-5、6-6）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 6（题 6-5、6-6）</p>
 <h3>10.4 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 能背出四个级别及含义（DEBUG/INFO/WARNING/ERROR）</p>
@@ -1240,7 +1355,7 @@ True</pre>
 <p>☐ 会用 filename 把日志写进文件</p>
 <p>☐ 能说出 print 调试的三大不足</p>
 </div>
-<p class="note">📚 相关手册：日志报错解读 → 《日志报错解读手册》；/var/log 对照 → 《Linux 入门》第 10 章。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：日志报错解读 → 《日志报错解读手册》；/var/log 对照 → 《Linux 入门》第 10 章。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-12">第 11 章 · 进程调用：subprocess</h2>
@@ -1279,7 +1394,7 @@ True</pre>
 <p class="demo-ex">组合拳：subprocess 拿输出 → <span class="code fn">split</span>()（切割字符串，第 1 章 1.3 学过）按行分成列表 → 取第 2 行（lines[1]，第 1 行是表头）→ 再 split 按空格切 → 拿到数字。这套"调命令 +解析输出"就是 server-health-check 的核心动作。到这一步，Linux 的知识全部变成了 Python 的数据来源。</p>
 </div>
 <div class="warn">
-<p><span class="danger">⚠ 安全提醒：</span>用 subprocess 调命令时，命令列表里的参数<b>不要直接拼用户输入</b>（尤其是 rm、dd 这类危险命令）。永远用列表形式传参，别用字符串拼接——以后做 Web 服务时会懂，先种下这个习惯。</p>
+<p><span class="danger"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全提醒：</span>用 subprocess 调命令时，命令列表里的参数<b>不要直接拼用户输入</b>（尤其是 rm、dd 这类危险命令）。永远用列表形式传参，别用字符串拼接——以后做 Web 服务时会懂，先种下这个习惯。</p>
 </div>
 
 <h3>11.2 易错点（这章的坑）</h3>
@@ -1302,7 +1417,7 @@ True</pre>
 <p class="demo-ex"><b>两行认识（进阶册场景 1、4 的脚本用了它）</b>：① <span class="code">__name__</span> 是 Python 给每个文件的"名字标签"——文件被直接运行时它是 <span class="code">"__main__"</span>，被别的文件 import 时它是文件名。所以这句话的意思 = <b>"只有直接跑我这个文件时，才执行下面的 main()"</b>（被导入时不自动跑，避免误触发）。② 另一种等效写法 <span class="code">raise SystemExit(main())</span>：跑 main 并把它的返回值当"退出码"交给系统（0=成功、非 0=失败），相当于 Shell 里的 <span class="code">exit $?</span>。现在只需混个眼熟——<b>进阶册场景 1、4 的脚本用了它</b>（其他脚本直接调 main() 也能跑）。</p>
 </div>
 
-<h3>11.4 章末作业 🌐</h3>
+<h3>11.4 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></h3>
 <div class="box">
 <p>1. 用 Python 调 df -h，打印结果。</p>
 <p>2. 用 Python 调 free -h，只打印内存那一行。</p>
@@ -1310,7 +1425,7 @@ True</pre>
 <p>4. 综合：调 df -h /，把 Use% 那列的数字抓出来（提示：split），超过 80 打印警告（用第 2 章的 if）。</p>
 </div>
 
-<p class="practice">✏️ 对应练习册：基础篇阶段 6（题 6-7、6-8）；进阶场景 3（巡检雏形·王牌项目版本 0）；进阶场景 5（paramiko 远程版·选做）</p>
+<p class="practice"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇阶段 6（题 6-7、6-8）；进阶场景 3（巡检雏形·王牌项目版本 0）；进阶场景 5（paramiko 远程版·选做）</p>
 <h3>11.5 这章你会了吗？</h3>
 <div class="quiz">
 <p>☐ 会写 run() 并拿到 stdout</p>
@@ -1318,7 +1433,7 @@ True</pre>
 <p>☐ 能说出 returncode 为 0 的含义</p>
 <p>☐ 能说出 subprocess 在运维里的地位（两条线合流的接口）</p>
 </div>
-<p class="note">📚 相关手册：df/free → 《Linux 入门》第 7 章；split → 《Python 内置函数手册》字符串方法速查（11 条）。学完本书 → 开始《Python 练习册：基础篇》。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-bk"/></svg> 相关手册：df/free → 《Linux 入门》第 7 章；split → 《Python 内置函数手册》字符串方法速查（11 条）。学完本书 → 开始《Python 练习册：基础篇》。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-13">附录 A · 章末作业参考答案（含思考过程）</h2>
@@ -1445,13 +1560,13 @@ True</pre>
 <tr><td>第 3 章 list、dict、tuple、set</td><td>2.5h</td><td>通讯录小程序</td></tr>
 <tr><td>第 4 章 def、参数、返回值</td><td>2h</td><td>三个小函数、计算器</td></tr>
 <tr><td>第 5 章 import、os、time</td><td>1.5h</td><td>工作目录报告</td></tr>
-<tr><td>⭐ 检查点①</td><td>—</td><td>学完第 5 章后，能独立完成第 5 章全部章末作业和自测清单（逐项运行、逐项打勾）；这就是本书的第一个基础检查点。</td></tr>
+<tr><td><svg class="em" width="15" height="15"><use href="#ic-st"/></svg> 检查点①</td><td>—</td><td>学完第 5 章后，能独立完成第 5 章全部章末作业和自测清单（逐项运行、逐项打勾）；这就是本书的第一个基础检查点。</td></tr>
 <tr><td>第 6 章 open/with、json</td><td>2h</td><td>通讯录存 JSON</td></tr>
-<tr><td>第 7 章 try/except/finally</td><td>1.5h</td><td>⭐ 检查点②：带 try/except 的脚本</td></tr>
+<tr><td>第 7 章 try/except/finally</td><td>1.5h</td><td><svg class="em" width="15" height="15"><use href="#ic-st"/></svg> 检查点②：带 try/except 的脚本</td></tr>
 <tr><td>第 8 章 requests</td><td>2h</td><td>天气查询器雏形（脚本 2 核心）</td></tr>
 <tr><td>第 9 章 argparse</td><td>1.5h</td><td>python3 weather.py 杭州</td></tr>
 <tr><td>第 10 章 logging</td><td>1h</td><td>带日志的脚本</td></tr>
-<tr><td>第 11 章 subprocess</td><td>1.5h</td><td>⭐ 通往 server-health-check 的接口</td></tr>
+<tr><td>第 11 章 subprocess</td><td>1.5h</td><td><svg class="em" width="15" height="15"><use href="#ic-st"/></svg> 通往 server-health-check 的接口</td></tr>
 <tr><td><b>合计</b></td><td><b>20.5h</b></td><td>学完接《Python 练习册：基础篇》</td></tr>
 </table>
 <p class="note">学习顺序：本书在 Linux 三连之后开始。两件成品脚本：① 批量文件重命名（第 5、6 章知识）② 天气查询器（第 8、9 章知识）——练习册进阶篇会把它们作为收尾项目。</p>
