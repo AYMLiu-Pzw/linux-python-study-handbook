@@ -10,7 +10,7 @@ body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family
 h1 { font-size: 18pt; color: #003a8c; margin: 6px 0 2px; }
 h2 { font-size: 13.5pt; color: #fff; background: #003a8c; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
 h3 { font-size: 11.5pt; color: #003a8c; margin: 10px 0 4px; border-left: 4px solid #003a8c; padding-left: 6px; }
-p { margin: 3px 0; }
+p { margin: 2px 0; }
 td, th, pre, h1, h2, h3 { text-align: left; }
 .note { font-size: 9pt; color: #666; }
 .code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
@@ -35,9 +35,9 @@ td, th, pre, h1, h2, h3 { text-align: left; }
 .demo-out { white-space: pre-wrap; font-family: Consolas,"Courier New",monospace; font-size: 10.5pt; line-height: 1.5; color: #444; }
 .demo-ex { font-size: 11pt; color: #003a8c; }
 .newpage { page-break-before: always; }
-table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
 th { background: #003a8c; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
-td { border: 1px solid #ccc; padding: 2px 5px; vertical-align: top; font-size: 10pt; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
 pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
 .step { color: #003a8c; font-weight: bold; }
 .toc { border: 1px solid #ccc; border-radius: 4px; padding: 6px 12px; margin: 6px 0; }
@@ -87,7 +87,11 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 @media print {
   pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
 }
-.footer { font-size: 9pt; color: #999; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </style>
 
 

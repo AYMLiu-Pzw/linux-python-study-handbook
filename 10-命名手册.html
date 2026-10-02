@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>命名手册 · v1.0</title>
+<style>
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #003a8c; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #003a8c; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #003a8c; margin: 10px 0 4px; border-left: 4px solid #003a8c; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.word { color: #003a8c; font-weight: bold; }
+.err { color: #c00000; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.section-head { font-size: 12pt; font-weight: bold; color: #003a8c; background: #e8f0fb; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #003a8c; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #003a8c; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #f7faff; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #b45309; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #b45309; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+
+</style>
+</head>
+<body>
+
+<h1>📘 命名手册（起名速查）</h1>
+<p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>；需要保留彩色底色时开启"背景图形"。用法：先背第 1、2 页；写代码卡壳时翻第 3、4 页找词。</p>
+
+<h2 class="toc-title">目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">第 1 页</span><span class="tdesc">起名三原则 + 两个必须避开的坑</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">第 2 页</span><span class="tdesc">怎么起名：四步法 + 核心 24 词</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">第 3 页</span><span class="tdesc">分组速查（数量 · 状态 · 文件 · 时间 · 网络）</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">第 4 页</span><span class="tdesc">动作动词 + 判断前缀 + 常用缩写 + 检查三连问</span><a href="#toc-4"></a></div>
+</div>
+
+<h2 id="toc-1">第 1 页 · 起名三原则</h2>
+<p>变量名不是给电脑看的，是给<b>读代码的人</b>看的。做到下面三条，代码的可读性会明显不一样。</p>
+<table>
+<tr><th>原则</th><th>人话解释</th><th>❌ 别这样</th><th>✅ 这样写</th></tr>
+<tr><td><b>1. 见名知意</b></td><td>一眼看出里面装的是什么</td><td class="code err">x　a1　data2</td><td class="code ok">total_count　disk_usage</td></tr>
+<tr><td><b>2. 下划线连接</b></td><td>全部小写，用下划线连；别用拼音缩写</td><td class="code err">diskUsage　panYongLv</td><td class="code ok">disk_usage　user_name</td></tr>
+<tr><td><b>3. 判断用 is_/has_</b></td><td>值只有 True / False 的，一眼看出是"是不是"</td><td class="code err">empty　err_flag</td><td class="code ok">is_empty　has_error</td></tr>
+</table>
+
+<h3>⚠ 坑 1：别把 Python 内置名当变量名</h3>
+<p>下面这些词 Python 已经占用。再拿它们当变量名，等于把原有功能“覆盖”掉：</p>
+<p class="code err">list　dict　str　int　float　bool　len　sum　max　min　input　print　open　type　id　next　all　any　set　object</p>
+<p>❌ <span class="code err">list = [1, 2]</span>（写完这句，以后 <span class="code">list()</span> 就废了）<br>
+✅ <span class="code ok">data_list = [1, 2]</span>　✅ <span class="code ok">total_sum = 100</span>　✅ <span class="code ok">max_value = 9</span></p>
+<p class="rule">解法就一句话：<b>加前缀或后缀</b>——<span class="code">data_</span>、<span class="code">total_</span>、<span class="code">_value</span>、<span class="code">_list</span>，立刻不撞。</p>
+
+<h3>⚠ 坑 2：pwd 有歧义</h3>
+<p>Linux 里 <span class="code">pwd</span> = 显示当前目录。所以表示“密码”时写全称 <span class="code ok">password</span>，<b>别用 pwd</b>——同一个词两个意思，读代码的人会懵。</p>
+
+<div class="pb"></div>
+<h2 id="toc-2">第 2 页 · 怎么起名：四步法</h2>
+<div class="box">
+<p><b>① 先用中文说清楚</b>：这个变量装的是"磁盘用了百分之几"。</p>
+<p><b>② 圈出关键词</b>：磁盘 → disk	｜	使用率 → usage</p>
+<p><b>③ 判断类型，挑词形</b>：</p>
+<p>· 装"东西"（名词）→ 名词组合：<span class="code ok">disk_usage</span></p>
+<p>· 是"是不是"（只有 True/False）→ 加 is_/has_：<span class="code ok">is_disk_full</span></p>
+<p>· 要做"动作"（函数）→ 动词开头：<span class="code ok">check_disk()</span></p>
+<p><b>④ 连起来、读一遍</b>：全小写 + 下划线，读起来能一眼看懂。</p>
+</div>
+<p class="note">拿不准就用<b>全称</b>，不要自造缩写：message 就写 message（别写 mssg），password 就写 password（别写 pwd）。</p>
+
+<h3>🔥 核心 24 词（最高频，优先掌握）</h3>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
+<tr><td>count</td><td>计数</td><td class="code">error_count</td><td>total</td><td>总计</td><td class="code">total_size</td></tr>
+<tr><td>size</td><td>大小</td><td class="code">file_size</td><td>result</td><td>结果</td><td class="code">result = run()</td></tr>
+<tr><td>value</td><td>值</td><td class="code">current_value</td><td>status</td><td>状态</td><td class="code">status = "running"</td></tr>
+<tr><td>error</td><td>错误</td><td class="code">error_msg</td><td>file</td><td>文件</td><td class="code">file_list</td></tr>
+<tr><td>filename</td><td>文件名</td><td class="code">filename = "a.txt"</td><td>path</td><td>路径</td><td class="code">log_path</td></tr>
+<tr><td>dir</td><td>目录</td><td class="code">home_dir</td><td>line</td><td>行（一行文本）</td><td class="code">first_line</td></tr>
+<tr><td>empty</td><td>空的</td><td class="code">is_empty</td><td>name</td><td>名字</td><td class="code">user_name</td></tr>
+<tr><td>data</td><td>数据</td><td class="code">data_list</td><td>time</td><td>时间</td><td class="code">start_time</td></tr>
+<tr><td>get</td><td>获取</td><td class="code">get_data()</td><td>set</td><td>设置</td><td class="code">set_value()</td></tr>
+<tr><td>check</td><td>检查</td><td class="code">check_disk()</td><td>run</td><td>运行</td><td class="code">run_backup()</td></tr>
+<tr><td>read / write</td><td>读 / 写</td><td class="code">read_file()</td><td>start / end</td><td>开始 / 结束</td><td class="code">start_time / end_time</td></tr>
+<tr><td>msg</td><td>消息</td><td class="code">error_msg</td><td>tmp</td><td>临时</td><td class="code">tmp_dir</td></tr>
+</table>
+
+<div class="pb"></div>
+<h2 id="toc-3">第 3 页 · 分组速查（速查）</h2>
+
+<div class="section-head tight2">📊 数量与统计</div>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
+<tr><td>count</td><td>计数</td><td class="code">error_count = 0</td><td>total</td><td>总计</td><td class="code">total_size</td></tr>
+<tr><td>num</td><td>数量</td><td class="code">user_num</td><td>index</td><td>第几个（索引）</td><td class="code">循环里的 i</td></tr>
+<tr><td>size</td><td>大小</td><td class="code">file_size</td><td>length</td><td>长度</td><td class="code">str_length</td></tr>
+<tr><td>sum</td><td>总和（避免单用）</td><td class="code ok">total_sum</td><td>avg</td><td>平均</td><td class="code">avg_cpu</td></tr>
+<tr><td>max / min</td><td>最大 / 最小（避免单用）</td><td class="code ok">max_value</td><td>percent</td><td>百分比</td><td class="code">disk_percent</td></tr>
+</table>
+
+<div class="section-head tight2">📋 结果与状态</div>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
+<tr><td>result</td><td>结果</td><td class="code">result = 2 + 3</td><td>value</td><td>值（键值对）</td><td class="code">current_value</td></tr>
+<tr><td>status</td><td>状态</td><td class="code">status = "running"</td><td>flag</td><td>标志开关</td><td class="code">success_flag</td></tr>
+<tr><td>code</td><td>状态码</td><td class="code">exit_code（0=正常）</td><td>message</td><td>消息</td><td class="code">error_msg</td></tr>
+<tr><td>success</td><td>成功</td><td class="code">success_count</td><td>pending</td><td>待处理</td><td class="code">pending_tasks</td></tr>
+<tr><td>running</td><td>运行中</td><td class="code">service_running</td><td>done</td><td>完成</td><td class="code">is_done</td></tr>
+</table>
+
+<div class="section-head tight2">📁 文件与路径</div>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
+<tr><td>file</td><td>文件</td><td class="code">file_path</td><td>filename</td><td>文件名</td><td class="code">filename = "a.txt"</td></tr>
+<tr><td>path</td><td>路径</td><td class="code">log_path</td><td>dir</td><td>目录</td><td class="code">home_dir</td></tr>
+<tr><td>content</td><td>内容</td><td class="code">file_content</td><td>name</td><td>名字</td><td class="code">user_name</td></tr>
+<tr><td>line</td><td>行（一行文本）</td><td class="code">last_line</td><td>empty</td><td>空的（True/False）</td><td class="code">is_empty</td></tr>
+<tr><td>blank</td><td>空白</td><td class="code">blank_line</td><td>None</td><td>"无"/空值（Python 写法）</td><td class="code">result = None</td></tr>
+</table>
+
+<div class="section-head tight2">⏰ 时间</div>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
+<tr><td>time</td><td>时间</td><td class="code">start_time</td><td>date</td><td>日期</td><td class="code">backup_date</td></tr>
+<tr><td>timestamp</td><td>时间戳</td><td class="code">create_timestamp</td><td>duration</td><td>持续时长</td><td class="code">run_duration</td></tr>
+<tr><td>start / end</td><td>开始 / 结束</td><td class="code">start_time / end_time</td><td>interval</td><td>间隔</td><td class="code">check_interval</td></tr>
+<tr><td>hour / minute / second</td><td>时 / 分 / 秒</td><td class="code">timeout_sec</td><td>day / month / year</td><td>日 / 月 / 年</td><td class="code">backup_2026_10_02</td></tr>
+</table>
+
+<div class="section-head tight2">🌐 网络</div>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
+<tr><td>host</td><td>主机</td><td class="code">remote_host</td><td>port</td><td>端口</td><td class="code">ssh_port（22）</td></tr>
+<tr><td>ip</td><td>IP 地址</td><td class="code">server_ip</td><td>url</td><td>网址</td><td class="code">api_url</td></tr>
+<tr><td>request / response</td><td>请求 / 响应</td><td class="code">send_request()</td><td>client / server</td><td>客户端 / 服务器</td><td class="code">client_host</td></tr>
+<tr><td>connection</td><td>连接</td><td class="code">ssh_conn</td><td>timeout</td><td>超时</td><td class="code">conn_timeout</td></tr>
+</table>
+
+
+
+<div class="pb"></div>
+<h2 id="toc-4">第 4 页 · 动作动词 · 判断前缀 · 缩写 · 检查三连问</h2>
+<div class="section-head tight2">⚡ 动作动词（给函数起名：动词开头）</div>
+<table class="tight xtight">
+<tr><th>词</th><th>中文</th><th>函数名示例</th><th>词</th><th>中文</th><th>函数名示例</th></tr>
+<tr><td>get / set</td><td>获取 / 设置</td><td class="code">get_data()</td><td>add / remove</td><td>添加 / 移除</td><td class="code">add_user()</td></tr>
+<tr><td>create / delete</td><td>创建 / 删除</td><td class="code">create_dir()</td><td>update</td><td>更新</td><td class="code">update_config()</td></tr>
+<tr><td>read / write</td><td>读 / 写</td><td class="code">read_log()</td><td>open / close</td><td>打开 / 关闭</td><td class="code">open_file()</td></tr>
+<tr><td>start / stop / restart</td><td>启动 / 停止 / 重启</td><td class="code">restart_service()</td><td>run</td><td>运行</td><td class="code">run_backup()</td></tr>
+<tr><td>check</td><td>检查</td><td class="code">check_disk()</td><td>find / search</td><td>查找 / 搜索</td><td class="code">find_file()</td></tr>
+<tr><td>parse / convert</td><td>解析 / 转换</td><td class="code">parse_log()</td><td>copy / move</td><td>复制 / 移动</td><td class="code">copy_file()</td></tr>
+<tr><td>send</td><td>发送</td><td class="code">send_alert()</td><td>load / save</td><td>加载 / 保存</td><td class="code">load_config()</td></tr>
+<tr><td>log</td><td>记日志</td><td class="code">log_error()</td><td>clean / clear</td><td>清理 / 清空</td><td class="code">clean_tmp()</td></tr>
+</table>
+<p class="note">函数名 = 动词 + 名词，一眼看出"它干什么、对谁干"；动作永远放前面。</p>
+
+
+
+<div class="section-head tight2">✅ 判断前缀（is_ / has_ / can_ / should_，值只会是 True / False）</div>
+<table class="tight xtight">
+<tr><th>名字</th><th>含义</th><th>名字</th><th>含义</th><th>名字</th><th>含义</th></tr>
+<tr><td class="code">is_empty</td><td>是不是空的</td><td class="code">is_running</td><td>是不是在运行</td><td class="code">is_valid</td><td>是不是有效</td></tr>
+<tr><td class="code">is_success</td><td>是不是成功</td><td class="code">is_dir</td><td>是不是目录</td><td class="code">has_error</td><td>有没有错误</td></tr>
+<tr><td class="code">has_data</td><td>有没有数据</td><td class="code">can_write</td><td>能不能写</td><td class="code">should_alert</td><td>应不应该告警</td></tr>
+<tr><td class="code">need_reboot</td><td>需不需要重启</td><td colspan="4" class="note">一眼看出"这是判断题"，不是数量、不是内容</td></tr>
+</table>
+
+<div class="section-head tight2">🔤 约定俗成的缩写（不要自造）</div>
+<table class="tight xtight">
+<tr><th>缩写</th><th>全称</th><th>中文</th><th>缩写</th><th>全称</th><th>中文</th></tr>
+<tr><td class="code">msg</td><td>message</td><td>消息</td><td class="code">num</td><td>number</td><td>数量</td></tr>
+<tr><td class="code">len</td><td>length</td><td>长度（内置名，别单用）</td><td class="code">tmp</td><td>temp</td><td>临时</td></tr>
+<tr><td class="code">arg</td><td>argument</td><td>参数</td><td class="code">var</td><td>variable</td><td>变量</td></tr>
+<tr><td class="code">func</td><td>function</td><td>函数</td><td class="code">obj</td><td>object</td><td>对象</td></tr>
+<tr><td class="code">idx</td><td>index</td><td>索引</td><td class="code">cfg</td><td>config</td><td>配置</td></tr>
+<tr><td class="code">env</td><td>environment</td><td>环境</td><td class="code">info</td><td>information</td><td>信息</td></tr>
+<tr><td class="code">addr</td><td>address</td><td>地址</td><td class="code">password</td><td>—</td><td>密码（别写 pwd）</td></tr>
+<tr><td class="code">req</td><td>request</td><td>请求</td><td class="code">src / dst</td><td>source / destination</td><td>源 / 目标</td></tr>
+<tr><td class="code">app</td><td>application</td><td>应用</td><td class="code">db</td><td>database</td><td>数据库</td></tr>
+</table>
+
+<h3>📌 命名检查三连问（起完名默念一遍）</h3>
+<p><b>① 别人一眼能看懂吗？</b>　<b>② 有下划线分隔吗？</b>　<b>③ 撞内置名了吗？</b></p>
+<p class="rule">三个都过，这个名字就合格。　<b>背诵顺序</b>：核心 24 词 → is_ 判断组 → 动作动词组（写脚本 90% 的命名来自这三块）。</p>
+
+<p class="note">命名手册 · v1.0（2026-10） · 与《九阶》系列同格式</p>
+
+</body>
+</html>
