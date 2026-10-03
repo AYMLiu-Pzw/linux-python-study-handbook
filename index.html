@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九阶 · Linux 与 Python 自学资料</title>
+<style>
+
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.lvl-hot { color: #c00000; font-size: 8pt; border: 1px solid #e0b3b3; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.lvl-mid { color: #666; font-size: 8pt; border: 1px solid #ddd; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #c00000; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #c00000; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
+
+.cols { column-count: 2; column-gap: 10mm; }
+.section-head { break-after: avoid; page-break-after: avoid; }
+.st { margin: 2px 0 6px 0; padding-left: 2px; list-style: none; }
+.st li { font-size: 10pt; line-height: 1.38; margin: 1px 0; break-inside: avoid; }
+.st-title { font-size: 10.5pt; font-weight: bold; color: #003a8c; margin: 6px 0 1px; break-after: avoid; }
+ul.st { columns: 1; }
+@media print { .cols { column-count: 2; } }
+
+
+body { max-width: 900px; margin: 0 auto; padding: 24px 18px; }
+td.num { width: 2.2em; color: #0a6b1e; font-weight: bold; font-size: 13pt; }
+td.kind { width: 5.5em; color: #666; font-size: 9.5pt; }
+td.links { width: 8.5em; font-size: 10pt; white-space: nowrap; }
+.desc { color: #666; font-size: 9.5pt; }
+a { color: #0a6b1e; }
+</style>
+</head>
+<body>
+<h1>九阶 · Linux 与 Python 自学资料</h1>
+<p class="note">共 <b>12 份资料</b>（v2.5 · 2026-10）——按顺序学即可：先用教科书理解概念，再用练习册练熟，遇到问题翻手册，最后用《总自测表》逐条验收。</p>
+<table>
+<tr><th>#</th><th>资料</th><th>类型</th><th>阅读</th></tr>
+<tr><td class="num">01</td><td><b>Linux入门</b><br><span class="desc">终端、目录、文件、权限、进程、服务、网络、Shell 脚本</span></td><td class="kind">教科书</td><td class="links"><a href="01-Linux入门.html">在线阅读</a> · <a href="PDF版/01-Linux入门.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">02</td><td><b>Linux练习册基础篇</b><br><span class="desc">5 个阶段、40 道基础操作题</span></td><td class="kind">练习册</td><td class="links"><a href="02-Linux练习册基础篇.html">在线阅读</a> · <a href="PDF版/02-Linux练习册基础篇.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">03</td><td><b>Linux练习册进阶篇</b><br><span class="desc">5 个故障场景：服务起不来、端口不通、磁盘满…</span></td><td class="kind">练习册</td><td class="links"><a href="03-Linux练习册进阶篇.html">在线阅读</a> · <a href="PDF版/03-Linux练习册进阶篇.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">04</td><td><b>Python入门</b><br><span class="desc">12 章：语法、函数、文件、异常、模块；附 venv/pip 附录</span></td><td class="kind">教科书</td><td class="links"><a href="04-Python入门.html">在线阅读</a> · <a href="PDF版/04-Python入门.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">05</td><td><b>Python练习册基础篇</b><br><span class="desc">6 个阶段、49 道基础编程题</span></td><td class="kind">练习册</td><td class="links"><a href="05-Python练习册基础篇.html">在线阅读</a> · <a href="PDF版/05-Python练习册基础篇.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">06</td><td><b>Python练习册进阶篇</b><br><span class="desc">5 个自动化场景：批量改名、天气 API、巡检、日志分析</span></td><td class="kind">练习册</td><td class="links"><a href="06-Python练习册进阶篇.html">在线阅读</a> · <a href="PDF版/06-Python练习册进阶篇.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">07</td><td><b>Python内置函数手册</b><br><span class="desc">常用内置函数、字符串方法、文件与 JSON 速查</span></td><td class="kind">手册</td><td class="links"><a href="07-Python内置函数手册.html">在线阅读</a> · <a href="PDF版/07-Python内置函数手册.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">08</td><td><b>报错英语单词手册</b><br><span class="desc">A~F 六组报错高频词，看懂英文报错</span></td><td class="kind">手册</td><td class="links"><a href="08-报错英语单词手册.html">在线阅读</a> · <a href="PDF版/08-报错英语单词手册.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">09</td><td><b>日志报错解读手册</b><br><span class="desc">日志结构、级别、常见 Linux/Python 报错逐词解读</span></td><td class="kind">手册</td><td class="links"><a href="09-日志报错解读手册.html">在线阅读</a> · <a href="PDF版/09-日志报错解读手册.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">10</td><td><b>命名手册</b><br><span class="desc">起名三原则、四步法、分组词表与避坑清单</span></td><td class="kind">手册</td><td class="links"><a href="10-命名手册.html">在线阅读</a> · <a href="PDF版/10-命名手册.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">11</td><td><b>Git与GitHub速查</b><br><span class="desc">最小工作流六条命令、.gitignore、常见报错</span></td><td class="kind">手册</td><td class="links"><a href="11-Git与GitHub速查.html">在线阅读</a> · <a href="PDF版/11-Git与GitHub速查.pdf">下载 PDF</a></td></tr>
+<tr><td class="num">12</td><td><b>总自测表</b><br><span class="desc">109 个检验点，按册与章节分组，做完打勾验收</span></td><td class="kind">自测清单</td><td class="links"><a href="12-总自测表.html">在线阅读</a> · <a href="PDF版/12-总自测表.pdf">下载 PDF</a></td></tr>
+</table>
+<h2>怎么用</h2>
+<p>① <b>在线阅读</b>：点上表「在线阅读」，直接在浏览器打开（排版和打印版一致，无需下载）。<br>
+② <b>打印 / 离线</b>：点「下载 PDF」，已排好页码与书签，A4 直接打印。<br>
+③ <b>学习顺序</b>：01 → 02 → 03 → 04 → 05 → 06（07~11 随手查阅，12 用于阶段验收）。</p>
+<p class="note">环境基准：Ubuntu 26.04 LTS + Python 3.14（命令在 22.04 / 24.04 上通用）。全部内容为单文件自包含，不依赖任何外部服务。</p>
+<p class="footer">九阶 · Linux 与 Python 自学资料 · 站点首页 · 2026-10</p>
+</body>
+</html>
