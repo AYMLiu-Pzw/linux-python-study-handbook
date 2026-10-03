@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>日志报错解读手册 · v2.4</title>
+<title>日志报错解读手册 · v2.5</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,6 +93,8 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 .em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
 </style>
 
 
@@ -343,7 +345,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p class="line">逐词：<span class="word">Cannot connect</span>（连不上）→ <span class="word">daemon</span>（守护进程：后台服务）→ <span class="word">running</span>（运行中）</p>
 <p class="line">整句：<b class="trans">连不上 Docker 后台服务：它没在运行</b></p>
 <p class="line">为什么：Docker 服务没启动；或当前用户没权限（没加入 docker 组）</p>
-<p class="line">怎么办：<span class="ok">sudo systemctl start docker</span> 启动；<span class="ok">sudo usermod -aG docker 用户名</span> 加组后重新登录（<b>外部扩展：Docker 的安装、镜像、端口、卷、停止与清理都不在九册前置内，无 Docker 时本条跳过，不影响主线</b>）</p>
+<p class="line">怎么办：<span class="ok">sudo systemctl start docker</span> 启动；<span class="ok">sudo usermod -aG docker 用户名</span> 加组后重新登录（<b>外部扩展：Docker 的安装、镜像、端口、卷、停止与清理都不在本套教材前置内，无 Docker 时本条跳过，不影响主线</b>）</p>
 </div>
 
 <div class="errblock">
@@ -559,6 +561,19 @@ ZeroDivisionError: division by zero</pre>
 <p class="line">整句：<b class="trans">你按了 Ctrl+C 把程序打断了（这不是 bug，是你干的）</b></p>
 <p class="line">怎么办：不用管，程序是正常的，你想重启就再运行一次</p>
 </div>
+<div class="errblock">
+<p class="code err">㉑ error: externally-managed-environment<span class="lvl-hot"><svg class="em" width="15" height="15"><use href="#ic-fr"/></svg> Ubuntu 26.04 默认如此</span></p>
+<p class="line">逐词：<span class="word">externally</span>（由外部/系统）→ <span class="word">managed</span>（被管理的）→ <span class="word">environment</span>（环境）</p>
+<p class="line">整句：<b class="trans">这个 Python 环境归系统管，不允许你直接往里装包</b>——Ubuntu 24.04 起引入的保护机制（26.04 同样如此），防止 pip 把系统装乱</p>
+<p class="line">怎么办：建虚拟环境再装——<span class="ok">python3 -m venv .venv &amp;&amp; source .venv/bin/activate</span>，然后 <span class="ok">pip install 包名</span>；要给系统装就用 <span class="ok">sudo apt install python3-包名</span>。详见《Python 入门》附录 E</p>
+</div>
+<div class="errblock">
+<p class="code err">㉒ No module named pip<span class="lvl-mid"><svg class="em" width="15" height="15"><use href="#ic-lb"/></svg> 新建虚拟环境后常见</span></p>
+<p class="line">逐词：<span class="word">module</span>（模块）→ <span class="word">pip</span>（Python 的装包工具）</p>
+<p class="line">整句：<b class="trans">这个环境里没带 pip</b>——Ubuntu 把 pip 拆成了独立包，新建的虚拟环境默认不带</p>
+<p class="line">怎么办：先 <span class="ok">sudo apt install python3-venv python3-pip</span>，删掉旧环境重建一次；在虚拟环境里则先确认已 <span class="ok">source .venv/bin/activate</span></p>
+</div>
+
 
 <div class="newpage"></div>
 <h2 id="toc-4">报错分级速查表（什么颜色代表多严重）</h2>
@@ -617,7 +632,19 @@ Aug 25 10:00:03 server1 backup.sh[2002]: /home/&lt;某用户&gt;/backup.sh: line
 <p>④ <b>一次只改一个变量</b>——排错时改一处试一次，别一次性改五处（改五处，好了你也不知道是哪处起作用）</p>
 <p>⑤ <b>解决后记笔记</b>——"什么报错 + 什么原因 + 怎么解决"写进学习日志，这以后就是你的《运维踩坑宝典》</p>
 </div>
-<p class="footer">日志报错解读手册 · 这不是用来背的，是用来"查"的——遇到就翻，翻多了自然记住 · v2.4（2026-09）</p>
+<div class="box2"><b>本套资料总索引（要查什么 → 翻哪册）：</b>
+<table class="tight xtight"><tr><th>你要找</th><th>去哪册</th></tr>
+<tr><td>Linux 命令、权限、进程、服务、网络、Shell 脚本</td><td>01 Linux 入门（练：02 基础篇 / 03 进阶篇）</td></tr>
+<tr><td>Python 语法、模块、文件、异常、自动化</td><td>04 Python 入门（练：05 基础篇 / 06 进阶篇）</td></tr>
+<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>07 内置函数手册</td></tr>
+<tr><td>报错里的英文单词看不懂</td><td>08 报错英语单词手册</td></tr>
+<tr><td>日志读不懂、报错不会定位</td><td>09 日志报错解读手册</td></tr>
+<tr><td>变量 / 函数怎么起名</td><td>10 命名手册</td></tr>
+<tr><td>代码提交、推送到 GitHub</td><td>11 Git 与 GitHub 速查</td></tr>
+<tr><td>装第三方库（pip / venv / requirements）</td><td>04 Python 入门 · 附录 E</td></tr>
+<tr><td>我到底学会了没有</td><td>12 总自测表（逐条打勾）</td></tr></table></div>
+
+<p class="footer">日志报错解读手册 · 这不是用来背的，是用来"查"的——遇到就翻，翻多了自然记住 · v2.5（2026-09）</p>
 
 <div class="newpage"></div>
 <h2 id="toc-8">实战练习答案（先做再看）</h2>

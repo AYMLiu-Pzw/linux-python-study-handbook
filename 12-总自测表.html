@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>九阶·总自测表 · v2.5</title>
+<style>
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.lvl-hot { color: #c00000; font-size: 8pt; border: 1px solid #e0b3b3; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.lvl-mid { color: #666; font-size: 8pt; border: 1px solid #ddd; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #c00000; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #c00000; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
+
+.cols { column-count: 2; column-gap: 10mm; }
+.section-head { break-after: avoid; page-break-after: avoid; }
+.st { margin: 2px 0 6px 0; padding-left: 2px; list-style: none; }
+.st li { font-size: 10pt; line-height: 1.38; margin: 1px 0; break-inside: avoid; }
+.st-title { font-size: 10.5pt; font-weight: bold; color: #003a8c; margin: 6px 0 1px; break-after: avoid; }
+ul.st { columns: 1; }
+@media print { .cols { column-count: 2; } }
+
+</style>
+</head>
+<body>
+<h1>☑ 九阶 · 总自测表</h1>
+<p class="note">打印提示：A4、实际大小（100%）、关闭浏览器"页眉和页脚"；开启"背景图形"保留彩色。用法：<b>按册序（01→11）</b>，每学完一册就回来逐条打勾；<b>全部打勾 = 可以去投实习了</b>。</p>
+<div class="box2"><b>使用说明：</b>每一条都是"能做到"的检验点，不是"看过"。打勾前请动手做一遍；卡住的条目，回到对应册的对应章节补课。<b>带 ★ 的是学习计划的关键检查点 / 里程碑</b>，必须优先达成。</div>
+<div class="section-head">01 · Linux 入门（教科书）</div>
+<p class="st-title">第 0 章 · 开篇：终端与命令</p><ul class="st">
+<li>☐ Linux 是什么、为什么运维要学它</li>
+<li>☐ 能打开终端并看懂提示符</li>
+<li>☐ 会使用"命令 + 选项 + 参数"三件套</li>
+<li>☐ 会用 --help 自救</li>
+</ul>
+<p class="st-title">第 1 章 · 目录树与路径</p><ul class="st">
+<li>☐ 理解"一切皆文件"和目录树</li>
+<li>☐ 说出三大重要目录的用途</li>
+<li>☐ 会区分绝对路径与相对路径</li>
+<li>☐ 会用 cd 在树里移动</li>
+</ul>
+<p class="st-title">第 2 章 · 文件与目录操作</p><ul class="st">
+<li>☐ 会建文件和目录</li>
+<li>☐ 会复制、移动、改名</li>
+<li>☐ 理解删除的不可逆</li>
+<li>☐ 会用 mkdir -p 连级创建</li>
+</ul>
+<p class="st-title">第 4 章 · 管道与重定向</p><ul class="st">
+<li>☐ 理解管道 | 的流水线思想</li>
+<li>☐ 区分 &gt;（覆盖）与 &gt;&gt;（追加）</li>
+<li>☐ 会 sort / uniq 配合管道</li>
+<li>☐ awk 入门：按列取数据</li>
+</ul>
+<p class="st-title">第 6 章 · 进程管理</p><ul class="st">
+<li>☐ 看懂 ps aux 各列</li>
+<li>☐ 会找进程（pgrep / ps+grep）</li>
+<li>☐ 理解"优雅杀 vs 强杀"</li>
+<li>☐ 会前后台切换与 nohup</li>
+<li>☐ 会用 fuser 定位占端口的进程</li>
+</ul>
+<p class="st-title">第 7 章 · 磁盘与文件系统</p><ul class="st">
+<li>☐ 会用 df 看整体、du 看明细</li>
+<li>☐ 理解"挂载"</li>
+<li>☐ 会造测试大文件（fallocate / dd）</li>
+<li>☐ 看懂磁盘满的排查套路。</li>
+</ul>
+<p class="st-title">第 8 章 · 网络命令</p><ul class="st">
+<li>☐ 会查 IP、网关（ip / ip route）</li>
+<li>☐ 会用 ping、ss、nc、curl 做基础排查</li>
+<li>☐ 会 ssh / scp 远程操作</li>
+<li>☐ 掌握"主机→端口→进程→日志"四层排查法</li>
+</ul>
+<p class="st-title">第 9 章 · apt 包管理</p><ul class="st">
+<li>☐ 理解包管理器为什么存在</li>
+<li>☐ 会用 apt 装/卸/搜软件</li>
+<li>☐ 看懂常见的锁文件报错</li>
+</ul>
+<p class="st-title">第 10 章 · systemctl 与服务</p><ul class="st">
+<li>☐ 理解 systemd 和"服务"</li>
+<li>☐ 会用 systemctl 管理服务全流程</li>
+<li>☐ 会用 journalctl 看服务日志</li>
+</ul>
+<p class="st-title">第 11 章 · 环境变量</p><ul class="st">
+<li>☐ 理解环境变量是"全局公告栏"</li>
+<li>☐ 明白 PATH 决定"命令找不找得到"</li>
+<li>☐ 会 export、改 rc 文件、source</li>
+<li>☐ 会 alias 起外号</li>
+</ul>
+<p class="st-title">第 12 章 · 归档与压缩</p><ul class="st">
+<li>☐ 理解"归档"和"压缩"是两件事</li>
+<li>☐ 会用 tar 打包（含 tar.gz）</li>
+<li>☐ 会 gzip / zip</li>
+<li>☐ 会用 diff 验证解包无误</li>
+</ul>
+<p class="st-title">第 13 章 · Shell 脚本基础</p><ul class="st">
+<li>☐ 理解"脚本 = 把敲过的命令装进文件"</li>
+<li>☐ 会写带变量、if、for 的脚本</li>
+<li>☐ 会用 crontab 定时执行</li>
+<li>☐ 知道脚本的标准写法</li>
+</ul>
+<div class="section-head">02 · Linux 练习册 · 基础篇</div>
+<ul class="st"><li>☐ 能独立完成 阶段 1｜文件系统操作：导航、创建、复制、移动、删除</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 2｜查看与管道：cat/less/head/tail/grep/重定向</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 3｜权限与用户：chmod/chown/sudo/用户管理</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 4｜进程与系统：ps/top/kill/服务/磁盘/包管理</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 5｜查找与归档：find/grep -r/sort/uniq/tar</li></ul>
+<div class="section-head">03 · Linux 练习册 · 进阶篇</div>
+<ul class="st"><li>☐ 能独立完成 场景 1｜本地推理服务起不来（日志排查）</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 3｜服务连不上（网络链路排查）</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 4｜服务与进程运维（含 GPU 进程定位）</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 5｜脚本收尾（衔接 Shell 脚本任务）</li></ul>
+<div class="section-head">04 · Python 入门（教科书）</div>
+<p class="st-title">第 0 章 · Python 与 AI 运维的关系</p><ul class="st">
+<li>☐ Python 是什么、为什么 AI 运维要用它</li>
+<li>☐ 会装好环境并跑出第一行代码</li>
+<li>☐ 知道 Python 和 Shell 怎么分工</li>
+</ul>
+<p class="st-title">第 1 章 · 起步：print、变量、类型</p><ul class="st">
+<li>☐ 能写"自我介绍卡"程序——程序打印出名字、年龄，还会算两位数倒序。这是所有 Python 代码的地基</li>
+</ul>
+<p class="st-title">第 2 章 · 控制流：if、for、while</p><ul class="st">
+<li>☐ 会写成绩分段程序、九九乘法表、猜数字游戏——程序从此会"自己拿主意"和"重复干活"</li>
+</ul>
+<p class="st-title">第 3 章 · 数据结构：list、dict、tuple、set</p><ul class="st">
+<li>☐ 会写通讯录小程序（能存、能查、能删）。数据结构是"数据处理"的核心地基——后面处理日志、JSON、API 全靠它们</li>
+</ul>
+<p class="st-title">第 4 章 · 函数：def、参数、返回值</p><ul class="st">
+<li>☐ 写自己的函数（问候、计算、判断）+ 一个"计算器"函数集合——代码从此可以打包复用</li>
+</ul>
+<p class="st-title">第 5 章 · 模块与导入：import、os、time</p><ul class="st">
+<li>☐ 写"我的工作目录报告"——列出当前目录所有文件和修改时间。你开始调用 Python 自带的大工具箱（标准库）</li>
+<li>☐ ★ 学完本章 = 达成检查点①：能独立完成第 5 章全部章末作业和自测清单（逐项运行、逐项打勾）</li>
+<li>☐ ★ 互动版（futurecoder 模式）课程完成度 ≥ 60% —— 检查点① · 辅助渠道（与上一条互为补充，练完互动版的关再回来打勾）</li>
+</ul>
+<p class="st-title">第 6 章 · 文件操作：open/with、json</p><ul class="st">
+<li>☐ 把通讯录存成 JSON 文件再读回来——程序从此能记住数据（关掉再开不丢失）</li>
+</ul>
+<p class="st-title">第 7 章 · 异常处理：try/except/finally</p><ul class="st">
+<li>☐ ★ 给第 6 章的 JSON 程序加上"文件不存在时友好提示"——你的脚本从此不会一碰错误就崩溃。学完本章 = 达成检查点②：能独立写带 try/except 的 Python 脚本</li>
+</ul>
+<p class="st-title">第 8 章 · 网络请求：requests</p><ul class="st">
+<li>☐ 写"天气查询器"雏形——程序联网拿数据。这是脚本 2 的核心能力，也是调 API 的第一步</li>
+</ul>
+<p class="st-title">第 9 章 · 命令行参数：argparse</p><ul class="st">
+<li>☐ 脚本支持 python3 weather.py 杭州 这种命令行调用——同一脚本应对不同情况，从"玩具"变"工具"</li>
+</ul>
+<p class="st-title">第 10 章 · 日志：logging</p><ul class="st">
+<li>☐ 给脚本加日志记录——每次操作留痕，出问题能排查。日志就是运维的第一现场（你读过 Linux 日志，现在自己生产日志）</li>
+</ul>
+<p class="st-title">第 11 章 · 进程调用：subprocess</p><ul class="st">
+<li>☐ 用 Python 调 df -h、free -h 并处理结果——Linux 三连和 Python 三连在这里合流。本章是通往王牌项目 server-health-check 的接口</li>
+</ul>
+<div class="section-head">05 · Python 练习册 · 基础篇</div>
+<ul class="st"><li>☐ 能独立完成 阶段 1｜变量与类型（约 1.5h）</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 2｜控制流（约 1.5h）</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 3｜数据结构（约 2h）</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 4｜函数与模块（约 1.5h）</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 5｜文件与异常（约 2h）</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 6｜模块组合（约 2h）</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 1</li></ul>
+<ul class="st"><li>☐ 能独立完成 阶段 2</li></ul>
+<div class="section-head">06 · Python 练习册 · 进阶篇</div>
+<ul class="st"><li>☐ 能独立完成 场景 1｜批量文件重命名工具</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 2｜天气查询器</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 3｜本机巡检工具雏形 ★（王牌项目版本 0 · 教学简化版）</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 4｜Nginx 日志分析器</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 5 ☆｜paramiko 远程巡检雏形（选做 · 可跳过）</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 1｜批量文件重命名工具</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 2｜天气查询器</li></ul>
+<ul class="st"><li>☐ 能独立完成 场景 3｜本机巡检工具雏形</li></ul>
+<div class="section-head">07 · Python 内置函数手册</div>
+<p class="st-title">自测项</p><ul class="st">
+<li>☐ 能按分组快速查到内置函数的用法（输入输出 / 类型 / 统计 / 序列 / 检查）</li>
+<li>☐ 会查文件与 JSON 的读写写法（open / with / json.load / json.dump）</li>
+<li>☐ 记住 11 个必会字符串方法并会用（split / join / strip / replace / find 等）</li>
+<li>☐ 能看懂「替代写法对比」，知道哪种更推荐</li>
+</ul>
+<div class="section-head">08 · 报错英语单词手册</div>
+<p class="st-title">自测项</p><ul class="st">
+<li>☐ 能说出报错英语的构造规律（倒着装回中文语序）</li>
+<li>☐ A~F 六组高频词过一遍，看到能认出意思</li>
+<li>☐ 能做对 6 道「看报错猜意思」自测题</li>
+<li>☐ 看到陌生报错，知道先找哪个关键词</li>
+</ul>
+<div class="section-head">09 · 日志报错解读手册</div>
+<p class="st-title">自测项</p><ul class="st">
+<li>☐ 能读懂日志结构、级别（INFO/WARN/ERROR）</li>
+<li>☐ A 组 Linux 报错前 10 条能条件反射说出含义</li>
+<li>☐ B 组 Python 报错看到 Traceback 会定位到最后一行</li>
+<li>☐ 会用「排错心法」处理没见过的报错</li>
+</ul>
+<div class="section-head">10 · 命名手册</div>
+<p class="st-title">自测项</p><ul class="st">
+<li>☐ 起名三原则能背（见名知意 / 下划线 / is_ 判断）</li>
+<li>☐ 会用「起名四步法」给新变量命名</li>
+<li>☐ 知道哪些是 Python 内置名，不会撞名（list / sum / max…）</li>
+<li>☐ 记住 pwd 有歧义，密码写 password</li>
+</ul>
+<div class="section-head">11 · Git 与 GitHub 速查</div>
+<p class="st-title">自测项</p><ul class="st">
+<li>☐ 配好 SSH 钥匙，ssh -T git@github.com 能通过 ★</li>
+<li>☐ 能独立完成「改 → add → commit → push」循环</li>
+<li>☐ 会写 .gitignore（.venv / __pycache__ / *.log / 密钥）</li>
+<li>☐ 提交信息写得清楚（别人看得懂你做了什么）</li>
+<li>☐ GitHub 上有自己的仓库，且提交记录 ≥ 10 次 ★</li>
+</ul>
+<p class="footer">九阶 · 总自测表 v2.5（2026-10） · 与 01~11 册配套使用 · 共 109 条检验点</p>
+</body>
+</html>

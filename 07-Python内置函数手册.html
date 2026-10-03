@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Python 内置函数手册 · v2.4</title>
+<title>Python 内置函数手册 · v2.5</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,6 +78,7 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 .em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
 </style>
 
 
@@ -323,7 +324,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="code fn">enumerate()</td><td>编号遍历</td><td class="code"><span class="kw">for</span> <span class="param">i</span>, <span class="param">x</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="param">xs</span>, <span class="num">1</span>): <span class="out">→ i 从 1 开始编号（不写第二个参数则从 0）</span></td><td>第二个参数=起始编号</td></tr>
 <tr><td class="code fn">zip()</td><td>拉链配对</td><td class="code"><span class="fn">list</span>(<span class="fn">zip</span>([<span class="num">1</span>,<span class="num">2</span>], [<span class="str">"a"</span>,<span class="str">"b"</span>])) <span class="out">→ [(1, 'a'), (2, 'b')]</span></td><td>zip() 本身返回迭代器，要列表得套 list()</td></tr>
 <tr><td class="code fn">sorted()</td><td>排序（返回新列表）</td><td class="code"><span class="fn">sorted</span>([<span class="num">3</span>,<span class="num">1</span>,<span class="num">2</span>]) <span class="out">→ [1, 2, 3]</span><br><span class="param">reverse</span>=<span class="kw">True</span> 倒序</td><td>原列表不变</td></tr>
-<tr><td class="code fn">list.sort()</td><td>原地排序（改原列表，返回 None）</td><td class="code"><span class="param">a</span> = [<span class="num">3</span>,<span class="num">1</span>]; <span class="param">a</span>.<span class="fn">sort</span>(); <span class="fn">print</span>(<span class="param">a</span>) → [<span class="num">1</span>,<span class="num">3</span>]<br>与 sorted() 的区别：sort() 改原列表不返回新列表；sorted() 返回新列表不动原列表（进阶篇已统一用 sorted()）</td></tr>
+<tr><td class="code fn">list.sort()</td><td>原地排序（改原列表，返回 None）</td><td class="code"><span class="param">a</span> = [<span class="num">3</span>,<span class="num">1</span>]; <span class="param">a</span>.<span class="fn">sort</span>(); <span class="fn">print</span>(<span class="param">a</span>) → [<span class="num">1</span>,<span class="num">3</span>]</td><td>与 sorted() 的区别：sort() 改原列表不返回新列表；sorted() 返回新列表不动原列表（进阶篇已统一用 sorted()）</td></tr>
 <tr><td class="code fn">reversed()</td><td>反向</td><td class="code"><span class="fn">list</span>(<span class="fn">reversed</span>([<span class="num">1</span>,<span class="num">2</span>])) <span class="out">→ [2, 1]</span></td><td>要 list() 包一层</td></tr>
 </table>
 
@@ -405,10 +406,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="box2">
 <p><span class="opt">json 四件套（配置文件 / API 数据专用，教科书第 6 章）：</span></p>
 <table>
-<tr><th style="width:34%">写法</th><th>作用</th></tr>
-<tr><td class="code">json.load(f)</td><td>从文件对象读 JSON → dict</td></tr>
+<tr><th style="width:30%">写法</th><th>作用</th><th>示例</th></tr>
+<tr><td class="code">json.load(f)</td><td>从文件对象读 JSON → dict</td><td class="code">先 <span class="fn">open</span> 文件再调用：<span class="param">d</span> = <span class="fn">json</span>.load(f)</td></tr>
 <tr><td class="code">json.dump(d, f, ensure_ascii=False)</td><td>把 dict 写进文件（ensure_ascii=False 让中文不乱码）</td><td class="code">先 <span class="fn">open</span> 文件再调用 <span class="out">→ 写入成功、不返回内容</span></td></tr>
-<tr><td class="code">json.loads(字符串)</td><td>从字符串解析 → dict</td></tr>
+<tr><td class="code">json.loads(字符串)</td><td>从字符串解析 → dict</td><td class="code">json.loads('{"a": 1}') <span class="out">→ {'a': 1}</span></td></tr>
 <tr><td class="code">json.dumps(d)</td><td>把 dict 变成 JSON 字符串</td><td class="code">json.dumps({<span class="str">"a"</span>: <span class="num">1</span>}) <span class="out">→ '{"a": 1}'</span></td></tr>
 </table>
 </div>
@@ -599,7 +600,19 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p class="note">（留白：学习中发现手册哪里不好用就记在这里，攒满 5 条再统一改版）</p>
 </div>
 
-<p class="footer">Python 内置函数手册· 配合《Python 入门》教科书使用 · 查得快、记得牢，不用背 · v2.4（2026-09）</p>
+<div class="box2"><b>本套资料总索引（要查什么 → 翻哪册）：</b>
+<table class="tight xtight"><tr><th>你要找</th><th>去哪册</th></tr>
+<tr><td>Linux 命令、权限、进程、服务、网络、Shell 脚本</td><td>01 Linux 入门（练：02 基础篇 / 03 进阶篇）</td></tr>
+<tr><td>Python 语法、模块、文件、异常、自动化</td><td>04 Python 入门（练：05 基础篇 / 06 进阶篇）</td></tr>
+<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>07 内置函数手册</td></tr>
+<tr><td>报错里的英文单词看不懂</td><td>08 报错英语单词手册</td></tr>
+<tr><td>日志读不懂、报错不会定位</td><td>09 日志报错解读手册</td></tr>
+<tr><td>变量 / 函数怎么起名</td><td>10 命名手册</td></tr>
+<tr><td>代码提交、推送到 GitHub</td><td>11 Git 与 GitHub 速查</td></tr>
+<tr><td>装第三方库（pip / venv / requirements）</td><td>04 Python 入门 · 附录 E</td></tr>
+<tr><td>我到底学会了没有</td><td>12 总自测表（逐条打勾）</td></tr></table></div>
+
+<p class="footer">Python 内置函数手册· 配合《Python 入门》教科书使用 · 查得快、记得牢，不用背 · v2.5（2026-09）</p>
 
 </body>
 </html>

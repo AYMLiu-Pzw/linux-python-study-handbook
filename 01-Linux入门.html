@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linux入门（教科书版） · v2.4</title>
+<title>Linux入门（教科书版） · v2.5</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -101,13 +101,32 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 .em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.str { color: #a31515; }
 </style>
 
 
 
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-pe" viewBox="0 0 72 72"><g id="pe_color">
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-px" viewBox="0 0 72 72"><g id="px_color">
+    <path fill="#f4aa41" d="m34.3223,64.1641c-.1755,0-.3479-.0462-.5-.1338l-22.6894-13.3321c-.3095-.1787-.5001-.5089-.5-.8662l-.251-27.414c0-.3573.1905-.6875.5-.8662l24.1904-14.3318c.3096-.1777.6904-.1777,1,0l22.6905,13.0818c.4784.2759.6426.8874.3666,1.3659-.0875.1517-.2133.2777-.3647.3655l-23.1923,14.0001-.2501,27.1327c-.0015.5514-.4486.9977-1,.9981Z"/>
+    <polygon fill="#f4aa41" points="36 64.5715 60.7589 50.4641 60.413 21.988 35.5724 36.0333 36 64.5715"/>
+    <path fill="#d0cfce" d="m44.4415,37.9783c-.7769-.442-1.2545-1.2692-1.249-2.163v-4.1719l-22.8806-15.5295c.692-.4567,6.2179-3.6331,6.5605-3.7231l26.1492,13.0017c.3095.1787.5001.5089.5.8662v6.0244c-.0018,1.1714-.6264,2.2536-1.64,2.8409l-4.9444,2.8544c-.771.4505-1.7251.4505-2.4961,0h.0004Z"/>
+    <path fill="#d0cfce" d="m44.8377,59.475v-3.336c.0017-1.0607.5674-2.0405,1.4853-2.5722l6.0733-3.5068c.8836-.5099,2.0133-.207,2.5232.6766.162.2808.2473.5992.2473.9234,0,0-.0232,1.6053-.3301,1.8473-2.0407,1.6093-9.9991,6.2783-9.999,5.9677Z"/>
+    <path fill="#3f3f3f" d="m44.4274,45.9464v.8683c0,.8266.67,1.4967,1.4967,1.4967.2628,0,.5209-.0692.7485-.2006l6.8048-3.76c.7054-.4073,1.14-1.1599,1.14-1.9745v-1.1184c0-.7976-.6466-1.4442-1.4442-1.4442-.2535,0-.5025.0667-.7221.1935l-6.7455,3.7252c-.7909.4567-1.2781,1.3006-1.2781,2.2139Z"/>
+    <polygon fill="#fff" points="31.083 38.917 22.785 34.264 22.785 41.706 31.083 46.359 31.083 38.917"/>
+  </g>
+  <g id="px_line">
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="61.262 21.168 35.572 6.336 9.882 21.168 9.882 50.832 35.572 65.664 61.262 50.832 61.262 21.168"/>
+    <line x1="35.5724" x2="35.5724" y1="36.0333" y2="65.6642" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="35.6301" x2="9.9401" y1="36.0333" y2="21.2012" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="52.5169" x2="61.2624" y1="26.2504" y2="21.2012" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <line x1="35.5724" x2="44.1879" y1="36.0333" y2="31.0591" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m26.884,11.4565l25.6375,14.8018v6.0248c0,.8146-.4346,1.5672-1.14,1.9745l-4.9439,2.8543c-.7158.4133-1.6312.1681-2.0446-.5477-.1314-.2276-.2006-.4857-.2006-.7485v-4.7486l-25.5689-14.8183"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="31.083 38.917 22.785 34.264 22.785 41.706 31.083 46.359 31.083 38.917"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m54.1667,54.6663v-3.0063c0-.4679-.3793-.8472-.8472-.8472-.1487,0-.2948.0391-.4236.1135l-6.073,3.5062c-.6098.3519-.9854,1.0025-.9853,1.7065v3.3361"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m44.4274,45.9464v.8683c0,.8266.67,1.4967,1.4967,1.4967.2628,0,.5209-.0692.7485-.2006l6.8048-3.76c.7054-.4073,1.14-1.1599,1.14-1.9745v-1.1184c0-.7976-.6466-1.4442-1.4442-1.4442-.2535,0-.5025.0667-.7221.1935l-6.7455,3.7252c-.7909.4567-1.2781,1.3006-1.2781,2.2139Z"/>
+  </g></symbol><symbol id="ic-pe" viewBox="0 0 72 72"><g id="pe_color">
     <polygon fill="#3F3F3F" stroke="none" points="14.5943,53.154 18.2544,56.814 12.6242,59.0928"/>
     <polyline fill="#f4aa41" stroke="none" points="18.0381,41.8761 36.8684,23.0457 48.1813,34.3586 29.5108,53.0291"/>
     <polyline fill="#a57939" stroke="none" points="14.4132,52.5663 17.9281,43.3946 27.8278,53.2939 18.6558,56.809"/>
@@ -273,7 +292,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="toc-row"><span class="tn">第 12 章</span><span class="tdesc">归档与压缩（tar czvf/xzvf、gzip、zip）</span><a href="#toc-14"></a></div>
 <div class="toc-row"><span class="tn">第 13 章</span><span class="tdesc">Shell 脚本基础（shebang、变量、if/for、crontab）</span><a href="#toc-15"></a></div>
 <div class="toc-row"><span class="tn">附录 A</span><span class="tdesc">章末作业检查点与自测答案（84 题）</span><a href="#toc-16"></a></div>
-<div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表（35 条）</span><a href="#toc-17"></a></div>
+<div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表（36 条）</span><a href="#toc-17"></a></div>
 <div class="toc-row"><span class="tn">附录 C</span><span class="tdesc">命令速查总表（按章分组）</span><a href="#toc-18"></a></div>
 <div class="toc-row"><span class="tn">附录 D</span><span class="tdesc">章 ↔ 练习册对应表（新命令对齐）</span><a href="#toc-19"></a></div>
 </div>
@@ -291,6 +310,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </tbody></table>
 <div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、挂载或日志时，先记录原状态；操作中逐步核对对象；操作后对照输出、数量、状态和退出码验证；结束后恢复配置、停止练习进程、卸载实验挂载并再次检查现场。异常时保留原始报错。</div>
 <p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。</p>
+<div class="box2"><b>环境口径：</b>本套资料以 <b>Ubuntu 26.04 LTS（当前 LTS）+ Python 3.14</b> 为基准录制并实测。下面三条是你一定会遇到的环境事实：<br>· <b>apt 源代号 = <span class="code">resolute</span></b>（看到它属于正常）；<br>· <b>pip 不能全局装包</b>：直接 <span class="code">pip install</span> 会报 <span class="code">externally-managed-environment</span>，正确做法是用 venv（见《Python 入门》<b>附录 E</b>）；<br>· <b>htop 需自装</b>：<span class="code">sudo apt install htop</span>（第 9 章会教）。<p class="note">示例输出全部以 26.04 为准；命令回显里的版本号等细节以你本机实际显示为准。若你的系统是别的版本，绝大多数命令通用，个别差异（如 <span class="code">last</span>）书中已单独标注。</p></div>
+<p class="note"><b>线上常识：</b>企业服务器上更常见的是 <b>22.04 / 24.04</b>，而不是最新版——生产环境求稳，新版要等镜像、监控、安全合规都跟上，一般比最新 LTS <b>慢 1~2 代</b>；而每个 LTS 都有 5 年标准支持，也没必要频繁升级。本书命令在这些版本上通用；拿到一台新机器，先 <span class="code">lsb_release -a</span> 确认版本。</p>
+
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志约定：每天把敲过的命令、报错与心得记进学习日志——这是检查点的依据。</p>
 <p class="note">安全红线：实验目录只用 <span class="code">~/lab</span> 和 <span class="code">/tmp</span>；<span class="code">/tmp</span> 是临时目录，但何时清理由发行版、挂载方式和 systemd-tmpfiles 等系统策略决定，<b>重启后不保证全部清空</b>；<span class="code cmd">rm -rf</span> 永远先 <span class="code cmd">ls</span> 看清楚；涉及 <span class="code cmd">sudo</span> 的命令只在练习机上执行。</p>
 
@@ -761,6 +783,7 @@ Sep 14:02</pre>
 <h2 id="toc-7">第 5 章 · 用户与权限</h2>
 <p><b>本章目标：</b>① 理解多用户模型和"组"；② 会创建用户、改密码、加 sudo；③ 读懂 rwx 权限位；④ 会用 chmod（含数字算法）、chown。</p>
 <p><b>本章新命令</b>：<span class="code cmd">whoami</span> <span class="code cmd">id</span> <span class="code cmd">su</span> <span class="code cmd">sudo</span> <span class="code cmd">useradd</span> <span class="code cmd">passwd</span> <span class="code cmd">usermod</span> <span class="code cmd">groupadd</span> <span class="code cmd">groups</span> <span class="code cmd">userdel</span> <span class="code cmd">last</span> <span class="code cmd">chmod</span> <span class="code cmd">chown</span> <span class="code cmd">chgrp</span></p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>注意</b>：<span class="code cmd">last</span>（登录历史）在 <b>Ubuntu 26.04 上已被系统移除</b>（连安装包都不再提供）。查看登录记录请改用：<span class="code cmd">loginctl list-sessions</span>、<span class="code cmd">who -a</span> 或 <span class="code cmd">journalctl -u systemd-logind</span>。</p>
 
 <h3>5.1 用户模型：住户、室友与房东</h3>
 <p>Linux 是多用户系统：很多人可以同时用一台机器，各干各的、互不干扰。</p>
@@ -902,7 +925,7 @@ EOF</span>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">kill</span> <span class="param">$MY_PID</span>
 <span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/lab/run.log</span>
 </pre><pre class="demo-out">09:30:15 收到退出信号，清理中...</pre>
-<p class="demo-ex">trap 那行 = 程序安装了"信号处理器"：收到 TERM 就写一行日志再退出。<b>kill（优雅）→ 日志里留下了告别记录</b>。现在再用 kill -9 试一次：日志里<b>不会有</b>新记录——程序连写日志的机会都没有。。</p>
+<p class="demo-ex">trap 那行 = 程序安装了"信号处理器"：收到 TERM 就写一行日志再退出。<b>kill（优雅）→ 日志里留下了告别记录</b>。现在再用 kill -9 试一次：日志里<b>不会有</b>新记录——程序连写日志的机会都没有。</p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 细节提示：PID 和日志时间是动态的——<code>$!</code> 拿到的是你的实际 PID；pgrep 可能匹配多个同名进程，所以用 <code>$!</code> 保存、用 <code>ps -p</code> 核对，<b>只动自己的实验进程</b>。run.log 写进 ~/lab/，从任何目录启动都不乱跑。</p>
 </div>
 <p><span class="code cmd">killall</span> = 按<b>名字</b>杀进程（不用查 PID）：<span class="code">killall nginx</span>。名字匹配到多个进程会全部杀掉，先 <span class="code cmd">pgrep</span> 确认再动手。</p>
@@ -964,7 +987,7 @@ EOF</span>
 
 <div class="newpage"></div>
 <h2 id="toc-9">第 7 章 · 磁盘与文件系统</h2>
-<p><b>本章目标：</b>① 会用 df 看整体、du 看明细；② 理解"挂载"；③ 会造测试大文件（fallocate / dd）；④ 看懂磁盘满的排查套路。</p>
+<p><b>本章目标：</b>① 会用 df 看整体、du 看明细；② 理解"挂载"；③ 会造测试大文件（fallocate / dd）；④ 看懂磁盘满的排查套路。 <span class="opt">补充：日志越写越多的典型场景用 <span class="code cmd">logrotate</span> 定期切割/清理（多数发行版自带，配置在 /etc/logrotate.d/）。</span></p>
 <p><b>本章新命令</b>：<span class="code cmd">df</span> <span class="code cmd">du</span> <span class="code cmd">lsblk</span> <span class="code cmd">mount</span> <span class="code cmd">fallocate</span> <span class="code cmd">dd</span> <span class="code cmd">mkfs</span></p>
 <div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>mount / mkfs 是危险操作，别急着动手</b>：完整演练流程见《Linux 练习册·进阶篇》场景 2 搭建手册（在镜像文件里练，安全）。先记住两个词义：<b>mount</b> = 把设备接到目录树上；<b>mkfs</b> = 格式化——<b>绝不对真磁盘乱用</b>。</div>
 
@@ -1104,7 +1127,7 @@ Server: SimpleHTTP/0.6 Python/3.x.x <span class="out">（以你机器实际输�
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">wget</span> <span class="param">http://localhost:8000/不存在.html</span></pre>
 <pre class="demo-out">HTTP request sent, awaiting response... 404 File not found
 ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实际输出为准）</span></pre>
-<p class="demo-ex">wget = 下载文件。<span class="opt">-O</span> 指定"保存成什么名字"——这里源文件 hello.txt 和下载目标在同一目录，<b>不指定 -O 的话 wget 会改名存成 hello.txt.1</b>（避免覆盖已存在的同名文件）。404 时 wget 会打印 ERROR 404 提示——<b>注意：Ubuntu 22.04 实测 wget 对 404 的退出码仍是 0</b>，所以脚本里判断下载成败别只依赖 wget 退出码，看输出提示、或用 <span class="code">curl --fail</span>（失败时退出码非 0）更可靠。演示完收尾：<span class="code">kill %1</span> 停掉本地服务、<span class="code">rm hello.txt downloaded-hello.txt</span> 清理。</p>
+<p class="demo-ex">wget = 下载文件。<span class="opt">-O</span> 指定"保存成什么名字"——这里源文件 hello.txt 和下载目标在同一目录，<b>不指定 -O 的话 wget 会改名存成 hello.txt.1</b>（避免覆盖已存在的同名文件）。404 时 wget 会打印 ERROR 404，并以<b>退出码 8</b>结束（<b>0 = 下载成功</b>）——可以直接用 <span class="code">echo $?</span> 判断成败。<b><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 但别把 wget 放进管道</b>（如 <span class="code">wget … | tail</span>）：<span class="code">$?</span> 拿到的是管道<b>最后一个命令</b>的退出码，不是 wget 的——要用退出码判断就别套管道（或用 <span class="code">curl --fail</span>，失败时退出码非 0）。演示完收尾：<span class="code">kill %1</span> 停掉本地服务、<span class="code">rm hello.txt downloaded-hello.txt</span> 清理。</p>
 </div>
 <div class="box2">
 <p><span class="opt">易错：</span>curl 测"服务通不通"，wget 下"文件"。URL 里的 &amp; 会被 shell 当后台符号处理，带 &amp; 的长 URL 必须加引号。</p>
@@ -1171,7 +1194,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 </pre><pre class="demo-out">Get:1 http://archive.ubuntu.com ... [1,234 kB] <span class="out">（示例输出，实际以本机为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">apt</span> <span class="param">search</span> <span class="param">htop</span>
 </pre><pre class="demo-out">htop/&lt;发行版代号&gt; 3.3.0-4 amd64
-  interactive processes viewer <span class="out">（示例输出：Ubuntu 版本不同会显示不同代号（22.04=jammy、24.04=noble），以本机实际显示为准）</span></pre>
+  interactive processes viewer <span class="out">（示例输出：26.04 的源代号是 resolute，以本机实际显示为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">install</span> <span class="param">htop</span>
 </pre><pre class="demo-in"><span class="prompt">$</span> <span class="cmd">htop</span></pre>
 <p class="demo-ex">四步标准流程：<b>update 刷新 → search 确认名字 → install 安装 → 直接运行验证</b>。以后想装任何软件，照这个流程走。</p>
@@ -1325,7 +1348,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><b>本章目标：</b>① 理解"归档"和"压缩"是两件事；② 会用 tar 打包（含 tar.gz）；③ 会 gzip / zip；④ 会用 diff 验证解包无误。</p>
 <p><b>本章新命令</b>：<span class="code cmd">tar</span> <span class="code cmd">gzip</span> <span class="code cmd">gunzip</span> <span class="code cmd">zip</span> <span class="code cmd">unzip</span></p>
 
-<h3>12.1 两个概念先分开</h3>
+
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-px"/></svg> 准备：<span class="code cmd">zip</span> / <span class="code cmd">unzip</span> 系统未预装，先 <span class="code cmd">sudo apt install -y zip unzip</span>；<span class="code cmd">tar</span> / <span class="code cmd">gzip</span> 自带，无需安装。</p><h3>12.1 两个概念先分开</h3>
 <table>
 <tr><th style="width:25%">概念</th><th>比喻</th><th>效果</th></tr>
 <tr><td>归档</td><td>把一堆文件<b>装箱</b></td><td>多个 → 一个（大小几乎不变）</td></tr>
@@ -1613,6 +1637,6 @@ done</pre>
 <tr><td>第 6、10 章</td><td>进阶篇 场景 4</td><td>fuser、nohup、systemctl</td></tr>
 <tr><td>第 13 章</td><td>进阶篇 场景 5</td><td>crontab（绝对路径）、脚本语法</td></tr>
 </table>
-<p class="footer">《Linux 入门》教科书版 · 与《Linux 指令练习册》基础篇 / 进阶篇、《英语单词手册》《日志报错解读手册》《Python 内置函数手册》配套使用 · v2.4（2026-09）</p>
+<p class="footer">《Linux 入门》教科书版 · 与《Linux 指令练习册》基础篇 / 进阶篇、《英语单词手册》《日志报错解读手册》《Python 内置函数手册》配套使用 · v2.5（2026-10）</p>
 </body>
 </html>

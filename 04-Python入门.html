@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>Python入门（教科书版） · v2.4</title>
+<title>Python入门（教科书版） · v2.5</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,6 +93,8 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 .em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.cmd { color: #0a6b1e; font-weight: bold; }
+.err { color: #c00000; font-weight: bold; }
 </style>
 
 
@@ -237,6 +239,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表（中英对照）</span><a href="#toc-14"></a></div>
 <div class="toc-row"><span class="tn">附录 C</span><span class="tdesc">学习路线图（第 0~11 章共 12 章顺序 + 每章耗时）</span><a href="#toc-15"></a></div>
 <div class="toc-row"><span class="tn">附录 D</span><span class="tdesc">函数与模块速查</span><a href="#toc-16"></a></div>
+<div class="toc-row"><span class="tn">附录 E</span><span class="tdesc">venv 与 pip（项目独立环境 / 依赖清单）</span><a href="#toc-17"></a></div>
 </div>
 
 <div class="newpage"></div>
@@ -256,7 +259,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="box2"><b>实验闭环：</b>涉及文件覆盖、重命名、联网或系统命令的示范与作业，先在练习目录记录文件状态；运行后核对输出、退出码和生成文件；结束后删除临时文件或恢复原文件。遇到异常保留 traceback 和输入条件。</div>
 <p><b>范围说明</b>：本书只教"用 Python 做自动化运维"够用的内容，目标 = 写出脚本 1（批量文件重命名）、脚本 2（天气查询器），并为王牌项目 server-health-check 打基础。面向对象进阶、异步、类型注解等超纲内容一律不进本书。</p>
 <p><b>学习顺序</b>：本书在 Linux 三连之后开始。主线是本书；语法卡壳时可回到对应章节重读。</p>
-<p><b>环境</b>：Ubuntu 自带 python3（终端敲 <span class="code fn">python3 --version</span> 验证，版本 3.8 以上即可），无需额外安装。全书代码都在电脑或平板 Termux 的终端里敲。</p>
+<p><b>环境</b>：本套资料以 <b>Ubuntu 26.04 + Python 3.14</b> 为基准（26.04 自带 Python 3.14，无需额外安装；详见《Linux 入门》的"环境口径"）。全书代码都在电脑或平板 Termux 的终端里敲。</p>
 
 <h2 id="toc-1">第 0 章 · Python 与 AI 运维的关系</h2>
 <p><b>本章目标</b>（学完能回答）：① Python 是什么、为什么 AI 运维要用它；② 会装好环境并跑出第一行代码；③ 知道 Python 和 Shell 怎么分工。</p>
@@ -268,7 +271,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="demo">
 <p class="dtitle">示范 1：验证环境</p>
 <pre class="demo-in">$ <span class="fn">python3</span> <span class="opt">--version</span></pre>
-<pre class="demo-out">Python 3.12.3</pre>
+<pre class="demo-out">Python 3.14.4</pre>
 <p class="demo-ex">看到 3.x 就是装好了。Ubuntu 自带，不用装。</p>
 </div>
 <div class="demo">
@@ -1567,13 +1570,57 @@ True</pre>
 <tr><td>第 9 章 argparse</td><td>1.5h</td><td>python3 weather.py 杭州</td></tr>
 <tr><td>第 10 章 logging</td><td>1h</td><td>带日志的脚本</td></tr>
 <tr><td>第 11 章 subprocess</td><td>1.5h</td><td><svg class="em" width="15" height="15"><use href="#ic-st"/></svg> 通往 server-health-check 的接口</td></tr>
-<tr><td><b>合计</b></td><td><b>20.5h</b></td><td>学完接《Python 练习册：基础篇》</td></tr>
+<tr><td><b>合计</b></td><td><b>20h</b></td><td>学完接《Python 练习册：基础篇》</td></tr>
 </table>
 <p class="note">学习顺序：本书在 Linux 三连之后开始。两件成品脚本：① 批量文件重命名（第 5、6 章知识）② 天气查询器（第 8、9 章知识）——练习册进阶篇会把它们作为收尾项目。</p>
 <div class="newpage"></div>
 <h2 id="toc-16">附录 D · 函数与模块速查</h2>
 <table><tr><th>类别</th><th>常用内容</th><th>用途</th></tr><tr><td>输入输出</td><td><span class="code">print / input</span></td><td>显示信息、读取输入</td></tr><tr><td>类型与序列</td><td><span class="code">type / int / str / len / range / enumerate</span></td><td>检查、转换、计数、范围和编号遍历</td></tr><tr><td>数据结构</td><td><span class="code">list / dict / tuple / set</span></td><td>保存和组织数据</td></tr><tr><td>文件与 JSON</td><td><span class="code">open / with / json.load / json.dump</span></td><td>读写文本和结构化数据</td></tr><tr><td>自动化模块</td><td><span class="code">os / time / requests / argparse / logging / subprocess</span></td><td>路径、时间、接口、参数、日志和系统命令</td></tr></table>
 <p class="note">需要按函数查用法时，查《Python 内置函数手册》对应小节。</p>
-<p class="footer">Python 入门（教科书版） · v2.4（2026-09）</p>
+
+<h2 id="toc-17">附录 E · venv 与 pip：给项目一个独立工具箱</h2>
+
+<div class="box2"><b>为什么需要它：</b>系统自带的 Python 是"公家的"——用 apt 装的包全机器共用，装坏了会影响系统里所有程序。而你的项目需要"自己的"工具箱：装上什么、什么版本，都由这个项目说了算，换台机器还能照单重建。<br>
+<b>venv（虚拟环境）= 项目专属工具箱；pip = 往箱子里装工具的手。</b>两条一起用，是 Python 世界最通用的做法。</div>
+
+<h3>E.1 三步上手（先记住这三条）</h3>
+<pre><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">install</span> <span class="param">-y</span> <span class="param">python3-venv</span> <span class="param">python3-pip</span>   <span class="cm"># ① 一次性准备</span>
+<span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">~/lab/myproject</span>
+<span class="prompt">$</span> <span class="cmd">python3</span> <span class="param">-m</span> <span class="param">venv</span> <span class="param">.venv</span>                    <span class="cm"># ② 在项目目录里建工具箱（.venv 是惯例名）</span>
+<span class="prompt">$</span> <span class="cmd">source</span> <span class="param">.venv/bin/activate</span>            <span class="cm"># ③ 激活（提示符前出现 (.venv) 就对了）</span>
+<span class="prompt">(.venv)</span> <span class="prompt">$</span> <span class="cmd">pip</span> <span class="param">install</span> <span class="param">requests</span>          <span class="cm"># 之后装的包只进这个箱子</span>
+<span class="prompt">(.venv)</span> <span class="prompt">$</span> <span class="cmd">python</span> <span class="param">-c</span> <span class="param">"import requests; print(requests.__version__)"</span></pre>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>实测提醒</b>：跳过第 ① 步直接建环境，目录虽然能建出来，但里面的 <span class="code">pip</span> 是缺的（Ubuntu 把引导组件拆成了独立包）——进箱后敲 pip 会报 <span class="code err">No module named pip</span>。<b>先 apt 装 python3-venv python3-pip，再建环境。</b></p>
+
+<h3>E.2 日常四条（够用）</h3>
+<table class="tight"><tr><th>命令</th><th>作用</th><th>什么时候用</th></tr>
+<tr><td class="code">deactivate</td><td>退出工具箱，回到系统环境</td><td>这个项目干完了</td></tr>
+<tr><td class="code">source .venv/bin/activate</td><td>重新进入</td><td>下次开终端接着做这个项目时（<b>每次都要先激活</b>）</td></tr>
+<tr><td class="code">pip list</td><td>看箱子里装了什么</td><td>想确认装没装、装的哪版</td></tr>
+<tr><td class="code">pip uninstall 包名</td><td>卸掉某个包</td><td>装错了、装重了</td></tr></table>
+<p class="note">判断小技巧：敲 <span class="code">which python</span>——显示 <span class="code">.venv/bin/python</span> 说明在箱子里；显示 <span class="code">/usr/bin/python3</span> 说明还在系统里。</p>
+
+<h3>E.3 交付给别人：requirements.txt（两行）</h3>
+<pre><span class="prompt">(.venv)</span> <span class="prompt">$</span> <span class="cmd">pip</span> <span class="param">freeze</span> <span class="param">&gt;</span> <span class="param">requirements.txt</span>    <span class="cm"># 导出清单：这个项目需要哪些包、什么版本</span>
+<span class="prompt">$</span> <span class="cmd">pip</span> <span class="param">install</span> <span class="param">-r</span> <span class="param">requirements.txt</span>          <span class="cm"># 在别人的机器上照单重建，版本一致</span></pre>
+<p class="note">把 <span class="code">requirements.txt</span> 交给同事/提交到仓库，对方一条命令就能还原出和你一样的环境——这就是"环境可复制"。</p>
+
+<h3>E.4 什么时候用 apt，什么时候用 pip</h3>
+<table class="tight"><tr><th>要装的东西</th><th>用什么</th><th>例子</th></tr>
+<tr><td>系统工具 / 服务</td><td><span class="code">sudo apt install</span></td><td>htop、nginx、curl、tree</td></tr>
+<tr><td><b>Python 第三方库</b></td><td><b>venv + pip</b></td><td>requests、paramiko、pandas</td></tr>
+<tr><td>系统自带的 Python 库（老办法）</td><td><span class="code">sudo apt install python3-xxx</span></td><td>python3-requests（能用，但不隔离、版本老）</td></tr></table>
+<p class="note">记忆点：<b>给系统装东西用 apt，给项目装东西用 pip（且先激活 venv）</b>。</p>
+
+<h3>E.5 两个常见报错（人话版）</h3>
+<table class="long-table"><tr><th>报错</th><th>什么意思</th><th>怎么解决</th></tr>
+<tr><td class="code err">error: externally-managed-environment</td><td>系统拦住了你：不允许直接往系统 Python 里装包（Ubuntu 24.04 起默认如此，26.04 同样）</td><td>先建并激活 venv，再 <span class="code">pip install</span>；确实要给系统装就用 <span class="code">apt install python3-xxx</span></td></tr>
+<tr><td class="code err">bash: pip: command not found</td><td>两个可能：箱子没激活，或没装 python3-pip</td><td>先 <span class="code">source .venv/bin/activate</span>；仍然没有就 <span class="code">sudo apt install python3-pip python3-venv</span></td></tr></table>
+
+<h3>E.6 小练习（做完你就掌握了）</h3>
+<p>① 在 <span class="code">~/lab</span> 下建一个项目目录，创建并激活虚拟环境；② 装上 <span class="code">requests</span>，写三行代码请求一次 <span class="code">https://example.com</span> 并打印状态码；③ 导出 <span class="code">requirements.txt</span>；④ 把 <span class="code">.venv</span> 整个删掉，再用 requirements.txt 重建一次并跑通同一段代码。</p>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 一条纪律：<b><span class="code">.venv</span> 不要提交到 Git</b>（体积大、且随时能重建）——提交 <span class="code">requirements.txt</span> 就够了。这条在你学 Git 时会用到。</div>
+
+<p class="footer">Python 入门（教科书版） · v2.5（2026-10）</p>
 </body>
 </html>

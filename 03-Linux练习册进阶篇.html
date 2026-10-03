@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Linux指令练习册·进阶篇 · v2.4</title>
+<title>Linux指令练习册·进阶篇 · v2.5</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,6 +71,12 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 .em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
+.param { color: #6b21a8; font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.param { color: #6b21a8; }
+.cm { color: #6a737d; font-style: italic; }
+.demo-in { font-family: Consolas,"Courier New",monospace; }
 </style>
 
 
@@ -264,7 +270,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="build">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 搭建手册（做题前执行，需电脑 Ubuntu <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>）</b>：</p>
 <pre><span class="out"># ① 先确认磁盘空间（df -h ~），再创建一个 500MB 空白镜像。</span>
-<span class="opt"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 空间紧张的替代参数（二选一，直接照抄整组；均为 Ubuntu 22.04 / ext4 / mount -o loop 实测值）：</span>
+<span class="opt"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 空间紧张的替代参数（二选一，直接照抄整组；均为 Ubuntu 26.04 / ext4 / mount -o loop 实测值）：</span>
 <span class="out">#   替代1：count=250（250MB 镜像）+ 塞入量合计 180MB，六个塞入行示例：30M、30M、30M、30M、30M、30M。实测 df 约 219M/181M/21M、Use% 90%，以你机器 df 实测为准。</span>
 <span class="out">#   替代2：count=150（150MB 镜像）+ 塞入量合计 100MB，六个塞入行示例：20M、20M、20M、10M、10M、20M。实测 df 约 125M/101M/14M、Use% 88%，以你机器 df 实测为准。</span>
 <span class="prompt">$</span> df -h ~
@@ -320,7 +326,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="ticket">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你在管一台"推理服务机器"，今天要完成：部署一个服务并让它开机自启、监控它、处理一个"卡死进程"，最后查清楚"显卡/文件被哪个进程占着"。</p>
 </div>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 22.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 26.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
 <div class="build">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 场景搭建手册</b>：</p>
 <pre><span class="prompt">$</span> cd ~/lab
@@ -515,7 +521,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> sudo systemctl disable --now labservice &amp;&amp; sudo rm /etc/systemd/system/labservice.service &amp;&amp; sudo systemctl daemon-reload   <span class="out"># 练习完恢复原状：先 disable 停止、再删 unit、最后 daemon-reload 让 systemd 重新读配置</span></pre>
 <div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>reboot 会断开当前所有连接</b>：请在本地终端做，或改用 <code>sudo systemctl restart labservice</code> 代替（效果等价）。</div>
 <p><span class="step">④ 怎么验证做对了</span>：重启后服务自动在跑。养成习惯：改完 unit 文件必须 <span class="code">daemon-reload</span>，这是新手最容易漏的一步。</p>
-<div class="box2"><p><span class="opt">Restart=on-failure 验证（Ubuntu 22.04 + systemd 实测通过，实测现象附在各步骤后）：</span></p>
+<div class="box2"><p><span class="opt">Restart=on-failure 验证（Ubuntu 26.04 + systemd 实测通过，实测现象附在各步骤后）：</span></p>
 <pre><span class="prompt">$</span> sudo systemctl start labservice
 <span class="prompt">$</span> ss -tlnp | grep :8080   <span class="out"># 输出如 users:(("python3",pid=1234,...))——记下这个唯一 PID</span>
 <span class="opt"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全警告：不要用 pkill -f 'http.server 8080'——它按整条命令行模糊匹配，会误杀别的同名 http.server。</span>
@@ -525,7 +531,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> for i in $(seq 1 30); do systemctl is-active --quiet labservice &amp;&amp; ss -tlnp | grep -q :8080 &amp;&amp; break; sleep 1; done   <span class="out"># 轮询最多 30 秒：等 unit 恢复 active 且端口恢复（实测恢复约需 4~5 秒，固定 sleep 2 会看到“还没恢复”的假象）</span>
 <span class="prompt">$</span> systemctl status labservice   <span class="out"># 预期：状态仍为 active (running)，Main PID 变了</span>
 <span class="prompt">$</span> journalctl -u labservice -n 10          <span class="out"># 预期：看到“已重启”相关日志，NRestarts ≥ 1</span></pre>
-<p>实测（Ubuntu 22.04）：kill -9 后约 4~5 秒 unit 自动重启、MainPID 由旧值变为新值。<b>注意：PID 每次随机分配——以你机器上 ss 和 systemctl status 的实际显示为准，不要对照固定数字。</b>、NRestarts=1；systemctl stop 后 unit inactive 且不自动重启。若你的环境现象不符 → 记录实际环境与现象，如实记为“环境限制”。<b>正常停止对照</b>：<span class="code">sudo systemctl stop labservice</span> 后 <span class="code">systemctl status labservice</span> 应为 inactive（dead）且 <b>不自动重启</b>（父进程 trap 收尾返回 0，不会触发 on-failure）；<span class="code">sudo systemctl start labservice</span> 再恢复。两项都通过才算本题闭环：异常→自动重启，正常→安静退出。</p></div></div>
+<p>实测（Ubuntu 26.04）：kill -9 后约 4~5 秒 unit 自动重启、MainPID 由旧值变为新值。<b>注意：PID 每次随机分配——以你机器上 ss 和 systemctl status 的实际显示为准，不要对照固定数字。</b>、NRestarts=1；systemctl stop 后 unit inactive 且不自动重启。若你的环境现象不符 → 记录实际环境与现象，如实记为“环境限制”。<b>正常停止对照</b>：<span class="code">sudo systemctl stop labservice</span> 后 <span class="code">systemctl status labservice</span> 应为 inactive（dead）且 <b>不自动重启</b>（父进程 trap 收尾返回 0，不会触发 on-failure）；<span class="code">sudo systemctl start labservice</span> 再恢复。两项都通过才算本题闭环：异常→自动重启，正常→安静退出。</p></div></div>
 
 <h3>场景 5 答案</h3>
 <div class="ans"><p><b>【进5-1】资源巡检脚本</b></p>
@@ -533,11 +539,14 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><span class="step">② 为什么用这个命令</span>：df（磁盘）、free（内存）、uptime（负载）都是"看一眼"类命令，脚本就是它们的组合 + 中文注释。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nano check_res.sh <span class="out"># 写完 Ctrl+X → Y → 回车保存退出</span>
+<span class="cm"># ↓ 从 #!/bin/bash 开始到下面的分隔线为止，全部是【脚本内容】——整段粘贴进 nano</span>
 <span class="out">#!/bin/bash
 echo "===== 磁盘 ====="; df -h /
 echo "===== 内存 ====="; free -h
 echo "===== 负载 ====="; uptime</span>
-<span class="prompt">$</span> chmod +x check_res.sh &amp;&amp; ./check_res.sh</pre>
+</pre>
+<p class="note">↑ 以上整块就是【脚本内容】（复制到脚本文件里）；下面这条是在【终端】执行的命令，<b>不要</b>复制进脚本：</p>
+<pre class="demo-in"><span class="prompt">$</span> chmod +x check_res.sh &amp;&amp; ./check_res.sh</pre>
 <p><span class="step">④ 怎么验证做对了</span>：一条命令输出三段摘要，和手动敲三条完全一致。这一步完成了"手动 → 脚本"的第一次跨越。</p></div>
 
 <div class="ans"><p><b>【进5-2】服务健康检查脚本</b></p><p class="note">达标版：用 pgrep 或 ps -p 判断进程在不在即可达标；下面的"四要素认领"是强化版（防 PID 复用误判），先看达标版思路，学有余力再上强化。</p>
@@ -545,6 +554,7 @@ echo "===== 负载 ====="; uptime</span>
 <p><span class="step">② 为什么用这个命令</span>：读 <span class="code">labservice.pid</span> + <span class="code">ps</span> 核对命令行查进程（不用 pgrep -f，避免误匹配同名脚本）；<span class="code">nc -z</span> 查端口；<span class="code">stat -c %Y 日志文件</span> 拿日志最后修改时间，和当前时间比较判断"最近有没有更新"。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre class="pre-split"><span class="prompt">$</span> nano health_check.sh <span class="out"># 写完 Ctrl+X → Y → 回车保存退出</span>
+<span class="cm"># ↓ 从 #!/bin/bash 开始到下面的分隔线为止，全部是【脚本内容】——整段粘贴进 nano</span>
 <span class="out">#!/bin/bash
 LOG=~/lab/logs/labservice.log
 [ -f ~/lab/labservice.pid ] || { echo "进程：PID 文件不存在，服务没在运行"; exit 1; }
@@ -569,7 +579,9 @@ else
   echo "日志：文件不存在（先确认 LOG 路径和权限）"
 fi</span>
 <span class="out"># $(( )) = 算术运算（两数相减）；date +%s = 当前秒数；stat -c %Y = 文件最后修改时间（秒）</span>
-<span class="prompt">$</span> chmod +x health_check.sh &amp;&amp; ./health_check.sh</pre>
+</pre>
+<p class="note">↑ 以上整块就是【脚本内容】（复制到脚本文件里）；下面这条是在【终端】执行的命令，<b>不要</b>复制进脚本：</p>
+<pre class="demo-in"><span class="prompt">$</span> chmod +x health_check.sh &amp;&amp; ./health_check.sh</pre>
 <p><span class="step">④ 怎么验证做对了</span>：三条中文结论准确反映当前状态。故意杀掉服务再跑一次，结论应变为"挂了/不通/没动静"；把 LOG 改成不存在的路径再跑，应打印"日志：文件不存在"而不是报错——五种情况（不存在/空/坏行/正常/权限不足）都要有明确输出。</p></div>
 
 <div class="ans ans-split"><p><b>【进5-3】变量、判断与注释</b></p>
@@ -663,7 +675,7 @@ uptime</pre>
 <h2 id="toc-7">附录 A · 练习用脚本（复制保存即可）</h2>
 
 <h3>A1. labservice.sh（假推理服务，支持 start / stop / status）</h3>
-<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>附录脚本总警告</b>：脚本内含自动删除命令（rm -f 清 PID 文件、stop 时结束子进程）——全部只作用于练习目录内自己的产物，不会碰其它路径；但仍需遵守：① 只在专用 Ubuntu 虚拟机或可丢弃实验环境运行；② 不把脚本复制到真实服务器使用；③ 每次实验前先 <span class="code">cd ~/lab</span> 并确认 labservice.conf 的 LOGDIR 指向 ~/lab/logs；④ 练完用 <span class="code">./labservice.sh stop</span> 收尾并复查现场（PID 文件已删、端口已释放）。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>附录脚本总警告</b>：脚本内含自动删除命令（rm -f 清 PID 文件、stop 时结束子进程）——全部只作用于练习目录内自己的产物，不会碰其他路径；但仍需遵守：① 只在专用 Ubuntu 虚拟机或可丢弃实验环境运行；② 不把脚本复制到真实服务器使用；③ 每次实验前先 <span class="code">cd ~/lab</span> 并确认 labservice.conf 的 LOGDIR 指向 ~/lab/logs；④ 练完用 <span class="code">./labservice.sh stop</span> 收尾并复查现场（PID 文件已删、端口已释放）。</div>
 
 <pre class="pre-split">#!/bin/bash
 # labservice.sh - 练习用假服务，仅在练习目录使用
@@ -942,6 +954,6 @@ else
 fi</pre>
 <p style="line-height:1.35;"><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：<span class="code">./service_guard.sh ssh</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop ssh</span> 再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
 
-<p class="footer">Linux 指令练习册 · 进阶篇 · 先自己想，再看答案 · v2.4（2026-09）</p>
+<p class="footer">Linux 指令练习册 · 进阶篇 · 先自己想，再看答案 · v2.5（2026-09）</p>
 </body>
 </html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Git与GitHub速查 · v2.5</title>
+<style>
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.lvl-hot { color: #c00000; font-size: 8pt; border: 1px solid #e0b3b3; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.lvl-mid { color: #666; font-size: 8pt; border: 1px solid #ddd; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #c00000; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #c00000; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.cmd { color: #0a6b1e; font-weight: bold; }
+.param { color: #6b21a8; font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.prompt { color: #0a6b1e; }
+.demo-in .prompt { color: #0a6b1e; }
+.cm { color: #6a737d; font-style: italic; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-herb" viewBox="0 0 72 72"><g id="herb_color">
+    <path fill="#B1CC33" stroke="none" d="M36.8349,18.0781c1.7393,1.6583,1.6481,4.5775,1.6481,4.5775s-2.9114,0.2303-4.651-1.428 c-1.7396-1.6582-1.6481-4.5775-1.6481-4.5775S35.0958,16.4213,36.8349,18.0781z"/>
+    <path fill="#5C9E31" stroke="none" d="M42.0884,54.3627c-4.6114,1.465-9.3345-1.6943-9.3345-1.6943s2.7546-5.5346,7.3663-7.0003 s9.3345,1.6943,9.3345,1.6943S46.6971,52.8966,42.0884,54.3627z"/>
+    <path fill="#B1CC33" stroke="none" d="M49.0484,35.6919c-3.6542,1.0489-7.2941-1.5366-7.2941-1.5366s2.2856-4.2862,5.9401-5.3357 s7.2941,1.5366,7.2941,1.5366S52.7005,34.642,49.0484,35.6919z"/>
+    <path fill="#5C9E31" stroke="none" d="M27.0179,32.1509c3.0883,2.3003,3.5096,6.9616,3.5096,6.9616s-4.5864,0.9311-7.6753-1.3691 c-3.0889-2.3002-3.5096-6.9616-3.5096-6.9616S23.9302,29.8529,27.0179,32.1509z"/>
+  </g>
+  <g id="herb_hair"/>
+  <g id="herb_skin"/>
+  <g id="herb_skin-shadow"/>
+  <g id="herb_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M36.8349,18.0781 c1.7393,1.6583,1.6481,4.5775,1.6481,4.5775s-2.9114,0.2303-4.651-1.428c-1.7396-1.6582-1.6481-4.5775-1.6481-4.5775 S35.0958,16.4213,36.8349,18.0781z"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M27.0179,32.1509 c3.0883,2.3003,3.5096,6.9616,3.5096,6.9616s-4.5864,0.9311-7.6753-1.3691c-3.0889-2.3002-3.5096-6.9616-3.5096-6.9616 S23.9302,29.8529,27.0179,32.1509z"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M42.0884,54.3627 c-4.6114,1.465-9.3345-1.6943-9.3345-1.6943s2.7546-5.5346,7.3663-7.0003s9.3345,1.6943,9.3345,1.6943 S46.6971,52.8966,42.0884,54.3627z"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M49.0484,35.6919 c-3.6542,1.0489-7.2941-1.5366-7.2941-1.5366s2.2856-4.2862,5.9401-5.3357s7.2941,1.5366,7.2941,1.5366 S52.7005,34.642,49.0484,35.6919z"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M39.9046,25.7818 c0,4.7785-2.8879,10.0608-4.8815,13.1378c-0.8136,1.2558-1.7383,2.4273-2.7031,3.5711c-2.5753,3.0534-5.2237,8.2176-3.876,15.8715"/>
+  </g></symbol><symbol id="ic-loop" viewBox="0 0 72 72"><g id="loop_color">
+    <path fill="#3F3F3F" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M20.7713,30.421l-3.7092,4.0991c0.6829-7.7072,5.6421-14.3554,12.9628-17.0134c2.1314-0.774,4.3519-1.1663,6.5997-1.1663 c5.4828,0,10.7603,2.375,14.4775,6.5161l0.61,0.6795l3.8565-3.6084l-0.61-0.6795C50.2532,14.0063,43.5725,11,36.6282,11 c-2.8472,0-5.6591,0.4963-8.3556,1.4755C19.0651,15.819,12.7121,24.3037,11.8404,34.059L8.549,30.421L5.205,33.5375l9.4546,10.4502 l9.4537-10.4493L20.7713,30.421z"/>
+    <path fill="#3F3F3F" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M67,38.3473l-9.4546-10.4502l-9.4537,10.4493l3.3421,3.1174l3.6932-4.0815c-0.6491,7.749-5.6209,14.4422-12.9728,17.1119 c-2.1306,0.7731-4.3501,1.1654-6.5997,1.1654c-5.4828,0-10.7603-2.375-14.4775-6.5157l-0.61-0.6795l-3.8565,3.6079l0.61,0.6795 C21.925,57.9933,28.6066,61,35.5509,61c2.8481,0,5.6591-0.4968,8.3556-1.475c9.2481-3.3574,15.6194-11.9025,16.4463-21.7122 l3.3032,3.6511L67,38.3473z"/>
+  </g>
+  <g id="loop_hair"/>
+  <g id="loop_skin"/>
+  <g id="loop_skin-shadow"/>
+  <g id="loop_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M20.7713,30.421l-3.7092,4.0991c0.6829-7.7072,5.6421-14.3554,12.9628-17.0134c2.1314-0.774,4.3519-1.1663,6.5997-1.1663 c5.4828,0,10.7603,2.375,14.4775,6.5161l0.61,0.6795l3.8565-3.6084l-0.61-0.6795C50.2532,14.0063,43.5725,11,36.6282,11 c-2.8472,0-5.6591,0.4963-8.3556,1.4755C19.0651,15.819,12.7121,24.3037,11.8404,34.059L8.549,30.421L5.205,33.5375l9.4546,10.4502 l9.4537-10.4493L20.7713,30.421z"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M67,38.3473l-9.4546-10.4502l-9.4537,10.4493l3.3421,3.1174l3.6932-4.0815c-0.6491,7.749-5.6209,14.4422-12.9728,17.1119 c-2.1306,0.7731-4.3501,1.1654-6.5997,1.1654c-5.4828,0-10.7603-2.375-14.4775-6.5157l-0.61-0.6795l-3.8565,3.6079l0.61,0.6795 C21.925,57.9933,28.6066,61,35.5509,61c2.8481,0,5.6591-0.4968,8.3556-1.475c9.2481-3.3574,15.6194-11.9025,16.4463-21.7122 l3.3032,3.6511L67,38.3473z"/>
+  </g></symbol><symbol id="ic-amb" viewBox="0 0 72 72"><g id="amb_line-supplement">
+    <line x1="57" x2="57" y1="32" y2="38" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="54.4" x2="59.6" y1="33.5" y2="36.5" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="54.4" x2="59.6" y1="36.5" y2="33.5" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <rect x="32" y="40" width="33" height="4" fill="#000000"/>
+  </g>
+  <g id="amb_color">
+    <path fill="#FFFFFF" stroke="none" d="M65,28.67v21.08c0,0.55-0.45,1.9583-1,1.9583h-6.67c0-2.76-1.24-5.9583-4-5.9583c-2.76,0-4,3.1983-4,5.9583 H32.17V27.67H64C64.55,27.67,65,28.11,65,28.67z"/>
+    <path fill="#FFFFFF" stroke="none" d="M32.17,27.67v24.08l-11.9318-0.0176c-0.12-2.65-2.1582-5.9824-4.8382-5.9824c-2.61,0-4.76,3.01-4.97,5.57 L7,51.25c0,0,0-2.75,0-5.67c0-0.12,0-0.23,0.01-0.34c0-0.11,0.01-0.21,0.02-0.31c0.05-0.62,0.18-1.11,0.34-1.48 c0.1-0.25,0.21-0.44,0.32-0.6c0-0.01,0-0.01,0-0.01c0.06-0.07,0.11-0.14,0.16-0.2c0.04-0.06,0.09-0.11,0.14-0.15 c0.03-0.02,0.05-0.05,0.07-0.07c0.02-0.02,0.04-0.03,0.06-0.05c0.03-0.03,0.05-0.03,0.05-0.03l4.5-3.13 c0.94-1.04,1.84-1.99,2.72-2.85c0.28-0.29,0.57-0.57,0.85-0.84c0.55-0.54,1.1-1.04,1.62-1.51c0.52-0.47,1.02-0.9,1.51-1.3 c1.45-1.2,2.74-2.12,3.85-2.81c0.38-0.24,0.73-0.44,1.06-0.63c0.33-0.19,0.65-0.35,0.94-0.5c0.29-0.15,0.56-0.27,0.82-0.38 c0.18-0.08,0.36-0.15,0.53-0.22c0.08-0.03,0.16-0.06,0.24-0.09c1-0.37,1.52-0.41,1.52-0.41H32.17z"/>
+    <circle cx="53.33" cy="50.75" r="3" fill="#d0cfce" stroke="none"/>
+    <path fill="#d0cfce" stroke="none" d="M18.4,50.75c0,1.66-1.34,3-3,3s-3-1.34-3-3c0-0.13,0.01-0.26,0.03-0.39c0.18-1.47,1.44-2.61,2.97-2.61 c1.57,0,2.85,1.2,2.98,2.73C18.4,50.57,18.4,50.66,18.4,50.75z"/>
+    <line x1="57" x2="57" y1="32" y2="38" fill="none" stroke="#92d3f5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="54.4" x2="59.6" y1="33.5" y2="36.5" fill="none" stroke="#92d3f5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="54.4" x2="59.6" y1="36.5" y2="33.5" fill="none" stroke="#92d3f5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="#92d3f5" stroke="none" d="M26.9434,33.1235l-0.1517,5.3559c0,0.1598-2.101,1.3501-2.2604,1.3607l-6.3812-0.0017 c-0.9195,0.0608-1.4213-1.0409-0.7717-1.6946l4.7033-5.0286c0.1877-0.1889,0.4431-0.2952,0.7094-0.2952h3.8488 C26.8075,32.82,26.9434,32.9559,26.9434,33.1235z"/>
+    <rect x="32" y="40" width="33" height="4" fill="#ea5a47"/>
+  </g>
+  <g id="amb_hair"/>
+  <g id="amb_skin"/>
+  <g id="amb_skin-shadow"/>
+  <g id="amb_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M61.5,50.75H64c0.5523,0,1-0.4477,1-1V28.6667c0-0.5523-0.4477-1-1-1H28.3333c0,0-5.5833,0.4166-15.6666,11.5416l-4.5,3.125 c0,0-1.1667,0.7292-1.1667,3.25C7,48.5,7,50.25,7,50.25h0.9167"/>
+    <line x1="22.75" x2="45.5833" y1="50.75" y2="50.75" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="#000000" stroke="none" d="M53.33,45.75c-2.76,0-5,2.24-5,5s2.24,5,5,5c2.76,0,5-2.24,5-5S56.09,45.75,53.33,45.75z M53.33,53.75c-1.66,0-3-1.34-3-3 s1.34-3,3-3c1.66,0,3,1.34,3,3S54.99,53.75,53.33,53.75z"/>
+    <path fill="#000000" stroke="none" d="M20.39,50.52c-0.12-2.65-2.31-4.77-4.99-4.77c-2.61,0-4.76,2.01-4.97,4.57c-0.02,0.14-0.03,0.28-0.03,0.43 c0,2.76,2.24,5,5,5s5-2.24,5-5C20.4,50.67,20.4,50.59,20.39,50.52z M15.4,53.75c-1.66,0-3-1.34-3-3c0-0.13,0.01-0.26,0.03-0.39 c0.18-1.47,1.44-2.61,2.97-2.61c1.57,0,2.85,1.2,2.98,2.73c0.02,0.09,0.02,0.18,0.02,0.27C18.4,52.41,17.06,53.75,15.4,53.75z"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M26.75,33.8333v2.1459c0,1.6569-1.3431,3-3,3H18"/>
+    <line x1="32.1667" x2="32.1667" y1="27.6667" y2="50.75" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-no" viewBox="0 0 72 72"><g id="no_color">
+    <circle cx="36" cy="36" r="26" fill="#fff"/>
+    <path fill="#ea5a47" stroke-miterlimit="10" d="m36 7c-16.02 0-29 12.98-29 29s12.98 29 29 29 29-12.98 29-29-12.98-29-29-29zm-25.21 29.27c0-5.075 3.417-12.69 6.202-16.49l35.2 35.27c-3.805 2.784-10.93 5.904-16.01 5.904-12.7 0-25.39-11.98-25.39-24.68zm44.87 15.18-35.06-35.13c3.805-2.784 10.77-5.441 15.84-5.441 12.7 0 24.68 12.25 24.68 24.95 0 5.075-2.686 11.81-5.47 15.62z"/>
+  </g>
+  <g id="no_hair"/>
+  <g id="no_skin"/>
+  <g id="no_skin-shadow"/>
+  <g id="no_line">
+    <circle cx="36" cy="36" r="30" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m55.66 51.44a24.99 24.99 0 0 0-35.06-35.13z"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16.99 19.77a24.99 24.99 0 0 0 35.2 35.27z"/>
+  </g></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="ic-wn" viewBox="0 0 72 72"><g id="wn_color">
+    <path fill="#fcea2b" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="wn_hair"/>
+  <g id="wn_skin"/>
+  <g id="wn_skin-shadow"/>
+  <g id="wn_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.5222,13.005c0.6977-1.2046,1.9862-2.0244,3.4778-2.0244c1.4916,0,2.7801,0.8198,3.4778,2.0244l20.9678,41.9351 C60.7889,55.5339,61,56.2136,61,56.9483c0,2.2272-1.8051,4.0323-4.0323,4.0323l-41.9354,0.0173 C12.8051,60.9979,11,59.192,11,56.9657c0-0.7356,0.211-1.4145,0.5544-2.0083L32.5222,13.005"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M37.6129,47.2709c0,0.8907-0.7222,1.6129-1.6129,1.6129c-0.8907,0-1.6129-0.7222-1.6129-1.6129V23.8925 c0-0.8907,0.7222-1.6129,1.6129-1.6129c0.8907,0,1.6129,0.7222,1.6129,1.6129V47.2709z"/>
+    <circle cx="36" cy="54.529" r="1.6129" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-pe" viewBox="0 0 72 72"><g id="pe_color">
+    <polygon fill="#3F3F3F" stroke="none" points="14.5943,53.154 18.2544,56.814 12.6242,59.0928"/>
+    <polyline fill="#f4aa41" stroke="none" points="18.0381,41.8761 36.8684,23.0457 48.1813,34.3586 29.5108,53.0291"/>
+    <polyline fill="#a57939" stroke="none" points="14.4132,52.5663 17.9281,43.3946 27.8278,53.2939 18.6558,56.809"/>
+    <polyline fill="#EA5A47" stroke="none" points="42.9209,16.9933 50.4228,9.4913 61.7357,20.8042 54.2975,28.2424"/>
+    <polyline fill="#9b9b9a" stroke="none" points="35.6498,24.2643 43.3318,16.5823 54.6447,27.8952 47.0278,35.512"/>
+  </g>
+  <g id="pe_hair"/>
+  <g id="pe_skin"/>
+  <g id="pe_skin-shadow"/>
+  <g id="pe_line">
+    <polygon fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="18.6304,56.8203 27.8278,53.2939 53.8207,27.301 43.9212,17.4015 17.9281,43.3946 14.3904,52.6032"/>
+    <polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="47.3354,13.9873 50.8388,10.4839 60.7383,20.3834 57.2645,23.8572"/>
+    <line x1="18.5562" x2="28.4557" y1="42.7665" y2="52.6659" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" points="14.3979,52.5817 11.9073,59.3148 18.6558,56.809"/>
+    <line x1="36.9099" x2="46.4225" y1="25.0073" y2="34.5199" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-gl" viewBox="0 0 72 72"><g id="gl_color">
+    <circle cx="36" cy="36" r="28" fill="#92D3F5" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+  <g id="gl_hair"/>
+  <g id="gl_skin"/>
+  <g id="gl_skin-shadow"/>
+  <g id="gl_line">
+    <circle cx="36" cy="36" r="28" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M36,8v56c-8.5604,0-15.5-12.536-15.5-28S27.4396,8,36,8c8.5604,0,15.5,12.536,15.5,28S44.5604,64,36,64"/>
+    <line x1="64" x2="8" y1="36" y2="36" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="22" y2="22" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="60" x2="12" y1="50" y2="50" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g></symbol><symbol id="ic-pn" viewBox="0 0 72 72"><g id="pn_color">
+    <path fill="#ea5a47" d="m46.288,34.3932c-.8205-1.4005-3.5756-2.5592-3.5756-2.5592l-1.0343-4.1975-2.2282-13.0482-9.1051-.6051-2.184,16.6293c-.0635.3545-1.4459,1.7772-1.7857,1.8963-2.8213.9893-3.0856,3.5212-3.57,4.5505l24.1657.0322c-.0304-.143.0226-1.494-.6828-2.6983Z"/>
+    <polygon fill="#ea5a47" points="31.0083 8.5994 29.5845 14.5883 40.2816 14.1282 39.8274 8.7892 31.0083 8.5994"/>
+    <polygon fill="#d22f27" points="39.8274 8.7892 36.848 8.7892 37.1401 14.5883 40.8274 14.5883 39.8274 8.7892"/>
+    <path fill="#d0cfce" d="m33.051,40.2346s-.0242,2.6808-.0242,3.2335l.3163,12.4946,2.5241,5.8434,1.67-4.2589.7783-17.2953-5.2645-.0173Z"/>
+    <polygon fill="#9b9b9a" points="35.8645 61.5263 37.9727 55.7491 38.3093 41.6967 38.32 40.2367 35.6609 40.2456 35.8645 61.5263"/>
+    <path fill="#d22f27" d="m38.0116,31.834s1.4394,1.1587,2.2599,2.5592c.7054,1.2043,1.238,2.5553,1.2684,2.6983l5.2498-.6511c-.4834-1.0264-.2141-2.6709-3.0383-3.6611-.3398-.1191-.6609-.5908-.7244-.9453,0,0-2.712-14.0382-2.5498-13.5879l-.6956-4.1179-2.6415.4601.8499,15.3903.0216,1.8554Z"/>
+  </g>
+  <g id="pn_line">
+    <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="33.069 41.2315 33.0753 56.0146 35.9361 63.8727 38.2539 55.9913 38.2479 41.2352"/>
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m30.3187,18.576l-2.3773,13.26c-5.2242,1.8318-5.4803,5.4953-5.4803,5.4953h25.4502s-.2561-3.6635-5.4803-5.4953l-2.3773-13.26"/>
+    <polygon fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" points="40.8274 14.5883 29.5845 14.5883 30.5845 8.7892 39.8274 8.7892 40.8274 14.5883"/>
+  </g></symbol><symbol id="ic-xx" viewBox="0 0 72 72"><g id="xx_color">
+    <path fill="#ea5a47" d="m58.14 21.78-7.76-8.013-14.29 14.22-14.22-14.22-8.013 8.013 14.36 14.22-14.36 14.22 8.014 8.013 14.22-14.22 14.29 14.22 7.76-8.013-14.22-14.22z"/>
+  </g>
+  <g id="xx_hair"/>
+  <g id="xx_skin"/>
+  <g id="xx_skin-shadow"/>
+  <g id="xx_line">
+    <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="m58.14 21.78-7.76-8.013-14.29 14.22-14.22-14.22-8.013 8.013 14.35 14.22-14.35 14.22 8.014 8.013 14.22-14.22 14.29 14.22 7.76-8.013-14.22-14.22z"/>
+  </g></symbol><symbol id="ic-ok" viewBox="0 0 72 72"><g id="ok_color">
+    <path fill="#B1CC33" stroke="none" d="M53.1887,52.843H20.5794c-0.3752,0-0.6794-0.2955-0.6794-0.66v-31.68c0-0.3645,0.3042-0.66,0.6794-0.66 h21.5062h1.2918h2.0097h6.6745h1.1271c0.3752,0,0.6794,0.2955,0.6794,0.66v31.68C53.8681,52.5475,53.5639,52.843,53.1887,52.843z"/>
+    <path fill="#FFFFFF" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M30.66,30.538c-1.85-2.61-6.18-0.11-4.32,2.52c3.19,4.51,5.87,9.25,7.91,14.38c0.84,2.09,4.23,2.65,4.83,0 c2.83-12.6,8.21-27.17,20.68-33c2.91-1.36,0.38-5.67-2.52-4.32c-11.43,5.35-17.68,17.36-21.23,29.25 C34.45,36.318,32.68,33.378,30.66,30.538z"/>
+  </g>
+  <g id="ok_hair"/>
+  <g id="ok_skin"/>
+  <g id="ok_skin-shadow"/>
+  <g id="ok_line">
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M53,22.642v30.476c0,0.3645-0.2955,0.66-0.66,0.66H20.66c-0.3645,0-0.66-0.2955-0.66-0.66v-31.68c0-0.3645,0.2955-0.66,0.66-0.66 h20.0814h0.5672"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M30.66,30.538c-1.85-2.61-6.18-0.11-4.32,2.52c3.19,4.51,5.87,9.25,7.91,14.38c0.84,2.09,4.23,2.65,4.83,0 c2.83-12.6,8.21-27.17,20.68-33c2.91-1.36,0.38-5.67-2.52-4.32c-11.43,5.35-17.68,17.36-21.23,29.25 C34.45,36.318,32.68,33.378,30.66,30.538z"/>
+  </g></symbol><symbol id="ic-tg" viewBox="0 0 72 72"><g id="tg_color">
+    <circle cx="39.4882" cy="39.4552" r="29.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="23.85" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="15.85" fill="#EA5A47" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="10.9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="39.4882" cy="39.4552" r="5.9" fill="#EA5A47" stroke="none"/>
+  </g>
+  <g id="tg_hair"/>
+  <g id="tg_skin"/>
+  <g id="tg_skin-shadow"/>
+  <g id="tg_line">
+    <line x1="11.4659" x2="2.5131" y1="11.4989" y2="11.4989" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="11.4662" x2="11.4663" y1="11.4989" y2="2.546" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5067" x2="6.5538" y1="15.5473" y2="15.5473" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="15.5086" x2="15.5086" y1="15.5454" y2="6.5925" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <line x1="39.4865" x2="7.4778" y1="39.4644" y2="7.5188" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M21.9689,16.3467c4.8593-3.674,10.9579-5.8915,17.5193-5.8915c16.0163,0,29,12.9837,29,29s-12.9837,29-29,29s-29-12.9837-29-29 c0-6.5467,2.1693-12.5867,5.8283-17.4404"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M26.2567,20.6399c3.7421-2.6364,8.306-4.1847,13.2315-4.1847c12.7025,0,23,10.2975,23,23s-10.2975,23-23,23s-23-10.2975-23-23 c0-4.8704,1.5138-9.3872,4.0966-13.1056"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M32.04,26.4321c2.1945-1.2578,4.7374-1.9769,7.4482-1.9769c8.2843,0,15,6.7157,15,15s-6.7157,15-15,15s-15-6.7157-15-15 c0-2.6162,0.7305-5.1268,1.9079-7.268"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M40.0779,34.4744c2.4674,0.3067,4.3769,2.4111,4.3769,4.9616c0,2.7614-2.2386,5-5,5c-2.4824,0-4.5422-1.809-4.9332-4.1806"/>
+    <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M35.7775,30.1663c1.1474-0.4587,2.3996-0.7111,3.7107-0.7111c5.5228,0,10,4.4772,10,10s-4.4772,10-10,10s-10-4.4771-10-10 c0-1.2548,0.252-2.4731,0.6858-3.5895"/>
+  </g></symbol></defs></svg>
+
+<h1><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> Git 与 GitHub 速查</h1>
+<p class="note">打印提示：A4、实际大小（100%）、关闭浏览器"页眉和页脚"；需要保留彩色底色时开启"背景图形"。用法：第 1 页背概念，第 2 页是每天要用的命令，第 3~4 页在卡住时翻。</p>
+
+<h2 class="toc-title">目录</h2>
+<div class="toc">
+<div class="toc-row"><span class="tn">第 1 页</span><span class="tdesc">三个概念 + 首次配置（一劳永逸）</span><a href="#toc-1"></a></div>
+<div class="toc-row"><span class="tn">第 2 页</span><span class="tdesc">最小工作流：六条命令走完一个循环</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">第 3 页</span><span class="tdesc">撤销、查看、分支（出错时翻）</span><a href="#toc-3"></a></div>
+<div class="toc-row"><span class="tn">第 4 页</span><span class="tdesc">.gitignore + 常见报错 + 提交规范 + 小练习</span><a href="#toc-4"></a></div>
+</div>
+
+<h2 id="toc-1">第 1 页 · 三个概念与首次配置</h2>
+
+<div class="box2"><b>一句话理解：</b>Git = 给你的代码<b>拍快照</b>（随时能回到过去）；GitHub = 把快照<b>存到云端</b>（换电脑不丢、别人能看）。<br>
+找工作时，面试官看的就是你的 GitHub 仓库——<b>提交记录 = 你最真实的学习履历</b>。</div>
+
+<h3>1.1 三个概念（记住这个比喻就够）</h3>
+<table class="tight"><tr><th>概念</th><th>比喻</th><th>对应命令</th></tr>
+<tr><td><b>仓库</b>（repository）</td><td>一本带"存档功能"的相册</td><td><span class="code">git init</span></td></tr>
+<tr><td><b>提交</b>（commit）</td><td>按下一次"存档"：记录这一刻的所有文件</td><td><span class="code">git add</span> + <span class="code">git commit</span></td></tr>
+<tr><td><b>远程</b>（remote）</td><td>云端备份（GitHub 上的那本相册）</td><td><span class="code">git push</span> / <span class="code">git pull</span></td></tr></table>
+<p class="note">工作区 →（add）→ 暂存区 →（commit）→ 本地仓库 →（push）→ GitHub。四个格子，命令只在格子之间搬东西。</p>
+
+<h3>1.2 首次配置（只做一次，五条命令）</h3>
+<pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">--version</span>                          <span class="cm"># 没装就先：sudo apt install git</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">config</span> <span class="param">--global</span> <span class="param">user.name</span> <span class="param">"你的名字"</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">config</span> <span class="param">--global</span> <span class="param">user.email</span> <span class="param">"你的邮箱"</span>     <span class="cm"># 建议用 GitHub 注册邮箱</span>
+<span class="prompt">$</span> <span class="cmd">ssh-keygen</span> <span class="param">-t</span> <span class="param">ed25519</span>                <span class="cm"># 一路回车，生成 SSH 钥匙</span>
+<span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/.ssh/id_ed25519.pub</span>           <span class="cm"># 复制这一整行 → 粘到 GitHub</span></pre>
+<p class="note">粘贴位置：GitHub 网页 → 右上角头像 → <b>Settings</b> → <b>SSH and GPG keys</b> → New SSH key → 粘贴 → 保存。<br>
+验证：<span class="code">ssh -T git@github.com</span> 出现 <span class="code">Hi 你的用户名!</span> 就成了。</p>
+
+<div class="pb"></div>
+<h2 id="toc-2">第 2 页 · 最小工作流：一个循环六条命令</h2>
+
+<div class="box"><b>日常循环</b>（改代码 → 存档 → 上传），背下来：
+<pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">status</span>                      <span class="cm"># ① 看：哪些文件改了（最常用，随时敲）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">add</span> <span class="param">.</span>                         <span class="cm"># ② 挑：把改动放进暂存区（. = 全部）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">commit</span> <span class="param">-m</span> <span class="param">"说明这次改了什么"</span>     <span class="cm"># ③ 存：拍快照</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">push</span>                          <span class="cm"># ④ 传：同步到 GitHub</span></pre>
+</div>
+
+<h3>2.1 第一次：把本地目录变成仓库并推上去</h3>
+<pre><span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">~/lab/myproject</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">init</span>                            <span class="cm"># 变成 Git 仓库（多出一个 .git 隐藏目录）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">add</span> <span class="param">.</span> &amp;&amp; <span class="cmd">git</span> <span class="param">commit</span> <span class="param">-m</span> <span class="param">"首次提交"</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">branch</span> <span class="param">-M</span> <span class="param">main</span>                   <span class="cm"># 主分支命名为 main（GitHub 的默认叫法）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">remote</span> <span class="param">add</span> <span class="param">origin</span> <span class="param">git@github.com:你的用户名/仓库名.git</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">push</span> <span class="param">-u</span> <span class="param">origin</span> <span class="param">main</span>              <span class="cm"># 第一次要 -u，以后直接 git push</span></pre>
+<p class="note">先在 GitHub 网页上点 <b>New repository</b> 建一个空仓库（<b>不要</b>勾选 "Add a README"，否则两边不一致会推不上去），再把上面的地址粘过来。</p>
+
+<h3>2.2 看一眼历史</h3>
+<pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">log</span> <span class="param">--oneline</span>                 <span class="cm"># 一行一条提交记录（按 q 退出）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">diff</span>                          <span class="cm"># 看还没暂存的改动（改了哪几行）</span></pre>
+
+<div class="pb"></div>
+<h2 id="toc-3">第 3 页 · 撤销、查看、分支（出错时翻）</h2>
+
+<div class="section-head tight2">↩️ 改错了想撤回（按"改到哪一步"选）</div>
+<table class="long-table"><tr><th>情况</th><th>命令</th><th>说明</th></tr>
+<tr><td>改了文件、还没 add</td><td class="code">git restore 文件名</td><td>丢弃工作区改动，<b>不可找回</b></td></tr>
+<tr><td>已 add、还没 commit</td><td class="code">git restore --staged 文件名</td><td>从暂存区拿出来，改动仍在</td></tr>
+<tr><td>已 commit、想改说明</td><td class="code">git commit --amend -m "新说明"</td><td>只改最近一次（还没 push 时用）</td></tr>
+<tr><td>想回到某次提交</td><td class="code">git log --oneline</td><td>先找到那次的编号（前 7 位），再决定怎么处理</td></tr>
+<tr><td>想丢弃全部本地改动</td><td class="code err">git reset --hard</td><td><b>危险</b>：所有未提交的改动全没</td></tr></table>
+<p class="rule"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 记住一条：<b>没提交的东西，Git 救不回来</b>。所以养成"小步提交"的习惯——改一点、存一次。</p>
+
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-herb"/></svg> 分支（先知道，别急着用）</div>
+<pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">branch</span>                        <span class="cm"># 看有哪些分支（* 是当前）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">checkout</span> <span class="param">-b</span> <span class="param">feature-login</span>       <span class="cm"># 新建并切到新分支（试新想法不污染主线）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">checkout</span> <span class="param">main</span>                 <span class="cm"># 切回主线</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">merge</span> <span class="param">feature-login</span>            <span class="cm"># 把分支合并回主线</span></pre>
+
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-loop"/></svg> 多人/多机同改：先拉后推</div>
+<pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">pull</span>                           <span class="cm"># 开工前：把云端最新改动拉下来</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">push</span>                           <span class="cm"># 收工前：把自己的改动推上去</span></pre>
+<p class="note">口诀：<b>开工先 pull，收工再 push</b>。两台机器（或和同事）同时改，就不会打结。</p>
+
+<div class="pb"></div>
+<h2 id="toc-4">第 4 页 · .gitignore · 常见报错 · 提交规范 · 小练习</h2>
+
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-no"/></svg> .gitignore：哪些文件不提交</div>
+<p>在仓库根目录建一个名为 <span class="code">.gitignore</span> 的文件，写上不要提交的东西（每行一条）：</p>
+<pre><span class="cm"># 依赖与缓存（体积大、能重建）</span>
+.venv/
+__pycache__/
+*.pyc
+
+<span class="cm"># 日志与临时文件</span>
+*.log
+tmp/
+
+<span class="cm"># 含密码的配置（千万别传！）</span>
+*.env
+config_secret.*</pre>
+<p class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 记住：<b>能自动重建的东西不提交</b>（.venv、__pycache__），<b>要重建它的清单要提交</b>（requirements.txt）。</p>
+
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-amb"/></svg> 五个最常见的报错（人话版）</div>
+<table class="long-table"><tr><th>报错</th><th>意思</th><th>怎么办</th></tr>
+<tr><td class="code err">fatal: not a git repository</td><td>当前目录不是 Git 仓库</td><td>进到仓库目录；或先 <span class="code">git init</span></td></tr>
+<tr><td class="code err">nothing to commit, working tree clean</td><td>没有新改动可提交</td><td>不是错误：你没改东西，或已经提交过了</td></tr>
+<tr><td class="code err">failed to push some refs</td><td>云端有你本地没有的提交</td><td>先 <span class="code">git pull</span>，再 <span class="code">git push</span></td></tr>
+<tr><td class="code err">Permission denied (publickey)</td><td>GitHub 不认你的钥匙</td><td>重新把 <span class="code">~/.ssh/id_ed25519.pub</span> 贴到 GitHub；或测试 <span class="code">ssh -T git@github.com</span></td></tr>
+<tr><td class="code err">CONFLICT (content): Merge conflict</td><td>两边改了同一行</td><td>打开文件找 <span class="code">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> 标记，人工留一份，然后 add + commit</td></tr></table>
+
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 提交信息怎么写（面试官真的会看）</div>
+<table class="tight"><tr><th>写法</th><th>示例</th><th>点评</th></tr>
+<tr><td><svg class="em" width="15" height="15"><use href="#ic-xx"/></svg> 太随意</td><td class="code">update / 改了一下 / aaa</td><td>看不出做了什么</td></tr>
+<tr><td><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 推荐</td><td class="code">新增磁盘巡检脚本 / 修复日志解析的空行报错</td><td>一句话说清"做了什么"</td></tr>
+<tr><td><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 进阶（可选）</td><td class="code">feat: 磁盘巡检脚本 / fix: 日志解析空行</td><td>加前缀：feat 新功能、fix 修复、docs 文档</td></tr></table>
+
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 小练习（做完你的 GitHub 就有内容了）</div>
+<p>① 把 <span class="code">~/lab</span> 下写好的脚本目录变成 Git 仓库；② 建好 <span class="code">.gitignore</span>（按上面四类）；③ 提交 3 次以上（每次说明写清楚）；④ 推到 GitHub；⑤ 在网页上打开仓库，确认能看到文件和历史记录。</p>
+<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 检查点对接：学习计划的"第 2 周末 commit ≥ 10 次""第 4 周末脚本进 GitHub"——就靠这一册完成。</div>
+
+<p class="footer">Git 与 GitHub 速查 · v2.5（2026-10） · 与《九阶》系列同格式</p>
+
+</body>
+</html>

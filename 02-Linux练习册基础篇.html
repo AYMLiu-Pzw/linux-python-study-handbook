@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Linux指令练习册·基础篇 · v2.4</title>
+<title>Linux指令练习册·基础篇 · v2.5</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -99,6 +99,8 @@ pre.pre-split { break-inside: auto; page-break-inside: auto; }
 .demo { break-inside: avoid; page-break-inside: avoid; }
 h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 .em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.param { color: #6b21a8; font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.param { color: #6b21a8; }
 </style>
 
 
@@ -201,6 +203,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 ② <span class="keyword">边学边做（可选）</span>：每学完教科书一章，立刻做本册对应阶段，用于复习与查漏。</p>
 <p><b>★/☆ 分级</b>：★ = 必做（每个概念的变式 1），☆ = 选做（每个概念的变式 2，加难版）。<b>自检规则（决定 ☆ 做不做）</b>：做完一道 ★ 变式 1 后自检——一次做对、用时少、全程独立没看答案，则该概念的 ☆ 变式 2 可以跳过；卡壳、做错、超时，则该概念的 ☆ 必做，把漏洞补上。</p>
 <div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、配置或日志的题，先记录原状态；每一步核对路径、对象、PID 和权限；操作后对照输出与数量验证；完成后删除临时对象、恢复权限并复查现场。异常时保留报错原文。</div>
+<div class="box2"><b>做完之后：</b>本册所有阶段做完，请打开《<b>12-总自测表</b>》对照本册部分逐条打勾——<b>打勾 = 真正会了</b>（不是"看过"）；卡住的条目回到对应阶段重做。 打勾全部完成，就可以进入下一册。</div>
 <p><b>环境要求</b>：题目标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定（不保证可做）；其余题目平板一般能做。</p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志：每天把敲过的命令、报错与心得记进学习日志——坚持记录本身就是在练习"写下来"。</p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-lb"/></svg> 题面括号里有时会给出"脚手架提示"（如 bash 的 {1..5} 花括号展开）——卡住再看；先自己思考，提示只是安全绳。</p>
@@ -548,7 +551,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 
 <div class="ans"><p><b>【基础 3-5 ★】chown 影响</b></p>
 <p class="note">前提：本答案假设 alice 不在该文件的属组内（此时她按"其他人"权限位判断）；若 alice 与文件同属一组，则应按属组权限位判断，结论相应改变。</p>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 环境前提（Ubuntu 26.04 实测一致）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
 <p><span class="step">① 先想什么</span>：文件换了主人后，原主人变成了"其他人"还是"同组"，权限就跟着变。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code cmd">chown bob file</span> 把属主换成 bob。若文件 644（rw-r--r--），alice 不再是属主，只能以"其他人"身份读（r），不能写也不能执行。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
@@ -562,7 +565,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">④ 怎么验证做对了</span>：读成功、写失败，与你按权限位推演的结果一致。关键理解：<b>判断权限不是看"我是谁"，而是看"对这个人而言我是属主、属组还是其他人"</b>——文件换主后，原主人的身份也跟着变了。</p></div>
 
 <div class="ans"><p><b>【基础 3-6 ☆】组共享</b></p>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 环境前提（Ubuntu 22.04 默认要处理）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 环境前提（Ubuntu 26.04 实测一致）：新装 Ubuntu（21.04 起）家目录默认是 <span class="code">750</span>（drwxr-x---），alice/bob 穿不过 <span class="code">/home/&lt;你&gt;</span>，会直接 Permission denied。先确认：<span class="code">ls -ld /home/$(whoami)</span>——若显示 drwxr-x---，临时 <span class="code">sudo chmod 711 /home/$(whoami)</span>（别人"只能穿过、不能列目录"），做完实验务必恢复：<span class="code">sudo chmod 750 /home/$(whoami)</span>。</p>
 <p><span class="step">① 先想什么</span>：两个人要能写同一个目录，但又不给"所有人"写——用"属组"这个中间层。</p>
 <p><span class="step">② 为什么用这个命令</span>：建组 <span class="code cmd">groupadd</span>，把人加进组 <span class="code cmd">usermod -aG</span>，目录属组设成该组 <span class="code cmd">chgrp</span>，组权限给 rwx。这样"组内能写、组外不能"。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
@@ -589,7 +592,7 @@ drwxr-xr-x 2 student student 4096 Aug 16 08:00 notes</pre>
 <p><span class="step">① 先想什么</span>：结合 1-7 的结论推演：删除看目录的写权限，那"目录可写"时无论文件是谁的，都能删。</p>
 <p><span class="step">② 为什么用这个命令</span>：删除 = 从目录里划掉登记项，需要目录 w 权限，跟文件的属主无关。所以"目录可写 + 文件属主是别人"→ 能删。唯一例外是 sticky bit（粘滞位，/tmp 就有，权限位显示 t）：此时只有文件属主或 root 能删。</p>
 <p><span class="step">③ 完整步骤</span>：</p>
-<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>危险操作提醒（先读再做）</b>：本组涉及 <span class="code cmd">chmod 777</span>（所有人可写）和 <span class="code cmd">sudo rm -rf</span>（递归强删）。只在<b>专用 Ubuntu 虚拟机</b>里做，不碰真实系统；动手前先 <span class="code">pwd</span> 和 <span class="code">ls</span> 核对目标；实验中建的 /tmp/openbox、/tmp/stickybox 只允许删这两个目录，<b>绝不能把 rm -rf 指向 /tmp 本身或其它路径</b>；做完按④的收尾恢复现场。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>危险操作提醒（先读再做）</b>：本组涉及 <span class="code cmd">chmod 777</span>（所有人可写）和 <span class="code cmd">sudo rm -rf</span>（递归强删）。只在<b>专用 Ubuntu 虚拟机</b>里做，不碰真实系统；动手前先 <span class="code">pwd</span> 和 <span class="code">ls</span> 核对目标；实验中建的 /tmp/openbox、/tmp/stickybox 只允许删这两个目录，<b>绝不能把 rm -rf 指向 /tmp 本身或其他路径</b>；做完按④的收尾恢复现场。</div>
 <pre><span class="prompt">$</span> sudo mkdir /tmp/openbox; sudo chmod 777 /tmp/openbox
 <span class="prompt">$</span> sudo touch /tmp/openbox/rootfile      <span class="out"># root 的文件</span>
 <span class="prompt">$</span> sudo -u alice sh -c 'whoami; rm /tmp/openbox/rootfile' <span class="out"># 显示 alice，并删除 root 的文件</span>
@@ -823,6 +826,6 @@ EOF
 <tr><td>粘滞位（t）</td><td>目录权限上的特殊位：只有文件属主或 root 能删除（如 /tmp）</td></tr>
 </tbody></table>
 
-<p class="footer">Linux 指令练习册 · 基础篇 · 先自己想，再看答案 · v2.4（2026-09）</p>
+<p class="footer">Linux 指令练习册 · 基础篇 · 先自己想，再看答案 · v2.5（2026-09）</p>
 </body>
 </html>
