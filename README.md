@@ -108,7 +108,11 @@
 5. 做完涉及修改、删除、权限或服务状态的题后，把实验环境恢复到题目前的状态；
 6. 动态内容例如 PID、时间、随机值、目录列表和系统版本可能不同，应比较结构和含义，不要求每个数字完全相同。
 
-## 7. 打印使用说明
+## 7. 阅读与打印
+
+**在线阅读**：打开站点首页 https://aymliu-pzw.github.io/linux-python-study-handbook/ —— 点任意一册即可在浏览器里直接阅读（排版与打印版一致），无需下载；点每行的「下载 PDF」即可拿到打印版。
+
+### 打印使用说明
 
 除《总自测表》外，每份资料都是 HTML 文件，可以用浏览器阅读或打印：
 
@@ -125,18 +129,6 @@
 ## 8. 仓库结构
 
 ```text
-README.md
-01-Linux入门.html
-02-Linux练习册基础篇.html
-03-Linux练习册进阶篇.html
-04-Python入门.html
-05-Python练习册基础篇.html
-06-Python练习册进阶篇.html
-07-Python内置函数手册.html
-08-报错英语单词手册.html
-09-日志报错解读手册.html
-10-命名手册.html
-11-Git与GitHub速查.html
 PDF版/
   01-Linux入门.pdf
   02-Linux练习册基础篇.pdf
@@ -150,6 +142,20 @@ PDF版/
   10-命名手册.pdf
   11-Git与GitHub速查.pdf
   12-总自测表.pdf
+01-Linux入门.html
+02-Linux练习册基础篇.html
+03-Linux练习册进阶篇.html
+04-Python入门.html
+05-Python练习册基础篇.html
+06-Python练习册进阶篇.html
+07-Python内置函数手册.html
+08-报错英语单词手册.html
+09-日志报错解读手册.html
+10-命名手册.html
+11-Git与GitHub速查.html
+12-总自测表.html
+index.html
+README.md
 ```
 
 ## 9. 当前定位
