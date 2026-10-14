@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>综合项目（教科书版） · v3.1</title>
+<style>
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.lvl-hot { color: #c00000; font-size: 8pt; border: 1px solid #e0b3b3; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.lvl-mid { color: #666; font-size: 8pt; border: 1px solid #ddd; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #c00000; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #c00000; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
+
+.cols { column-count: 2; column-gap: 10mm; }
+.section-head { break-after: avoid; page-break-after: avoid; }
+.st { margin: 2px 0 6px 0; padding-left: 2px; list-style: none; }
+.st li { font-size: 10pt; line-height: 1.38; margin: 1px 0; break-inside: avoid; }
+.st-title { font-size: 10.5pt; font-weight: bold; color: #003a8c; margin: 6px 0 1px; break-after: avoid; }
+ul.st { columns: 1; }
+@media print { .cols { column-count: 2; } }
+
+</style>
+</head>
+<body>
+<h1>10 · 综合项目（server-health-check）</h1>
+<p class="note">配套：《01 Linux 入门》《04 Python 入门》《07 Docker 入门》《08 监控入门》《09 K8s 入门》《16 Git 速查》《17 关卡总表》；本册是阶段 7 的正文，按关卡编号打关。</p>
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（新写）</td></tr>
+<tr><td><b>本册关卡</b></td><td>7-01 ~ 7-08</td></tr>
+<tr><td><b>用时</b></td><td>必做 33 小时</td></tr>
+<tr><td><b>学完解锁</b></td><td>交付王牌项目 v1：本机巡检 ＋ 阈值告警 ＋ 报告与历史对比 ＋ 容器化 ＋ 指标进监控 ＋ README/设计决策/讲述稿</td></tr></table>
+<div class="box2"><b>全册已写</b>（第四轮）。这是实战里最看重的那道题的主料，做完要能在干净环境按 README 跑通。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：这一册是<b>把前面学到的所有零件拼成一个真项目</b>：写一个 <span class="code">server-health-check</span> 巡检脚本（查磁盘 / 内存 / CPU / 服务）→ 出报告 → 容器化 → 接监控 → 写 README 和讲述稿。生活类比：零件（命令、Python、Docker、监控）你都见过，这一册教你把它们<b>装成一台能给别人看的机器</b>。</p>
+<p><b>② 干什么用</b>：实战里最看重的是"讲一件你真正动手做过的事"——做完这一册，你手里就有一个<b>能从零跑通、带 README</b> 的作品，而不是零散的知识点。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：别人先看你的 GitHub，再让你讲 3 分钟；没有项目故事，前面学的都只是"学过"。</p>
+<p><b>④ 长什么样 / 怎么用</b>：一条主线走完七关：7-01 立项（定检查项与门槛）→ 7-02 写脚本 → 7-03 报告与历史对比 → 7-04 容器化 → 7-05 接 Prometheus → 7-06 README → 7-07 讲述稿；位置：第 7 阶段收官册（01~09 学的东西全用得上）。</p>
+
+<h2>7-01 项目立项：巡检到底要检查什么</h2>
+<p class="note">时长：休息日 3 小时 ｜ 工作日 15 分　｜　前置：3-17（或 6-08）　｜　状态：已写（第四轮）</p>
+<p><b>这一册是你的王牌项目</b>：`server-health-check` —— 实战里最看重的"讲一件你真正动手做过的事"，讲的就是它。第一关先把"要检查什么、怎么算不正常"定下来，<b>不写代码</b>。</p>
+<h3>步骤 1：先回答一个问题</h3>
+<pre class="demo">如果半夜收到告警"某台服务器好像不对劲"，你希望脚本替你回答哪几个问题？
+
+1) 磁盘是不是快满了？     → df -h       （门槛：>80% 告警）
+2) 内存是不是被吃光了？   → free -m     （门槛：可用 &lt;10%）
+3) CPU 负载是不是过高？   → uptime      （门槛：1 分钟负载 > 核数 × 1.5）
+4) 关键服务还活着吗？     → systemctl is-active   （门槛：不是 active 就报）
+—— 这四条就是版本 1 的检查清单（和阶段 3 的 v0 相比，多了"服务检查"）</pre>
+<h3>步骤 2：给每条定"三件事"</h3>
+<table><tr><th style="width:16%">检查项</th><th style="width:26%">命令</th><th style="width:20%">正常 / 异常门槛</th><th>异常时说什么</th></tr>
+<tr><td>磁盘</td><td><span class="code">df -h /</span></td><td>使用率 ≥ 80%</td><td>"根分区用量 87%，先查是谁在涨"</td></tr>
+<tr><td>内存</td><td><span class="code">free -m</span></td><td>可用 ≤ 10%</td><td>"可用内存只剩 380MB"</td></tr>
+<tr><td>负载</td><td><span class="code">uptime</span> / <span class="code">nproc</span></td><td>1 分钟负载 &gt; 核数 × 1.5</td><td>"负载 7.2，超过 4 核的 1.5 倍"</td></tr>
+<tr><td>服务</td><td><span class="code">systemctl is-active ssh</span></td><td>不是 <span class="code">active</span></td><td>"ssh 服务状态：inactive"</td></tr></table>
+<p><b>解读</b>：<b>每一个检查都要有"门槛"和"异常时的人话"</b> —— 这就是"运维脚本"和"练习脚本"的区别：前者是给人看的、能直接进告警的。</p>
+<h3>步骤 3：写一页《检查清单 + 判定标准》（产出）</h3>
+<pre class="demo"># server-health-check 检查清单 v1
+| 检查项 | 命令 | 门槛 | 异常时输出 |
+|-------|------|------|-----------|
+| 磁盘   | df -h / | ≥80% | [告警] 根分区 87% |
+| 内存   | free -m | 可用 ≤10% | [告警] 可用内存 380MB |
+| 负载   | uptime  | >核数×1.5 | [告警] 负载 7.2（4 核）|
+| 服务   | systemctl is-active | ≠active | [告警] ssh inactive |
+退出码约定：0=全部正常，1=脚本自身出错，2=存在告警</pre>
+<h3>完成判定</h3>
+<p>□ 有一页检查清单（四项 ＋ 门槛 ＋ 异常话术）　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）　□ 能说出为什么每项都要有门槛　□ 能说出退出码 0/1/2 各自代表什么　□ 能说出这一版和 3-17 的 v0 差在哪（多了服务检查、门槛更明确）</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：纯文档，无风险。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：别人问"你这个巡检项目都查什么"，你能一条条说出"查什么、什么算不正常、为什么定这个门槛"——这就是"设计过"和"抄过"的区别。</p>
+
+<h2>7-02 v1：把四个检查写进脚本（subprocess ＋ 阈值告警）</h2>
+<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：7-01 ＋ 3-10（subprocess）＋ 3-05（异常）　｜　状态：已写（第四轮）</p>
+<h3>步骤 1：核心骨架（可直接复制，先跑通再改）</h3>
+<pre class="demo">#!/usr/bin/env python3
+"""server-health-check v1：四项本机巡检，超阈值告警"""
+import subprocess
+import sys
+
+
+def run(cmd):
+    """跑一条命令，返回输出；命令不存在/失败都抛异常给上层"""
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
+    if result.returncode != 0:
+        raise RuntimeError(f"{' '.join(cmd)} 失败：{result.stderr.strip()}")
+    return result.stdout
+
+
+def check_disk(threshold=80):
+    out = run(["df", "-h", "/"])                      # 第二行第二列是使用率
+    usage = int(out.splitlines()[1].split()[4].rstrip("%"))
+    return usage &gt;= threshold, f"根分区使用率 {usage}%"
+
+
+def check_memory(min_free_pct=10):
+    out = run(["free", "-m"])                          # Mem 那行：total / available
+    parts = out.splitlines()[1].split()
+    total, available = int(parts[1]), int(parts[6])
+    pct = available / total * 100
+    return pct &lt;= min_free_pct, f"可用内存 {available}MB（{pct:.0f}%）"
+
+
+def check_load(factor=1.5):
+    cores = int(run(["nproc"]).strip())
+    load1 = float(run(["uptime"]).split("load average:")[1].split(",")[0])
+    return load1 &gt; cores * factor, f"1 分钟负载 {load1}（{cores} 核，门槛 {cores * factor}）"
+
+
+def check_service(name="ssh"):
+    # 注意：is-active 用"返回码"表达状态（不在跑=3、不存在=4），
+    # 所以这里不能用会抛异常的 run()，要自己接住返回码
+    result = subprocess.run(["systemctl", "is-active", name],
+                            capture_output=True, text=True, timeout=10)
+    out = result.stdout.strip() or "（无输出）"
+    return out != "active", f"服务 {name} 状态：{out}"
+
+
+CHECKS = [("磁盘", check_disk), ("内存", check_memory), ("负载", check_load), ("服务", check_service)]
+
+
+def main():
+    alerts = []
+    for name, fn in CHECKS:
+        try:
+            bad, message = fn()
+        except Exception as exc:
+            print(f"[错误] {name} 检查失败：{exc}")
+            return 1
+        print(f"[{'告警' if bad else '正常'}] {name}：{message}")
+        if bad:
+            alerts.append(f"{name}：{message}")
+    if alerts:
+        print(f"\n共 {len(alerts)} 项异常")
+        return 2
+    print("\n全部正常")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())</pre>
+<p><b>解读（四处值得说的设计）</b>：① <b>每个检查是一个函数</b> —— 以后加"GPU 检查"只是再加一个函数；② <b>命令失败抛异常、上层统一处理</b>（不会静默算错）；③ <b>每项都打印"人话"</b>，不只是数字；④ <b>退出码 0/1/2</b>，可以被 crontab 或别的脚本判断。</p>
+<h3>步骤 2：跑两次 —— 正常态和告警态</h3>
+<pre class="demo"><span class="prompt">$</span> chmod +x server_check.py &amp;&amp; ./server_check.py
+[正常] 磁盘：根分区使用率 42%
+[正常] 内存：可用内存 3120MB（78%）
+[正常] 负载：1 分钟负载 0.31（4 核，门槛 6.0）
+[正常] 服务：服务 ssh 状态：active
+
+全部正常
+<span class="note">（两种常见情况：① 本机没装 ssh——报 <span class="code">Unit ssh.service could not be found.</span>——把 <span class="code">check_service</span> 的默认名换成你机器上一定有的服务（如 <span class="code">cron</span>），或先装 openssh-server；② 装了 ssh 但显示 <span class="code">inactive</span>——这是 26.04 的正常现象：新版 ssh 由 <span class="code">ssh.socket</span> 按需拉起，"服务没在跑"≠机器有问题；要盯 ssh 就改查 <span class="code">ssh.socket</span>，或干脆默认用 <span class="code">cron</span> 这类常驻服务，免得把正常机器误报成告警。示例里 ssh 显示 active 是演示机的样子，以你机器为准。）</span>
+<span class="prompt">$</span> echo $?
+0
+
+# 把门槛调极端，看告警态
+<span class="prompt">$</span> sed -i 's/threshold=80/threshold=1/' server_check.py &amp;&amp; ./server_check.py
+[告警] 磁盘：根分区使用率 42%
+...
+共 1 项异常
+<span class="prompt">$</span> echo $?
+2</pre>
+<h3>步骤 3：故意造一个故障场景（这步最值钱）</h3>
+<pre class="demo"># 造一个大文件把磁盘顶上去
+<span class="prompt">$</span> fallocate -l 3G ~/lab/bigfile &amp;&amp; ./server_check.py
+[告警] 磁盘：根分区使用率 81%          ← 脚本真的抓到了（示例："3G 顶到 81%"是小沙箱盘的效果；你的盘大就用步骤 2 的 sed 阈值法，或按盘容量再造大文件）
+<span class="prompt">$</span> rm ~/lab/bigfile &amp;&amp; ./server_check.py   # 清理后回到正常
+
+# 停一个服务看它抓不抓
+<span class="prompt">$</span> sudo systemctl stop ssh.socket 2&gt;/dev/null || sudo systemctl stop ssh
+<span class="prompt">$</span> ./server_check.py | grep 服务
+[告警] 服务：服务 ssh 状态：inactive
+<span class="prompt">$</span> sudo systemctl start ssh        # 记得恢复！</pre>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p class="note">回滚方式：实验文件 <span class="code cmd">rm ~/lab/bigfile</span>；停掉的服务 <span class="code cmd">systemctl start</span> 恢复。<b>动服务前先确认它是不是你正在用的（ssh 停了你自己会掉线，所以先开一个备用终端）</b>。</p>
+<h3>完成判定</h3>
+<p>□ 脚本四项检查都能跑出结果　□ 造过一次真实告警（大文件顶磁盘）并恢复　□ 退出码 0/1/2 都验证过　□ 能说清为什么每项检查用函数封装　□ 能说清 <span class="code">subprocess.run</span> 的 <span class="code">capture_output</span> / <span class="code">text</span> / <span class="code">timeout</span> 各干什么</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这是实战里最看重的那道题的主料 —— 你能讲"我怎么设计这个脚本、怎么造故障验证它、顺手处理了哪些边界"。有设计取舍的故事，才有说服力。</p>
+
+<h2>7-03 输出报告与历史对比</h2>
+<p class="note">时长：休息日 4 小时 ｜ 工作日 20 分　｜　前置：7-02 ＋ 3-03（文件）　｜　状态：已写（第四轮）</p>
+<p><b>为什么要"留档"</b>：只看一眼数字，你判断不了"这台机器是今天不对，还是一直都不对"。<b>把每次巡检写成文件，才有"趋势"</b>——这也是运维和临时工的区别。</p>
+<h3>步骤 1：把结果写成文件（带时间戳）</h3>
+<pre class="demo">import datetime, os, pathlib
+
+REPORT_DIR = pathlib.Path(os.environ.get("REPORT_DIR", pathlib.Path.home() / "lab" / "health-reports"))  # 允许用环境变量指定（容器里挂载就靠它）
+
+
+def write_report(lines, alerts):
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    now = datetime.datetime.now()
+    path = REPORT_DIR / f"{now:%Y%m%d-%H%M%S}.txt"        # 每次一个文件，按时间命名
+    body = "\n".join([f"巡检时间：{now:%Y-%m-%d %H:%M:%S}", f"告警数：{len(alerts)}", *lines])
+    path.write_text(body, encoding="utf-8")
+    print(f"报告已写入：{path}")
+    return path</pre>
+<p><b>解读</b>：文件名带时间戳，<b>天然就是历史记录</b>；目录用 <span class="code">mkdir(parents=True, exist_ok=True)</span> 保证第一次跑也不会因为目录不存在而失败。</p>
+<h3>步骤 2：和上一次比（这一步才是"运维视角"）</h3>
+<pre class="demo">def last_reports(n=2):
+    files = sorted(REPORT_DIR.glob("*.txt"))
+    return files[-n:]
+
+
+def diff_with_last(current_line):
+    """从最近两次报告里，把磁盘那行挑出来对比"""
+    files = last_reports(2)
+    if len(files) &lt; 2:
+        return "（还没有上一份报告，明天再比）"
+    def disk_line(path):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if "根分区使用率" in line:
+                return line
+        return ""
+    return f"上次：{disk_line(files[0])}\n本次：{disk_line(files[1])}"
+
+
+print(diff_with_last(""))
+# 两次运行后输出示例：
+# 上次：[正常] 磁盘：根分区使用率 42%
+# 本次：[告警] 磁盘：根分区使用率 81%     ← 一眼看出涨了</pre>
+<p><b>解读</b>：要点不在算法，而在<b>"先有历史、才有趋势"这个习惯</b>。生产上这叫"基线"（baseline）：没有基线，"这个数字正不正常"就只能靠猜。</p>
+<h3>步骤 3：接到定时任务上（让它自己跑）</h3>
+<pre class="demo"><span class="prompt">$</span> crontab -e
+0 * * * * /usr/bin/python3 /home/你的真实用户名/lab/server_check.py &gt;&gt; /home/你的真实用户名/lab/health.log 2&gt;&amp;1
+
+# 一小时后确认：
+<span class="prompt">$</span> tail -3 ~/lab/health.log
+<span class="prompt">$</span> ls -1 ~/lab/health-reports | tail -3
+20261009-231001.txt
+20261010-001001.txt
+20261010-011001.txt      ← 每小时一份，历史自动累积</pre>
+<p class="note">行里两处 <span class="code">/home/你的真实用户名</span> 记得换成你的真实路径；cron 不展开 <span class="code">~</span>，写绝对路径最稳。</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">crontab -e</span> 删掉那一行；报告目录 <span class="code">rm -rf ~/lab/health-reports</span>（先确认里面没有你要留的）。</p>
+<h3>完成判定</h3>
+<p>□ 每次运行都生成一份带时间戳的报告文件　□ 至少跑两次，能打印出"上次 vs 本次"的对比　□ 挂上 crontab，等它自己跑出至少两份　□ 能说出"基线"是什么、为什么没有基线就没法判断异常</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：工作里常问"你怎么判断一台机器状态不对"，答"我留了历史报告，看的是趋势不是瞬间值"——这句话直接体现运维思维。</p>
+
+<h2>7-04 容器化：把巡检脚本做成镜像</h2>
+<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：7-03 ＋ 7 册 Docker（4-04、4-05、4-10）　｜　状态：已写（第四轮）</p>
+<p class="note">拉不动基础镜像？（报 <span class="code">i/o timeout</span>）先按 <b>07 册《Docker 入门》的「开始之前 · 先把镜像加速器配好」</b>配一次。</p>
+<h3>步骤 1：Dockerfile（照 4-05 的模板改）</h3>
+<pre class="demo">FROM python:3.14-slim
+RUN apt-get update &amp;&amp; apt-get install -y procps &amp;&amp; rm -rf /var/lib/apt/lists/*
+WORKDIR /opt/check
+COPY server_check.py ./
+RUN chmod +x server_check.py
+ENTRYPOINT ["python3", "server_check.py"]</pre>
+<p><p class="note">（<b>为什么要装 <span class="code">procps</span></b>：slim 镜像里连 <span class="code">free</span> / <span class="code">uptime</span> 都没有——这是 4-01 学的"底座只给你最小集合"，缺什么自己装。）</p>
+<p><b>解读</b>：用 <span class="code">python:3.14-slim</span> 当底座（比 ubuntu 小、又自带 Python）；<b>不用再 apt 装 Python</b> —— 这就是选底座的价值。</p>
+<p class="note"><b>为什么用 ENTRYPOINT 而不是 CMD</b>：镜像名后面跟的参数会<b>追加</b>到 <span class="code">ENTRYPOINT</span>；写成 <span class="code">CMD</span> 会把它<b>整条替换</b>（后面 <span class="code">--skip-service</span> 那一步能生效就靠这个）。</p>
+<p class="note"><b>构建卡在 apt-get？（国内网络常见）</b>：容器的 apt 走 Debian 官方源，慢网下可能十几分钟拉不动。把步骤 1 的 RUN 换成下面这行（换源段会打印实际改了哪个源文件）再构建，几秒就能装完：<span class="code">RUN for f in /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list; do [ -f "$f" ] &amp;&amp; echo 换源: $f &amp;&amp; sed -i 's|deb.debian.org|mirrors.tuna.tsinghua.edu.cn|g' "$f"; done; apt-get update &amp;&amp; apt-get install -y procps &amp;&amp; rm -rf /var/lib/apt/lists/*</span>。换的只是下载通道、装的包不变；<b>注意：07 册配的加速器只管拉 Docker 镜像，管不到容器里的 apt</b>，两件事分开配。</p>
+<h3>步骤 2：构建、运行、看结果</h3>
+<pre class="demo"><span class="prompt">$</span> docker build -t health-check:1.0 .
+<span class="prompt">$</span> docker run --rm health-check:1.0
+[正常] 磁盘：根分区使用率 1%          ← 容器自己的盘（数值随机器）
+[正常] 内存：可用内存 8192MB（85%）    ← 装了 procps 才有 free
+[正常] 负载：1 分钟负载 0.10（2 核，门槛 3.0）
+[错误] 服务 检查失败：[Errno 2] No such file or directory: 'systemctl'   ← 容器里没有 systemd
+
+<span class="prompt">$</span> echo $?
+1</pre>
+<p><b>解读</b>：<b>这是一个真实且重要的坑</b>：容器里通常没有 systemd，所以"检查服务"这条在容器内做不了。<b>更要紧的是</b>：这条一报错，<span class="code">main()</span> 就 <span class="code">return 1</span>——<b>后面的 <span class="code">write_report</span> 根本不会执行、报告也就写不出来</b>（这正是下一步先用上开关的原因）。<b>三种正经处理办法</b>：① 把服务检查做成可选（<span class="code">--skip-service</span> 参数，<b>下一段就给代码</b>）；② 服务检查改用"端口探活"（容器里 <span class="code">nc -z localhost 22</span> 也能判断）；③ 这个检查项留给"在宿主机上跑"的场景，容器版只做前三项。</p>
+<p class="note">三种都行，<b>关键是你要能说清为什么</b>——这就是"设计决策"（下一关有模板）。</p>
+<p>本册就按办法①做，给 <span class="code">main()</span> 开头加两行：</p>
+<pre class="demo">def main():
+    if "--skip-service" in sys.argv:                      # 容器里没有 systemd 时跳过服务检查
+        global CHECKS
+        CHECKS = [c for c in CHECKS if c[0] != "服务"]
+    alerts = []
+    ...（后面不变）</pre>
+<h3>步骤 3：把宿主机目录挂进去（报告要落地）</h3>
+<p class="note">跑之前先建好目录：<span class="code cmd">mkdir -p ~/lab/health-reports</span>——目录不存在时 Docker 会自动帮你建一个，但<b>属主是 root</b>，之后你自己写、删都麻烦。</p>
+<pre class="demo"><span class="prompt">$</span> docker build -t health-check:1.0 .        # 改完脚本要重新构建
+<span class="prompt">$</span> docker run --rm -v ~/lab/health-reports:/reports -e REPORT_DIR=/reports health-check:1.0 --skip-service
+<span class="prompt">$</span> ls ~/lab/health-reports | tail -2       # 报告确实落在宿主机上</pre>
+<p><b>解读</b>：<b>容器是"用完就删"的，报告必须写到挂载出来的目录里</b>（4-03 学过"无状态的放容器里、有状态的挂出来"，这里就是它的真实应用）。</p>
+<p class="note"><b>报告文件名的时间比墙上的钟慢 8 小时？</b>正常——<b>容器默认走 UTC</b>（比北京时间慢 8 小时）；"上次 vs 本次"对比不受影响，只是历史文件排序观感怪。想让时间戳和宿主机一致：跑的时候加一个环境变量 <span class="code">-e TZ=Asia/Shanghai</span> 即可——完整命令：<span class="code">docker run --rm -e TZ=Asia/Shanghai -v ~/lab/health-reports:/reports -e REPORT_DIR=/reports health-check:1.0 --skip-service</span>。</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<h3>回滚方式</h3>
+<p><span class="code cmd">docker rmi health-check:1.0</span> 删镜像；宿主机上的 <span class="code">~/lab/health-reports</span> 不受影响。</p>
+<h3>完成判定</h3>
+<p>□ 镜像构建成功并能跑出巡检输出　□ 报告通过挂载写入宿主机目录（容器删了报告还在）　□ 能说清"为什么容器里 systemd 检查会失败"以及你选了哪种处理办法　□ 能说出用 python:3.14-slim 当底座的好处</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："容器里遇到的坑"——"容器里没有 systemd 导致服务检查失效，我改成端口探活/参数跳过"就是一段很实在的踩坑故事。</p>
+
+<h2>7-05 接到监控：把巡检指标暴露给 Prometheus</h2>
+<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：7-04 ＋ 8 册（监控：5-04、5-05）　｜　状态：已写（第四轮）</p>
+<p><b>这一关让项目"活起来"</b>：之前是"跑一次看一次"，现在是<b>持续暴露指标，让 Prometheus 每隔 15 秒来抓一次，超阈值还能触发告警</b>。这就是把脚本变成"可观测的服务"。</p>
+<h3>步骤 1：给脚本加一个 /metrics 出口（最简做法）</h3>
+<pre class="demo"># 用标准库起一个极小的 HTTP 服务，把巡检结果按 Prometheus 格式吐出来
+import re
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+LAST = {"disk": 0.0, "mem": 0.0, "load": 0.0}
+
+
+def _num(text, pattern=r"([\d.]+)%"):
+    """从检查函数的"人话"里抠出数字（巡检函数返回的是给人看的字符串）"""
+    return float(re.search(pattern, text).group(1))
+
+
+def refresh():
+    """跑一次检查，把数字塞进 LAST"""
+    LAST["disk"] = _num(check_disk(threshold=0)[1])                       # 根分区使用率 42% → 42.0
+    LAST["mem"] = _num(check_memory(min_free_pct=0)[1], r"（([\d.]+)%）")  # 可用内存 …（78%）→ 78.0
+    LAST["load"] = _num(check_load(factor=0)[1], r"负载 ([\d.]+)")         # 1 分钟负载 0.31… → 0.31
+
+
+class Metrics(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path != "/metrics":
+            self.send_error(404); return
+        refresh()
+        body = (
+            "# HELP health_disk_percent 根分区使用率\n"
+            "# TYPE health_disk_percent gauge\n"
+            f'health_disk_percent {LAST["disk"]}\n'
+            f'health_mem_available_percent {LAST["mem"]}\n'
+            f'health_load1 {LAST["load"]}\n'
+        )
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain; version=0.0.4")
+        self.end_headers()
+        self.wfile.write(body.encode())
+
+
+# —— 把上面这段（import re 起、到 Metrics 类为止）追加到 server_check.py，
+#    再把 main() 的开头加上这个开关，--serve 才会起服务：
+#     if "--serve" in sys.argv:
+#         print("指标服务已启动：http://localhost:9101/metrics（Ctrl+C 退出）")
+#         HTTPServer(("0.0.0.0", 9101), Metrics).serve_forever()</pre>
+<p><b>解读</b>：<b>Prometheus 的指标格式其实很简单</b> —— 一行一个"指标名 值"，前面用 <span class="code"># HELP / # TYPE</span> 声明。你不需要装 prometheus_client 库也能做（装了更省事：<span class="code">pip install prometheus_client</span> 然后用 <span class="code">Gauge</span>）。</p>
+<p class="note">更省事的写法（推荐）：<span class="code">pip install prometheus_client</span>，用它自带的 <span class="code">start_http_server(9101)</span> ＋ <span class="code">Gauge("health_disk_percent", "...").set(值)</span> —— 格式、并发、并发安全它都替你处理。</p>
+<h3>步骤 2：起服务并验证</h3>
+<pre class="demo"><span class="prompt">$</span> python3 server_check.py --serve &amp;
+<span class="prompt">$</span> curl -s http://localhost:9101/metrics | head -6
+# HELP health_disk_percent 根分区使用率
+# TYPE health_disk_percent gauge
+health_disk_percent 42.0
+health_mem_available_percent 78.0
+health_load1 0.31</pre>
+<h3>步骤 3：让 Prometheus 抓它 + 配一条告警</h3>
+<pre class="demo"><span class="prompt">$</span> cd ~/lab/monitor
+# docker-compose.yml 的 prometheus 服务下加两行（Linux / WSL 原生 Docker 必须加，
+# 否则 host.docker.internal 解析不了，Target 会一直 down）：
+#   extra_hosts:
+#     - "host.docker.internal:host-gateway"
+# prometheus.yml 的 scrape_configs 里加一段：
+  - job_name: "health-check"
+    static_configs:
+      - targets: ["host.docker.internal:9101"]
+<span class="prompt">$</span> docker compose up -d prometheus
+→ Status → Targets 里出现 health-check 且 UP
+
+# alerts.yml 里加一条规则（照 5-05 的写法；注意整段要放在 groups → rules 下面）：
+  groups:
+  - name: health-check
+    rules:
+    - alert: HealthDiskHigh
+      expr: health_disk_percent &gt; 80
+      for: 1m
+      annotations:
+        summary: "巡检脚本报告：磁盘使用率 {{ $value }}%"</pre>
+<p><b>解读</b>：<b>到这里，你的脚本从"一段代码"变成了"系统的一部分"</b>：它自己暴露指标、被监控抓取、能触发告警。这就是"脚本 ＋ 面板 ＋ 告警"那条完整故事。</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<h3>回滚方式</h3>
+<p>停掉服务 <span class="code cmd">kill %1</span>；把 prometheus.yml 里那段删掉并 <span class="code cmd">docker compose up -d</span>。</p>
+<h3>完成判定</h3>
+<p>□ <span class="code">/metrics</span> 能返回至少三个自定义指标　□ Prometheus 的 Targets 里有 health-check 且 UP　□ Grafana 上能画出你自己的指标曲线　□ 有一条自己的告警规则，且调低阈值能触发　□ 能说出 Prometheus 的指标格式长什么样</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这一关把"我写过脚本"升级成"我做过可观测性"——别人听到"我自己暴露 metrics 接进 Prometheus，还配了告警"，会明显多看你一眼。</p>
+
+<h2>7-06 README 与设计决策记录</h2>
+<p class="note">时长：休息日 4 小时 ｜ 工作日 20 分　｜　前置：7-05 ｜ 参考：16 册《一个合格的 README 长什么样》　｜　状态：已写（第四轮）</p>
+<h3>步骤 1：README（照 16 册那页的五段结构写）</h3>
+<pre class="demo"># server-health-check
+
+一台机器的健康巡检工具：磁盘 / 内存 / 负载 / 服务四项检查，超阈值告警，
+可选容器运行，指标可被 Prometheus 抓取。
+
+## 怎么用
+    git clone https://github.com/你的用户名/server-health-check.git
+    cd server-health-check &amp;&amp; python3 server_check.py
+    python3 server_check.py --serve        # 以 /metrics 方式常驻（端口 9101）
+
+## 环境
+Ubuntu 26.04 / Python 3.14；容器方式需要 Docker。
+
+## 效果
+    $ python3 server_check.py
+    [正常] 磁盘：根分区使用率 42%
+    [告警] 磁盘：根分区使用率 81%
+    共 1 项异常
+
+## 踩坑记录
+- 容器里没有 systemd → 服务检查改成端口探活 / --skip-service
+- 报告写进容器内部 → 一删容器就没了 → 改成挂载宿主目录</pre>
+<h3>步骤 2：设计决策记录（最值得给人看的一页）</h3>
+<pre class="demo"># 设计决策记录
+
+1) 为什么用 subprocess 调系统命令，而不是读 /proc？
+   选了：subprocess
+   其它方案：直接读 /proc/meminfo 等文件
+   为什么不用：df/free/uptime 的输出就是运维日常看到的格式，一致的输出方便对照；
+               /proc 格式各发行版有差异，维护成本高
+
+2) 为什么容器版把"服务检查"做成可选？
+   选了：--skip-service ＋ 端口探活两种
+   其它方案：容器里装 systemd
+   为什么不用：容器里跑 systemd 是反模式（一个容器一个进程），得不偿失
+
+3) 为什么报告按时间戳分文件，而不是一个文件追加？
+   选了：每次一个文件
+   其它方案：单文件追加
+   为什么不用：单文件久了难检索，也容易被误删；分文件天然形成历史序列
+
+4) 为什么自己暴露 metrics，而不是让脚本直接发告警通知？
+   选了：暴露指标 ＋ Prometheus 告警规则
+   其它方案：脚本内直接发邮件/钉钉
+   为什么不用：脚本只负责"产出数据"，判断和通知交给监控系统，职责更清楚，也更容易改阈值</pre>
+<p><b>解读</b>：<b>这四条的格式就是实战里最看重的那道题的答题格式</b>："我选了什么 / 还有什么方案 / 为什么不用"。写下来，讲的时候就不用现想。</p>
+<h3>完成判定</h3>
+<p>□ README 五段齐全，陌生人照它能跑通　□ 有设计决策记录，至少覆盖四个决策　□ 每条决策都写清"选了什么 / 还有什么 / 为什么不用"　□ 仓库里没有密钥等敏感信息</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：文档改动可随时回退（git 里都有）。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这两份文档就是实战里最看重的那道题的"小抄"——你不需要临场组织语言，照着讲就行。</p>
+
+<h2>7-07 三分钟讲述稿与 10 分钟深挖</h2>
+<p class="note">时长：休息日 4 小时 ｜ 工作日 20 分　｜　前置：7-06　｜　状态：已写（第四轮）</p>
+<h3>步骤 1：三分钟讲述稿（骨架照这里填，别背全文）</h3>
+<pre class="demo">【1 分钟 · 是什么】
+"这是我写的服务器健康巡检工具，检查四项：磁盘、内存、负载、关键服务。
+ 它可以在本机直接跑，也可以容器运行；指标能被 Prometheus 抓，超阈值会告警。"
+
+【1 分钟 · 为什么这么做】
+"我不想每次上机器手动敲四五个命令，就把它们写成脚本；
+ 判断交给 Prometheus，脚本只负责产出数据 —— 这样改阈值不用改代码。"
+
+【1 分钟 · 踩了什么坑】
+"容器版第一次跑就失败了：容器里没有 systemd，服务检查用不了。
+ 我改成两种方案：跳过参数，或者用端口探活代替。"
+
+（结尾留一句钩子："如果您想看，我可以讲一下报告的历史对比是怎么做的。"）</pre>
+<h3>步骤 2：准备 10 分钟深挖（一定会被追问）</h3>
+<table><tr><th style="width:38%">可能的追问</th><th>你的答法（从项目里找证据）</th></tr>
+<tr><td>为什么不用现成的监控？（Node Exporter 不就有了）</td><td>"现成的确实更全。我写它的目的是：① 练 subprocess ＋ 异常 ＋ 日志这条链；② 我加了业务侧的"关键服务是否活着"这种自定义判断 —— 这正是脚本比通用 exporter 灵活的地方。"</td></tr>
+<tr><td>阈值为什么定 80%？</td><td>"80% 是我按经验定的保守值，真正的做法是先跑一周看基线；这也是我加了历史对比的原因。"</td></tr>
+<tr><td>脚本挂了怎么办？</td><td>"分两层：脚本自身的异常有退出码 1，Prometheus 那边如果抓不到 targets 会显示 DOWN —— 两种情况都能被发现。"</td></tr>
+<tr><td>要你巡检 100 台机器呢？</td><td>"本机版先解决单机；多机我会：先用 Ansible（批量在多台机器上执行命令的工具）/SSH 批量执行（这是我下一步想学的），或者每台部署一个 —— 指标层用 Prometheus 汇总就能看到全部。"</td></tr>
+<tr><td>容器版为什么不用 host 网络？</td><td>"可以用，但会占用宿主端口；我选了挂载报告目录，指标用 host.docker.internal 暴露，避免和宿主服务冲突。"</td></tr></table>
+<h3>步骤 3：对着人（或录音）讲一遍</h3>
+<pre class="demo">要求：3 分钟讲述稿 不看稿；10 分钟深挖至少能接住 3 个追问
+录音存进 learning-journey，文件名：server-health-check-讲述-YYYYMMDD.m4a</pre>
+<h3>完成判定</h3>
+<p>□ 三分钟讲述稿能不看稿讲完（录音为证）　□ 能接住至少三个追问（照上面表里练）　□ 每个答案都能指到项目里的具体文件/命令　□ 讲述稿里至少说清一个"设计取舍"</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：无操作。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：实战里最看重的那道题的全部准备工作就在这一关里 —— 讲得清楚，比项目本身复杂更重要。</p>
+
+<h2>7-08 阶段 7 · 学习总结练习：陌生人 clone 下来能跑</h2>
+<p class="note">时长：休息日 3 小时 ｜ 工作日 20 分　｜　前置：7-01 ~ 7-07　｜　状态：已写（第四轮）</p>
+<h3>业务场景</h3>
+<p>你要把这个工具交给别人用（别人、同事、或者三个月后的自己）。<b>一个自己不熟悉的人，能不能只看 README 就把它跑起来？</b>这一关就是验收这件事。</p>
+<h3>综合要求（这册的技能全用上）</h3>
+<p class="note">技能点：<b>检查清单设计（7-01）＋ subprocess 与阈值告警（7-02）＋ 报告与历史对比（7-03）＋ Dockerfile 与挂载（7-04）＋ 指标暴露与 Prometheus 告警（7-05）＋ README 与设计决策（7-06）＋ 三分钟讲述（7-07）</b></p>
+<p>① 仓库里四件套齐全：<span class="code">server_check.py</span>、<span class="code">Dockerfile</span>、<span class="code">README.md</span>、<span class="code">设计决策记录.md</span>；<br>
+② 在<b>一台干净的机器</b>（或新建的 Ubuntu 虚拟机/WSL）上照 README 跑一遍；<br>
+③ 记录过程中"卡住的地方"，回头把 README 补清楚（这一步最容易发现问题）；<br>
+④ 跑通三件事：本机运行出报告 / 容器运行出报告 / <span class="code">--serve</span> 后 Prometheus 抓得到；<br>
+⑤ 更新讲述稿：把这次"交接给别人"发现的坑加进去。</p>
+<h3>验收</h3>
+<p>□ 在干净环境照 README 跑通（截图或记录）　□ 三个跑法（本机 / 容器 / 指标）都验证过　□ README 里补上了"我卡住过的地方"　□ 设计决策记录至少四条　□ 三分钟讲述稿能不看稿讲完　□ 仓库里无密钥、无大文件</p>
+<h3>时间</h3>
+<p>3 小时（休息日）</p>
+<h3>产出</h3>
+<p>仓库 <span class="code">server-health-check</span>（README ＋ 脚本 ＋ Dockerfile ＋ 设计决策记录 ＋ 截图）。<b>这是你的头号项目。</b></p>
+<h3>AI 运维指向</h3>
+<p>这套东西换成 GPU 机器就是 AI 集群巡检的雏形：把"磁盘/内存/负载/服务"换成"显存/GPU 利用率/推理服务是否活着"，其余骨架一模一样 —— 8-08 你已经做过 GPU 指标那一半了。</p>
+<h3>实战价值</h3>
+<p>实战里最看重的那道题的完整答案：有项目、有 README、有设计取舍、有踩坑记录、有讲述稿。<b>别人拿着你的仓库能跑起来 —— 这一条本身就是硬证据。</b></p>
+
+<h3>顺带一提 · 版本 2（远程巡检）先不做</h3>
+<div class="box2"><b>是什么</b>：用 paramiko 通过 SSH 去巡检<b>别的机器</b>（现在这版只查本机）。<br>
+<b>为什么留着</b>：你入行后每天面对的是几十上百台机器，多机巡检是必然要做的；但现在做它的性价比低（先把单机版吃透更值）。<br>
+<b>什么时候做</b>：入行后有空时，照着 06 场景 5 的 paramiko 雏形往下写即可（那一关标着 ☆）。</div>
+<p class="footer">《综合项目（server-health-check）》</p>
+</body>
+</html>

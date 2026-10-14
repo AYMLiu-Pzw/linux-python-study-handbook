@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linux入门（教科书版） · v2.5</title>
+<title>Linux入门（教科书版） · v3.1</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -273,6 +273,21 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 
 <div class="newpage"></div>
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（教科书）</td></tr>
+<tr><td><b>本册关卡</b></td><td>1-01 ~ 1-36；书末另有「阶段总结练习」1-45（01＋03 综合）；第 13 章「本关三要素」框还带跨册三关 2-05 / 2-08 / 2-09（随 03 册场景一起做）</td></tr>
+<tr><td><b>用时</b></td><td>必做 32.1 小时 / 全做 33.2 小时（1-01~1-36 关卡口径，含《02 练习册》题并入）</td></tr>
+<tr><td><b>学完解锁</b></td><td>阶段 1 的主体：能独立在 Ubuntu 里导航、改权限、杀进程、盯日志，并写出第一个 Shell 脚本</td></tr></table>
+<div class="box2">每章开头都有「本关三要素」，跟着编号打关即可。附录 A~D 是字典，不用通读。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
+
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：这是整套教材的<b>主课本·Linux 入门</b>。Linux 是服务器上最常用的操作系统（世界上大多数服务器都跑它）；本册从"什么是终端"一路讲到能写 Shell 脚本。生活类比：像学开车——先认识方向盘、油门、刹车（终端、命令、选项 ＋ 参数），再上路。</p>
+<p><b>② 干什么用</b>：连服务器、传文件、看日志、查磁盘、修故障，全在命令行里完成；AI 运维的每一步（部署推理服务、看 GPU 显存、清磁盘）都是"先登录 Linux，再敲命令"。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：真实工作里，九成排障都在命令行完成；“Linux 熟不熟、常用命令会不会”是第一天就要过的关。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小一串命令：<span class="code cmd">pwd</span>（我在哪）→ <span class="code cmd">ls -l</span>（这里有什么）→ <span class="code cmd">cd /var/log</span>（进去）→ <span class="code cmd">tail -n 20 syslog</span>（看最后 20 行）。用法：每章开头有「本关三要素」（编号 ｜ 时长 ｜ 完成判定），跟着编号打关；想深入看第 0 章 0.1「Linux 是什么」。</p>
+
+<div class="section-head">全套总览（按阶段）</div><table><tr><th style="width:34%">阶段</th><th style="width:20%">★ 必做时长</th><th>产出作品</th></tr><tr><td><b>0 · 环境与工具</b></td><td>★ 5.2 小时（7 关）</td><td>learning-journey（日志仓库）</td></tr><tr><td><b>1 · Linux 系统</b></td><td>★ 41.2 小时（45 关）</td><td>能力型，无仓库（判定靠阶段总验收 1-45）</td></tr><tr><td><b>2 · Shell 脚本</b></td><td>★ 21.0 小时（12 关）</td><td>shell-scripts（三个能讲出故事的脚本）</td></tr><tr><td><b>3 · Python 脚本</b></td><td>★ 39.6 小时（18 关）</td><td>python-scripts（重命名 / 天气 / 巡检 v0）</td></tr><tr><td><b>4 · Docker</b></td><td>★ 26.2 小时（11 关）</td><td>monitor-demo（把自己的脚本容器化）</td></tr><tr><td><b>5 · 监控</b></td><td>★ 16.0 小时（6 关）</td><td>monitor-demo（Prometheus + Grafana + 阈值告警）</td></tr><tr><td><b>6 · Kubernetes</b></td><td>★ 16.0 小时（8 关）</td><td>k8s-demo（含「Pod 起不来」踩坑记录）</td></tr><tr><td><b>7 · 综合项目</b></td><td>★ 33.0 小时（8 关）</td><td>server-health-check（王牌项目 v1）</td></tr><tr><td><b>8 · AI / GPU / 推理部署</b></td><td>★ 29.0 小时（10 关）</td><td>ai-inference-notes（部署笔记 + 踩坑记录）</td></tr></table><p class="note">全部 ★ 必做关卡合计 <b>227.2 小时</b>（125 关）；含复习与返工弹性约 <b>252 小时</b>，约占 340 小时的 <b>74%</b>。数字由《17-关卡总表》的数据源自动生成并逐册校验（`tools\check-totals.py`）。每天只排到可用时间的 70%，留 30% 给超时和状态不好的日子。</p>
 <h2 class="toc-title"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">使用说明</span><span class="tdesc">配色约定 · 环境要求 · 安全红线</span><a href="#toc-0"></a></div>
@@ -295,10 +310,12 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="toc-row"><span class="tn">附录 B</span><span class="tdesc">术语表（36 条）</span><a href="#toc-17"></a></div>
 <div class="toc-row"><span class="tn">附录 C</span><span class="tdesc">命令速查总表（按章分组）</span><a href="#toc-18"></a></div>
 <div class="toc-row"><span class="tn">附录 D</span><span class="tdesc">章 ↔ 练习册对应表（新命令对齐）</span><a href="#toc-19"></a></div>
+<div class="toc-row"><span class="tn">附录 E</span><span class="tdesc">电脑上得到 Ubuntu 的两种装法（WSL 为主）</span><a href="#toc-20"></a></div>
 </div>
 <p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
 
 <h2 id="toc-0">使用说明</h2>
+<p class="note"><b>关于示例输出</b>：示例里的<b>路径、PID、时间、版本号、空格/对齐</b>会因为你的系统版本和用户名而不同——<b>看结构就行</b>（哪一列是什么、大概什么形状），不必逐字对齐；真正要当问题的是"命令跑不通 / 报错含义不一样"。</p>
 <p><b>配色约定</b>（全书一致，共 6 色）：</p>
 <table class="long-table"><thead><tr><th style="width:25%">颜色</th><th>含义</th></tr></thead><tbody>
 <tr><td><span class="cmd code">绿色粗体</span></td><td>命令本身（要敲进去的）</td></tr>
@@ -309,7 +326,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td><span class="opt">橙色</span></td><td>易错点、坑</td></tr>
 </tbody></table>
 <div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、挂载或日志时，先记录原状态；操作中逐步核对对象；操作后对照输出、数量、状态和退出码验证；结束后恢复配置、停止练习进程、卸载实验挂载并再次检查现场。异常时保留原始报错。</div>
-<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。</p>
+<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。　<b>电脑上还没有 Ubuntu？看本册「附录 E」：两种装法（WSL 为主、VMware 为辅），30 分钟搞定。</b></p>
 <div class="box2"><b>环境口径：</b>本套资料以 <b>Ubuntu 26.04 LTS（当前 LTS）+ Python 3.14</b> 为基准录制并实测。下面三条是你一定会遇到的环境事实：<br>· <b>apt 源代号 = <span class="code">resolute</span></b>（看到它属于正常）；<br>· <b>pip 不能全局装包</b>：直接 <span class="code">pip install</span> 会报 <span class="code">externally-managed-environment</span>，正确做法是用 venv（见《Python 入门》<b>附录 E</b>）；<br>· <b>htop 需自装</b>：<span class="code">sudo apt install htop</span>（第 9 章会教）。<p class="note">示例输出全部以 26.04 为准；命令回显里的版本号等细节以你本机实际显示为准。若你的系统是别的版本，绝大多数命令通用，个别差异（如 <span class="code">last</span>）书中已单独标注。</p></div>
 <p class="note"><b>线上常识：</b>企业服务器上更常见的是 <b>22.04 / 24.04</b>，而不是最新版——生产环境求稳，新版要等镜像、监控、安全合规都跟上，一般比最新 LTS <b>慢 1~2 代</b>；而每个 LTS 都有 5 年标准支持，也没必要频繁升级。本书命令在这些版本上通用；拿到一台新机器，先 <span class="code">lsb_release -a</span> 确认版本。</p>
 
@@ -317,7 +334,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p class="note">安全红线：实验目录只用 <span class="code">~/lab</span> 和 <span class="code">/tmp</span>；<span class="code">/tmp</span> 是临时目录，但何时清理由发行版、挂载方式和 systemd-tmpfiles 等系统策略决定，<b>重启后不保证全部清空</b>；<span class="code cmd">rm -rf</span> 永远先 <span class="code cmd">ls</span> 看清楚；涉及 <span class="code cmd">sudo</span> 的命令只在练习机上执行。</p>
 
 <h2 id="toc-1">学习路线图（章 → 练习册）</h2>
-<p class="note">⏱️ 全书 14 章约 22~30 小时（每章约 1.5~2h）。</p>
+<p class="note">⏱️ 全书 14 章正文自学约 22~30 小时（每章约 1.5~2h，章节估时）；关卡口径的"必做 32.1 小时"含练习册题并入——两套口径都对，见本册关卡地图。</p>
 <table>
 <tr><th style="width:40%">本书章节</th><th>学完去做</th></tr>
 <tr><td>第 0~2 章（终端、目录树、文件操作）</td><td>基础篇 阶段 1</td></tr>
@@ -334,6 +351,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <div class="newpage"></div>
 <h2 id="toc-2">第 0 章 · 开篇：终端与命令</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-01 · 认识终端与"命令+选项+参数"</b> ★ ｜ 休息日 30 分 ｜ 工作日 15 分<br>　□ 能说出提示符每一部分的含义；说出三件套各是什么　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）<br><b>1-02 · 用 --help 和 man 自救</b> ★ ｜ 休息日 30 分 ｜ 工作日 15 分<br>　□ 不看教程，用 --help 查出 ls 三个选项的含义<br>　<span class="note">实战价值：不会就查是运维的核心动作</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标</b>（学完能回答）：</p>
 <p>① Linux 是什么、为什么运维要学它；② 能打开终端并看懂提示符；③ 会使用"命令 + 选项 + 参数"三件套；④ 会用 <span class="code cmd">--help</span> 自救。</p>
 <p><b>本章新命令</b>：<span class="code cmd">pwd</span> <span class="code cmd">ls</span> <span class="code cmd">echo</span> <span class="code cmd">man</span> <span class="code cmd">clear</span> <span class="code cmd">history</span> <span class="code cmd">exit</span> <span class="code cmd">whoami</span>（选项 <span class="code opt">--help</span> 见 0.4 节）</p>
@@ -345,7 +364,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <h3>0.2 打开终端</h3>
 <p>先搞清楚三个词的关系：<b>内核（kernel）</b>是 Linux 最核心的程序，管着 CPU、内存、硬盘这些硬件，但你不直接指挥它；<b>Shell（壳）</b>是包在内核外面的"命令翻译官"——你敲的命令先交给它，它翻译成内核能执行的动作；<b>终端（Terminal）</b>是你看到的那扇"窗户"，把你和 Shell 连起来。以后说"打开终端敲命令"，其实就是"隔着窗户对 Shell 说话"。</p>
-<p>终端（Terminal）是你和 Linux 对话的窗口。Ubuntu 里按 <span class="code">Ctrl + Alt + T</span> 打开。你看到的这一行就是<span class="keyword">提示符</span>：</p>
+<p>终端（Terminal）是你和 Linux 对话的窗口。Ubuntu 里按 <span class="code">Ctrl + Alt + T</span> 打开（WSL：从开始菜单搜 Ubuntu 打开，见附录 E）。你看到的这一行就是<span class="keyword">提示符</span>：</p>
 <pre><span class="prompt">student@ubuntu:~$</span></pre>
 <div class="demo">
 <p class="dtitle">提示符逐段拆解</p>
@@ -400,12 +419,11 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="demo">
 <p class="dtitle">示范 3：自救实战</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">ls</span> <span class="opt">--help</span></pre>
-<pre class="demo-out">Usage: ls [OPTION]... [FILE]...
-List information about the FILEs...
-  -l  use a long listing format
-  -a  do not ignore entries starting with .</pre>
+<pre class="demo-out">-l, --long 用长格式列出
+-a, --all 连隐藏文件一起列
+<span class="out">（26.04 的 ls 是 uutils 版：首行不再是 Usage:，选项说明也换了措辞——以你机器实际输出为准，认出 -l 与 -a 就够）</span></pre>
 <p class="demo-ex"><b>读帮助的两条规则</b>：<span class="code">[ ]</span> 括起来的 = <b>可选项</b>（不写也行）；<span class="code">...</span> = <b>可重复多个</b>。这行读作"用法：ls、可选选项、可重复的文件名"。</p>
-<p class="demo-ex">看不懂英文没关系——你现在只需要认出 <b>-l</b> 和 <b>-a</b> 两个选项的名字。配合《英语单词手册》慢慢积累。</p>
+<p class="demo-ex">看不懂英文没关系——你现在只需要认出 <b>-l</b> 和 <b>-a</b> 两个选项的名字。配合《报错英语单词手册》慢慢积累。</p>
 </div>
 
 <h3>0.7 易错点</h3>
@@ -418,7 +436,7 @@ List information about the FILEs...
 <div class="hw">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业（答案见附录 A）</p>
 <p>1. 打开终端，用 <span class="code cmd">pwd</span> 和 <span class="code cmd">whoami</span> 各敲一遍，把输出抄进学习日志。</p>
-<p>2. 用 <span class="code cmd">ls --help</span> 找出 3 个选项，并说出各自作用。</p>
+<p>2. 用 <span class="code cmd">ls --help</span> 找出 3 个选项，并说出各自作用（示范里已经认识 -l、-a 两个，第三个自己从输出里挑——这就是"自救"的练法）。</p>
 <p>3. 敲 <span class="code cmd">history</span>，看你今天敲过的所有命令；用 <span class="code">↑</span> 键调出上一条命令再执行一次。</p>
 <p>4. 故意敲一个拼错的命令（如 <span class="code cmd">pws</span>），把报错原文记下来。</p>
 </div>
@@ -427,10 +445,12 @@ List information about the FILEs...
 <p>1. 提示符 <span class="code">student@ubuntu:~$</span> 中，<span class="code">$</span> 表示什么？如果换成 <span class="code">#</span> 说明什么？</p>
 <p>2. 判断：<span class="code">ls -l /home</span> 中，<span class="code">ls</span> 是选项，<span class="code">-l</span> 是命令，<span class="code">/home</span> 是参数。（对/错）</p>
 </div>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：学完本章先做基础篇「阶段 1」里的 1-1、1-2。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：第 0 章无练习册题；基础篇 1-1、1-2 等第 1 章学完再做。</p>
 
 <div class="newpage"></div>
 <h2 id="toc-3">第 1 章 · 目录树与路径</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-03 · 一切皆文件：读懂目录树</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 能画出 / 下的三大目录并说出用途<br><b>1-04 · 绝对路径 vs 相对路径</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 用两种写法各走一次：从任意位置到 /var/log 再回家目录<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解"一切皆文件"和目录树；② 说出三大重要目录的用途；③ 会区分绝对路径与相对路径；④ 会用 <span class="code cmd">cd</span> 在树里移动。</p>
 <p><b>本章新命令</b>：<span class="code cmd">cd</span>（<span class="code cmd">pwd</span>、<span class="code cmd">ls</span> 在第 0 章已见，本章复习）</p>
 
@@ -443,7 +463,7 @@ List information about the FILEs...
 ├── var/log/  日志（排查问题来这里）
 ├── tmp/      临时文件；是否在重启后清理由系统配置决定，不能保证全部清空
 ├── usr/      已安装的软件
-└── bin/      命令的住处</span></pre>
+└── bin/      命令的住处（26.04 里它其实指向 usr/bin——就像个快捷方式）</span></pre>
 <div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 记住三个排障位置：<b>/etc</b> 找配置、<b>/var/log</b> 找日志、<b>/home</b> 找你的东西。</div>
 
 <h3>1.2 两种路径写法</h3>
@@ -461,7 +481,7 @@ List information about the FILEs...
 <pre class="demo-out">total 12
 drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 -rw-r--r-- 1 &lt;用户名&gt; &lt;用户名&gt;  123 Aug 15 09:00 hello.py <span class="out">（示例输出，实际以本机为准）</span></pre>
-<p class="demo-ex">每一行是一个条目。<b>第 1 列</b>第一个字符：<b>d</b>=目录，<b>-</b>=普通文件（后面的 rwx 权限位第 5 章细讲）。<b>属主 属组</b>。<b>4096/123</b>=大小（字节）。最后是<b>修改时间</b>和<b>名字</b>。</p>
+<p class="demo-ex">每一行是一个条目。<b>第 1 列</b>第一个字符：<b>d</b>=目录，<b>-</b>=普通文件（后面的 rwx 权限位第 5 章细讲）。<b>属主 属组</b>。<b>4096/123</b>=大小（字节）。最后是<b>修改时间</b>和<b>名字</b>。（新家目录里可能还没有 notes、hello.py——想对照就 <span class="code">mkdir notes</span> ＋ <span class="code">touch hello.py</span>；只是示例，不建也不影响。）</p>
 </div>
 <div class="demo">
 <p class="dtitle">示范 2：在树里移动</p>
@@ -489,7 +509,7 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 <div class="hw">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用 <span class="code cmd">cd</span> 走到 <span class="code">/etc</span> 看一眼，再 <span class="code cmd">cd</span> <span class="code">~</span> 回家——两步各用一次 <span class="code cmd">pwd</span>，把输出记下来。</p>
-<p>2. 从 <span class="code">/tmp</span> 出发，分别用绝对路径和相对路径进入 <span class="code">~/lab/ch1</span>。</p>
+<p>2. 从 <span class="code">/tmp</span> 出发，分别用绝对路径和相对路径进入 <span class="code">~/lab/ch1</span>（目录不存在就先建：<span class="code cmd">mkdir -p ~/lab/ch1</span>——mkdir 详解在第 2 章，这里先照抄用）。</p>
 <p>3. 用 <span class="code">ls -a ~</span> 找出 3 个隐藏文件，把名字记下来。</p>
 <p>4. 用 <span class="code">cd /</span> 到树根，用 <span class="code">ls</span> 看根下有哪些目录，找找 /home、/etc、/var 在哪。</p>
 </div>
@@ -502,6 +522,8 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 
 <div class="newpage"></div>
 <h2 id="toc-4">第 2 章 · 文件与目录操作</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-05 · 建与删：touch / mkdir -p / rm</b> ★ ｜ 休息日 1.3 小时 ｜ 工作日 15 分<br>　□ 建出 a/b/c 三级目录再拆掉<br>　□ 能独立做出 02-★1-1（建多级目录）<br>　□ 能独立做出 02-★1-3（批量创建）<br>　<span class="note">回滚方式：只在 ~/lab 里练；删掉的任务自己重建</span><br><b>1-06 · 复制与移动：cp 和 mv 的边界</b> ★ ｜ 休息日 1.4 小时 ｜ 工作日 15 分<br>　□ 说清 cp 与 mv 各自的两条规则<br>　□ 能独立做出 02-★1-4（cp 递归）<br>　□ 能独立做出 02-★1-6（mv 双功能）<br><b>1-07 · 安全删除习惯</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 说清"删除靠的是目录写权限"；演示一次删除前确认<br>　□ 能独立做出 02-★1-7（删除权限原理；留到学完第 5 章再回头做）<br>　<span class="note">回滚方式：练习目录只准用 ~/lab ｜ 实战价值：误删恢复是实战里躲不开的一课</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 会建文件和目录；② 会复制、移动、改名；③ 理解删除的不可逆；④ 会用 <span class="code cmd">mkdir -p</span> 连级创建。</p>
 <p><b>本章新命令</b>：<span class="code cmd">touch</span> <span class="code cmd">mkdir</span> <span class="code cmd">cp</span> <span class="code cmd">mv</span> <span class="code cmd">rm</span> <span class="code cmd">rmdir</span></p>
 
@@ -525,6 +547,7 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 <tr><td><span class="code cmd">cp 源 目标</span></td><td>复制（copy）</td><td>复制<b>目录</b>必须加 <span class="opt">-r</span>（递归 = 连所有子目录一层层一起复制）</td></tr>
 <tr><td><span class="code cmd">mv 源 目标</span></td><td>移动 / 改名（move）</td><td>目标路径和源在同一目录 = 改名；跨目录 = 搬家</td></tr>
 </table>
+<p class="note">把"两条规则"记死：<b>cp</b> ① 复制目录必须 <span class="opt">-r</span>；② 目标已存在时<b>直接覆盖</b>（不想被静默覆盖就加 <span class="opt">-i</span> 让它先问）。<b>mv</b> ① 同目录 = 改名、跨目录 = 搬家；② 移动/改名目录<b>不需要</b> <span class="opt">-r</span>（和 cp 不一样）。</p>
 <div class="demo" style="line-height:1.3">
 <p class="dtitle">示范 2：复制目录</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab/ch2/sub</span> <span class="out"># 先自造一个目录（空目录也能跑完整示范）</span>
@@ -586,6 +609,8 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 
 <div class="newpage"></div>
 <h2 id="toc-5">第 3 章 · 查看与搜索</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-08 · 看文件：cat / less / head / tail / wc</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 用 head 和 tail 各取 5 行；在 less 里搜索并退出<br>　□ 能独立做出 02-★2-3（头尾查看）<br><b>1-09 · 搜内容与搜文件：grep / find</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 在日志里搜出指定字符串；找出今天新增的文件<br>　□ 能独立做出 02-★2-5（grep 过滤）<br>　□ 能独立做出 02-★5-1（按名查找）<br><b>1-10 · 比较差异：diff</b> ☆ ｜ 休息日 30 分 ｜ 工作日 15 分<br>　□ 说出两个文件差在哪<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-lb"/></svg> 本册日志示范统一用自建文件 <span class="code">~/lab/app.log</span>：先执行 <span class="code">echo '2026-08-01 09:00:01 ERROR disk fail' &gt;&gt; ~/lab/app.log</span>（多敲几行不同内容）。系统日志路径取决于发行版、日志服务和配置；不要假定 <span class="code">/var/log/syslog</span> 一定存在。先确认实际文件，或对 systemd 服务使用 <span class="code">journalctl</span>。</p>
 <p><b>本章目标：</b>① 会用四种"看"命令按需查看文件；② 会用 <span class="code cmd">grep</span> 按内容搜、<span class="code cmd">find</span> 按名字找；③ 会 <span class="code cmd">wc</span> 计数、<span class="code cmd">diff</span> 对比；④ 理解 <span class="code cmd">tail -f</span> 的实时跟踪。</p>
 <p><b>本章新命令</b>：<span class="code cmd">cat</span> <span class="code cmd">less</span> <span class="code cmd">head</span> <span class="code cmd">tail</span> <span class="code cmd">wc</span> <span class="code cmd">file</span> <span class="code cmd">grep</span> <span class="code cmd">find</span> <span class="code cmd">diff</span></p>
@@ -635,7 +660,7 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 <span class="prompt">$</span> <span class="cmd">grep</span> <span class="opt">-v</span> <span class="param">"^#" ~/lab/my.conf</span>
 </pre><pre class="demo-out">Port 22
 MaxSessions 10</pre>
-<p class="demo-ex"><span class="opt">-v</span> = 反选（排除匹配行）。配置文件里通常有很多 # 注释行，用 <span class="code">grep -v "^#"</span> 只看"真正生效的配置"。注意 <b>^#</b> 的 ^ 表示"行首"——只排除 # 开头的行，正文里带 # 的不误伤。</p>
+<p class="demo-ex"><span class="opt">-v</span> = 反选（排除匹配行）。配置文件里通常有很多 # 注释行，用 <span class="code">grep -v "^#"</span> 只看"真正生效的配置"。注意 <b>^#</b> 的 ^ 表示"行首"——只排除 # 开头的行，正文里带 # 的不误伤。另外：# 开头不全是废话，有些是"被注释掉的默认值"，改配置时值得翻出来看——<span class="code cmd">grep -v</span> 只是帮你先看清"当前生效的是哪几行"。</p>
 </div>
 
 <h3>3.3 按名字找：find</h3>
@@ -643,12 +668,13 @@ MaxSessions 10</pre>
 <div class="demo">
 <p class="dtitle">示范 4：find 实战</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">find</span> <span class="param">~</span> <span class="opt">-name</span> <span class="param">"*.log"</span>
-</pre><pre class="demo-out">~/lab/app.log
-~/lab/error.log</pre>
+</pre><pre class="demo-out">/home/你的真实用户名/lab/app.log
+/home/你的真实用户名/lab/error.log <span class="out">（示例输出：以你机器上实际的 .log 文件为准）</span></pre>
 <p class="demo-ex">find 对 ~/lab 查找。find 的格式：<b>find 在哪找 + 按什么条件</b>。<span class="code">"*.log"</span> 中的 * 是通配模式。模式放在引号里时，shell 不会先展开它；<b>find 自己接收原样模式并递归匹配文件名</b>。去掉引号后，shell 可能先展开当前目录中的匹配项；当前目录没有匹配项时，行为还可能因 shell 选项而不同。因此 find 的通配模式通常要加引号。</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">find</span> <span class="param">~</span> <span class="opt">-size</span> <span class="param">+100M</span>
-</pre><pre class="demo-out">~/videos/big-file.mp4</pre>
-<p class="demo-ex">按大小找：+100M = 大于 100 兆。磁盘满的时候（第 7 章），用 find 揪出大文件。</p>
+</pre><pre class="demo-out">/home/你的真实用户名/videos/big-file.mp4 <span class="out">（示例输出：以你机器上的大文件为准）</span></pre>
+<p class="demo-ex">按大小找：+100M = 大于 100 兆。磁盘满的时候（第 7 章），用 find 揪出大文件。想亲手试出效果：先造一个——<span class="code">truncate -s 150M ~/lab/big.bin</span>（150M 的占位文件，练完 <span class="code">rm ~/lab/big.bin</span> 删掉）。</p>
+<p class="demo-ex">还有两类常用条件：<b>按时间</b> <span class="code">find ~/lab -mtime -1</span>（最近 1 天内改过的文件；<span class="code">+7</span> = 7 天以前）与 <span class="code">-newer 参照文件</span>（比它新的）。<b>找到后直接动手</b>：<span class="code">find ~/lab -name "*.tmp" -delete</span>（删掉匹配项）或 <span class="code">-exec rm {} \;</span>（逐个交给别的命令；<span class="code">{}</span> 是占位、<span class="code">\;</span> 收尾）。<b>危险动作先去掉 -delete 跑一遍看列表</b>，确认对了再加。</p>
 </div>
 
 <h3>3.4 计数与对比：wc、file、diff</h3>
@@ -660,7 +686,8 @@ MaxSessions 10</pre>
 </table>
 <div class="demo">
 <p class="dtitle">示范 5：用 diff 验证复制无误</p>
-<pre class="demo-in"><span class="prompt">$</span> <span class="cmd">diff</span> <span class="opt">-r</span> <span class="param">~/lab/ch2 ~/lab/ch2-backup</span>
+<pre class="demo-in"><span class="prompt">$</span> <span class="cmd">cp</span> <span class="opt">-r</span> <span class="param">~/lab/ch2 ~/lab/ch2-backup</span> <span class="out"># 先造一份备份（本示范的前提；缺了它 diff 会报 No such file or directory）</span>
+<span class="prompt">$</span> <span class="cmd">diff</span> <span class="opt">-r</span> <span class="param">~/lab/ch2 ~/lab/ch2-backup</span>
 </pre><pre class="demo-out">（没有任何输出）</pre>
 <p class="demo-ex"><b>diff 没输出 = 两个目录完全一致</b>。以后做完复制、备份、解压，都可以用 diff -r 验证"一个不多一个不少"。</p>
 </div>
@@ -669,12 +696,12 @@ MaxSessions 10</pre>
 <div class="box2 tight2">
 <p><span class="opt">坑 1：</span>cat 大文件会刷屏，机器卡住几秒都正常——大文件用 less。</p>
 <p><span class="opt">坑 2：</span>grep 的搜索词建议加引号：<span class="code">grep "my log"</span>，否则空格和特殊符号会捣乱。</p>
-<p><span class="opt">坑 3：</span>grep 搜内容 vs find 找文件，面试常考，别混。</p>
+<p><span class="opt">坑 3：</span>grep 搜内容 vs find 找文件，常用，但别混。</p>
 </div>
 <div class="hw tight2">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 用 less 打开 ~/lab/app.log，练习 空格 / b / q / 搜索。</p>
-<p>2. 用 grep -i 在 ~/lab/app.log 里找 "error"，用 grep -c 数一共几行。</p>
+<p>2. 用 grep -i 在 ~/lab/app.log 里找 "error"，用 grep -ic 数一共几行（-i 别丢：大小写不同的行也算）。</p>
 <p>3. 用 find 找出家目录下所有 .txt 文件。</p>
 <p>4. 复制一个目录后用 diff -r 验证两边一致，再改动一个文件后看 diff 输出长什么样。</p>
 </div>
@@ -687,6 +714,8 @@ MaxSessions 10</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-6">第 4 章 · 管道与重定向</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-11 · 重定向：> 覆盖与 >> 追加</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 演示两种写法的区别；说清为什么别重定向到正在写的文件<br>　□ 能独立做出 02-★2-1（创建与重定向）<br>　<span class="note">回滚方式：重要文件先备份再试</span><br><b>1-12 · 管道与排序取前 N：sort / uniq</b> ★ ｜ 休息日 1.4 小时 ｜ 工作日 15 分<br>　□ 一条命令查出出现次数最多的前三项<br>　□ 能独立做出 02-★2-7（管道实战）<br>　□ 能独立做出 02-★5-4（排序去重）<br><b>1-13 · awk 入门：取列</b> ☆ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 取出日志第 2 列并统计<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解管道 <span class="code">|</span> 的流水线思想；② 区分 <span class="code">&gt;</span>（覆盖）与 <span class="code">&gt;&gt;</span>（追加）；③ 会 sort / uniq 配合管道；④ awk 入门：按列取数据。</p>
 <p><b>本章新命令</b>：<span class="code cmd">sort</span> <span class="code cmd">uniq</span> <span class="code cmd">awk</span>（符号：<span class="code">|</span> <span class="code">&gt;</span> <span class="code">&gt;&gt;</span> <span class="code">2&gt;&amp;1</span>）</p>
 
@@ -696,7 +725,7 @@ MaxSessions 10</pre>
 <div class="demo">
 <p class="dtitle">示范 1：三道工序接力</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">grep</span> <span class="opt">-i</span> <span class="param">"error" ~/lab/app.log</span> | <span class="cmd">wc</span> <span class="opt">-l</span>
-</pre><pre class="demo-out">3 <span class="note">（你自建了几行就是几）</span></pre>
+</pre><pre class="demo-out">1 <span class="note">（示例：以你自建日志的实际结果为准）</span></pre>
 <p class="demo-ex">grep 捞出行 → 交给 wc -l 数行数。<b>不落地、不存中间文件</b>，这就是管道的好处。</p>
 </div>
 
@@ -718,9 +747,11 @@ MaxSessions 10</pre>
 </pre><pre class="demo-out">第二行
 第三行</pre>
 <p class="demo-ex">两次 &gt; 之后文件里只剩"第二行"——<b>&gt; 每次都会清空重写</b>。&gt;&gt; 则乖乖排在后面。这个实验一定要亲手敲一遍，比看十遍都记得牢。</p>
+<p class="note">顺手再学一招：<span class="code cmd">cat &gt; ~/lab/notes.txt</span> 回车后直接输入几行文字，按 <b>Ctrl+D</b> 结束——这是"手动写一个小文件"的最快办法（第 1-11 关会用到）。</p>
 </div>
 <div class="box2">
 <p><span class="opt">易错点：</span>往重要文件写内容时，<b>先备份再 &gt;</b>。一条 <span class="code">echo x &gt; 配置.conf</span> 会把原配置清得干干净净。</p>
+<p class="note">还有一条反直觉的：别把输出 <span class="code">&gt;</span> 到"另一个程序正在写"的文件（比如正在追加的日志）——两边各写各的、互相覆盖，日志会丢行。追加日志用 <span class="code">&gt;&gt;</span>，并且只让一个程序写它。</p>
 </div>
 
 <h3>4.3 sort 和 uniq</h3>
@@ -743,9 +774,10 @@ MaxSessions 10</pre>
 </pre><pre class="demo-out">Aug</pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="str">'Aug 09:30:01 kernel: boot ok'</span> &gt; <span class="param">~/lab/log.txt</span>; <span class="cmd">echo</span> <span class="str">'Sep 14:02:55 kernel: shutdown ok'</span> &gt;&gt; <span class="param">~/lab/log.txt</span> <span class="out"># 先自造两行日志</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">awk</span> '<span class="param">{print $1, $3}</span>' <span class="param">~/lab/log.txt</span>
-</pre><pre class="demo-out">Aug 09:30
-Sep 14:02</pre>
-<p class="demo-ex">awk 的固定格式：<span class="code">awk '{print 你想取的列}'</span>。单引号里的内容是一小段"取列指令"。$0 表示整行。</p>
+</pre><pre class="demo-out">Aug kernel:
+Sep kernel:</pre>
+<p class="demo-ex">awk 的固定格式：<span class="code">awk '{print 你想取的列}'</span>。单引号里的内容是一小段"取列指令"。<b>为什么必须用单引号</b>：双引号里 Shell 会先把 <span class="code">$1</span> 展开掉（Shell 的 <span class="code">$1</span> 是"脚本第 1 个参数"，这里没有、展开成空），awk 就拿到了错东西；单引号让 Shell 别管、原样交给 awk。$0 表示整行。</p>
+<p class="demo-ex"><b>补充：</b>冒号分隔的文件（如 <span class="code">/etc/passwd</span>）每行不是按空格分列，要加 <span class="code">-F:</span> 指定分隔符：<span class="code">awk -F: '{print $1}' /etc/passwd</span>。</p>
 </div>
 
 <h3>4.5 日志分析标准套路（本章精华）</h3>
@@ -769,7 +801,7 @@ Sep 14:02</pre>
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
 <p>1. 把 echo 输出分别用 &gt; 和 &gt;&gt; 写 3 次，cat 验证差别（照示范 2 做）。</p>
 <p>2. 造一个多行文本，用 sort | uniq -c 统计每个词出现次数。</p>
-<p>3. 用 awk 取出 /etc/passwd 的第一列（用户名）。</p>
+<p>3. 用 awk 取出 /etc/passwd 的第一列（用户名）——它按冒号分列，要写成 <span class="code">awk -F: '{print $1}'</span>；再对比一下不加 <span class="code">-F:</span> 时的输出。</p>
 <p>4. 把示范 5 的管道改造成：统计自己日志里出现最多的 3 个词。</p>
 </div>
 <div class="quiz">
@@ -781,8 +813,10 @@ Sep 14:02</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-7">第 5 章 · 用户与权限</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-14 · 多用户模型：whoami / id / su / sudo</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 说清 su 与 sudo 的区别；切一次身份并安全退出<br>　□ 能独立做出 02-★3-3（建用户）<br>　<span class="note">回滚方式：切用户前记好当前用户和目录</span><br><b>1-15 · rwx 与 chmod 符号法</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 给脚本设成"自己读写执行、别人只读"<br>　□ 能独立做出 02-★3-1（权限位解读）<br>　□ 能独立做出 02-★3-4（越权验证）<br>　<span class="note">回滚方式：改权限前先 ls -l 记下原权限</span><br><b>1-16 · 数字法与危险组合：644 / 755 / 777</b> ★ ｜ 休息日 1.3 小时 ｜ 工作日 15 分<br>　□ 一次改对 644 与 755；说清 777 为什么危险<br>　□ 能独立做出 02-★3-5（chown 影响）<br>　□ 能独立做出 02-★3-7（账号文件）<br>　<span class="note">回滚方式：同上 ｜ 实战价值：权限题是日常高频</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解多用户模型和"组"；② 会创建用户、改密码、加 sudo；③ 读懂 rwx 权限位；④ 会用 chmod（含数字算法）、chown。</p>
-<p><b>本章新命令</b>：<span class="code cmd">whoami</span> <span class="code cmd">id</span> <span class="code cmd">su</span> <span class="code cmd">sudo</span> <span class="code cmd">useradd</span> <span class="code cmd">passwd</span> <span class="code cmd">usermod</span> <span class="code cmd">groupadd</span> <span class="code cmd">groups</span> <span class="code cmd">userdel</span> <span class="code cmd">last</span> <span class="code cmd">chmod</span> <span class="code cmd">chown</span> <span class="code cmd">chgrp</span></p>
+<p><b>本章新命令</b>：<span class="code cmd">whoami</span> <span class="code cmd">id</span> <span class="code cmd">su</span> <span class="code cmd">sudo</span> <span class="code cmd">useradd</span> <span class="code cmd">passwd</span> <span class="code cmd">usermod</span> <span class="code cmd">groupadd</span> <span class="code cmd">groups</span> <span class="code cmd">userdel</span> <span class="code cmd">last</span><span class="out">（26.04 已移除）</span> <span class="code cmd">chmod</span> <span class="code cmd">chown</span> <span class="code cmd">chgrp</span></p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>注意</b>：<span class="code cmd">last</span>（登录历史）在 <b>Ubuntu 26.04 上已被系统移除</b>（连安装包都不再提供）。查看登录记录请改用：<span class="code cmd">loginctl list-sessions</span>、<span class="code cmd">who -a</span> 或 <span class="code cmd">journalctl -u systemd-logind</span>。</p>
 
 <h3>5.1 用户模型：住户、室友与房东</h3>
@@ -798,6 +832,11 @@ Sep 14:02</pre>
 <p><span class="opt">易错：</span><span class="code cmd">sudo</span> 是"借权限执行<b>一条</b>命令"（superuser do）；<span class="code cmd">su</span> 是"切换<b>成为</b>另一个用户"（switch user）。<span class="code">sudo -i</span> 才会变成 root 的提示符。日常操作永远 sudo，别长期待在 root。</p>
 </div>
 
+<div class="box2">
+<p><span class="opt">换身份实操：</span><span class="code cmd">su - alice</span> 切到 alice（<b>- 会连环境一起换</b>，要输她的密码；实验机上没设过密码进不去，可以从 root 切：<span class="code cmd">sudo su - alice</span>）→ <span class="code cmd">whoami</span> 验收 → <span class="code cmd">exit</span> 回到原用户。只想"以别人身份跑一条命令"用 <span class="code cmd">sudo -u alice whoami</span>（不需要她的密码）。</p>
+<p class="note">顺带记住：Ubuntu 新建用户的家目录默认权限是 <span class="code">drwxr-x---</span>（750）——"其他人"连进都进不去，这是后面做"权限穿透"实验的前提。</p>
+</div>
+
 <h3>5.2 创建用户</h3>
 <div class="demo">
 <p class="dtitle">示范 1：建一个完整用户并加入 sudo 组 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
@@ -809,7 +848,7 @@ Sep 14:02</pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">usermod</span> <span class="opt">-aG sudo</span> <span class="param">alice</span>
 <span class="prompt">$</span> <span class="cmd">groups</span> <span class="param">alice</span>
 </pre><pre class="demo-out">alice : alice sudo</pre>
-<p class="demo-ex">三步：<b>useradd -m -s /bin/bash</b>（-m=顺带建家目录；-s=指定登录 shell，不写默认可能是 sh 而不是 bash——想要熟悉的 bash 环境就写上）、<b>passwd</b> 设密码、<b>usermod -aG sudo</b>（-a=追加、-G=组，把 alice 塞进 sudo 组=获得借钥匙资格）。groups 验证她在哪些组。</p>
+<p class="demo-ex">三步：<b>useradd -m -s /bin/bash</b>（-m=顺带建家目录；-s=指定登录 shell，不写默认可能是 sh 而不是 bash——想要熟悉的 bash 环境就写上）、<b>passwd</b> 设密码、<b>usermod -aG sudo</b>（-a=追加、-G=组，把 alice 塞进 sudo 组=获得借钥匙资格）。groups 验证她在哪些组。</p><p class="note">getent = 查系统数据库（用户、主机名等）；getent hosts 域名 相当于查 DNS</p>
 </div>
 
 <h3>5.3 权限位：rwx 三组九位</h3>
@@ -850,14 +889,17 @@ Sep 14:02</pre>
 <table>
 <tr><th style="width:28%">命令</th><th>作用</th></tr>
 <tr><td><span class="code">id 用户名</span></td><td>看用户的 UID、GID 和所属组（比 whoami 详细）</td></tr>
-<tr><td><span class="code">userdel -r 用户名</span></td><td>删除用户（-r 连家目录一起删）</td></tr>
+<tr><td><span class="code">userdel -r 用户名</span></td><td>删除用户（-r 连家目录一起删；跑完常提示 <span class="code">mail spool ... not found</span>——没有邮箱目录而已，不是报错）</td></tr>
 <tr><td><span class="code">groupadd 组名</span></td><td>创建组（做共享目录的第一步）</td></tr>
-<tr><td><span class="code">last</span></td><td>看最近谁登录过这台机器</td></tr>
+<tr><td><span class="code">last</span>（26.04 已移除）</td><td>看最近谁登录过这台机器（改用 loginctl / who）</td></tr>
 </table>
+<p class="note">两个"户口本"文件长什么样（自查用）：<span class="code">/etc/passwd</span> 每行 7 段——<b>用户名 : 密码占位(x) : UID : GID : 备注 : 家目录 : 登录 shell</b>；<span class="code">/etc/group</span> 每行 4 段——<b>组名 : 密码占位(x) : GID : 成员列表</b>。想看你机器上的真实样子：<span class="code cmd">tail -5 /etc/passwd</span> 与 <span class="code cmd">tail -5 /etc/group</span>。</p>
 <div class="warn">
 <p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：chmod 777</p>
-<p><span class="code cmd">chmod 777 文件</span> = 属主、属组、其他人都能读写执行——相当于把家门钥匙插在锁上。遇到"权限问题先 777 再说"的坏习惯，面试和实战都会翻车。正确姿势：<b>搞清楚谁需要什么权限，给最小权限</b>。</p>
+<p><span class="code cmd">chmod 777 文件</span> = 属主、属组、其他人都能读写执行——相当于把家门钥匙插在锁上。遇到"权限问题先 777 再说"的坏习惯，迟早要翻车。正确姿势：<b>搞清楚谁需要什么权限，给最小权限</b>。</p>
 </div>
+
+<p class="note"><b>顺带一眼：4 位数字里的"特殊位"</b>——<span class="code">chmod 2770 目录</span> 的 <b>2 = setgid</b>：目录里新建的文件<b>自动继承该目录的属组</b>——团队共享目录常这么配（练习册 3-6 组共享会用到）；<span class="code">1</span> = 粘滞位（<span class="code">/tmp</span> 靠它：只准本人删自己的文件）；<span class="code">4</span> = setuid（少数系统命令用）。日常 3 位数字够用，遇到 4 位知道开头是特殊位即可。</p>
 
 <h3>5.7 易错点</h3>
 <div class="box2">
@@ -881,6 +923,8 @@ Sep 14:02</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-8">第 6 章 · 进程管理</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-17 · 看进程：ps aux 与 pgrep</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 找出某个进程的 PID 和它属于谁<br>　□ 能独立做出 02-★4-1（进程定位）<br><b>1-18 · 杀进程：信号、优雅 vs 强杀</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 先 TERM 后 KILL 处理一个卡死进程，并说清区别<br>　□ 能独立做出 02-★4-3（优雅 vs 强杀）<br>　<span class="note">回滚方式：先确认 PID，别对系统进程下手 ｜ 实战价值：进程杀不掉怎么办是常见追问</span><br><b>1-19 · 前后台与端口占用：jobs / nohup / fuser</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 让命令在后台跑；找出占用某端口的进程<br>　<span class="note">实战价值：端口被占是运维日常</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 看懂 ps aux 各列；② 会找进程（pgrep / ps+grep）；③ 理解"优雅杀 vs 强杀"；④ 会前后台切换与 nohup；⑤ 会用 fuser 定位占端口的进程。</p>
 <p><b>本章新命令</b>：<span class="code cmd">ps</span> <span class="code cmd">top</span> <span class="code cmd">htop</span> <span class="code cmd">pgrep</span> <span class="code cmd">kill</span> <span class="code cmd">killall</span> <span class="code cmd">jobs</span> <span class="code cmd">bg</span> <span class="code cmd">fg</span> <span class="code cmd">nohup</span> <span class="code cmd">fuser</span></p>
 
@@ -903,7 +947,7 @@ root     1   0.0  0.1 163904  12340  ?    Ss    08:00  0:01  /sbin/init
 <span class="prompt">$</span> <span class="cmd">pgrep</span> <span class="param">nginx</span> <span class="note"># 快捷法：直接输出 PID</span>
 </pre><pre class="demo-out">1234
 5678 <span class="out">（示例 PID：实际是你的进程号）</span></pre>
-<p class="demo-ex">pgrep = process grep，一步到位拿 PID。ps aux | grep 是面试必考的组合拳，两者都要会。</p>
+<p class="demo-ex">pgrep = process grep，一步到位拿 PID。ps aux | grep 是日常排查的组合拳，两者都要会。</p>
 </div>
 
 <h3>6.3 结束进程：优雅 vs 强杀</h3>
@@ -917,7 +961,7 @@ trap 'echo "$(date +%T) 收到退出信号，清理中..." &gt;&gt; ~/lab/run.lo
 while true; do sleep 1; done
 EOF</span>
 <span class="prompt">$</span> <span class="cmd">chmod</span> <span class="param">+x ~/lab/run.sh</span>
-<span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">~/lab &amp;&amp;</span> <span class="cmd">./run.sh</span> <span class="param">&amp;</span>
+<span class="prompt">$</span> <span class="out"># 分两步写更清楚：先进入目录，再后台启动</span><br><span class="prompt">$</span> <span class="cmd">cd</span> <span class="param">~/lab</span><br><span class="prompt">$</span> <span class="cmd">./run.sh</span> <span class="param">&amp;   # &amp; 加在这条命令末尾</span>
 <span class="param">MY_PID=$!</span> <span class="out"># $! = 刚启动的后台任务真实 PID（不靠猜）</span>
 <span class="prompt">$</span> <span class="cmd">ps</span> <span class="param">-p $MY_PID</span> <span class="out"># 先核对：确实是我们启动的 ./run.sh</span>
 </pre><pre class="demo-out">PID TTY TIME CMD
@@ -931,7 +975,7 @@ EOF</span>
 <p><span class="code cmd">killall</span> = 按<b>名字</b>杀进程（不用查 PID）：<span class="code">killall nginx</span>。名字匹配到多个进程会全部杀掉，先 <span class="code cmd">pgrep</span> 确认再动手。</p>
 <div class="warn">
 <p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：kill -9 滥用</p>
-<p>对数据库、推理服务直接 <span class="code cmd">kill -9</span> 可能造成数据损坏。<b>-9 永远是最后手段</b>：先试普通 kill → 没反应再观察 → 仍无效才 -9。养成习惯，面试和实战都加分。</p>
+<p>对数据库、推理服务直接 <span class="code cmd">kill -9</span> 可能造成数据损坏。<b>-9 永远是最后手段</b>：先试普通 kill → 没反应再观察 → 仍无效才 -9。养成习惯，关键时刻少踩坑。</p>
 </div>
 
 <h3>6.4 前后台与 nohup</h3>
@@ -959,17 +1003,18 @@ EOF</span>
 <span class="param">SRV_PID=$!</span> <span class="out"># 记下它的 PID，验证完要清理</span>
 <span class="prompt">$</span> <span class="cmd">fuser</span> <span class="opt">-v</span> <span class="param">8080/tcp</span>
 </pre><pre class="demo-out">USER   PID ACCESS COMMAND
-8080/tcp:        &lt;用户名&gt;    &lt;实际 PID&gt; F.... python3 <span class="out">（示例 PID，以你实际输出为准）</span></pre>
+8080/tcp:        &lt;用户名&gt;    &lt;实际 PID&gt; F.... python3 <span class="out">（示例输出，以你机器为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">kill</span> <span class="param">$SRV_PID</span> <span class="out"># 验证完清理，别留后台服务</span>
 <span class="prompt">$</span> <span class="cmd">fuser</span> <span class="opt">-v</span> <span class="param">8080/tcp</span> <span class="out"># 没输出 = 端口已释放</span></pre>
-<p class="demo-ex"><b>-v</b> = 详细。输出告诉你：8080 端口被 <b>&lt;实际 PID&gt;</b> 的 python3 占着（PID 是动态的，以本机实际输出为准）。<b>fuser 属于 psmisc 软件包</b>，没装就先 <span class="code">sudo apt install psmisc</span>。也可以查文件：<span class="code">fuser -v 某个文件</span>。</p>
+<p class="demo-ex"><b>-v</b> = 详细。输出告诉你：8080 端口被 <b>你的</b> python3 占着（PID 是动态的，以你机器实际输出为准）。在终端里直接跑，PID 就显示在这一列；如果把 <span class="code cmd">fuser</span> 的输出<b>接进管道或分开重定向</b>，PID 会单独一行出现（fuser 的表格走 stderr、PID 数字走 stdout），看起来像"PID 列空了"——所以直接在终端里看。想看纯 PID，用不带 <span class="code">-v</span> 的 <span class="code cmd">fuser 8080/tcp</span>。<b>fuser 属于 psmisc 软件包</b>，没装就先 <span class="code">sudo apt install psmisc</span>。也可以查文件：<span class="code">fuser -v 某个文件</span>。</p>
 </div>
 
 <h3>6.6 易错点</h3>
 <div class="box2 tight2">
-<p><span class="opt">坑 1：</span>ps 不带 aux 只显示自己的进程——"找不到进程"先检查是不是忘了 aux。</p>
+<p><span class="opt">坑 1：</span>ps 不带 aux 只显示<b>本终端 ＋ 同一用户</b>的进程（别人的、别的终端的都看不到）——"找不到进程"先检查是不是忘了 aux。</p>
 <p><span class="opt">坑 2：</span>kill 之后用 ps 再确认一次，有些进程要几秒才消失。</p>
 <p><span class="opt">坑 3：</span>&amp; 忘打，程序霸占终端——Ctrl+C 或 Ctrl+Z 先救场。</p>
+  <p><span class="opt">坑 4：</span><span class="code cmd">ps aux | grep 关键词</span> 会把 <b>grep 自己那一行</b>也捞出来——那行显示的是 "grep 关键词" 本身，不是你要找的进程，按 PID 定位时别被它带偏。</p>
 </div>
 <div class="hw tight2">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业</p>
@@ -987,6 +1032,8 @@ EOF</span>
 
 <div class="newpage"></div>
 <h2 id="toc-9">第 7 章 · 磁盘与文件系统</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-20 · 看懂 df 与 du 的数字</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 说出 df -h 每一列的含义；说清 df 与 du 的分工<br>　□ 能独立做出 02-★4-5（磁盘视角）<br><b>1-21 · 磁盘满了，第一眼看哪里</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 不看教材，2 分钟内说出最大目录是哪个、多大<br>　<span class="note">实战价值：磁盘满排障是日常高频</span><br><b>1-22 · 大文件与挂载</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 造一个测试大文件再清理；能说出 umount 要先确认没有进程占用（target is busy 是怎么来的）<br>　□ 能独立做出 02-★5-3（查找+执行）<br>　<span class="note">回滚方式：卸载前确认没有进程在用；实验分区用镜像文件</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 会用 df 看整体、du 看明细；② 理解"挂载"；③ 会造测试大文件（fallocate / dd）；④ 看懂磁盘满的排查套路。 <span class="opt">补充：日志越写越多的典型场景用 <span class="code cmd">logrotate</span> 定期切割/清理（多数发行版自带，配置在 /etc/logrotate.d/）。</span></p>
 <p><b>本章新命令</b>：<span class="code cmd">df</span> <span class="code cmd">du</span> <span class="code cmd">lsblk</span> <span class="code cmd">mount</span> <span class="code cmd">fallocate</span> <span class="code cmd">dd</span> <span class="code cmd">mkfs</span></p>
 <div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>mount / mkfs 是危险操作，别急着动手</b>：完整演练流程见《Linux 练习册·进阶篇》场景 2 搭建手册（在镜像文件里练，安全）。先记住两个词义：<b>mount</b> = 把设备接到目录树上；<b>mkfs</b> = 格式化——<b>绝不对真磁盘乱用</b>。</div>
@@ -1000,7 +1047,9 @@ EOF</span>
 <pre class="demo-out">Filesystem  Size  Used Avail Use% Mounted on
 /dev/sda1     500G  120G  355G  26%  / <span class="out">（示例输出，实际以本机为准）</span></pre>
 <p class="demo-ex"><b>-h</b> = human（人类可读，自动换算 G/M）。<b>Use%</b> 是核心：超过 80% 要警惕，100% 服务会挂。Mounted on 列就是"挂载点"。</p>
+<p class="demo-ex"><b>WSL 用户注意：</b>WSL 里 df -h 会多出 <span class="code">/mnt/c</span>、<span class="code">drivers</span> 等 Windows 侧挂载（可能已 80% 以上），别被吓到——认 <span class="code">Mounted on</span> 是 <span class="code">/</span> 的那一行，才是 Linux 根分区。</p>
 </div>
+<p><span class="code cmd">lsblk</span> = list block devices（把块设备列出来）：<span class="code">NAME</span> 设备名 ｜ <span class="code">SIZE</span> 大小 ｜ <span class="code">TYPE</span> 类型（disk = 整块盘、part = 分区、rom = 光驱）｜ <span class="code">MOUNTPOINT</span> 挂到哪里（空着 = 没挂载）。想知道"这块盘分了几块、各自挂哪"，就用它。</p>
 <div class="demo">
 <p class="dtitle">示范 2：du -sh 看谁占了空间</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">du</span> <span class="opt">-sh</span> <span class="param">~/*</span>   <span class="out"># 明确指定家目录；* 不展开隐藏文件（.开头），想看全部先 ls -a ~</span></pre>
@@ -1013,7 +1062,7 @@ EOF</span>
 <p><span class="opt">易错：</span>df 和 du 的数字对不上是经典现象——常见原因是"文件被删了但还有进程占着"（实战中常见，先记住这个结论）。</p>
 </div>
 <div class="box2">
-<p><b>挂载与卸载速览（mount / umount）</b>：<span class="code">sudo mount /dev/sdb1 /mnt/data</span> 把分区接到目录 → <span class="code">df -h /mnt/data</span> 验证（列表里能看到即成功）→ <span class="code">sudo umount /mnt/data</span> 卸载（<b>拼写没有 n</b>，别写成 unmount）。卸载报 <b>target is busy</b> 时：先 <span class="code">cd</span> 离开该目录、结束占用它的程序，或 <span class="code">lsof /mnt/data</span> 查是谁在用。完整演练见《Linux 练习册·进阶篇》场景 2 搭建手册（镜像文件里练，安全）。</p>
+<p><b>挂载与卸载速览（mount / umount）</b>：<span class="code">sudo mount /dev/sdb1 /mnt/data</span> 把分区接到目录 → <span class="code">df -h /mnt/data</span> 验证（列表里能看到即成功）→ <span class="code">sudo umount /mnt/data</span> 卸载（<b>拼写没有 n</b>，别写成 unmount）。卸载报 <b>target is busy</b> 时：先 <span class="code">cd</span> 离开该目录、结束占用它的程序，或 <span class="code">lsof /mnt/data</span> 查是谁在用。完整演练（☆ 选做，留到以后再做也行）见《Linux 练习册·进阶篇》场景 2 搭建手册（镜像文件里练，安全）。</p><p class="note">lsof = 列出「谁打开了这个文件/端口」（排查占用常用，可能需 sudo apt install lsof）</p>
 </div>
 
 <h3>7.2 造测试文件：fallocate 和 dd</h3>
@@ -1069,11 +1118,18 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 4-5；进阶篇场景 2（磁盘满应急）。</p>
 
 <div class="newpage"></div>
+<div class="box2"><b>顺带一提 · 日志轮转 logrotate（不用学，知道有这么回事就行）</b><br>
+<b>是什么</b>：自动把越写越大的日志"切成一段一段、旧的删掉"的工具，Ubuntu 自带，配置在 <span class="code">/etc/logrotate.d/</span>。<br>
+<b>为什么提它</b>：<b>磁盘被日志撑满</b>是运维最高频的故障之一 —— 排查完记得问一句"这日志为什么一直在长，能不能让它自己切"。<br>
+<b>真要用时去哪查</b>：<span class="code cmd">man logrotate</span>，或搜"logrotate 每天切一次保留 7 天"。</div>
+
 <h2 id="toc-10">第 8 章 · 网络命令</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-23 · 查自己：ip / ip route / DNS</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 说出本机 IP、网关、DNS 各自怎么看<br><b>1-24 · 连通性：ping / curl / nc</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 说清"ping 不通"与"端口不通"的差别<br><b>1-25 · 端口与监听：ss -tulnp</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 找出某个端口是谁在听<br><b>1-26 · 四层排查法综合</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 面对"服务连不上"，按主机→端口→进程→日志走一遍<br>　<span class="note">实战价值：网络排障是日常高频</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 会查 IP、网关（ip / ip route）；② 会用 ping、ss、nc、curl 做基础排查；③ 会 ssh / scp 远程操作；④ 掌握"主机→端口→进程→日志"四层排查法。</p>
 <p><b>本章新命令</b>：<span class="code cmd">ip</span> <span class="code cmd">ip route</span> <span class="code cmd">ping</span> <span class="code cmd">ss</span> <span class="code cmd">curl</span> <span class="code cmd">wget</span> <span class="code cmd">nc</span> <span class="code cmd">traceroute</span> <span class="code cmd">nslookup</span> <span class="code cmd">ssh</span> <span class="code cmd">scp</span></p>
 
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件说明：<span class="code cmd">nc / traceroute / nslookup</span> 通常需 apt 安装（netcat-openbsd、traceroute、dnsutils）；<span class="code cmd">ssh / scp</span> 需要远程主机。主线（ip / ping / ss / curl / wget）本地可完成；扩展命令只演示用法，装不上不影响主线。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件说明：<span class="code cmd">nc</span> <b>多数系统自带</b>（26.04 WSL 就有；没有再 <span class="code">sudo apt install netcat-openbsd</span>）；<span class="code cmd">traceroute / nslookup</span> 通常需 apt 安装（traceroute、dnsutils）；<span class="code cmd">ssh / scp</span> 需要远程主机。主线（ip / ping / ss / curl / wget）本地可完成；扩展命令只演示用法，装不上不影响主线。</p>
 
 <h3>8.1 地址与端口</h3>
 <p><b>IP = 门牌号</b>（机器在网络里的地址），<b>端口 = 门上的窗口号</b>（一台机器上不同服务各开一个窗口：网页 80、SSH 22、HTTPS 443）。"连不上服务"= 要么门牌找不到，要么窗口没开。</p>
@@ -1081,10 +1137,11 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 <p class="dtitle">示范 1：查本机 IP 和网关</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">ip</span> <span class="param">addr</span></pre>
 <pre class="demo-out">2: ens33: inet 192.168.1.10/24 ... <span class="out">（示例输出，实际以本机为准）</span></pre>
-<p class="demo-ex">在 inet 后面找本机 IP（192.168.1.10）。/24 表示子网掩码，暂时不用深究。</p>
+<p class="demo-ex">在 inet 后面找本机 IP（192.168.1.10）。多块网卡时会有多行——<b>lo</b> 是本机回环（127.0.0.1）、<b>docker0</b> 是容器网桥，都不算；认 <b>ens*</b>/<b>eth*</b>（WSL 常是 eth0）里带内网地址的那块。/24 表示子网掩码，暂时不用深究。</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">ip</span> <span class="param">route</span></pre>
 <pre class="demo-out">default via 192.168.1.1 dev ens33 <span class="out">（示例输出，实际以本机为准）</span></pre>
 <p class="demo-ex"><b>ip route（查看路由表）</b>：default via 后面就是你的<b>默认网关</b>（一般就是路由器地址）。排查"上不了网"从这里开始。</p>
+<p class="demo-ex">再顺一位主角：<b>DNS（把域名翻译成 IP）</b>——<span class="code cmd">resolvectl status</span> 看当前 DNS 服务器（新版 Ubuntu），老写法看 <span class="code">/etc/resolv.conf</span> 里 nameserver 那几行。排查分家：<b>ping IP 通、ping 域名不通 = DNS 的问题</b>。</p>
 </div>
 
 <h3>8.2 排查三件套：ping、ss、nc</h3>
@@ -1094,15 +1151,16 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 <tr><td><span class="code">ss -tlnp</span></td><td>看本机哪些端口在<b>监听</b>（t=TCP、l=监听、n=数字、p=程序名）</td></tr>
 <tr><td><span class="code">nc -zv 主机 端口</span></td><td>探测对方端口开没开（-z=只探测不传数据、-v=详细）</td></tr>
 </table>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本节演示以"22 端口有 sshd 在听"为前提——桌面版 / WSL 版通常没预装 sshd，先按 8.4 的说明装上再回来看（或把 22 换成你机器上任意在听的端口，练法完全一样）。</p>
 <div class="demo">
 <p class="dtitle">示范 2：ss 和 nc 实战</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">ss</span> <span class="opt">-tlnp</span></pre>
 <pre class="demo-out">LISTEN 0  128  0.0.0.0:22  users:(("sshd",pid=&lt;实际 PID&gt;,fd=3)) <span class="out">（示例输出：端口、进程名、PID 均以本机为准）</span></pre>
 <p class="demo-ex">22 端口（SSH 服务）在监听，程序是 sshd。谁在哪个端口一目了然。<span class="opt">注：-p 显示的进程名需要权限——普通用户看不到别人的进程名属正常，用 sudo ss -tlnp 可看全部。</span></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">nc</span> <span class="opt">-zv</span> <span class="param">localhost 22</span></pre>
-<pre class="demo-out">Connection to localhost 22 port [tcp/ssh] succeeded!</pre>
+<pre class="demo-out">Connection to localhost (127.0.0.1) 22 port [tcp/ssh] succeeded!</pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">nc</span> <span class="opt">-zv</span> <span class="param">localhost 9999</span></pre>
-<pre class="demo-out">nc: connect to localhost port 9999 (tcp) failed: Connection refused</pre>
+<pre class="demo-out">nc: connect to localhost (127.0.0.1) port 9999 (tcp) failed: Connection refused</pre>
 <p class="demo-ex">"在听"和"能连上"是两回事：ss 看<b>本机</b>谁在听；nc 从<b>访问者角度</b>测能不能连。第一次用 nc 若提示找不到命令：<span class="code cmd">sudo apt install netcat-openbsd</span>（第 9 章会教你 apt）。</p>
 </div>
 
@@ -1141,7 +1199,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p class="dtitle">示范 6：ssh 登录 + scp 传文件 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">ssh</span> <span class="param">用户名@192.168.1.10</span> <span class="note"># 远程登录（-p 可指定端口）</span>
 <span class="prompt">$</span> <span class="cmd">scp</span> <span class="param">~/lab/file.txt 用户名@192.168.1.10:/tmp/</span> <span class="note"># 把文件拷到远程机器</span></pre>
-<p class="demo-ex">ssh = secure shell，远程登录后就像坐在那台机器前一样敲命令。<b>scp</b> = 通过 SSH 跨机器拷贝文件。练习条件：被连的机器要先装 openssh-server（Ubuntu：<span class="code cmd">sudo apt install openssh-server</span>）。</p>
+<p class="demo-ex">ssh = secure shell，远程登录后就像坐在那台机器前一样敲命令。<b>scp</b> = 通过 SSH 跨机器拷贝文件。练习条件：被连的机器要先装 openssh-server——<b>桌面版和 WSL 版通常都没预装</b>（Ubuntu：<span class="code cmd">sudo apt install openssh-server</span>；WSL 上装完还要把服务起起来：未启用 systemd 的用 <span class="code cmd">sudo service ssh start</span>，启用 systemd 的（新版 WSL 默认启用）用 <span class="code cmd">sudo systemctl start ssh</span>）。</p>
 </div>
 
 <div class="box2">
@@ -1150,8 +1208,18 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <h3>8.5 四层排查法（本章精华）</h3>
 <div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 服务连不上时，按证据分层排查，不能由一次 ping 直接下结论：<br>① <b>回环层</b>：<span class="code">ping -c 4 127.0.0.1</span>，只验证本机回环和网络栈；<br>② <b>本机/网关层</b>：<span class="code">ip addr</span> 看地址，<span class="code">ip route</span> 找默认网关，再测试网关；<br>③ <b>目标主机层</b>：ping 目标 IP；ICMP 可能被防火墙禁用，ping 不通不等于机器关机；<br>④ <b>端口/进程/应用层</b>：用 <span class="code">nc -zv</span> 或 <span class="code">curl</span> 测端口和应用，再用 <span class="code">ss</span>、<span class="code">ps</span>、日志定位服务。</div>
 <p class="note">这条路线和练习册进阶篇场景 3 的题目一一对应，做完题回来再读一遍，体会更深。</p>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-36 · 阶段 1 综合：服务连不上，全流程自己走一遍</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 不看教材走完 主机 → 端口 → 进程 → 日志，并说清每一步为什么<br>　□ 能独立做出 02-★2-6（递归搜索）<br>　□ 能独立做出 02-★5-8（引号原理）<br>　<span class="note">回滚方式：以只读排查为主，启动过的服务实验完停掉 ｜ 实战价值：这一步就是实战里最常见的实操题</span></div>
 
-<h3>8.6 易错点</h3>
+<h3>8.6 免密登录：ssh 密钥（这一节要学，阶段 7 / 8 的远程操作要用）</h3>
+<p><b>为什么需要</b>：每次 ssh 都输密码，脚本就没法自动在远程机器上干活；“平时怎么连服务器”的标准做法。</p>
+<p><b>三步走</b>：① 生成密钥对 <span class="code cmd">ssh-keygen -t ed25519</span>（一路回车，生成 ~/.ssh/id_ed25519 与 <span class="code">.pub</span>）；② 把公钥送到目标机 <span class="code cmd">ssh-copy-id 用户名@主机</span>（只这一次要输密码）；③ 验证 <span class="code cmd">ssh 用户名@主机</span> 不再问密码。</p>
+<p><b>一句话原理</b>：私钥留在自己机器上，公钥放到对方机器的 <span class="code">~/.ssh/authorized_keys</span> 里；对方用公钥考你一道只有私钥能答的题。</p>
+<p class="note">回滚方式：把目标机 authorized_keys 里那一行删掉，免密立刻失效。私钥（不带 .pub 的那个）永远不外传、不提交到 GitHub。</p>
+<div class="box2"><b>顺带一提 · 防火墙（不用学，知道有这么个东西就行）</b><br>
+<b>是什么</b>：管"谁能连进来"的守门人，Ubuntu 上常用 <span class="code">ufw</span>。<br>
+<b>什么时候遇到</b>：服务器要对外开放端口、或被要求做安全加固的时候。<br>
+<b>真要用时去哪查</b>：14 手册的「排错心法」＋ <span class="code">man ufw</span>，或者直接搜"ufw 放行端口"。</div>
+<h3>8.7 易错点</h3>
 <div class="box2">
 <p><span class="opt">坑 1：</span>ping 不通 ≠ 对方没开机——对方可能禁 ping（防火墙），但网页服务正常。继续用 nc 测端口。</p>
 <p><span class="opt">坑 2：</span>ss 是新一代 netstat，旧教程里的 netstat 用 ss 替代。</p>
@@ -1173,6 +1241,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 
 <div class="newpage"></div>
 <h2 id="toc-11">第 9 章 · apt 包管理</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-27 · apt 包管理：装 / 卸 / 搜 / 锁报错</b> ★ ｜ 休息日 1.1 小时 ｜ 工作日 15 分<br>　□ 装一个工具再卸掉；说清 update 与 upgrade 的区别<br>　□ 能独立做出 02-★4-7（包管理）<br>　<span class="note">回滚方式：别卸载系统关键包</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解包管理器为什么存在；② 会用 apt 装/卸/搜软件；③ 看懂常见的锁文件报错。</p>
 <p><b>本章新命令</b>：<span class="code cmd">apt update</span> <span class="code cmd">apt install</span> <span class="code cmd">apt remove</span> <span class="code cmd">apt search</span> <span class="code cmd">apt upgrade</span> <span class="code cmd">apt list</span> <span class="code cmd">dpkg</span></p>
 
@@ -1193,7 +1263,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">update</span>
 </pre><pre class="demo-out">Get:1 http://archive.ubuntu.com ... [1,234 kB] <span class="out">（示例输出，实际以本机为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">apt</span> <span class="param">search</span> <span class="param">htop</span>
-</pre><pre class="demo-out">htop/&lt;发行版代号&gt; 3.3.0-4 amd64
+</pre><pre class="demo-out">htop/&lt;发行版代号&gt; 3.4.1-5build2 amd64
   interactive processes viewer <span class="out">（示例输出：26.04 的源代号是 resolute，以本机实际显示为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">install</span> <span class="param">htop</span>
 </pre><pre class="demo-in"><span class="prompt">$</span> <span class="cmd">htop</span></pre>
@@ -1204,7 +1274,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <div class="demo">
 <p class="dtitle">示范 2：锁文件报错</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">apt</span> <span class="param">install</span> <span class="param">htop</span>
-</pre><pre class="demo-out">E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)</pre>
+</pre><pre class="demo-out">Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 1234 (unattended-upgr)（26.04 文案）</pre>
+<p class="demo-ex"><span class="opt">说明：</span>报错里的<b>锁路径、进程号</b>会随冲突对象不同；<b>apt 会等锁</b>——默认最多等 120 秒，等到就继续装、等不到才退出（这也是它和 <span class="code">apt-get</span> 的差别：后者会立即报两行 <span class="code">E:</span>）。</p>
 <p class="demo-ex">原因：<b>另一个 apt 正在跑</b>（比如系统自动更新），或者上次 apt 被 Ctrl+C 打断没清理。<b>锁</b>=防止两个 apt 同时改系统。解决：等它跑完；确认没有别的 apt 后重启一次系统锁会自动释放。</p>
 </div>
 <p class="note">底层补充：<span class="code cmd">dpkg</span> 是 apt 底层的"装机工"，apt 最终通过它干活。日常用 apt 就够，知道 dpkg 的存在即可——报错里见到 dpkg 字样不用慌。</p>
@@ -1215,8 +1286,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. 用 apt search 找一个你感兴趣的小软件（如 cowsay、neofetch），装它并运行。</p>
 <p>2. apt list --installed 配合 grep，确认 htop 是否已安装。</p>
-<p>3. 用 apt remove 卸掉刚装的小软件，再 search 确认它没了。</p>
-<p>4. <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 复现锁报错：终端 1 运行 <span class="code">sudo apt install linux-firmware</span>（体积较大、下载需片刻，够时间复现），趁它下载时在终端 2 运行 <span class="code">sudo apt install htop</span>——观察终端 2 的锁报错。实验完终端 1 按 Ctrl+C 中断，并清理残留：<span class="code">sudo dpkg --configure -a</span>。</p>
+<p>3. 用 apt remove 卸掉刚装的小软件，再用 <span class="code">apt list --installed | grep 名字</span> 确认它没了（注意：<span class="code">apt search</span> 仍会列出它——search 搜的是"仓库里有哪些"，不是"你装没装"）。</p>
+<p>4. <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 复现锁报错：终端 1 运行 <span class="code">sudo apt update</span>（连官方源会跑上一会儿），趁它还没结束，终端 2 再运行 <span class="code">sudo apt install htop</span>——观察终端 2 的锁报错。<b>不用为复现去下载大包</b>（旧做法要装几百 MB 的 linux-firmware、还改系统）；窗口实在难抢，就把本章"锁报错"的示范读懂、说出原因，一样算过。实验完终端 1 等它跑完（或 Ctrl+C 中断），必要时 <span class="code">sudo dpkg --configure -a</span> 收尾。</p>
 </div>
 <div class="quiz">
 <p class="qtitle"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 章末自测</p>
@@ -1227,22 +1298,26 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 
 <div class="newpage"></div>
 <h2 id="toc-12">第 10 章 · systemctl 与服务</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-28 · 服务状态：systemctl status / is-active</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 说出 loaded / active 各表示什么<br><b>1-29 · 起停与开机自启：start / stop / enable</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 停掉一个服务再恢复；说清 enable 与 start 的区别<br>　□ 能独立做出 02-★4-6（服务管理）<br>　<span class="note">回滚方式：自己开的服务自己关；停之前记下原状态 ｜ 实战价值：服务起不来是日常高频</span><br><b>1-30 · 看服务日志：journalctl -u</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 从服务日志里找出最近一次失败的原因<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解 systemd 和"服务"；② 会用 systemctl 管理服务全流程；③ 会用 journalctl 看服务日志。</p>
 <p><b>本章新命令</b>：<span class="code cmd">systemctl</span> <span class="code cmd">journalctl</span></p>
 
 <h3>10.1 systemd：开机大管家</h3>
 <p><b>服务 = 常驻后台的程序</b>（nginx 网页服务、sshd 远程登录服务、docker 容器引擎……）。它们没人盯着也要 7×24 运行。<b>systemd 就是大管家</b>：开机时按顺序拉起所有服务，运行时盯着它们，崩了拉起来。</p>
 <p><span class="code cmd">systemctl</span> 是你和管家对话的命令。它管理的每个服务都有一份"档案"（unit 文件），记录启动命令、依赖、重启策略。</p>
+<p>常用子命令先认脸：<span class="code cmd">status</span> 看状态 ｜ <span class="code cmd">start / stop / restart</span> 开关与重启 ｜ <span class="code cmd">enable / disable</span> 开机自启开关 ｜ <span class="code cmd">is-active</span> 只回答"活着吗"（脚本里判断服务状态用它——本册末尾的阶段总结练习 1-45、进阶篇场景 5 的 service_guard 脚本都会用到）。</p>
 <div class="demo">
 <p class="dtitle">示范 1：服务管理全流程 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">systemctl</span> <span class="param">status</span> <span class="param">ssh</span>
 </pre><pre class="demo-out">● ssh.service - OpenBSD Secure Shell server
-     Loaded: loaded (/usr/lib/systemd/system/ssh.service; enabled)
+     Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: enabled)
      Active: active (running) since Fri 2026-08-15 08:00:01 CST; 1 day ago
-   Main PID: 890 (sshd) <span class="out">（示例时间和 PID，以你机器实际输出为准）</span></pre>
+TriggeredBy: ● ssh.socket
+   Main PID: 890 (sshd) <span class="out">（示例时间和 PID；26.04 实际输出还会多几行——Invocation、Docs、Process 等，以你机器为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">sudo</span> <span class="cmd">systemctl</span> <span class="param">restart</span> <span class="param">ssh</span>
 <span class="prompt">$</span> <span class="cmd">systemctl</span> <span class="param">status</span> <span class="param">ssh</span></pre>
-<p class="demo-ex">status 输出三行是核心：<b>Loaded</b>=档案在哪（enabled=开机自启）；<b>Active</b>=现在是活是死（running=活着，failed=挂了，这里是排查第一眼）；<b>Main PID</b>=主进程工号。</p>
+<p class="demo-ex">status 输出的核心：<b>Loaded</b>=档案在哪、自不自启；<b>Active</b>=现在是活是死（running=活着，failed=挂了，这里是排查第一眼）；<b>Main PID</b>=主进程工号。<b>26.04 新变化</b>：ssh 平时由 <span class="code">ssh.socket</span> 按需拉起——所以 ssh.service 这行显示 <span class="code">disabled</span>（它自己不"开机自启"），开机待命的是 <span class="code">ssh.socket</span>（<span class="code">systemctl is-enabled ssh.socket</span> → <span class="code">enabled</span>），看到 disabled 别慌。刚装好还没启动、也没连接过时，Active 会是 <span class="code">inactive (dead)</span>——先 <span class="code">sudo systemctl start ssh</span> 再做本示范。另外 <span class="code">sudo systemctl stop ssh</span> 时会多一句 <span class="code">Warning: ... triggering units are still active: ssh.socket</span>——意思是"socket 还待命、随时会再拉起它"，不是失败；要彻底停，把 <span class="code">ssh.socket</span> 一起 stop（或 disable）。</p>
 </div>
 <table>
 <tr><th style="width:40%">命令</th><th>作用</th></tr>
@@ -1255,6 +1330,15 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">易错点：</span><b>start ≠ enable</b>。start 是"现在启动"；enable 是"开机时自动启动"。装了服务忘记 enable，重启机器后服务不回来——经典坑。改完配置文件后要 <b>restart</b>（或 reload）才生效。</p>
 </div>
 
+<p><b>最小 unit 文件长什么样（2-07「把脚本变成 systemd 服务」要用）</b>：自己写的服务档案放在 <span class="code">/etc/systemd/system/服务名.service</span>，最小就三块：</p>
+<pre class="demo-in">[Unit]
+Description=我的巡检脚本
+[Service]
+ExecStart=/home/你的用户名/lab/health_check.sh
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target</pre>
+<p class="note">[Unit] 写"这是什么"；[Service] 写"怎么跑"——<span class="code">ExecStart</span> 必须用<b>绝对路径</b>，<span class="code">Restart=on-failure</span> 让失败后自动拉起；[Install] 决定 <span class="code">enable</span> 时挂到哪里。放好文件后三步：<span class="code cmd">sudo systemctl daemon-reload</span> → <span class="code cmd">sudo systemctl enable --now 服务名</span> → <span class="code cmd">systemctl status 服务名</span>。<b>两个容易踩的点：</b>① unit 里别依赖 <span class="code">$HOME</span>／<span class="code">~</span>（服务环境里它们可能是空的，路径尽量写绝对路径）；想让服务按你自己的身份跑，就在 [Service] 里加 <span class="code">User=你的用户名</span>。② <span class="code">status</span> 显示 active 不等于没问题——脚本内部报错它照样 active，排错要接着看 <span class="code cmd">journalctl -u 服务名</span>。</p>
 <h3>10.2 journalctl：服务的日记本</h3>
 <div class="demo">
 <p class="dtitle">示范 2：journalctl 实战</p>
@@ -1263,7 +1347,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 </pre><pre class="demo-in"><span class="prompt">$</span> <span class="cmd">journalctl</span> <span class="opt">-p err</span> <span class="note"># 只看错误级别以上的</span></pre>
 <p class="demo-ex">服务挂了的三板斧：<b>systemctl status 看死活 → journalctl -u 服务名 看日志 → journalctl -p err 只看报错</b>。和《日志报错解读手册》配合使用。</p>
 </div>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件：本章用 ssh 服务做演示对象——Ubuntu 桌面版可能没装 openssh-server（先 <span class="code">sudo apt install openssh-server</span>，或用系统已有的任意服务代替，如 cron、systemd-resolved）。<b>停止正在用的 SSH 服务会断掉你的远程会话</b>：实验请在本地终端做，远程时改用"重启"而非"停止"，并留好本地终端恢复方式。WSL / 容器环境 systemd 可能受限，不能做时记为环境限制，不影响主线概念。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 权限小坑：普通用户读 journalctl 要在 <b>adm / systemd-journal 组</b>里——桌面安装时建的第一个用户默认在 adm 组；WSL 或自建用户若只看到 <span class="code">-- No entries --</span>，先用 <span class="code">sudo journalctl -u ssh</span> 看，或 <span class="code">sudo usermod -aG adm 你的用户名</span> 后重新登录。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件：本章用 ssh 服务做演示对象——<b>Ubuntu 桌面版 / WSL 版通常都没装 openssh-server</b>（先 <span class="code">sudo apt install openssh-server</span>；<b>WSL 上装完还要把服务起起来</b>——未启用 systemd 的用 <span class="code">sudo service ssh start</span>，启用 systemd 的用 <span class="code">sudo systemctl start ssh</span>——才有服务可查），或用系统已有的任意服务代替（如 cron、systemd-resolved、systemd-journald）。<b>停止正在用的 SSH 服务会断掉你的远程会话</b>：实验请在本地终端做，远程时改用"重启"而非"停止"，并留好本地终端恢复方式。WSL / 容器环境 systemd 可能受限，不能做时记为环境限制，不影响主线概念。</p>
 <div class="hw">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. systemctl status ssh，逐行解释 Loaded、Active、Main PID 的含义。</p>
@@ -1280,6 +1365,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 
 <div class="newpage"></div>
 <h2 id="toc-13">第 11 章 · 环境变量</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-31 · 环境变量：PATH 与 export</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 说清"命令为什么找不到"并修好一次<br>　<span class="note">回滚方式：改 shell 配置前先备份</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解环境变量是"全局公告栏"；② 明白 PATH 决定"命令找不找得到"；③ 会 export、改 rc 文件、source；④ 会 alias 起外号。</p>
 <p><b>本章新命令</b>：<span class="code cmd">env</span> <span class="code cmd">echo</span> <span class="code cmd">export</span> <span class="code cmd">source</span> <span class="code cmd">alias</span>（文件：<span class="code">~/.bashrc</span>）</p>
 
@@ -1291,7 +1378,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 </pre><pre class="demo-out">/home/&lt;你的真实用户名&gt; <span class="out">（示例输出，以你机器为准）</span></pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">echo</span> <span class="param">$PATH</span>
 </pre><pre class="demo-out">/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin</pre>
-<p class="demo-ex">$ 的作用是"取公告内容"。PATH 是一串<b>用冒号分隔的目录</b>——你敲 <span class="code">ls</span> 时，系统按这个顺序逐目录找叫 ls 的程序，找到就执行。</p>
+<p class="demo-ex">$ 的作用是"取公告内容"。PATH 是一串<b>用冒号分隔的目录</b>——你敲 <span class="code">ls</span> 时，系统按这个顺序逐目录找叫 ls 的程序，找到就执行。<b>WSL 用户注意：</b>你的 $PATH 会长很多（几十段，其中不少是 <span class="code">/mnt/c/…</span> 这类 Windows 侧路径）——正常现象，不用管。</p>
 </div>
 <div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 第 0 章的 "command not found" 谜底就在这：<b>你要的程序不在 PATH 的任何一个目录里</b>。装的东西找不到了？三种可能：没装、装了但 PATH 没有它的目录、名字记错了。</div>
 
@@ -1345,6 +1432,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 
 <div class="newpage"></div>
 <h2 id="toc-14">第 12 章 · 归档与压缩</h2>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-32 · 归档与压缩：tar / gzip / zip</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 打包一个目录再解开验证<br>　□ 能独立做出 02-★5-6（打包压缩）<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解"归档"和"压缩"是两件事；② 会用 tar 打包（含 tar.gz）；③ 会 gzip / zip；④ 会用 diff 验证解包无误。</p>
 <p><b>本章新命令</b>：<span class="code cmd">tar</span> <span class="code cmd">gzip</span> <span class="code cmd">gunzip</span> <span class="code cmd">zip</span> <span class="code cmd">unzip</span></p>
 
@@ -1362,7 +1451,8 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <span class="prompt">$</span> <span class="cmd">tar</span> <span class="opt">-czvf</span> <span class="param">~/lab/bak.tar.gz ~/lab/ch2</span></pre>
 <pre class="demo-out">/home/&lt;你的真实用户名&gt;/lab/ch2/
 /home/&lt;你的真实用户名&gt;/lab/ch2/note.txt
-<span class="note">（tar 打印的是真实绝对路径，以你机器为准）</span></pre>
+tar: Removing leading `/' from member names
+<span class="note">（上面这行是 stderr 警告：tar 把包内路径开头的 / 去掉了——包内用相对路径更安全，不影响解包；路径行以你机器为准）</span></pre>
 <p class="demo-ex"><b>c</b>=create 建包、<b>z</b>=gzip 压缩、<b>v</b>=verbose 显示过程、<b>f</b>=file 后面接文件名。口诀：<b>打包 czvf，解包 xzvf</b>（解包把 c 换成 x）。f 永远放最后，紧接文件名。</p>
 </div>
 <div class="demo" style="line-height:1.3">
@@ -1383,7 +1473,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <span class="prompt">$</span> <span class="cmd">gunzip</span> <span class="param">~/lab/big.txt.gz</span> <span class="note"># 解回来</span>
 <span class="prompt">$</span> <span class="cmd">zip</span> <span class="opt">-r</span> <span class="param">~/lab/for-windows.zip ~/lab/ch2</span>
 <span class="prompt">$</span> <span class="cmd">unzip</span> <span class="param">~/lab/for-windows.zip</span></pre>
-<p class="demo-ex">gzip 只压单个文件（压完原文件消失，变成 .gz）；zip 是 Windows 也认的格式，跨系统交换文件用 zip。</p>
+<p class="demo-ex">gzip 只压单个文件（压完原文件消失，变成 .gz）；zip 是 Windows 也认的格式，跨系统交换文件用 zip。<b>另：很短的文字压完可能反而更大</b>（gzip 要加文件头，几十字节的小文件属正常现象，不是操作错）。</p>
 </div>
 <div class="box2 tight2">
 <p><span class="opt">易错点：</span>c 和 x 写反 = 灾难（覆盖）；-f 必须最后；tar 本身只打包不压缩（tar.gz 里的 z 才负责压缩）。</p>
@@ -1403,7 +1493,12 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 对应练习册：基础篇 5-6、5-7；进阶篇场景 2（归档大文件）。</p>
 
 <div class="newpage"></div>
+
 <h2 id="toc-15">第 13 章 · Shell 脚本基础</h2>
+<p class="note"><b>先认四个"连接符"</b>：<span class="code">&amp;&amp;</span> = 前一条<b>成功才</b>执行后一条（如 <span class="code">cd ~/lab &amp;&amp; ./run.sh</span>）；<span class="code">;</span> = 不管成败都接着执行；<span class="code">|</span> = 把前一条的输出交给后一条（管道，第 4 章见过）；<span class="code">||</span> = 前一条<b>失败才</b>执行后一条（兜底用）。</p>
+<p class="note"><b>脚本里的条件测试</b>（第 13 章会用到）：<span class="code">[ -n "$s" ]</span> 字符串非空 · <span class="code">[ -z "$s" ]</span> 字符串为空 · <span class="code">[ "$n" -gt 5 ]</span> 数字大于 5 · <span class="code">{1..5}</span> 展开成 1 2 3 4 5 · <span class="code">[ -d "$p" ]</span> 目录存在 · <span class="code">[ -e "$p" ]</span> 路径存在（不分类型）· <span class="code">[ -f "$p" ]</span> 是普通文件 · <span class="code">!</span> 取反（<span class="code">[ ! -d "$p" ]</span> = 不是目录）。</p>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-33 · 第一个脚本：shebang、执行权限、退出码</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 写出一个能跑并返回退出码的脚本<br><b>1-34 · 变量、if、for</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 写一个"目录不存在就创建"的脚本<br><b>1-35 · crontab 定时任务与绝对路径的坑</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 让脚本每分钟跑一次并看到日志<br>　<span class="note">回滚方式：实验完用 crontab -r 清掉 ｜ 实战价值：定时任务是运维日常</span><br><b>2-05 · 接进 crontab：绝对路径的坑</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 定时任务真的跑了，日志按时新增<br>　<span class="note">回滚方式：实验完用 crontab -r 清掉</span><br><b>2-08 · 加日志与退出码：让别人看得懂</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 出错时退出码非 0，日志里能看出哪一步挂的<br><b>2-09 · 参数与用法：$1 / usage / 退出码约定</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 脚本有 --help、能收参数、参数错时给用法<br><span class="note">这三关（2-05 / 2-08 / 2-09）随阶段 2 的《03 进阶篇》场景一起做——2-09 的参数与用法示范在 03 册的脚本里。</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <p><b>本章目标：</b>① 理解"脚本 = 把敲过的命令装进文件"；② 会写带变量、if、for 的脚本；③ 会用 crontab 定时执行；④ 知道脚本的标准写法。</p>
 <p><b>本章新命令</b>：<span class="code cmd">crontab</span>（脚本语法：shebang、变量、if、for、函数、exit）</p>
 
@@ -1451,6 +1546,8 @@ done</pre>
 <p class="demo-ex">三个语法点：<b>变量</b>（THRESHOLD=80，<span class="danger">等号两边绝不能有空格</span>；用的时候加 $）；<b>$()</b> = 把命令的输出装进变量；<b>tr -d '%'</b> = tr 字符转换、-d 删除，把 % 号删掉（df 输出是 "26%" 带百分号，删掉才是纯数字，才能和 80 比大小）；<b>if/then/else/fi</b> 判断（注意 [ ] 里和条件之间有空格）；<b>for 变量 in 列表; do...done</b> 循环。</p>
 </div>
 
+<p class="note">（作业里要"算百分比"：df 的 Use% 可以像上面那样用 <span class="code">awk</span> + <span class="code">tr -d "%"</span> 直接取；要自己算，就 <span class="code">awk "BEGIN{printf \"%.0f\", a/b*100}"</span>。）</p>
+
 <div class="box2">
 <p><span class="opt">补两个脚本零件：</span></p>
 <p>① <span class="code cmd">exit</span> = 结束脚本，并带一个"退出码"：<span class="code">exit 0</span>（正常）、<span class="code">exit 1</span>（出错）。别的程序（或你自己）可以读这个码判断脚本成没成功。</p>
@@ -1465,10 +1562,10 @@ done</pre>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">crontab</span> <span class="opt">-e</span></pre>
 <pre class="demo-out">0 2 * * * /home/&lt;你的真实用户名&gt;/lab/check.sh &gt;&gt; /home/&lt;你的真实用户名&gt;/lab/check.log 2&gt;&amp;1</pre>
 <p class="demo-ex">格式：<b>分 时 日 月 周 + 命令</b>（五个时间位，* = 任意）。这行=每天 2 点 0 分执行。<b>check.sh 就是本章 13.1 写好的巡检脚本</b>——cron 只管按时叫你，跑什么还是你自己的脚本。</p>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 安全闭环（照做）：①改前先备份 <span class="code">crontab -l &gt; ~/lab/cron.backup</span>；②实验行加唯一标记（如把 check.sh 改成每分钟跑一次：<span class="code">* * * * * /home/学生/lab/check.sh &gt;&gt; ...</span>）；③等 1~2 分钟验证日志新增后，立即删掉该实验行；④核对只剩原有任务：<span class="code">crontab -l</span>；⑤若改乱，恢复：<span class="code">crontab ~/lab/cron.backup</span>。cron 无“运行错误提示”，验证只能看脚本自己写的日志或邮件。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 安全闭环（照做）：①改前先备份 <span class="code">crontab -l &gt; ~/lab/cron.backup</span>；②实验行加唯一标记（如把 check.sh 改成每分钟跑一次：<span class="code">* * * * * /home/你的真实用户名/lab/check.sh &gt;&gt; ...</span>）；③等 1~2 分钟验证日志新增后，立即删掉该实验行；④核对只剩原有任务：<span class="code">crontab -l</span>；⑤若改乱，恢复：<span class="code">crontab ~/lab/cron.backup</span>。cron 无“运行错误提示”，验证只能看脚本自己写的日志或邮件。</p>
 </div>
 <div class="box2">
-<p><span class="opt">易错（重要）：</span>cron 的环境和你的终端<b>不是同一个</b>——它对 <span class="code">~</span> 的展开不可靠。定时任务里的路径<b>一律写绝对路径</b>（/home/&lt;你的真实用户名&gt;/...，不写 ~/...）。这是练习册进阶篇 5-4 的考点，也是实战第一大坑。</p>
+<p><span class="opt">易错（重要）：</span>cron 的环境和你的终端<b>不是同一个</b>（PATH 很短，$HOME 与展开规则也可能和终端里不一样）。定时任务里的路径<b>一律写绝对路径最稳</b>（/home/&lt;你的真实用户名&gt;/...，不写 ~/...）。这是练习册进阶篇 5-4 的考点，也是实战第一大坑。</p>
 </div>
 
 <div class="box">
@@ -1522,7 +1619,7 @@ done</pre>
 <h3>第 4 章</h3>
 <p><b>自测 1：</b>管道 | 连接<b>命令与命令</b>（数据不落地）；重定向 &gt; 连接<b>命令与文件</b>（数据写进文件）。</p>
 <p><b>自测 2：</b>错。uniq 只对相邻重复行生效，乱序文件必须先 sort。</p>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① cat 验证 &gt; 覆盖、&gt;&gt; 追加（和示范 2 现象一致）；② uniq -c 每行 = 数字 + 词；③ awk '{print $1}' 输出全是第一列；④ 管道链改造后输出 3 个词，用 head -3 收尾。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① cat 验证 &gt; 覆盖、&gt;&gt; 追加（和示范 2 现象一致）；② uniq -c 每行 = 数字 + 词；③ awk -F: '{print $1}' 输出全是第一列（/etc/passwd 按冒号分列，要先 -F:）；④ 管道链改造后输出 3 个词，用 head -3 收尾。</p>
 <h3>第 5 章</h3>
 <p><b>自测 1：</b>其他人权限是 r--（只读）；数字法是 4，整串是 754。</p>
 <p><b>自测 2：</b>错。说反了：sudo 是借 root 权限执行一条命令，su 是切换成另一个用户。</p>
@@ -1538,7 +1635,7 @@ done</pre>
 <h3>第 8 章</h3>
 <p><b>自测 1：</b>① ping 目标 IP；② nc -zv 目标 端口 / ss -tlnp；③ ps aux | grep / fuser -v 端口；④ tail -f 对应日志。</p>
 <p><b>自测 2：</b>错。对方可能禁 ping（防火墙丢 ICMP），服务却正常；应继续用 nc 测端口。</p>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① ip addr 里 inet 后是本机 IP，ip route 里 default via 后是网关；② ss -tlnp 里认出 22 端口 sshd；③ nc -zv 22 端口 succeeded、9999 端口 refused；④ curl -I 能看到 HTTP/1.1 200 等状态行。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① ip addr 里 inet 后是本机 IP，ip route 里 default via 后是网关；② ss -tlnp 里认出 22 端口 sshd；③ nc -zv 22 端口 succeeded、9999 端口 refused；④ 能看到 <span class="code">HTTP/… 200 OK</span> 这种状态行（本机 <span class="code cmd">python3 -m http.server</span> 显示的是 <span class="code">HTTP/1.0 200 OK</span>，版本号不同不影响判定）。</p>
 <h3>第 9 章</h3>
 <p><b>自测 1：</b>update 刷新软件列表（不装不升级）；upgrade 把已装软件升级到新版本。</p>
 <p><b>自测 2：</b>错。锁报错=另一个 apt 在跑或上次异常中断；磁盘满会报 No space left on device。</p>
@@ -1556,7 +1653,7 @@ done</pre>
 <p><b>自测 2：</b>错。tar 只归档不压缩；tar.gz 里的 z 才压缩。</p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① ls 里出现 bak.tar.gz；② diff -r 无输出（一个不多一个不少）；③ 文件后缀变 .gz，gunzip 后还原；④ unzip 能解出全部文件。</p>
 <h3>第 13 章</h3>
-<p><b>自测 1：</b>#!/bin/bash 是 shebang，告诉系统用 bash 解释脚本。cron 环境对 ~ 展开不可靠，路径必须写绝对路径才能保证找得到。</p>
+<p><b>自测 1：</b>#!/bin/bash 是 shebang，告诉系统用 bash 解释脚本。cron 的环境和终端不一样，路径写绝对路径最稳、才保证找得到。</p>
 <p><b>自测 2：</b>错。必须有执行权限（chmod +x）才能 ./ 运行；或改用 bash 脚本名 方式运行。</p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 作业检查点：① 脚本输出含日期、磁盘、内存三项；② 临时把阈值改大（如 90）能触发警告分支，再改回 20；③ 三个文件各行打印出“文件 X 的大小是...”；④ crontab -l 能看到任务，日志每分钟新增，删除后 crontab -l 无该项。</p>
 
@@ -1611,7 +1708,7 @@ done</pre>
 <tr><td>第 2 章</td><td>touch mkdir(-p) cp(-r) mv rm(-r -f) rmdir</td></tr>
 <tr><td>第 3 章</td><td>cat less head tail(-f) wc file grep(-i -r -n -v -c) find(-name -size) diff(-r)</td></tr>
 <tr><td>第 4 章</td><td>| &gt; &gt;&gt; 2&gt;&amp;1 sort uniq(-c) awk('{print $1}')</td></tr>
-<tr><td>第 5 章</td><td>whoami id su sudo useradd passwd usermod(-aG) groupadd groups userdel last chmod(符号/数字) chown chgrp</td></tr>
+<tr><td>第 5 章</td><td>whoami id su sudo useradd passwd usermod(-aG) groupadd groups userdel last(已移除) chmod(符号/数字) chown chgrp</td></tr>
 <tr><td>第 6 章</td><td>ps aux top htop pgrep kill killall jobs bg fg nohup fuser(-v)</td></tr>
 <tr><td>第 7 章</td><td>df(-h) du(-sh) lsblk mount fallocate dd mkfs</td></tr>
 <tr><td>第 8 章</td><td>ip addr ip route ping(-c) ss(-tlnp) curl(-I -o) wget nc(-zv) traceroute nslookup ssh scp</td></tr>
@@ -1637,6 +1734,34 @@ done</pre>
 <tr><td>第 6、10 章</td><td>进阶篇 场景 4</td><td>fuser、nohup、systemctl</td></tr>
 <tr><td>第 13 章</td><td>进阶篇 场景 5</td><td>crontab（绝对路径）、脚本语法</td></tr>
 </table>
-<p class="footer">《Linux 入门》教科书版 · 与《Linux 指令练习册》基础篇 / 进阶篇、《英语单词手册》《日志报错解读手册》《Python 内置函数手册》配套使用 · v2.5（2026-10）</p>
+<div class="newpage"></div>
+<h2 id="toc-20">附录 E · 电脑上得到 Ubuntu 的两种装法（WSL 为主 / VMware 为辅）</h2>
+<p class="note">这一页解决第 0 关（0-03）的第一件事：电脑上还没有 Ubuntu 怎么办。只做一次；做完 30 分钟内应能敲出 <span class="code cmd">uname -a</span> 并贴进学习日志。</p>
+<h3>路线 A（推荐）：WSL2——在 Windows 里直接跑一个 Ubuntu</h3>
+<p>前提：Windows 10（21H2 以上）或 Windows 11；BIOS 里开启了虚拟化（一般默认已开）。</p>
+<p><b>① 键盘敲什么</b>：开始菜单搜 <b>PowerShell</b> → 右键「以管理员身份运行」→ 敲 <span class="code cmd">wsl --install -d Ubuntu</span>，装完<b>重启电脑</b>。</p>
+<p><b>② 看到什么</b>：重启后会自动弹出 Ubuntu 窗口，让你设置<b>用户名和密码</b>（这是你的 Linux 账号；输密码时不显示是正常的）；出现 <span class="code">你@机器名:~$</span> 提示符 = 成功。</p>
+<p><b>③ 怎么验证</b>：敲 <span class="code cmd">uname -a</span>（应出 Linux 内核信息）、<span class="code cmd">lsb_release -a</span>（看版本）；以后每次用：开始菜单搜 <b>Ubuntu</b> 打开。</p>
+<p><b>④ 卡住怎么办</b>：报「虚拟化未启用」→ 进 BIOS 打开 Intel VT-x / AMD-V（开机时按 Del / F2 找 Virtualization Technology）；重启后没弹 Ubuntu → 开始菜单手动搜 Ubuntu；忘了 Linux 密码 → 在 PowerShell 里 <span class="code cmd">wsl --user root</span> 进去后 <span class="code cmd">passwd 你的用户名</span> 重设。</p>
+<h3>路线 B（备选）：VMware 虚拟机——在 Windows 里开一台完整的 Ubuntu</h3>
+<p><b>① 下载两样东西</b>：Ubuntu 桌面版镜像 ISO——官网 ubuntu.com/download 慢就用国内镜像站 <span class="code">mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/</span>（找 26.04）；虚拟机软件 VMware Workstation（个人使用免费）。</p>
+<p><b>② 建虚拟机</b>：「新建虚拟机」→ 选刚下的 ISO → 内存 4GB 以上、磁盘 40GB 以上（默认即可）→ 装的时候选「最小安装」，设好用户名密码。</p>
+<p><b>③ 怎么验证</b>：桌面打开「终端」，敲 <span class="code cmd">uname -a</span> 与 <span class="code cmd">lsb_release -a</span>；Firefox 能开网页 = 网络通。</p>
+<p><b>④ 卡住怎么办</b>：镜像慢 → 用上面的清华镜像站；安装卡住 → 把虚拟机内存调大（低于 4GB 容易卡）；<b>别装双系统</b>——零基础阶段 WSL 或虚拟机就够，真机双系统留给以后。</p>
+<h3>怎么选</h3>
+<table><tr><th>路线</th><th>适合</th><th>注意</th></tr>
+<tr><td><b>WSL2</b>（推荐）</td><td>大多数 Windows 用户：启动快、占资源少、与 Windows 文件互通方便</td><td>没有桌面环境；26.04 的 WSL 已支持 systemd（个别机器要在 <span class="code">/etc/wsl.conf</span> 里开 <span class="code">[boot] systemd=true</span> 后 <span class="code cmd">wsl --shutdown</span> 重启）</td></tr>
+<tr><td><b>VMware</b>（备选）</td><td>想要一台完整 Ubuntu（带桌面、玩挂载/服务更完整）</td><td>吃内存和磁盘（建议 8GB 以上内存的机器再走这条）；镜像下载慢换国内源</td></tr></table>
+<p class="note">两条路选一条即可。0-03 的判定：能进系统、能上网、能敲 <span class="code cmd">ls</span>，并<b>能说出你用的是哪一种环境</b>（WSL / VMware / 平板 Termux）。</p>
+<div class="section-head">阶段总结练习（新增 · 打完本阶段关卡再做）</div>
+<div class="box2"><h3>阶段 1 · 学习总结练习：工单"磁盘满了 ＋ 服务起不来"</h3>
+<p><b>业务场景</b>：你是某公司 AI 组的值班运维。周一早上两条告警：① 某台服务器磁盘使用率 100%；② 昨天还正常的推理服务，现在起不来了。你只有这台机器的 SSH。</p>
+<p><b>综合要求</b>：① 用 df / du 定位是谁占满了磁盘（含"已删除但仍被进程占用"的思路）；② 清理或迁移后确认空间回收；③ 从服务状态（systemctl / is-active）与日志（journalctl）判断服务为什么起不来；④ 处理进程与端口占用；⑤ 全程按"现象 → 线索 → 命令 → 验证"写一份根因分析。</p>
+<p><b>验收</b>：□ 20 分钟内定位磁盘占用的大头　□ 服务恢复并说清根因　□ 有一份别人能看懂的根因分析（含恢复/回滚步骤）</p>
+<p><b>时间</b>：2.5 小时（休息日）　<b>产出</b>：incident 根因分析 + 操作记录，放进 learning-journey</p>
+<p class="note">环境提示：本工单的"磁盘满 ＋ 服务起不来"需要先自己造出来——方向见《03 进阶篇》的场景题（磁盘告警脚本 ＋ 服务保活脚本，正好对应两种故障源）。</p>
+<p><b>AI 运维指向</b>：这正是推理服务挂掉的第一现场——磁盘满、端口占用是 GPU 服务器最常见的两个故障。</p>
+<p><b>实战价值</b>：实战里最看重的就是"面对没见过的故障看你的推理路径"，这道题就是你要讲的那个故事。</p></div>
+<p class="footer">《Linux 入门》</p>
 </body>
 </html>

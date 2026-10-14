@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>报错英语单词手册 · v2.5</title>
+<title>报错英语单词手册 · v3.1</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -136,15 +136,30 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h1><svg class="em" width="15" height="15"><use href="#ic-b2"/></svg> 报错英语单词手册</h1>
 <p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
 
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
+<tr><td><b>本册关卡</b></td><td>—</td></tr>
+<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
+<tr><td><b>学完解锁</b></td><td>看到陌生报错词不再发懵</td></tr></table>
+<div class="box2"><b>本册禁止通读，只许查。</b>例外：「理念篇」只有一页，先读一遍；其余部分都不用通读。<br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：这是一本<b>报错英语单词手册</b>——把 Linux / Python 报错里反复出现的那几十个英文词挑出来，按"否定与判断 / 文件世界 / 动作动词 / 状态结果 / 网络 / Python"分组背。生活类比：像<b>体检化验单上的缩写</b>，不认识时看得心慌，认全了就知道那只是一张"哪里出了什么问题"的说明。</p>
+<p><b>② 干什么用</b>：报错看不懂，就分不清"是我命令敲错了、权限不够、还是文件根本不在"，只能乱试或者问人。认词以后一眼能分类：<span class="code err">Permission denied</span> = 没权限（denied = 被拒绝）、<span class="code err">No such file</span> = 文件不在、<b>-ed 结尾 = 被…了</b>。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维每天读的就是日志和报错 —— 训练脚本崩了、推理服务报 500、CUDA OOM，全靠"看得懂那几行英文"定位；实战里常要你<b>现场读一段报错、说出原因</b>。这一册就是把这件事的门槛降到"认词"。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小示意：<span class="code">Permission denied → permission（权限）＋ denied（-ed = 被…了）→ 被拒绝 = 没权限</span>。用法照书里的规矩：<b>不许通读，只许查</b>——遇到报错，翻到对应组把这一条读懂，再回到日志里对照。位置：字典类第 13 册，和 14 册《日志报错解读手册》是"认词 → 读整句"的接力。</p>
+<p class="note">读法：这一节只要求"能用自己的话讲清这四问"，具体背哪几组看下面目录（标了优先背顺序）。</p>
+
 <h2 class="toc-title">目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">理念篇</span><span class="tdesc">报错英语的构造规律（先读这一页）</span><a href="#toc-1"></a></div>
 <div class="toc-row"><span class="tn">A 组</span><span class="tdesc">否定与判断核心词（第 1 优先背）</span><a href="#toc-2"></a></div>
 <div class="toc-row"><span class="tn">B 组</span><span class="tdesc">文件世界（第 2 优先背）</span><a href="#toc-3"></a></div>
 <div class="toc-row"><span class="tn">C 组</span><span class="tdesc">动作动词（第 3 优先背）</span><a href="#toc-4"></a></div>
-<div class="toc-row"><span class="tn">D 组</span><span class="tdesc">状态与结果</span><a href="#toc-5"></a></div>
-<div class="toc-row"><span class="tn">E 组</span><span class="tdesc">网络世界</span><a href="#toc-6"></a></div>
-<div class="toc-row"><span class="tn">F 组</span><span class="tdesc">Python 世界（学 Python 前先背这组）</span><a href="#toc-7"></a></div>
+<div class="toc-row"><span class="tn">D 组</span><span class="tdesc">状态与结果（第 4 优先背）</span><a href="#toc-5"></a></div>
+<div class="toc-row"><span class="tn">E 组</span><span class="tdesc">网络世界（第 5 优先背）</span><a href="#toc-6"></a></div>
+<div class="toc-row"><span class="tn">F 组</span><span class="tdesc">Python 世界（学 Python 前先背这组 · 第 6 优先背）</span><a href="#toc-7"></a></div>
 </div>
 <h2 id="toc-1">第 1 页 · 理念篇：报错英语的构造规律</h2>
 
@@ -195,7 +210,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p>规律：<b>大部分技术单词都是"词根+前后缀"拼出来的，先拆块、再拼意思，比死记快 3 倍。</b></p>
 </div>
 
-<h3>4. 读报错四步口诀</h3>
+<h3>4. 读报错四步口诀（认词）</h3>
 <div class="box">
 <p>① 先找否定词：<b>not / no / denied / failed / refused / error</b>（红色的就是）</p>
 <p>② 再找主语：谁出事了？file？connection？permission？</p>
@@ -215,7 +230,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="word">invalid</td><td>无效的</td><td class="code err">invalid syntax 无效的语法</td></tr>
 <tr><td class="word">missing</td><td>缺失、不见了</td><td class="code err">Missing required argument 缺少必需的参数</td></tr>
 <tr><td class="word">unexpected</td><td>意料之外的</td><td class="code err">unexpected indent 意外的缩进</td></tr>
-<tr><td class="word">unknown</td><td>未知的</td><td class="code err">unknown host 未知的主机</td></tr>
+<tr><td class="word">unknown</td><td>未知的</td><td class="code err">UnknownHostException: xxx 未知的主机（Java 生态的真实报错；Ubuntu 下 ping 报 Name or service not known、curl 报 Could not resolve host）</td></tr>
 <tr><td class="word">forbidden</td><td>被禁止</td><td class="code err">403 Forbidden 服务器拒绝访问</td></tr>
 <tr><td class="word">unavailable</td><td>不可用</td><td class="code err">service unavailable 服务不可用</td></tr>
 <tr><td class="word">warning</td><td>警告（还不到错误）</td><td class="code">W: warning 黄字提示</td></tr>
@@ -241,7 +256,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="word">hidden</td><td>隐藏的</td><td>ls -a 能看到点开头的隐藏文件</td></tr>
 </table>
 
-<div class="section-head" id="toc-4">C 组 · 动作动词（命令里的动词就是它们）</div>
+<div class="section-head" id="toc-4">C 组 · 动作动词（第 3 优先背 · 命令里的动词就是它们）</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">install</td><td>安装</td><td>apt install nginx 安装nginx</td></tr>
@@ -262,7 +277,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </table>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本表 mount、apt、systemctl 等词条只是<b>报错词汇</b>教学，不是操作手册；照做前以《Linux 入门》《日志报错解读手册》对应章节的风险与恢复说明为准。</p>
 
-<div class="section-head" id="toc-5">D 组 · 状态与结果</div>
+<div class="section-head" id="toc-5">D 组 · 状态与结果（第 4 优先背）</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">success / successful</td><td>成功 / 成功的</td><td class="ok">Successfully installed 安装成功（绿色）</td></tr>
@@ -275,19 +290,19 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="word">complete / completed</td><td>完成</td><td>download completed 下载完成</td></tr>
 <tr><td class="word">interrupted</td><td>被打断</td><td>process interrupted 进程被打断（Ctrl+C）</td></tr>
 <tr><td class="word">in use</td><td>使用中</td><td class="code err">Address already in use 地址已被占用</td></tr>
-<tr><td class="word">available</td><td>可用的</td><td>available space 可用空间</td></tr>
+<tr><td class="word">available</td><td>可用的（内存语境：真正可用，含缓存）</td><td>available space 可用空间</td></tr>
 <tr><td class="word">expired</td><td>过期了</td><td>license expired 许可证过期</td></tr>
 </table>
 
 <div class="newpage"></div>
-<div class="section-head" id="toc-6">E 组 · 网络</div>
+<div class="section-head" id="toc-6">E 组 · 网络（第 5 优先背）</div>
 <table>
 <tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>出现在哪里 / 例句</th></tr>
 <tr><td class="word">connection</td><td>连接（connect 的名词）</td><td class="code err">Connection refused 连接被拒绝</td></tr>
 <tr><td class="word">request</td><td>请求（你向服务器要东西）</td><td>send a request 发一个请求</td></tr>
 <tr><td class="word">response</td><td>响应（服务器回你话）</td><td>server response 服务器的回应</td></tr>
 <tr><td class="word">server / client</td><td>服务器 / 客户端</td><td>server = 提供服务者；client = 来要服务的</td></tr>
-<tr><td class="word">host</td><td>主机、服务器</td><td>unknown host 未知的主机</td></tr>
+<tr><td class="word">host</td><td>主机、服务器</td><td>UnknownHostException: xxx 未知的主机（Java 生态的真实报错；Ubuntu 见 resolve 词条）</td></tr>
 <tr><td class="word">port</td><td>端口（服务的门牌号）</td><td>port 80 = 网站的门；port 22 = SSH 的门</td></tr>
 <tr><td class="word">address</td><td>地址</td><td>IP address IP 地址</td></tr>
 <tr><td class="word">network</td><td>网络</td><td>network error 网络错误</td></tr>
@@ -300,7 +315,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="word">proxy</td><td>代理</td><td>proxy server 代理服务器</td></tr>
 </table>
 
-<div class="section-head" id="toc-7">F 组 · Python 世界（学 Python 前先背这组）</div>
+<div class="section-head" id="toc-7">F 组 · Python 世界（学 Python 前先背这组 · 第 6 优先背）</div>
 <table class="long-table"><thead><tr><th style="width:20%">单词</th><th style="width:22%">中文</th><th>含义 / 例子</th></tr></thead><tbody>
 <tr><td class="word">string (str)</td><td>字符串</td><td>一串文字："hello"（像一串珠子，string=绳子）</td></tr>
 <tr><td class="word">integer (int)</td><td>整数</td><td>5、-3、100</td></tr>
@@ -375,15 +390,15 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <table class="tight xtight"><tr><th>你要找</th><th>去哪册</th></tr>
 <tr><td>Linux 命令、权限、进程、服务、网络、Shell 脚本</td><td>01 Linux 入门（练：02 基础篇 / 03 进阶篇）</td></tr>
 <tr><td>Python 语法、模块、文件、异常、自动化</td><td>04 Python 入门（练：05 基础篇 / 06 进阶篇）</td></tr>
-<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>07 内置函数手册</td></tr>
-<tr><td>报错里的英文单词看不懂</td><td>08 报错英语单词手册</td></tr>
-<tr><td>日志读不懂、报错不会定位</td><td>09 日志报错解读手册</td></tr>
-<tr><td>变量 / 函数怎么起名</td><td>10 命名手册</td></tr>
-<tr><td>代码提交、推送到 GitHub</td><td>11 Git 与 GitHub 速查</td></tr>
+<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>12 内置函数手册</td></tr>
+<tr><td>报错里的英文单词看不懂</td><td>13 报错英语单词手册</td></tr>
+<tr><td>日志读不懂、报错不会定位</td><td>14 日志报错解读手册</td></tr>
+<tr><td>变量 / 函数怎么起名</td><td>15 命名手册</td></tr>
+<tr><td>代码提交、推送到 GitHub</td><td>16 Git 与 GitHub 速查</td></tr>
 <tr><td>装第三方库（pip / venv / requirements）</td><td>04 Python 入门 · 附录 E</td></tr>
-<tr><td>我到底学会了没有</td><td>12 总自测表（逐条打勾）</td></tr></table></div>
+<tr><td>我到底学会了没有</td><td>17 关卡总表（逐条打勾）</td></tr></table></div>
 
-<p class="footer">报错英语单词手册 · 每天过 1 组（混个脸熟）+ 朗读一遍十条黄金报错 · v2.5（2026-09）</p>
+<p class="footer">《报错英语单词手册》</p>
 
 <div class="newpage"></div>
 <h2>综合练习 · 看报错猜意思（6 题，先猜再看答案）</h2>

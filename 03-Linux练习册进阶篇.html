@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Linux指令练习册·进阶篇 · v2.5</title>
+<title>Linux指令练习册·进阶篇 · v3.1</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -200,13 +200,28 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
   </g></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 指令练习册 · 进阶篇</h1>
-<p class="note">系列顺序： 《Linux 入门》→《基础篇》→ 本册。本册约 10~15 小时（场景 2~4 按需选做，全做约 15h），建议先做基础篇。</p>
+<p class="note">系列顺序： 《Linux 入门》→《基础篇》→ 本册。本册场景作业约 10~15 小时（每场景约 3h；场景 2 按需选做，全做约 15h）；完整口径（含复盘与记录）见关卡地图"必做 27.7 小时"。建议先做基础篇。</p>
+
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>课程＋字典</b> —— 课程（场景工单）</td></tr>
+<tr><td><b>本册关卡</b></td><td>1-37 ~ 1-45、2-01 ~ 2-12</td></tr>
+<tr><td><b>用时</b></td><td>必做 27.7 小时（按《关卡数据》复算：1-37~1-44 ＋ 2-01~2-12）</td></tr>
+<tr><td><b>学完解锁</b></td><td>拿到一张工单能独立走「现象 → 线索 → 命令 → 验证」，并把 5 件套脚本做出来</td></tr></table>
+<div class="box2"><b>场景 2（磁盘满，☆选做）留到以后再做；参考答案约 24,000 字，做完之前不许翻。</b><br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
+
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：这是《基础篇》的进阶练习册 —— 把"单个命令"升级成<b>组合技能</b>：5 个模拟真实工单的场景（服务起不来 / 磁盘满☆选做 / 服务连不上 / 进程与 GPU 排查 / 脚本收尾），每题<b>有背景、有故障、只给目标、不给过程</b>。生活类比：像<b>医生接急诊</b>——症状先摆在你面前，怎么查、怎么治要自己想，不是照着菜谱做菜。</p>
+<p><b>② 干什么用</b>：真实工作里没人给你标准答案，只有现象。这一册练的就是「<b>现象 → 线索 → 命令 → 验证</b>」这条排查套路，以及把过程写成记录（故障复盘、讲述稿的底稿都从这儿来）。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维的日常就是排障 —— 推理服务挂了、磁盘被模型文件打满、GPU 被别的进程占着，全是这一册的场景；实战里最看重的"讲一件你真正动手做过的事"，答案也在这里。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小一条链：现象"服务起不来" → 线索（先看日志最后 20 行）→ 命令（<span class="code">tail -n 20</span>、<span class="code">systemctl status</span>）→ 验证（<span class="code">curl</span> 通了）。规矩照书里：每题<b>先自己想 3 分钟</b>、<b>真敲一遍</b>、卡住 20 分钟再查。位置：基础篇（02 册）之后、07 Docker 之前。</p>
 
 <h2>前言：工单式实战怎么玩</h2>
 
 <p><b>定位</b>：基础篇练"单个技能"，本册练"组合技能"——每道题模拟真实运维工单：<b>有背景、有故障、只给目标、不给过程</b>。你扮演值班运维，从一堆现象里自己定位问题、修复、写记录。</p>
+<div class="box2"><b>答题要求（统一约定）：</b>① <b>先自己想</b>——每题至少想 3 分钟再看答案；② <b>动手敲</b>——看懂 ≠ 会做，必须真敲一遍、真跑一遍；③ <b>对答案时看"为什么"</b>——四步式答案里"为什么这么写"比代码更重要；④ <b>卡住 20 分钟就查</b>——先查《Linux 入门》教科书，再查手册，别死磕。</div>
 
-<p><b>两种用法</b>：① 学完基础篇后集中做；② 边学边做，按需选用。场景 1 和场景 5 与后续的日志排查、Shell 脚本任务衔接最紧密，建议优先完成；场景 2~4 按需选做。</p>
+<p><b>两种用法</b>：① 学完基础篇后集中做；② 边学边做，按需选用。场景 1 和场景 5 与后续的日志排查、Shell 脚本任务衔接最紧密，建议优先完成；场景 2 按需选做。</p>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志：每天把敲过的命令、报错与心得记进学习日志。&nbsp;&nbsp;<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 说明：<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> = 须电脑环境（Ubuntu）完成；平板 Termux 环境下不确定（不保证可做）。</p>
 
 <div class="warn"><b><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全红线（本册最重要的一节）</b>：进阶篇所有故障都用<b>沙盒式故障注入</b>复刻——故障只发生在练习目录、镜像文件、练习进程里，<b>不会伤到真实系统</b>。规则：① 场景 2 结束后必须执行 <span class="code cmd">sudo umount /mnt/lab</span>（卸载实验分区）；② 实验目录只用 ~/lab 和 /tmp；③ 每场景做完都要"恢复现场"（杀掉练习进程、删除实验文件）。</div>
@@ -220,8 +235,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本册路线（5 场景）</b></p>
 <pre><a href="#toc-1" style="color:inherit;text-decoration:none;">场景1 本地推理服务起不来（日志排查）</a>      约 3h   ★ 必做
 <a href="#toc-2" style="color:inherit;text-decoration:none;">场景2 磁盘满应急（模型文件占满磁盘）<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></a>   约 3h   ☆ 选做
-<a href="#toc-3" style="color:inherit;text-decoration:none;">场景3 服务连不上（网络链路排查）</a>          约 3h   ☆ 选做
-<a href="#toc-4" style="color:inherit;text-decoration:none;">场景4 服务与进程运维（含 GPU 进程定位）</a>   约 3h   ☆ 选做
+<a href="#toc-3" style="color:inherit;text-decoration:none;">场景3 服务连不上（网络链路排查）</a>          约 3h   ★ 必做
+<a href="#toc-4" style="color:inherit;text-decoration:none;">场景4 服务与进程运维（含 GPU 进程定位）</a>   约 3h   ★ 必做
 <a href="#toc-5" style="color:inherit;text-decoration:none;">场景5 脚本收尾（衔接 5 个 Shell 脚本）</a>   约 3h   ★ 必做
 <a href="#toc-6" style="color:inherit;text-decoration:none;">参考答案（书末集中，先做再看）</a>            做完题对答案
 <a href="#toc-7" style="color:inherit;text-decoration:none;">附录 A · 练习用脚本（labservice.sh）</a>      复刻现场用
@@ -234,6 +249,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h2>进阶篇 · 场景与题目（只给目标）</h2>
 
 <h3 id="toc-1">场景 1｜本地推理服务起不来（日志排查）</h3>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-37 · 场景 1（上）：复现"推理服务起不来"</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 在沙盒里把故障复现出来，并写下现象<br>　<span class="note">回滚方式：沙盒故障注入，只动练习目录</span><br><b>1-38 · 场景 1（中）：从日志读到根因</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 说出根因，并能指出日志里哪一行证明了它<br><b>1-39 · 场景 1（下）：修复 + 一页处理记录</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 服务起来；记录按"现象→线索→命令→验证"写完<br>　<span class="note">回滚方式：修复后恢复现场 ｜ 实战价值：这些都是复盘素材</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <div class="ticket">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你是某公司 AI 组的新运维。同事说他昨天在服务器上装了一个推理服务，今天早上启动失败，让你去处理。<b>机器上有个服务脚本 labservice.sh（见附录 A），它在某个目录下写日志。</b></p>
 </div>
@@ -241,7 +258,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 场景搭建手册（做题前执行）</b>：</p>
 <pre><span class="prompt">$</span> mkdir -p ~/lab && cd ~/lab
 <span class="out"># 只检查并停止本场景记录的 PID；不要按模糊命令名误杀其他服务</span>
-<span class="prompt">$</span> if [ -f ~/lab/labservice.pid ]; then old_pid=$(cat ~/lab/labservice.pid); ps -p "$old_pid" -o pid=,args=; fi
+<span class="prompt">$</span> if [ -f ~/lab/labservice.pid ]; then old_pid=$(sed -n '1p' ~/lab/labservice.pid); ps -p "$old_pid" -o pid=,args=; fi
 <span class="prompt">$</span> ./labservice.sh stop 2&gt;/dev/null || true
 <span class="prompt">$</span> nano labservice.sh     <span class="out"># 把附录 A1 的脚本内容全部粘贴进来，保存退出（Ctrl+X → Y → 回车）——nano 是终端里的文本编辑器，比 vim 友好，新手先用它</span>
 <span class="prompt">$</span> nano labservice.conf   <span class="out"># 把附录 A2 的配置内容粘贴进来，LOGDIR 填你的真实路径（用 A2 里的生成命令产生）</span>
@@ -261,7 +278,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>进1-3</td><td>修复问题，重新启动服务，让服务成功跑起来</td></tr>
 <tr><td>进1-4</td><td>验证服务可用（端口通了、日志显示正常），写一份 3 行的处理记录（做了什么、为什么）</td></tr>
 </table>
-<p><b>最终产出</b>：一份故障处理记录 + 复述"处理流程四步"（即 9 册《日志报错解读手册》的"读日志四步法"：确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测）。</p>
+<p><b>最终产出</b>：一份故障处理记录 + 复述"处理流程四步"（即 《日志报错解读手册》的"读日志四步法"：确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测）。</p>
 
 <h3 id="toc-2">场景 2｜磁盘满应急（模型文件占满磁盘）<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></h3>
 <div class="ticket">
@@ -294,6 +311,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b>题目</b>：进2-1 确认是哪个挂载点满了，占用多少。进2-2 进入该分区，逐层定位最大的目录、最大的文件。进2-3 判断哪些可安全删除、哪些不能动（说清依据），完成清理。进2-4 验证恢复，写出 2 条预防措施。</p>
 
 <h3 id="toc-3">场景 3｜服务连不上（网络链路排查）</h3>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-40 · 场景 3（上）：复现"服务连不上"</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 复现故障，列出你要先看的三件事<br>　<span class="note">回滚方式：同上</span><br><b>1-41 · 场景 3（中）：四层链路定位</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 按主机→端口→进程→日志定位到根因<br><b>1-42 · 场景 3（下）：修复 + 记录</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 恢复服务并写完记录<br>　<span class="note">回滚方式：恢复现场</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <div class="ticket">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：同事反馈"我们部署在本地 8080 端口的服务突然连不上了"，让你按链路排查：<b>主机通不通 → 端口通不通 → 服务进程在不在 → 日志怎么说。</b></p>
 </div>
@@ -323,10 +342,12 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b>最终产出</b>：一份网络故障排查记录 + 画一张排查顺序流程图。</p>
 
 <h3 id="toc-4">场景 4｜服务与进程运维（含 GPU 进程定位）</h3>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-43 · 场景 4（上）：进程与资源占用排查</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 找出占资源最多的进程并说清依据<br>　<span class="note">回滚方式：只对练习进程下手</span><br><b>1-44 · 场景 4（中）：定位与安全处理</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 定位根因并安全处理<br>　<span class="note">回滚方式：恢复现场</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <div class="ticket">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：你在管一台"推理服务机器"，今天要完成：部署一个服务并让它开机自启、监控它、处理一个"卡死进程"，最后查清楚"显卡/文件被哪个进程占着"。</p>
 </div>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 需先 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 26.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 环境边界（实测结论）：① <b>GPU 题（进4-3）是 NVIDIA 外部扩展</b>：需 NVIDIA 显卡 + 驱动 + nvidia-smi；fuser 一般已自带，若提示找不到再装 <span class="code">sudo apt install psmisc</span>。<b>无 GPU 就做替代题</b>（fuser -v 查文件占用），<b>替代题通过 ≠ GPU 题通过</b>。② <b>systemd 题（进4-4 开机自启）</b>：完整验证需 Ubuntu 主机 systemd（<b>Restart=on-failure 已在 Ubuntu 26.04 + systemd 实测通过：外部 kill -9 子服务后 unit 自动重启（MainPID 变化、NRestarts 递增、端口恢复）；systemctl stop 后 unit inactive、不误触发重启</b>）；WSL 可能可用，容器 PID 1 非 systemd 时 systemctl 为 offline，不能替代主机验收。实验边界：Ubuntu + systemd + sudo + 专用实验机，完整走 start → 验证 → stop → 清理；正常 stop 后 unit 应为 inactive。受限环境都如实记为“环境限制”，不影响其余题目。</p>
 <div class="build">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-wr"/></svg> 场景搭建手册</b>：</p>
 <pre><span class="prompt">$</span> cd ~/lab
@@ -347,6 +368,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b>最终产出</b>：一台"服务能自启、能监控、出问题会处理"的练习机状态 + 处理记录。</p>
 
 <h3 id="toc-5">场景 5｜脚本收尾（衔接 Shell 脚本任务）</h3>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>2-01 · 五件套地图：先看懂 5 个脚本各解决什么问题</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 能用一句话说出每个脚本解决什么问题<br><b>2-02 · backup.sh：备份 + 日期后缀</b> ★ ｜ 休息日 2 小时 ｜ 工作日 15 分<br>　□ 脚本能生成带日期的备份文件<br>　<span class="note">回滚方式：只写 ~/lab；先拿测试目录试跑一遍（没有 --dry-run 开关——直接加会被当成路径名报错）</span><br><b>2-03 · backup.sh 排错：路径空格与变量引用</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 故意造一个带空格的文件名，脚本仍能处理<br><b>2-04 · disk_alert.sh：取数 + 阈值判断</b> ★ ｜ 休息日 2 小时 ｜ 工作日 15 分<br>　□ 磁盘超 80% 时输出告警<br>　<span class="note">实战价值：磁盘告警脚本怎么写是常见追问</span><br><b>2-06 · service_guard.sh：服务挂了自动拉起</b> ★ ｜ 休息日 2 小时 ｜ 工作日 15 分<br>　□ 手动停服务后，脚本能把它拉起来<br>　<span class="note">回滚方式：只对自己起的练习服务做</span><br><b>2-07 · 把脚本变成 systemd 服务</b> ★ ｜ 休息日 2 小时 ｜ 工作日 15 分<br>　□ systemctl status 能看到自己的服务<br>　<span class="note">回滚方式：不用时 systemctl disable 掉</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+
 <div class="ticket">
 <p><b><svg class="em" width="15" height="15"><use href="#ic-cl"/></svg> 背景工单</b>：前四个场景你都是手动敲命令处理的。现在公司要求把巡检"脚本化"：以后一键就能看到机器状态。<b>这就是通往"5 个 Shell 脚本"任务的桥。</b></p>
 </div>
@@ -363,8 +386,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td><span class="code">check_res.sh</span></td><td>资源巡检（磁盘/内存/负载 + 日期）</td><td>本场景进5-1</td><td>★ 必做</td></tr>
 <tr><td><span class="code">health_check.sh</span></td><td>服务健康检查（进程/端口/日志时间）</td><td>本场景进5-2</td><td>★ 必做</td></tr>
 <tr><td><span class="code">backup.sh</span></td><td>自动备份 + 日期后缀（tar + date）</td><td>基础篇 5-6 + 教科书第 12 章</td><td>★ 必做</td></tr>
-<tr><td><span class="code">disk_alert.sh</span></td><td>磁盘超 80% 告警（df 解析 + if 判断）</td><td>进5-1 思路 + 教科书第 13 章</td><td>☆ 选做</td></tr>
-<tr><td><span class="code">service_guard.sh</span></td><td>服务挂了自动拉起（systemctl is-active 检查 || start）</td><td>教科书第 6、10 章</td><td>☆ 选做</td></tr>
+<tr><td><span class="code">disk_alert.sh</span></td><td>磁盘超 80% 告警（df 解析 + if 判断）</td><td>进5-1 思路 + 教科书第 13 章</td><td>★ 必做</td></tr>
+<tr><td><span class="code">service_guard.sh</span></td><td>服务挂了自动拉起（systemctl is-active 检查 || start）</td><td>教科书第 6、10 章</td><td>★ 必做</td></tr>
 </table>
 <p class="note">另有"批量建用户""清理过期日志"两项能力已在基础篇阶段 3、阶段 5 覆盖，不再单独成脚本。全部脚本配 README，保存到 shell-scripts 仓库。</p>
 
@@ -396,7 +419,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><span class="step">② 为什么用这个命令</span>：改配置用 nano 编辑 labservice.conf（nano 按键：改完 Ctrl+X → Y → 回车），把 PORT=abc 改回 PORT=8080，再重新启动。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nano labservice.conf   <span class="out"># 改完 Ctrl+X → Y → 回车</span>        <span class="out">把 PORT=abc 改回 PORT=8080，保存退出</span>
-<span class="prompt">$</span> ./labservice.sh start
+<span class="prompt">$</span> ./labservice.sh start <span class="keyword">&amp;</span>
 <span class="prompt">$</span> ps aux | grep -v grep | grep labservice   <span class="out"># 进程活了</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：进程存在，且日志末尾出现 <span class="code out">[INFO] 服务启动成功</span>。修复不是"猜"，是"改掉日志指出的那一处"。</p></div>
 
@@ -404,7 +427,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><span class="step">① 先想什么</span>：验证要"从外到内"——端口通不通（外部视角）、日志正不正常（内部视角）。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">curl localhost:8080</span> 或 <span class="code">nc -zv localhost 8080</span> 测端口；<span class="code">tail -f</span> 看心跳在跳。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
-<pre><span class="prompt">$</span> nc -zv localhost 8080              <span class="out"># Connection to localhost 8080 port [tcp/*] succeeded!</span>
+<pre><span class="prompt">$</span> nc -zv localhost 8080              <span class="out"># Connection to localhost (127.0.0.1) 8080 port [tcp/http-alt] succeeded!</span>
 <span class="prompt">$</span> tail -f ~/lab/logs/labservice.log  <span class="out"># 每 3 秒一条心跳，Ctrl+C 退出</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：端口连通 + 心跳正常，服务恢复。处理记录示例（3 行）：<br>1. 现象：服务启动失败。<br>2. 定位：日志 [ERROR] 端口配置非法（PORT=abc）。<br>3. 处理：改回 PORT=8080 重启，端口 8080 连通、心跳正常。已提醒同事：改配置后保存前核对格式。</p></div>
 
@@ -436,8 +459,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ping -c 4 localhost      <span class="out"># 4 个包，全通</span>
 <span class="prompt">$</span> ip route                <span class="out"># 找到默认网关地址</span>
-<span class="prompt">$</span> ping -c 4 网关IP        <span class="out"># 局域网通</span></pre>
-<p><span class="step">④ 怎么验证做对了</span>：输出显示 0% packet loss。本场景是"本地 8080 服务"，ping 通说明问题在更高层（端口/进程/配置），继续下一题。</p></div>
+<span class="prompt">$</span> ping -c 4 网关IP        <span class="out"># 局域网通（见下方 WSL 说明）</span></pre>
+<p class="note"><b>WSL2 读者注意</b>：WSL2 是 NAT 网络，ping 那个网关地址<b>必然 100% 丢包</b>（而网络其实是通的）——这是 WSL2 的正常现象，不是你操作错了；用 <span class="code cmd">ping -c 4 8.8.8.8</span> 或 <span class="code cmd">curl</span> 验证连通性即可。物理机 / 云主机 / VMware 上则是正常的"局域网通"。</p>
+<p><span class="step">④ 怎么验证做对了</span>：输出显示 0% packet loss（WSL2 下改用 8.8.8.8 那条）。本场景是"本地 8080 服务"，ping 通说明问题在更高层（端口/进程/配置），继续下一题。</p></div>
 
 <div class="ans"><p><b>【进3-2】端口监听检查</b></p>
 <p><span class="step">① 先想什么</span>：8080 有没有人在听？被谁听？</p>
@@ -453,13 +477,13 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">nc -zv 主机 端口</span> 直接发起一次连接尝试（z=只测不传数据，v=显示过程）；<span class="code">curl</span> 还能顺带看服务是否正常应答。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> nc -zv localhost 8080
-<span class="out"># 能连：Connection to localhost 8080 port succeeded!
+<span class="out"># 能连：Connection to localhost (127.0.0.1) 8080 port [tcp/http-alt] succeeded!
 # 不能连：Connection refused（没人听）或 timeout（有防火墙丢包）</span>
 <span class="prompt">$</span> curl -I localhost:8080    <span class="out"># 看 HTTP 响应头，确认服务正常应答</span></pre>
 <p><span class="step">④ 怎么验证做对了</span>：能区分三种结论——refused（没进程听）、timeout（防火墙/地址错）、succeeded（连通）。故障 C（监听地址错）的表现正是"localhost 能连、真实 IP 连不上"。</p></div>
 
 <div class="ans"><p><b>【进3-4】定位 + 修复 + 复述顺序</b></p>
-<p><span class="step">① 先想什么</span>：把前三题的结论拼起来，按"主机→端口→进程→日志"给故障点定位。</p>
+<p><span class="step">① 先想什么</span>：把前三题的结论拼起来，按"主机→端口→进程→日志"给故障点定位。<b>小提醒：日志"毫无新增"本身也是证据</b>——故障 B（端口被占）时请求根本没进到 labservice，日志自然干净；别把"日志没动静"误当成"没查对"。</p>
 <p><span class="step">② 为什么用这个命令</span>：A 类修复=启动服务；B 类修复=找到占用者（ss 输出里有 PID）评估后 kill 掉、再启动服务；C 类修复=改回正确的监听地址。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="out"># 故障B 修复示例：</span>
@@ -470,7 +494,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> OCC_PID="$PIDS"
 <span class="prompt">$</span> ps -p "$OCC_PID" -o pid=,args= | grep -q "python3 -m http.server 8080" || { echo "PID $OCC_PID 的命令行不是本场景的 http.server，停止处理"; exit 1; }   <span class="out"># 核对命令行确实是本场景进程才动手</span>
 <span class="prompt">$</span> kill "$OCC_PID"                    <span class="out"># 先优雅终止</span>
-<span class="prompt">$</span> ./labservice.sh start         <span class="out"># 重启服务</span>
+<span class="prompt">$</span> ./labservice.sh start <span class="keyword">&amp;</span>       <span class="out"># 重启服务（&amp; 别漏，否则占住终端）</span>
 <span class="prompt">$</span> nc -zv localhost 8080         <span class="out"># 验证连通</span></pre>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-pp"/></svg> <b>sed 拆解</b>（本册第一次出现，正文未教，这里一次讲清）：<code>-n</code>=只打印被处理的行；<code>s/旧/新/p</code>=替换并打印；<code>\(...\)</code>=圈住要保留的部分；<code>\1</code>=用圈住的内容替换整行——整句 = 把含 <code>pid=</code> 的行替换成 <code>pid=</code> 后面的数字。</p>
 <p><span class="step">④ 怎么验证做对了</span>：服务连通。四步顺序脱口而出：<b>先记录各层证据，再按“确定时间窗口 → 收集日志/状态/退出码 → 结合上下文定位 → 修复并复测”处理</b>，不能只凭单次 ping 或单条命令下结论。</p></div>
@@ -519,19 +543,19 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> sudo reboot          <span class="out"># 重启验证</span>
 <span class="prompt">$</span> systemctl status labservice   <span class="out"># active (running) = 自启成功</span>
 <span class="prompt">$</span> sudo systemctl disable --now labservice &amp;&amp; sudo rm /etc/systemd/system/labservice.service &amp;&amp; sudo systemctl daemon-reload   <span class="out"># 练习完恢复原状：先 disable 停止、再删 unit、最后 daemon-reload 让 systemd 重新读配置</span></pre>
-<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>reboot 会断开当前所有连接</b>：请在本地终端做，或改用 <code>sudo systemctl restart labservice</code> 代替（效果等价）。</div>
+<div class="warn"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> <b>reboot 会断开当前所有连接</b>：请在本地终端做。<b>注意：<code>systemctl restart</code> 不能代替重启</b>——它只验证"服务能跑起来"，验不到"开机自启"（那是 <code>enable</code> 的职责），要真验证得重启一次。在 WSL 里 <code>sudo reboot</code> 是空操作（不会真的重启）；请从 Windows 侧执行 <code>wsl --shutdown</code>（或 <code>wsl --terminate 发行版名</code>），再重新进入发行版看 <code>systemctl status labservice</code>。</div>
 <p><span class="step">④ 怎么验证做对了</span>：重启后服务自动在跑。养成习惯：改完 unit 文件必须 <span class="code">daemon-reload</span>，这是新手最容易漏的一步。</p>
 <div class="box2"><p><span class="opt">Restart=on-failure 验证（Ubuntu 26.04 + systemd 实测通过，实测现象附在各步骤后）：</span></p>
 <pre><span class="prompt">$</span> sudo systemctl start labservice
-<span class="prompt">$</span> ss -tlnp | grep :8080   <span class="out"># 输出如 users:(("python3",pid=1234,...))——记下这个唯一 PID</span>
+<span class="prompt">$</span> sudo ss -tlnp | grep :8080   <span class="out"># 输出如 users:(("python3",pid=1234,...))——记下这个唯一 PID（unit 以 root 运行，普通用户看不到进程名，要用 sudo）</span>
 <span class="opt"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 安全警告：不要用 pkill -f 'http.server 8080'——它按整条命令行模糊匹配，会误杀别的同名 http.server。</span>
 <span class="prompt">$</span> PID=1234   <span class="out"># 换成上一步 ss 显示的唯一 PID（如 ss 显示多个 pid，先逐个 ps 核对，只处理本场景那个）</span>
 <span class="prompt">$</span> ps -p "$PID" -o pid=,args=   <span class="out"># 人工核对命令行确实是本场景子服务（含 http.server 8080），不是别的进程</span>
 <span class="prompt">$</span> sudo kill -9 "$PID"   <span class="out"># 只杀这一个 PID；父服务随后以非 0 退出，触发 Restart=on-failure</span>
-<span class="prompt">$</span> for i in $(seq 1 30); do systemctl is-active --quiet labservice &amp;&amp; ss -tlnp | grep -q :8080 &amp;&amp; break; sleep 1; done   <span class="out"># 轮询最多 30 秒：等 unit 恢复 active 且端口恢复（实测恢复约需 4~5 秒，固定 sleep 2 会看到“还没恢复”的假象）</span>
+<span class="prompt">$</span> for i in $(seq 1 30); do systemctl is-active --quiet labservice &amp;&amp; ss -tlnp | grep -q :8080 &amp;&amp; break; sleep 1; done   <span class="out"># 轮询最多 30 秒：等 unit 恢复 active 且端口恢复（实测恢复约 3~5 秒、视机器而定；固定 sleep 2 会看到“还没恢复”的假象）</span>
 <span class="prompt">$</span> systemctl status labservice   <span class="out"># 预期：状态仍为 active (running)，Main PID 变了</span>
-<span class="prompt">$</span> journalctl -u labservice -n 10          <span class="out"># 预期：看到“已重启”相关日志，NRestarts ≥ 1</span></pre>
-<p>实测（Ubuntu 26.04）：kill -9 后约 4~5 秒 unit 自动重启、MainPID 由旧值变为新值。<b>注意：PID 每次随机分配——以你机器上 ss 和 systemctl status 的实际显示为准，不要对照固定数字。</b>、NRestarts=1；systemctl stop 后 unit inactive 且不自动重启。若你的环境现象不符 → 记录实际环境与现象，如实记为“环境限制”。<b>正常停止对照</b>：<span class="code">sudo systemctl stop labservice</span> 后 <span class="code">systemctl status labservice</span> 应为 inactive（dead）且 <b>不自动重启</b>（父进程 trap 收尾返回 0，不会触发 on-failure）；<span class="code">sudo systemctl start labservice</span> 再恢复。两项都通过才算本题闭环：异常→自动重启，正常→安静退出。</p></div></div>
+<span class="prompt">$</span> journalctl -u labservice -n 10          <span class="out"># 预期：看到 systemd 的英文原话 "Scheduled restart job, restart counter is at 1."（NRestarts ≥ 1）</span></pre>
+<p>实测（Ubuntu 26.04）：kill -9 后约 3~5 秒 unit 自动重启（视机器而定）、MainPID 由旧值变为新值。<b>注意：PID 每次随机分配——以你机器上 ss 和 systemctl status 的实际显示为准，不要对照固定数字。</b>NRestarts=1；systemctl stop 后 unit inactive 且不自动重启。若你的环境现象不符 → 记录实际环境与现象，如实记为“环境限制”。<b>正常停止对照</b>：<span class="code">sudo systemctl stop labservice</span> 后 <span class="code">systemctl status labservice</span> 应为 inactive（dead）且 <b>不自动重启</b>（父进程 trap 收尾返回 0，不会触发 on-failure）；<span class="code">sudo systemctl start labservice</span> 再恢复。两项都通过才算本题闭环：异常→自动重启，正常→安静退出。</p></div></div>
 
 <h3>场景 5 答案</h3>
 <div class="ans"><p><b>【进5-1】资源巡检脚本</b></p>
@@ -658,18 +682,18 @@ else
 fi
 <span class="out"># 负载</span>
 uptime</pre>
-<p><span class="step">④ 怎么验证做对了</span>：三种分支都要跑，<b>全程不碰真实的 labservice.pid</b>（真实服务保持运行、端口不被误停）：① 服务在跑（先 <span class="code">./labservice.sh start</span>）：应打印"进程：正常"且退出码 0；② 不存在的假路径：<span class="code">PID_FILE="$HOME/lab/not-exist.pid" ./health_check.sh</span> → 打印"PID 文件不存在"且退出码非 0；③ 写假 PID：<span class="code">printf '99999\n/fake/path\n/fake/dir\n' &gt; "$HOME/lab/fake.pid"</span>，再 <span class="code">PID_FILE="$HOME/lab/fake.pid" ./health_check.sh</span> → 打印"实例不符或已过期"且退出码非 0。测完 <span class="code">rm -f "$HOME/lab/fake.pid"</span> 清理，并确认 <span class="code">cat ~/lab/labservice.pid</span> 内容未变、<span class="code">./labservice.sh status</span> 仍显示运行中。可读性：让没学过脚本的人读一遍能说出"它在查什么"。</p></div>
+<p><span class="step">④ 怎么验证做对了</span>：三种分支都要跑，<b>全程不碰真实的 labservice.pid</b>（真实服务保持运行、端口不被误停）：① 服务在跑（先 <span class="code">./labservice.sh start &amp;</span>）：应打印"进程：正常"且退出码 0；② 不存在的假路径：<span class="code">PID_FILE="$HOME/lab/not-exist.pid" ./health_check.sh</span> → 打印"PID 文件不存在"且退出码非 0；③ 写假 PID：<span class="code">printf '99999\n/fake/path\n/fake/dir\n' &gt; "$HOME/lab/fake.pid"</span>，再 <span class="code">PID_FILE="$HOME/lab/fake.pid" ./health_check.sh</span> → 打印"实例不符或已过期"且退出码非 0。测完 <span class="code">rm -f "$HOME/lab/fake.pid"</span> 清理，并确认 <span class="code">cat ~/lab/labservice.pid</span> 内容未变、<span class="code">./labservice.sh status</span> 仍显示运行中。可读性：让没学过脚本的人读一遍能说出"它在查什么"。</p></div>
 
 <div class="ans"><p><b>【进5-4 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg>】验证 + 定时巡检</b></p>
 <p><span class="step">① 先想什么</span>：脚本要定期自动跑，用 crontab 定计划。</p>
 <p><span class="step">② 为什么用这个命令</span>：<span class="code">crontab -e</span> 编辑定时表，格式"分 时 日 月 周 命令"；<span class="code">0 9 * * *</span> 表示每天 9:00。</p>
 <p style="break-after: avoid; page-break-after: avoid;"><span class="step">③ 完整步骤</span>：</p>
 <pre><span class="prompt">$</span> ./check_res.sh &gt; ~/lab/巡检报告_$(date +%F).txt   <span class="out"># 先手动验证输出正确</span>
-<span class="prompt">$</span> CRON_HOME="$HOME"   <span class="out"># 真实家目录绝对路径（cron 不认 ~）</span>
+<span class="prompt">$</span> CRON_HOME="$HOME"   <span class="out"># 用真实家目录的绝对路径（cron 的环境和终端不同，绝对路径最稳）</span>
 <span class="prompt">$</span> (crontab -l 2&gt;/dev/null; printf '0 9 * * * %s/lab/check_res.sh &gt;&gt; %s/lab/巡检记录.log 2&gt;&amp;1\n' "$CRON_HOME" "$CRON_HOME") | crontab -   <span class="out"># 动态生成真实绝对路径，不用手写占位</span>
 <span class="prompt">$</span> crontab -l        <span class="out"># 确认已写入（能看到真实路径）</span>
 <span class="prompt">$</span> crontab -l | grep -v check_res.sh | crontab -   <span class="out"># 练习完删除这条任务，恢复原状态</span></pre>
-<p><span class="step">④ 怎么验证做对了</span>：<span class="code">crontab -l</span> 能看到计划；把时间改成"两分钟后"测试一次，日志文件按时新增内容，再改回 9 点。注意：cron 环境对 ~ 的展开不可靠，定时任务里的路径一律写绝对路径。这两个脚本（check_res.sh、health_check.sh）可直接放进脚本目录。</p></div>
+<p><span class="step">④ 怎么验证做对了</span>：<span class="code">crontab -l</span> 能看到计划；把时间改成"两分钟后"测试一次，日志文件按时新增内容，再改回 9 点。注意：cron 的环境和终端不一样（PATH 很短、展开规则也有差异）——定时任务里的路径一律写绝对路径，最稳。<b>WSL 用户多一句：</b>空闲时 WSL 会挂起、cron 服务也跟着停——测试时别关终端（或改用真机/云主机验证），免得"等半天日志没动静"。这两个脚本（check_res.sh、health_check.sh）可直接放进脚本目录。</p></div>
 
 <div class="newpage"></div>
 <h2 id="toc-7">附录 A · 练习用脚本（复制保存即可）</h2>
@@ -759,7 +783,7 @@ stop_cmd() {                 # ./labservice.sh stop：通知父进程
 
 status_cmd() {
   if [ ! -f "$PID_FILE" ]; then echo "状态：未运行"; exit 1; fi
-  if ! parent_is_ours; then echo "状态：PID 文件不属于本实例（跨目录同名 / 过期 / PID 复用）"; exit 1; fi
+  if ! parent_is_ours; then echo "状态：PID 文件不属于本实例（跨目录同名 / 过期 / PID 复用）——最常见是服务已停、只剩残留文件：确认端口没被占，直接 ./labservice.sh start 重开即可"; exit 1; fi
   echo "运行中：父进程 PID=$(sed -n '1p' "$PID_FILE")，端口=$PORT"
   exit 0
 }
@@ -791,7 +815,7 @@ start_service() {
     return 1
   fi
   echo "[$(date '+%F %T')] [INFO] 服务启动成功，父进程 PID=$$ 子进程 PID=$SRV，端口=$PORT" &gt;&gt; "$LOG"
-  echo "服务已在前台运行（父进程 PID=$$）；如需后台运行，请在启动时用 ./labservice.sh start &amp;"
+  echo "服务已启动（父进程 PID=$$）。若没回到命令行，说明在【前台】跑——按 Ctrl+C 会停掉服务；正确用法：./labservice.sh start &amp;"
   while true; do
     echo "[$(date '+%F %T')] [INFO] 服务心跳正常" &gt;&gt; "$LOG"
     # 子服务退出检测：kill -0 对 zombie 仍为真，所以再查进程状态 Z
@@ -877,7 +901,7 @@ while :; do :; done</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-10">附录 D · 5 件套其余 3 个脚本（backup / disk_alert / service_guard）</h2>
-<p class="note">场景 5 的"5 件套总览"里，check_res.sh 与 health_check.sh 在场景 5 题目中完成；本附录给出其余 3 个的完整实现与验证方式——每条命令的出处都标注了教科书章节，全部在教材体系内。</p>
+<p class="note">场景 5 的"5 件套总览"里，check_res.sh 与 health_check.sh 在场景 5 题目中完成；本附录给出其余 3 个的完整实现与验证方式——每条命令的出处都标注了教科书章节，全部在教材体系内。（本附录给的是最小骨架、含退出码；2-12 验收要的「日志」在各脚本对应关卡里用 <span class="code">&gt;&gt;</span> 追加补上即可。）</p>
 
 <h3>D1. backup.sh（自动备份 + 日期后缀）</h3>
 <pre class="pre-split">#!/bin/bash
@@ -901,13 +925,15 @@ else
   echo "备份失败：tar 返回非 0（检查源目录和磁盘空间）"
   exit 1
 fi</pre>
+<p class="note">正式跑起来终端会先出现一行 <span class="code out">tar: Removing leading `/' from member names</span>——那是 tar 把包内绝对路径改成相对路径的<b>正常提示</b>，不是报错，备份照样成功。</p>
 <p><b>逐行要点</b>：<span class="code">[ "$1" = "" ]</span> 判断没传参数（= 在 [ ] 里是字符串比较，第 13 章）；<span class="code">[ ! -d ]</span> 源目录不存在、<span class="code">[ ! -r ]</span> 不可读，任一成立就退出——<b>源目录不存在绝不能打印"成功"</b>；<span class="code">date +%F-%H%M%S</span> 输出"年-月-日-时分秒"（%F、%H、%M、%S 是固定格式符），<b>同一天重复跑也不会覆盖</b>；<span class="code">tar -czf</span> 打包+压缩（c=建包 z=gzip f=文件名，第 12 章）；<b>if 直接判断 tar 命令</b>（命令返回 0=成功，非 0=失败，第 13 章），失败不打印成功、返回 1；<span class="code">mkdir -p</span> 保证备份目录存在（第 2 章）；<span class="code">exit 1</span> 异常退出（0 正常、非 0 异常，第 13 章）。<b>验证（五种情况）</b>：①正常备份 → 打印成功、文件存在；②不传参数 → 只打印用法、退出码 1；③源目录不存在 → 打印"不存在或不可读"、退出码 1；④权限不足 → 同上；⑤连续跑两次 → 两个不同名字的备份都在，不覆盖。退出码用 <span class="code">echo $?</span> 查看。</p>
+<p class="note"><span class="code">$RANDOM</span> = 每次给出 0~32767 的随机数（给文件名加唯一尾巴，避免重名覆盖）。</p>
 
 <h3 style="page-break-before: always;">D2. disk_alert.sh（磁盘超 80% 告警）</h3>
 <pre class="pre-split">#!/bin/bash
 # disk_alert.sh —— 磁盘使用率超过 80% 就告警
 # 用法：./disk_alert.sh（可放进 crontab 定时跑）
-THRESHOLD=80
+THRESHOLD=${THRESHOLD:-80}   # 有传就用传进来的，没传默认 80（例：THRESHOLD=90 ./disk_alert.sh）
 if ! df / > /dev/null 2&gt;&amp;1; then
   echo "df 执行失败（路径不存在或环境异常），退出"
   exit 1
@@ -926,7 +952,7 @@ if [ "$USE" -gt "$THRESHOLD" ]; then
 else
   echo "磁盘正常：根分区使用率 $USE%"
 fi</pre>
-<p><b>逐行要点</b>：取数 → 判断 → 行动的巡检三步曲；<span class="code">df /</span> 看根分区（第 7 章）、<span class="code">tail -1</span> 取最后一行（第 3 章）、<span class="code">awk '{print $5}'</span> 取第 5 列即使用率（第 4 章）、<span class="code">tr -d '%'</span> 删掉百分号只剩数字（tr=字符转换、-d=删除，第 13 章 13.2）、<span class="code">$(...)</span> 把命令输出装进变量（第 13 章）、<span class="code">-gt</span> 在 [ ] 里表示"大于"（第 13 章）。<b>三层防护</b>：① df 本身失败先退出（路径不存在/环境异常）；② 解析结果为空先退出；③ <span class="code">[ "$USE" -eq "$USE" ]</span> 是"数值自比较"技巧——USE 不是纯数字时 test 会失败（非 0），! 翻转后进分支退出，防止把垃圾当数字比大小。阈值放变量，以后想改只改一行。<b>验证</b>：正常时打印"磁盘正常：X%"；把 THRESHOLD 改成 0 再跑，应打印"磁盘告警"；把 df / 换成 df /nonexist 再跑，应打印"df 执行失败"且退出码 1——三种分支都出现即正确；建议配 crontab 每天跑一次（第 13 章）。</p>
+<p><b>逐行要点</b>：取数 → 判断 → 行动的巡检三步曲；<span class="code">df /</span> 看根分区（第 7 章）、<span class="code">tail -1</span> 取最后一行（第 3 章）、<span class="code">awk '{print $5}'</span> 取第 5 列即使用率（第 4 章）、<span class="code">tr -d '%'</span> 删掉百分号只剩数字（tr=字符转换、-d=删除，第 13 章 13.2）、<span class="code">$(...)</span> 把命令输出装进变量（第 13 章）、<span class="code">-gt</span> 在 [ ] 里表示"大于"（第 13 章）。<b>三层防护</b>：① df 本身失败先退出（路径不存在/环境异常）；② 解析结果为空先退出；③ <span class="code">[ "$USE" -eq "$USE" ]</span> 是"数值自比较"技巧——USE 不是纯数字时 test 会失败（非 0），! 翻转后进分支退出，防止把垃圾当数字比大小。阈值放变量，以后想改只改一行。<b>验证</b>：正常时打印"磁盘正常：X%"；把 THRESHOLD 改成 0（或 THRESHOLD=0 ./disk_alert.sh 临时覆盖）再跑，应打印"磁盘告警"；把 df / 换成 df /nonexist 再跑，应打印"df 执行失败"且退出码 1——三种分支都出现即正确；建议配 crontab 每天跑一次（第 13 章）。</p>
 
 <h3 style="page-break-before: always;">D3. service_guard.sh（服务挂了自动拉起）</h3>
 <pre class="pre-split">#!/bin/bash
@@ -952,8 +978,18 @@ else
   echo "$1 拉起后仍不在运行（active/failed/offline 状态不同，逐一核实），看日志：journalctl -u $1"
   exit 1
 fi</pre>
-<p style="line-height:1.35;"><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：<span class="code">./service_guard.sh ssh</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop ssh</span> 再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
+<p style="line-height:1.35;"><b>逐行要点</b>：保活三段——查（is-active 问"还活着吗"）→ 拉（死了就 start）→ 复核（拉完再问一次，没起来就看日志）。<span class="code">systemctl is-active</span> 专门问服务状态，<span class="code">--quiet</span> 安静模式只通过退出码回答（0=在，非 0=不在），正好放进 if（第 10 章）；<span class="code">sudo systemctl start</span> 拉起需管理员权限（第 10 章）；<span class="code">journalctl -u</span> 看该服务日志（第 10 章）。<b>返回码纪律</b>：成功（本来就在 / 拉起成功）返回 0；启动命令失败、拉起后仍 inactive/failed 都返回 1——<b>失败不伪装成功</b>，方便定时任务据此告警。<span class="code">2&gt;/dev/null</span> 把 systemd 不可用时的报错吞掉（第 4 章重定向），由退出码分支统一处理。<b>验证</b>：示例服务要挑<b>你机器上确实存在</b>的（如 <span class="code">systemd-journald</span> 或 <span class="code">cron</span>；<b>没装 ssh 服务的话别用它</b>）——<span class="code">./service_guard.sh systemd-journald</span> 输出"运行中"、退出码 0；先 <span class="code">sudo systemctl stop systemd-journald</span>（或换一个你能停的服务）再跑，应看到"没在运行 → 尝试拉起 → 已拉起"、退出码 0；对一个不存在的服务名跑，应打印"启动命令失败"、退出码 1（<svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 需电脑 Ubuntu；systemd 不可用的容器/WSL 记为环境限制）。</p>
 
-<p class="footer">Linux 指令练习册 · 进阶篇 · 先自己想，再看答案 · v2.5（2026-09）</p>
+<p class="note">（2-09「参数与用法：$1 / usage」的示范就在本册：<span class="code">[ "$1" = "" ]</span> 的用法分支 ＋ <span class="code">case "$args"</span> 的写法——做 2-09 时以这里的脚本为准。要「--help」效果：把"缺参数给用法"那段加一行 <span class="code">[ "$1" = "--help" ]</span>（或并进 case）打印同样的用法文字就行。另：脚本一旦改名，用法文字、日志文件名和 crontab 里的旧名字都要同步改——不然 --help 会打出已经不存在的旧名。）</p>
+
+<div class="section-head">阶段总结练习（新增 · 打完本阶段关卡再做）</div>
+<div class="box2"><h3>阶段 2 · 学习总结练习：5 件套脚本 ＋ crontab ＋ systemd（自愈的雏形）</h3>
+<p><b>业务场景</b>：组里没有监控系统，同事说"至少磁盘快满时有人知道、服务挂了能自己起来"。</p>
+<p><b>综合要求</b>：① backup.sh 带日期后缀、路径含空格也能跑；② disk_alert.sh 超阈值输出告警；③ service_guard.sh 检测到服务挂掉就拉起；④ 一个脚本进 crontab（绝对路径）、一个进 systemd；⑤ 三个脚本都有日志与退出码；⑥ 仓库带 README（用法 ＋ 最小复现步骤）。</p>
+<p><b>验收</b>：□ 陌生人照 README 能跑通三个脚本　□ 定时任务真的执行过（日志为证）　□ 手动停服务后能被拉起　□ 每个脚本能讲 3 分钟</p>
+<p><b>时间</b>：4 小时（休息日）　<b>产出</b>：shell-scripts 仓库（本练习做 3 个新脚本：backup / disk_alert / service_guard ＋ README；另 2 个 check_res / health_check 在场景 5 已完成——合起来就是 5 件套）</p>
+<p><b>AI 运维指向</b>：这是监控与自愈的最小版本——以后 GPU 机器上的"显存超阈值告警""推理服务挂了自动拉起"用的是同一套骨架。</p>
+<p><b>实战价值</b>：实战里最看重的"讲一件真正动手做过的事"，这三个脚本最容易讲清楚。</p></div>
+<p class="footer">《Linux 练习册 · 进阶篇》</p>
 </body>
 </html>

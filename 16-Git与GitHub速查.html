@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Git与GitHub速查 · v2.5</title>
+<title>Git与GitHub速查 · v3.1</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -264,6 +264,21 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h1><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> Git 与 GitHub 速查</h1>
 <p class="note">打印提示：A4、实际大小（100%）、关闭浏览器"页眉和页脚"；需要保留彩色底色时开启"背景图形"。用法：第 1 页背概念，第 2 页是每天要用的命令，第 3~4 页在卡住时翻。</p>
 
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
+<tr><td><b>本册关卡</b></td><td>—</td></tr>
+<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
+<tr><td><b>学完解锁</b></td><td>每天 push 不断档</td></tr></table>
+<div class="box2"><b>本册禁止通读，只许查</b>；第 2 页天天要用（对应前置关 <b>0-02：Git 最小闭环</b>）。<br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：<b>Git</b> 是给代码"存档 ＋ 时光机"的工具（在你本机跑）；<b>GitHub</b> 是把这些存档放到网上的仓库（别人能看、也能一起改）。生活类比：Git 像游戏里的<b>存档点</b>——每做完一小步存一次，改坏了能读档回去；GitHub 就是"把存档传到云端"，换台电脑也能接着玩。</p>
+<p><b>② 干什么用</b>：写脚本、做项目时四件麻烦事全靠它 —— ① 改坏了要回退；② 想试新写法又怕搞砸（开分支）；③ 换电脑接着写（<span class="code">git clone</span>）；④ 让别人和别人看到你每天在做什么：你的 GitHub 主页就是<b>最实在的一份学习履历</b>。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维交付的东西（脚本、compose 文件、训练代码）都用 Git 管理；GitHub 几乎是这行的硬通货；团队里天天要打交道的就是「代码怎么管理、多人怎么协作」。学习计划里"第 2 周末 commit ≥ 10 次"就靠这一册。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小闭环一条循环：<span class="code">git add → git commit → git push</span>（开工前先 <span class="code">git pull</span>）。位置：字典类第 16 册——前面手写的每日日志、后面 10 册的综合项目，都往这个仓库里放。</p>
+<p class="note">读法：第 1 页先看三个概念和首次配置（一劳永逸）；配好之后每天只用第 2 页那六条命令。</p>
+
 <h2 class="toc-title">目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">第 1 页</span><span class="tdesc">三个概念 + 首次配置（一劳永逸）</span><a href="#toc-1"></a></div>
@@ -275,7 +290,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h2 id="toc-1">第 1 页 · 三个概念与首次配置</h2>
 
 <div class="box2"><b>一句话理解：</b>Git = 给你的代码<b>拍快照</b>（随时能回到过去）；GitHub = 把快照<b>存到云端</b>（换电脑不丢、别人能看）。<br>
-找工作时，面试官看的就是你的 GitHub 仓库——<b>提交记录 = 你最真实的学习履历</b>。</div>
+看你 GitHub 仓库的人，看的就是提交记录——<b>那是你最真实的学习履历</b>。</div>
 
 <h3>1.1 三个概念（记住这个比喻就够）</h3>
 <table class="tight"><tr><th>概念</th><th>比喻</th><th>对应命令</th></tr>
@@ -284,10 +299,11 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td><b>远程</b>（remote）</td><td>云端备份（GitHub 上的那本相册）</td><td><span class="code">git push</span> / <span class="code">git pull</span></td></tr></table>
 <p class="note">工作区 →（add）→ 暂存区 →（commit）→ 本地仓库 →（push）→ GitHub。四个格子，命令只在格子之间搬东西。</p>
 
-<h3>1.2 首次配置（只做一次，五条命令）</h3>
+<h3>1.2 首次配置（只做一次，六条命令）</h3>
 <pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">--version</span>                          <span class="cm"># 没装就先：sudo apt install git</span>
 <span class="prompt">$</span> <span class="cmd">git</span> <span class="param">config</span> <span class="param">--global</span> <span class="param">user.name</span> <span class="param">"你的名字"</span>
 <span class="prompt">$</span> <span class="cmd">git</span> <span class="param">config</span> <span class="param">--global</span> <span class="param">user.email</span> <span class="param">"你的邮箱"</span>     <span class="cm"># 建议用 GitHub 注册邮箱</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">config</span> <span class="param">--global</span> <span class="param">pull.rebase</span> <span class="param">false</span>      <span class="cm"># 分叉时 pull 用合并（不加这条，Git 2.53+ 会报 "Need to specify how to reconcile divergent branches"）</span>
 <span class="prompt">$</span> <span class="cmd">ssh-keygen</span> <span class="param">-t</span> <span class="param">ed25519</span>                <span class="cm"># 一路回车，生成 SSH 钥匙</span>
 <span class="prompt">$</span> <span class="cmd">cat</span> <span class="param">~/.ssh/id_ed25519.pub</span>           <span class="cm"># 复制这一整行 → 粘到 GitHub</span></pre>
 <p class="note">粘贴位置：GitHub 网页 → 右上角头像 → <b>Settings</b> → <b>SSH and GPG keys</b> → New SSH key → 粘贴 → 保存。<br>
@@ -311,6 +327,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <span class="prompt">$</span> <span class="cmd">git</span> <span class="param">remote</span> <span class="param">add</span> <span class="param">origin</span> <span class="param">git@github.com:你的用户名/仓库名.git</span>
 <span class="prompt">$</span> <span class="cmd">git</span> <span class="param">push</span> <span class="param">-u</span> <span class="param">origin</span> <span class="param">main</span>              <span class="cm"># 第一次要 -u，以后直接 git push</span></pre>
 <p class="note">先在 GitHub 网页上点 <b>New repository</b> 建一个空仓库（<b>不要</b>勾选 "Add a README"，否则两边不一致会推不上去），再把上面的地址粘过来。</p>
+<p class="note"><b>已经有仓库了（比如在网页建好、带着 README 的日志仓库）？</b>不用 init / remote 那一串——一条命令把它拉到本地：<span class="code cmd">git clone 仓库地址</span>（地址在仓库页绿色 <b>Code</b> 按钮里）。拉下来之后，就回到上面的日常循环：add → commit → push。（0-02 关名里的「clone / add / commit / push」就是这条流）</p>
+<div class="warn"><b>推不动 / 拉不动？先看这里（网络兜底）</b>：GitHub 在国内网络下时通时不通——<br>① 先在原命令上重试一次；还不行，换手机热点或换个时段。<br>② 走 SSH 方式（<span class="code">ssh -T git@github.com</span> 验证）；若卡在连接超时（22 端口被挡）：GitHub 支持 SSH 走 443 端口——先 <span class="code">ssh -T -p 443 git@ssh.github.com</span> 验证能通，再把 <span class="code">Host github.com</span>、<span class="code">Hostname ssh.github.com</span>、<span class="code">Port 443</span> 三行写进 <span class="code">~/.ssh/config</span>，之后照常用 <span class="code">git@github.com:</span> 地址。<br>③ 实在连不上：换国内备选 Gitee——在 gitee.com 建好同名仓库，再把远端换掉：<span class="code">git remote set-url origin 你的Gitee仓库地址</span>，然后 push 一次。<br>④ 第一次用 SSH 连接时会问 <span class="code">Are you sure you want to continue connecting (yes/no)?</span>——输 <span class="code">yes</span> 回车（首次校验服务器指纹，正常流程，不是报错）。</div>
 
 <h3>2.2 看一眼历史</h3>
 <pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">log</span> <span class="param">--oneline</span>                 <span class="cm"># 一行一条提交记录（按 q 退出）</span>
@@ -325,12 +343,13 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>已 add、还没 commit</td><td class="code">git restore --staged 文件名</td><td>从暂存区拿出来，改动仍在</td></tr>
 <tr><td>已 commit、想改说明</td><td class="code">git commit --amend -m "新说明"</td><td>只改最近一次（还没 push 时用）</td></tr>
 <tr><td>想回到某次提交</td><td class="code">git log --oneline</td><td>先找到那次的编号（前 7 位），再决定怎么处理</td></tr>
+<tr><td>已 push、想撤掉某次提交</td><td class="code">git revert 编号</td><td>不改历史，新加一次"反做"提交把它抵消——<b>已推送时的正规退法</b>（编号用 git log 找）</td></tr>
 <tr><td>想丢弃全部本地改动</td><td class="code err">git reset --hard</td><td><b>危险</b>：所有未提交的改动全没</td></tr></table>
 <p class="rule"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 记住一条：<b>没提交的东西，Git 救不回来</b>。所以养成"小步提交"的习惯——改一点、存一次。</p>
 
 <div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-herb"/></svg> 分支（先知道，别急着用）</div>
 <pre><span class="prompt">$</span> <span class="cmd">git</span> <span class="param">branch</span>                        <span class="cm"># 看有哪些分支（* 是当前）</span>
-<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">checkout</span> <span class="param">-b</span> <span class="param">feature-login</span>       <span class="cm"># 新建并切到新分支（试新想法不污染主线）</span>
+<span class="prompt">$</span> <span class="cmd">git</span> <span class="param">checkout</span> <span class="param">-b</span> <span class="param">feature-login</span>       <span class="cm"># 新建并切到新分支（试新想法不污染主线；新写法 <span class="param">git switch -c feature-login</span> 同效）</span>
 <span class="prompt">$</span> <span class="cmd">git</span> <span class="param">checkout</span> <span class="param">main</span>                 <span class="cm"># 切回主线</span>
 <span class="prompt">$</span> <span class="cmd">git</span> <span class="param">merge</span> <span class="param">feature-login</span>            <span class="cm"># 把分支合并回主线</span></pre>
 
@@ -354,29 +373,81 @@ __pycache__/
 tmp/
 
 <span class="cm"># 含密码的配置（千万别传！）</span>
+.env
+.env.*
 *.env
 config_secret.*</pre>
 <p class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 记住：<b>能自动重建的东西不提交</b>（.venv、__pycache__），<b>要重建它的清单要提交</b>（requirements.txt）。</p>
 
-<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-amb"/></svg> 五个最常见的报错（人话版）</div>
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-amb"/></svg> 六个最常见的报错（人话版）</div>
 <table class="long-table"><tr><th>报错</th><th>意思</th><th>怎么办</th></tr>
 <tr><td class="code err">fatal: not a git repository</td><td>当前目录不是 Git 仓库</td><td>进到仓库目录；或先 <span class="code">git init</span></td></tr>
 <tr><td class="code err">nothing to commit, working tree clean</td><td>没有新改动可提交</td><td>不是错误：你没改东西，或已经提交过了</td></tr>
-<tr><td class="code err">failed to push some refs</td><td>云端有你本地没有的提交</td><td>先 <span class="code">git pull</span>，再 <span class="code">git push</span></td></tr>
+<tr><td class="code err">failed to push some refs</td><td>云端有你本地没有的提交</td><td>先 <span class="code">git pull</span>，再 <span class="code">git push</span>；<b>若 pull 报</b> <span class="code err">Need to specify how to reconcile divergent branches</span>，先跑一次 <span class="code">git config --global pull.rebase false</span>（首次配置里已含这条）</td></tr>
 <tr><td class="code err">Permission denied (publickey)</td><td>GitHub 不认你的钥匙</td><td>重新把 <span class="code">~/.ssh/id_ed25519.pub</span> 贴到 GitHub；或测试 <span class="code">ssh -T git@github.com</span></td></tr>
-<tr><td class="code err">CONFLICT (content): Merge conflict</td><td>两边改了同一行</td><td>打开文件找 <span class="code">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> 标记，人工留一份，然后 add + commit</td></tr></table>
+<tr><td class="code err">CONFLICT (content): Merge conflict</td><td>两边改了同一行</td><td>打开文件找 <span class="code">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> 标记，人工留一份，然后 add + commit</td></tr>
+<tr><td class="code err">Repository not found</td><td>GitHub 上找不到这个名字的仓库</td><td>仓库名/用户名敲错了，或<b>还没在 GitHub 上建这个空仓库</b>——照 2.1 建好再推</td></tr></table>
 
-<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 提交信息怎么写（面试官真的会看）</div>
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 提交信息怎么写（别人真的会看）</div>
 <table class="tight"><tr><th>写法</th><th>示例</th><th>点评</th></tr>
 <tr><td><svg class="em" width="15" height="15"><use href="#ic-xx"/></svg> 太随意</td><td class="code">update / 改了一下 / aaa</td><td>看不出做了什么</td></tr>
 <tr><td><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 推荐</td><td class="code">新增磁盘巡检脚本 / 修复日志解析的空行报错</td><td>一句话说清"做了什么"</td></tr>
 <tr><td><svg class="em" width="15" height="15"><use href="#ic-ok"/></svg> 进阶（可选）</td><td class="code">feat: 磁盘巡检脚本 / fix: 日志解析空行</td><td>加前缀：feat 新功能、fix 修复、docs 文档</td></tr></table>
 
 <div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 小练习（做完你的 GitHub 就有内容了）</div>
-<p>① 把 <span class="code">~/lab</span> 下写好的脚本目录变成 Git 仓库；② 建好 <span class="code">.gitignore</span>（按上面四类）；③ 提交 3 次以上（每次说明写清楚）；④ 推到 GitHub；⑤ 在网页上打开仓库，确认能看到文件和历史记录。</p>
+<p>① 把 <span class="code">~/lab</span> 下写好的脚本目录变成 Git 仓库；② 建好 <span class="code">.gitignore</span>（按上面四类）；③ 提交 3 次以上（每次说明写清楚）；④ 先在 GitHub 网页建一个空仓库（照 2.1，别勾 README）；⑤ 推到 GitHub（两步命令见 2.1）；⑥ 在网页上打开仓库，确认能看到文件和历史记录。</p>
 <div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 检查点对接：学习计划的"第 2 周末 commit ≥ 10 次""第 4 周末脚本进 GitHub"——就靠这一册完成。</div>
 
-<p class="footer">Git 与 GitHub 速查 · v2.5（2026-10） · 与《九阶》系列同格式</p>
+<div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 每日日志怎么记（0-06 · 三行模板）</div>
+<pre><span class="cm"># 2026-10-13（周一）</span>
+- 做了什么：把 df / du 的示范各敲了一遍，日志里留 3 行复述
+- 卡在哪：fuser 输出没看懂 → 查 man，看懂"占用进程"那列
+- 明天第一件事：第 7 章挂载示范</pre>
+<p class="note">就这三行，写进 <span class="code">logs/2026-10/2026-10-13.md</span>（按月建目录），当天 commit 一次——连续 3 天，0-06 关就过了。</p>
+<div class="section-head">阶段总结练习（新增 · 打完本阶段关卡再做）</div>
+<div class="box2"><h3>阶段 0 · 学习总结练习（关卡 0-07）：把日志仓库整理成"别人能看懂"的样子</h3>
+<p><b>业务场景</b>：你换了台电脑，要在新机器上接着学——别人（或三个月后的你）打开你的 GitHub，必须一眼看出你每天在干什么。</p>
+<p><b>综合要求</b>：① 仓库首页写清"我在学什么、学到哪"；② 每天的日志按月归档（例如 <span class="code">logs/2026-10/2026-10-13.md</span>）；③ 挑 3 天日志补上"卡在哪、怎么解决的"；④ 提交信息写得让人看得懂（不是 update）。</p>
+<p><b>验收</b>：□ 陌生人打开仓库能说出你在学什么　□ 连续 3 天有提交记录　□ 日志里至少 3 条"卡点 → 解决"</p>
+<p><b>时间</b>：60 分钟　<b>产出</b>：整理好的 learning-journey 仓库</p>
+<p><b>AI 运维指向</b>：运维日常就是"把过程写清楚"——故障记录、变更记录、交接文档都是这个能力。</p>
+<p><b>实战价值</b>：别人点开你的 GitHub，第一眼看到的就是这个。</p></div>
+<h2>附录 · 一个合格的 README 长什么样（4-10 要用）</h2>
+<p class="note">这一页不占关卡、不占预算；写 README 之前回来照一遍就行。</p>
+<p><b>README 是谁在看</b>：看仓库的人、以及三个月后的你自己。他们的共同点是——<b>没耐心</b>，只想知道三件事：这是干什么的、怎么跑起来、跑出来长什么样。</p>
+<table><tr><th style="width:22%">段落</th><th>写什么</th></tr>
+<tr><td><b>① 一句话说明</b></td><td>这个仓库解决什么问题（例：三个 Shell 脚本，负责备份、磁盘告警、服务自愈）</td></tr>
+<tr><td><b>② 怎么用</b></td><td>按顺序可复制的命令：装什么、怎么跑、怎么验证（<b>别人照抄能跑通</b>是唯一标准）</td></tr>
+<tr><td><b>③ 依赖与环境</b></td><td>Ubuntu 26.04 / Python 3.14 / Docker 29.x（以你机器为准）；需要装什么</td></tr>
+<tr><td><b>④ 效果</b></td><td>一张截图或一段真实输出（证明你真的跑过）</td></tr>
+<tr><td><b>⑤ 踩坑记录</b></td><td>你遇到的两个坑和怎么解决的 —— 别人最爱看这一段</td></tr></table>
+<h3>正例（照这个骨架写）</h3>
+<pre class="demo"># shell-scripts
+
+三个日常运维脚本：备份、磁盘告警、服务自愈。
+
+## 怎么用
+    git clone https://github.com/你的用户名/shell-scripts.git
+    cd shell-scripts &amp;&amp; chmod +x *.sh
+    ./disk_alert.sh              # 磁盘超 80% 时输出告警
+    THRESHOLD=90 ./disk_alert.sh # 自定义阈值
+
+## 环境
+Ubuntu 26.04、bash 5.3、Docker 29.x（都写"以你机器为准"也行），需要 df / tar / systemctl。
+
+## 效果
+    $ ./disk_alert.sh
+    磁盘正常：根分区使用率 42%（示意，以你机器为准）
+
+## 踩坑记录
+- 定时任务里 ~ 不展开：改成绝对路径解决
+- 文件名带空格时循环跑飞：用 IFS 和引号解决</pre>
+<h3>三个最常见的毛病</h3>
+<p>① <b>只有标题没有用法</b>——别人不知道先敲哪条命令，等于没写；<br>
+② <b>没有依赖说明</b>——在你机器上能跑，在别人机器上报 command not found；<br>
+③ <b>没有效果证据</b>——只有源码没有输出/截图，别人会怀疑你是不是抄的。</p>
+<p class="note">写完自检一句话：<b>把一个陌生人放到这台机器上，照着 README 能不能跑通？</b>能，就算合格。</p>
+<p class="footer">《Git 与 GitHub 速查》</p>
 
 </body>
 </html>

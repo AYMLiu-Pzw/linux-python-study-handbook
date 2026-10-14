@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>K8s入门（教科书版） · v3.1</title>
+<style>
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.lvl-hot { color: #c00000; font-size: 8pt; border: 1px solid #e0b3b3; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.lvl-mid { color: #666; font-size: 8pt; border: 1px solid #ddd; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #c00000; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #c00000; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
+
+.cols { column-count: 2; column-gap: 10mm; }
+.section-head { break-after: avoid; page-break-after: avoid; }
+.st { margin: 2px 0 6px 0; padding-left: 2px; list-style: none; }
+.st li { font-size: 10pt; line-height: 1.38; margin: 1px 0; break-inside: avoid; }
+.st-title { font-size: 10.5pt; font-weight: bold; color: #003a8c; margin: 6px 0 1px; break-after: avoid; }
+ul.st { columns: 1; }
+@media print { .cols { column-count: 2; } }
+
+</style>
+</head>
+<body>
+<h1>09 · K8s 入门</h1>
+<p class="note">配套：《01 Linux 入门》《04 Python 入门》《07 Docker 入门》《08 监控入门》《16 Git 速查》《17 关卡总表》；本册是阶段 6 的正文，按关卡编号打关。</p>
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（新写）</td></tr>
+<tr><td><b>本册关卡</b></td><td>6-01 ~ 6-08</td></tr>
+<tr><td><b>用时</b></td><td>必做 16 小时</td></tr>
+<tr><td><b>学完解锁</b></td><td>能在 Killercoda 沙箱里部署 Pod / Service，会看"三只眼"（get / describe / logs），能排查 ImagePullBackOff，懂 requests/limits 与调度</td></tr></table>
+<div class="box2"><b>全册已写</b>（第四轮）。用浏览器沙箱练，不用在本机装 minikube。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：Kubernetes（简称 K8s）是<b>管一群机器的"调度员"</b>：你说"我要 3 个副本一直活着"，它负责安排到哪台机器、挂了自动重启。生活类比：像<b>快递站点的调度中心</b>——不亲自送件，只保证"每个岗位随时有人"。</p>
+<p><b>② 干什么用</b>：一台机器上的容器，Docker 就够了；机器一多（几十台）就需要 K8s 来编排：滚动升级、自动重启、按负载扩缩、服务发现。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维的推理服务基本都跑在 K8s 上；天天打交道的 Pod / Deployment / Service、requests / limits 就是这些概念。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小三条命令：<span class="code">kubectl get nodes</span>（有几台机器）→ <span class="code">kubectl apply -f app.yaml</span>（按文件部署）→ <span class="code">kubectl get pods</span>（看状态）。本册在 <b>Killercoda 免费沙箱</b>里做（零安装、零资源占用），6-01 ~ 6-08 八关。</p>
+
+<h2>6-01 打开 Killercoda，认识 kubectl</h2>
+<p class="note">时长：休息日 2 小时 ｜ 工作日 20 分　｜　前置：5-06　｜　状态：已写（第四轮）</p>
+<p><b>先说环境：为什么用 Killercoda</b>：K8s 最少要几台机器。在自己电脑的虚拟机里装 minikube 经常卡在嵌套虚拟化上，一卡就是半天。<b>Killercoda 是浏览器里的免费沙箱 —— 打开就有集群，零安装、零资源占用，关掉就没了</b>。</p>
+<h3>步骤 1：进沙箱</h3>
+<pre class="demo">浏览器打开 https://killercoda.com/playgrounds → 选 "Kubernetes"（不是 Docker 那个）
+等 10 秒左右，右侧出现终端：
+<span class="prompt">$</span> kubectl get nodes
+NAME           STATUS   ROLES           AGE   VERSION
+controlplane   Ready    control-plane   1m    v1.31.0
+node01         Ready    &lt;none&gt;          30s   v1.31.0</pre>
+<p class="note">（示例里的节点名、数量（<span class="code">controlplane</span> / <span class="code">node01</span>）来自 Killercoda 沙箱；单节点或别的沙箱会不同——<b>以你的 <span class="code">kubectl get nodes</span> 为准</b>，看 <b>STATUS 是不是 Ready</b>。）</p>
+<p><b>解读</b>：<b>STATUS 是 Ready</b> 就说明集群活着；<span class="code">kubectl</span> 是"跟集群说话"的唯一工具，后面所有操作都靠它。<b>注意 Roles 那列写着 control-plane</b> —— 这是"管事的"那台，node01 是"干活的"那台。这就是 K8s 最基础的分工。</p>
+<h3>步骤 2：认识三个名词（先记住这三个，别的慢慢来）</h3>
+<table><tr><th style="width:20%">名词</th><th style="width:34%">是什么</th><th>一句话类比</th></tr>
+<tr><td><span class="code">Pod</span></td><td>K8s 里最小的运行单位（一个或多个容器）</td><td>一个"工人"</td></tr>
+<tr><td><span class="code">Deployment</span></td><td>"我要几个副本、用什么镜像"的说明书</td><td>工头下的"招 2 个人"的指令</td></tr>
+<tr><td><span class="code">Service</span></td><td>一组 Pod 的稳定入口（Pod 会变，入口不变）</td><td>公司的"前台电话"</td></tr></table>
+<p><b>解读</b>：Pod 随时可能被重建（IP 会变），所以你永远不该直接找 Pod，而是找 Service —— 这就是"调度与自愈"的前提。下一关就动手。</p>
+<h3>步骤 3：看看空集群里有什么</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl get pods -A
+NAMESPACE     NAME                                      READY   STATUS    RESTARTS
+kube-system   coredns-6f6b679f8f-abcde                  1/1     Running   0
+kube-system   kube-proxy-xyz12                          1/1     Running   0
+...
+
+<span class="prompt">$</span> kubectl get ns
+NAME              STATUS   AGE
+default           Active   3m
+kube-system       Active   3m</pre>
+<p><b>解读</b>：<b>namespace（命名空间）</b>是集群里的"分区"，系统自己的东西住在 <span class="code">kube-system</span>，你的东西默认放 <span class="code">default</span>。<span class="code">-A</span> 表示"看所有分区"。<span class="code">READY 1/1</span> = 一个容器里该起的都起来了。</p>
+<h3>完成判定</h3>
+<p>□ 能连上沙箱并跑通 <span class="code cmd">kubectl get nodes</span>　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）　□ 能说出 Pod / Deployment / Service 各解决什么问题　□ 能说出为什么不该直接访问 Pod　□ 能说出 namespace 是干什么的</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：沙箱是临时的，关掉浏览器就全清；不占本机资源，无回滚负担。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：工作里常问"你 K8s 到什么程度"，第一句就答"我用 Killercoda 沙箱做过部署和排障"——有真实操作比背概念强。</p>
+
+<h2>6-02 部署第一个 Pod（Deployment + Service）</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 20 分　｜　前置：6-01　｜　状态：已写（第四轮）</p>
+<h3>步骤 1：写 Deployment 文件</h3>
+<pre class="demo"><span class="prompt">$</span> cat &gt; web.yaml &lt;&lt;'EOF'
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2                 # 我要 2 个副本
+  selector:
+    matchLabels:
+      app: web
+  template:                   # 下面是"每个副本长什么样"
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+EOF</pre>
+<p><b>解读</b>：这份 YAML 的骨架和 compose 一样（缩进即层级）。三处关键：<span class="code">replicas: 2</span>（要几个副本）、<span class="code">selector.matchLabels</span> 与 <span class="code">template.metadata.labels</span> <b>必须对上</b>（Deployment 靠标签找自己的 Pod）、<span class="code">containers</span> 下面是"用哪个镜像、开哪个端口"。</p>
+<h3>步骤 2：apply 上去</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl apply -f web.yaml
+deployment.apps/web created
+
+<span class="prompt">$</span> kubectl get deploy,pods
+NAME                  READY   UP-TO-DATE   AVAILABLE
+deployment.apps/web   2/2     2            2
+
+NAME                      READY   STATUS    RESTARTS   AGE
+pod/web-6d8f7c9b4d-7x2kl   1/1     Running   0          15s
+pod/web-6d8f7c9b4d-q9m4t   1/1     Running   0          15s</pre>
+<p><b>解读</b>：<b>2/2 就是"要 2 个、好了 2 个"</b>。Pod 名字里那串随机字符是 K8s 自动生成的（每次重建都不一样 —— 所以别记 Pod 名）。</p>
+<h3>步骤 3：给它一个稳定入口（Service）</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl expose deployment web --name=web-svc --port=80 --target-port=80
+service/web-svc exposed
+
+<span class="prompt">$</span> kubectl get svc
+NAME      TYPE        CLUSTER-IP      PORT(S)   AGE
+web-svc   ClusterIP   10.96.142.11    80/TCP    5s
+
+<span class="prompt">$</span> kubectl run tmp --rm -it --image=busybox --restart=Never -- wget -qO- http://web-svc | head -3   <span class="out"># --rm 用完自动删；--restart=Never 只跑一次、不重建</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;</pre>
+<p><b>解读</b>：<span class="code cmd">expose</span> 一条命令就建了个 Service（刚才那张"前台电话"）。<b>集群内的其他 Pod 用 <span class="code">web-svc</span> 这个名字就能访问到那 2 个 Pod</b>（和 4-08 里 compose 的服务名一个道理）。最后那条 <span class="code">wget</span> 是"从集群内部访问一次"，看到 nginx 首页就说明通了。</p>
+<h3>步骤 4：看它到底起了什么</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl get all
+NAME                          READY   STATUS    RESTARTS
+pod/web-6d8f7c9b4d-7x2kl       1/1     Running   0
+pod/web-6d8f7c9b4d-q9m4t       1/1     Running   0
+
+NAME                 TYPE        CLUSTER-IP     PORT(S)
+service/web-svc      ClusterIP   10.96.142.11   80/TCP
+service/kubernetes   ClusterIP   10.96.0.1      443/TCP
+
+NAME                  READY   UP-TO-DATE   AVAILABLE
+deployment.apps/web   2/2     2            2</pre>
+<p><b>解读</b>：<span class="code cmd">get all</span> 一次把 Pod、Service、Deployment 都列出来 —— 记住这一条，排障第一步就够用了。</p>
+<h3>完成判定</h3>
+<p>□ 能不看教材写出一个 2 副本的 Deployment　□ 能说出 <span class="code">selector</span> 和 <span class="code">labels</span> 为什么必须对上　□ 能用 Service 名字从集群内访问到服务　□ 能用 <span class="code cmd">kubectl get all</span> 说清现在集群里有什么</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">kubectl delete -f web.yaml</span> 和 <span class="code cmd">kubectl delete svc web-svc</span>；沙箱关掉即清空。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："你会不会写 Deployment"——能说出 replicas / selector / labels 三者的关系，就说明你真写过而不是抄过。</p>
+
+<h2>6-03 看：get / describe / logs</h2>
+<p class="note">时长：休息日 2 小时 ｜ 工作日 20 分　｜　前置：6-02　｜　状态：已写（第四轮）</p>
+<p><b>这一关学的是"三只眼睛"</b>：集群出问题时，你靠这三条命令把盲盒打开。</p>
+<h3>眼睛 ①：get —— 现在是什么状态</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl get pods -o wide
+NAME                   READY   STATUS    RESTARTS   AGE   IP           NODE
+web-6d8f7c9b4d-7x2kl   1/1     Running   0          3m    10.244.1.5   node01
+web-6d8f7c9b4d-q9m4t   1/1     Running   0          3m    10.244.0.4   controlplane
+
+<span class="prompt">$</span> kubectl get pods -w          # 盯着看变化，Ctrl+C 退出
+web-6d8f7c9b4d-7x2kl   1/1     Running   0     3m
+web-6d8f7c9b4d-q9m4t   0/1     Terminating   0   4m
+web-6d8f7c9b4d-new1a   0/1     ContainerCreating</pre>
+<p><b>解读</b>：<span class="code">-o wide</span> 多给你两列：<b>Pod 的 IP 和它在哪台节点上</b>（调度结果就看这里）。<span class="code">-w</span> 是"实时刷新"，删 Pod 时你会看到 Terminating → 新 Pod ContainerCreating 的过程（下一关的自愈就是这个）。</p>
+<h3>眼睛 ②：describe —— 为什么是这个状态</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl describe pod web-6d8f7c9b4d-7x2kl | tail -20
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  4m    default-scheduler  Successfully assigned default/web-... to node01
+  Normal  Pulling    4m    kubelet            Pulling image "nginx:alpine"
+  Normal  Pulled     4m    kubelet            Successfully pulled image
+  Normal  Created    4m    kubelet            Created container nginx
+  Normal  Started    4m    kubelet            Started container nginx</pre>
+<p><b>解读</b>：<b>describe 的重点永远是最下面那段 Events（事件）</b> —— 它是"时间线"：什么时候被调度、什么时候拉镜像、什么时候起来。出了问题，<b>报错原因几乎都在这几行里</b>（第 6 关的 ImagePullBackOff 就是靠它定位的）。</p>
+<h3>眼睛 ③：logs —— 容器里那个程序说了什么</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl logs web-6d8f7c9b4d-7x2kl | tail -3
+2026/10/09 22:10:01 [notice] 1#1: start worker process 29
+
+<span class="prompt">$</span> kubectl logs -f deploy/web          # 按 Deployment 看（它会挑一个 Pod），-f 实时跟
+<span class="prompt">$</span> kubectl logs web-6d8f7c9b4d-7x2kl --previous   # 容器重启过？看"上一次"的日志</pre>
+<p><b>解读</b>：三个细节要记住 —— ① 可以直接写 <span class="code">deploy/web</span> 不用抄 Pod 名；② <span class="code">-f</span> 实时跟（和 <span class="code cmd">tail -f</span> 一样）；③ <b><span class="code">--previous</span> 是排"容器反复重启"的关键</b>：当前这次如果刚起来，日志是空的，原因在上一次里。</p>
+<h3>三只眼睛合起来用</h3>
+<pre class="demo">Pod 不对劲
+ ① kubectl get pods -o wide      → 什么状态？在哪台机器？（Pending / Running / CrashLoopBackOff…）
+ ② kubectl describe pod X | tail → Events 里为什么？（调度失败 / 拉镜像失败 / 起不来）
+ ③ kubectl logs X [--previous]   → 程序自己报了什么错？</pre>
+<h3>完成判定</h3>
+<p>□ 能用 <span class="code">-o wide</span> 说出 Pod 被调度到哪台节点　□ 能用 <span class="code cmd">describe</span> 的 Events 讲出一个 Pod 的启动时间线　□ 能用 <span class="code cmd">logs</span> 看 Deployment 的日志　□ 能说出"容器反复重启"时该加哪个参数（<span class="code">--previous</span>）</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：只读操作，无风险。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：工作里常问"Pod 起不来你怎么查"，答"先 get 看状态、再 describe 看 Events、最后 logs 看程序报错"——这就是标准答案，而且你是真用过。</p>
+
+<h2>6-04 进容器：exec</h2>
+<p class="note">时长：休息日 1.5 小时 ｜ 工作日 15 分　｜　前置：6-03　｜　状态：已写（第四轮）</p>
+<h3>步骤 1：进到 Pod 里面看一眼</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl exec -it web-6d8f7c9b4d-7x2kl -- sh
+/ # hostname
+web-6d8f7c9b4d-7x2kl
+/ # ls /etc/nginx
+conf.d          mime.types      nginx.conf
+/ # cat /etc/nginx/conf.d/default.conf | head -5
+server {
+    listen       80;
+    server_name  localhost;
+/ # exit</pre>
+<p><b>解读</b>：<span class="code">kubectl exec -it Pod名 -- 命令</span>，<b>注意那个 <span class="code">--</span> 不能少</b>：它后面才是"在容器里执行什么"。进容器看现场是排障的常用手段（和 <span class="code cmd">docker exec</span> 一个思路）。</p>
+<p class="note"><b>一个容易懵的报错：</b>exec 一只<b>正在重启</b>的 Pod（CrashLoopBackOff / Restarting）会报 <span class="code err">container not found ("nginx")</span>——不是命令写错，是容器此刻不在。先 <span class="code cmd">kubectl get pods</span> 看状态：回到 Running 再进；一直起不来就先按 6-06 的排查链修。</p>
+<h3>步骤 2：不进容器也能干活</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl exec web-6d8f7c9b4d-7x2kl -- nginx -v
+nginx version: nginx/1.27.2
+
+<span class="prompt">$</span> kubectl exec deploy/web -- ls /usr/share/nginx/html
+50x.html
+index.html</pre>
+<p><b>解读</b>：<b>不加 <span class="code">-it</span> 就是"执行一条命令就出来"</b> —— 写排查脚本时常用这种形式。<span class="code">deploy/web</span> 也能用（K8s 帮你挑一个 Pod）。</p>
+<h3>步骤 3：改点东西，看看会发生什么（重要概念）</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl exec -it deploy/web -- sh -c 'echo hello &gt; /usr/share/nginx/html/test.html'
+<span class="prompt">$</span> kubectl exec deploy/web -- ls /usr/share/nginx/html
+50x.html  index.html  test.html
+
+<span class="prompt">$</span> kubectl delete pod web-6d8f7c9b4d-7x2kl      # 删掉这个 Pod
+<span class="prompt">$</span> kubectl get pods
+NAME                   READY   STATUS    AGE
+web-6d8f7c9b4d-pp8mk   1/1     Running   20s     ← 新 Pod
+<span class="prompt">$</span> kubectl exec deploy/web -- ls /usr/share/nginx/html
+50x.html  index.html                            ← test.html 没了</pre>
+<p><b>解读</b>：<b>容器里的改动"长"在 Pod 上，Pod 一重建就没了</b> —— 和 4-03 学的"容器数据会消失"是同一件事，只是换到了 K8s 里。要持久化，就得用 <span class="code">Volume</span>（和 Docker 的数据卷对应）。<b>这条实战里常踩</b>。</p>
+<h3>完成判定</h3>
+<p>□ 能进 Pod 看文件并安全退出　□ 能说出 <span class="code">--</span> 的作用　□ 能不进容器直接执行一条命令　□ 能说清"为什么在容器里改的东西 Pod 一重建就没了"，以及该用什么解决</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：删掉的 Pod 会自动重建（这就是下一关的内容）；文件改动随 Pod 一起消失，无残留。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："进容器看过吗""数据为什么不持久"——这两问能顺口答出来，说明你摸过真集群。</p>
+
+<h2>6-05 自愈：删掉 Pod 看它自动重建</h2>
+<p class="note">时长：休息日 1.5 小时 ｜ 工作日 15 分　｜　前置：6-04　｜　状态：已写（第四轮）</p>
+<p><b>这一关是"集群自愈能力"的最小现场</b>：你什么都不用做，删掉一个 Pod，看它自己长回来。</p>
+<h3>步骤 1：先数清楚</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl get pods
+NAME                   READY   STATUS    AGE
+web-6d8f7c9b4d-7x2kl   1/1     Running   5m
+web-6d8f7c9b4d-q9m4t   1/1     Running   5m
+
+<span class="prompt">$</span> kubectl get deploy web -o jsonpath='{.status.readyReplicas}{"\n"}'   <span class="out"># jsonpath：按路径从返回的 JSON 里取值（.status.readyReplicas = 就绪副本数）</span>
+2</pre>
+<h3>步骤 2：删掉一个，盯着看</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl delete pod web-6d8f7c9b4d-7x2kl
+pod "web-6d8f7c9b4d-7x2kl" deleted
+
+<span class="prompt">$</span> kubectl get pods -w
+web-6d8f7c9b4d-q9m4t   1/1     Running        5m
+web-6d8f7c9b4d-pp8mk   0/1     ContainerCreating   2s
+web-6d8f7c9b4d-pp8mk   1/1     Running             6s     ← 20 秒内自己长出来了
+^C</pre>
+<p><b>解读</b>：<b>Deployment 说"我要 2 个副本"，一旦发现只剩 1 个，就立刻建一个新的</b>。这就是"控制器"在干活：<b>声明式 —— 你只说要什么状态，K8s 负责把现实拉回那个状态</b>（不是叫你去启一个）。这一点是 K8s 和"手敲 docker run"最大的区别。</p>
+<h3>步骤 3：换个视角看它想要的状态</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl get deploy web -o yaml | grep -A3 status
+status:
+  availableReplicas: 2
+  readyReplicas: 2
+  replicas: 2            ← 现状 = 期望（spec 里的 2）</pre>
+<p><b>解读</b>：<span class="code">spec</span> 是"我想要什么"，<span class="code">status</span> 是"现在是什么"。<b>K8s 的全部工作就是让 status 追上 spec</b> —— 记住这一句，后面所有资源都按这个套路理解。</p>
+<h3>完成判定</h3>
+<p>□ 删掉一个 Pod 并看到它被自动重建（截图/记录）　□ 能说出"声明式"和"命令式"的区别（用删 Pod 这件事举例子）　□ 能说出 <span class="code">spec</span> 与 <span class="code">status</span> 各是什么　□ 能说出这一步在生产里有什么用</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：不用回滚 —— 实验本身就是删除，集群自己恢复。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："你怎么理解 K8s 的价值"——答"声明式：我只说副本数是 2，Pod 挂了它自己补回来"，比背一堆名词强得多。</p>
+
+<h2>6-06 故意弄坏：镜像名写错，排查 ImagePullBackOff</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 20 分　｜　前置：6-05　｜　状态：已写（第四轮）</p>
+<p><b>这一关是整册的重点</b>：亲手制造一个真实故障，再靠三条眼（get / describe / logs）把它查出来 —— 这就是“面对没见过的故障看推理路径”的标准练法。</p>
+<h3>步骤 1：把镜像名写错一个字母</h3>
+<pre class="demo"><span class="prompt">$</span> sed -i 's/nginx:alpine/nginx:alpne/' web.yaml      # alpne 是错的
+<span class="prompt">$</span> kubectl apply -f web.yaml
+deployment.apps/web configured
+
+<span class="prompt">$</span> kubectl get pods
+NAME                   READY   STATUS             RESTARTS   AGE
+web-7c9d4b6f8a-2k9xz   0/1     ImagePullBackOff   0          20s
+web-6d8f7c9b4d-q9m4t   1/1     Running            0          12m</pre>
+<p><b>解读</b>：<b>ImagePullBackOff</b> 直译"拉镜像退避" —— K8s 试了几次拉不到那个镜像，就先歇一会儿再试（退避）。这个状态名要背下来，它是最常见的一种。</p>
+<h3>步骤 2：用 describe 找出真正原因</h3>
+<pre class="demo"><span class="prompt">$</span> kubectl describe pod web-7c9d4b6f8a-2k9xz | tail -8
+Events:
+  Type     Reason     Age                From     Message
+  ----     ------     ----               ----     -------
+  Normal   Pulling    30s (x4 over 90s)  kubelet  Pulling image "nginx:alpne"
+  Warning  Failed     28s (x4 over 88s)  kubelet  Failed to pull image "nginx:alpne": ...
+           rpc error: code = NotFound ... manifest unknown
+  Warning  Failed     28s (x4 over 88s)  kubelet  Error: ErrImagePull
+  Normal   BackOff    12s (x5 over 85s)  kubelet  Back-off pulling image "nginx:alpne"</pre>
+<p><b>解读</b>：Events 里写得非常清楚：<b><span class="code">manifest unknown</span> = 仓库里没有这个标签的镜像</b>。这就是"证据"——排查不是猜，是找这一行。</p>
+<p class="note"><b>四类常见拉镜像失败，靠 Events 区分</b>：<br>
+• <span class="code">manifest unknown</span> → 标签（版本）写错或不存在<br>
+• <span class="code">not found</span> / <span class="code">pull access denied</span> → 仓库名写错，或是私有镜像没配登录凭证<br>
+• <span class="code">i/o timeout</span> / <span class="code">dial tcp ... timeout</span> → 网络不通：<b>按 07 册《Docker 入门》的「开始之前 · 先把镜像加速器配好」把加速器配上</b>（注意：K8s 拉镜像不一定用 Docker——自建集群常用 containerd，加速要配 containerd 的 config.toml，而不是 Docker 的 daemon.json；沙箱环境按其说明）<br>• <span class="code">403 Forbidden</span> → 走国内加速器时"标签不存在"常以 403 出现：同样先怀疑标签/名字写错（别只当"没权限"）</p>
+<h3>步骤 3：改回来，看它自己恢复</h3>
+<pre class="demo"><span class="prompt">$</span> sed -i 's/nginx:alpne/nginx:alpine/' web.yaml
+<span class="prompt">$</span> kubectl apply -f web.yaml
+deployment.apps/web configured
+
+<span class="prompt">$</span> kubectl get pods
+NAME                   READY   STATUS    RESTARTS   AGE
+web-6d8f7c9b4d-8vq4n   1/1     Running   0          15s
+web-6d8f7c9b4d-q9m4t   1/1     Running   0          15m</pre>
+<p><b>解读</b>：改回正确镜像名，<b>滚动更新</b>会自动把坏的那个换掉，全程不用你手动删 Pod。</p>
+<h3>步骤 4：把这次排查写成记录（这是产出）</h3>
+<pre class="demo"># Pod 起不来排查记录
+现象：kubectl get pods 显示 web-xxx  0/1  ImagePullBackOff
+第一步：kubectl describe pod web-xxx | tail -20
+         → Events 最后一行：Failed to pull image "nginx:alpne": manifest unknown
+判读：不是集群问题，是镜像标签写错了（alpne ≠ alpine），仓库里没有这个标签
+处理：把 deployment 的 image 改回 nginx:alpine → kubectl apply -f → 自动滚动更新
+验证：kubectl get pods 两个副本都 Running；kubectl get deploy web 显示 2/2
+一句话总结：ImagePullBackOff 先看 describe 的 Events，那里一定有一行写明原因</pre>
+<p class="note"><b>注意：最后那行报错的原文会随网络 / 镜像源不同</b>——常见 <span class="code">manifest unknown</span>，走加速器时也可能是 <span class="code">502 Bad Gateway</span> 之类。认准 <span class="code">Failed to pull image</span> 这一行就行，后面的字以你机器实际输出为准。</p>
+<h3>完成判定</h3>
+<p>□ 能故意造出 ImagePullBackOff 并用 describe 找出原因　□ 能说出四类拉镜像失败（标签错 / 权限或仓库错 / 网络不通 / 加速器下 403）各看什么关键词　□ 能把它改回来并看到自动恢复　□ 写出这份排查记录（放 `~/lab` 或 learning-journey）</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：把镜像名改回正确值 <span class="code cmd">kubectl apply -f web.yaml</span>；沙箱关掉即清空。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这是能拿去讲的一段"我踩过的坑"——有现象、有命令、有判读、有验证，正是别人最想听的一段。</p>
+
+<h2>6-07 资源配额与调度：requests / limits</h2>
+<p class="note">时长：休息日 2 小时 ｜ 工作日 20 分　｜　前置：6-06　｜　状态：已写（第四轮）</p>
+<p><b>为什么这一关重要</b>：这类岗位最常考的就是"<b>Pod、调度、资源配额</b>"。前面几关练了 Pod，这一关把"配额"和"调度"补上 —— 而这两件事正是"多个人共用一个集群不打架"的关键。</p>
+<h3>一、两个数字，两种作用（先分清）</h3>
+<table><tr><th style="width:16%">字段</th><th style="width:30%">管什么</th><th>一句话</th></tr>
+<tr><td><span class="code">requests</span></td><td><b>调度</b>：告诉 K8s"至少给我留这么多"</td><td>订座：没这个量的机器就不会把你排上去</td></tr>
+<tr><td><span class="code">limits</span></td><td><b>上限</b>：超过就被限速（CPU）或杀掉（内存）</td><td>天花板：用到头就别再涨了</td></tr></table>
+<h3>二、给 Pod 加上配额</h3>
+<pre class="demo"><span class="prompt">$</span> cat &gt; quota.yaml &lt;&lt;'EOF'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hungry
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c", "sleep 3600"]
+      resources:
+        requests:
+          cpu: "2"            # 至少要 2 核
+          memory: "4Gi"       # 至少要 4G 内存
+        limits:
+          cpu: "2"
+          memory: "4Gi"
+EOF
+<span class="prompt">$</span> kubectl apply -f quota.yaml
+pod/hungry created
+
+<span class="prompt">$</span> kubectl get pod hungry
+NAME     READY   STATUS    RESTARTS   AGE
+hungry   0/1     Pending   0          15s        ← 起不来，挂着
+
+<span class="prompt">$</span> kubectl describe pod hungry | tail -6
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  20s   default-scheduler  0/2 nodes are available:
+           2 Insufficient cpu, 2 Insufficient memory. preemption: 0/2 nodes are available</pre>
+<p class="note"><b>大机器上复现不了 Pending？</b>正常——这段输出是按 Killercoda 的小节点录的。你的机器核多、内存大时，把 requests 调大（如 <span class="code">cpu: "100"</span> / <span class="code">memory: "64Gi"</span>）再 apply，就会看到同样的 <span class="code">Insufficient cpu</span>。</p>
+<p><b>解读</b>：<b><span class="code">Pending</span> = 调度器找不到能满足 requests 的机器</b>。Events 那句 "<span class="code">Insufficient cpu</span>" 就是原因：沙箱里的节点没有 2 核空闲给它。<b>这就是"资源配额"在起作用 —— 它拦住了"抢不到座位还硬要坐"的 Pod。</b></p>
+<h3>三、把请求改小，它就排得上了</h3>
+<pre class="demo"><span class="prompt">$</span> sed -i 's/cpu: "2"/cpu: "100m"/; s/memory: "4Gi"/memory: "64Mi"/g' quota.yaml
+<span class="prompt">$</span> kubectl delete pod hungry --ignore-not-found; kubectl apply -f quota.yaml   <span class="out"># --ignore-not-found：这个 Pod 不存在也不报错</span>
+pod/hungry created
+
+<span class="prompt">$</span> kubectl get pod hungry
+NAME     READY   STATUS    RESTARTS   AGE
+hungry   1/1     Running   0          8s        ← 排上了</pre>
+<p><b>解读</b>：<span class="code">100m</span> = 0.1 核（m 是千分之一核）。<b>requests 写小 ≠ 只能用这么点</b>，它只是"订座"的门槛；真正的天花板是 limits。</p>
+<h3>四、不写 limits 会怎样（为什么生产上必须写）</h3>
+<pre class="demo"># 一个没写 limits 的 Pod 内存泄漏 → 把整台节点的内存吃光
+# 结果：同节点上别人的 Pod 被"饿死"或被驱逐（Evicted），故障从"一个服务"扩散成"一台机器"
+
+<span class="prompt">$</span> kubectl describe node node01 | grep -A4 "Allocated resources"
+  Resource           Requests    Limits
+  cpu                250m (12%)  100m (5%)
+  memory             128Mi (3%)   64Mi (1%)</pre>
+<p><b>解读</b>：<b>不写 limits = 允许它随便吃</b>。生产上"一个人把节点撑爆、殃及邻居"是最典型的低级事故，所以团队规范一般要求：<b>每个容器都要有 requests 和 limits，内存 limit 尤其不能省</b>。</p>
+<h3>五、调度还看什么（先知道有这些）</h3>
+<pre class="demo">kubectl get pod hungry -o wide          # NODE 那一列就是"调度到哪台"
+kubectl describe node controlplane | head -20   # 看节点上的标签与状态
+# 多节点时还能用 nodeSelector / affinity 把 Pod"指定"到某类机器上（GPT 机器、GPU 机器就靠这个区分）</pre>
+<p><b>解读</b>：调度器先按 requests 过滤掉"装不下"的节点，再按标签/亲和性挑机器。<b>以后运维 GPU 机器时，"哪些 Pod 该上 GPU 节点"就是用这种办法控制的</b>。</p>
+<h3>完成判定</h3>
+<p>□ 能说出 requests 和 limits 各自管什么（调度 vs 上限）　□ 能造出一个 Pending 并用 describe 说出"为什么排不上"　□ 能说出不写 limits 的后果（一个 Pod 拖垮整台节点）　□ 能用 <span class="code">-o wide</span> 说出 Pod 被调度到哪台节点　□ 能说出 <span class="code">100m</span> 是什么意思</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">kubectl delete pod hungry</span>（Pending 的 Pod 也删得掉）；沙箱关掉即清空。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这类岗位最常问"Pod、调度、资源配额"，这一关就是它的正面回答："我给容器配过 requests/limits，见过 Pending 和 Insufficient cpu，知道不写 limits 会拖垮节点。"</p>
+
+<h2>6-08 阶段 6 · 学习总结练习：部署 → 弄坏 → 排查 → 留一份踩坑记录</h2>
+<p class="note">时长：休息日 2 小时 ｜ 工作日 20 分　｜　前置：6-01 ~ 6-07　｜　状态：已写（第四轮）</p>
+<h3>业务场景</h3>
+<p>你在一个新集群上部署一个 Web 服务（2 副本）。上线后"看起来没问题"，但第二天同事说"服务好像是通的，但有时候访问不到"。领导要你：<b>不光修好，还要留下一份记录 —— 下次别人遇到同样的问题，照着你的记录就能解决</b>。</p>
+<h3>综合要求（这题把这册的技能串起来）</h3>
+<p class="note">技能点：<b>Deployment / Service（6-02）＋ get/describe/logs 三只眼（6-03）＋ exec 进容器（6-04）＋ 自愈（6-05）＋ 拉镜像失败排查（6-06）＋ requests/limits 与调度（6-07）</b></p>
+<p>① 写 Deployment（2 副本）＋ Service，确认 <span class="code">get all</span> 里都是正常的；<br>
+② <b>自己制造三个故障</b>（分别对应三类原因），每个都用三条眼查出根因：<br>
+　• 镜像名写错（拉取类）<br>
+　• requests 写得太大（调度类）<br>
+　• 容器启动命令写错（应用类，比如 <span class="code">command: ["sh", "-c", "/不存在的程序"]</span> 这种 <b>shell 包裹</b>的写法）<br>
+　<span class="note">注意：直接写 <span class="code">command: ["/不存在的程序"]</span> 会得到 <span class="code">RunContainerError</span>（还没跑起来就失败），不是 <span class="code">CrashLoopBackOff</span>——想看 CrashLoop 就用 shell 包裹，让容器"起来了又崩"。</span><br>
+③ 每修好一个，都要用 <span class="code">kubectl get</span> 验证回正常；<br>
+④ 删掉一个 Pod 验证自愈，并截图/记录；<br>
+⑤ 写一份《Pod 起不来排查手册》（一页就够）：<b>状态名 → 大概率原因 → 先看哪条命令 → 常见关键词</b>；<br>
+　<span class="note">（"Running 但访问不到"这一类的手册材料：<span class="code cmd">kubectl get endpoints 服务名</span>——若 ENDPOINTS 显示 <span class="code">&lt;none&gt;</span>，说明 Service 的 selector 没匹配上任何 Pod：对照 <span class="code cmd">kubectl get svc 服务名 -o yaml</span> 里的 selector 与 Pod 的 labels 是否一字不差；再确认 targetPort 对准容器真正监听的端口——拿不准就用上面 ② 前那条临时 Pod 里 <span class="code">wget 服务名</span> 的命令实测。）</span><br>
+⑥ 把这份记录放进 learning-journey（或 k8s-demo 仓库），README 里给出入口。</p>
+<h3>验收</h3>
+<p>□ 三个故障都造出来过、都用 describe/logs 找到了根因　□ 每个修复都有验证命令与输出　□ 自愈实验有记录　□ 有《Pod 起不来排查手册》，覆盖至少四种状态名（Pending / ImagePullBackOff / CrashLoopBackOff / Running 但访问不到）　□ 能不看笔记讲 3 分钟"我是怎么查的"</p>
+<h3>时间</h3>
+<p>2 小时（休息日）</p>
+<h3>产出</h3>
+<p>仓库 <span class="code">k8s-demo</span>（或 learning-journey 里的一个目录）：<span class="code">web.yaml</span> ＋ <span class="code">README.md</span>（怎么跑）＋ <span class="code">troubleshooting.md</span>（Pod 起不来排查手册）＋ 一两张 <span class="code">kubectl get</span> 输出的截图。</p>
+<h3>AI 运维指向</h3>
+<p>在 AI 集群里，推理服务就是跑在这种 Pod 上：<b>拉不到镜像、资源不够排不上、启动就崩 —— 这三种故障占了日常的一大半</b>。你现在练的这套三条眼，就是以后排查推理服务的第一反应。</p>
+<h3>实战价值</h3>
+<p>实战里最典型的一类问题：“面对没见过的故障看推理路径”。你可以说："我在 Killercoda 上故意造过三类故障 —— 拉镜像失败、资源不足排不上、启动命令写错，分别用 describe 的 Events 和 logs 定位过，还整理了一份状态名对照的排查手册。" <b>这段话说出来，比背十条 kubectl 命令有效得多。</b></p>
+
+<h3>顺带一提 · 集群里还有这些东西（不用学，知道有这么回事就行）</h3>
+<div class="box2">
+<b>是什么</b>：ConfigMap / Secret（把配置和密码从镜像里拆出来）、Namespace（分区，6-01 见过）、Ingress（集群对外的统一入口，比 Service 更进一步）、StatefulSet（有状态服务，比如数据库）。<br>
+<b>什么时候遇到</b>：部署稍微正式一点的服务就会碰到 ConfigMap/Secret；"外网怎么访问我的服务"会碰到 Ingress。<br>
+<b>真要用时去哪查</b>：搜"kubectl create configmap 用法"、K8s 官方文档中文版；先知道名字，用到再看细节。</div>
+<p class="footer">《K8s 入门》</p>
+</body>
+</html>

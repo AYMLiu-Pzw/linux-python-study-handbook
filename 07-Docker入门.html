@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Docker入门（教科书版） · v3.1</title>
+<style>
+
+@page { size: A4; margin: 13mm 12mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: "Microsoft YaHei","PingFang SC",sans-serif; font-size: 11pt; line-height: 1.5; color: #222; }
+h1 { font-size: 18pt; color: #c00000; margin: 6px 0 2px; }
+h2 { font-size: 13.5pt; color: #fff; background: #c00000; padding: 4px 10px; margin: 14px 0 6px; border-radius: 3px; }
+h3 { font-size: 11.5pt; color: #c00000; margin: 10px 0 4px; border-left: 4px solid #c00000; padding-left: 6px; }
+p { margin: 2px 0; }
+.note { font-size: 9pt; color: #666; }
+.code { font-family: Consolas,"Courier New",monospace; font-size: 10pt; }
+.err { color: #c00000; font-weight: bold; }
+.warn { color: #b45309; font-weight: bold; }
+.ok { color: #0a6b1e; font-family: Consolas,"Courier New",monospace; background: #eef7ee; padding: 0 2px; border-radius: 2px; }
+.word { color: #003a8c; font-weight: bold; }
+.trans { color: #000; }
+.section-head { font-size: 12pt; font-weight: bold; color: #c00000; background: #fdecec; padding: 3px 8px; margin: 12px 0 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 3px 0; }
+th { background: #c00000; color: #fff; font-size: 9.5pt; padding: 3px 6px; text-align: left; }
+td { border: 1px solid #ccc; padding: 1.5px 5px; vertical-align: top; font-size: 10pt; }
+.rule { background:#fffbe6; border-left:4px solid #b45309; padding:4px 8px; margin:5px 0; font-size: 10.5pt; }
+.box { border: 1.5px solid #c00000; border-radius: 4px; padding: 8px 10px; margin: 8px 0; background: #fffafa; }
+.errblock { border: 1px solid #e0b3b3; border-left: 4px solid #c00000; padding: 5px 8px; margin: 7px 0; background: #fff; }
+.errblock .line { margin: 2px 0; }
+.newpage { page-break-before: always; }
+pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-height: 1.35; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 6px 8px; margin: 5px 0; overflow-x: auto; }
+.lvl-hot { color: #c00000; font-size: 8pt; border: 1px solid #e0b3b3; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.lvl-mid { color: #666; font-size: 8pt; border: 1px solid #ddd; border-radius: 3px; padding: 0 3px; margin-left: 4px; }
+.footer { font-size: 9pt; color: #888; text-align: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 4px; }
+
+/* ===== 打印优化增强 ===== */
+table, pre, .errblock, .box, .box2, .warn, .rule, .quiz, .hw, .ans, .toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+h1, h2, h3, .section-head, .dtitle, .toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { orphans: 3; widows: 3; }
+.tight { line-height: 1.27; }
+.xtight { line-height: 1.2; }
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===== 分页锚点与挤压辅助 ===== */
+.pb { page-break-before: always; break-before: page; }
+.tight td { padding: 1px 4px; }
+.tight2 { line-height: 1.35; padding: 4px 6px; }
+.xtight td { line-height: 1.27; padding: 1px 4px; }
+.section-head.xtight { padding: 1px 8px; margin: 4px 0 2px; }
+
+/* ===== 打印优化 v2：长块自然跨页 + 打印换行 + 长表格重复表头 ===== */
+.ans-split { break-inside: auto; page-break-inside: auto; }
+.ans-split > p:first-child { break-after: avoid; page-break-after: avoid; }
+pre.pre-split { break-inside: auto; page-break-inside: auto; }
+.long-table { break-inside: auto; page-break-inside: auto; }
+.long-table thead { display: table-header-group; }
+.long-table tr { break-inside: avoid; page-break-inside: avoid; }
+@media print {
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; }
+}
+.toc { border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; margin: 8px 0; }
+
+.toc-title { background: none; color: #c00000; border: none; margin: 0 0 6px; font-size: 14pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc-row { display: flex; gap: 8px; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
+
+.toc-row .tn { color: #c00000; font-weight: bold; min-width: 70px; }
+
+.toc-row .tdesc { color: #666; font-size: 9pt; }
+
+.toc a { color: #222; text-decoration: none; }
+
+.toc, .ticket, .build, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.toc-title {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* ===== 示范块完整性（2026-09-25）：demo 整块不拆 + 标题组粘连 ===== */
+.demo { break-inside: avoid; page-break-inside: avoid; }
+h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
+.em{display:inline-block;vertical-align:-0.16em;margin:0 1px;}
+.opt { color: #b45309; }
+.opt-tag { color: #666; }
+
+.cols { column-count: 2; column-gap: 10mm; }
+.section-head { break-after: avoid; page-break-after: avoid; }
+.st { margin: 2px 0 6px 0; padding-left: 2px; list-style: none; }
+.st li { font-size: 10pt; line-height: 1.38; margin: 1px 0; break-inside: avoid; }
+.st-title { font-size: 10.5pt; font-weight: bold; color: #003a8c; margin: 6px 0 1px; break-after: avoid; }
+ul.st { columns: 1; }
+@media print { .cols { column-count: 2; } }
+
+</style>
+</head>
+<body>
+<h1>07 · Docker 入门</h1>
+<p class="note">配套：《01 Linux 入门》《04 Python 入门》《16 Git 速查》《17 关卡总表》；本册是阶段 4 的正文，按关卡编号打关。</p>
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（新写）</td></tr>
+<tr><td><b>本册关卡</b></td><td>4-00 ~ 4-10</td></tr>
+<tr><td><b>用时</b></td><td>必做 26.2 小时</td></tr>
+<tr><td><b>学完解锁</b></td><td>能起容器、挂数据卷、写 Dockerfile，并把自己的脚本打包成镜像</td></tr></table>
+<div class="box2"><b>全册已写</b>（第四轮）。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：Docker 是<b>把程序和它需要的一切（依赖、配置）打成一个包</b>的工具 —— 这个包叫"镜像"，跑起来的实例叫"容器"。生活类比：像搬家的<b>标准集装箱</b>——家具（程序）和说明书（依赖）一起装进标准箱子，换任何一条船（任何服务器）都能直接搬下来用。</p>
+<p><b>② 干什么用</b>：专治"在我机器上能跑、到你机器上就报错"。同一镜像在哪跑都一样；AI 运维把推理服务、监控组件打包成容器后，一条 <span class="code">docker compose up -d</span> 就能起一整套。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：“容器和虚拟机有什么区别”“Dockerfile 写过吗”——实战里都会碰到；不容器化，服务就没法可靠交付。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小三步：写 <span class="code">Dockerfile</span> → <span class="code">docker build -t app .</span>（做箱子）→ <span class="code">docker run -p 8080:80 app</span>（搬出来跑）。本册从 4-00（先懂 YAML）走到 4-10，最后把<b>你自己的脚本</b>容器化。</p>
+
+<h2>4-00 前置：YAML 是什么（15 分钟）</h2>
+<p class="note">时长：休息日 15 分 ｜ 工作日 15 分　｜　前置：无　｜　状态：已写（第二轮）</p>
+<p><b>为什么先学它</b>：Docker Compose 和 K8s 的配置文件都是 YAML。不会读它，后面那两条命令你写不出来。</p>
+<p><b>三句话说完</b>：① <b>缩进 = 层级</b>（用空格，别用 Tab）；② <b>冒号 = 键和值</b>；③ 一行以 <b>- </b> 开头 = 列表里的一项。</p>
+<pre class="demo">services:            # 顶层的键
+  web:               # 缩进 2 格：web 是 services 里的一项
+    image: nginx     # 冒号左边是键，右边是值
+    ports:
+      - "8080:80"    # 前面带 - ：这是列表里的一项</pre>
+<p><b>怎么读</b>：像读目录树——缩进越深，层级越里；冒号左边是名字，右边是内容。</p>
+<p><b>三个坑</b>：① 用 Tab 缩进会直接报错（YAML 只认空格）；② 冒号后面必须有一个空格；③ 同一个键不能出现两次，后面的会盖掉前面的。</p>
+<h3>完成判定</h3>
+<p>□ 能说出上面那段里哪些是键、哪些是值　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）　□ 能指出 "8080:80" 属于哪个键　□ 能说出为什么不能用 Tab 缩进</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填；填完贴进学习日志，或收进仓库的 troubleshooting.md）</p>
+<p><b>实战价值</b>：真正让你现场改一段 compose 文件时，你不会因为缩进错一格就卡住。</p>
+
+<h2>开始之前 · 先把镜像加速器配好（只做一次，约 10 分钟）</h2>
+<p class="note"><b>为什么放在这里</b>：下一步（4-01）你就要 <span class="code cmd">docker pull</span> 了。国内直连 Docker Hub 大概率超时，<b>先把这一步做掉</b>，后面 4-01、4-02、08 册的监控三件套、09 册的 K8s 才拉得动镜像。</p>
+<p><b>不配会看到什么</b>（真实报错样式）：</p>
+<pre class="demo"><span class="prompt">$</span> docker pull hello-world
+Error response from daemon: Get "https://registry-1.docker.io/v2/": dial tcp 154.83.15.45:443: i/o timeout</pre>
+<p>看到 <span class="code">i/o timeout</span> 就说明是"连不上仓库"，不是你的命令写错了。</p>
+<h3>三步配好（可直接复制）</h3>
+<pre class="demo"><span class="prompt">$</span> sudo mkdir -p /etc/docker
+<span class="prompt">$</span> sudo tee /etc/docker/daemon.json &gt;/dev/null &lt;&lt;'EOF'
+{
+  "registry-mirrors": [
+    "https://docker.m.daocloud.io",
+    "https://docker.1ms.run",
+    "https://docker.1panel.live"
+  ]
+}
+EOF
+<span class="prompt">$</span> sudo systemctl restart docker
+<span class="prompt">$</span> docker info | grep -A3 "Registry Mirrors"
+ Registry Mirrors:
+  https://docker.m.daocloud.io/
+  https://docker.1ms.run/
+  https://docker.1panel.live/</pre>
+<p><b>解读</b>：<span class="code">daemon.json</span> 是 Docker 的配置文件；<span class="code">registry-mirrors</span> 就是"镜像加速器名单"——拉镜像时 Docker 先问这几个国内站点，不再直连国外。<b>看到 <span class="code">Registry Mirrors</span> 下面列出这三个地址，就算配好了。</b></p>
+<h3>验证一次</h3>
+<pre class="demo"><span class="prompt">$</span> docker run hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.</pre>
+<p class="note">（注意区别：<span class="code cmd">docker pull</span> 只把镜像拉下来，输出是 <span class="code">Using default tag / Pulling from / Digest / Status: Downloaded…</span> 这种状态行；让它"跑出那几行字"的是 <span class="code cmd">docker run</span>。）</p>
+<p><b>三个坑</b>：① JSON 里不能写注释，最后一个地址后面不能多逗号（多一个逗号 Docker 会起不来）；② 改完<b>必须</b> <span class="code cmd">sudo systemctl restart docker</span> 才生效；③ 三个加速器是轮着试的，某个哪天挂了，把顺序调一下换一个即可。</p>
+<p class="note"><b>三个都不行时（兜底）</b>：① 换<b>阿里云容器镜像服务</b>的<b>个人专属</b>加速地址——登录阿里云 → 容器镜像服务（ACR）→「镜像加速器」页免费领取，按页面说明配置；② 或临时直连重试——<span class="code cmd">docker pull</span> 卡住就换个网络、或过一会儿再试；<b>自检</b>：<span class="code cmd">docker info</span> 的 Registry Mirrors 里是不是你配的那几个（改完没 <span class="code cmd">systemctl restart docker</span> 的话，这里还是旧值）。</p>
+<p class="note">只做一次。以后重装系统或换机器时，回来再做一遍。</p>
+
+
+<h2>4-01 镜像与容器是什么：跑起第一个容器</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分（只做第 1、2 步）　｜　前置：4-00</p>
+<p><b>这一关只解决一件事</b>：分清"镜像"和"容器"，并且亲手跑起来一个。</p>
+<p><b>一个比喻</b>：<b>镜像 = 菜谱</b>（只读的模板，放在仓库里）；<b>容器 = 照着菜谱做出来的那盘菜</b>（能跑、能停、能删，删了菜谱还在）。同一份菜谱可以同时做出好几盘菜（这就是"一个镜像起多个容器"）。</p>
+<h3>步骤 1：确认 Docker 装好了</h3>
+<pre class="demo"><span class="prompt">$</span> docker --version
+Docker version 27.3.1, build ce12230   <span class="out"># 示例（本册输出按 Docker 27 录）；26.04 源里现在是 29.x（以你机器为准）</span></pre>
+<p class="note"><b>版本差怎么读</b>：26.04 的 <span class="code">docker.io</span> 是 29.x——<span class="code">docker images</span> 的列变成 IMAGE / ID / DISK USAGE / CONTENT SIZE / EXTRA，<span class="code">docker ps</span> / <span class="code">docker port</span> 可能多出 IPv6 行，<span class="code">docker build</span> 会走经典构建器（<span class="code">Step 1/4 …</span>）。<b>看结构就行，不影响判定。</b></p>
+<p><b>解读</b>：有版本号就是装好了。没装的话用 <span class="code cmd">sudo apt install -y docker.io</span>（Ubuntu 源里就有；<b>再装上 compose 插件</b>：<span class="code cmd">sudo apt install -y docker-compose-v2</span>，否则后面 4-07 起会报 <span class="code err">docker: unknown command: docker compose</span>）。</p>
+<p class="note"><b>不管是刚装的还是早就装好的，用 Docker 前先把自己加进 docker 组</b>：<span class="code cmd">sudo usermod -aG docker $USER</span> → 退出重登一次（WSL 里关掉终端重开即可）。不加这一步，<span class="code cmd">docker</span> 命令会报 <span class="code err">permission denied ... /var/run/docker.sock</span>——这是新手的一号卡点。</p>
+<h3>步骤 2：跑第一个容器</h3>
+<pre class="demo"><span class="prompt">$</span> docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+...</pre>
+<p><b>解读</b>：<span class="code cmd">docker run</span> 一共干了两件事——<b>先从仓库把镜像拉下来</b>（本地没有 hello-world 这个镜像），<b>再照着它起一个容器</b>跑出那几行字。容器跑完就退出了，镜像还留在你机器上。这就是"镜像和容器不是一回事"。</p>
+<h3>步骤 3：看清"镜像留下、容器退出"</h3>
+<pre class="demo"><span class="prompt">$</span> docker images
+REPOSITORY    TAG       IMAGE ID       CREATED       SIZE
+hello-world   latest    ee301c921b8a   5 months ago  9.14kB
+
+<span class="prompt">$</span> docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                     NAMES
+9c5b1e2a77f1   hello-world   "/hello"   10 seconds ago   Exited (0) 9 seconds ago   happy_allen</pre>
+<p><b>解读</b>：<span class="code cmd">docker images</span> 列的是<b>镜像</b>（模板，只有一份）；<span class="code cmd">docker ps -a</span> 列的是<b>容器</b>（跑过的实例，<b>STATUS 那列写着 Exited (0)</b> = 正常退出，退出码 0）。<span class="code">-a</span> 表示连已经退出的也一起看；不加 <span class="code">-a</span> 只看正在跑的。</p>
+<h3>完成判定</h3>
+<p>□ 能用自己的话说清镜像和容器的区别　□ <span class="code cmd">docker run hello-world</span> 能跑出输出　□ 能说出 <span class="code cmd">docker images</span> 和 <span class="code cmd">docker ps -a</span> 各看的是什么　□ 能解释 STATUS 里的 Exited (0) 是什么意思</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：实验完把容器清掉即可——<span class="code cmd">docker rm happy_allen</span>（把 NAMES 换成你自己那行）；镜像想删就 <span class="code cmd">docker rmi hello-world</span>。删了都不影响系统。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这是关于容器最经典的一问——"容器和虚拟机/镜像有什么区别"，你现在有一手的说法。</p>
+
+<h2>4-02 六件套：pull / run / ps / logs / exec / stop·rm</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分（每天敲一条，边敲边背）　｜　前置：4-01</p>
+<p><b>这一关是</b>：容器日常操作的六组命令（六节、七个命令名，最后一节 stop 和 rm 一起讲）。每条都按"<b>输入 → 输出 → 解读</b>"写，你照着敲一遍就算过。</p>
+<h3>① pull：先把镜像拿下来</h3>
+<pre class="demo"><span class="prompt">$</span> docker pull nginx:alpine
+alpine: Pulling from library/nginx
+...
+Status: Downloaded newer image for nginx:alpine</pre>
+<p><b>解读</b>：<span class="code">nginx:alpine</span> 里的冒号后面是<b>标签（版本）</b>；alpine 是一个特别小的 Linux 发行版，用它做出来的镜像只有几十 MB。不写标签默认是 <span class="code">latest</span>。</p>
+<h3>② run：起容器（最常用的两条参数）</h3>
+<pre class="demo"><span class="prompt">$</span> docker run -d --name web -p 8080:80 nginx:alpine
+7f3a9c1d2e4b8a6f0c5d3e2b1a9f8c7d6e5b4a3c2d1e0f9a8b7c6d5e4f3a2b1c</pre>
+<p><b>解读</b>：<span class="code">-d</span> = 后台跑（不占着你的终端）；<span class="code">--name web</span> = 给容器起个名字（方便后面 stop/rm 时不用抄那串乱码 ID）；<span class="code">-p 8080:80</span> = 把<b>本机 8080</b> 接到<b>容器 80</b>（下一关细讲）；最后的 <span class="code">nginx:alpine</span> 是"用哪个镜像"。<b>输出那一长串就是容器 ID。</b></p>
+<h3>③ ps：看现在有哪些容器</h3>
+<pre class="demo"><span class="prompt">$</span> docker ps
+CONTAINER ID   IMAGE          COMMAND                  STATUS         PORTS                  NAMES
+7f3a9c1d2e4b   nginx:alpine   "/docker-entrypoint.…"   Up 12 seconds  0.0.0.0:8080->80/tcp   web</pre>
+<p><b>解读</b>：<b>STATUS 是 Up 就说明它在跑</b>；PORTS 那列 <span class="code">0.0.0.0:8080-&gt;80/tcp</span> 就是把本机 8080 转进容器 80 的证据。这时候你浏览器打开 <span class="code">http://localhost:8080</span> 就能看到 nginx 欢迎页——这就是"服务跑起来了"。（刚 <span class="code cmd">run</span> 的一两秒里页面可能还没就绪——nginx 在容器里启动要一点时间，稍等/刷新一下；<span class="code cmd">docker logs web</span> 里看到 "start worker processes" 就是稳了。）</p>
+<h3>④ logs：容器里的程序说了什么</h3>
+<pre class="demo"><span class="prompt">$</span> docker logs web
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/10/09 12:03:11 [notice] 1#1: start worker processes</pre>
+<p><b>解读</b>：容器里的程序输出不会留在你的终端里，要用 <span class="code cmd">logs</span> 捞出来——<b>排障第一步永远是看日志</b>。加 <span class="code">-f</span> 就是实时盯（和 Linux 的 <span class="code cmd">tail -f</span> 一个意思）。</p>
+<h3>⑤ exec：进容器里面看</h3>
+<pre class="demo"><span class="prompt">$</span> docker exec -it web sh
+/ # ls /etc/nginx
+conf.d          mime.types      nginx.conf   <span class="out"># 示例：条目数随 nginx 版本</span>
+/ # exit</pre>
+<p><b>解读</b>：<span class="code">-it</span> = 交互式终端（i 是标准输入，t 是终端）；<span class="code">sh</span> 是要执行的命令（alpine 里没有 bash，用 sh）。<b>进容器只为了看和查，改完的东西容器一删就没了</b>（这也是实战里常问的点）。</p>
+<h3>⑥ stop / rm：停掉、删掉</h3>
+<pre class="demo"><span class="prompt">$</span> docker stop web &amp;&amp; docker rm web
+web
+web</pre>
+<p><b>解读</b>：<span class="code cmd">stop</span> 是温柔地停（先发 TERM，和你在 Linux 里学的优雅停机一个道理），<span class="code cmd">rm</span> 才是删掉容器。<b>容器不删会一直占着名字和端口</b>，所以练习完记得清理。</p>
+<h3>完成判定</h3>
+<p>□ 四个字：上面六节里的命令各自能不看笔记敲一遍　□ 能说出 <span class="code">-d</span>、<span class="code">--name</span>、<span class="code">-p</span> 各解决什么问题　□ 能说出 <span class="code cmd">logs</span> 和 <span class="code cmd">exec</span> 分别什么时候用　□ 练习完把容器清干净（<span class="code cmd">docker ps -a</span> 里没有遗留）</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">docker stop</span> + <span class="code cmd">docker rm</span> 一删就回到原样；镜像用 <span class="code cmd">docker rmi nginx:alpine</span> 删（不吃磁盘时不用删）。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：工作里常问"容器起不来你怎么查"，答案就是这个顺序——<span class="code cmd">ps</span>（是不是 Up）→ <span class="code cmd">logs</span>（报什么错）→ <span class="code cmd">exec</span>（进去看现场）。</p>
+
+<h2>4-03 数据卷与端口映射</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：4-02</p>
+<p><b>这一关解决两个"为什么"</b>：为什么容器里的数据一删就没？为什么外面连不上容器里的服务？</p>
+<h3>一、先把"数据会消失"亲眼看一遍</h3>
+<pre class="demo"><span class="prompt">$</span> docker run -it --name tmp ubuntu:26.04 bash
+root@5a1b2c3d4e5f:/# echo "hello" &gt; /data.txt &amp;&amp; cat /data.txt
+hello
+root@5a1b2c3d4e5f:/# exit
+
+<span class="prompt">$</span> docker rm tmp &amp;&amp; docker run -it --name tmp2 ubuntu:26.04 bash
+root@9f8e7d6c5b4a:/# cat /data.txt
+cat: /data.txt: No such file or directory</pre>
+<p><b>解读</b>：容器是"一次性的盘子"——<b>删掉容器，写在容器里的东西全没了</b>，因为那些写入只存在于容器那一层可写层里。想留下，就得把数据放到容器外面。</p>
+<h3>二、数据卷 -v：把本机目录接进容器</h3>
+<pre class="demo"><span class="prompt">$</span> mkdir -p ~/lab/docker-data &amp;&amp; echo "我在外面写的" &gt; ~/lab/docker-data/note.txt
+<span class="prompt">$</span> docker run --rm -it -v ~/lab/docker-data:/data ubuntu:26.04 bash
+root@a1b2c3d4e5f6:/# cat /data/note.txt
+我在外面写的
+root@a1b2c3d4e5f6:/# echo "我在容器里写的" &gt;&gt; /data/note.txt &amp;&amp; exit
+
+<span class="prompt">$</span> cat ~/lab/docker-data/note.txt
+我在外面写的
+我在容器里写的</pre>
+<p><b>解读</b>：<span class="code">-v 本机路径:容器路径</span> = 把本机的目录"接"到容器里。两边看到的是<b>同一份文件</b>：容器里改的，外面立刻能看到。这样容器删了，数据还在（因为文件本来就住在你机器上）。<span class="code">--rm</span> 表示容器退出后自动删掉。</p>
+<p class="note">一句话记住：<b>无状态的放容器里，有状态的（数据、日志、配置）挂出来。</b></p>
+<h3>三、端口映射 -p：让外面能连进来</h3>
+<pre class="demo"><span class="prompt">$</span> docker run -d --name web -p 8080:80 nginx:alpine
+<span class="prompt">$</span> curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080
+200
+<span class="prompt">$</span> docker port web
+80/tcp -&gt; 0.0.0.0:8080</pre>
+<p><b>解读</b>：容器有自己的"内网"（里面 80 端口在听），外面默认连不上。<span class="code">-p 8080:80</span> = <b>本机 8080 → 容器 80</b>（前面是本机，后面是容器，别写反）。<span class="code cmd">curl</span> 返回 200 就说明通了——这也是你以后验证"服务有没有起来"的标准动作。</p>
+<h3>完成判定</h3>
+<p>□ 能说出"为什么容器删了数据就没了"，并演示一次数据卷保住数据　□ 能自己起一个 nginx 并用 curl 验证 200　□ 能说出 <span class="code">-p 8080:80</span> 里前后两个数字各是什么　□ 能说出什么该挂卷、什么不用</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：实验容器 <span class="code cmd">docker rm -f</span> 掉；挂载目录在 <span class="code">~/lab</span> 里，删掉不影响系统。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："容器里的数据怎么持久化""为什么 8080 能访问、80 不行"——这两问几乎每次用容器都会碰到。</p>
+
+<h2>4-04 写第一个 Dockerfile</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：4-03</p>
+<p><b>Dockerfile 是什么</b>：一份"怎么把东西装进镜像"的说明书，五行就能跑通。你只要先记住这五个指令，别的等用到再查。</p>
+<table><tr><th style="width:16%">指令</th><th style="width:38%">干什么</th><th>一句话理解</th></tr>
+<tr><td><span class="code">FROM</span></td><td>选基础镜像（从哪个系统开始搭）</td><td>打地基，永远写第一行</td></tr>
+<tr><td><span class="code">RUN</span></td><td>在<b>构建时</b>执行命令（装软件、建目录）</td><td>装修：装的时候做一次</td></tr>
+<tr><td><span class="code">COPY</span></td><td>把本机文件复制进镜像</td><td>把你的脚本搬进去</td></tr>
+<tr><td><span class="code">EXPOSE</span></td><td>声明容器里要听哪个端口（<b>给读的人看的说明</b>）</td><td>留个纸条：我用 80</td></tr>
+<tr><td><span class="code">CMD</span></td><td>容器<b>启动时</b>默认执行的那条命令</td><td>开火：跑起来时做</td></tr></table>
+<h3>动手：写一个自己的 hello 镜像</h3>
+<pre class="demo"><span class="prompt">$</span> mkdir -p ~/lab/myimage &amp;&amp; cd ~/lab/myimage
+<span class="prompt">$</span> cat &gt; Dockerfile &lt;&lt;'EOF'
+FROM ubuntu:26.04
+RUN apt-get update &amp;&amp; apt-get install -y curl
+COPY hello.sh /hello.sh
+RUN chmod +x /hello.sh
+CMD ["/hello.sh"]
+EOF
+<span class="prompt">$</span> cat &gt; hello.sh &lt;&lt;'EOF'
+#!/bin/bash
+echo "容器里跑起来了，里面装的是："
+curl --version | head -1
+EOF</pre>
+<h3>构建并运行</h3>
+<pre class="demo"><span class="prompt">$</span> docker build -t my-hello:1.0 .
+[+] Building 12.4s
+ =&gt; [1/4] FROM docker.io/library/ubuntu:26.04
+ =&gt; [2/4] RUN apt-get update &amp;&amp; apt-get install -y curl
+ =&gt; [3/4] COPY hello.sh /hello.sh
+ =&gt; [4/4] RUN chmod +x /hello.sh
+ =&gt; =&gt; naming to docker.io/library/my-hello:1.0
+
+<span class="prompt">$</span> docker run --rm my-hello:1.0
+容器里跑起来了，里面装的是：
+curl 8.5.0 (x86_64-pc-linux-gnu)  <span class="out"># 示例（版本号随机器）；脚本里 head -1 只取了第一行，完整输出还有一大串特性开关</span></pre>
+<p><b>解读</b>：<span class="code cmd">docker build -t 名字:版本 .</span> 里的<b>最后那个点不能少</b>——它表示"用当前目录里的 Dockerfile"。build 的过程就是<b>一行一行照着 Dockerfile 做</b>，所以输出里能看到 [1/4]、[2/4]……每一步都生成一层。</p>
+<p><b>为什么 COPY 要放在装软件之后</b>：Docker 有缓存，<b>哪一层变了，它和它后面的层才重建</b>。你改脚本的时候不想重装一遍 curl，所以"变化少的放前面、变化多的放后面"。</p>
+<h3>完成判定</h3>
+<p>□ 能不看笔记写出 FROM / RUN / COPY / CMD 四行　□ 能说清 RUN 和 CMD 的区别（构建时 vs 启动时）　□ 能说清 build 命令最后那个点是什么　□ 能说出 COPY 为什么要放在后面</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：练废的镜像 <span class="code cmd">docker rmi my-hello:1.0</span> 删掉重来；<span class="code">~/lab/myimage</span> 里的文件随时可改。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："你们的镜像怎么构建的？"——能讲清"分层 + 缓存 + 变化多的放后面"，比背十条指令管用。</p>
+
+<h2>4-05 把自己的脚本打包成镜像跑起来</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：4-04 ｜ 原料：阶段 2 的 <span class="code">disk_alert.sh</span> 或 <span class="code">backup.sh</span></p>
+<p><b>这一关的意义</b>：从"会跑别人的镜像"变成"<b>能把自己的东西装进镜像</b>"。这也是阶段 4 检查点的前置动作。</p>
+<h3>步骤 1：把脚本准备好</h3>
+<pre class="demo"><span class="prompt">$</span> mkdir -p ~/lab/docker-scripts &amp;&amp; cd ~/lab/docker-scripts
+<span class="prompt">$</span> cp ~/lab/shell-scripts/disk_alert.sh .    # 换成你自己的脚本路径
+<span class="prompt">$</span> cat disk_alert.sh
+#!/bin/bash
+THRESHOLD=80
+USE=$(df -h / | awk 'NR==2 {print $5}' | tr -d '%')
+if [ "$USE" -ge "$THRESHOLD" ]; then
+  echo "[告警] 磁盘使用率 ${USE}%，超过阈值 ${THRESHOLD}%"
+else
+  echo "[正常] 磁盘使用率 ${USE}%"
+fi</pre>
+<h3>步骤 2：写 Dockerfile</h3>
+<pre class="demo">FROM ubuntu:26.04
+RUN apt-get update &amp;&amp; apt-get install -y bash coreutils &amp;&amp; rm -rf /var/lib/apt/lists/*
+WORKDIR /opt/scripts
+COPY disk_alert.sh ./disk_alert.sh
+RUN chmod +x disk_alert.sh
+CMD ["./disk_alert.sh"]</pre>
+<p><b>解读</b>：<span class="code">WORKDIR</span> = 进容器后默认站在哪个目录（省得每句都写绝对路径）；<span class="code">rm -rf /var/lib/apt/lists/*</span> 是装完就删缓存，让镜像小一点；<span class="code">CMD</span> 用方括号写法（推荐，避免 shell 解析带来的怪问题）。</p>
+<h3>步骤 3：构建、运行、验证</h3>
+<pre class="demo"><span class="prompt">$</span> docker build -t disk-alert:1.0 .
+<span class="prompt">$</span> docker run --rm disk-alert:1.0
+[正常] 磁盘使用率 42%      <span class="out"># 示例数值，随你机器</span>
+
+<span class="prompt">$</span> docker run --rm -e THRESHOLD=10 disk-alert:1.0
+[正常] 磁盘使用率 42%</pre>
+<p><b>解读</b>：脚本在容器里跑通了。<b>注意后一条</b>：我们想试试改阈值，但脚本里阈值是写死的（<span class="code">THRESHOLD=80</span>），所以在外面改环境变量没用。<b>这就是"参数要能传进去"的意义</b>——顺手把脚本改成从环境变量读阈值：</p>
+<p class="note"><b>版本差异说明</b>：本节贴的"写死版"是为了展示"参数要能传进去"的演进；你阶段 2 交付的 disk_alert.sh（03 册附录 D2）本来就是 <span class="code">THRESHOLD=${THRESHOLD:-80}</span> 环境变量版——如果手头就是那份，可以跳过这步改写，直接 build 后用 <span class="code">-e</span> 传值验证。</p>
+<pre class="demo">THRESHOLD=<span class="param">${THRESHOLD:-80}</span>     # 有传就用传进来的，没传默认 80</pre>
+<p>改完重新 build 再跑，换一个一定会触发的值就能看到告警：<span class="code cmd">docker run --rm -e THRESHOLD=0 disk-alert:1.0</span>（或填一个低于你机器当前磁盘使用率的值）——<b>用 10 这类值在自己机器上可能根本不触发，那是"阈值没到"，不是"没生效"</b>。<b>这一步做出来，你就完成了"脚本 → 镜像 → 可配置服务"的升级。</b></p>
+<h3>完成判定</h3>
+<p>□ 自己的脚本能在容器里跑出结果　□ 能说出 <span class="code">WORKDIR</span> 解决了什么问题　□ 改一处脚本后重新 build，能说清"哪几层用了缓存"　□ 用 <span class="code">-e</span> 把阈值传进去并触发一次告警</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">docker rmi disk-alert:1.0</span> 删镜像；脚本原件在 <span class="code">~/lab</span> 和 shell-scripts 仓库里，没被改动过。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这是值得写进项目经历的一行——"把自己的巡检脚本容器化，用环境变量控制阈值"。比"学过 Docker"强得多。</p>
+
+<h3>顺带一提 · SQL（不用学，知道有这么回事就行）</h3>
+<div class="box2"><b>是什么</b>：跟数据库说话的语言，最常用的四句是 SELECT（查）、INSERT（插）、UPDATE（改）、DELETE（删）。<br>
+<b>什么时候遇到</b>：容器化部署里常带一个数据库容器；工单里会有"数据库连不上""连接数满了""这条数据查不到"。<br>
+<b>真要用时去哪查</b>：14 手册的排错心法（先看容器状态与日志）＋ 搜"mysql 连接数 查看"，四句话的语法 10 分钟就能看懂。</div>
+
+<h2>4-06 镜像瘦身与分层</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：4-05　｜　状态：已写（第三轮）</p>
+<p><b>这一关只解决一件事</b>：让你的镜像不要又大又慢。你要是只会写 Dockerfile，镜像是能跑，但别人问"你这镜像多大、为什么这么大"，就答不上来了。</p>
+<h3>步骤 1：先看看镜像是怎么做出来的</h3>
+<pre class="demo"><span class="prompt">$</span> docker history my-hello:1.0
+IMAGE          CREATED BY                                      SIZE
+9f8e7d6c5b4a   CMD ["/hello.sh"]                               0B
+1a2b3c4d5e6f   RUN chmod +x /hello.sh                          0B
+2b3c4d5e6f70   COPY hello.sh /hello.sh                         121B
+3c4d5e6f7081   RUN apt-get update &amp;&amp; apt-get install -y curl   92MB
+4d5e6f708192   /bin/sh -c #(nop)  FROM ubuntu:26.04           78MB</pre>
+<p><b>解读</b>：Dockerfile 里<b>每一条指令就是一层</b>，从下往上看就是构建顺序。<b>装 curl 那一条一口气吃掉 92MB</b> —— 因为 apt 装的包加上缓存全留在这一层里了。</p>
+<h3>步骤 2：把体积压回去</h3>
+<pre class="demo">FROM ubuntu:26.04
+RUN apt-get update &amp;&amp; apt-get install -y curl \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*          # ← 装完在同一层里删缓存
+COPY hello.sh /hello.sh
+RUN chmod +x /hello.sh
+CMD ["/hello.sh"]</pre>
+<pre class="demo"><span class="prompt">$</span> docker build -t my-hello:1.1 . &amp;&amp; docker images | head -3
+REPOSITORY   TAG   IMAGE ID       SIZE
+my-hello     1.1   7a8b9c0d1e2f   96MB
+my-hello     1.0   9f8e7d6c5b4a   170MB</pre>
+<p><b>解读</b>：<b>170MB → 96MB</b>。关键动作只有一个：<b>"装东西"和"清缓存"要写在同一层里</b>（用 <span class="code">&amp;&amp;</span> 连起来）。分成两条 RUN，中间那层已经把缓存固化下来了，后面删也没用。</p>
+<h3>步骤 3：缓存与顺序（这一条实战里常问）</h3>
+<pre class="demo"><span class="prompt">$</span> docker build -t my-hello:1.2 .      # 什么都没改
+ =&gt; CACHED [2/4] RUN apt-get update &amp;&amp; apt-get install -y curl ...
+ =&gt; CACHED [3/4] COPY hello.sh /hello.sh
+# 改一行 hello.sh 再 build：
+ =&gt; CACHED [2/4] RUN apt-get update ...        ← 没重装 curl
+ =&gt; [3/4] COPY hello.sh /hello.sh              ← 从这层开始重做</pre>
+<p><b>解读</b>：<b>哪一层变了，它和它后面的层才重建</b>。"很少变的东西放前面，经常变的东西放后面" 就是这个道理（所以装依赖在 COPY 代码之前）。</p>
+<h3>延伸（点到为止）：多阶段构建</h3>
+<pre class="demo">FROM golang:1.23 AS builder     # 第一阶段：编译用的"工地"
+WORKDIR /src
+COPY main.go .
+RUN go build -o app main.go
+
+FROM alpine:3.20                # 第二阶段：只把成品搬进小房子
+COPY --from=builder /src/app /app
+CMD ["/app"]</pre>
+<p><b>解读</b>：把"编译要的一大堆工具"留在第一阶段，<b>最终镜像里只放能跑的成品</b>。名字记住就行，等他真遇到编译型语言再看细节。</p>
+<h3>完成判定</h3>
+<p>□ 能用 <span class="code cmd">docker history</span> 说出哪一层最大　□ 把"装 + 清缓存"写进同一层后，镜像确实变小　□ 能说出为什么 COPY 要放在装依赖之后　□ 能说出多阶段构建解决了什么问题（一句话）</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：旧镜像 <span class="code cmd">docker rmi my-hello:1.0</span> 删掉即可；Dockerfile 改坏了就从 <span class="code">~/lab/myimage</span> 里的备份恢复。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："你们镜像怎么优化"——答"装和清缓存写同一层、变化少的放前面、必要时多阶段构建"，这三句就够了。</p>
+
+<h2>4-07 docker compose 起两个服务</h2>
+<p class="note">时长：休息日 3 小时 ｜ 工作日 15 分　｜　前置：4-00（YAML）＋ 4-02　｜　状态：已写（第三轮）</p>
+<p><b>为什么需要 compose</b>：一条 <span class="code cmd">docker run</span> 只能起一个容器。真实场景动辄"应用 + 缓存 + 数据库"三四个容器，一个个手敲容易漏参数。<b>compose 就是把这些 <span class="code cmd">docker run</span> 写成一份文件</b>，一声令下全起来。</p>
+<h3>步骤 1：写文件</h3>
+<pre class="demo"><span class="prompt">$</span> mkdir -p ~/lab/two-services &amp;&amp; cd ~/lab/two-services
+<span class="prompt">$</span> cat &gt; docker-compose.yml &lt;&lt;'EOF'
+services:
+  web:
+    image: nginx:alpine
+    container_name: web
+    ports:
+      - "8080:80"
+    depends_on:
+      - cache
+    restart: unless-stopped
+
+  cache:
+    image: redis:7-alpine
+    container_name: cache
+    restart: unless-stopped
+EOF</pre>
+<p><b>解读</b>：这份文件就是两个 <span class="code cmd">docker run</span> 的"清单版"。注意 <span class="code">services:</span> 下缩进的两格才是服务名（<b>YAML 的缩进就是层级</b>，4-00 学过）。<span class="code">depends_on</span> 表示"起 web 之前先起 cache"。</p>
+<h3>步骤 2：起来</h3>
+<pre class="demo"><span class="prompt">$</span> docker compose up -d
+[+] Running 3/3
+ ✔ Network two-services_default   Created
+ ✔ Container cache                Started
+ ✔ Container web                  Started
+
+<span class="prompt">$</span> docker compose ps
+NAME    IMAGE              STATUS         PORTS
+cache   redis:7-alpine     Up 10 seconds  6379/tcp
+web     nginx:alpine       Up 10 seconds  0.0.0.0:8080-&gt;80/tcp</pre>
+<p><b>解读</b>：<b>两个都是 Up 才算成功</b>。compose 还顺带建了一个网络（<span class="code">two-services_default</span>），下一关讲它。<span class="code">-d</span> 还是"后台跑"的意思。</p>
+<h3>步骤 3：验证两个服务真的在</h3>
+<pre class="demo"><span class="prompt">$</span> curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080
+200
+<span class="prompt">$</span> docker compose exec cache redis-cli ping
+PONG
+<span class="prompt">$</span> docker compose logs web | tail -2
+2026/10/09 12:30:01 [notice] 1#1: start worker process 29</pre>
+<p><b>解读</b>：<b>200 = web 活着，PONG = cache 活着</b>。注意命令从 <span class="code cmd">docker exec</span> 变成了 <span class="code cmd">docker compose exec 服务名</span> —— 用服务名就不用抄容器 ID 了。</p>
+<h3>步骤 4：收工</h3>
+<pre class="demo"><span class="prompt">$</span> docker compose down
+[+] Running 3/3
+ ✔ Container web    Removed
+ ✔ Container cache  Removed
+ ✔ Network two-services_default  Removed</pre>
+<p><b>解读</b>：<span class="code cmd">down</span> 一条命令把容器和网络都清掉（<b>但具名卷不会删</b>，这是有意的：数据别跟着容器一起消失）。</p>
+<h3>完成判定</h3>
+<p>□ 能不看笔记写出一个两服务的 compose 文件　□ <span class="code cmd">up -d</span> / <span class="code cmd">ps</span> / <span class="code cmd">logs</span> / <span class="code cmd">exec</span> / <span class="code cmd">down</span> 五条命令能跑通　□ 能用 curl 200 和 redis PONG 各验证一次　□ 能说出 <span class="code cmd">down</span> 之后什么被删了、什么没被删</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">docker compose down</span>；想连数据卷一起清就 <span class="code cmd">down -v</span>（练习环境随便清，生产环境别乱加 -v）。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：这是"用 compose 起过多个服务"的实物；后面追问"服务之间怎么找到对方"就接下一关。</p>
+
+<h2>4-08 Compose 的网络与依赖顺序</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：4-07　｜　状态：已写（第三轮）</p>
+<h3>一、服务之间靠"名字"互相找到</h3>
+<pre class="demo"><span class="prompt">$</span> cd ~/lab/two-services &amp;&amp; docker compose up -d
+<span class="prompt">$</span> docker compose exec web ping -c 2 cache
+PING cache (172.20.0.3): 56 data bytes
+64 bytes from 172.20.0.3: seq=0 ttl=64 time=0.071 ms
+
+<span class="prompt">$</span> docker compose exec web ping -c 1 baidu.com
+ping: bad address 'baidu.com'          # ← 如果这里显示的是 IP（能解析），说明容器用的是宿主机 DNS，正常；解析不通再查 daemon 的 DNS 配置</pre>
+<p><b>解读</b>：compose 给这组服务建了<b>一个专属网络</b>，并在里面做了 DNS：<b>服务名（web / cache）就是主机名</b>。所以代码里连 Redis 就写 <span class="code">redis://cache:6379</span>，而不是 <span class="code">localhost</span>——对 web 容器来说，localhost 是它自己。</p>
+<p class="note">这就是 5-02 里 Prometheus 要写 <span class="code">node-exporter:9100</span> 的同一个道理。</p>
+<h3>二、depends_on 不等于"对方已经准备好了"</h3>
+<pre class="demo"># 现象：web 启动了，但连不上 redis，报连接被拒
+<span class="prompt">$</span> docker compose logs web | grep -i "connection" | head -2
+ Connection refused (cache:6379)
+
+# 原因：depends_on 只管"先启动 cache 容器"，
+#       不代表 redis 进程已经能接受连接（它可能还在加载数据）</pre>
+<p><b>解读</b>：<span class="code">depends_on</span> 保证的是<b>启动顺序</b>，不是<b>就绪状态</b>。这是实战里的经典坑。两种正经解法：</p>
+<pre class="demo"># 解法 A（推荐）：应用侧重试 —— 连不上就等 2 秒再试，最多 10 次
+# 解法 B：给 cache 加健康检查，web 等它"健康"再起
+services:
+  cache:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 5
+  web:
+    image: nginx:alpine
+    depends_on:
+      cache:
+        condition: service_healthy     # ← 等它健康，而不是"启动了"</pre>
+<p><b>解读</b>：解法 A 更常用（应用自己扛住"依赖没就绪"），解法 B 更漂亮但只有 compose 支持。两个都记住，够用了。</p>
+<h3>三、看一眼网络长什么样</h3>
+<pre class="demo"><span class="prompt">$</span> docker network ls | grep two
+8f1c2d3e4f5a   two-services_default   bridge    local
+<span class="prompt">$</span> docker network inspect two-services_default --format '{{range .Containers}}{{.Name}} {{end}}'
+web cache</pre>
+<p><b>解读</b>：同一个 compose 项目里的服务自动进同一个 bridge 网络，<b>不同项目之间默认互相看不见</b>（这也是隔离）。</p>
+<h3>完成判定</h3>
+<p>□ 能说出为什么代码里写 <span class="code">cache:6379</span> 而不是 <span class="code">localhost:6379</span>　□ 能说出 <span class="code">depends_on</span> 保证了什么、没保证什么　□ 能用两种解法之一演示"依赖没就绪时不崩"　□ 能用 <span class="code cmd">docker network inspect</span> 说出哪个网络里有哪几个容器</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：<span class="code cmd">docker compose down</span>；实验用的网络会跟着一起删。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>："容器里连数据库为什么不用 localhost""depends_on 靠谱吗"——这两个问题答对，就说明你真部署过，不是只看过教程。</p>
+
+<h2>4-09 容器排障：日志 / 退出码 / 端口被占</h2>
+<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：4-02 ＋ 4-07　｜　状态：已写（第三轮）</p>
+<p><b>这一关是阶段 4 的重点</b>：容器起不来时，你要能在 3 分钟内说清"是哪一类问题"。下面三条是排查链，不是命令清单 —— <b>每一条都是"现象 → 命令 → 判读 → 下一步"</b>。</p>
+<h3>排查链 ①：容器起不来，先看日志</h3>
+<pre class="demo"><span class="prompt">$</span> docker compose up -d          # 结果 web 没稳住
+[+] Running 2/2
+ ✔ Container cache  Started
+ ✔ Container web    Started          ← 注意：这里不是 Error
+
+<span class="prompt">$</span> docker compose ps             # ← 先看状态：Restarting = 起来又自己退了
+web   …   Restarting (1) 3 seconds ago
+
+<span class="prompt">$</span> docker compose logs web      # ← 第一步永远是日志
+web  | nginx: [emerg] invalid number of arguments in "listen" directive in /etc/nginx/conf.d/default.conf:3</pre>
+<p><b>判读</b>：<b>"Started" 不等于跑住了</b>——4-07 的 compose 配了 <span class="code">restart: unless-stopped</span>，容器退出后会被自动拉起，所以<b>看不到 Error</b>，而是 <span class="code">Restarting</span> 循环；日志直接告诉你是<b>配置写错</b>（nginx 的 listen 少写了端口）。<br>
+<b>下一步</b>：改配置 → <span class="code cmd">docker compose up -d</span> 重来。<b>"Started" 或 "Restarting" 时都先 <span class="code cmd">docker compose ps</span> 看状态、再看日志。</b>若日志是空的，走第 ② 条。</p>
+<h3>排查链 ②：日志空的，就看退出码</h3>
+<pre class="demo"><span class="prompt">$</span> docker ps -a | grep web
+7f3a9c1d2e4b   web   nginx:alpine   Exited (1) 2 minutes ago
+
+<span class="prompt">$</span> docker inspect web --format '{{.State.ExitCode}} {{.State.OOMKilled}}'
+1 false</pre>
+<table><tr><th style="width:14%">退出码</th><th style="width:30%">常见含义</th><th>下一步看哪</th></tr>
+<tr><td><span class="code">0</span></td><td>正常结束（一次性任务的正常态）</td><td>不是故障，看它该不该一直跑</td></tr>
+<tr><td><span class="code">1</span></td><td>应用自己报错退出</td><td>日志；检查配置 / 依赖 / 参数</td></tr>
+<tr><td><span class="code">137</span></td><td>被 SIGKILL 杀掉，最常见是<b>内存超限被 OOM</b></td><td><span class="code cmd">docker inspect</span> 看 <span class="code">OOMKilled</span>；加大内存或查内存泄漏</td></tr>
+<tr><td><span class="code">143</span></td><td>进程自己处理 SIGTERM 后主动退出（<b>128＋15</b>；<b>不是所有 <span class="code cmd">docker stop</span> 都是 143</b>）</td><td>看应用怎么处理 SIGTERM：优雅退出＝0 / 被强杀＝137</td></tr></table>
+<p><b>判读</b>：<span class="code">137</span> ＋ <span class="code">OOMKilled: true</span> = 内存超限被 OOM；<span class="code">137</span> 但没 OOM = 被 SIGKILL（最常见就是 <span class="code cmd">docker stop</span> 发了 SIGTERM、等 10 秒没停住，然后强杀），<span class="code">0</span> = 应用处理 SIGTERM 后优雅退出。<br><b>实测（三组，可自己复现）</b>：<span class="code">docker stop</span> 一个 <span class="code">alpine sleep 300</span> → <b>137</b>（等满 10 秒后强杀）；<span class="code">docker stop</span> 一个 <span class="code">nginx:alpine</span> → <b>0</b>（1 秒内优雅退出；<b>前提是让它先跑起来再停</b>——刚 run 就秒停会得到 137，那是没来得及处理信号）；<span class="code">docker kill</span> → <b>137</b>。<b>所以别背「stop 就是 143」——要看应用怎么处理 SIGTERM。</b></p>
+<p class="note"><b>日志里还有一类"没见过"的报错：<span class="code err">exec format error</span></b>——意思是"可执行文件格式不对"。容器里最常见两因：① 脚本第一行 shebang 缺失或写错（如漏了 <span class="code">#!/bin/bash</span>）；② 文件在 Windows 里编辑过、带了 CRLF 换行。修法：<span class="code cmd">head -1</span> 看第一行、对齐换行符，再 <span class="code">chmod +x</span> 后重新 build 跑。</p>
+<h3>排查链 ③：容器在跑，但外面连不上（端口被占）</h3>
+<pre class="demo"><span class="prompt">$</span> docker compose up -d
+docker: Error response from daemon: failed to set up container networking: driver failed
+programming external connectivity on endpoint web2 (…): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+<span class="prompt">$</span> ss -tulnp | grep 8080        # ← 谁占了 8080
+tcp   LISTEN 0 511  0.0.0.0:8080  0.0.0.0:*  users:(("nginx",pid=2211,fd=6))
+
+<span class="prompt">$</span> docker ps --format '{{.Names}}\t{{.Ports}}' | grep 8080
+old-nginx   0.0.0.0:8080-&gt;80/tcp</pre>
+<p><b>判读</b>：<b>本机 8080 端口已经被占了</b>（要么另一个容器，要么一个直接跑在系统上的 nginx）。<br>
+<b>下一步</b>：二选一 —— 把新服务换到别的端口（<span class="code">-p 8081:80</span>），或者把占用的那位停掉（<span class="code cmd">docker stop old-nginx</span> / <span class="code cmd">systemctl stop nginx</span>）。<b>先确认那个服务是不是别人正在用的，再动手停。</b></p>
+<h3>三条链合起来：一张排查顺序图</h3>
+<pre class="demo">容器没起来
+ ├─ ① docker compose logs 服务名   → 有报错：按报错改（配置/依赖/参数）
+ ├─ ② docker ps -a 看 Exited (N)   → 137/OOMKilled：内存问题
+ │                                  143：被谁停了
+ │                                  1：应用内部报错，回 ①
+ └─ ③ 容器 Up 但连不上             → ss -tulnp 看端口 → 被占就换端口或停掉占用者</pre>
+<h3>完成判定</h3>
+<p>□ 能不看笔记走完三条排查链　□ 能说出 <span class="code">137</span> 和 <span class="code">143</span> 各代表什么　□ 能故意造一个"端口被占"并解决掉　□ 能说出"容器 Up 但连不上"时第一步敲什么（<span class="code cmd">ss -tulnp</span>）</p>
+<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p><b>回滚方式</b>：练习造的故障容器全部 <span class="code cmd">docker rm -f</span> 清掉；改动过的端口配置改回原样。</p>
+<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p><b>实战价值</b>：实战里最看重的就是"面对没见过的故障看推理路径"——容器故障的三条链是你手里最标准的一段推理。</p>
+
+<h2>4-10 阶段 4 · 学习总结练习：三个脚本容器化 ＋ README</h2>
+<p class="note">时长：休息日 3 小时 ｜ 工作日 15 分　｜　前置：4-00 ~ 4-09 ｜　状态：已写（第三轮）</p>
+<h3>业务场景</h3>
+<p>你阶段 2 写的三个脚本（backup / disk_alert / service_guard）现在只躺在你的机器上。同事说："换台机器就得重配一遍环境，能不能打包成镜像，谁拿去都能跑？"</p>
+<p class="note"><b>容器化范围</b>：就用阶段 2 的 <span class="code">backup.sh</span> / <span class="code">disk_alert.sh</span> / <span class="code">service_guard.sh</span> 这三个（5 件套里的其余两个 check_res / health_check 是配套脚本，不必容器化）。</p>
+<h3>综合要求（这题把这几关的技能串起来）</h3>
+<p class="note">技能点：<b>Dockerfile 分层与缓存（4-04/4-06）＋ 环境变量传参（4-05）＋ 数据卷（4-03）＋ compose 两个服务（4-07/4-08）＋ 容器排障（4-09）＋ README 写法（16 册那一页）</b></p>
+<p>① 给三个脚本各写一个 Dockerfile，<b>装依赖和清缓存写在同一层</b>；<br>
+② 阈值一类的参数<b>从环境变量读</b>（<span class="code">${THRESHOLD:-80}</span> 那种写法），不要写死；<br>
+③ 用一个 <span class="code">docker-compose.yml</span> 把"巡检脚本 + 一个服务"两个容器一起管起来（服务可以是 nginx，模拟被巡检的对象）；<br>
+④ 把巡检结果<b>写到挂载出来的目录</b>里（容器删了结果还在）；<br>
+⑤ 写 README：一句话说明 / 怎么跑 / 环境 / 效果输出 / 踩坑记录（照 16 册《一个合格的 README 长什么样》）。</p>
+<h3>验收</h3>
+<p>□ 三个镜像都能 build 成功，且 <span class="code cmd">docker history</span> 里没有"又大又不该留"的层　□ 改阈值用 <span class="code">-e</span> 传进去能触发告警　□ compose 两个服务都是 Up　□ 报告文件在宿主机目录里能找到　□ 陌生人照 README 能跑通（写法见 16 册《一个合格的 README 长什么样》）　□ 每一条都能说清"为什么这么做"</p>
+<h3>时间</h3>
+<p>3 小时（休息日）</p>
+<h3>产出</h3>
+<p>仓库 <span class="code">docker-scripts</span>（或并进 <span class="code">shell-scripts</span> 的 <span class="code">docker/</span> 目录）：三个 Dockerfile ＋ compose 文件 ＋ README ＋ 一张运行截图。</p>
+<h3>AI 运维指向</h3>
+<p>这是"把运维脚本变成可分发工具"的标准动作 —— 以后你把推理服务打成镜像、在 K8s 里跑，用的是同一套思路。</p>
+<h3>实战价值</h3>
+<p>别人问"你 Docker 到什么程度"，你可以说："我把自己写的三个运维脚本容器化了，参数用环境变量传，用 compose 管两个容器，结果落盘；镜像我做过瘦身，知道分层和缓存怎么影响构建速度。" —— 这段话说出来，Docker 这一项就过了。</p>
+<p class="footer">《Docker 入门》</p>
+</body>
+</html>

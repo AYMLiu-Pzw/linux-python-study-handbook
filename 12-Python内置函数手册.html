@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Python 内置函数手册 · v2.5</title>
+<title>Python 内置函数手册 · v3.1</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -221,7 +221,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="toc-row"><span class="tn">第 6 组</span><span class="tdesc">工具集：pow/divmod/chr/ord/format/all/any/repr + os/time 常用函数 + 自定义函数速查</span><a href="#toc-7"></a></div>
 <div class="toc-row"><span class="tn">文件与 JSON</span><span class="tdesc">JSON 四件套、文件对象三连（运维天天用）</span><a href="#toc-8"></a></div>
 <div class="toc-row"><span class="tn">文件对象三连</span><span class="tdesc">open / read / with（三种文件操作速查）</span><a href="#toc-9"></a></div>
-<div class="toc-row"><span class="tn">字符串方法速查</span><span class="tdesc">11 条必会：split/join/strip(带参)/replace/大小写/find/头尾判断/count/rsplit/splitlines/isdigit</span><a href="#toc-10"></a></div>
+<div class="toc-row"><span class="tn">字符串方法速查</span><span class="tdesc">12 条必会：split/join/strip(带参)/replace/大小写/find/头尾判断/count/rsplit/splitlines/isdigit</span><a href="#toc-10"></a></div>
 <div class="toc-row"><span class="tn">组合练习</span><span class="tdesc">5 道函数组合套路题（含答案）</span><a href="#toc-11"></a></div>
 <div class="toc-row"><span class="tn">替代写法对比</span><span class="tdesc">f-string vs %；subprocess vs os.system；logging vs print</span><a href="#toc-12"></a></div>
 <div class="toc-row"><span class="tn">章末作业</span><span class="tdesc">8 题（答案紧随题目，先做再看）</span><a href="#toc-13"></a></div>
@@ -231,6 +231,20 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 
 <div class="newpage"></div>
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
+<tr><td><b>本册关卡</b></td><td>—</td></tr>
+<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
+<tr><td><b>学完解锁</b></td><td>写代码时 30 秒查到用法</td></tr></table>
+<div class="box2"><b>本册禁止通读，只许查。</b><br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：这是 Python 内置函数的<b>查表手册</b> —— 常用内置函数按六组整理（输入输出 / 类型工厂 / 长度统计 / 序列工具 / 检查工具 / 工具集），外加文件与 JSON、字符串方法。生活类比：像厨房墙上的<b>量杯刻度表</b>——不会替你做饭，但一抬眼就知道该用哪个。</p>
+<p><b>② 干什么用</b>：写脚本时"这个功能有没有现成的"答案都在这儿；比背更实用的是<b>知道名字、能查</b>（例：计数用 <span class="code">len</span>、带序号遍历用 <span class="code">enumerate</span>）。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：写代码时用得对不对（比如用 <span class="code">enumerate</span> 而不是手写计数器）直接反映熟练度。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小一例：<span class="code">len("hello") → 5</span>（函数 = 加工机器：原料进、产品出）。用法照本册规矩：<b>不许通读，只许查</b>——先读「理念篇」的三条规律，再按组查表。</p>
+
 <h2 id="toc-1">理念篇：先搞懂函数是什么，再记函数</h2>
 
 <h3>1. 函数 = 一台加工机器</h3>
@@ -376,8 +390,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td class="code">os.path.exists(路径)</td><td>判断文件是否存在</td><td class="code">os.path.exists(<span class="str">"a.txt"</span>) <span class="out">→ True/False</span></td></tr>
 <tr><td class="code">os.path.getsize(路径)</td><td>文件大小（字节）</td><td class="code">os.path.getsize(<span class="str">"a.txt"</span>) <span class="out">→ 数字（大小以你机器的文件为准）</span></td></tr>
 <tr><td class="code">os.path.getmtime(路径)</td><td>最后修改时间（时间戳）</td><td class="code">os.path.getmtime(<span class="str">"a.txt"</span>) <span class="out">→ 数字（时间戳，值以你机器为准）</span></td></tr>
-<tr><td class="code">time.localtime(秒)</td><td>时间戳 → 可读时间</td><td class="code">time.strftime(<span class="str">"%F"</span>, time.localtime(时间戳)) <span class="out">→ '2026-08-25'（示例）</span></td></tr>
-<tr><td class="code">time.time()</td><td>时间戳（1970 起的秒数）</td><td class="code"><span class="kw">import</span> time; time.time() <span class="out">→ 1758400000.0（示例值，每次运行都在涨）</span></td></tr>
+<tr><td class="code">time.localtime(秒)</td><td>时间戳 → 可读时间</td><td class="code">time.strftime(<span class="str">"%F"</span>, time.localtime()) <span class="out">→ '2026-08-25'（示例；<span class="code">localtime()</span> 不传参就取当前时间；传数字就是时间戳 → 可读时间，如 <span class="code">time.localtime(1789972200)</span>）</span></td></tr>
+<tr><td class="code">time.time()</td><td>时间戳（1970 起的秒数）</td><td class="code"><span class="kw">import</span> time; time.time() <span class="out">→ 1789972200.0（示例值，每次运行都在涨）</span></td></tr>
 <tr><td class="code">time.sleep(秒)</td><td>暂停</td><td class="code">time.sleep(<span class="num">1</span>) <span class="out">→ 暂停 1 秒后继续</span> <span class="cm"># 脚本里"等一会"用</span></td></tr>
 <tr><td class="code">time.strftime(格式)</td><td>格式化当前时间</td><td class="code">time.strftime(<span class="str">"%Y-%m-%d %H:%M:%S"</span>) <span class="out">→ '2026-09-21 14:30:00'（示例）</span></td></tr>
 <tr><td class="code">random.randint(a, b)</td><td>随机整数（a~b，两头都包含）</td><td class="code"><span class="kw">import</span> random; random.randint(<span class="num">1</span>, <span class="num">6</span>) <span class="out">→ 1~6 的随机数</span></td></tr>
@@ -451,7 +465,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 </div>
 
-<h2 id="toc-10">字符串方法速查（11 个必会方法）</h2>
+<h2 id="toc-10">字符串方法速查（12 个必会方法）</h2>
 
 <table>
 <tr><th style="width:24%">方法</th><th>作用</th><th style="width:40%">示例</th></tr>
@@ -556,10 +570,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b>第5处</b>：答案：1. False（"5" 是 str）　2. 字符串能用的所有方法名列表（split、strip……）</p>
 <p><b>第6处</b>：答案：1. (3, 1)　2. False（0 算假）　3. "a/b"（Windows 上是 "a\b"——这就是用 join 别手拼的理由）</p>
 <p><b>第7处</b>：答案：1. 立刻清空（重要文件先备份或用 "a"）　2. 自动关闭文件，不会忘写 close</p>
-<p><b>第8处</b>：答案：1. ['a','b','c']　2. "hello"（读文件后每行都该 strip 一下，去掉末尾换行）</p>
+<p><b>第8处</b>：答案：1. ['a','b','c']　2. "hello"（<span class="code">.strip()</span> 去掉首尾空白）</p>
 <h3>组合练习参考答案</h3>
 
-<p><b>参考答案</b>（运行前先准备：题 1 先 <span class="code">echo 'error' &gt; log.txt</span> 建文件；题 2 自行输入三个数字；题 3 交互式输入数字串；其余按题意准备）</p>
+<p><b>参考答案</b>（运行前先准备：题 1 先 <span class="code">echo 'error' &gt; log.txt</span> 建文件；题 3 交互式输入数字串；其余按题意准备）</p>
 <pre><span class="cm"># 1</span>
 <span class="kw">with</span> <span class="fn">open</span>(<span class="str">"log.txt"</span>, <span class="param">encoding</span>=<span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="param">f</span>:
     <span class="fn">print</span>(<span class="param">f</span>.<span class="fn">read</span>().<span class="fn">count</span>(<span class="str">"error"</span>))
@@ -592,27 +606,26 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p>④ <b>排一排</b>：range数列、enumerate编号、zip配对、sorted排序、reversed反转</p>
 <p>⑤ <b>查一查</b>：type/isinstance看类型、dir看方法、help看说明书</p>
 <p>⑥ <b>文件三连</b>：open开门、read读、write写，with自动关门</p>
-<p>⑦ <b>字符串方法（11 个）</b>：split切、join拼、strip洗（可带参数）、replace换、upper/lower大小写、find找、startswith/endswith看头尾、count数、rsplit右切、splitlines按行切、isdigit验数字</p>
+<p>⑦ <b>字符串方法（12 个）</b>：split切、join拼、strip洗（可带参数）、replace换、upper/lower大小写、find找、startswith/endswith看头尾、count数、rsplit右切、splitlines按行切、isdigit验数字</p>
 </div>
 
 <div class="box2">
-<p><b><svg class="em" width="15" height="15"><use href="#ic-nt"/></svg> 本册待改进清单</b>（学习中发现手册不好用的地方，攒 5 条再统一改版）：</p>
-<p class="note">（留白：学习中发现手册哪里不好用就记在这里，攒满 5 条再统一改版）</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-nt"/></svg> 本册待改进清单</b>（学习中发现手册不好用的地方，记在这里）：</p>
 </div>
 
 <div class="box2"><b>本套资料总索引（要查什么 → 翻哪册）：</b>
 <table class="tight xtight"><tr><th>你要找</th><th>去哪册</th></tr>
 <tr><td>Linux 命令、权限、进程、服务、网络、Shell 脚本</td><td>01 Linux 入门（练：02 基础篇 / 03 进阶篇）</td></tr>
 <tr><td>Python 语法、模块、文件、异常、自动化</td><td>04 Python 入门（练：05 基础篇 / 06 进阶篇）</td></tr>
-<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>07 内置函数手册</td></tr>
-<tr><td>报错里的英文单词看不懂</td><td>08 报错英语单词手册</td></tr>
-<tr><td>日志读不懂、报错不会定位</td><td>09 日志报错解读手册</td></tr>
-<tr><td>变量 / 函数怎么起名</td><td>10 命名手册</td></tr>
-<tr><td>代码提交、推送到 GitHub</td><td>11 Git 与 GitHub 速查</td></tr>
+<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>12 内置函数手册</td></tr>
+<tr><td>报错里的英文单词看不懂</td><td>13 报错英语单词手册</td></tr>
+<tr><td>日志读不懂、报错不会定位</td><td>14 日志报错解读手册</td></tr>
+<tr><td>变量 / 函数怎么起名</td><td>15 命名手册</td></tr>
+<tr><td>代码提交、推送到 GitHub</td><td>16 Git 与 GitHub 速查</td></tr>
 <tr><td>装第三方库（pip / venv / requirements）</td><td>04 Python 入门 · 附录 E</td></tr>
-<tr><td>我到底学会了没有</td><td>12 总自测表（逐条打勾）</td></tr></table></div>
+<tr><td>我到底学会了没有</td><td>17 关卡总表（逐条打勾）</td></tr></table></div>
 
-<p class="footer">Python 内置函数手册· 配合《Python 入门》教科书使用 · 查得快、记得牢，不用背 · v2.5（2026-09）</p>
+<p class="footer">《Python 内置函数手册》</p>
 
 </body>
 </html>

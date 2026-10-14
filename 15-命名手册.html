@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>命名手册 · v2.5</title>
+<title>命名手册 · v3.1</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -247,10 +247,24 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <h1><svg class="em" width="15" height="15"><use href="#ic-b2"/></svg> 命名手册（起名速查）</h1>
 <p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>；需要保留彩色底色时开启"背景图形"。用法：先背第 1、2 页；写代码卡壳时翻第 3、4 页找词。</p>
 
+<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
+<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
+<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
+<tr><td><b>本册关卡</b></td><td>—</td></tr>
+<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
+<tr><td><b>学完解锁</b></td><td>变量和函数起名不再卡壳</td></tr></table>
+<div class="box2"><b>本册禁止通读，只许查</b>（起名三原则那一页可以扫一眼）。<br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+
+<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
+<p><b>① 是什么</b>：这是一本<b>起名手册</b> —— 把写代码时反复要用的变量名、函数名整理成 4 页速查（起名三原则 / 四步法 ＋ 核心词表（约 24 组） / 分组速查 / 动作动词与判断前缀）。生活类比：像给孩子起名前先定"姓 ＋ 辈分"——名字不是随手取的，是按规则拼出来的。</p>
+<p><b>② 干什么用</b>：命名混乱的代码（<span class="code">a</span>、<span class="code">data1</span>、<span class="code">list2</span>）过三天自己都看不懂。这一册让你碰到"这个变量该叫什么"时能直接查、几十秒定名；也帮你避开坑（<span class="code">list</span>、<span class="code">str</span> 这些 Python 内置名不能当变量名）。</p>
+<p><b>③ 为什么要学（＋实战里怎么用）</b>：代码评审第一眼看的就是命名（"这份代码像不像专业人写的"）；AI 运维要读写别人的脚本、日志字段、K8s 资源名，命名规范是通用语言。</p>
+<p><b>④ 长什么样 / 怎么用</b>：最小对照：<span class="code">result = run()</span> → 改成 <span class="code">disk_usage = get_disk_usage()</span>（见名知意、动作动词开头）。用法照本册规矩：<b>不许通读，只许查</b>——卡住时翻到对应页，选定名字再回去写代码。位置：字典类第 15 册，和 12 册（内置函数）、16 册（Git）合起来是"日常查三件套"。</p>
+
 <h2 class="toc-title">目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">第 1 页</span><span class="tdesc">起名三原则 + 两个必须避开的坑</span><a href="#toc-1"></a></div>
-<div class="toc-row"><span class="tn">第 2 页</span><span class="tdesc">怎么起名：四步法 + 核心 24 词</span><a href="#toc-2"></a></div>
+<div class="toc-row"><span class="tn">第 2 页</span><span class="tdesc">怎么起名：四步法 + 核心词表（约 24 组）</span><a href="#toc-2"></a></div>
 <div class="toc-row"><span class="tn">第 3 页</span><span class="tdesc">分组速查（数量 · 状态 · 文件 · 时间 · 网络）</span><a href="#toc-3"></a></div>
 <div class="toc-row"><span class="tn">第 4 页</span><span class="tdesc">动作动词 + 判断前缀 + 常用缩写 + 检查三连问</span><a href="#toc-4"></a></div>
 </div>
@@ -264,6 +278,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td><b>3. 判断用 is_/has_</b></td><td>值只有 True / False 的，一眼看出是"是不是"</td><td class="code err">empty　err_flag</td><td class="code ok">is_empty　has_error</td></tr>
 </table>
 
+<p class="note">一个例外先交代：<b>Shell 脚本</b>里全大写的名字（如 01 册脚本里的 <span class="code">THRESHOLD</span>）是 Shell 对「环境变量 / 约定常量」的惯例；<b>Python 变量全小写</b>（本册教的这套）——两套语言习惯不同，别混用。</p>
+
+<p class="rule"><b>两条硬规则（不遵守直接报错）</b>：① 不能数字开头（<span class="code err">1name</span> ✗，改成 <span class="code ok">name1</span> 或 <span class="code ok">user_name</span>）；② 不能拿关键字当名字（<span class="code err">if</span>、<span class="code err">for</span>、<span class="code err">class</span>… ✗）。</p>
 <h3><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 坑 1：别把 Python 内置名当变量名</h3>
 <p>下面这些词 Python 已经占用。再拿它们当变量名，等于把原有功能“覆盖”掉：</p>
 <p class="code err">list　dict　str　int　float　bool　len　sum　max　min　input　print　open　type　id　next　all　any　set　object</p>
@@ -287,7 +304,8 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 <p class="note">拿不准就用<b>全称</b>，不要自造缩写：message 就写 message（别写 mssg），password 就写 password（别写 pwd）。</p>
 
-<h3><svg class="em" width="15" height="15"><use href="#ic-fr"/></svg> 核心 24 词（最高频，优先掌握）</h3>
+<h3><svg class="em" width="15" height="15"><use href="#ic-fr"/></svg> 核心词表（约 24 组）（最高频，优先掌握）</h3>
+<p class="note"><b>注意</b>：表里 <b>set</b>（后面的 sum / max 同理）是 Python 内置名——单用会撞名，<b>加前缀或后缀就不算撞名</b>（<span class="code ok">set_value()</span> 放心用）。</p>
 <table class="tight xtight">
 <tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
 <tr><td>count</td><td>计数</td><td class="code">error_count</td><td>total</td><td>总计</td><td class="code">total_size</td></tr>
@@ -298,7 +316,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>dir</td><td>目录</td><td class="code">home_dir</td><td>line</td><td>行（一行文本）</td><td class="code">first_line</td></tr>
 <tr><td>empty</td><td>空的</td><td class="code">is_empty</td><td>name</td><td>名字</td><td class="code">user_name</td></tr>
 <tr><td>data</td><td>数据</td><td class="code">data_list</td><td>time</td><td>时间</td><td class="code">start_time</td></tr>
-<tr><td>get</td><td>获取</td><td class="code">get_data()</td><td>set</td><td>设置</td><td class="code">set_value()</td></tr>
+<tr><td>get</td><td>获取</td><td class="code">get_data()</td><td>set</td><td>设置（避免单用）</td><td class="code ok">set_value()</td></tr>
 <tr><td>check</td><td>检查</td><td class="code">check_disk()</td><td>run</td><td>运行</td><td class="code">run_backup()</td></tr>
 <tr><td>read / write</td><td>读 / 写</td><td class="code">read_file()</td><td>start / end</td><td>开始 / 结束</td><td class="code">start_time / end_time</td></tr>
 <tr><td>msg</td><td>消息</td><td class="code">error_msg</td><td>tmp</td><td>临时</td><td class="code">tmp_dir</td></tr>
@@ -343,7 +361,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td>time</td><td>时间</td><td class="code">start_time</td><td>date</td><td>日期</td><td class="code">backup_date</td></tr>
 <tr><td>timestamp</td><td>时间戳</td><td class="code">create_timestamp</td><td>duration</td><td>持续时长</td><td class="code">run_duration</td></tr>
 <tr><td>start / end</td><td>开始 / 结束</td><td class="code">start_time / end_time</td><td>interval</td><td>间隔</td><td class="code">check_interval</td></tr>
-<tr><td>hour / minute / second</td><td>时 / 分 / 秒</td><td class="code">timeout_sec</td><td>day / month / year</td><td>日 / 月 / 年</td><td class="code">backup_2026_10_02</td></tr>
+<tr><td>hour / minute / second</td><td>时 / 分 / 秒</td><td class="code">timeout_sec</td><td>day / month / year</td><td>日 / 月 / 年</td><td class="code">backup_date</td></tr>
 </table>
 
 <div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 网络</div>
@@ -362,9 +380,9 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-hv"/></svg> 动作动词（给函数起名：动词开头）</div>
 <table class="tight xtight">
 <tr><th>词</th><th>中文</th><th>函数名示例</th><th>词</th><th>中文</th><th>函数名示例</th></tr>
-<tr><td>get / set</td><td>获取 / 设置</td><td class="code">get_data()</td><td>add / remove</td><td>添加 / 移除</td><td class="code">add_user()</td></tr>
+<tr><td>get / set</td><td>获取 / 设置（set 避免单用）</td><td class="code">get_data()</td><td>add / remove</td><td>添加 / 移除</td><td class="code">add_user()</td></tr>
 <tr><td>create / delete</td><td>创建 / 删除</td><td class="code">create_dir()</td><td>update</td><td>更新</td><td class="code">update_config()</td></tr>
-<tr><td>read / write</td><td>读 / 写</td><td class="code">read_log()</td><td>open / close</td><td>打开 / 关闭</td><td class="code">open_file()</td></tr>
+<tr><td>read / write</td><td>读 / 写</td><td class="code">read_log()</td><td>open / close</td><td>打开 / 关闭（open 避免单用）</td><td class="code">open_file()</td></tr>
 <tr><td>start / stop / restart</td><td>启动 / 停止 / 重启</td><td class="code">restart_service()</td><td>run</td><td>运行</td><td class="code">run_backup()</td></tr>
 <tr><td>check</td><td>检查</td><td class="code">check_disk()</td><td>find / search</td><td>查找 / 搜索</td><td class="code">find_file()</td></tr>
 <tr><td>parse / convert</td><td>解析 / 转换</td><td class="code">parse_log()</td><td>copy / move</td><td>复制 / 移动</td><td class="code">copy_file()</td></tr>
@@ -400,9 +418,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <h3><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 命名检查三连问（起完名默念一遍）</h3>
 <p><b>① 别人一眼能看懂吗？</b>　<b>② 有下划线分隔吗？</b>　<b>③ 撞内置名了吗？</b></p>
-<p class="rule">三个都过，这个名字就合格。　<b>背诵顺序</b>：核心 24 词 → is_ 判断组 → 动作动词组（写脚本 90% 的命名来自这三块）。</p>
+<p class="rule">三个都过，这个名字就合格。　<b>背诵顺序</b>：核心词表（约 24 组） → is_ 判断组 → 动作动词组（写脚本 90% 的命名来自这三块）。</p>
 
-<p class="note">命名手册 · v2.5（2026-10） · 与《九阶》系列同格式</p>
 
+
+<p class="footer">《命名手册》</p>
 </body>
 </html>
