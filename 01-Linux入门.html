@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linux入门（教科书版） · v3.1</title>
+<title>Linux入门（教科书版）</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,7 +51,7 @@ pre { font-family: Consolas,"Courier New",monospace; font-size: 10pt; line-heigh
 .toc a { color: #222; text-decoration: none; }
 .toc-row { position: relative; padding: 2.5px 0; border-bottom: 1px dotted #ddd; font-size: 10.5pt; }
 .toc-row a { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
-.toc-row .tn { color: #0a6b1e; font-weight: bold; display: inline-block; min-width: 68px; }
+.toc-row .tn { color: #0a6b1e; font-weight: bold; display: inline-block; min-width: 68px; margin-right: 6px; }
 .toc-row .tdesc { color: #666; font-size: 9pt; }
 a { color: #003a8c; text-decoration: none; }
 @media print {
@@ -265,7 +265,6 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
   </g></symbol></defs></svg>
 
 <h1><img src="data:image/jpeg;base64,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" alt="Linux" style="height:20pt; vertical-align:-5pt; margin-right:5px;">Linux 入门（教科书版）</h1>
-<p class="note">主课本 · 建议按顺序学习 · 与《Linux 指令练习册（基础篇 / 进阶篇）》配套使用</p>
 
 <div class="box">
 <p><b>本书是什么：</b>一本从零开始的 Linux 教科书。每个命令都先讲"是什么、为什么存在"，再给<b>输入 → 输出 → 解读</b>三段式示范，最后布置作业。</p>
@@ -273,22 +272,12 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 
 <div class="newpage"></div>
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（教科书）</td></tr>
-<tr><td><b>本册关卡</b></td><td>1-01 ~ 1-36；书末另有「阶段总结练习」1-45（01＋03 综合）；第 13 章「本关三要素」框还带跨册三关 2-05 / 2-08 / 2-09（随 03 册场景一起做）</td></tr>
-<tr><td><b>用时</b></td><td>必做 32.1 小时 / 全做 33.2 小时（1-01~1-36 关卡口径，含《02 练习册》题并入）</td></tr>
-<tr><td><b>学完解锁</b></td><td>阶段 1 的主体：能独立在 Ubuntu 里导航、改权限、杀进程、盯日志，并写出第一个 Shell 脚本</td></tr></table>
-<div class="box2">每章开头都有「本关三要素」，跟着编号打关即可。附录 A~D 是字典，不用通读。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
+<p>本册共 36 关（1-01 ~ 1-36）＋书末阶段总结练习 1-45（01＋03 综合）；第 13 章还带跨册三关 2-05 / 2-08 / 2-09。目标：阶段 1 的主体 —— 能独立在 Ubuntu 里导航、改权限、杀进程、盯日志，并写出第一个 Shell 脚本。</p>
+<div class="box2">附录 A~D 是字典，不用通读。<br><span class="note">关卡编号、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
 
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：这是整套教材的<b>主课本·Linux 入门</b>。Linux 是服务器上最常用的操作系统（世界上大多数服务器都跑它）；本册从"什么是终端"一路讲到能写 Shell 脚本。生活类比：像学开车——先认识方向盘、油门、刹车（终端、命令、选项 ＋ 参数），再上路。</p>
-<p><b>② 干什么用</b>：连服务器、传文件、看日志、查磁盘、修故障，全在命令行里完成；AI 运维的每一步（部署推理服务、看 GPU 显存、清磁盘）都是"先登录 Linux，再敲命令"。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：真实工作里，九成排障都在命令行完成；“Linux 熟不熟、常用命令会不会”是第一天就要过的关。</p>
-<p><b>④ 长什么样 / 怎么用</b>：最小一串命令：<span class="code cmd">pwd</span>（我在哪）→ <span class="code cmd">ls -l</span>（这里有什么）→ <span class="code cmd">cd /var/log</span>（进去）→ <span class="code cmd">tail -n 20 syslog</span>（看最后 20 行）。用法：每章开头有「本关三要素」（编号 ｜ 时长 ｜ 完成判定），跟着编号打关；想深入看第 0 章 0.1「Linux 是什么」。</p>
+<p>本册是什么：整套教材的主课本 —— 从“什么是终端”讲到能写 Shell 脚本；连服务器、查日志、修故障都在命令行里完成。 用法：每章开头有「本关三要素」，跟着编号打关。</p>
 
-<div class="section-head">全套总览（按阶段）</div><table><tr><th style="width:34%">阶段</th><th style="width:20%">★ 必做时长</th><th>产出作品</th></tr><tr><td><b>0 · 环境与工具</b></td><td>★ 5.2 小时（7 关）</td><td>learning-journey（日志仓库）</td></tr><tr><td><b>1 · Linux 系统</b></td><td>★ 41.2 小时（45 关）</td><td>能力型，无仓库（判定靠阶段总验收 1-45）</td></tr><tr><td><b>2 · Shell 脚本</b></td><td>★ 21.0 小时（12 关）</td><td>shell-scripts（三个能讲出故事的脚本）</td></tr><tr><td><b>3 · Python 脚本</b></td><td>★ 39.6 小时（18 关）</td><td>python-scripts（重命名 / 天气 / 巡检 v0）</td></tr><tr><td><b>4 · Docker</b></td><td>★ 26.2 小时（11 关）</td><td>monitor-demo（把自己的脚本容器化）</td></tr><tr><td><b>5 · 监控</b></td><td>★ 16.0 小时（6 关）</td><td>monitor-demo（Prometheus + Grafana + 阈值告警）</td></tr><tr><td><b>6 · Kubernetes</b></td><td>★ 16.0 小时（8 关）</td><td>k8s-demo（含「Pod 起不来」踩坑记录）</td></tr><tr><td><b>7 · 综合项目</b></td><td>★ 33.0 小时（8 关）</td><td>server-health-check（王牌项目 v1）</td></tr><tr><td><b>8 · AI / GPU / 推理部署</b></td><td>★ 29.0 小时（10 关）</td><td>ai-inference-notes（部署笔记 + 踩坑记录）</td></tr></table><p class="note">全部 ★ 必做关卡合计 <b>227.2 小时</b>（125 关）；含复习与返工弹性约 <b>252 小时</b>，约占 340 小时的 <b>74%</b>。数字由《17-关卡总表》的数据源自动生成并逐册校验（`tools\check-totals.py`）。每天只排到可用时间的 70%，留 30% 给超时和状态不好的日子。</p>
-<h2 class="toc-title"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h2>
+<p class="note">全套阶段总览（九个阶段与各阶段产出）见《17-关卡总表》。</p><h2 class="toc-title"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h2>
 <div class="toc">
 <div class="toc-row"><span class="tn">使用说明</span><span class="tdesc">配色约定 · 环境要求 · 安全红线</span><a href="#toc-0"></a></div>
 <div class="toc-row"><span class="tn">学习路线图</span><span class="tdesc">章 → 练习册映射表</span><a href="#toc-1"></a></div>
@@ -312,10 +301,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <div class="toc-row"><span class="tn">附录 D</span><span class="tdesc">章 ↔ 练习册对应表（新命令对齐）</span><a href="#toc-19"></a></div>
 <div class="toc-row"><span class="tn">附录 E</span><span class="tdesc">电脑上得到 Ubuntu 的两种装法（WSL 为主）</span><a href="#toc-20"></a></div>
 </div>
-<p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
+<p class="note">打印用 A4、缩放 100%。</p>
 
 <h2 id="toc-0">使用说明</h2>
-<p class="note"><b>关于示例输出</b>：示例里的<b>路径、PID、时间、版本号、空格/对齐</b>会因为你的系统版本和用户名而不同——<b>看结构就行</b>（哪一列是什么、大概什么形状），不必逐字对齐；真正要当问题的是"命令跑不通 / 报错含义不一样"。</p>
+<p class="note"><b>关于示例输出</b>：路径、PID、时间、版本号会因机器而异——<b>看结构就行</b>；只有"命令跑不通 / 报错含义不一样"才是问题。</p>
 <p><b>配色约定</b>（全书一致，共 6 色）：</p>
 <table class="long-table"><thead><tr><th style="width:25%">颜色</th><th>含义</th></tr></thead><tbody>
 <tr><td><span class="cmd code">绿色粗体</span></td><td>命令本身（要敲进去的）</td></tr>
@@ -326,15 +315,14 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <tr><td><span class="opt">橙色</span></td><td>易错点、坑</td></tr>
 </tbody></table>
 <div class="box2"><b>实验闭环：</b>涉及删除、重命名、权限、进程、服务、挂载或日志时，先记录原状态；操作中逐步核对对象；操作后对照输出、数量、状态和退出码验证；结束后恢复配置、停止练习进程、卸载实验挂载并再次检查现场。异常时保留原始报错。</div>
-<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。　<b>电脑上还没有 Ubuntu？看本册「附录 E」：两种装法（WSL 为主、VMware 为辅），30 分钟搞定。</b></p>
-<div class="box2"><b>环境口径：</b>本套资料以 <b>Ubuntu 26.04 LTS（当前 LTS）+ Python 3.14</b> 为基准录制并实测。下面三条是你一定会遇到的环境事实：<br>· <b>apt 源代号 = <span class="code">resolute</span></b>（看到它属于正常）；<br>· <b>pip 不能全局装包</b>：直接 <span class="code">pip install</span> 会报 <span class="code">externally-managed-environment</span>，正确做法是用 venv（见《Python 入门》<b>附录 E</b>）；<br>· <b>htop 需自装</b>：<span class="code">sudo apt install htop</span>（第 9 章会教）。<p class="note">示例输出全部以 26.04 为准；命令回显里的版本号等细节以你本机实际显示为准。若你的系统是别的版本，绝大多数命令通用，个别差异（如 <span class="code">last</span>）书中已单独标注。</p></div>
-<p class="note"><b>线上常识：</b>企业服务器上更常见的是 <b>22.04 / 24.04</b>，而不是最新版——生产环境求稳，新版要等镜像、监控、安全合规都跟上，一般比最新 LTS <b>慢 1~2 代</b>；而每个 LTS 都有 5 年标准支持，也没必要频繁升级。本书命令在这些版本上通用；拿到一台新机器，先 <span class="code">lsb_release -a</span> 确认版本。</p>
+<p><b>环境要求：</b>以电脑 Ubuntu 为主；标注 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 的须电脑环境（Ubuntu）完成，平板 Termux 环境下不确定；未标注的平板 Termux 一般可做。　<b>电脑上还没有 Ubuntu？看本册「附录 E」：两种装法（WSL 为主、VMware 为辅）。</b></p>
+<div class="box2"><b>环境说明：</b>本套资料以 <b>Ubuntu 26.04 LTS（当前 LTS）+ Python 3.14</b> 为准。三条常见环境事实：<br>· <b>apt 源代号 = <span class="code">resolute</span></b>（看到它属于正常）；<br>· <b>pip 不能全局装包</b>：直接 <span class="code">pip install</span> 会报 <span class="code">externally-managed-environment</span>，正确做法是用 venv（见《Python 入门》<b>附录 E</b>）；<br>· <b>htop 需自装</b>：<span class="code">sudo apt install htop</span>（第 9 章会教）。<p class="note">示例输出全部以 26.04 为准；命令回显里的版本号等细节以你本机实际显示为准。若你的系统是别的版本，绝大多数命令通用，个别差异（如 <span class="code">last</span>）书中已单独标注。</p></div>
+<p class="note"><b>线上常识：</b>企业服务器更常见的是 <b>22.04 / 24.04</b>（生产求稳，一般比最新 LTS <b>慢 1~2 代</b>）；拿到新机器先 <span class="code">lsb_release -a</span> 确认版本，本书命令在这些版本上通用。</p>
 
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志约定：每天把敲过的命令、报错与心得记进学习日志——这是检查点的依据。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-nb"/></svg> 学习日志约定：每天把敲过的命令、报错与心得记进学习日志。</p>
 <p class="note">安全红线：实验目录只用 <span class="code">~/lab</span> 和 <span class="code">/tmp</span>；<span class="code">/tmp</span> 是临时目录，但何时清理由发行版、挂载方式和 systemd-tmpfiles 等系统策略决定，<b>重启后不保证全部清空</b>；<span class="code cmd">rm -rf</span> 永远先 <span class="code cmd">ls</span> 看清楚；涉及 <span class="code cmd">sudo</span> 的命令只在练习机上执行。</p>
 
 <h2 id="toc-1">学习路线图（章 → 练习册）</h2>
-<p class="note">⏱️ 全书 14 章正文自学约 22~30 小时（每章约 1.5~2h，章节估时）；关卡口径的"必做 32.1 小时"含练习册题并入——两套口径都对，见本册关卡地图。</p>
 <table>
 <tr><th style="width:40%">本书章节</th><th>学完去做</th></tr>
 <tr><td>第 0~2 章（终端、目录树、文件操作）</td><td>基础篇 阶段 1</td></tr>
@@ -351,7 +339,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <div class="newpage"></div>
 <h2 id="toc-2">第 0 章 · 开篇：终端与命令</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-01 · 认识终端与"命令+选项+参数"</b> ★ ｜ 休息日 30 分 ｜ 工作日 15 分<br>　□ 能说出提示符每一部分的含义；说出三件套各是什么　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）<br><b>1-02 · 用 --help 和 man 自救</b> ★ ｜ 休息日 30 分 ｜ 工作日 15 分<br>　□ 不看教程，用 --help 查出 ls 三个选项的含义<br>　<span class="note">实战价值：不会就查是运维的核心动作</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-01 · 认识终端与"命令+选项+参数"</b> ★<br>　□ 能说出提示符每一部分的含义；说出三件套各是什么　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（见本册开篇）<br><b>1-02 · 用 --help 和 man 自救</b> ★<br>　□ 不看教程，用 --help 查出 ls 三个选项的含义<br>　<span class="note">实战价值：不会就查是运维的核心动作</span><br></div>
 
 <p><b>本章目标</b>（学完能回答）：</p>
 <p>① Linux 是什么、为什么运维要学它；② 能打开终端并看懂提示符；③ 会使用"命令 + 选项 + 参数"三件套；④ 会用 <span class="code cmd">--help</span> 自救。</p>
@@ -423,7 +411,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 -a, --all 连隐藏文件一起列
 <span class="out">（26.04 的 ls 是 uutils 版：首行不再是 Usage:，选项说明也换了措辞——以你机器实际输出为准，认出 -l 与 -a 就够）</span></pre>
 <p class="demo-ex"><b>读帮助的两条规则</b>：<span class="code">[ ]</span> 括起来的 = <b>可选项</b>（不写也行）；<span class="code">...</span> = <b>可重复多个</b>。这行读作"用法：ls、可选选项、可重复的文件名"。</p>
-<p class="demo-ex">看不懂英文没关系——你现在只需要认出 <b>-l</b> 和 <b>-a</b> 两个选项的名字。配合《报错英语单词手册》慢慢积累。</p>
+<p class="demo-ex">看不懂英文没关系——你现在只需要认出 <b>-l</b> 和 <b>-a</b> 两个选项的名字。</p>
 </div>
 
 <h3>0.7 易错点</h3>
@@ -435,7 +423,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <div class="hw">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业（答案见附录 A）</p>
-<p>1. 打开终端，用 <span class="code cmd">pwd</span> 和 <span class="code cmd">whoami</span> 各敲一遍，把输出抄进学习日志。</p>
+<p>1. 打开终端，用 <span class="code cmd">pwd</span> 和 <span class="code cmd">whoami</span> 各敲一遍，记下输出。</p>
 <p>2. 用 <span class="code cmd">ls --help</span> 找出 3 个选项，并说出各自作用（示范里已经认识 -l、-a 两个，第三个自己从输出里挑——这就是"自救"的练法）。</p>
 <p>3. 敲 <span class="code cmd">history</span>，看你今天敲过的所有命令；用 <span class="code">↑</span> 键调出上一条命令再执行一次。</p>
 <p>4. 故意敲一个拼错的命令（如 <span class="code cmd">pws</span>），把报错原文记下来。</p>
@@ -449,7 +437,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 
 <div class="newpage"></div>
 <h2 id="toc-3">第 1 章 · 目录树与路径</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-03 · 一切皆文件：读懂目录树</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 能画出 / 下的三大目录并说出用途<br><b>1-04 · 绝对路径 vs 相对路径</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 用两种写法各走一次：从任意位置到 /var/log 再回家目录<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-03 · 一切皆文件：读懂目录树</b> ★<br>　□ 能画出 / 下的三大目录并说出用途<br><b>1-04 · 绝对路径 vs 相对路径</b> ★<br>　□ 用两种写法各走一次：从任意位置到 /var/log 再回家目录<br></div>
 
 <p><b>本章目标：</b>① 理解"一切皆文件"和目录树；② 说出三大重要目录的用途；③ 会区分绝对路径与相对路径；④ 会用 <span class="code cmd">cd</span> 在树里移动。</p>
 <p><b>本章新命令</b>：<span class="code cmd">cd</span>（<span class="code cmd">pwd</span>、<span class="code cmd">ls</span> 在第 0 章已见，本章复习）</p>
@@ -522,7 +510,7 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 
 <div class="newpage"></div>
 <h2 id="toc-4">第 2 章 · 文件与目录操作</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-05 · 建与删：touch / mkdir -p / rm</b> ★ ｜ 休息日 1.3 小时 ｜ 工作日 15 分<br>　□ 建出 a/b/c 三级目录再拆掉<br>　□ 能独立做出 02-★1-1（建多级目录）<br>　□ 能独立做出 02-★1-3（批量创建）<br>　<span class="note">回滚方式：只在 ~/lab 里练；删掉的任务自己重建</span><br><b>1-06 · 复制与移动：cp 和 mv 的边界</b> ★ ｜ 休息日 1.4 小时 ｜ 工作日 15 分<br>　□ 说清 cp 与 mv 各自的两条规则<br>　□ 能独立做出 02-★1-4（cp 递归）<br>　□ 能独立做出 02-★1-6（mv 双功能）<br><b>1-07 · 安全删除习惯</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 说清"删除靠的是目录写权限"；演示一次删除前确认<br>　□ 能独立做出 02-★1-7（删除权限原理；留到学完第 5 章再回头做）<br>　<span class="note">回滚方式：练习目录只准用 ~/lab ｜ 实战价值：误删恢复是实战里躲不开的一课</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-05 · 建与删：touch / mkdir -p / rm</b> ★<br>　□ 建出 a/b/c 三级目录再拆掉<br>　□ 能独立做出 02-★1-1（建多级目录）<br>　□ 能独立做出 02-★1-3（批量创建）<br>　<span class="note">回滚方式：只在 ~/lab 里练；删掉的任务自己重建</span><br><b>1-06 · 复制与移动：cp 和 mv 的边界</b> ★<br>　□ 说清 cp 与 mv 各自的两条规则<br>　□ 能独立做出 02-★1-4（cp 递归）<br>　□ 能独立做出 02-★1-6（mv 双功能）<br><b>1-07 · 安全删除习惯</b> ★<br>　□ 说清"删除靠的是目录写权限"；演示一次删除前确认<br>　□ 能独立做出 02-★1-7（删除权限原理；留到学完第 5 章再回头做）<br>　<span class="note">回滚方式：练习目录只准用 ~/lab ｜ 实战价值：误删恢复是实战里躲不开的一课</span><br></div>
 
 <p><b>本章目标：</b>① 会建文件和目录；② 会复制、移动、改名；③ 理解删除的不可逆；④ 会用 <span class="code cmd">mkdir -p</span> 连级创建。</p>
 <p><b>本章新命令</b>：<span class="code cmd">touch</span> <span class="code cmd">mkdir</span> <span class="code cmd">cp</span> <span class="code cmd">mv</span> <span class="code cmd">rm</span> <span class="code cmd">rmdir</span></p>
@@ -609,7 +597,7 @@ drwxr-xr-x 2 &lt;用户名&gt; &lt;用户名&gt; 4096 Aug 15 08:00 notes
 
 <div class="newpage"></div>
 <h2 id="toc-5">第 3 章 · 查看与搜索</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-08 · 看文件：cat / less / head / tail / wc</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 用 head 和 tail 各取 5 行；在 less 里搜索并退出<br>　□ 能独立做出 02-★2-3（头尾查看）<br><b>1-09 · 搜内容与搜文件：grep / find</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 在日志里搜出指定字符串；找出今天新增的文件<br>　□ 能独立做出 02-★2-5（grep 过滤）<br>　□ 能独立做出 02-★5-1（按名查找）<br><b>1-10 · 比较差异：diff</b> ☆ ｜ 休息日 30 分 ｜ 工作日 15 分<br>　□ 说出两个文件差在哪<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-08 · 看文件：cat / less / head / tail / wc</b> ★<br>　□ 用 head 和 tail 各取 5 行；在 less 里搜索并退出<br>　□ 能独立做出 02-★2-3（头尾查看）<br><b>1-09 · 搜内容与搜文件：grep / find</b> ★<br>　□ 在日志里搜出指定字符串；找出今天新增的文件<br>　□ 能独立做出 02-★2-5（grep 过滤）<br>　□ 能独立做出 02-★5-1（按名查找）<br><b>1-10 · 比较差异：diff</b> ☆<br>　□ 说出两个文件差在哪<br></div>
 
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-lb"/></svg> 本册日志示范统一用自建文件 <span class="code">~/lab/app.log</span>：先执行 <span class="code">echo '2026-08-01 09:00:01 ERROR disk fail' &gt;&gt; ~/lab/app.log</span>（多敲几行不同内容）。系统日志路径取决于发行版、日志服务和配置；不要假定 <span class="code">/var/log/syslog</span> 一定存在。先确认实际文件，或对 systemd 服务使用 <span class="code">journalctl</span>。</p>
 <p><b>本章目标：</b>① 会用四种"看"命令按需查看文件；② 会用 <span class="code cmd">grep</span> 按内容搜、<span class="code cmd">find</span> 按名字找；③ 会 <span class="code cmd">wc</span> 计数、<span class="code cmd">diff</span> 对比；④ 理解 <span class="code cmd">tail -f</span> 的实时跟踪。</p>
@@ -714,7 +702,7 @@ MaxSessions 10</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-6">第 4 章 · 管道与重定向</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-11 · 重定向：> 覆盖与 >> 追加</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 演示两种写法的区别；说清为什么别重定向到正在写的文件<br>　□ 能独立做出 02-★2-1（创建与重定向）<br>　<span class="note">回滚方式：重要文件先备份再试</span><br><b>1-12 · 管道与排序取前 N：sort / uniq</b> ★ ｜ 休息日 1.4 小时 ｜ 工作日 15 分<br>　□ 一条命令查出出现次数最多的前三项<br>　□ 能独立做出 02-★2-7（管道实战）<br>　□ 能独立做出 02-★5-4（排序去重）<br><b>1-13 · awk 入门：取列</b> ☆ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 取出日志第 2 列并统计<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-11 · 重定向：> 覆盖与 >> 追加</b> ★<br>　□ 演示两种写法的区别；说清为什么别重定向到正在写的文件<br>　□ 能独立做出 02-★2-1（创建与重定向）<br>　<span class="note">回滚方式：重要文件先备份再试</span><br><b>1-12 · 管道与排序取前 N：sort / uniq</b> ★<br>　□ 一条命令查出出现次数最多的前三项<br>　□ 能独立做出 02-★2-7（管道实战）<br>　□ 能独立做出 02-★5-4（排序去重）<br><b>1-13 · awk 入门：取列</b> ☆<br>　□ 取出日志第 2 列并统计<br></div>
 
 <p><b>本章目标：</b>① 理解管道 <span class="code">|</span> 的流水线思想；② 区分 <span class="code">&gt;</span>（覆盖）与 <span class="code">&gt;&gt;</span>（追加）；③ 会 sort / uniq 配合管道；④ awk 入门：按列取数据。</p>
 <p><b>本章新命令</b>：<span class="code cmd">sort</span> <span class="code cmd">uniq</span> <span class="code cmd">awk</span>（符号：<span class="code">|</span> <span class="code">&gt;</span> <span class="code">&gt;&gt;</span> <span class="code">2&gt;&amp;1</span>）</p>
@@ -813,7 +801,7 @@ Sep kernel:</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-7">第 5 章 · 用户与权限</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-14 · 多用户模型：whoami / id / su / sudo</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 说清 su 与 sudo 的区别；切一次身份并安全退出<br>　□ 能独立做出 02-★3-3（建用户）<br>　<span class="note">回滚方式：切用户前记好当前用户和目录</span><br><b>1-15 · rwx 与 chmod 符号法</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 给脚本设成"自己读写执行、别人只读"<br>　□ 能独立做出 02-★3-1（权限位解读）<br>　□ 能独立做出 02-★3-4（越权验证）<br>　<span class="note">回滚方式：改权限前先 ls -l 记下原权限</span><br><b>1-16 · 数字法与危险组合：644 / 755 / 777</b> ★ ｜ 休息日 1.3 小时 ｜ 工作日 15 分<br>　□ 一次改对 644 与 755；说清 777 为什么危险<br>　□ 能独立做出 02-★3-5（chown 影响）<br>　□ 能独立做出 02-★3-7（账号文件）<br>　<span class="note">回滚方式：同上 ｜ 实战价值：权限题是日常高频</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-14 · 多用户模型：whoami / id / su / sudo</b> ★<br>　□ 说清 su 与 sudo 的区别；切一次身份并安全退出<br>　□ 能独立做出 02-★3-3（建用户）<br>　<span class="note">回滚方式：切用户前记好当前用户和目录</span><br><b>1-15 · rwx 与 chmod 符号法</b> ★<br>　□ 给脚本设成"自己读写执行、别人只读"<br>　□ 能独立做出 02-★3-1（权限位解读）<br>　□ 能独立做出 02-★3-4（越权验证）<br>　<span class="note">回滚方式：改权限前先 ls -l 记下原权限</span><br><b>1-16 · 数字法与危险组合：644 / 755 / 777</b> ★<br>　□ 一次改对 644 与 755；说清 777 为什么危险<br>　□ 能独立做出 02-★3-5（chown 影响）<br>　□ 能独立做出 02-★3-7（账号文件）<br>　<span class="note">回滚方式：同上 ｜ 实战价值：权限题是日常高频</span><br></div>
 
 <p><b>本章目标：</b>① 理解多用户模型和"组"；② 会创建用户、改密码、加 sudo；③ 读懂 rwx 权限位；④ 会用 chmod（含数字算法）、chown。</p>
 <p><b>本章新命令</b>：<span class="code cmd">whoami</span> <span class="code cmd">id</span> <span class="code cmd">su</span> <span class="code cmd">sudo</span> <span class="code cmd">useradd</span> <span class="code cmd">passwd</span> <span class="code cmd">usermod</span> <span class="code cmd">groupadd</span> <span class="code cmd">groups</span> <span class="code cmd">userdel</span> <span class="code cmd">last</span><span class="out">（26.04 已移除）</span> <span class="code cmd">chmod</span> <span class="code cmd">chown</span> <span class="code cmd">chgrp</span></p>
@@ -896,7 +884,7 @@ Sep kernel:</pre>
 <p class="note">两个"户口本"文件长什么样（自查用）：<span class="code">/etc/passwd</span> 每行 7 段——<b>用户名 : 密码占位(x) : UID : GID : 备注 : 家目录 : 登录 shell</b>；<span class="code">/etc/group</span> 每行 4 段——<b>组名 : 密码占位(x) : GID : 成员列表</b>。想看你机器上的真实样子：<span class="code cmd">tail -5 /etc/passwd</span> 与 <span class="code cmd">tail -5 /etc/group</span>。</p>
 <div class="warn">
 <p class="wtitle"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 危险警告：chmod 777</p>
-<p><span class="code cmd">chmod 777 文件</span> = 属主、属组、其他人都能读写执行——相当于把家门钥匙插在锁上。遇到"权限问题先 777 再说"的坏习惯，迟早要翻车。正确姿势：<b>搞清楚谁需要什么权限，给最小权限</b>。</p>
+<p><span class="code cmd">chmod 777 文件</span> = 属主、属组、其他人都能读写执行——相当于把家门钥匙插在锁上。遇到"权限问题先 777 再说"的坏习惯，迟早要出问题。正确姿势：<b>搞清楚谁需要什么权限，给最小权限</b>。</p>
 </div>
 
 <p class="note"><b>顺带一眼：4 位数字里的"特殊位"</b>——<span class="code">chmod 2770 目录</span> 的 <b>2 = setgid</b>：目录里新建的文件<b>自动继承该目录的属组</b>——团队共享目录常这么配（练习册 3-6 组共享会用到）；<span class="code">1</span> = 粘滞位（<span class="code">/tmp</span> 靠它：只准本人删自己的文件）；<span class="code">4</span> = setuid（少数系统命令用）。日常 3 位数字够用，遇到 4 位知道开头是特殊位即可。</p>
@@ -923,7 +911,7 @@ Sep kernel:</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-8">第 6 章 · 进程管理</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-17 · 看进程：ps aux 与 pgrep</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 找出某个进程的 PID 和它属于谁<br>　□ 能独立做出 02-★4-1（进程定位）<br><b>1-18 · 杀进程：信号、优雅 vs 强杀</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 先 TERM 后 KILL 处理一个卡死进程，并说清区别<br>　□ 能独立做出 02-★4-3（优雅 vs 强杀）<br>　<span class="note">回滚方式：先确认 PID，别对系统进程下手 ｜ 实战价值：进程杀不掉怎么办是常见追问</span><br><b>1-19 · 前后台与端口占用：jobs / nohup / fuser</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 让命令在后台跑；找出占用某端口的进程<br>　<span class="note">实战价值：端口被占是运维日常</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-17 · 看进程：ps aux 与 pgrep</b> ★<br>　□ 找出某个进程的 PID 和它属于谁<br>　□ 能独立做出 02-★4-1（进程定位）<br><b>1-18 · 杀进程：信号、优雅 vs 强杀</b> ★<br>　□ 先 TERM 后 KILL 处理一个卡死进程，并说清区别<br>　□ 能独立做出 02-★4-3（优雅 vs 强杀）<br>　<span class="note">回滚方式：先确认 PID，别对系统进程下手 ｜ 实战价值：进程杀不掉怎么办是常见追问</span><br><b>1-19 · 前后台与端口占用：jobs / nohup / fuser</b> ★<br>　□ 让命令在后台跑；找出占用某端口的进程<br>　<span class="note">实战价值：端口被占是运维日常</span><br></div>
 
 <p><b>本章目标：</b>① 看懂 ps aux 各列；② 会找进程（pgrep / ps+grep）；③ 理解"优雅杀 vs 强杀"；④ 会前后台切换与 nohup；⑤ 会用 fuser 定位占端口的进程。</p>
 <p><b>本章新命令</b>：<span class="code cmd">ps</span> <span class="code cmd">top</span> <span class="code cmd">htop</span> <span class="code cmd">pgrep</span> <span class="code cmd">kill</span> <span class="code cmd">killall</span> <span class="code cmd">jobs</span> <span class="code cmd">bg</span> <span class="code cmd">fg</span> <span class="code cmd">nohup</span> <span class="code cmd">fuser</span></p>
@@ -1032,7 +1020,7 @@ EOF</span>
 
 <div class="newpage"></div>
 <h2 id="toc-9">第 7 章 · 磁盘与文件系统</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-20 · 看懂 df 与 du 的数字</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 说出 df -h 每一列的含义；说清 df 与 du 的分工<br>　□ 能独立做出 02-★4-5（磁盘视角）<br><b>1-21 · 磁盘满了，第一眼看哪里</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 不看教材，2 分钟内说出最大目录是哪个、多大<br>　<span class="note">实战价值：磁盘满排障是日常高频</span><br><b>1-22 · 大文件与挂载</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 造一个测试大文件再清理；能说出 umount 要先确认没有进程占用（target is busy 是怎么来的）<br>　□ 能独立做出 02-★5-3（查找+执行）<br>　<span class="note">回滚方式：卸载前确认没有进程在用；实验分区用镜像文件</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-20 · 看懂 df 与 du 的数字</b> ★<br>　□ 说出 df -h 每一列的含义；说清 df 与 du 的分工<br>　□ 能独立做出 02-★4-5（磁盘视角）<br><b>1-21 · 磁盘满了，第一眼看哪里</b> ★<br>　□ 不看教材，2 分钟内说出最大目录是哪个、多大<br>　<span class="note">实战价值：磁盘满排障是日常高频</span><br><b>1-22 · 大文件与挂载</b> ★<br>　□ 造一个测试大文件再清理；能说出 umount 要先确认没有进程占用（target is busy 是怎么来的）<br>　□ 能独立做出 02-★5-3（查找+执行）<br>　<span class="note">回滚方式：卸载前确认没有进程在用；实验分区用镜像文件</span><br></div>
 
 <p><b>本章目标：</b>① 会用 df 看整体、du 看明细；② 理解"挂载"；③ 会造测试大文件（fallocate / dd）；④ 看懂磁盘满的排查套路。 <span class="opt">补充：日志越写越多的典型场景用 <span class="code cmd">logrotate</span> 定期切割/清理（多数发行版自带，配置在 /etc/logrotate.d/）。</span></p>
 <p><b>本章新命令</b>：<span class="code cmd">df</span> <span class="code cmd">du</span> <span class="code cmd">lsblk</span> <span class="code cmd">mount</span> <span class="code cmd">fallocate</span> <span class="code cmd">dd</span> <span class="code cmd">mkfs</span></p>
@@ -1062,7 +1050,7 @@ EOF</span>
 <p><span class="opt">易错：</span>df 和 du 的数字对不上是经典现象——常见原因是"文件被删了但还有进程占着"（实战中常见，先记住这个结论）。</p>
 </div>
 <div class="box2">
-<p><b>挂载与卸载速览（mount / umount）</b>：<span class="code">sudo mount /dev/sdb1 /mnt/data</span> 把分区接到目录 → <span class="code">df -h /mnt/data</span> 验证（列表里能看到即成功）→ <span class="code">sudo umount /mnt/data</span> 卸载（<b>拼写没有 n</b>，别写成 unmount）。卸载报 <b>target is busy</b> 时：先 <span class="code">cd</span> 离开该目录、结束占用它的程序，或 <span class="code">lsof /mnt/data</span> 查是谁在用。完整演练（☆ 选做，留到以后再做也行）见《Linux 练习册·进阶篇》场景 2 搭建手册（镜像文件里练，安全）。</p><p class="note">lsof = 列出「谁打开了这个文件/端口」（排查占用常用，可能需 sudo apt install lsof）</p>
+<p><b>挂载与卸载速览（mount / umount）</b>：<span class="code">sudo mount /dev/sdb1 /mnt/data</span> 把分区接到目录 → <span class="code">df -h /mnt/data</span> 验证（列表里能看到即成功）→ <span class="code">sudo umount /mnt/data</span> 卸载（<b>拼写没有 n</b>，别写成 unmount）。卸载报 <b>target is busy</b> 时：先 <span class="code">cd</span> 离开该目录、结束占用它的程序，或 <span class="code">lsof /mnt/data</span> 查是谁在用。完整演练（☆ 选做）见《Linux 练习册·进阶篇》场景 2 搭建手册（镜像文件里练，安全）。</p><p class="note">lsof = 列出「谁打开了这个文件/端口」（排查占用常用，可能需 sudo apt install lsof）</p>
 </div>
 
 <h3>7.2 造测试文件：fallocate 和 dd</h3>
@@ -1124,7 +1112,7 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 <b>真要用时去哪查</b>：<span class="code cmd">man logrotate</span>，或搜"logrotate 每天切一次保留 7 天"。</div>
 
 <h2 id="toc-10">第 8 章 · 网络命令</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-23 · 查自己：ip / ip route / DNS</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 说出本机 IP、网关、DNS 各自怎么看<br><b>1-24 · 连通性：ping / curl / nc</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 说清"ping 不通"与"端口不通"的差别<br><b>1-25 · 端口与监听：ss -tulnp</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 找出某个端口是谁在听<br><b>1-26 · 四层排查法综合</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 面对"服务连不上"，按主机→端口→进程→日志走一遍<br>　<span class="note">实战价值：网络排障是日常高频</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-23 · 查自己：ip / ip route / DNS</b> ★<br>　□ 说出本机 IP、网关、DNS 各自怎么看<br><b>1-24 · 连通性：ping / curl / nc</b> ★<br>　□ 说清"ping 不通"与"端口不通"的差别<br><b>1-25 · 端口与监听：ss -tulnp</b> ★<br>　□ 找出某个端口是谁在听<br><b>1-26 · 四层排查法综合</b> ★<br>　□ 面对"服务连不上"，按主机→端口→进程→日志走一遍<br>　<span class="note">实战价值：网络排障是日常高频</span><br></div>
 
 <p><b>本章目标：</b>① 会查 IP、网关（ip / ip route）；② 会用 ping、ss、nc、curl 做基础排查；③ 会 ssh / scp 远程操作；④ 掌握"主机→端口→进程→日志"四层排查法。</p>
 <p><b>本章新命令</b>：<span class="code cmd">ip</span> <span class="code cmd">ip route</span> <span class="code cmd">ping</span> <span class="code cmd">ss</span> <span class="code cmd">curl</span> <span class="code cmd">wget</span> <span class="code cmd">nc</span> <span class="code cmd">traceroute</span> <span class="code cmd">nslookup</span> <span class="code cmd">ssh</span> <span class="code cmd">scp</span></p>
@@ -1165,7 +1153,7 @@ Swap:         2.0G    0B  2.0G <span class="out">（示例输出，实际以本�
 </div>
 
 <h3>8.3 取数据：curl 和 wget（本地可复现版）</h3>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本节全部用本地服务演示，不需要外网；文末附一个"联网扩展"例子（无网络直接跳过，不影响主线验收）。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 本节全部用本地服务演示，不需要外网；文末附一个"联网扩展"例子（选做）。</p>
 <div class="demo">
 <p class="dtitle">示范 3：先用 python3 -m http.server 起一个本地网页服务</p>
 <pre class="demo-in"><span class="prompt">$</span> <span class="cmd">mkdir</span> <span class="opt">-p</span> <span class="param">~/lab</span> &amp;&amp; <span class="cmd">cd</span> <span class="param">~/lab</span> &amp;&amp; <span class="cmd">python3</span> <span class="opt">-m</span> <span class="param">http.server</span> <span class="param">8000</span> <span class="opt">&amp;</span></pre>
@@ -1191,7 +1179,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <p><span class="opt">易错：</span>curl 测"服务通不通"，wget 下"文件"。URL 里的 &amp; 会被 shell 当后台符号处理，带 &amp; 的长 URL 必须加引号。</p>
 </div>
 <div class="box2">
-<p><b><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 联网扩展（可跳过，不影响主线）：</b>带参数的公开 API 示例——<span class="code">curl 'https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true'</span>（天气 API，免注册）。返回 JSON，值随时变化；<b>需要网络，连不上就跳过</b>——本节所有验收只要求本地部分。</p>
+<p><b><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> 联网扩展（选做）：</b>带参数的公开 API 示例——<span class="code">curl 'https://api.open-meteo.com/v1/forecast?latitude=30.25&amp;longitude=120.17&amp;current_weather=true'</span>（天气 API，免注册）。返回 JSON，值随时变化；<b>需要网络</b>；本节所有验收只要求本地部分。</p>
 </div>
 
 <h3>8.4 远程操作：ssh 和 scp</h3>
@@ -1208,17 +1196,13 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 <h3>8.5 四层排查法（本章精华）</h3>
 <div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 服务连不上时，按证据分层排查，不能由一次 ping 直接下结论：<br>① <b>回环层</b>：<span class="code">ping -c 4 127.0.0.1</span>，只验证本机回环和网络栈；<br>② <b>本机/网关层</b>：<span class="code">ip addr</span> 看地址，<span class="code">ip route</span> 找默认网关，再测试网关；<br>③ <b>目标主机层</b>：ping 目标 IP；ICMP 可能被防火墙禁用，ping 不通不等于机器关机；<br>④ <b>端口/进程/应用层</b>：用 <span class="code">nc -zv</span> 或 <span class="code">curl</span> 测端口和应用，再用 <span class="code">ss</span>、<span class="code">ps</span>、日志定位服务。</div>
 <p class="note">这条路线和练习册进阶篇场景 3 的题目一一对应，做完题回来再读一遍，体会更深。</p>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-36 · 阶段 1 综合：服务连不上，全流程自己走一遍</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 不看教材走完 主机 → 端口 → 进程 → 日志，并说清每一步为什么<br>　□ 能独立做出 02-★2-6（递归搜索）<br>　□ 能独立做出 02-★5-8（引号原理）<br>　<span class="note">回滚方式：以只读排查为主，启动过的服务实验完停掉 ｜ 实战价值：这一步就是实战里最常见的实操题</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-36 · 阶段 1 综合：服务连不上，全流程自己走一遍</b> ★<br>　□ 不看教材走完 主机 → 端口 → 进程 → 日志，并说清每一步为什么<br>　□ 能独立做出 02-★2-6（递归搜索）<br>　□ 能独立做出 02-★5-8（引号原理）<br>　<span class="note">回滚方式：以只读排查为主，启动过的服务实验完停掉 ｜ 实战价值：这一步就是实战里最常见的实操题</span></div>
 
 <h3>8.6 免密登录：ssh 密钥（这一节要学，阶段 7 / 8 的远程操作要用）</h3>
 <p><b>为什么需要</b>：每次 ssh 都输密码，脚本就没法自动在远程机器上干活；“平时怎么连服务器”的标准做法。</p>
 <p><b>三步走</b>：① 生成密钥对 <span class="code cmd">ssh-keygen -t ed25519</span>（一路回车，生成 ~/.ssh/id_ed25519 与 <span class="code">.pub</span>）；② 把公钥送到目标机 <span class="code cmd">ssh-copy-id 用户名@主机</span>（只这一次要输密码）；③ 验证 <span class="code cmd">ssh 用户名@主机</span> 不再问密码。</p>
 <p><b>一句话原理</b>：私钥留在自己机器上，公钥放到对方机器的 <span class="code">~/.ssh/authorized_keys</span> 里；对方用公钥考你一道只有私钥能答的题。</p>
 <p class="note">回滚方式：把目标机 authorized_keys 里那一行删掉，免密立刻失效。私钥（不带 .pub 的那个）永远不外传、不提交到 GitHub。</p>
-<div class="box2"><b>顺带一提 · 防火墙（不用学，知道有这么个东西就行）</b><br>
-<b>是什么</b>：管"谁能连进来"的守门人，Ubuntu 上常用 <span class="code">ufw</span>。<br>
-<b>什么时候遇到</b>：服务器要对外开放端口、或被要求做安全加固的时候。<br>
-<b>真要用时去哪查</b>：14 手册的「排错心法」＋ <span class="code">man ufw</span>，或者直接搜"ufw 放行端口"。</div>
 <h3>8.7 易错点</h3>
 <div class="box2">
 <p><span class="opt">坑 1：</span>ping 不通 ≠ 对方没开机——对方可能禁 ping（防火墙），但网页服务正常。继续用 nc 测端口。</p>
@@ -1241,7 +1225,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 
 <div class="newpage"></div>
 <h2 id="toc-11">第 9 章 · apt 包管理</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-27 · apt 包管理：装 / 卸 / 搜 / 锁报错</b> ★ ｜ 休息日 1.1 小时 ｜ 工作日 15 分<br>　□ 装一个工具再卸掉；说清 update 与 upgrade 的区别<br>　□ 能独立做出 02-★4-7（包管理）<br>　<span class="note">回滚方式：别卸载系统关键包</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-27 · apt 包管理：装 / 卸 / 搜 / 锁报错</b> ★<br>　□ 装一个工具再卸掉；说清 update 与 upgrade 的区别<br>　□ 能独立做出 02-★4-7（包管理）<br>　<span class="note">回滚方式：别卸载系统关键包</span><br></div>
 
 <p><b>本章目标：</b>① 理解包管理器为什么存在；② 会用 apt 装/卸/搜软件；③ 看懂常见的锁文件报错。</p>
 <p><b>本章新命令</b>：<span class="code cmd">apt update</span> <span class="code cmd">apt install</span> <span class="code cmd">apt remove</span> <span class="code cmd">apt search</span> <span class="code cmd">apt upgrade</span> <span class="code cmd">apt list</span> <span class="code cmd">dpkg</span></p>
@@ -1298,7 +1282,7 @@ ERROR 404: File not found. <span class="out">（失败：退出码非 0，以实
 
 <div class="newpage"></div>
 <h2 id="toc-12">第 10 章 · systemctl 与服务</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-28 · 服务状态：systemctl status / is-active</b> ★ ｜ 休息日 40 分 ｜ 工作日 15 分<br>　□ 说出 loaded / active 各表示什么<br><b>1-29 · 起停与开机自启：start / stop / enable</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 停掉一个服务再恢复；说清 enable 与 start 的区别<br>　□ 能独立做出 02-★4-6（服务管理）<br>　<span class="note">回滚方式：自己开的服务自己关；停之前记下原状态 ｜ 实战价值：服务起不来是日常高频</span><br><b>1-30 · 看服务日志：journalctl -u</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 从服务日志里找出最近一次失败的原因<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-28 · 服务状态：systemctl status / is-active</b> ★<br>　□ 说出 loaded / active 各表示什么<br><b>1-29 · 起停与开机自启：start / stop / enable</b> ★<br>　□ 停掉一个服务再恢复；说清 enable 与 start 的区别<br>　□ 能独立做出 02-★4-6（服务管理）<br>　<span class="note">回滚方式：自己开的服务自己关；停之前记下原状态 ｜ 实战价值：服务起不来是日常高频</span><br><b>1-30 · 看服务日志：journalctl -u</b> ★<br>　□ 从服务日志里找出最近一次失败的原因<br></div>
 
 <p><b>本章目标：</b>① 理解 systemd 和"服务"；② 会用 systemctl 管理服务全流程；③ 会用 journalctl 看服务日志。</p>
 <p><b>本章新命令</b>：<span class="code cmd">systemctl</span> <span class="code cmd">journalctl</span></p>
@@ -1348,7 +1332,7 @@ WantedBy=multi-user.target</pre>
 <p class="demo-ex">服务挂了的三板斧：<b>systemctl status 看死活 → journalctl -u 服务名 看日志 → journalctl -p err 只看报错</b>。和《日志报错解读手册》配合使用。</p>
 </div>
 <p class="note"><svg class="em" width="15" height="15"><use href="#ic-wn"/></svg> 权限小坑：普通用户读 journalctl 要在 <b>adm / systemd-journal 组</b>里——桌面安装时建的第一个用户默认在 adm 组；WSL 或自建用户若只看到 <span class="code">-- No entries --</span>，先用 <span class="code">sudo journalctl -u ssh</span> 看，或 <span class="code">sudo usermod -aG adm 你的用户名</span> 后重新登录。</p>
-<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件：本章用 ssh 服务做演示对象——<b>Ubuntu 桌面版 / WSL 版通常都没装 openssh-server</b>（先 <span class="code">sudo apt install openssh-server</span>；<b>WSL 上装完还要把服务起起来</b>——未启用 systemd 的用 <span class="code">sudo service ssh start</span>，启用 systemd 的用 <span class="code">sudo systemctl start ssh</span>——才有服务可查），或用系统已有的任意服务代替（如 cron、systemd-resolved、systemd-journald）。<b>停止正在用的 SSH 服务会断掉你的远程会话</b>：实验请在本地终端做，远程时改用"重启"而非"停止"，并留好本地终端恢复方式。WSL / 容器环境 systemd 可能受限，不能做时记为环境限制，不影响主线概念。</p>
+<p class="note"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 外部条件：用系统里已有的任意服务做演示对象即可（如 cron、systemd-resolved、systemd-journald）；想用 ssh，Ubuntu 桌面版 / WSL 通常要自己装（<span class="code">sudo apt install openssh-server</span>，WSL 上装完还要把服务起起来）。<b>注意：停止正在用的 SSH 服务会断掉远程会话</b>——实验请在本地终端做。<br>做不了时记为环境限制，不影响主线概念。</p>
 <div class="hw">
 <p class="htitle"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 章末作业 <svg class="em" width="15" height="15"><use href="#ic-gl"/></svg></p>
 <p>1. systemctl status ssh，逐行解释 Loaded、Active、Main PID 的含义。</p>
@@ -1365,7 +1349,7 @@ WantedBy=multi-user.target</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-13">第 11 章 · 环境变量</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-31 · 环境变量：PATH 与 export</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 说清"命令为什么找不到"并修好一次<br>　<span class="note">回滚方式：改 shell 配置前先备份</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-31 · 环境变量：PATH 与 export</b> ★<br>　□ 说清"命令为什么找不到"并修好一次<br>　<span class="note">回滚方式：改 shell 配置前先备份</span><br></div>
 
 <p><b>本章目标：</b>① 理解环境变量是"全局公告栏"；② 明白 PATH 决定"命令找不找得到"；③ 会 export、改 rc 文件、source；④ 会 alias 起外号。</p>
 <p><b>本章新命令</b>：<span class="code cmd">env</span> <span class="code cmd">echo</span> <span class="code cmd">export</span> <span class="code cmd">source</span> <span class="code cmd">alias</span>（文件：<span class="code">~/.bashrc</span>）</p>
@@ -1432,7 +1416,7 @@ WantedBy=multi-user.target</pre>
 
 <div class="newpage"></div>
 <h2 id="toc-14">第 12 章 · 归档与压缩</h2>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-32 · 归档与压缩：tar / gzip / zip</b> ★ ｜ 休息日 1 小时 ｜ 工作日 15 分<br>　□ 打包一个目录再解开验证<br>　□ 能独立做出 02-★5-6（打包压缩）<br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-32 · 归档与压缩：tar / gzip / zip</b> ★<br>　□ 打包一个目录再解开验证<br>　□ 能独立做出 02-★5-6（打包压缩）<br></div>
 
 <p><b>本章目标：</b>① 理解"归档"和"压缩"是两件事；② 会用 tar 打包（含 tar.gz）；③ 会 gzip / zip；④ 会用 diff 验证解包无误。</p>
 <p><b>本章新命令</b>：<span class="code cmd">tar</span> <span class="code cmd">gzip</span> <span class="code cmd">gunzip</span> <span class="code cmd">zip</span> <span class="code cmd">unzip</span></p>
@@ -1497,7 +1481,7 @@ tar: Removing leading `/' from member names
 <h2 id="toc-15">第 13 章 · Shell 脚本基础</h2>
 <p class="note"><b>先认四个"连接符"</b>：<span class="code">&amp;&amp;</span> = 前一条<b>成功才</b>执行后一条（如 <span class="code">cd ~/lab &amp;&amp; ./run.sh</span>）；<span class="code">;</span> = 不管成败都接着执行；<span class="code">|</span> = 把前一条的输出交给后一条（管道，第 4 章见过）；<span class="code">||</span> = 前一条<b>失败才</b>执行后一条（兜底用）。</p>
 <p class="note"><b>脚本里的条件测试</b>（第 13 章会用到）：<span class="code">[ -n "$s" ]</span> 字符串非空 · <span class="code">[ -z "$s" ]</span> 字符串为空 · <span class="code">[ "$n" -gt 5 ]</span> 数字大于 5 · <span class="code">{1..5}</span> 展开成 1 2 3 4 5 · <span class="code">[ -d "$p" ]</span> 目录存在 · <span class="code">[ -e "$p" ]</span> 路径存在（不分类型）· <span class="code">[ -f "$p" ]</span> 是普通文件 · <span class="code">!</span> 取反（<span class="code">[ ! -d "$p" ]</span> = 不是目录）。</p>
-<div class="box2"><b>本关三要素</b>（编号 ｜ 时长 ｜ 完成判定）<br><b>1-33 · 第一个脚本：shebang、执行权限、退出码</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 写出一个能跑并返回退出码的脚本<br><b>1-34 · 变量、if、for</b> ★ ｜ 休息日 50 分 ｜ 工作日 15 分<br>　□ 写一个"目录不存在就创建"的脚本<br><b>1-35 · crontab 定时任务与绝对路径的坑</b> ★ ｜ 休息日 45 分 ｜ 工作日 15 分<br>　□ 让脚本每分钟跑一次并看到日志<br>　<span class="note">回滚方式：实验完用 crontab -r 清掉 ｜ 实战价值：定时任务是运维日常</span><br><b>2-05 · 接进 crontab：绝对路径的坑</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 定时任务真的跑了，日志按时新增<br>　<span class="note">回滚方式：实验完用 crontab -r 清掉</span><br><b>2-08 · 加日志与退出码：让别人看得懂</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 出错时退出码非 0，日志里能看出哪一步挂的<br><b>2-09 · 参数与用法：$1 / usage / 退出码约定</b> ★ ｜ 休息日 1.5 小时 ｜ 工作日 15 分<br>　□ 脚本有 --help、能收参数、参数错时给用法<br><span class="note">这三关（2-05 / 2-08 / 2-09）随阶段 2 的《03 进阶篇》场景一起做——2-09 的参数与用法示范在 03 册的脚本里。</span><br><span class="note">工作日 15 分钟版：只做第 1 步 + 背 1 张卡（卡片见各阶段的工作日卡）。</span></div>
+<div class="box2"><b>本关三要素</b>（编号 ｜ 完成判定）<br><b>1-33 · 第一个脚本：shebang、执行权限、退出码</b> ★<br>　□ 写出一个能跑并返回退出码的脚本<br><b>1-34 · 变量、if、for</b> ★<br>　□ 写一个"目录不存在就创建"的脚本<br><b>1-35 · crontab 定时任务与绝对路径的坑</b> ★<br>　□ 让脚本每分钟跑一次并看到日志<br>　<span class="note">回滚方式：实验完用 crontab -r 清掉 ｜ 实战价值：定时任务是运维日常</span><br><b>2-05 · 接进 crontab：绝对路径的坑</b> ★<br>　□ 定时任务真的跑了，日志按时新增<br>　<span class="note">回滚方式：实验完用 crontab -r 清掉</span><br><b>2-08 · 加日志与退出码：让别人看得懂</b> ★<br>　□ 出错时退出码非 0，日志里能看出哪一步挂的<br><b>2-09 · 参数与用法：$1 / usage / 退出码约定</b> ★<br>　□ 脚本有 --help、能收参数、参数错时给用法<br><span class="note">这三关（2-05 / 2-08 / 2-09）随阶段 2 的《03 进阶篇》场景一起做——2-09 的参数与用法示范在 03 册的脚本里。</span><br></div>
 
 <p><b>本章目标：</b>① 理解"脚本 = 把敲过的命令装进文件"；② 会写带变量、if、for 的脚本；③ 会用 crontab 定时执行；④ 知道脚本的标准写法。</p>
 <p><b>本章新命令</b>：<span class="code cmd">crontab</span>（脚本语法：shebang、变量、if、for、函数、exit）</p>
@@ -1736,7 +1720,7 @@ done</pre>
 </table>
 <div class="newpage"></div>
 <h2 id="toc-20">附录 E · 电脑上得到 Ubuntu 的两种装法（WSL 为主 / VMware 为辅）</h2>
-<p class="note">这一页解决第 0 关（0-03）的第一件事：电脑上还没有 Ubuntu 怎么办。只做一次；做完 30 分钟内应能敲出 <span class="code cmd">uname -a</span> 并贴进学习日志。</p>
+<p class="note">这一页解决第 0 关（0-03）的第一件事：电脑上还没有 Ubuntu 怎么办。只做一次；做完 30 分钟内应能敲出 <span class="code cmd">uname -a</span> 并记下输出。</p>
 <h3>路线 A（推荐）：WSL2——在 Windows 里直接跑一个 Ubuntu</h3>
 <p>前提：Windows 10（21H2 以上）或 Windows 11；BIOS 里开启了虚拟化（一般默认已开）。</p>
 <p><b>① 键盘敲什么</b>：开始菜单搜 <b>PowerShell</b> → 右键「以管理员身份运行」→ 敲 <span class="code cmd">wsl --install -d Ubuntu</span>，装完<b>重启电脑</b>。</p>
@@ -1753,12 +1737,12 @@ done</pre>
 <tr><td><b>WSL2</b>（推荐）</td><td>大多数 Windows 用户：启动快、占资源少、与 Windows 文件互通方便</td><td>没有桌面环境；26.04 的 WSL 已支持 systemd（个别机器要在 <span class="code">/etc/wsl.conf</span> 里开 <span class="code">[boot] systemd=true</span> 后 <span class="code cmd">wsl --shutdown</span> 重启）</td></tr>
 <tr><td><b>VMware</b>（备选）</td><td>想要一台完整 Ubuntu（带桌面、玩挂载/服务更完整）</td><td>吃内存和磁盘（建议 8GB 以上内存的机器再走这条）；镜像下载慢换国内源</td></tr></table>
 <p class="note">两条路选一条即可。0-03 的判定：能进系统、能上网、能敲 <span class="code cmd">ls</span>，并<b>能说出你用的是哪一种环境</b>（WSL / VMware / 平板 Termux）。</p>
-<div class="section-head">阶段总结练习（新增 · 打完本阶段关卡再做）</div>
+<div class="section-head">阶段总结练习（打完本阶段关卡再做）</div>
 <div class="box2"><h3>阶段 1 · 学习总结练习：工单"磁盘满了 ＋ 服务起不来"</h3>
 <p><b>业务场景</b>：你是某公司 AI 组的值班运维。周一早上两条告警：① 某台服务器磁盘使用率 100%；② 昨天还正常的推理服务，现在起不来了。你只有这台机器的 SSH。</p>
 <p><b>综合要求</b>：① 用 df / du 定位是谁占满了磁盘（含"已删除但仍被进程占用"的思路）；② 清理或迁移后确认空间回收；③ 从服务状态（systemctl / is-active）与日志（journalctl）判断服务为什么起不来；④ 处理进程与端口占用；⑤ 全程按"现象 → 线索 → 命令 → 验证"写一份根因分析。</p>
 <p><b>验收</b>：□ 20 分钟内定位磁盘占用的大头　□ 服务恢复并说清根因　□ 有一份别人能看懂的根因分析（含恢复/回滚步骤）</p>
-<p><b>时间</b>：2.5 小时（休息日）　<b>产出</b>：incident 根因分析 + 操作记录，放进 learning-journey</p>
+<p><b>产出</b>：incident 根因分析 + 操作记录，放进 learning-journey</p>
 <p class="note">环境提示：本工单的"磁盘满 ＋ 服务起不来"需要先自己造出来——方向见《03 进阶篇》的场景题（磁盘告警脚本 ＋ 服务保活脚本，正好对应两种故障源）。</p>
 <p><b>AI 运维指向</b>：这正是推理服务挂掉的第一现场——磁盘满、端口占用是 GPU 服务器最常见的两个故障。</p>
 <p><b>实战价值</b>：实战里最看重的就是"面对没见过的故障看你的推理路径"，这道题就是你要讲的那个故事。</p></div>

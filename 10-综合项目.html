@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>综合项目（教科书版） · v3.1</title>
+<title>综合项目（教科书版）</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -109,22 +109,13 @@ ul.st { columns: 1; }
 </head>
 <body>
 <h1>10 · 综合项目（server-health-check）</h1>
-<p class="note">配套：《01 Linux 入门》《04 Python 入门》《07 Docker 入门》《08 监控入门》《09 K8s 入门》《16 Git 速查》《17 关卡总表》；本册是阶段 7 的正文，按关卡编号打关。</p>
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（新写）</td></tr>
-<tr><td><b>本册关卡</b></td><td>7-01 ~ 7-08</td></tr>
-<tr><td><b>用时</b></td><td>必做 33 小时</td></tr>
-<tr><td><b>学完解锁</b></td><td>交付王牌项目 v1：本机巡检 ＋ 阈值告警 ＋ 报告与历史对比 ＋ 容器化 ＋ 指标进监控 ＋ README/设计决策/讲述稿</td></tr></table>
-<div class="box2"><b>全册已写</b>（第四轮）。这是实战里最看重的那道题的主料，做完要能在干净环境按 README 跑通。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：这一册是<b>把前面学到的所有零件拼成一个真项目</b>：写一个 <span class="code">server-health-check</span> 巡检脚本（查磁盘 / 内存 / CPU / 服务）→ 出报告 → 容器化 → 接监控 → 写 README 和讲述稿。生活类比：零件（命令、Python、Docker、监控）你都见过，这一册教你把它们<b>装成一台能给别人看的机器</b>。</p>
-<p><b>② 干什么用</b>：实战里最看重的是"讲一件你真正动手做过的事"——做完这一册，你手里就有一个<b>能从零跑通、带 README</b> 的作品，而不是零散的知识点。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：别人先看你的 GitHub，再让你讲 3 分钟；没有项目故事，前面学的都只是"学过"。</p>
-<p><b>④ 长什么样 / 怎么用</b>：一条主线走完七关：7-01 立项（定检查项与门槛）→ 7-02 写脚本 → 7-03 报告与历史对比 → 7-04 容器化 → 7-05 接 Prometheus → 7-06 README → 7-07 讲述稿；位置：第 7 阶段收官册（01~09 学的东西全用得上）。</p>
+<p class="note">本册是阶段 7 的正文，从 7-01 起步；配套与路线见《17-关卡总表》。</p>
+<p>本册共 8 关（7-01 ~ 7-08）。目标：交付王牌项目 v1 —— 本机巡检 ＋ 阈值告警 ＋ 报告与历史对比 ＋ 容器化 ＋ 指标进监控 ＋ README/设计决策/讲述稿。</p>
+<div class="box2">这是实战里最看重的那道题的主料，做完要能在干净环境按 README 跑通。</div>
+<p>本册是什么：综合项目 —— 把前面所有零件拼成 server-health-check：巡检、告警、报告、容器化、接监控。 用法：八关走完，产出一个陌生人 clone 下来能跑通的作品（含 README 与讲述稿）。</p>
+<p class="note">动手做实验时照这两条来：实验闭环（先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场）和踩坑记录位（现象 → 原因 → 解决 → 一句话总结）——不必逐关都写，做完整册回头总结一次就够。</p>
 
 <h2>7-01 项目立项：巡检到底要检查什么</h2>
-<p class="note">时长：休息日 3 小时 ｜ 工作日 15 分　｜　前置：3-17（或 6-08）　｜　状态：已写（第四轮）</p>
 <p><b>这一册是你的王牌项目</b>：`server-health-check` —— 实战里最看重的"讲一件你真正动手做过的事"，讲的就是它。第一关先把"要检查什么、怎么算不正常"定下来，<b>不写代码</b>。</p>
 <h3>步骤 1：先回答一个问题</h3>
 <pre class="demo">如果半夜收到告警"某台服务器好像不对劲"，你希望脚本替你回答哪几个问题？
@@ -151,14 +142,11 @@ ul.st { columns: 1; }
 | 服务   | systemctl is-active | ≠active | [告警] ssh inactive |
 退出码约定：0=全部正常，1=脚本自身出错，2=存在告警</pre>
 <h3>完成判定</h3>
-<p>□ 有一页检查清单（四项 ＋ 门槛 ＋ 异常话术）　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）　□ 能说出为什么每项都要有门槛　□ 能说出退出码 0/1/2 各自代表什么　□ 能说出这一版和 3-17 的 v0 差在哪（多了服务检查、门槛更明确）</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p>□ 有一页检查清单（四项 ＋ 门槛 ＋ 异常话术）　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（见本册开篇）　□ 能说出为什么每项都要有门槛　□ 能说出退出码 0/1/2 各自代表什么　□ 能说出这一版和 3-17 的 v0 差在哪（多了服务检查、门槛更明确）</p>
 <p><b>回滚方式</b>：纯文档，无风险。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：别人问"你这个巡检项目都查什么"，你能一条条说出"查什么、什么算不正常、为什么定这个门槛"——这就是"设计过"和"抄过"的区别。</p>
 
 <h2>7-02 v1：把四个检查写进脚本（subprocess ＋ 阈值告警）</h2>
-<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：7-01 ＋ 3-10（subprocess）＋ 3-05（异常）　｜　状态：已写（第四轮）</p>
 <h3>步骤 1：核心骨架（可直接复制，先跑通再改）</h3>
 <pre class="demo">#!/usr/bin/env python3
 """server-health-check v1：四项本机巡检，超阈值告警"""
@@ -257,15 +245,12 @@ if __name__ == "__main__":
 <span class="prompt">$</span> ./server_check.py | grep 服务
 [告警] 服务：服务 ssh 状态：inactive
 <span class="prompt">$</span> sudo systemctl start ssh        # 记得恢复！</pre>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p class="note">回滚方式：实验文件 <span class="code cmd">rm ~/lab/bigfile</span>；停掉的服务 <span class="code cmd">systemctl start</span> 恢复。<b>动服务前先确认它是不是你正在用的（ssh 停了你自己会掉线，所以先开一个备用终端）</b>。</p>
 <h3>完成判定</h3>
 <p>□ 脚本四项检查都能跑出结果　□ 造过一次真实告警（大文件顶磁盘）并恢复　□ 退出码 0/1/2 都验证过　□ 能说清为什么每项检查用函数封装　□ 能说清 <span class="code">subprocess.run</span> 的 <span class="code">capture_output</span> / <span class="code">text</span> / <span class="code">timeout</span> 各干什么</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这是实战里最看重的那道题的主料 —— 你能讲"我怎么设计这个脚本、怎么造故障验证它、顺手处理了哪些边界"。有设计取舍的故事，才有说服力。</p>
 
 <h2>7-03 输出报告与历史对比</h2>
-<p class="note">时长：休息日 4 小时 ｜ 工作日 20 分　｜　前置：7-02 ＋ 3-03（文件）　｜　状态：已写（第四轮）</p>
 <p><b>为什么要"留档"</b>：只看一眼数字，你判断不了"这台机器是今天不对，还是一直都不对"。<b>把每次巡检写成文件，才有"趋势"</b>——这也是运维和临时工的区别。</p>
 <h3>步骤 1：把结果写成文件（带时间戳）</h3>
 <pre class="demo">import datetime, os, pathlib
@@ -317,16 +302,13 @@ print(diff_with_last(""))
 20261010-001001.txt
 20261010-011001.txt      ← 每小时一份，历史自动累积</pre>
 <p class="note">行里两处 <span class="code">/home/你的真实用户名</span> 记得换成你的真实路径；cron 不展开 <span class="code">~</span>，写绝对路径最稳。</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">crontab -e</span> 删掉那一行；报告目录 <span class="code">rm -rf ~/lab/health-reports</span>（先确认里面没有你要留的）。</p>
 <h3>完成判定</h3>
 <p>□ 每次运行都生成一份带时间戳的报告文件　□ 至少跑两次，能打印出"上次 vs 本次"的对比　□ 挂上 crontab，等它自己跑出至少两份　□ 能说出"基线"是什么、为什么没有基线就没法判断异常</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：工作里常问"你怎么判断一台机器状态不对"，答"我留了历史报告，看的是趋势不是瞬间值"——这句话直接体现运维思维。</p>
 
 <h2>7-04 容器化：把巡检脚本做成镜像</h2>
-<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：7-03 ＋ 7 册 Docker（4-04、4-05、4-10）　｜　状态：已写（第四轮）</p>
-<p class="note">拉不动基础镜像？（报 <span class="code">i/o timeout</span>）先按 <b>07 册《Docker 入门》的「开始之前 · 先把镜像加速器配好」</b>配一次。</p>
+<p class="note">拉不动基础镜像？（报 <span class="code">i/o timeout</span>）按 <b>07 册的镜像加速器说明</b>配一次即可。</p>
 <h3>步骤 1：Dockerfile（照 4-05 的模板改）</h3>
 <pre class="demo">FROM python:3.14-slim
 RUN apt-get update &amp;&amp; apt-get install -y procps &amp;&amp; rm -rf /var/lib/apt/lists/*
@@ -334,7 +316,7 @@ WORKDIR /opt/check
 COPY server_check.py ./
 RUN chmod +x server_check.py
 ENTRYPOINT ["python3", "server_check.py"]</pre>
-<p><p class="note">（<b>为什么要装 <span class="code">procps</span></b>：slim 镜像里连 <span class="code">free</span> / <span class="code">uptime</span> 都没有——这是 4-01 学的"底座只给你最小集合"，缺什么自己装。）</p>
+<p class="note">（<b>为什么要装 <span class="code">procps</span></b>：slim 镜像里连 <span class="code">free</span> / <span class="code">uptime</span> 都没有——这是 4-01 学的"底座只给你最小集合"，缺什么自己装。）</p>
 <p><b>解读</b>：用 <span class="code">python:3.14-slim</span> 当底座（比 ubuntu 小、又自带 Python）；<b>不用再 apt 装 Python</b> —— 这就是选底座的价值。</p>
 <p class="note"><b>为什么用 ENTRYPOINT 而不是 CMD</b>：镜像名后面跟的参数会<b>追加</b>到 <span class="code">ENTRYPOINT</span>；写成 <span class="code">CMD</span> 会把它<b>整条替换</b>（后面 <span class="code">--skip-service</span> 那一步能生效就靠这个）。</p>
 <p class="note"><b>构建卡在 apt-get？（国内网络常见）</b>：容器的 apt 走 Debian 官方源，慢网下可能十几分钟拉不动。把步骤 1 的 RUN 换成下面这行（换源段会打印实际改了哪个源文件）再构建，几秒就能装完：<span class="code">RUN for f in /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list; do [ -f "$f" ] &amp;&amp; echo 换源: $f &amp;&amp; sed -i 's|deb.debian.org|mirrors.tuna.tsinghua.edu.cn|g' "$f"; done; apt-get update &amp;&amp; apt-get install -y procps &amp;&amp; rm -rf /var/lib/apt/lists/*</span>。换的只是下载通道、装的包不变；<b>注意：07 册配的加速器只管拉 Docker 镜像，管不到容器里的 apt</b>，两件事分开配。</p>
@@ -364,16 +346,13 @@ ENTRYPOINT ["python3", "server_check.py"]</pre>
 <span class="prompt">$</span> ls ~/lab/health-reports | tail -2       # 报告确实落在宿主机上</pre>
 <p><b>解读</b>：<b>容器是"用完就删"的，报告必须写到挂载出来的目录里</b>（4-03 学过"无状态的放容器里、有状态的挂出来"，这里就是它的真实应用）。</p>
 <p class="note"><b>报告文件名的时间比墙上的钟慢 8 小时？</b>正常——<b>容器默认走 UTC</b>（比北京时间慢 8 小时）；"上次 vs 本次"对比不受影响，只是历史文件排序观感怪。想让时间戳和宿主机一致：跑的时候加一个环境变量 <span class="code">-e TZ=Asia/Shanghai</span> 即可——完整命令：<span class="code">docker run --rm -e TZ=Asia/Shanghai -v ~/lab/health-reports:/reports -e REPORT_DIR=/reports health-check:1.0 --skip-service</span>。</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <h3>回滚方式</h3>
 <p><span class="code cmd">docker rmi health-check:1.0</span> 删镜像；宿主机上的 <span class="code">~/lab/health-reports</span> 不受影响。</p>
 <h3>完成判定</h3>
 <p>□ 镜像构建成功并能跑出巡检输出　□ 报告通过挂载写入宿主机目录（容器删了报告还在）　□ 能说清"为什么容器里 systemd 检查会失败"以及你选了哪种处理办法　□ 能说出用 python:3.14-slim 当底座的好处</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>："容器里遇到的坑"——"容器里没有 systemd 导致服务检查失效，我改成端口探活/参数跳过"就是一段很实在的踩坑故事。</p>
 
 <h2>7-05 接到监控：把巡检指标暴露给 Prometheus</h2>
-<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：7-04 ＋ 8 册（监控：5-04、5-05）　｜　状态：已写（第四轮）</p>
 <p><b>这一关让项目"活起来"</b>：之前是"跑一次看一次"，现在是<b>持续暴露指标，让 Prometheus 每隔 15 秒来抓一次，超阈值还能触发告警</b>。这就是把脚本变成"可观测的服务"。</p>
 <h3>步骤 1：给脚本加一个 /metrics 出口（最简做法）</h3>
 <pre class="demo"># 用标准库起一个极小的 HTTP 服务，把巡检结果按 Prometheus 格式吐出来
@@ -451,16 +430,13 @@ health_load1 0.31</pre>
       annotations:
         summary: "巡检脚本报告：磁盘使用率 {{ $value }}%"</pre>
 <p><b>解读</b>：<b>到这里，你的脚本从"一段代码"变成了"系统的一部分"</b>：它自己暴露指标、被监控抓取、能触发告警。这就是"脚本 ＋ 面板 ＋ 告警"那条完整故事。</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <h3>回滚方式</h3>
 <p>停掉服务 <span class="code cmd">kill %1</span>；把 prometheus.yml 里那段删掉并 <span class="code cmd">docker compose up -d</span>。</p>
 <h3>完成判定</h3>
 <p>□ <span class="code">/metrics</span> 能返回至少三个自定义指标　□ Prometheus 的 Targets 里有 health-check 且 UP　□ Grafana 上能画出你自己的指标曲线　□ 有一条自己的告警规则，且调低阈值能触发　□ 能说出 Prometheus 的指标格式长什么样</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这一关把"我写过脚本"升级成"我做过可观测性"——别人听到"我自己暴露 metrics 接进 Prometheus，还配了告警"，会明显多看你一眼。</p>
 
 <h2>7-06 README 与设计决策记录</h2>
-<p class="note">时长：休息日 4 小时 ｜ 工作日 20 分　｜　前置：7-05 ｜ 参考：16 册《一个合格的 README 长什么样》　｜　状态：已写（第四轮）</p>
 <h3>步骤 1：README（照 16 册那页的五段结构写）</h3>
 <pre class="demo"># server-health-check
 
@@ -510,13 +486,10 @@ Ubuntu 26.04 / Python 3.14；容器方式需要 Docker。
 <p><b>解读</b>：<b>这四条的格式就是实战里最看重的那道题的答题格式</b>："我选了什么 / 还有什么方案 / 为什么不用"。写下来，讲的时候就不用现想。</p>
 <h3>完成判定</h3>
 <p>□ README 五段齐全，陌生人照它能跑通　□ 有设计决策记录，至少覆盖四个决策　□ 每条决策都写清"选了什么 / 还有什么 / 为什么不用"　□ 仓库里没有密钥等敏感信息</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：文档改动可随时回退（git 里都有）。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
-<p><b>实战价值</b>：这两份文档就是实战里最看重的那道题的"小抄"——你不需要临场组织语言，照着讲就行。</p>
+<p><b>实战价值</b>：这两份文档就是实战里最看重的那道题的"逐字稿"——你不需要临场组织语言，照着讲就行。</p>
 
 <h2>7-07 三分钟讲述稿与 10 分钟深挖</h2>
-<p class="note">时长：休息日 4 小时 ｜ 工作日 20 分　｜　前置：7-06　｜　状态：已写（第四轮）</p>
 <h3>步骤 1：三分钟讲述稿（骨架照这里填，别背全文）</h3>
 <pre class="demo">【1 分钟 · 是什么】
 "这是我写的服务器健康巡检工具，检查四项：磁盘、内存、负载、关键服务。
@@ -543,13 +516,10 @@ Ubuntu 26.04 / Python 3.14；容器方式需要 Docker。
 录音存进 learning-journey，文件名：server-health-check-讲述-YYYYMMDD.m4a</pre>
 <h3>完成判定</h3>
 <p>□ 三分钟讲述稿能不看稿讲完（录音为证）　□ 能接住至少三个追问（照上面表里练）　□ 每个答案都能指到项目里的具体文件/命令　□ 讲述稿里至少说清一个"设计取舍"</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：无操作。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：实战里最看重的那道题的全部准备工作就在这一关里 —— 讲得清楚，比项目本身复杂更重要。</p>
 
 <h2>7-08 阶段 7 · 学习总结练习：陌生人 clone 下来能跑</h2>
-<p class="note">时长：休息日 3 小时 ｜ 工作日 20 分　｜　前置：7-01 ~ 7-07　｜　状态：已写（第四轮）</p>
 <h3>业务场景</h3>
 <p>你要把这个工具交给别人用（别人、同事、或者三个月后的自己）。<b>一个自己不熟悉的人，能不能只看 README 就把它跑起来？</b>这一关就是验收这件事。</p>
 <h3>综合要求（这册的技能全用上）</h3>
@@ -561,8 +531,6 @@ Ubuntu 26.04 / Python 3.14；容器方式需要 Docker。
 ⑤ 更新讲述稿：把这次"交接给别人"发现的坑加进去。</p>
 <h3>验收</h3>
 <p>□ 在干净环境照 README 跑通（截图或记录）　□ 三个跑法（本机 / 容器 / 指标）都验证过　□ README 里补上了"我卡住过的地方"　□ 设计决策记录至少四条　□ 三分钟讲述稿能不看稿讲完　□ 仓库里无密钥、无大文件</p>
-<h3>时间</h3>
-<p>3 小时（休息日）</p>
 <h3>产出</h3>
 <p>仓库 <span class="code">server-health-check</span>（README ＋ 脚本 ＋ Dockerfile ＋ 设计决策记录 ＋ 截图）。<b>这是你的头号项目。</b></p>
 <h3>AI 运维指向</h3>

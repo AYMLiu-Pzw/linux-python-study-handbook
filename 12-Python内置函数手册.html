@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Python 内置函数手册 · v3.1</title>
+<title>Python 内置函数手册</title>
 <style>
 @page { size: A4; margin: 13mm 12mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -208,7 +208,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
   </g></symbol></defs></svg>
 
 <h1><svg class="em" width="15" height="15"><use href="#ic-ob"/></svg> Python 内置函数手册（教科书配套版）</h1>
-<p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>——本套教材的 PDF 版已自带页码，重复勾选会产生双页码；需要保留彩色底色时，在打印选项里开启"背景图形"。</p>
+<p class="note">打印用 A4、缩放 100%。</p>
 
 <div class="toc">
 <h3 style="border:none;margin:2px 0 6px;"><svg class="em" width="15" height="15"><use href="#ic-bm"/></svg> 目录</h3>
@@ -231,19 +231,10 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 </div>
 
 <div class="newpage"></div>
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
-<tr><td><b>本册关卡</b></td><td>—</td></tr>
-<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
-<tr><td><b>学完解锁</b></td><td>写代码时 30 秒查到用法</td></tr></table>
-<div class="box2"><b>本册禁止通读，只许查。</b><br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+<p>目标：写代码时随手能查到用法。</p>
+<div class="box2"><b>本册是字典册：禁止通读，只许查。</b></div>
 
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：这是 Python 内置函数的<b>查表手册</b> —— 常用内置函数按六组整理（输入输出 / 类型工厂 / 长度统计 / 序列工具 / 检查工具 / 工具集），外加文件与 JSON、字符串方法。生活类比：像厨房墙上的<b>量杯刻度表</b>——不会替你做饭，但一抬眼就知道该用哪个。</p>
-<p><b>② 干什么用</b>：写脚本时"这个功能有没有现成的"答案都在这儿；比背更实用的是<b>知道名字、能查</b>（例：计数用 <span class="code">len</span>、带序号遍历用 <span class="code">enumerate</span>）。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：写代码时用得对不对（比如用 <span class="code">enumerate</span> 而不是手写计数器）直接反映熟练度。</p>
-<p><b>④ 长什么样 / 怎么用</b>：最小一例：<span class="code">len("hello") → 5</span>（函数 = 加工机器：原料进、产品出）。用法照本册规矩：<b>不许通读，只许查</b>——先读「理念篇」的三条规律，再按组查表。</p>
+<p>本册是什么：Python 内置函数与常用写法的查表手册。 用法：禁止通读，只许查 —— 按组翻，用完就合上。</p>
 
 <h2 id="toc-1">理念篇：先搞懂函数是什么，再记函数</h2>
 
@@ -613,17 +604,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <p><b><svg class="em" width="15" height="15"><use href="#ic-nt"/></svg> 本册待改进清单</b>（学习中发现手册不好用的地方，记在这里）：</p>
 </div>
 
-<div class="box2"><b>本套资料总索引（要查什么 → 翻哪册）：</b>
-<table class="tight xtight"><tr><th>你要找</th><th>去哪册</th></tr>
-<tr><td>Linux 命令、权限、进程、服务、网络、Shell 脚本</td><td>01 Linux 入门（练：02 基础篇 / 03 进阶篇）</td></tr>
-<tr><td>Python 语法、模块、文件、异常、自动化</td><td>04 Python 入门（练：05 基础篇 / 06 进阶篇）</td></tr>
-<tr><td>内置函数、字符串方法、文件与 JSON 写法</td><td>12 内置函数手册</td></tr>
-<tr><td>报错里的英文单词看不懂</td><td>13 报错英语单词手册</td></tr>
-<tr><td>日志读不懂、报错不会定位</td><td>14 日志报错解读手册</td></tr>
-<tr><td>变量 / 函数怎么起名</td><td>15 命名手册</td></tr>
-<tr><td>代码提交、推送到 GitHub</td><td>16 Git 与 GitHub 速查</td></tr>
-<tr><td>装第三方库（pip / venv / requirements）</td><td>04 Python 入门 · 附录 E</td></tr>
-<tr><td>我到底学会了没有</td><td>17 关卡总表（逐条打勾）</td></tr></table></div>
+<div class="box2"><b>本套资料总索引</b>（要查什么 → 翻哪册）见《17-关卡总表》。</div>
 
 <p class="footer">《Python 内置函数手册》</p>
 

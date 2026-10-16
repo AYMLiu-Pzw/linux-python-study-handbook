@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>监控入门（教科书版） · v3.1</title>
+<title>监控入门（教科书版）</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -109,23 +109,12 @@ ul.st { columns: 1; }
 </head>
 <body>
 <h1>08 · 监控入门</h1>
-<p class="note">配套：《01 Linux 入门》《04 Python 入门》《07 Docker 入门》《16 Git 速查》《17 关卡总表》；本册是阶段 5 的正文，按关卡编号打关。</p>
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（新写）</td></tr>
-<tr><td><b>本册关卡</b></td><td>5-01 ~ 5-06</td></tr>
-<tr><td><b>用时</b></td><td>必做 16 小时</td></tr>
-<tr><td><b>学完解锁</b></td><td>用 compose 起 Prometheus + Grafana + node_exporter，看得懂 CPU / 内存 / 磁盘三条曲线</td></tr></table>
-<div class="box2"><b>全册已写</b>（第四轮）。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：监控 = 让机器<b>自己汇报状态</b>——你不用一直盯着，也能提前知道它要出事。生活类比：楼道的<b>烟雾报警器</b>，它不灭火、也不改你家里的东西，只负责在起火之前先喊人。</p>
-<p><b>② 干什么用</b>：运维最头疼的三件事全靠它接住 —— ① 磁盘快满：在写满之前收到提醒，而不是服务崩了才发现；② 服务偷偷挂掉：由监控先发现，而不是用户先投诉；③ "这台机器这周到底忙不忙"：有历史曲线可看，不用凭记忆猜。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维要盯的是 <b>GPU 显存、推理服务的延迟和请求量</b>——和"磁盘 / 内存 / CPU"是同一套"采集 → 存储 → 展示 → 告警"的路子；工作里最怕“出了问题最后一个知道”，这一册就是那道题的最小答案。</p>
-<p><b>④ 长什么样 / 怎么用</b>：一条链看懂整册：<span class="code">node-exporter（采集）→ Prometheus（每 15 秒拉一次、存成时间序列）→ Grafana（画曲线）→ 阈值告警</span>。在整条路线里的位置：第 5 阶段第 8 册 —— 先用 07 册的 Docker 把三个组件装起来；K8s（09 册）继续用同一套指标思路。</p>
-<p class="note">读法：这一节只要求"能用自己的话讲清这四问"，命令细节在 5-01 ~ 5-06。</p>
+<p class="note">本册是阶段 5 的正文，从 5-01 起步；配套与路线见《17-关卡总表》。</p>
+<p>本册共 6 关（5-01 ~ 5-06）。目标：用 compose 起 Prometheus + Grafana + node_exporter，看得懂 CPU / 内存 / 磁盘三条曲线。</p>
+<p>本册是什么：监控 —— 让机器自己汇报状态，磁盘、服务、负载三件事提前知道。 用法：用 compose 起 Prometheus ＋ Grafana ＋ node_exporter，六关走完整条链。</p>
+<p class="note">动手做实验时照这两条来：实验闭环（先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场）和踩坑记录位（现象 → 原因 → 解决 → 一句话总结）——不必逐关都写，做完整册回头总结一次就够。</p>
 
 <h2>5-01 监控地图：采集 / 存储查询 / 展示</h2>
-<p class="note">时长：休息日 2 小时 ｜ 工作日 15 分　｜　前置：4-10　｜　状态：已写（第二轮）</p>
 <p><b>先把三个角色分清</b>，后面两条命令才不会是"照着抄"。</p>
 <table><tr><th style="width:22%">角色</th><th style="width:24%">是谁</th><th>负责什么</th></tr>
 <tr><td><b>采集</b></td><td><span class="code">node-exporter</span></td><td>住在被监控的机器上，把 CPU / 内存 / 磁盘 / 网络这些数字<b>变成可被抓取的接口</b>（默认 9100 端口）</td></tr>
@@ -134,12 +123,10 @@ ul.st { columns: 1; }
 <p><b>数据怎么流</b>：<span class="code">node-exporter（采集）→ Prometheus 定时拉（存储查询）→ Grafana 画图（展示）→ 你看到的曲线</span>。</p>
 <p><b>一个比喻</b>：exporter 是<b>体温计</b>，Prometheus 是<b>每 15 分钟记一次数的护士</b>，Grafana 是<b>贴在墙上的曲线图</b>。三者缺一不可：没有体温计就没有数，没有护士就没人记，没有图你就看不出趋势。</p>
 <h3>完成判定</h3>
-<p>□ 能说出三个组件各自负责什么　□ 能说出数据从哪来到哪去（一条链说下来）　□ 能说出 Prometheus 多久抓一次数据（默认 15 秒）　□ 能说出"告警"应该由谁来判断（Prometheus，不是 Grafana）　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
+<p>□ 能说出三个组件各自负责什么　□ 能说出数据从哪来到哪去（一条链说下来）　□ 能说出 Prometheus 多久抓一次数据（默认 15 秒）　□ 能说出"告警"应该由谁来判断（Prometheus，不是 Grafana）　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（见本册开篇）</p>
 <p><b>实战价值</b>：工作里常问"你们的监控怎么搭的"，能顺着"采集 → 存储 → 展示"讲下来的人，明显比只会说"装了个 Grafana"的人专业。</p>
 
 <h2>5-02 用 compose 起 Prometheus + Grafana + node_exporter</h2>
-<p class="note">时长：休息日 3 小时 ｜ 工作日 20 分　｜　前置：5-01</p>
 <p><b>这一关是招牌动作</b>：三个容器一起跑起来，浏览器能看到界面。下面两份文件可以<b>原样复制</b>。</p>
 <p class="note">如果报 <span class="code err">docker: unknown command: docker compose</span>：说明装的是老式 docker，缺 compose 插件——先 <span class="code">sudo apt install docker-compose-v2</span>（详见 07 册《Docker 入门》的安装说明）。</p>
 <p class="note">拉不动镜像？（报 <span class="code">i/o timeout</span>）先按 <b>07 册《Docker 入门》的「开始之前 · 先把镜像加速器配好」</b>做一遍，再回来。</p>
@@ -220,13 +207,10 @@ go_gc_duration_seconds{quantile="0"} 3.2e-05
 <p>浏览器打开 <span class="code">http://localhost:9090</span> → 顶部菜单 <b>Status → Targets</b>，能看到一条 <span class="code">node</span>，状态是 <b>UP</b>（绿色）。<b>这一步是排障的分水岭</b>：Targets 不 UP，Grafana 里就永远是空的。（刚 <span class="code">up -d</span> 的头 10~15 秒，Targets 可能还是空/红的——给它一点抓取时间，刷新一两下；一直不 UP 再排查。）</p>
 <h3>完成判定</h3>
 <p>□ 三个容器都是 Up　□ 三个入口（9090 / 9100 / 3000）都能打开　□ Status → Targets 里 node 是 UP　□ 能说出为什么 Prometheus 里写的是 <span class="code">node-exporter:9100</span> 而不是 <span class="code">localhost:9100</span>　□ 能把三个容器关掉再起来（<span class="code cmd">docker compose down</span> / <span class="code cmd">up -d</span>）</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">docker compose down</span> 停掉并删除容器（数据卷还在，下次起来曲线还在）；不想要数据就 <span class="code cmd">docker compose down -v</span>。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这就是"用 docker-compose 搭过 Prometheus + Grafana 监控"的实物；别人追问时，你能讲清 Targets UP 才是数据通的标志。</p>
 
 <h2>5-03 导入面板，看懂三条曲线</h2>
-<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：5-02</p>
 <p><b>这一关的产出</b>：一张能贴进 GitHub 的截图 —— CPU / 内存 / 磁盘三条曲线。</p>
 <h3>步骤 1：给 Grafana 接上数据源</h3>
 <pre class="demo">浏览器打开 http://localhost:3000 （账号密码 admin / admin，会让你改密码）
@@ -250,16 +234,13 @@ URL 填：http://prometheus:9090        ← 注意：这里是容器名，不是
 <span class="prompt">$</span> sleep 60 &amp;&amp; kill %1    # 一分钟后停掉
 （回到 Grafana 刷新，看 CPU 曲线那一分钟是不是抬起来了）</pre>
 <h3>步骤 4：截图存档</h3>
-<p>把带三条曲线的面板截图，存成 <span class="code">~/lab/monitor/面板截图.png</span>，写进你的学习日志。以后做综合项目（阶段 7）时，这张图就是"我会监控"的证据。</p>
+<p>把带三条曲线的面板截图，存成 <span class="code">~/lab/monitor/面板截图.png</span>，记下这次的改动。以后做综合项目（阶段 7）时，这张图就是"我会监控"的证据。</p>
 <h3>完成判定</h3>
 <p>□ 数据源测试通过（Data source is working）　□ 1860 面板导入成功且曲线在动　□ 能说出三条曲线各自"什么样算不正常"　□ 用 <span class="code">yes</span> 制造波动并在曲线上看到　□ 有一张截图存档</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">kill %1</span>（或 <span class="code cmd">pkill yes</span>）停掉压测进程，别让它一直跑。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：别人问"你怎么判断一台机器健不健康"，你说"看 CPU / 内存 / 磁盘三条线的趋势，不是看瞬间值"——这句话本身就是加分项。</p>
 
 <h2>5-04 手写一条 PromQL：磁盘使用率</h2>
-<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：5-03　｜　状态：已写（第三轮）</p>
 <p><b>这一关的目标</b>：不靠现成面板，自己能写出一条查询 —— 因为下一关的告警规则、再下一关的 Python 报警脚本，用的都是这一条。</p>
 <h3>步骤 1：先认识两个指标名</h3>
 <pre class="demo">浏览器打开 http://localhost:9090 → 顶部 Query 框里输入：
@@ -288,13 +269,10 @@ node_filesystem_avail_bytes{device="/dev/sda1", fstype="ext4", mountpoint="/"}  
 <p><b>解读</b>：<b>同一句话，在 Prometheus 里验证、在 Grafana 里展示</b>。自己写的查询放进面板，比导入现成面板更有说服力（可以直接说“这条是我自己写的”）。</p>
 <h3>完成判定</h3>
 <p>□ 能说出"指标名 + 标签"是什么关系　□ 能默写出这条使用率公式并解释为什么用 100 减　□ 会用 <span class="code">{mountpoint="/"}</span> 过滤　□ 能把这条查询放进 Grafana 面板</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：没有破坏性操作；实验面板删掉即可。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：工作里常问"告警规则里的表达式谁写的"，你能说"我写过磁盘使用率的 PromQL，知道 avail/size 和 100 减的关系"。</p>
 
 <h2>5-05 配一条阈值告警规则</h2>
-<p class="note">时长：休息日 2.5 小时 ｜ 工作日 15 分　｜　前置：5-04　｜　状态：已写（第三轮）</p>
 <h3>步骤 1：规则写在单独一个文件里</h3>
 <pre class="demo"><span class="prompt">$</span> cd ~/lab/monitor
 <span class="prompt">$</span> cat &gt; alerts.yml &lt;&lt;'EOF'
@@ -338,17 +316,14 @@ EOF
 # 造一次真告警：把阈值临时改成 1
 <span class="prompt">$</span> sed -i 's/&gt; 85/&gt; 1/' alerts.yml &amp;&amp; docker compose up -d --force-recreate prometheus
 再刷新 Alerts 页面：状态变成 PENDING → 等 1~2 分钟 FIRING（红色）<span class="out">（for: 1m ＋ 15 秒评估间隔，实测约 75~90 秒；刚过 60 秒时还是 PENDING）</span></pre>
-<p><b>解读</b>：<b>PENDING = 条件满足但还没到 for 的时长；FIRING = 真告警了</b>。这个"先 PENDING 再 FIRING"的机制就是用来压掉抖动误报的 —— 配置告警时绕不开。</p>
+<p><b>解读</b>：<b>PENDING = 条件满足但还没到 for 规定的时间；FIRING = 真告警了</b>。这个"先 PENDING 再 FIRING"的机制就是用来压掉抖动误报的 —— 配置告警时绕不开。</p>
 <p class="note">别忘了把阈值改回 85（<span class="code cmd">sed -i 's/&gt; 1/&gt; 85/' alerts.yml</span>），再用 <b>--force-recreate</b> 重建一次并<b>确认状态回到 INACTIVE</b>，把这次实验写进踩坑记录——<b>为什么不用 restart</b>：<span class="code">sed -i</span> 会换文件本体，单文件挂载下容器里读到的还是旧内容。</p>
 <h3>完成判定</h3>
 <p>□ 规则文件写对，Prometheus 启动无报错　□ Alerts 页面能看到这条规则　□ 阈值改成 1 后能看到 PENDING → FIRING　□ 能说出 <span class="code">for: 1m</span> 的作用　□ 改回 85 并确认状态回到 INACTIVE</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">sed</span> 改回原阈值并 <span class="code cmd">docker compose up -d --force-recreate prometheus</span>；规则文件备份一份到 <span class="code">~/lab/monitor/alerts.yml.bak</span> 更稳妥。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>："你配过告警吗"——答"配过磁盘使用率的告警规则，知道 for 的防抖作用、知道 PENDING 和 FIRING 的区别"，这一项就立住了。</p>
 
 <h2>5-06 招牌关：用 Python 拉指标，超阈值报警 ＋ crontab</h2>
-<p class="note">时长：休息日 3.5 小时 ｜ 工作日 20 分　｜　前置：5-05 ＋ 3-06（requests）＋ 3-09（logging）＋ 3-08（argparse）＋ 1-35（crontab）　｜　状态：已写（第三轮）</p>
 <p><b>为什么这是招牌关</b>：它把 <b>Python ＋ 监控 ＋ 定时任务</b> 三条线接成一个能讲的作品 —— 有真实数据源、有判断逻辑、有日志、有定时执行。这是你作品里辨识度最高的一项。</p>
 <h3>步骤 1：先看清 Prometheus 的返回长什么样（这一步不看懂，后面必卡）</h3>
 <pre class="demo"><span class="prompt">$</span> curl -s 'http://localhost:9090/api/v1/query?query=100-(node_filesystem_avail_bytes%7Bmountpoint%3D%22/%22%7D/node_filesystem_size_bytes%7Bmountpoint%3D%22/%22%7D*100)'
@@ -441,7 +416,7 @@ if __name__ == "__main__":
 2026-10-09 21:10:03,221 INFO 阈值=85.0 当前=42.31 标签={'device': '/dev/sda1', ...}
 2026-10-09 21:10:11,887 WARNING 磁盘告警：42.31% 超过阈值 1.0%
 2026-10-09 21:10:19,004 ERROR 拉取指标失败：HTTPConnectionPool(...)</pre>
-<p><b>解读</b>：三种情况都不炸栈、日志都留痕，这就叫"能交给别人的脚本"。</p>
+<p><b>解读</b>：三种情况都有明确提示、日志都留痕，这就叫"能交给别人的脚本"。</p>
 <h3>步骤 4：挂进 crontab，每 5 分钟跑一次</h3>
 <pre class="demo"><span class="prompt">$</span> crontab -e
 */5 * * * * /usr/bin/python3 /home/你的真实用户名/disk_watch.py &gt;&gt; /home/你的真实用户名/disk_watch.log 2&gt;&amp;1
@@ -450,17 +425,15 @@ if __name__ == "__main__":
 <span class="prompt">$</span> sleep 300 &amp;&amp; tail -2 ~/disk_watch.log   # 等一轮，看有没有新记录</pre>
 <p><b>解读</b>：<b>路径全部写绝对路径</b>（把行里的 <span class="code">/home/你的真实用户名</span> 换成你自己的；cron 环境不展开 <span class="code">~</span>，1-35 学过的坑）；<span class="code">&gt;&gt; ... 2&gt;&amp;1</span> 把输出和错误都追加进日志。cron 里跑 Python 要写 <span class="code">/usr/bin/python3</span> 的完整路径。</p>
 <h3>完成判定</h3>
-<p>□ 能画出返回结构（status → data → result → [0] → value[1]）并说出哪一步是数值　□ 三种情况（正常／告警／连不上）都跑过，都不炸栈　□ 日志文件里三种记录都有　□ <span class="code cmd">crontab</span> 里挂了任务，日志能看到新记录　□ 能说清退出码 0／1／2 各自什么意思</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p>□ 能画出返回结构（status → data → result → [0] → value[1]）并说出哪一步是数值　□ 三种情况（正常／告警／连不上）都跑过，都有明确提示　□ 日志文件里三种记录都有　□ <span class="code cmd">crontab</span> 里挂了任务，日志能看到新记录　□ 能说清退出码 0／1／2 各自什么意思</p>
 <p><b>回滚方式</b>：<span class="code cmd">crontab -e</span> 删掉那一行（或 <span class="code cmd">crontab -r</span> 清空）；脚本和日志都在 <span class="code">~/</span> 下，随时可删。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这是"你写过什么脚本"的答案 —— 真实数据源（Prometheus API）、判断逻辑（阈值）、定时执行（crontab）、日志三态（INFO/WARNING/ERROR）、退出码约定，五样齐全。别人追问返回结构时，你能直接画出那五层。</p>
 
 <h3>阶段 5 · 学习总结练习：把监控接成一条"能报警"的链子</h3>
 <p><b>业务场景</b>：领导说"我不想天天问人机器好不好，我要它自己会喊"。你要交付的不是一张截图，而是<b>一条从采集到报警的完整链路</b>。</p>
 <p><b>综合要求</b>：① 用 compose 起 Prometheus + Grafana + node_exporter 三件套；② 在 Grafana 上有一块<b>自己写 PromQL</b> 的面板（磁盘使用率，不是导入的现成面板）；③ 配一条告警规则，把阈值临时改到 1% 并<b>看到 PENDING → FIRING</b>；④ 用 Python 脚本调 Prometheus HTTP API 拿同一个指标，超阈值写日志告警，并挂进 crontab；⑤ 把"手工看的曲线"和"脚本报的警"两条路都截图留档。</p>
 <p><b>验收</b>：□ 三个容器都是 Up、Targets 里 node 这条 job 是 UP　□ 面板上的曲线会动（能用手造负载验证）　□ 告警规则真的从 PENDING 走到 FIRING　□ 脚本能拉到真实指标；阈值调 1% 能触发；日志有记录　□ 三张截图（面板 / 告警状态 / 脚本输出）进仓库</p>
-<p><b>时间</b>：4 小时（休息日）　<b>产出</b>：仓库 <span class="code">monitor-demo</span>（compose ＋ prometheus.yml ＋ alerts.yml ＋ <span class="code">disk_watch.py</span> ＋ 截图 ＋ README）</p>
+<p><b>产出</b>：仓库 <span class="code">monitor-demo</span>（compose ＋ prometheus.yml ＋ alerts.yml ＋ <span class="code">disk_watch.py</span> ＋ 截图 ＋ README）</p>
 <p><b>AI 运维指向</b>：这就是 AI 集群可观测性的最小版 —— 把 node_exporter 换成 GPU exporter（8-08 做过），链条一模一样。</p>
 <p><b>实战价值</b>：工作里常问"你做过监控吗"，你可以说"我搭过 Prometheus ＋ Grafana，自己写过 PromQL 和告警规则，还写了个 Python 脚本调 API 报警、挂在 crontab 上"——这已经是很多在职运维的水平。</p>
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>AI与GPU入门（教科书版） · v3.1</title>
+<title>AI与GPU入门（教科书版）</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -109,26 +109,17 @@ ul.st { columns: 1; }
 </head>
 <body>
 <h1>11 · AI 与 GPU 入门</h1>
-<p class="note">配套：《01 Linux 入门》《04 Python 入门》《07 Docker 入门》《08 监控入门》《16 Git 速查》《17 关卡总表》；本册是阶段 8 的正文，按关卡编号打关。</p>
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>课程</b> —— 课程（新写）</td></tr>
-<tr><td><b>本册关卡</b></td><td>8-01 ~ 8-10</td></tr>
-<tr><td><b>用时</b></td><td>必做 29 小时</td></tr>
-<tr><td><b>学完解锁</b></td><td>会用 Ollama / vLLM 跑与部署模型，看得懂 nvidia-smi，能复现并排查 CUDA OOM，能把 GPU 指标接进监控，能画全景图讲 10 分钟</td></tr></table>
-<div class="box2"><b>全册已写</b>（第四轮）。<b>⚠ 这一册必须在网上跑（Colab / Kaggle）</b>：CUDA 相关命令（nvidia-smi、显存溢出复现）只认 NVIDIA 显卡——<b>如果你手上是 AMD 卡 / 没有独显，跑不了是正常的，不是你操作错了</b>。免费资源（Colab / Kaggle）覆盖到绝大多数关卡，不需要买显卡——<b>唯一例外是 8-08</b>：那一段要 Docker ＋ NVIDIA 卡，免费档跑不了，书里给了「降级演练」的替代路径。<br><span class="note">关卡编号、时长、完成判定都写在正文每章/每节的「本关三要素」里；全书进度在《17-关卡总表》。</span></div>
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：这一册讲 <b>AI 运维里最特殊的资源 —— GPU</b>：分清"训练 vs 推理"、看懂显存、把模型真正跑起来。生活类比：像<b>开一家小餐馆</b>——训练 = 研发菜谱（花几天、用大锅大灶），推理 = 每天出餐（要快、要稳、要够用）。</p>
-<p><b>② 干什么用</b>：AI 服务绝大多数故障都跟"显存不够 / 卡被占满 / 模型起不来"有关；这一册教你在<b>有限资源</b>上把模型跑起来，并在出问题时定位原因。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维岗必问"训练和推理什么区别""显存溢出了怎么办""Ollama / vLLM 用过吗"——听懂这三组词，方向就对了。</p>
-<p><b>④ 长什么样 / 怎么用</b>：最小一条命令：<span class="code">nvidia-smi</span>（看显存与占用）；本册 8-01 认概念 → 8-02 用 Ollama 起模型 → 后面显存、中断、监控。注意：<b>如果你手上是 AMD 卡 / 没有独显，CUDA 相关命令跑不了也是正常的</b>（书里已注明，全程用免费资源、不用买显卡）。</p>
+<p class="note">本册是阶段 8 的正文，从 8-01 起步；配套与路线见《17-关卡总表》。</p>
+<p>本册共 10 关（8-01 ~ 8-10）。目标：会用 Ollama / vLLM 跑与部署模型，看得懂 nvidia-smi，能复现并排查 CUDA OOM，能把 GPU 指标接进监控，能画全景图讲 10 分钟。</p>
+<div class="box2"><b>注意：这一册必须在网上跑（Colab / Kaggle）</b>：CUDA 相关命令（nvidia-smi、显存溢出复现）只认 NVIDIA 显卡——<b>如果你手上是 AMD 卡 / 没有独显，跑不了是正常的，不是你操作错了</b>。免费资源（Colab / Kaggle）覆盖到绝大多数关卡，不需要买显卡——<b>唯一例外是 8-08</b>：那一段要 Docker ＋ NVIDIA 卡，免费档跑不了，书里给了「降级演练」的替代路径。</div>
+<p>本册是什么：GPU 与 AI 运维 —— 分清训练与推理、看懂显存、把模型跑起来并接进监控。 用法：按 8-01 ~ 8-10 的编号打关。</p>
+<p class="note">动手做实验时照这两条来：实验闭环（先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场）和踩坑记录位（现象 → 原因 → 解决 → 一句话总结）——不必逐关都写，做完整册回头总结一次就够。</p>
 
 <h2>8-01 GPU 是谁：训练 vs 推理、显存 vs 内存</h2>
-<p class="note">时长：休息日 1 小时 ｜ 工作日 15 分　｜　前置：7-08　｜　状态：已写（第四轮）</p>
 <p><b>这一关不敲命令</b>，只把三组词分清。它们是后面所有关卡的"地图"。</p>
 <h3>一、训练 vs 推理（最重要的区分）</h3>
 <table><tr><th style="width:14%">阶段</th><th style="width:26%">在干什么</th><th style="width:24%">资源特点</th><th>你以后会怎么碰到</th></tr>
-<tr><td><b>训练</b></td><td>拿海量数据反复调整模型参数</td><td>几天到几个月、几百张卡、<b>算力拉满</b></td><td>训练任务挂了/变慢了；要重启、要从断点续训</td></tr>
+<tr><td><b>训练</b></td><td>拿海量数据反复调整模型参数</td><td>几天到几个月、几百张卡、<b>满负荷运转</b></td><td>训练任务挂了/变慢了；要重启、要从断点续训</td></tr>
 <tr><td><b>推理</b></td><td>拿训好的模型回答用户</td><td>长期在线、<b>显存吃紧</b>、要低延迟</td><td>推理服务起不来、变慢、显存不够、被限流</td></tr></table>
 <p><b>一句话记忆</b>：<b>训练烧算力，推理吃显存</b>；训练是"批处理"，推理是"在线服务"。AI 运维的日常里，<b>推理占大头</b>（因为它在线上跑，随时随地会出问题）。</p>
 <h3>二、显存 vs 内存（两个不同的"内存"）</h3>
@@ -138,14 +129,11 @@ ul.st { columns: 1; }
 <h3>三、为什么 GPU 比 CPU 快（实战里常被问到）</h3>
 <p>CPU 像"几个博士"：单个算得很快，但人手少。GPU 像"几千个小学生"：单个算得慢，但<b>人多、能同时干同一件简单的事</b>。矩阵运算是"同样的简单计算重复几百万次"，正好是 GPU 的主场 —— 这就是 GPU 在 AI 里不可替代的原因。</p>
 <h3>完成判定</h3>
-<p>□ 能用自己的话说清训练和推理的区别，并各举一个运维场景　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（对应本册「开始之前」那节）　□ 能说出显存和内存是两回事，各用什么命令看　□ 能用"博士 vs 小学生"讲清 GPU 为什么适合 AI（不掉进数学细节）</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p>□ 能用自己的话说清训练和推理的区别，并各举一个运维场景　□ 能用自己的话讲清「这一册学的东西是什么、干什么用的」（见本册开篇）　□ 能说出显存和内存是两回事，各用什么命令看　□ 能用"博士 vs 小学生"讲清 GPU 为什么适合 AI（不掉进数学细节）</p>
 <p><b>回滚方式</b>：纯认知，无操作。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：工作里常问"你怎么理解 AI 运维和普通运维的区别"，答"推理服务在线上跑、显存是稀缺资源、训练任务要防中断"——三句话就把方向说对了。</p>
 
 <h2>8-02 用 Ollama 起一个本地模型并对话</h2>
-<p class="note">时长：休息日 3 小时 ｜ 工作日 20 分　｜　前置：8-01 ＋ 7 册 Docker（可选，Ollama 也支持容器跑）　｜　状态：已写（第四轮）</p>
 <p><b>为什么先做这一关</b>：它<b>零外部依赖</b>：不抢 GPU、不花钱、断网也能跑（模型下载时除外）。先在自己机器上把"模型跑起来"这件事做成，再谈故障。</p>
 <h3>步骤 1：装并拉一个小模型</h3>
 <pre class="demo"><span class="prompt">$</span> sudo apt install -y zstd                        # 新装 Ubuntu 没带 zstd，官方脚本解包会报 "requires zstd"
@@ -184,13 +172,10 @@ curl: (7) Failed to connect to localhost port 11434: Connection refused
 <p><b>解读</b>：<b>Connection refused = 端口没人听 = 服务没起来</b>（对比 4-09 的端口排查链）。<span class="code cmd">systemctl status ollama</span> 能看到它为什么停。</p>
 <h3>完成判定</h3>
 <p>□ 模型拉下来并能对话（截图或记录一句回答）　□ 能说出模型文件放在哪、默认端口是多少、只听哪个地址　□ 能用 curl 调一次接口拿到 JSON　□ 能故意停掉服务、看到 Connection refused、再恢复</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">ollama rm qwen2.5:1.5b</span> 删模型释放磁盘；<span class="code cmd">systemctl stop ollama</span> 停服务。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>："你部署过模型吗"——"我用 Ollama 在本地跑过 1.5B 的小模型，知道它默认 11434 端口、只监听本地、模型文件在哪、怎么用 curl 调它"。这一串已经比大多数转行者强。</p>
 
-<h2>8-03 在 Colab 白嫖一张 GPU，看懂 nvidia-smi</h2>
-<p class="note">时长：休息日 2 小时 ｜ 工作日 20 分　｜　前置：8-02　｜　状态：已写（第四轮）</p>
+<h2>8-03 在 Colab 借一张免费 GPU，看懂 nvidia-smi</h2>
 <p><b>这一关的目标</b>：不用买显卡，也能在真 GPU 上敲第一条命令，并且<b>看懂 nvidia-smi 的每一列</b>——那是 GPU 运维的"仪表盘"。</p>
 <h3>步骤 1：开一张免费 GPU</h3>
 <pre class="demo">浏览器打开 https://colab.research.google.com → 新建笔记本
@@ -199,7 +184,7 @@ curl: (7) Failed to connect to localhost port 11434: Connection refused
 
 在第一个单元格里输入（Colab 里命令前面加 !）：
 !nvidia-smi</pre>
-<p class="note"><b>抢不到卡不是你操作失误</b>：免费 GPU 有额度，高峰时段可能分不到。遇到 "You have exhausted your GPU quota" 或干脆给不到 GPU —— <b>先打别的关，过两天再来</b>。这条对 Colab 和 Kaggle 都适用；<b>另外"打不开"（连不上 Colab）也算——换 Kaggle 即可。</b></p>
+<p class="note"><b>抢不到卡不是你操作失误</b>：免费 GPU 有额度，高峰时段可能分不到 —— 遇到 "You have exhausted your GPU quota" 或给不到 GPU，换时段（或换 Kaggle）再试即可。</p>
 <h3>步骤 2：把 nvidia-smi 的每一列读出来</h3>
 <pre class="demo">+-----------------------------------------------------------------------------------------+
 <span class="out">（下面这份输出来自 T4（15360MiB）；换卡型/平台数字会变，读法不变）</span>
@@ -234,13 +219,10 @@ for _ in range(30):
 3. PyTorch 版本与是否能看到 GPU：torch 2.x / True</pre>
 <h3>完成判定</h3>
 <p>□ 能在 Colab（或 Kaggle）里拿到 GPU 并跑出 <span class="code">nvidia-smi</span>　□ 能逐列说出含义（至少：型号、驱动/CUDA、温度、功耗、显存、利用率）　□ 能说出 GPU-Util 高和低各说明什么　□ 能记录一次完整环境信息　□ 知道抢不到卡时该怎么办</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：Colab 会话关掉即回收；不留本机痕迹。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：工作里常问"你怎么判断一张卡是不是在干活"，答"看 nvidia-smi 的 GPU-Util 和功耗：利用率高是在算，利用率低说明在等数据或卡上没任务"——这已经是有经验的答法了。</p>
 
 <h2>8-04 故意把显存撑爆：复现 CUDA out of memory（本册心脏）</h2>
-<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：8-03　｜　状态：已写（第四轮）</p>
 <p><b>为什么它是心脏</b>：这类岗位更看重你面对没见过的故障，而不是背诵。<b>OOM（显存溢出）是 AI 运维最高频、也最能讲出故事的故障</b>——你要亲手把它造出来，读懂那段报错，再想出至少四种缓解办法。</p>
 <div class="box2"><b>环境兜底（抢不到免费卡也能完成本关）</b>：本关要在真 GPU 上复现 OOM；<b>配额用尽、平台排队时别干等</b>——<br>① <b>同方法降级演练（推荐）</b>：用 <span class="code">ulimit -v</span> 先把试炼进程的内存上限压小、再申请超大内存，得到干净的 <span class="code">MemoryError</span>：<span class="code cmd">bash -c "ulimit -v 500000; python3 -c 'x = bytearray(20 * 1024**3)'"</span>；想经历"被系统 OOM 杀"就用限内存容器（有 Docker 时）：<span class="code cmd">docker run --memory=256m python:3.12 python3 -c 'x = bytearray(20 * 1024**3)'</span>（退出码 <span class="code">137</span>＝OOMKilled）——<b>用同一套"现象 → 线索 → 建议"三层读法逐句拆</b>，方法与 CUDA OOM 完全一致，只是换了故障现场。<b>WSL 用户特别注意：别在本机直接"申请超大内存"赌系统杀进程——实测会把整个 WSL 发行版打挂（连接断开、容器与 k3s 全断）；要么像上面用 <span class="code">ulimit -v</span> 限住，要么把演示关进限内存容器。</b><br>② 记录里如实标注："<b>免费额度受限，未实测 CUDA，用内存 OOM 做了同方法演练</b>"；<br>③ 对外就按记录说："CUDA OOM 我先用内存 OOM 做了同方法演练，三层读法一致；拿到卡 30 分钟能复现真版。"——如实说反而加分，硬吹最容易被追问拆穿。</div>
 <h3>步骤 1：把显存吃满</h3>
@@ -255,7 +237,7 @@ and 12.31 MiB is reserved by PyTorch but unallocated.
 If reserved but unallocated memory is large try setting
 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.</pre>
 <p class="note">（这段是 PyTorch 的 CUDA OOM 报错；<b>核心几句与新版本逐字一致</b>，只有末尾 <span class="code">expandable_segments</span> 那句的措辞新版略有改写——以你机器上的报错为准，读法不变。）</p>
-<p class="note"><b>照做复现不了？</b>上面这段报错来自一台<b>显存已被占用</b>的机器（示例）。在全新 Colab / Kaggle 的 T4（约 13.9 GiB 空闲）上，<span class="code">size = 20000</span>（只申请 1.49 GiB）<b>根本不会炸</b>——把 <span class="code">size</span> 继续加大到约 <b>6.2 万</b>（4 × 62000² ≈ 14.3 GiB）才会 OOM；想稳定复现也可以先占住一部分显存再跑。</p>
+<p class="note"><b>照做复现不了？</b>上面这段报错来自一台<b>显存已被占用</b>的机器（示例）。在全新 Colab / Kaggle 的 T4（约 13.9 GiB 空闲）上，<span class="code">size = 20000</span>（只申请 1.49 GiB）<b>根本不会崩</b>——把 <span class="code">size</span> 继续加大到约 <b>6.2 万</b>（4 × 62000² ≈ 14.3 GiB）才会 OOM；想稳定复现也可以先占住一部分显存再跑。</p>
 <p><b>逐句读这段报错（这就是"看懂报错"）</b>：</p>
 <table><tr><th style="width:46%">原句</th><th>它在说什么</th></tr>
 <tr><td><span class="code">Tried to allocate 1.49 GiB</span></td><td><b>现象</b>：这一次想申请 1.49G</td></tr>
@@ -310,9 +292,7 @@ print("清理后：", round(torch.cuda.memory_reserved() / 1024**3, 2), "GiB 仍
 一句话总结：OOM 先读"还剩多少"，再按四类病因对号入座</pre>
 <h3>完成判定</h3>
 <p>□ 亲手复现一次 CUDA out of memory（记录报错原文；抢不到卡时按"环境兜底"用内存 OOM 做同方法演练并如实标注）　□ 能逐句读出报错里的"现象 / 线索 / 建议"　□ 能说出四种缓解办法及各自对应的病因　□ 写出这份排查记录　□ 能说出 <span class="code">reserved but unallocated</span> 是什么意思</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：Colab/Kaggle 里"运行时 → 重新启动会话"即释放全部显存；本机跑就杀掉进程。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这是整册最能讲的一关 —— "我故意复现过 CUDA OOM，能读懂报错的三层信息，并准备了四类缓解方案"。这是踩过的坑，不是背的文档（没抢到卡：按上方"环境兜底"如实说明口径）。</p>
 
 
@@ -348,8 +328,7 @@ print("清理后：", round(torch.cuda.memory_reserved() / 1024**3, 2), "GiB 仍
 <b>真要用时去哪查</b>：搜"NCCL debug log"（设 <span class="code">NCCL_DEBUG=INFO</span> 看每步耗时）和"checkpoint 加速"（异步保存 / 更快的数据盘）；先知道有这两个东西、知道它们会拖慢训练，就够这一轮用了。</div>
 
 
-<h2>8-05 跑一个最小训练（1 小时版）</h2>
-<p class="note">时长：休息日 1 小时 ｜ 工作日 15 分　｜　前置：8-04　｜　状态：已写（第四轮）</p>
+<h2>8-05 跑一个最小训练</h2>
 <p><b>为什么只跑两轮</b>：你不需要学会训练模型 —— <b>只需要"跑过一次真的训练"，这样 8-04 的显存问题才有具体场景</b>，聊起来也能说“训练和推理我都见过”。所以就用最小的 MNIST，两轮收工。</p>
 <h3>步骤 1：两轮训练跑起来</h3>
 <pre class="demo">import torch
@@ -391,13 +370,10 @@ print("batch_size=256 时显存占用：", round(torch.cuda.max_memory_allocated
 <p><b>解读</b>：<b>batch 越大、显存占用越大</b>（大致成正比）。这就是 8-04 里"办法 3：数据分批"的现实依据 —— 显存不够时，把 batch 调小是训练侧最常用的手法。</p>
 <h3>完成判定</h3>
 <p>□ 两轮训练跑通，loss 明显下降　□ 能说出 loss 下降说明什么　□ 用两个不同 batch_size 各跑一次，说出显存占用的变化趋势　□ 能说出"batch 大小 → 显存 → OOM"这条因果链</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：Colab 会话重启即清；下载的 MNIST 数据在 <span class="code">./data</span>，删掉即可。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：工作里常问"你了解训练吗"，能说"我跑过最小训练，知道 loss 怎么看、batch 和显存的关系"，就不会被当成"只会用工具的人"。</p>
 
 <h2>8-06 用 Python 调 DeepSeek API 做命令行助手</h2>
-<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：8-05 ＋ 3-06（requests）＋ 3-08（argparse）＋ 3-09（logging）　｜　状态：已写（第四轮）</p>
 <p><b>这一关的产出是一个你能天天用、也能拿去讲的小工具</b>：命令行里敲一行，模型回答并记进日志。它把阶段 3 的 requests / argparse / logging 和阶段 8 的"模型服务"接在一起。</p>
 <h3>步骤 1：拿一个 API Key（没有也能做完）</h3>
 <pre class="demo">1) 注册 https://platform.deepseek.com → API Keys → 新建，复制（只显示一次）
@@ -478,18 +454,15 @@ if __name__ == "__main__":
 你好！有什么可以帮你的吗？
 
 <span class="prompt">$</span> DEEPSEEK_API_KEY="" python3 assistant.py --ask "测试"
-[错误] 没有找到 DEEPSEEK_API_KEY（见步骤 1）        ← 报错不炸栈
+[错误] 没有找到 DEEPSEEK_API_KEY（见步骤 1）        ← 报错不乱
 <span class="prompt">$</span> tail -2 ~/assistant.log
 2026-10-09 23:05:11,201 INFO 问：用一句话解释什么是显存｜答：显存是显卡自带的内存…</pre>
 <h3>完成判定</h3>
-<p>□ 脚本能带 <span class="code">--ask</span> 提问并打印回答　□ <span class="code">--local</span> 能切到本地模型（没 key 也能演示）　□ 出错时给中文提示、不炸栈、日志有记录　□ key 没有出现在代码里　□ 能说出"为什么 key 要放环境变量"</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
+<p>□ 脚本能带 <span class="code">--ask</span> 提问并打印回答　□ <span class="code">--local</span> 能切到本地模型（没 key 也能演示）　□ 出错时给中文提示、报错不乱、日志有记录　□ key 没有出现在代码里　□ 能说出"为什么 key 要放环境变量"</p>
 <p><b>回滚方式</b>：删掉脚本与日志即可；key 在环境变量里，随时可在控制台吊销。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这是"你写过什么脚本"的第二个答案，而且它证明你会<b>同时管两种模型服务</b>（云 API 和本地推理），还知道密钥不能进仓库。</p>
 
 <h2>8-07 用 vLLM 部署一个能访问的推理服务</h2>
-<p class="note">时长：休息日 5 小时 ｜ 工作日 20 分　｜　前置：8-06 ＋ 7 册 Docker　｜　状态：已写（第四轮）</p>
 <p><b>为什么要 vLLM</b>：Ollama 适合"自己玩玩"，而<b>生产上跑推理服务常用 vLLM</b>——它专为高并发推理优化。这一关让你从"跑模型"升级到"<b>部署一个服务</b>"：有端口、有接口、有日志、能排障。</p>
 <p class="note">环境提示：vLLM 需要 Linux ＋ NVIDIA 显卡 ＋ CUDA。<b>没有显卡怎么办</b>：① Colab / Kaggle 免费 GPU 上 <span class="code">pip install vllm</span> 跑（推荐；国内网络优先 Kaggle——Colab 需要能访问 Google 的网络，详见 8-03 的说明）；② 只把配置和命令读一遍、在 Ollama 上做等价的"服务化"练习（8-02 已经做过一次）。<b>两条路都算过关</b>；记录里标清口径：真卡跑的写"实测"，走等价练习的写"未实测 CUDA，已用 Ollama 等价演练"——对外就按记录说，不夸张。</p>
 <h3>步骤 1：起服务（Colab 或本机 GPU 机器）</h3>
@@ -535,13 +508,10 @@ OSError: Can't load the configuration of 'Qwen/Qwen2.5-1.5B'
 <p><b>解读</b>：<b>起服务只是第一步，能"看着它跑、出问题能查"才是运维</b>。这也是行业里常说的“黑盒变透明”。</p>
 <h3>完成判定</h3>
 <p>□ 服务起得来，<span class="code">/v1/models</span> 能返回模型列表　□ 能用 curl 发一次请求拿到回答　□ 能说出 <span class="code">--gpu-memory-utilization</span> 为什么要留余量　□ 能说出推理服务起不来的三类原因及各自的排查命令　□ 能说清 vLLM 的接口为什么和 OpenAI 一样</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">kill %1</span>（或 kill 掉进程）停服务；Colab 会话关掉即回收。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>："你部署过推理服务吗"——答"我用 vLLM 起过服务，知道它的接口和 OpenAI 兼容，也知道起不来通常是端口、显存或模型路径三类问题"。这是**直接来自实际工作的说法**。</p>
 
 <h2>8-08 把 GPU 指标接进监控面板</h2>
-<p class="note">时长：休息日 3 小时 ｜ 工作日 20 分　｜　前置：8-07 ＋ 8 册（监控）　｜　状态：已写（第四轮）</p>
 <p><b>把两条线接起来</b>：8 册你搭了 Prometheus + Grafana，但那时面板上只有 CPU / 内存 / 磁盘。<b>这一关把 GPU 也接上去</b>——"黑盒变透明"，这也正是行业里的常见说法。</p>
 <h3>步骤 1：GPU 指标要有个"翻译官"</h3>
 <pre class="demo">node-exporter 管 CPU/内存/磁盘，但它**看不到 GPU**。
@@ -588,14 +558,11 @@ while time.time() - t0 &lt; 60:
 # 回 Grafana：GPU 利用率飙高、显存曲线有一块台阶 —— 截图存档</pre>
 <h3>完成判定</h3>
 <p>□ 能说出为什么 node-exporter 看不到 GPU、该用谁　□ Prometheus 的 Targets 里有 GPU job 并且是 UP　□ Grafana 上有"GPU 显存使用率"和"GPU 利用率"两块面板　□ 能说出这两条 PromQL 与 5-04 那条是同一个句型　□ 有一段负载下的曲线截图</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：<span class="code cmd">docker rm -f dcgm</span> 删掉 exporter；把 prometheus.yml 里 gpu 那段删掉再 <span class="code cmd">docker compose up -d</span> 即回到原样。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：把"我会监控"从 CPU/内存升级到 <b>GPU 可视化</b>——这正好是 AI 运维岗区别于普通运维的那一块。配上曲线截图，说服力很强。</p>
 
 <h2>8-09 读 DeepSeek-V3 技术报告，写 MoE / MLA 中文笔记</h2>
-<p class="note">时长：休息日 2 小时 ｜ 工作日 15 分　｜　前置：8-01　｜　状态：已写（第四轮）</p>
-<p class="note">（出处：DeepSeek-V3 Technical Report（https://arxiv.org/abs/2412.19437）。<b>不读原文也能完成本关</b>：用下面的大白话小节 ＋ 8-06 的命令行助手提问就能把笔记写完；想深挖再点开看。）</p>
+<p class="note">（参考：DeepSeek-V3 Technical Report，arxiv.org/abs/2412.19437。<b>不读原文也能完成本关</b>：用下面的大白话小节 ＋ 8-06 的命令行助手提问就能把笔记写完。）</p>
 <p><b>这一关不是让你啃论文</b>，而是回答"聊聊你对 AGI 的理解"。你只需要<b>用自己的话讲清两个词</b>，再补一点自己的疑问。</p>
 <h3>步骤 1：先建立"大模型很贵"的直觉</h3>
 <pre class="demo">模型越大 → 参数越多 → 显存越吃紧、算得越慢、花钱越多
@@ -618,13 +585,10 @@ while time.time() - t0 &lt; 60:
 —— 疑问比结论更值钱，聊起来最有料的就是它</pre>
 <h3>完成判定</h3>
 <p>□ 能用大白话讲清 MoE 和 MLA 各解决什么问题（不背定义）　□ 能说出它们和"显存 / 卡 / 通信"的关系　□ 有一页中文笔记（含至少一条自己的疑问）　□ 至少用命令行助手查过两个不懂的词</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：纯阅读与笔记，无风险。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：工作里聊到 AGI 理解，靠的就是这个。能说"我读过 DeepSeek-V3 的报告，我理解 MoE 是让参数大但每次只用一部分，MLA 是省显存；我有个疑问是专家分布不均会不会拖慢训练"——<b>带着疑问的答案，比背书好听得多</b>。</p>
 
 <h2>8-10 画一张全景图，讲 10 分钟（★）</h2>
-<p class="note">时长：休息日 2 小时 ｜ 工作日 15 分　｜　前置：8-01 ~ 8-09　｜　状态：已写（第四轮）</p>
 <p><b>为什么这一关是 ★</b>：这类岗位的要求里写着"脑子里要有从 GPU 计算 → 显存 → NVLink → 网卡 → 存储 → 调度的完整地图"。<b>这不是加分项，是入场要求</b>。这一关就是把这十关学的东西压缩成一张图，练到能讲 10 分钟。</p>
 <h3>步骤 1：照这六层画（一层一行，别抄术语，用你自己的话）</h3>
 <pre class="demo">① GPU 计算      —— 卡在不在干活？（nvidia-smi: GPU-Util；工具：8-03）
@@ -650,16 +614,14 @@ while time.time() - t0 &lt; 60:
 —— 录音存进 learning-journey，方便以后对比进步</pre>
 <h3>完成判定</h3>
 <p>□ 有一张手画的全景图（六层齐全）　□ 每层能说出一个"会出什么问题"和一个"看什么指标"　□ 能对着图不卡壳讲满 10 分钟（录音为证）　□ 至少能回溯到三个自己练过的关卡（点名编号）</p>
-<p class="note"><b>实验闭环</b>：先记录原状态 → 操作 → 按输出 / 退出码验证 → 恢复现场。</p>
 <p><b>回滚方式</b>：无操作。</p>
-<p class="note">踩坑记录位：现象 → 原因 → 解决 → 一句话总结（留空自己填）</p>
 <p><b>实战价值</b>：这是阶段 8 的收官，也是工作里聊集群时的底稿。这类岗位要的就是这张图 —— 你不但有，还能讲。</p>
 
 <h3>阶段 8 · 学习总结练习：一张全景图 ＋ 一次显存故障的完整交代</h3>
 <p><b>业务场景</b>：组长（或未来的同事）问你："你说你懂 GPU，那我给你一张卡，你怎么知道它好不好？出了显存问题你怎么查？" —— 你要在 <b>10 分钟</b>里把这两个问题讲完，并且手里有实物。</p>
 <p><b>综合要求</b>：① 用 Ollama 起一个小模型并能调它（证明"模型跑得起来"）；② 在 Colab 或 Kaggle 上跑一次 <span class="code">nvidia-smi</span> 并截图（证明"我见过真卡"）；③ <b>亲手复现一次 CUDA out of memory</b>，把报错原文和排查记录留下来；④ 把 GPU 指标接进监控面板（显存 / 利用率曲线截图）；⑤ 画一张六层全景图（GPU 计算 → 显存 → NVLink → 网卡 → 存储 → 调度），每层写"看什么指标 / 会出什么问题"；⑥ 录一段 10 分钟讲述。</p>
 <p><b>验收</b>：□ Ollama 能对话并有一条 curl 调用记录　□ nvidia-smi 截图（能看到型号/显存/利用率）　□ OOM 报错原文 ＋ 四类病因的排查记录　□ 监控面板上的显存曲线截图（没有 N 卡就按 8-08 的「降级演练」处理并标注"环境限制"）　□ 六层全景图（手画）＋ 10 分钟录音　□ 能说出"训练变慢了先看哪一层"</p>
-<p><b>时间</b>：4 小时（休息日，可与 8-04 的记录合并整理）　<b>产出</b>：仓库 <span class="code">ai-inference-notes</span>（OOM 排查记录 ＋ 全景图 ＋ 讲述稿 ＋ 截图）</p>
+<p><b>产出</b>：仓库 <span class="code">ai-inference-notes</span>（OOM 排查记录 ＋ 全景图 ＋ 讲述稿 ＋ 截图）</p>
 <p><b>AI 运维指向</b>：这类岗位要的就是这张"从算力到调度"的地图；显存故障是 AI 运维日常的第一大类。</p>
 <p><b>实战价值</b>：“陌生故障”和“AGI / 集群理解”两类问题的合体准备。有实物、有录音、有图，讲起来不心虚。</p>
 

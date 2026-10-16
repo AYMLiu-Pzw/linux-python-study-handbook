@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>命名手册 · v3.1</title>
+<title>命名手册</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -245,21 +245,12 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
   </g></symbol></defs></svg>
 
 <h1><svg class="em" width="15" height="15"><use href="#ic-b2"/></svg> 命名手册（起名速查）</h1>
-<p class="note">打印提示：A4、实际大小（100%）、<b>关闭浏览器"页眉和页脚"</b>；需要保留彩色底色时开启"背景图形"。用法：先背第 1、2 页；写代码卡壳时翻第 3、4 页找词。</p>
+<p class="note">打印用 A4、缩放 100%。</p>
 
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
-<tr><td><b>本册关卡</b></td><td>—</td></tr>
-<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
-<tr><td><b>学完解锁</b></td><td>变量和函数起名不再卡壳</td></tr></table>
-<div class="box2"><b>本册禁止通读，只许查</b>（起名三原则那一页可以扫一眼）。<br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+<p>目标：变量和函数起名不再卡壳。</p>
+<div class="box2"><b>本册是字典册：禁止通读，只许查</b>（起名三原则那一页可以扫一眼）。</div>
 
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：这是一本<b>起名手册</b> —— 把写代码时反复要用的变量名、函数名整理成 4 页速查（起名三原则 / 四步法 ＋ 核心词表（约 24 组） / 分组速查 / 动作动词与判断前缀）。生活类比：像给孩子起名前先定"姓 ＋ 辈分"——名字不是随手取的，是按规则拼出来的。</p>
-<p><b>② 干什么用</b>：命名混乱的代码（<span class="code">a</span>、<span class="code">data1</span>、<span class="code">list2</span>）过三天自己都看不懂。这一册让你碰到"这个变量该叫什么"时能直接查、几十秒定名；也帮你避开坑（<span class="code">list</span>、<span class="code">str</span> 这些 Python 内置名不能当变量名）。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：代码评审第一眼看的就是命名（"这份代码像不像专业人写的"）；AI 运维要读写别人的脚本、日志字段、K8s 资源名，命名规范是通用语言。</p>
-<p><b>④ 长什么样 / 怎么用</b>：最小对照：<span class="code">result = run()</span> → 改成 <span class="code">disk_usage = get_disk_usage()</span>（见名知意、动作动词开头）。用法照本册规矩：<b>不许通读，只许查</b>——卡住时翻到对应页，选定名字再回去写代码。位置：字典类第 15 册，和 12 册（内置函数）、16 册（Git）合起来是"日常查三件套"。</p>
+<p>本册是什么：起名速查手册 —— 变量名、函数名按规则拼出来，几十秒定名。 用法：先背第 1、2 页，卡壳时翻第 3、4 页找词。</p>
 
 <h2 class="toc-title">目录</h2>
 <div class="toc">
@@ -359,7 +350,7 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
 <table class="tight xtight">
 <tr><th>词</th><th>中文</th><th>示例</th><th>词</th><th>中文</th><th>示例</th></tr>
 <tr><td>time</td><td>时间</td><td class="code">start_time</td><td>date</td><td>日期</td><td class="code">backup_date</td></tr>
-<tr><td>timestamp</td><td>时间戳</td><td class="code">create_timestamp</td><td>duration</td><td>持续时长</td><td class="code">run_duration</td></tr>
+<tr><td>timestamp</td><td>时间戳</td><td class="code">create_timestamp</td><td>duration</td><td>持续时间</td><td class="code">run_duration</td></tr>
 <tr><td>start / end</td><td>开始 / 结束</td><td class="code">start_time / end_time</td><td>interval</td><td>间隔</td><td class="code">check_interval</td></tr>
 <tr><td>hour / minute / second</td><td>时 / 分 / 秒</td><td class="code">timeout_sec</td><td>day / month / year</td><td>日 / 月 / 年</td><td class="code">backup_date</td></tr>
 </table>

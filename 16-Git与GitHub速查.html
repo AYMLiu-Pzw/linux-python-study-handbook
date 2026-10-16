@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>Git与GitHub速查 · v3.1</title>
+<title>Git与GitHub速查</title>
 <style>
 
 @page { size: A4; margin: 13mm 12mm; }
@@ -262,22 +262,11 @@ h2 + p, h3 + p { break-after: avoid; page-break-after: avoid; }
   </g></symbol></defs></svg>
 
 <h1><svg class="em" width="15" height="15"><use href="#ic-gl"/></svg> Git 与 GitHub 速查</h1>
-<p class="note">打印提示：A4、实际大小（100%）、关闭浏览器"页眉和页脚"；需要保留彩色底色时开启"背景图形"。用法：第 1 页背概念，第 2 页是每天要用的命令，第 3~4 页在卡住时翻。</p>
+<p class="note">打印用 A4、缩放 100%。</p>
 
-<div class="section-head">本册关卡地图（先读这一页，1 分钟）</div>
-<table><tr><th style="width:22%">项目</th><th>内容</th></tr>
-<tr><td><b>标签</b></td><td><b>字典</b> —— 字典</td></tr>
-<tr><td><b>本册关卡</b></td><td>—</td></tr>
-<tr><td><b>用时</b></td><td>—（不占关卡：随查随用，不计时长）</td></tr>
-<tr><td><b>学完解锁</b></td><td>每天 push 不断档</td></tr></table>
-<div class="box2"><b>本册禁止通读，只许查</b>；第 2 页天天要用（对应前置关 <b>0-02：Git 最小闭环</b>）。<br><span class="note">本册是字典册、不占关卡：要查学习进度看《17-关卡总表》，本册只管"随查随用"。</span></div>
+<div class="box2"><b>本册是字典册，随查随用：禁止通读；第 2 页那六条命令常用</b>（对应前置关 <b>0-02：Git 最小闭环</b>）。</div>
 
-<div class="section-head">开始之前 · 先弄懂这是什么（2 分钟）</div>
-<p><b>① 是什么</b>：<b>Git</b> 是给代码"存档 ＋ 时光机"的工具（在你本机跑）；<b>GitHub</b> 是把这些存档放到网上的仓库（别人能看、也能一起改）。生活类比：Git 像游戏里的<b>存档点</b>——每做完一小步存一次，改坏了能读档回去；GitHub 就是"把存档传到云端"，换台电脑也能接着玩。</p>
-<p><b>② 干什么用</b>：写脚本、做项目时四件麻烦事全靠它 —— ① 改坏了要回退；② 想试新写法又怕搞砸（开分支）；③ 换电脑接着写（<span class="code">git clone</span>）；④ 让别人和别人看到你每天在做什么：你的 GitHub 主页就是<b>最实在的一份学习履历</b>。</p>
-<p><b>③ 为什么要学（＋实战里怎么用）</b>：AI 运维交付的东西（脚本、compose 文件、训练代码）都用 Git 管理；GitHub 几乎是这行的硬通货；团队里天天要打交道的就是「代码怎么管理、多人怎么协作」。学习计划里"第 2 周末 commit ≥ 10 次"就靠这一册。</p>
-<p><b>④ 长什么样 / 怎么用</b>：最小闭环一条循环：<span class="code">git add → git commit → git push</span>（开工前先 <span class="code">git pull</span>）。位置：字典类第 16 册——前面手写的每日日志、后面 10 册的综合项目，都往这个仓库里放。</p>
-<p class="note">读法：第 1 页先看三个概念和首次配置（一劳永逸）；配好之后每天只用第 2 页那六条命令。</p>
+<p>本册是什么：Git 与 GitHub 速查 —— 存档、回退、同步，一条闭环管住所有脚本和文档。 用法：第 1 页背概念与首次配置，第 2 页是常用的六条命令。</p>
 
 <h2 class="toc-title">目录</h2>
 <div class="toc">
@@ -396,7 +385,6 @@ config_secret.*</pre>
 
 <div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-tg"/></svg> 小练习（做完你的 GitHub 就有内容了）</div>
 <p>① 把 <span class="code">~/lab</span> 下写好的脚本目录变成 Git 仓库；② 建好 <span class="code">.gitignore</span>（按上面四类）；③ 提交 3 次以上（每次说明写清楚）；④ 先在 GitHub 网页建一个空仓库（照 2.1，别勾 README）；⑤ 推到 GitHub（两步命令见 2.1）；⑥ 在网页上打开仓库，确认能看到文件和历史记录。</p>
-<div class="rule"><svg class="em" width="15" height="15"><use href="#ic-pn"/></svg> 检查点对接：学习计划的"第 2 周末 commit ≥ 10 次""第 4 周末脚本进 GitHub"——就靠这一册完成。</div>
 
 <div class="section-head tight2"><svg class="em" width="15" height="15"><use href="#ic-pe"/></svg> 每日日志怎么记（0-06 · 三行模板）</div>
 <pre><span class="cm"># 2026-10-13（周一）</span>
@@ -404,16 +392,16 @@ config_secret.*</pre>
 - 卡在哪：fuser 输出没看懂 → 查 man，看懂"占用进程"那列
 - 明天第一件事：第 7 章挂载示范</pre>
 <p class="note">就这三行，写进 <span class="code">logs/2026-10/2026-10-13.md</span>（按月建目录），当天 commit 一次——连续 3 天，0-06 关就过了。</p>
-<div class="section-head">阶段总结练习（新增 · 打完本阶段关卡再做）</div>
+<div class="section-head">阶段总结练习（打完本阶段关卡再做）</div>
 <div class="box2"><h3>阶段 0 · 学习总结练习（关卡 0-07）：把日志仓库整理成"别人能看懂"的样子</h3>
 <p><b>业务场景</b>：你换了台电脑，要在新机器上接着学——别人（或三个月后的你）打开你的 GitHub，必须一眼看出你每天在干什么。</p>
 <p><b>综合要求</b>：① 仓库首页写清"我在学什么、学到哪"；② 每天的日志按月归档（例如 <span class="code">logs/2026-10/2026-10-13.md</span>）；③ 挑 3 天日志补上"卡在哪、怎么解决的"；④ 提交信息写得让人看得懂（不是 update）。</p>
 <p><b>验收</b>：□ 陌生人打开仓库能说出你在学什么　□ 连续 3 天有提交记录　□ 日志里至少 3 条"卡点 → 解决"</p>
-<p><b>时间</b>：60 分钟　<b>产出</b>：整理好的 learning-journey 仓库</p>
+<p><b>产出</b>：整理好的 learning-journey 仓库</p>
 <p><b>AI 运维指向</b>：运维日常就是"把过程写清楚"——故障记录、变更记录、交接文档都是这个能力。</p>
 <p><b>实战价值</b>：别人点开你的 GitHub，第一眼看到的就是这个。</p></div>
 <h2>附录 · 一个合格的 README 长什么样（4-10 要用）</h2>
-<p class="note">这一页不占关卡、不占预算；写 README 之前回来照一遍就行。</p>
+<p class="note">这一页不占关卡；写 README 之前回来照一遍就行。</p>
 <p><b>README 是谁在看</b>：看仓库的人、以及三个月后的你自己。他们的共同点是——<b>没耐心</b>，只想知道三件事：这是干什么的、怎么跑起来、跑出来长什么样。</p>
 <table><tr><th style="width:22%">段落</th><th>写什么</th></tr>
 <tr><td><b>① 一句话说明</b></td><td>这个仓库解决什么问题（例：三个 Shell 脚本，负责备份、磁盘告警、服务自愈）</td></tr>
